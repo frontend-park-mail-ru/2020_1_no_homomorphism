@@ -42,7 +42,7 @@ body {
     padding: 0 1%;
 }
 
-.navbar .searchButton {
+.navbar .search-button {
     border-radius: 0.33em;
     background: white;
     outline: none;
@@ -54,33 +54,10 @@ body {
 }
 
 .login-form input {
+    right: 0;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     margin-left: 1.5em;
-}
-
-.login-input {
-    border-bottom: 0;
-    margin-bottom: 0;
-}
-
-.login-bottom {
-    border-top: 0;
-    margin-top: 0;
-    border-bottom: 0;
-    margin-bottom: 0;
-}
-
-.login-signup {
-    border-top: 0;
-    margin-top: 0;
-    border-bottom: 0;
-    margin-bottom: 0;
-}
-
-.oauth {
-    border-top: 0;
-    margin-top: 0;
 }
 
 input {
@@ -132,7 +109,7 @@ legend {
     text-align: left;
 }
 
-.post .nameRow .col {
+.post .name-row .col {
     margin-bottom: 0;
 }
 
@@ -140,7 +117,7 @@ legend {
     padding-left: 2.5%;
 }
 
-.post .nameRow {
+.post .name-row {
     display: flex;
     align-items: center;
 }
@@ -154,12 +131,18 @@ legend {
     font-size: 13px;
 }
 
-.post .releaseImage {
+.post .release-image {
+    margin: 0.5em;
+    float: left;
     height: 150px;
     width: 150px;
 }
 
-.post .releaseName {
+.post .release-name {
     font-weight: bolder;
     font-size: 24px;
+}
+
+.post .release-description-p {
+    margin: 0.5em;
 }
