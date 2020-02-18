@@ -1,0 +1,148 @@
+body {
+    margin: 0 auto;
+    font-family: sans-serif;
+}
+
+.navbar {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    padding: 0 5%;
+    margin-bottom: 2%;
+    /*background: #fd4;*/
+    /*background: #ffcc80;*/
+    background: white;
+    box-shadow: 0 3px 6px silver;
+    display: flex;
+    align-items: center;
+}
+
+.navbar .logo {
+    height: 3%;
+    width: 3%;
+    margin: 5px 0;
+}
+
+.navbar .login {
+    margin-left: 0.5%;
+}
+
+.navbar .signup {
+    margin-left: auto;
+}
+
+.navbar .search {
+    margin-left: 2%;
+    margin-right: 0.5%;
+    border-radius: 0.33em;
+    border: 1px solid silver;
+    outline: none;
+    height: 2em;
+    width: 20em;
+    padding: 0 1%;
+}
+
+.navbar .search-button {
+    border-radius: 0.33em;
+    background: white;
+    outline: none;
+    height: 2em;
+}
+
+.login-form {
+    width: 47%;
+}
+
+.login-form input {
+    right: 0;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: 1.5em;
+}
+
+input {
+    margin-left: 2%;
+    margin-right: 0.5%;
+    border-radius: 0.33em;
+    border: 1px solid silver;
+    outline: none;
+    height: 2em;
+    padding: 0 1%;
+}
+
+input[type="checkbox"] {
+    margin: 0;
+    height: 13px;
+}
+
+.login-input {
+    text-align: right;
+}
+
+legend {
+    text-align: left;
+}
+
+.feed {
+    background: white;
+    padding-left: 2%;
+    border-left: 1px solid silver;
+    padding-right: 2%;
+    border-right: 1px solid silver;
+}
+
+.post {
+    margin: 0.1em 0;
+    border-bottom: 1px solid silver;
+    padding: 1em;
+    background: white;
+    text-align: left;
+}
+
+.post .avatar {
+    height: 50px;
+    width: 50px;
+    border-radius: 100px;
+}
+
+.post .col {
+    text-align: left;
+}
+
+.post .name-row .col {
+    margin-bottom: 0;
+}
+
+.post .col-11 {
+    padding-left: 2.5%;
+}
+
+.post .name-row {
+    display: flex;
+    align-items: center;
+}
+
+.post .artist {
+    font-weight: bold;
+}
+
+.post .date {
+    color: silver;
+    font-size: 13px;
+}
+
+.post .release-image {
+    margin: 0.5em;
+    float: left;
+    height: 150px;
+    width: 150px;
+}
+
+.post .release-name {
+    font-weight: bolder;
+    font-size: 24px;
+}
+
+.post .release-description-p {
+    margin: 0.5em;
+}
