@@ -18,7 +18,7 @@ h2 {
     text-align: center;
 }
 
-a {
+.tiny-ref {
     font-weight: lighter;
     color: #6b6b6b !important;
     text-decoration: none
@@ -30,10 +30,10 @@ form {
     padding: 3em 2em 2em 2em;
     background: #fafafa;
     border: 1px solid #ebebeb;
-    box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(0, 0, 0, 0.09804) 0px 1px 2px 0px;
+    box-shadow: #d9d9d9 0px 1px 1px 0px, #d9d9d9 0px 1px 2px 0px;
 }
 
-input, select {
+.input-regular, select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -43,7 +43,7 @@ input, select {
     box-sizing: border-box;
 }
 
-input[type=submit] {
+.input-regular[type=submit] {
     width: 100%;
     background-color: #3e8daf;
     color: white;
@@ -54,7 +54,7 @@ input[type=submit] {
     cursor: pointer;
 }
 
-input[type=submit]:hover {
+.input-regular[type=submit]:hover {
     background-color: #387f9c;
 }
 
