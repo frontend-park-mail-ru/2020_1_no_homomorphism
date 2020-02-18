@@ -13,7 +13,7 @@
                 <img src="static/img/headphones.png" alt="logo" height="40px" width="40px">
             </a>
             <input type="text" class="search">
-            <button type="button" class="searchButton">
+            <button type="button" class="search-button">
                 <img src="static/img/finder.png" alt="lupa & pupa" height="20px" width="20px">
             </button>
             <a href="/signup" class="signup">
@@ -28,23 +28,28 @@
                 <div class="col col-1"></div>
                 <div class="col col-7">
                     <form class="login-form" method="post">
-                        <fieldset class="login-input">
+                        <fieldset>
                             <legend>Вход</legend>
-                            <label>логин/почта<input type="text" required></label>
-                            <label>пароль<input type="password" required></label>
-                        </fieldset>
-                        <fieldset class="login-bottom">
+                            <label>
+                                логин/почта
+                                <input type="text" required>
+                            </label>
+                            <label>
+                                пароль
+                                <input type="password" required>
+                            </label>
                             <div class="col col-6">
-                                <label><input type="checkbox">запомнить</label>
+                                <label>
+                                    <input type="checkbox">
+                                    запомнить
+                                </label>
                             </div>
                             <div class="col col-6">
-                                <button type="submit" class="login-button">Войти</button>
+                                <button type="submit" class="login-button">
+                                    Войти
+                                </button>
                             </div>
-                        </fieldset>
-                        <fieldset class="login-signup">
                             <a href="/signup">зарегистрироваться</a>
-                        </fieldset>
-                        <fieldset class="oauth">
                         </fieldset>
                     </form>
                 </div>
