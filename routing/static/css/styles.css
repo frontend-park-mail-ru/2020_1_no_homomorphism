@@ -1,0 +1,102 @@
+.main-pos {
+    background-color: #cca8c4;
+    height: 600px;
+    width: 400px;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -300px;
+    margin-left: -200px;
+}
+
+.board {
+    border-style: solid; /* Стиль линии вокруг параграфа */
+    border-width: 1px;
+    padding: 16px; /* Поля вокруг текста */
+    background: linear-gradient(#f8f8f8, #fff);
+    box-shadow: -3px 6px 30px 0 rgba(0,0,0,0.4);
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+    color: black;
+}
+
+.container-audio {
+    height: auto;
+    border-radius: 5px;
+    color: #444;
+    margin: 20px auto;
+    overflow: hidden;
+}
+audio {
+    width:100%;
+}
+
+li {
+    list-style-type: none;
+}
+ul {
+    margin-left: 0;
+    padding-left: 0 ;
+}
+.track-name {
+    font-size: x-large;
+}
+
+.track-photo {
+    width: 20%;
+}
+
+.left {
+    margin-left: 16px;
+}
+
+.left-line {
+    border-left: 2px solid #ebeae7;
+    margin-left: 20px;
+    padding-left: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.top-line {
+    border-top: 2px solid #ebeae7;
+}
+.top-line-long {
+    border-top: 2px solid #ebeae7;
+    margin-top: 20px;
+    padding-top: 10px;
+}
+
+.group-name {
+    text-decoration: none;
+    color: black;
+}
+
+.track-list {
+    background-color: #f1f3f4;
+    border-radius: 20px;
+}
+
+.right {
+    margin-right: 16px;
+}
+
+.top {
+    margin-top: 16px;
+}
+
+.bottom-pad {
+    padding-bottom: 46px;
+}
+
+.bottom {
+    margin-bottom: 16px;
+}
+
+.to-the-right {
+    padding-left: 150px;
+}
+
+.playlist-to-the-right {
+    padding-left: 150px;
+}
