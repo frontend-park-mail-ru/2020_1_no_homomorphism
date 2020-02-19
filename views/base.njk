@@ -1,0 +1,33 @@
+{% block basic %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/grid.css">
+        <link rel="stylesheet" href="/css/styles.css">
+        <title></title>
+    </head>
+    <body>
+        <div class="navbar">
+            <a href="/" class="logo">
+                <img src="/img/headphones.png" alt="logo" height="40px" width="40px">
+            </a>
+            <input type="text" class="search">
+            <button type="button" class="search-button">
+                <img src="/img/finder.png" alt="lupa & pupa" height="20px" width="20px">
+            </button>
+            <a href="/signup" class="signup">
+                sign up
+            </a>
+            <a href="/login" class="login">
+                log in
+            </a>
+        </div>
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
+{% endblock %}
