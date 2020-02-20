@@ -2,25 +2,22 @@
     background-color: #cca8c4;
     height: 600px;
     width: 400px;
-
     position: fixed;
     top: 50%;
     left: 50%;
     margin-top: -300px;
     margin-left: -200px;
 }
-
 .board {
-    border-style: solid; /* Стиль линии вокруг параграфа */
+    border-style: solid;
     border-width: 1px;
-    padding: 16px; /* Поля вокруг текста */
+    padding: 16px;
     background: linear-gradient(#f8f8f8, #fff);
     box-shadow: -3px 6px 30px 0 rgba(0,0,0,0.4);
     border-bottom-left-radius: 30px;
     border-top-left-radius: 30px;
     color: black;
 }
-
 .container-audio {
     height: auto;
     border-radius: 5px;
@@ -31,7 +28,6 @@
 audio {
     width:100%;
 }
-
 li {
     list-style-type: none;
 }
@@ -43,12 +39,15 @@ ul {
     font-size: x-large;
 }
 
-.track-photo {
+.big-track-photo {
     width: 20%;
 }
 
-.left {
+.track-photo {
+    margin-right: 16px;
+    margin-top: 16px;
     margin-left: 16px;
+    width: 20%;
 }
 
 .left-line {
@@ -60,43 +59,28 @@ ul {
 }
 .top-line {
     border-top: 2px solid #ebeae7;
+    margin-top: 16px;
 }
 .top-line-long {
     border-top: 2px solid #ebeae7;
     margin-top: 20px;
     padding-top: 10px;
 }
-
 .group-name {
     text-decoration: none;
     color: black;
 }
-
 .track-list {
     background-color: #f1f3f4;
     border-radius: 20px;
 }
-
-.right {
-    margin-right: 16px;
+.buttons-in-playlist {
+    padding-left: 150px;
 }
-
-.top {
-    margin-top: 16px;
-}
-
-.bottom-pad {
+.share_button {
     padding-bottom: 46px;
 }
-
-.bottom {
-    margin-bottom: 16px;
-}
-
-.to-the-right {
+.add_to_playlist_button {
     padding-left: 150px;
-}
-
-.playlist-to-the-right {
-    padding-left: 150px;
+    padding-bottom: 46px;
 }
