@@ -4,9 +4,6 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const nunjucks = require('nunjucks');
 
-const index = require('./routes/index');
-const login = require('./routes/login');
-
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -14,17 +11,19 @@ app.set('view engine', 'njk');
 
 app.use(favicon(path.join(__dirname, 'static', 'favicon.ico')));
 app.use(logger('dev'));
-//app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: false }));
-//app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'static')));
 nunjucks.configure('views', {
     autoescape: true,
     express: app
 });
 
-app.use('/', index)
-app.use('/login', login)
+app.get('/', (req, res) => {
+    res.render('index')
+});
+
+app.get('/login', (req, res) => {
+    res.render('login');
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
