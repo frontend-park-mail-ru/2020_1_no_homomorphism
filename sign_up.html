@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="static/css/sign_up.css">
+</head>
+<body>
+<div>
+    <form class="sign_up_form">
+        <h2>Sign up</h2>
+        <label for="name">Name</label>
+        <input class="input-regular" type="text" id="name" name="name" value="" placeholder="John Smith" required>
+
+        <label for="login">Login</label>
+        <input class="input-regular" type="text" id="login" name="login" value="" placeholder="john99" required>
+
+        <h4>Sex:</h4>
+        <label class="container">Male
+            <input type="radio" checked="checked" name="radio">
+            <span class="checkmark"></span>
+        </label>
+        <label class="container">Female
+            <input type="radio" name="radio">
+            <span class="checkmark"></span>
+        </label>
+        <label class="container">Other
+            <input type="radio" name="radio">
+            <span class="checkmark"></span>
+        </label>
+
+        <label for="email" class="block">Email</label>
+        <input class="input-regular" type="email" id="email" name="email" value="" placeholder="johnSmith@mail.ru"
+               required>
+
+        <label for="pass">Password</label>
+        <input class="input-regular" type="password" id="pass" name="pass" value="" required>
+
+        <label for="pass_confirm">Password Confirmation</label>
+        <input class="input-regular" type="password" id="pass_confirm" name="pass_confirm" value="" required>
+
+        <button class="button" type="submit"><span>Go</span></button>
+    </form>
+    <div class="div-center"><a class="tiny-ref" href="">Already registered? Log in.</a></div>
+</div>
+</body>
+</html>
