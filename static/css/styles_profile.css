@@ -146,3 +146,43 @@ legend {
 .post .release-description-p {
     margin: 0.5em;
 }
+
+.profile .info .nickname {
+    font-size: 25px;
+    margin: 10px;
+}
+.profile-info.col {
+    text-align: left;
+    color: silver;
+}
+
+.profile-content.col{
+    text-align: left;
+}
+
+.profile .avatar  {
+    margin: 40px;
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+}
+
+.accounts .outer {
+    height: 75px;
+    width: 75px;
+    border-radius: 100px;
+    object-fit: cover;
+    margin: 10px;
+}
+
+.accounts-edit .accounts-info .col {
+    margin-top: 10px;
+
+}
+.accounts-edit .outer {
+    height: 50px;
+    width: 50px;
+    border-radius: 100px;
+    object-fit: cover;
+    margin: 10px;
+}
