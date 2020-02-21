@@ -1,0 +1,43 @@
+.navbar {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    padding: 0 5%;
+    margin-bottom: 2%;
+    background: white;
+    box-shadow: 0 3px 6px silver;
+    display: flex;
+    align-items: center;
+}
+
+.navbar .logo {
+    height: 3%;
+    width: 3%;
+    margin: 5px 0;
+}
+
+.navbar .login {
+    margin-left: 0.5%;
+}
+
+.navbar .signup {
+    margin-left: auto;
+}
+
+.navbar .search {
+    margin-left: 2%;
+    margin-right: 0.5%;
+    border-radius: 0.33em;
+    border: 1px solid silver;
+    outline: none;
+    height: 2em;
+    width: 20em;
+    padding: 0 1%;
+}
+
+.navbar .search-button {
+    border-radius: 0.33em;
+    background: white;
+    outline: none;
+    height: 2em;
+}

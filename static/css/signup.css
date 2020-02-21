@@ -25,7 +25,7 @@ h2 {
     text-decoration: none
 }
 
-.sign_up_form {
+.sign-up-form {
     width: 380px;
     margin: 32px auto;
     padding: 48px 32px 32px 32px;
@@ -65,7 +65,7 @@ h2 {
 }
 
 /* The container */
-.container {
+.signup-container {
     display: inline;
     position: relative;
     margin-top: 10px;
@@ -81,7 +81,7 @@ h2 {
 }
 
 /* Hide the browser's default radio button */
-.container input {
+.signup-container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -99,12 +99,12 @@ h2 {
 }
 
 /* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
+.signup-container:hover input ~ .checkmark {
     background-color: #ccc;
 }
 
 /* When the radio button is checked, add a blue background */
-.container input:checked ~ .checkmark {
+.signup-container input:checked ~ .checkmark {
     background-color: #2196F3;
 }
 
@@ -116,12 +116,12 @@ h2 {
 }
 
 /* Show the indicator (dot/circle) when checked */
-.container input:checked ~ .checkmark:after {
+.signup-container input:checked ~ .checkmark:after {
     display: block;
 }
 
 /* Style the indicator (dot/circle) */
-.container .checkmark:after {
+.signup-container .checkmark:after {
     top: 9px;
     left: 9px;
     width: 8px;

@@ -25,6 +25,22 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
+app.get('/signup', (req, res) => {
+    res.render('signup')
+});
+
+app.get('/pleer', (req, res) => {
+    res.render('pleer');
+});
+
+app.get('/profile', (req, res) => {
+    res.render('profile');
+});
+
+app.get('/settings', (req, res) => {
+    res.render('settings')
+});
+
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error('Not Found');

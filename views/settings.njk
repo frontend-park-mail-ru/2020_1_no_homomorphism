@@ -1,0 +1,99 @@
+{% extends "base.njk" %}
+
+{% block additional_css %}
+<link rel="stylesheet" href="/css/profile.css">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="profile">
+        <div class="col col-1"></div>
+        <div class="col col-7">
+            <div class="row">
+                <div class="col col-4">
+                    <img alt="avatar" src="/img/new_empire_vol1.jpg" class="avatar">
+                    <div class="row">
+                        <a href="/settings">
+                            Загрузить аватар
+                        </a>
+                    </div>
+                </div>
+                <div class="col col-8">
+                    <div class="info">
+                        <div class="nickname row">
+                            Митрофанов
+                        </div>
+                        <div calss="birthday row">
+                            <div class="profile-info col col-3">
+                                День рождения:
+                            </div>
+                            <input type=date class="profile-content col col-9" value="2001-02-18">
+                        </div>
+                        <div calss="name row">
+                            <div class="profile-info col col-3">
+                                ФИО:
+                            </div>
+                            <input type=text class="profile-content col col-9" value="Дмитрий Алексеевич Левен">
+                        </div>
+                        <div calss="email row">
+                            <div class="profile-info col col-3">
+                                e-mail:
+                            </div>
+                            <input type=text class="profile-content col col-9" value="leven@dima.go">
+                        </div>
+                        <div calss="password">
+                            <div class="row">
+                                <div class="profile-info col col-3">
+                                    Пароль:
+                                </div>
+                                <input type=password class="profile-content col col-9" placeholder="Новый пароль">
+                            </div>
+                            <div class="row">
+                                <div class="profile-info col col-3"></div>
+                                <input type=password class="profile-content col col-9" placeholder="Повторите пароль">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="accounts-edit">
+                            <div class="row">
+                                <a href="#" class="col col-3">
+                                    <img alt="avatar" src="/img/vk.jpg" class="outer">
+                                </a>
+                                <input type=text class="accounts-info col col-9" value="vkontacteid">
+                            </div>
+                            <div class="row">
+                                <a href="#" class ="col col-3">
+                                    <img alt="avatar" src="/img/ok.png" class="outer">
+                                </a>
+                                <input type=text class="accounts-info col col-9" value="vkontacteid">
+                            </div>
+                            <div class="row">
+                                <a href="#" class ="col col-3">
+                                    <img alt="avatar" src="/img/mm.png" class="outer">
+                                </a>
+                                <input type=text class="accounts-info col col-9" value="vkontacteid">
+                            </div>
+                            <div class="row">
+                                <a href="#" class ="col col-3">
+                                    <img alt="avatar" src="/img/plus.png" class="outer">
+                                </a>
+                                <input type=text class="accounts-info col col-7" value="vkontacteid">
+                                <a href="#" class="col col-2" value="vkontacteid">
+                                    Добавить
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <a href="/profile">
+                        Сохранить
+                    </a>
+                </div>
+            </div>
+            <div class="col col-4"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
