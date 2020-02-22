@@ -1,4 +1,10 @@
 language: node_js
 
+node_js:
+    - 12.14.1
+
+install:
+    - npm install eslint --save-dev
+
 script:
     - npx eslint .
