@@ -1,6 +1,12 @@
 export class ProfileModel {
-    constructor(eventBus, elements) {
+    constructor(eventBus) {
         this.eventBus = eventBus;
-        this.elements = elements;
+        this.data = {
+            avatar   : {},
+            login    : '',
+            name     : '',
+            email    : '',
+            outer    : [],
+        };
     }
 }

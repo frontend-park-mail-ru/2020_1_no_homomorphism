@@ -7,75 +7,86 @@
 {% block content %}
 <div class="row profile">
     <div class="col col-1"></div>
-    <div class="col col-7">
+    <div class="col col-3">
+        <img alt="avatar" src="/img/new_empire_vol1.jpg" class="avatar" id="avatar">
         <div class="row">
-            <div class="col col-4">
-                <img alt="avatar" src="/img/new_empire_vol1.jpg" class="avatar" id="avatar">
-                <div class="row">
-                    <input type="file" id="avatar-upload">
+            <input type="file" id="avatar-upload">
+        </div>
+    </div>
+    <div class="info col col-4">
+        <div class="login row">
+            Митрофанов
+        </div>
+        <div calss="name row">
+            <div class="col col-3">
+                <div class="profile-info">
+                    Имя:
                 </div>
             </div>
-            <div class="info col col-8">
-                <div class="nickname row">
-                    Митрофанов
+            <div class="col col-9">
+                <input type=text class="profile-content" id="name" value="Дмитрий Алексеевич Левен">
+            </div>
+        </div>
+        <div calss="email row">
+            <div class="col col-3">
+                <div class="profile-info">
+                    e-mail:
                 </div>
-                <div calss="birthday row">
-                    <div class="profile-info col col-3">
-                        День рождения:
-                    </div>
-                    <input type=date class="profile-content col col-9" id="birthday" value="2001-02-18">
+            </div>
+            <div class="col col-9">
+                <input type="email" class="profile-content" id="email" value="leven@dima.go">
+            </div>
+        </div>
+        <div calss="row">
+            <div class="col col-3">
+                <div class="profile-info">
+                    Пароль:
                 </div>
-                <div calss="name row">
-                    <div class="profile-info col col-3">
-                        ФИО:
+            </div>
+            <div class="col col-9">
+                <input type=password class="profile-content" id="password" placeholder="Новый пароль">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-3"></div>
+            <div class="col col-9">
+                <input type=password class="profile-content" id="password-confirm" placeholder="Повторите пароль">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-9 accounts-edit">
+                <div class="row">
+                    <a href="#" class="col col-3">
+                        <img alt="avatar" src="/img/vk.jpg" class="outer">
+                    </a>
+                    <div class="col col-9">
+                        <input type="url" class="accounts-info" value="vkontacteid">
                     </div>
-                    <input type=text class="profile-content col col-9" id="name" value="Дмитрий Алексеевич Левен">
-                </div>
-                <div calss="email row">
-                    <div class="profile-info col col-3">
-                        e-mail:
-                    </div>
-                    <input type="email" class="profile-content col col-9" id="email" value="leven@dima.go">
-                </div>
-                <div calss="row">
-                    <div class="profile-info col col-3">
-                        Пароль:
-                    </div>
-                    <input type=password class="profile-content col col-9" id="password" placeholder="Новый пароль">
                 </div>
                 <div class="row">
-                    <div class="profile-info col col-3"></div>
-                    <input type=password class="profile-content col col-9" id="password-confirm" placeholder="Повторите пароль">
+                    <a href="#" class ="col col-3">
+                        <img alt="avatar" src="/img/ok.png" class="outer">
+                    </a>
+                    <div class="col col-9">
+                        <input type="url" class="accounts-info" value="vkontacteid">
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col accounts-edit">
-                        <div class="row">
-                            <a href="#" class="col col-3">
-                                <img alt="avatar" src="/img/vk.jpg" class="outer">
-                            </a>
-                            <input type=url class="accounts-info col col-9" value="vkontacteid">
-                        </div>
-                        <div class="row">
-                            <a href="#" class ="col col-3">
-                                <img alt="avatar" src="/img/ok.png" class="outer">
-                            </a>
-                            <input type=url class="accounts-info col col-9" value="vkontacteid">
-                        </div>
-                        <div class="row">
-                            <a href="#" class ="col col-3">
-                                <img alt="avatar" src="/img/mm.png" class="outer">
-                            </a>
-                            <input type=url class="accounts-info col col-9" value="vkontacteid">
-                        </div>
-                        <div class="row">
-                            <a href="#" class ="col col-3">
-                                <img alt="avatar" src="/img/plus.png" class="outer">
-                            </a>
-                            <input type=url class="accounts-info col col-7" value="vkontacteid" id="outer-url">
-                            <button type="button" id="add-outer">
-                                Добавить
-                            </button>
-                        </div>
+                    <a href="#" class ="col col-3">
+                        <img alt="avatar" src="/img/mm.png" class="outer">
+                    </a>
+                    <div class="col col-9">
+                        <input type="url" class="accounts-info" value="vkontacteid">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-8">
+                        <input type="url" class="accounts-info" value="vkontacteid" id="outer-url">
+                    </div>
+                    <div class="col col-4">
+                        <button type="button" id="add-outer">
+                            Добавить
+                        </button>
                     </div>
                 </div>
             </div>

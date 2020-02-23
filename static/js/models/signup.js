@@ -1,9 +1,15 @@
 export class SignupModel {
-    constructor(eventBus, elements) {
+    constructor(eventBus) {
         this.eventBus = eventBus;
-        this.elements = elements;
+        this.data = {
+            name            : '',
+            login           : '',
+            email           : '',
+            password        : '',
+            passwordConfirm : '',
+        };
 
-        eventBus.on('submit', values => this.validate(values));
+        this.eventBus.on('submit', this.validate);
     }
 
     validate(values) {

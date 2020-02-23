@@ -1,10 +1,14 @@
 export class LoginModel {
-    constructor(eventBus, elements) {
+    constructor(eventBus) {
         this.eventBus = eventBus;
-        this.elements = elements;
+        this.data = {
+            login    : '',
+            password : '',
+            remember : false,
+        };
 
-        eventBus.on('submit', values => this.validate(values));
-        eventBus.on('remember checked', checked => this.elements.remember = checked)
+        this.eventBus.on('submit', this.validate);
+        this.eventBus.on('remember changed', this.data.changeRemember);
     }
 
     validate(values) {
@@ -12,5 +16,9 @@ export class LoginModel {
             login    : 'Пользователь с таким логином не найден',
             password : '',
         })
+    }
+
+    changeRemember(state) {
+        this.data.remember = state;
     }
 }

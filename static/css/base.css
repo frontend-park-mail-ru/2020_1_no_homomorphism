@@ -9,3 +9,16 @@ body {
     box-sizing: border-box;
     padding: 1em;
 }
+
+input[type="text"], input[type="email"],
+input[type="url"], input[type="password"] {
+    border-radius: 0.33em;
+    border: 1px solid silver;
+    outline: none;
+    padding: 0 1%;
+}
+
+input[type="text"], input[type="email"],
+input[type="password"] {
+    width: 20em;
+}

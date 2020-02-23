@@ -1,6 +1,5 @@
 export class IndexView {
-    constructor(eventBus, elements) {
+    constructor(eventBus) {
         this.eventBus = eventBus;
-        this.elements = elements;
     }
 }

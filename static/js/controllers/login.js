@@ -1,23 +1,15 @@
+import {EventBus} from '../eventBus.js'
 import {LoginModel} from '../models/login.js'
 import {LoginView} from '../views/login.js'
 
 export class LoginController {
-    constructor(eventBus/*, globalEventBus*/) {
-        this.model = new LoginModel(eventBus, {
-            login    : '',
-            password : '',
-            remember : false,
-        }),
-        this.view = new LoginView(eventBus, {
-            login    : document.getElementById('login'),
-            password : document.getElementById('password'),
-            remember : document.getElementById('remember'),
-            submit   : document.getElementById('submit'),
-        }),
-        this.eventBus = eventBus;
+    constructor(/*, globalEventBus*/) {
+        this.eventBus = new EventBus();
+        this.model = new LoginModel(this.eventBus);
+        this.view = new LoginView(this.eventBus);
         //this.globalEventBus = globalEventBus;
 
-        eventBus.on('valid', to => this.redirect(to));
+        this.eventBus.on('valid', this.redirect);
         //globalEventBus.on('redirect to login', () => this.eventBus.emit('load', {}))
     }
 

@@ -1,6 +1,5 @@
 export class IndexModel {
-    constructor(eventBus, elements) {
+    constructor(eventBus) {
         this.eventBus = eventBus;
-        this.elements = elements;
     }
 }

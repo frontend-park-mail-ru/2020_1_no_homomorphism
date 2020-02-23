@@ -1,7 +1,3 @@
-* {
-    box-sizing: border-box;
-}
-
 body {
     font-family: Helvetica, sans-serif;
     background: #eee;
@@ -34,7 +30,7 @@ h2 {
     box-shadow: #d9d9d9 0px 1px 1px 0px, #d9d9d9 0px 1px 2px 0px;
 }
 
-.input-regular, select {
+.sign-up-form .input-regular, select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -44,7 +40,7 @@ h2 {
     box-sizing: border-box;
 }
 
-.input-regular[type=submit] {
+.sign-up-form .input-regular[type=submit] {
     width: 100%;
     background-color: #3e8daf;
     color: white;
@@ -55,79 +51,8 @@ h2 {
     cursor: pointer;
 }
 
-.input-regular[type=submit]:hover {
+.sign-up-form .input-regular[type=submit]:hover {
     background-color: #387f9c;
-}
-
-.block {
-    display: block;
-    margin-top: 30px;
-}
-
-/* The container */
-.signup-container {
-    display: inline;
-    position: relative;
-    margin-top: 10px;
-    padding-left: 35px;
-    margin-bottom: 20px;
-    margin-right: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-/* Hide the browser's default radio button */
-.signup-container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-}
-
-/* Create a custom radio button */
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-    border-radius: 50%;
-}
-
-/* On mouse-over, add a grey background color */
-.signup-container:hover input ~ .checkmark {
-    background-color: #ccc;
-}
-
-/* When the radio button is checked, add a blue background */
-.signup-container input:checked ~ .checkmark {
-    background-color: #2196F3;
-}
-
-/* Create the indicator (the dot/circle - hidden when not checked) */
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-
-/* Show the indicator (dot/circle) when checked */
-.signup-container input:checked ~ .checkmark:after {
-    display: block;
-}
-
-/* Style the indicator (dot/circle) */
-.signup-container .checkmark:after {
-    top: 9px;
-    left: 9px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: white;
 }
 
 .button {

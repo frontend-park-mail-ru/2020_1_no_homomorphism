@@ -1,11 +1,12 @@
+import {EventBus} from '../eventBus.js'
 import {IndexModel} from '../models/index.js'
 import {IndexView} from '../views/index.js'
 
 export class IndexController {
-    constructor(eventBus/*, globalEventBus*/) {
-        this.model = new IndexModel(eventBus, {}),
-        this.view = new IndexView(eventBus, {}),
-        this.eventBus = eventBus;
+    constructor(/*, globalEventBus*/) {
+        this.eventBus = new EventBus();
+        this.model = new IndexModel(this.eventBus);
+        this.view = new IndexView(this.eventBus);
         //this.globalEventBus = globalEventBus;
     }
 };

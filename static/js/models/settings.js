@@ -1,11 +1,18 @@
 export class SettingsModel {
-    constructor(eventBus, elements) {
+    constructor(eventBus) {
         this.eventBus = eventBus;
-        this.elements = elements;
+        this.data = {
+            avatar          : {},
+            name            : '',
+            email           : '',
+            password        : '',
+            passwordConfirm : '',
+            outer           : [],
+        };
 
-        eventBus.on('avatar upload', avatar => this.resetAvatar(avatar));
-        eventBus.on('add outer', url => this.addOuter(url));
-        eventBus.on('submit', values => this.validate(values));
+        this.eventBus.on('avatar upload', this.resetAvatar);
+        this.eventBus.on('add outer', this.addOuter);
+        this.eventBus.on('submit', this.validate);
     }
 
     resetAvatar(avatar) {

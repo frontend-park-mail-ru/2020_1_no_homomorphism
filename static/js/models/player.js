@@ -1,16 +1,22 @@
 export class PlayerModel {
-    constructor(eventBus, elements) {
+    constructor(eventBus) {
         this.eventBus = eventBus;
-        this.elements = elements;
+        this.data = {
+            track   : {},
+            queue   : [],
+            mix     : false,
+            loop    : false,
+            loopOne : false,
+        };
 
-        eventBus.on('next', () => this.next());
-        eventBus.on('prev', () => this.prev());
-        eventBus.on('play/pause', () => this.playPause());
-        eventBus.on('mix', () => this.mix());
-        eventBus.on('unmix', () => this.unmix());
-        eventBus.on('loop', () => this.loop());
-        eventBus.on('loop one', () => this.loopOne());
-        eventBus.on('unloop', () => this.unloop());
+        this.eventBus.on('next', this.next);
+        this.eventBus.on('prev', this.prev);
+        this.eventBus.on('play/pause', this.playPause);
+        this.eventBus.on('mix', this.mix);
+        this.eventBus.on('unmix', this.unmix);
+        this.eventBus.on('loop', this.loop);
+        this.eventBus.on('loop one', this.loopOne);
+        this.eventBus.on('unloop', this.unloop);
     }
 
     next() {
