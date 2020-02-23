@@ -13,20 +13,20 @@
                 <legend>Вход</legend>
                 <label>
                     логин/почта
-                    <input type="text" required>
+                    <input type="text" id="login" required>
                 </label>
                 <label>
                     пароль
-                    <input type="password" required>
+                    <input type="password" id="password" required>
                 </label>
                 <div class="col col-6">
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" id="remember">
                         запомнить
                     </label>
                 </div>
                 <div class="col col-6">
-                    <button type="submit" class="login-button">
+                    <button type="submit" id="submit">
                         Войти
                     </button>
                 </div>
@@ -36,4 +36,8 @@
     </div>
     <div class="col col-4"></div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/js/login.js" type="module"></script>
 {% endblock %}
