@@ -1,24 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% extends "base.njk" %}
 
-    <link rel="stylesheet" href="static/css/pleer_styles.css">
+{% block additional_css %}
+<link rel="stylesheet" href="/css/pleer.css">
+{% endblock %}
 
-    <title>Title</title>
-</head>
-<body>
-
+{% block content %}
 <div class="main-pos board">
     <div class="music-bar">
         <table>
             <tr>
                 <td>
                     <div class="big-track-photo">
-                        <img src="static/img/album-24px.svg" height="100px"
-                             alt="...">
+                        <img src="/img/album-24px.svg" height="100px" alt="...">
                     </div>
-
                 </td>
                 <td class="left-line"></td>
                 <td>
@@ -31,37 +25,33 @@
                 </td>
                 <td class="add-to-playlist-button">
                     <a href="/pleer">
-                        <img src="static/img/add-24px.svg" height="30px"
-                             alt="...">
+                        <img src="/img/add-24px.svg" height="30px" alt="...">
                     </a>
                 </td>
                 <td class="share-button">
                     <a href="/pleer">
-                        <img src="static/img/send-24px.svg" height="25px"
-                             alt="...">
+                        <img src="/img/send-24px.svg" height="25px" alt="...">
                     </a>
                 </td>
             </tr>
         </table>
     </div>
-
     <div class="container-audio">
         <audio controls loop autoplay>
-            <source src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/9473/new_year_dubstep_minimix.ogg"
-                    type="audio/ogg">
+            <source src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/9473/new_year_dubstep_minimix.ogg" type="audio/ogg">
             Your browser does not Support the audio Tag
         </audio>
         <div class="top-line"></div>
     </div>
     <div class="track-list">
         <ul>
+            {% for i in range(1,3) %}
             <li>
                 <table>
                     <tr>
                         <td>
                             <div class="track-photo">
-                                <img src="static/img/album-24px.svg" height="50px"
-                                     alt="...">
+                                <img src="/img/album-24px.svg" height="50px" alt="...">
                             </div>
                         </td>
                         <td class="left-line"></td>
@@ -75,38 +65,35 @@
                         </td>
                         <td class="buttons-in-playlist">
                             <a href="/pleer">
-                                <img src="static/img/access_time-24px.svg" height="20px"
-                                     alt="...">
+                                <img src="/img/access_time-24px.svg" height="20px" alt="...">
                             </a>
                         </td>
                         <td>
                             <a href="/pleer">
-                                <img src="static/img/add-24px.svg" height="25px"
-                                     alt="...">
+                                <img src="/img/add-24px.svg" height="25px" alt="...">
                             </a>
                         </td>
                         <td>
                             <a href="/pleer">
-                                <img src="static/img/send-24px.svg" height="20px"
-                                     alt="...">
+                                <img src="/img/send-24px.svg" height="20px" alt="...">
                             </a>
                         </td>
                         <td>
                             <a href="/pleer">
-                                <img src="static/img/clear-24px.svg" height="20px"
-                                     alt="...">
+                                <img src="/img/clear-24px.svg" height="20px" alt="...">
                             </a>
                         </td>
                     </tr>
                 </table>
             </li>
             <li class="top-line"></li>
-            <li>
+            {% endfor %}
+            <!--li>
                 <table>
                     <tr>
                         <td>
                             <div class="track-photo">
-                                <img src="static/img/album-24px.svg" height="50px"
+                                <img src="/img/album-24px.svg" height="50px"
                                      alt="...">
                             </div>
                         </td>
@@ -121,25 +108,25 @@
                         </td>
                         <td class="buttons-in-playlist">
                             <a href="/pleer">
-                                <img src="static/img/access_time-24px.svg" height="20px"
+                                <img src="/img/access_time-24px.svg" height="20px"
                                      alt="...">
                             </a>
                         </td>
                         <td>
                             <a href="/pleer">
-                                <img src="static/img/add-24px.svg" height="25px"
+                                <img src="/img/add-24px.svg" height="25px"
                                      alt="...">
                             </a>
                         </td>
                         <td>
                             <a href="/pleer">
-                                <img src="static/img/send-24px.svg" height="20px"
+                                <img src="/img/send-24px.svg" height="20px"
                                      alt="...">
                             </a>
                         </td>
                         <td>
                             <a href="/pleer">
-                                <img src="static/img/clear-24px.svg" height="20px"
+                                <img src="/img/clear-24px.svg" height="20px"
                                      alt="...">
                             </a>
                         </td>
@@ -148,12 +135,12 @@
                 </table>
             </li>
             <li class="top-line"></li>
-            <li>
+            <li-->
                 <table>
                     <tr>
                         <td>
                             <div class="track-photo">
-                                <img src="static/img/album-24px.svg" height="50px"
+                                <img src="/img/album-24px.svg" height="50px"
                                      alt="...">
                             </div>
                         </td>
@@ -168,25 +155,25 @@
                         </td>
                         <td class="buttons-in-playlist">
                             <a href="/pleer">
-                                <img src="static/img/access_time-24px.svg" height="20px"
+                                <img src="/img/access_time-24px.svg" height="20px"
                                      alt="...">
                             </a>
                         </td>
                         <td>
                             <a href="/pleer">
-                                <img src="static/img/add-24px.svg" height="25px"
+                                <img src="/img/add-24px.svg" height="25px"
                                      alt="...">
                             </a>
                         </td>
                         <td>
                             <a href="/pleer">
-                                <img src="static/img/send-24px.svg" height="20px"
+                                <img src="/img/send-24px.svg" height="20px"
                                      alt="...">
                             </a>
                         </td>
                         <td>
                             <a href="/pleer">
-                                <img src="static/img/clear-24px.svg" height="20px"
+                                <img src="/img/clear-24px.svg" height="20px"
                                      alt="...">
                             </a>
                         </td>
@@ -196,8 +183,5 @@
             </li>
         </ul>
     </div>
-
 </div>
-
-</body>
-</html>
+{% endblock %}
