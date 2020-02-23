@@ -9,8 +9,8 @@ export class LoginModel {
 
     validate(values) {
         this.eventBus.emit('invalid', {
-            'login'    : 'Пользователь с таким логином не найден',
-            'password' : '',
+            login    : 'Пользователь с таким логином не найден',
+            password : '',
         })
     }
 }

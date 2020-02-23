@@ -4,17 +4,18 @@ export class LoginView {
         this.elements = elements;
         elements.submit.addEventListener('click',
             () => eventBus.emit('submit', {
-                'login'    : elements.login.value,
-                'password' : elements.password.value,
-                'remember' : elements.remember.checked,
+                login    : elements.login.value,
+                password : elements.password.value,
+                remember : elements.remember.checked,
             }));
         elements.remember.addEventListener('change',
             () => eventBus.emit('remember changed', elements.remember.checked));
-        eventBus.on('invalid', errors => this.show(errors));
+        eventBus.on('invalid', errors => this.render(errors));
     }
 
-    show(errors) {
-        this.elements.login.setCustomValidity(errors.login);
-        this.elements.password.setCustomValidity(errors.login);
+    render(errors) {
+        for (key in this.elements) {
+            this.elements.key.setCustomValidity(errors.key);
+        }
     }
 }
