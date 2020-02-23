@@ -10,10 +10,10 @@ export class LoginView {
             }));
         elements.remember.addEventListener('change',
             () => eventBus.emit('remember changed', elements.remember.checked));
-        eventBus.on('invalid', errors => this.render(errors));
+        eventBus.on('invalid', errors => this.show(errors));
     }
 
-    render(errors) {
+    show(errors) {
         this.elements.login.setCustomValidity(errors.login);
         this.elements.password.setCustomValidity(errors.login);
     }
