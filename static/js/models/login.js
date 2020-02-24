@@ -23,11 +23,13 @@ export class LoginModel {
             })
         } else if (values.password.empty()) {
             this.eventBus.emit('invalid', {
+                // Ты же понимаешь, что эти ошибки будут приписаны логину?
                 login: 'Введите пароль!',
             })
         }
 
         // Запрос в бд
+        // Если что, успешная вылидация -- emit('valid', {});
 
         this.eventBus.emit('invalid', {
             login: 'Все огонь',

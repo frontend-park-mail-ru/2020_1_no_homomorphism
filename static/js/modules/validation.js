@@ -1,3 +1,7 @@
+/**
+ * Проверка валидности введенных данных
+ * @class Validation
+ */
 export default class Validation {
 
     /**

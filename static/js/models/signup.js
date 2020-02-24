@@ -30,19 +30,21 @@ export class SignupModel {
             })
         } else if (resEmail !== '') {
             this.eventBus.emit('invalid', {
+                // Ты же понимаешь, что эти ошибки будут приписаны логину?
                 login: resEmail,
             })
         } else if (resPassword !== '') {
             this.eventBus.emit('invalid', {
+                // Ты же понимаешь, что эти ошибки будут приписаны логину?
                 login: resPassword,
             })
         }
 
         // Запрос в бд
+        // Если что, успешная вылидация -- emit('valid', {});
 
         this.eventBus.emit('valid', {
             login: 'Все огонь',
         })
     }
 }
-

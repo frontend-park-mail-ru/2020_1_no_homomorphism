@@ -8,4 +8,8 @@ export class PlayerController {
         this.model = new PlayerModel(this.eventBus);
         this.view = new PlayerView(this.eventBus);
     }
+
+    load() {
+        this.view.render();
+    }
 };

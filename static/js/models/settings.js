@@ -34,7 +34,6 @@ export class SettingsModel {
     }
 
     submit(values) {
-        // Тут вызов валидатора. Пока заглушка
         const validation = new Validation;
         const resLogin = validation.validationLogin(values.login);
         const resPassword = validation.validationPassword(values.password, values.passwordConfirm);
@@ -45,19 +44,21 @@ export class SettingsModel {
             })
         } else if (resPassword !== '') {
             this.eventBus.emit('invalid', {
+                // Ты же понимаешь, что эти ошибки будут приписаны логину?
                 login: resPassword,
             })
         } else if (!values.email.empty()) {
             this.eventBus.emit('invalid', {
+                // Ты же понимаешь, что эти ошибки будут приписаны логину?
                 login: 'Менять email низя',
             })
         }
 
         // Запрос в БД
+        // Если что, успешная вылидация -- emit('valid', {});
 
         this.eventBus.emit('invalid', {
             email: 'Все огонь',
         })
     }
 }
-

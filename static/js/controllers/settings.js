@@ -3,13 +3,10 @@ import {SettingsModel} from '../models/settings.js'
 import {SettingsView} from '../views/settings.js'
 
 export class SettingsController {
-    constructor(globalEventBus) {
+    constructor() {
         this.eventBus = new EventBus();
         this.model = new SettingsModel(this.eventBus);
         this.view = new SettingsView(this.eventBus);
-        this.globalEventBus = globalEventBus;
-
-        this.globalEventBus.on('jump to settings', this.load);
     }
 
     load() {
