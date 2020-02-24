@@ -2,54 +2,78 @@ export class PlayerModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.data = {
-            track   : {},
-            queue   : [],
-            mix     : false,
-            loop    : false,
-            loopOne : false,
+            track     : {},
+            queue     : [],
+            shuffle   : false,
+            repeat    : false,
+            repeatOne : false,
+            mute      : false,
+            volume    : 1,
         };
 
-        this.eventBus.on('next', this.next);
-        this.eventBus.on('prev', this.prev);
-        this.eventBus.on('play/pause', this.playPause);
-        this.eventBus.on('mix', this.mix);
-        this.eventBus.on('unmix', this.unmix);
-        this.eventBus.on('loop', this.loop);
-        this.eventBus.on('loop one', this.loopOne);
-        this.eventBus.on('unloop', this.unloop);
+        this.eventBus.on('pause', this.pause.bind(this));
+        this.eventBus.on('play', this.play.bind(this));
+        this.eventBus.on('prev', this.prev.bind(this));
+        this.eventBus.on('next', this.next.bind(this));
+        this.eventBus.on('rewind', this.rewind.bind(this));
+        this.eventBus.on('shuffle', this.shuffle.bind(this));
+        this.eventBus.on('unshuffle', this.unshuffle.bind(this));
+        this.eventBus.on('repeat', this.repeat.bind(this));
+        this.eventBus.on('repeat one', this.repeatOne.bind(this));
+        this.eventBus.on('unrepeat', this.unrepeat.bind(this));
+        this.eventBus.on('mute', this.mute.bind(this));
+        this.eventBus.on('unmute', this.unmute.bind(this));
+        //this.eventBus.on('volume up', this.volumeUp);
+        //this.eventBus.on('volume down', this.volumeDown);
+
     }
 
-    next() {
+    pause() {
         //...
-        this.eventBus.emit('track update', track);
+        this.eventBus.emit('draw play', {});
+    }
+    play() {
+        //...
+        this.eventBus.emit('draw pause', {});
     }
     prev() {
         //...
         this.eventBus.emit('track update', track);
     }
-    playPause() {
+    next() {
         //...
-        this.eventBus.emit('play draw', {});
-        this.eventBus.emit('pause draw', {});
+        this.eventBus.emit('track update', track);
     }
-    mix() {
+    rewind(ratio) {
         //...
-        this.eventBus.emit('mix draw', {});
+        this.eventBus.emit('draw timeline', ratio);
     }
-    unmix() {
+    shuffle() {
         //...
-        this.eventBus.emit('unmix draw', {});
+        this.eventBus.emit('draw shuffle', {});
     }
-    loop() {
+    unshuffle() {
         //...
-        this.eventBus.emit('loop draw', {});
+        this.eventBus.emit('draw unshuffle', {});
     }
-    loopOne() {
+    repeat() {
         //...
-        this.eventBus.emit('loop one draw', {});
+        this.eventBus.emit('draw repeat', {});
     }
-    unloop() {
+    repeatOne() {
         //...
-        this.eventBus.emit('unloop draw', {});
+        this.eventBus.emit('draw repeat one', {});
+    }
+    unrepeat() {
+        //...
+        this.eventBus.emit('draw unrepeat', {});
+    }
+    mute() {
+        //...
+        this.eventBus.emit('draw mute', {});
+    }
+    unmute() {
+        //...
+        this.eventBus.emit('draw unmute', {});
     }
 }
