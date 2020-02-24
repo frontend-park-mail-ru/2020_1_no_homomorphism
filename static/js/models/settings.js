@@ -2,6 +2,7 @@ export class SettingsModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.data = {
+            // Такой же вопрос, как и в profile
             avatar          : {},
             name            : '',
             email           : '',
@@ -12,8 +13,13 @@ export class SettingsModel {
 
         this.eventBus.on('avatar upload', this.resetAvatar);
         this.eventBus.on('add outer', this.addOuter);
-        this.eventBus.on('submit', this.validate);
+        this.eventBus.on('submit', this.submit);
     }
+
+    /*getUserData() {
+        ...
+        return data;
+    }*/
 
     resetAvatar(avatar) {
         //...
@@ -25,15 +31,10 @@ export class SettingsModel {
         this.eventBus.emit('new outer', outer);
     }
 
-    validate(values) {
+    submit(values) {
+        // Тут вызов валидатора. Пока заглушка
         this.eventBus.emit('invalid', {
-            avatar          : '',
-            birthday        : '',
-            name            : '',
             email           : 'невалидный адрес',
-            password        : '',
-            passwordConfirm : '',
-            outer           : '',
         })
     }
 }

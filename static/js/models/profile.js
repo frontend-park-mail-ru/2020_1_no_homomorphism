@@ -2,6 +2,7 @@ export class ProfileModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.data = {
+            // Брать из БД при создании класса или при загрузке страницы?
             avatar   : {},
             login    : '',
             name     : '',
@@ -9,4 +10,9 @@ export class ProfileModel {
             outer    : [],
         };
     }
+
+    /*getUserData() {
+        ...
+        return data;
+    }*/
 }

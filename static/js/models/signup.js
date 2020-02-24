@@ -2,6 +2,9 @@ export class SignupModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.data = {
+            /* Дефолтные значения. Наверное, надо бы их именно здесь сохранять,
+            *  чтобы после неудачного сабмита возвращать в форму
+            */
             name            : '',
             login           : '',
             email           : '',
@@ -9,17 +12,13 @@ export class SignupModel {
             passwordConfirm : '',
         };
 
-        this.eventBus.on('submit', this.validate);
+        this.eventBus.on('submit', this.submit);
     }
 
-    validate(values) {
+    submit(values) {
+        // Тут вызов валидатора. Пока заглушка
         this.eventBus.emit('invalid', {
-            name            : '',
             login           : 'Пользователь с таким логином уже существует',
-            sex             : '',
-            email           : '',
-            password        : '',
-            passwordConfirm : '',
 
         })
     }

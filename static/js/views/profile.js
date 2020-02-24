@@ -9,4 +9,10 @@ export class ProfileView {
             outer    : document.getElementsByClassName('outer'),
         };
     }
+
+    render(data) {
+        for (let key in data) {
+            this.elements.key.value = data.key;
+        }
+    }
 }

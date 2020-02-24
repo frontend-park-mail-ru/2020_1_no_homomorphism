@@ -16,11 +16,20 @@ export class SettingsView {
         this.elements.submit.addEventListener('click', this.submit);
         this.elements.avatarUpload.addEventListener('change', this.avatarUpload);
         this.elements.addOuter.addEventListener('click', this.addOuterClick);
-        this.eventBus.on('invalid', this.render);
+        this.eventBus.on('invalid', this.showErrors);
+        this.eventBus.on('valid', this.showSuccess);
     }
 
-    render(errors) {
-        for (key in this.elements) {
+    render(data) {
+        for (let key in data) {
+            this.elements.key.value = data.key;
+        }
+    }
+
+    showSuccess() {}
+
+    showErrors(errors) {
+        for (let key in errors) {
             this.elements.key.setCustomValidity(errors.key);
         }
     }

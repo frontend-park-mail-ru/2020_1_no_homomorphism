@@ -18,7 +18,7 @@ nunjucks.configure('views', {
 });
 
 app.get('/', (req, res) => {
-    res.render('index')
+    res.render('index');
 });
 
 app.get('/login', (req, res) => {
@@ -26,7 +26,7 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/signup', (req, res) => {
-    res.render('signup')
+    res.render('signup');
 });
 
 app.get('/player', (req, res) => {
@@ -38,7 +38,7 @@ app.get('/profile', (req, res) => {
 });
 
 app.get('/settings', (req, res) => {
-    res.render('settings')
+    res.render('settings');
 });
 
 // catch 404 and forward to error handler

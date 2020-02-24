@@ -10,11 +10,13 @@ export class SignupView {
             submit          : document.getElementById('submit'),
         };
         this.elements.submit.addEventListener('click', this.submit);
-        this.eventBus.on('invalid', this.render);
+        this.eventBus.on('invalid', this.showErrors);
     }
 
-    render(errors) {
-        for (key in this.elements) {
+    render() {}
+
+    showErrors(errors) {
+        for (let key in errors) {
             this.elements.key.setCustomValidity(errors.key);
         }
     }

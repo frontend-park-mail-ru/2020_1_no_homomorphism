@@ -9,15 +9,17 @@ export class LoginView {
         };
         this.elements.submit.addEventListener('click', this.submit);
         this.elements.remember.addEventListener('change', this.changeRemember);
-        this.eventBus.on('invalid', this.render);
+        this.eventBus.on('invalid', this.showErrors);
     }
 
-    render(errors) {
-        for (key in this.elements) {
+    render() {}
+
+    showErrors(errors) {
+        for (let key in errors) {
             this.elements.key.setCustomValidity(errors.key);
         }
     }
-
+    
     submit() {
         this.eventBus.emit('submit', {
             login    : this.elements.login.value,
