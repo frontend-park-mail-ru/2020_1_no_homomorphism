@@ -1,4 +1,4 @@
-{% extends "base.njk" %}
+{% extends "templates/base.njk" %}
 
 {% block additional_css %}
 <link rel="stylesheet" href="/css/index.css">
@@ -37,5 +37,6 @@
         {% endfor %}
     </div>
     <div class="col col-4"></div>
+    {% include "templates/player.njk" %}
 </div>
 {% endblock %}
