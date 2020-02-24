@@ -2,10 +2,7 @@
  * Роутер. Переход по страничкам
  * @class Router
  */
-
 export class Router {
-
-
     /**
      * Конструктор
      * */
@@ -21,7 +18,6 @@ export class Router {
         this.root = root;
     }
 
-
     /**
      * Добавление view
      * @param {string} name
@@ -30,7 +26,6 @@ export class Router {
     addView(name, view) {
         this.views[name] = view
     }
-
 
     /**
      * Добавление обработки касания
@@ -45,5 +40,4 @@ export class Router {
         })
         //Обращение к ивентбасу
     }
-
 }

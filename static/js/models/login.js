@@ -1,3 +1,5 @@
+//import {Router} from "../modules/router";
+
 export class LoginModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
@@ -5,9 +7,9 @@ export class LoginModel {
             /* Дефолтные значения. Наверное, надо бы их именно здесь сохранять,
             *  чтобы после неудачного сабмита возвращать в форму
             */
-            login    : '',
-            password : '',
-            remember : false,
+            login: '',
+            password: '',
+            remember: false,
         };
 
         this.eventBus.on('submit', this.submit);
@@ -15,9 +17,20 @@ export class LoginModel {
     }
 
     submit(values) {
-        // Тут вызов валидатора. Пока заглушка
+        if (values.email.empty()) {
+            this.eventBus.emit('invalid', {
+                login: 'Введите email!',
+            })
+        } else if (values.password.empty()) {
+            this.eventBus.emit('invalid', {
+                login: 'Введите пароль!',
+            })
+        }
+
+        // Запрос в бд
+
         this.eventBus.emit('invalid', {
-            login    : 'Пользователь с таким логином не найден',
+            login: 'Все огонь',
         })
     }
 

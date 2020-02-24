@@ -1,4 +1,4 @@
-export class Validation {
+export default class Validation {
 
     /**
      * @param {String} email
@@ -43,4 +43,3 @@ export class Validation {
         return '';
     }
 }
-export default new Validation;
