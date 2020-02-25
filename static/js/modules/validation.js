@@ -1,9 +1,8 @@
 /**
- * Проверка валидности введенных данных
+ * Валидация данных
  * @class Validation
  */
 export default class Validation {
-
     /**
      * @param {String} email
      * @returns {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
@@ -15,7 +14,6 @@ export default class Validation {
         }
         return '';
     }
-
     /**
      * @param {String} login
      * @returns {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
@@ -27,13 +25,11 @@ export default class Validation {
         }
         return '';
     }
-
     /**
      * @param {String} password1 Пароль
      * @param {String} password2 Повтор пароля
      * @returns {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
      */
-
     validationPassword(password1 = '', password2 = '') {
         if (password1 !== password2) {
             return 'Пароли не совпадают';

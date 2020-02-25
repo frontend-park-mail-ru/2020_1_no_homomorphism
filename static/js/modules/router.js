@@ -1,5 +1,5 @@
 /**
- * Роутер. Переход по страничкам
+ * Переход по страничкам
  * @class Router
  */
 export class Router {
@@ -8,9 +8,9 @@ export class Router {
      * */
     constructor() {
         this.root = document.getElementById('application');
+        this.curPath = null;
         this.views = {}
     }
-
     /* *
      * Новый root
      * */
@@ -19,16 +19,32 @@ export class Router {
     }
 
     /**
-     * Добавление view
-     * @param {string} name
+     * Добавление path с view
+     * @param {string} path
      * @param {string} view
      * */
-    addView(name, view) {
-        this.views[name] = view
+    addView(path, view) {
+        this.views[path] = view
     }
-
     /**
-     * Добавление обработки касания
+     * Запуск рендеринга
+     * @param {string} newPath
+     * */
+    check(newPath) {
+        if (newPath === this.curPath) {
+            // Уже на это страничке
+            return;
+        }
+        if (!this.views.has(newPath)) {
+            // Нет такого пути, показать ошибку
+            return;
+        }
+        this.curPath = newPath;
+        this.views[newPath].render();
+        //Обращение к ивентбасу
+    }
+    /**
+     * Добавление EventListener'a
      * */
     start() {
         window.addEventListener('click', (event) => {
@@ -36,8 +52,7 @@ export class Router {
                 return;
             }
             event.preventDefault();
-            this.views[event.target.pathname].render();
+            this.check(event.target.pathname);
         })
-        //Обращение к ивентбасу
     }
 }
