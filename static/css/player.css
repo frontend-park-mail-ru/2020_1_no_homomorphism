@@ -16,17 +16,22 @@
     text-align: left;
 }
 
+.patch {
+    height: 1em;
+    background: white;
+}
+
 .music-bar {
-    margin-top: 1em;
+    background: white;
 }
 
 .music-bar .col {
-    height: 100px;
+    height: 80px;
 }
 
 .music-bar .track-group-names {
     padding-left: 7px;
-    padding-top: 23px;
+    padding-top: 0;
 }
 
 .music-bar .add-to-playlist-button {
@@ -40,9 +45,9 @@
 .container-audio {
     height: auto;
     color: #444;
-    margin: 20px auto;
     margin-bottom: 5px;
     overflow: hidden;
+    background: white;
 }
 
 .timeline .timeline-back {
@@ -94,66 +99,88 @@
 .shuffle {
     position: relative;
     top: 5px;
-    left: 211px;
+    left: 207px;
 }
 
 .repeat {
     position: relative;
     top: 5px;
-    left: 209px;
+    left: 205px;
 }
 
 .volume {
     position: relative;
     top: 5px;
-    left: 207px;
+    left: 203px;
+    z-index: 1;
 }
 
 .volume-scale {
-   background: rgb(191, 192, 245);
-   border: 3px solid rgb(114, 71, 148);
-   border-radius: 5px;
-   -moz-border-radius: 5px;
-   position: relative;
-   padding: 5px;
-   width: 300px;
-   text-align: center;
-   margin-bottom: 10px;
+    height: 74px;
+    top: 48px;
+    left: 356px;
+    background: white;
+    border: 1px solid #ebeae7;
+    border-radius: 2px;
+    position: absolute;
+    padding: 5px;
+    width: 25px;
+    text-align: center;
+    margin-bottom: 10px;
+    transition-duration: 0.3s;
 }
 
 .volume-scale:after,
 .volume-scale:before {
-   content: '';
-   border: solid transparent;
-   position: absolute;
-   left: 80%;
-   margin-left: -12px;
-   top: -27px;
-   width: 0;
+    content: '';
+    border: solid transparent;
+    position: absolute;
+    left: 50%;
+    margin-left: -8px;
+    top: 72px;
+    width: 0;
 }
 
 .volume-scale:before {
-   border-bottom-color: rgb(114, 71, 148);
-   border-width: 12px;
+    border-top-color: #ebeae7;
+    border-width: 8px;
 }
 
 .volume-scale:after {
-   border-bottom-color: rgb(191, 192, 245);
-   border-width: 16px;
-   margin-left: -16px;
+    border-top-color: white;
+    border-width: 6px;
+    margin-left: -6px;
+}
+
+.volume-scale-back {
+    height: 60px;
+    width: 5px;
+    background: #ebeae7;
+    position: relative;
+    left: 4px;
+    cursor: pointer;
+}
+
+.volume-scale-front {
+    width: 5px;
+    background: black;
+    position: relative;
+    left: 4px;
+    cursor: pointer;
 }
 
 .music-bar .track-name {
-    font-size: 26px;
+    font-size: 19px;
 }
 
 .group-name {
     font-weight: bold;
 }
 
-.big-track-photo {
-    width: 100px;
-    margin-bottom: 0;
+.track-list {
+    position: relative;
+    top: 0px;
+    z-index: -1;
 }
 
 .track-list .track-group-names {
@@ -170,11 +197,15 @@
 }
 
 .track-list .col {
-    height: 54px;
+    height: 38px;
 }
 
 .track-photo {
     padding-left: 5px;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #ebeae7;
 }
 
 .top-line {
@@ -190,6 +221,7 @@
 .group-name {
     text-decoration: none;
     color: black;
+    font-size: 15px;
 }
 
 .track-list .buttons-in-playlist {

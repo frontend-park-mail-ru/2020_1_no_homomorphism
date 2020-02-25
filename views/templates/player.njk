@@ -5,11 +5,14 @@
                  height="17" style="visibility: hidden; transform: rotate(180deg); margin-left: -3px;">
         </div>
         <div class="col">
+            <div class="row patch"></div>
             <div class="row music-bar">
-                <div class="col big-track-photo">
-                    <img src="/img/album-24px.svg" height="100px" alt="..." id="cover">
+                <div class="col">
+                    <a href="/player">
+                        <img src="/img/album-24px.svg" height="80px" width="80px" alt="..." id="cover">
+                    </a>
                 </div>
-                <div class="col track-group-names left-border">
+                <div class="col track-group-names">
                     <div class="track-name" id="title">
                         Kek
                     </div>
@@ -17,23 +20,19 @@
                         Lol
                     </a>
                 </div>
-                <div class="col add-to-playlist-button">
-                    <a href="/player">
-                        <img src="/img/add-24px.svg" height="30px" alt="...">
-                    </a>
-                </div>
-                <div class="col share-button">
-                    <a href="/player">
-                        <img src="/img/send-24px.svg" height="25px" alt="...">
-                    </a>
-                </div>
+                <!--a href="/player">
+                    <img src="/img/add-24px.svg" height="30px" alt="...">
+                </a>
+                <a href="/player">
+                    <img src="/img/send-24px.svg" height="25px" alt="...">
+                </a-->
             </div>
             <div class="container-audio border-bottom">
                 <div class="timeline row">
                     <div class="timeline-back"></div>
-                    <div class="timeline-front" style="width: 41%;"></div>
-                    <div class="current-time col col-6" style="font-size: 0px;">1:15</div>
-                    <div class="duration col col-6" style="font-size: 0px;">3:04</div>
+                    <div class="timeline-front" style="width: 0;"></div>
+                    <div class="current-time col col-6" style="font-size: 0px;">0:00</div>
+                    <div class="duration col col-6" style="font-size: 0px;">0:00</div>
                 </div>
                 <div class="control-elements row">
                     <div class="col col-1">
@@ -48,13 +47,15 @@
                     <img src="/img/shuffle.svg" class="playlist-control-button shuffle" style="opacity: 0.4;" alt="shuffle">
                     <img src="/img/repeat.svg" class="playlist-control-button repeat" style="opacity: 0.4;" alt="repeat">
                     <img src="/img/volume_up.svg" class="volume"  style="opacity: 0.4;" alt="volume">
-                    <!--div class="volume-scale"></div-->
+                    <div class="volume-scale" style="opacity: 0; top: 58px; visibility: hidden; transition-property: opacity, visibility, top;">
+                        <div class="volume-scale-back"></div>
+                        <div class="volume-scale-front"></div>
+                    </div>
                 </div>
                 <audio>
-                    <source src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/9473/new_year_dubstep_minimix.ogg" type="audio/ogg">
+                    <source src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/9473/new_year_dubstep_minimix.ogg">
                     Your browser does not Support the audio Tag
                 </audio>
-                <div class="top-line"></div>
             </div>
             <div class="track-list">
             {% for i in range(0,13) %}
@@ -64,7 +65,7 @@
                             <img src="/img/album-24px.svg" height="50px" alt="...">
                         </div>
                     </div>
-                    <div class="col track-group-names left-border">
+                    <div class="col track-group-names">
                         <div class="track-name">
                             Kek
                         </div>

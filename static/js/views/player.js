@@ -2,6 +2,7 @@ export class PlayerView {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.elements = {
+            audio           : document.getElementsByTagName('audio')[0],
             trigger         : document.getElementsByClassName('player-trigger')[0],
             arrow           : document.getElementsByClassName('player-trigger-arrow')[0],
             player          : document.getElementsByClassName('main-pos')[0],
@@ -15,12 +16,18 @@ export class PlayerView {
                 zone        : document.getElementsByClassName('timeline')[0],
                 back        : document.getElementsByClassName('timeline-back')[0],
                 front       : document.getElementsByClassName('timeline-front')[0],
+                drag        : false,
                 currentTime : document.getElementsByClassName('current-time')[0],
                 duration    : document.getElementsByClassName('duration')[0],
             },
             shuffleButton   : document.getElementsByClassName('shuffle')[0],
             repeatButton    : document.getElementsByClassName('repeat')[0],
-            volumeButton    : document.getElementsByClassName('volume')[0],
+            volume          : {
+                button : document.getElementsByClassName('volume')[0],
+                scale  : document.getElementsByClassName('volume-scale')[0],
+                back   : document.getElementsByClassName('volume-scale-back')[0],
+                front  : document.getElementsByClassName('volume-scale-front')[0],
+            },
             //addButtons : document.getElementsByClassName('add-buttons'),
             //deleteButtons : document.getElementsByClassName('delete-buttons'),
         };
@@ -30,6 +37,9 @@ export class PlayerView {
         this.muted = false;
         this.volume = 1;
 
+        window.addEventListener('mouseup', this.windowMouseUp.bind(this));
+        this.elements.audio.addEventListener('timeupdate', this.audioTimeUpdate.bind(this));
+        this.elements.audio.addEventListener('ended', this.audioEnded.bind(this));
         this.elements.trigger.addEventListener('mouseover', this.triggerMouseOver.bind(this));
         this.elements.trigger.addEventListener('mouseout', this.triggerMouseOut.bind(this));
         this.elements.trigger.addEventListener('click', this.triggerClick.bind(this));
@@ -38,13 +48,25 @@ export class PlayerView {
         this.elements.nextButton.addEventListener('click', this.nextButtonClick.bind(this));
         this.elements.timeline.zone.addEventListener('mouseover', this.timelineMouseOver.bind(this));
         this.elements.timeline.zone.addEventListener('mouseout', this.timelineMouseOut.bind(this));
+        this.elements.timeline.back.addEventListener('mousedown', this.timelineMouseDown.bind(this));
+        this.elements.timeline.back.addEventListener('mouseup', this.timelineMouseUp.bind(this));
+        this.elements.timeline.front.addEventListener('mousedown', this.timelineMouseDown.bind(this));
+        this.elements.timeline.front.addEventListener('mouseup', this.timelineMouseUp.bind(this));
+        // Как это обойти?
+        this.elements.timeline.back.onmousemove = (event) => {
+            this.timelineMouseMove(event);
+        };
+        // Как это обойти?
+        this.elements.timeline.front.onmousemove = (event) => {
+            this.timelineMouseMove(event);
+        };
         // Как это обойти?
         this.elements.timeline.back.onclick = (event) => {
-            this.timelineBackClick(event);
+            this.timelineClick(event);
         };
         // Как это обойти?
         this.elements.timeline.front.onclick = (event) => {
-            this.timelineFrontClick(event);
+            this.timelineClick(event);
         };
         this.elements.shuffleButton.addEventListener('mouseover', this.shuffleButtonMouseOver.bind(this));
         this.elements.shuffleButton.addEventListener('mouseout', this.shuffleButtonMouseOut.bind(this));
@@ -52,9 +74,19 @@ export class PlayerView {
         this.elements.repeatButton.addEventListener('mouseover', this.repeatButtonMouseOver.bind(this));
         this.elements.repeatButton.addEventListener('mouseout', this.repeatButtonMouseOut.bind(this));
         this.elements.repeatButton.addEventListener('click', this.repeatButtonClick.bind(this));
-        this.elements.volumeButton.addEventListener('mouseover', this.volumeButtonMouseOver.bind(this));
-        this.elements.volumeButton.addEventListener('mouseout', this.volumeButtonMouseOut.bind(this));
-        this.elements.volumeButton.addEventListener('click', this.volumeButtonClick.bind(this));
+        this.elements.volume.button.addEventListener('mouseover', this.volumeButtonMouseOver.bind(this));
+        this.elements.volume.button.addEventListener('mouseout', this.volumeButtonMouseOut.bind(this));
+        this.elements.volume.button.addEventListener('click', this.volumeButtonClick.bind(this));
+        this.elements.volume.scale.addEventListener('mouseover', this.volumeButtonMouseOver.bind(this));
+        this.elements.volume.scale.addEventListener('mouseout', this.volumeButtonMouseOut.bind(this));
+        // Как это обойти?
+        this.elements.volume.back.onclick = (event) => {
+            this.volumeScaleClick(event);
+        };
+        // Как это обойти?
+        this.elements.volume.front.onclick = (event) => {
+            this.volumeScaleClick(event);
+        };
         //this.elements.addButtons.addEventListener();
         //this.elements.deleteButtons.addEventListener();
 
@@ -72,6 +104,7 @@ export class PlayerView {
     }
 
     render() {
+        this.eventBus.emit('init', {});
         const body = document.getElementsByTagName('body')[0];
         //console.log(player);
         //console.log(body);
@@ -96,8 +129,24 @@ export class PlayerView {
         //console.log(player.style.height);
         //console.log(trigger.style.height);
         //console.log('topkek');
+        this.drawVolume(this.elements.volume.back.getBoundingClientRect().height * this.volume);
     }
 
+    windowMouseUp() {
+        this.elements.timeline.drag = false;
+    }
+    audioTimeUpdate() {
+        if (
+            isNaN(this.elements.audio.currentTime / this.elements.audio.duration) ||
+            this.elements.timeline.drag
+        ) {
+            return;
+        }
+        this.drawTimeline(this.elements.audio.currentTime / this.elements.audio.duration);
+    }
+    audioEnded() {
+        this.eventBus.emit('next', 'self');
+    }
     triggerMouseOver() {
         this.elements.arrow.style.visibility = 'visible';
     }
@@ -130,7 +179,7 @@ export class PlayerView {
         this.eventBus.emit('prev', {});
     }
     nextButtonClick() {
-        this.eventBus.emit('next', {});
+        this.eventBus.emit('next', 'click');
     }
     timelineMouseOver() {
         this.elements.timeline.currentTime.style.fontSize = '11px';
@@ -140,14 +189,26 @@ export class PlayerView {
         this.elements.timeline.currentTime.style.fontSize = '0';
         this.elements.timeline.duration.style.fontSize = '0';
     }
-    timelineBackClick(event) {
-        const duration = 184;   //Заглушечная константа
+    timelineMouseDown() {
+        console.log('down');
+        this.elements.timeline.drag = true;
+    }
+    timelineMouseUp() {
+        console.log('up');
+        this.elements.timeline.drag = false;
         const width = event.clientX - this.elements.timeline.back.getBoundingClientRect().x;
         const ratio = width / this.elements.timeline.back.getBoundingClientRect().width;
         this.eventBus.emit('rewind', ratio);
     }
-    timelineFrontClick(event) {
-        const duration = 184;   //Заглушечная константа
+    timelineMouseMove(event) {
+        if (this.elements.timeline.drag) {
+            console.log('move');
+            const width = event.clientX - this.elements.timeline.back.getBoundingClientRect().x;
+            const ratio = width / this.elements.timeline.back.getBoundingClientRect().width;
+            this.drawTimeline(ratio);
+        }
+    }
+    timelineClick(event) {
         const width = event.clientX - this.elements.timeline.back.getBoundingClientRect().x;
         const ratio = width / this.elements.timeline.back.getBoundingClientRect().width;
         this.eventBus.emit('rewind', ratio);
@@ -164,7 +225,7 @@ export class PlayerView {
     }
     shuffleButtonClick() {
         if (!this.shuffled) {
-            this.eventBus.emit('shuffle', {});
+            this.eventBus.emit('shuffle', 'first');
         } else {
             this.eventBus.emit('unshuffle', {});
         }
@@ -193,10 +254,18 @@ export class PlayerView {
         }
     }
     volumeButtonMouseOver() {
-        this.elements.volumeButton.style.opacity = '1';
+        this.elements.volume.scale.style.transitionProperty = 'opacity, top';
+        this.elements.volume.scale.style.visibility = 'visible';
+        this.elements.volume.scale.style.opacity = '1';
+        this.elements.volume.scale.style.top = '48px';
+        this.elements.volume.button.style.opacity = '1';
     }
     volumeButtonMouseOut() {
-        this.elements.volumeButton.style.opacity = '0.4';
+        this.elements.volume.scale.style.transitionProperty = 'opacity, visibility, top';
+        this.elements.volume.scale.style.visibility = 'hidden';
+        this.elements.volume.scale.style.opacity = '0';
+        this.elements.volume.scale.style.top = '58px';
+        this.elements.volume.button.style.opacity = '0.4';
     }
     volumeButtonClick() {
         if (this.muted) {
@@ -204,6 +273,12 @@ export class PlayerView {
         } else {
             this.eventBus.emit('mute', {});
         }
+    }
+    volumeScaleClick(event) {
+        const height = this.elements.volume.back.getBoundingClientRect().height - (event.clientY - this.elements.volume.back.getBoundingClientRect().y);
+        this.volume = height / this.elements.volume.back.getBoundingClientRect().height;
+        this.elements.audio.volume = this.volume;
+        this.drawVolume(height);
     }
 
     drawPlay() {
@@ -218,14 +293,16 @@ export class PlayerView {
         this.elements.cover.src = track.cover;
         this.elements.artist.innerHTML = track.artist;
         this.elements.title.innerHTML = track.title;
-        this.elements.timeline.duration = track.duration;
+        const minutes = Math.floor(track.duration / 60);
+        const seconds = Math.floor(track.duration % 60);
+        this.elements.timeline.duration.innerHTML = minutes.toString() + ':' + (seconds < 10 ? '0' : '') + seconds.toString();
+        this.elements.timeline.currentTime.innerHTML = '0:00';
     }
     drawTimeline(ratio) {
-        const duration = 184;   //Заглушечная константа
         const width = ratio * this.elements.timeline.back.getBoundingClientRect().width;
         this.elements.timeline.front.style.width = width.toString() + 'px';
-        const minutes = Math.floor((ratio * duration) / 60);
-        const seconds = Math.floor((ratio * duration) % 60);
+        const minutes = Math.floor((ratio * this.elements.audio.duration) / 60);
+        const seconds = Math.floor((ratio * this.elements.audio.duration) % 60);
         this.elements.timeline.currentTime.innerHTML = minutes.toString() + ':' + (seconds < 10 ? '0' : '') + seconds.toString();
     }
     drawShuffle() {
@@ -250,15 +327,25 @@ export class PlayerView {
         this.repeatState = 0;
     }
     drawMute() {
-        this.elements.volumeButton.src = '/img/volume_mute.svg';
+        this.elements.volume.button.src = '/img/volume_mute.svg';
+        this.drawVolume(0);
         this.muted = true;
     }
     drawUnmute() {
         if (this.volume <= 0.5) {
-            this.elements.volumeButton.src = '/img/volume_down.svg';
+            this.elements.volume.button.src = '/img/volume_down.svg';
         } else {
-            this.elements.volumeButton.src = '/img/volume_up.svg';
+            this.elements.volume.button.src = '/img/volume_up.svg';
         }
+        this.drawVolume(this.elements.volume.back.getBoundingClientRect().height * this.volume);
         this.muted = false;
+    }
+    drawVolume(height) {
+        if (height === 0) {
+            this.elements.volume.front.style.height = '0';
+            return;
+        }
+        this.elements.volume.front.style.top = 0 - height.toString() + 'px';
+        this.elements.volume.front.style.height = height.toString() + 'px';
     }
 }
