@@ -131,7 +131,6 @@ export class PlayerModel {
         this.eventBus.emit('draw timeline', ratio);
     }
     shuffle(positionOfCurrent) {
-        console.log(this.data.current);
         let tmp;
 	    for (let j, i = this.data.queue.length - 1; i > 0; i--) {
             j = Math.floor(Math.random() * (i + 1));
@@ -150,17 +149,12 @@ export class PlayerModel {
             this.data.queue[this.data.current] = tmp;
         }
         this.data.current = 0;
-        console.log(this.data.queue);
-        console.log(this.data.current);
         this.data.shuffle = true;
         this.eventBus.emit('draw shuffle', {});
     }
     unshuffle() {
-        console.log(this.data.current);
         this.data.current = this.data.queue[this.data.current];
         this.data.queue.sort();
-        console.log(this.data.queue);
-        console.log(this.data.current);
         this.data.shuffle = false;
         this.eventBus.emit('draw unshuffle', {});
     }

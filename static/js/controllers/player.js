@@ -7,7 +7,6 @@ export class PlayerController {
         this.eventBus = new EventBus();
         this.model = new PlayerModel(this.eventBus);
         this.view = new PlayerView(this.eventBus);
-        this.load();
     }
 
     load() {
