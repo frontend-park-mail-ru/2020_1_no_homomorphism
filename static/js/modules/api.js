@@ -16,17 +16,15 @@ export default class Api {
         return postFetch('/login', {
             email,
             password,
-        });
+        }).catch(error => console.error(error))
     }
-
     /**
      * Логаут
      * @returns {Promise<Response>}
      */
     static logoutFetch() {
-        return deleteFetch();
+        return deleteFetch().catch(error => console.error(error))
     }
-
     /**
      * Регистрация
      * @param {string} name
@@ -43,17 +41,15 @@ export default class Api {
             sex,
             email,
             password,
-        });
+        }).catch(error => console.error(error))
     }
-
     /**
      * Профиль просмотр
      * @returns {Promise<Response>}
      */
     static profileFetch() {
-        return getFetch('/profile');
+        return getFetch('/profile').catch(error => console.error(error))
     }
-
     /**
      * Профиль настройка
      * @param {string} name
@@ -72,9 +68,8 @@ export default class Api {
             email,
             password,
             prevPassword,
-        });
+        }).catch(error => console.error(error))
     }
-
     /**
      * Отправка фоточки (отдельно, тк Димуля попросил)
      * @param {string} image
@@ -83,7 +78,7 @@ export default class Api {
     static profilePhotoFetch(image) {
         return putFetch('/image', {
             image: image,
-        })
+        }).catch(error => console.error(error))
         //const fileField = document.querySelector('input[type="file"]');
         //return putFetch('/image', {
         //    image: fileField.files[0],
@@ -95,6 +90,7 @@ export default class Api {
      * @returns {Promise<Response>}
      */
     static playerFetch(name) {
-        return getFetch(`/player/${name}`);
+        return getFetch(`/player/${name}`)
+            .catch(error => console.error(error))
     }
 }

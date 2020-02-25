@@ -17,11 +17,12 @@ export let postFetch = (path = '/', body = {}) => {
         method: 'POST',
         mode: 'cors', // no-cors, cors, *same-origin (последнее - значение оп умолчанию)
         credentials: 'include', // include, *same-origin, omit (относится к кукам)
-        body: JSON.stringify(body),
         headers: {
             'Content-Type': 'application/json; charset=utf-8'
         },
-    });
+        body: JSON.stringify(body),
+
+    }).then(response => response.json());
 };
 /**
  * GET
@@ -35,7 +36,7 @@ export let getFetch = (path = '/', body = {}) => {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
-    });
+    }).then(response => response.json());
 };
 /**
  * DELETE
@@ -48,7 +49,7 @@ export let deleteFetch = (path = '/') => {
         method: 'DELETE',
         mode: 'cors',
         credentials: 'include',
-    });
+    }).then(response => response.json());
 };
 /**
  * PUT
@@ -62,11 +63,11 @@ export let putFetch = (path = '/', body = {}) => {
         method: 'PUT',
         mode: 'cors',
         credentials: 'include',
-        body: JSON.stringify(body),
         headers: {
             'Content-Type': 'application/json; charset=utf-8'
         },
-    });
+        body: JSON.stringify(body),
+    }).then(response => response.json());
 };
 /**
  * PATCH
@@ -80,9 +81,9 @@ export let patchFetch = (path = '/', body = {}) => {
         method: 'PATCH',
         mode: 'cors',
         credentials: 'include',
-        body: JSON.stringify(body),
         headers: {
             'Content-Type': 'application/json; charset=utf-8'
         },
-    });
+        body: JSON.stringify(body),
+    }).then(response => response.json());
 };
