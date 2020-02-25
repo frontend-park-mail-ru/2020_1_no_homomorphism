@@ -70,6 +70,25 @@ export let putFetch = (path = '/', body = {}) => {
     }).then(response => response.json());
 };
 /**
+ * PUT IMAGE
+ * @static
+ * @param {string} path
+ * @param {Object} body
+ * return {Promise<Response>}
+ */
+export let putImageFetch = (path = '/image', body = {}) => {
+    return fetch(getServerPath() + path, {
+        method: 'PUT',
+        mode: 'cors',
+        credentials: 'include',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'multipart/form-data',
+        },
+        body: body,
+    }).then(response => response.json());
+};
+/**
  * PATCH
  * @static
  * @param {string} path

@@ -1,4 +1,4 @@
-import {postFetch, getFetch, deleteFetch, patchFetch, putFetch} from "./fetch";
+import {postFetch, getFetch, deleteFetch, patchFetch, putFetch, putImageFetch} from "./fetch";
 
 /**
  * API object
@@ -23,7 +23,7 @@ export default class Api {
      * @returns {Promise<Response>}
      */
     static logoutFetch() {
-        return deleteFetch().catch(error => console.error(error))
+        return deleteFetch('/logout').catch(error => console.error(error))
     }
     /**
      * Регистрация
@@ -57,32 +57,29 @@ export default class Api {
      * @param {string} sex
      * @param {string} email
      * @param {string} password
-     * @param {string} prevPassword
+     * @param {string} newPassword
      * @returns {Promise<Response>}
      */
-    static profileEditFetch({name, login, sex, email, password, prevPassword}) {
+    static profileEditFetch({name, login, sex, email, password, newPassword}) {
         return patchFetch('/profile/settings', {
             name,
             login,
             sex,
             email,
             password,
-            prevPassword,
+            newPassword,
         }).catch(error => console.error(error))
     }
     /**
-     * Отправка фоточки (отдельно, тк Димуля попросил)
-     * @param {string} image
+     * Отправка фоточки
+     * @param image
      * @returns {Promise<Response>}
      */
     static profilePhotoFetch(image) {
-        return putFetch('/image', {
-            image: image,
-        }).catch(error => console.error(error))
-        //const fileField = document.querySelector('input[type="file"]');
-        //return putFetch('/image', {
-        //    image: fileField.files[0],
-        //})
+        const formData = new FormData();
+        formData.append('file', image[0]);
+        return putImageFetch('/api/avatar', formData)
+            .catch(error => console.error(error))
     }
     /**
      * Получение плейлиста
