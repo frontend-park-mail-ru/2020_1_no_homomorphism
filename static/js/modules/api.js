@@ -1,4 +1,5 @@
-import {postFetch, getFetch} from "./fetch";
+import {postFetch, getFetch, deleteFetch, patchFetch, putFetch} from "./fetch";
+
 /**
  * API object
  * @class
@@ -6,17 +7,26 @@ import {postFetch, getFetch} from "./fetch";
  */
 export default class Api {
     /**
-     * Логин
+     * Логин вход
      * @param {string} email
      * @param {string} password
      * @returns {Promise<Response>}
      */
-    static login({email, password}) {
+    static loginFetch({email, password}) {
         return postFetch('/login', {
             email,
             password,
         });
     }
+
+    /**
+     * Логаут
+     * @returns {Promise<Response>}
+     */
+    static logoutFetch() {
+        return deleteFetch();
+    }
+
     /**
      * Регистрация
      * @param {string} name
@@ -26,7 +36,7 @@ export default class Api {
      * @param {string} password
      * @returns {Promise<Response>}
      */
-    static signup({name, login, sex, email, password}) {
+    static signupFetch({name, login, sex, email, password}) {
         return postFetch('/signup', {
             name,
             login,
@@ -34,5 +44,57 @@ export default class Api {
             email,
             password,
         });
+    }
+
+    /**
+     * Профиль просмотр
+     * @returns {Promise<Response>}
+     */
+    static profileFetch() {
+        return getFetch('/profile');
+    }
+
+    /**
+     * Профиль настройка
+     * @param {string} name
+     * @param {string} login
+     * @param {string} sex
+     * @param {string} email
+     * @param {string} password
+     * @param {string} prevPassword
+     * @returns {Promise<Response>}
+     */
+    static profileEditFetch({name, login, sex, email, password, prevPassword}) {
+        return patchFetch('/profile/settings', {
+            name,
+            login,
+            sex,
+            email,
+            password,
+            prevPassword,
+        });
+    }
+
+    /**
+     * Отправка фоточки (отдельно, тк Димуля попросил)
+     * @param {string} image
+     * @returns {Promise<Response>}
+     */
+    static profilePhotoFetch(image) {
+        return putFetch('/image', {
+            image: image,
+        })
+        //const fileField = document.querySelector('input[type="file"]');
+        //return putFetch('/image', {
+        //    image: fileField.files[0],
+        //})
+    }
+    /**
+     * Получение плейлиста
+     * @param {string} name
+     * @returns {Promise<Response>}
+     */
+    static playerFetch(name) {
+        return getFetch(`/player/${name}`);
     }
 }

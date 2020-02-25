@@ -2,8 +2,8 @@
  * Получение урла сервера
  * return {string}
  */
-const getServerUrl = () => {
-    return '/serverurl'
+const getServerPath = () => {
+    return 'https://kek.ru'
 };
 /**
  * POST
@@ -12,8 +12,8 @@ const getServerUrl = () => {
  * @param {Object} body
  * return {Promise<Response>}
  */
-export function postFetch(path = '/', body = {}) {
-    return fetch(getServerUrl() + path, {
+export let postFetch = (path = '/', body = {}) => {
+    return fetch(getServerPath() + path, {
         method: 'POST',
         mode: 'cors', // no-cors, cors, *same-origin (последнее - значение оп умолчанию)
         credentials: 'include', // include, *same-origin, omit (относится к кукам)
@@ -22,7 +22,7 @@ export function postFetch(path = '/', body = {}) {
             'Content-Type': 'application/json; charset=utf-8'
         },
     });
-}
+};
 /**
  * GET
  * @static
@@ -30,26 +30,26 @@ export function postFetch(path = '/', body = {}) {
  * @param {Object} body
  * return {Promise<Response>}
  */
-export function getFetch(path = '/', body = {}) {
-    return fetch(getServerUrl() + path, {
+export let getFetch = (path = '/', body = {}) => {
+    return fetch(getServerPath() + path, {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
     });
-}
+};
 /**
  * DELETE
  * @static
  * @param {string} path
  * return {Promise<Response>}
  */
-export function deleteFetch(path = '/') {
-    return fetch(getServerUrl() + path, {
+export let deleteFetch = (path = '/') => {
+    return fetch(getServerPath() + path, {
         method: 'DELETE',
         mode: 'cors',
         credentials: 'include',
     });
-}
+};
 /**
  * PUT
  * @static
@@ -57,8 +57,8 @@ export function deleteFetch(path = '/') {
  * @param {Object} body
  * return {Promise<Response>}
  */
-function putFetch(path = '/', body = {}) {
-    return fetch(getServerUrl() + path, {
+export let putFetch = (path = '/', body = {}) => {
+    return fetch(getServerPath() + path, {
         method: 'PUT',
         mode: 'cors',
         credentials: 'include',
@@ -67,7 +67,7 @@ function putFetch(path = '/', body = {}) {
             'Content-Type': 'application/json; charset=utf-8'
         },
     });
-}
+};
 /**
  * PATCH
  * @static
@@ -75,9 +75,9 @@ function putFetch(path = '/', body = {}) {
  * @param {Object} body
  * return {Promise<Response>}
  */
-function patchFetch(path = '/', body = {}) {
-    return fetch(getServerUrl() + path, {
-        method: 'DELETE',
+export let patchFetch = (path = '/', body = {}) => {
+    return fetch(getServerPath() + path, {
+        method: 'PATCH',
         mode: 'cors',
         credentials: 'include',
         body: JSON.stringify(body),
@@ -85,4 +85,4 @@ function patchFetch(path = '/', body = {}) {
             'Content-Type': 'application/json; charset=utf-8'
         },
     });
-}
+};
