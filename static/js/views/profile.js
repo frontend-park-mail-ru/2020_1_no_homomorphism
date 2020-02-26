@@ -11,7 +11,7 @@ export class ProfileView {
     }
 
     render(data) {
-        for (let key in data) {
+        for (const key in data) {
             this.elements.key.value = data.key;
         }
     }

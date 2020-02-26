@@ -131,8 +131,8 @@ export class PlayerModel {
         this.eventBus.emit('draw timeline', ratio);
     }
     shuffle(positionOfCurrent) {
-        let tmp;
-	    for (let j, i = this.data.queue.length - 1; i > 0; i--) {
+        let j, tmp;
+	    for (const i = this.data.queue.length - 1; i > 0; i--) {
             j = Math.floor(Math.random() * (i + 1));
             if (j === this.data.current) {
                 this.data.current = i;

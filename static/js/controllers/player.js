@@ -3,13 +3,9 @@ import {PlayerModel} from '../models/player.js'
 import {PlayerView} from '../views/player.js'
 
 export class PlayerController {
-    constructor() {
+    constructor(baseTemplate) {
         this.eventBus = new EventBus();
         this.model = new PlayerModel(this.eventBus);
-        this.view = new PlayerView(this.eventBus);
-    }
-
-    load() {
-        this.view.render();
+        this.view = new PlayerView(baseTemplate, this.eventBus);
     }
 };

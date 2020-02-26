@@ -6,7 +6,7 @@ const nunjucks = require('nunjucks');
 
 const app = express();
 
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'static', 'views'));
 app.set('view engine', 'njk');
 
 app.use(favicon(path.join(__dirname, 'static', 'favicon.ico')));
@@ -18,27 +18,7 @@ nunjucks.configure('views', {
 });
 
 app.get('/', (req, res) => {
-    res.render('index');
-});
-
-app.get('/login', (req, res) => {
-    res.render('login');
-});
-
-app.get('/signup', (req, res) => {
-    res.render('signup');
-});
-
-app.get('/player', (req, res) => {
-    res.render('player');
-});
-
-app.get('/profile', (req, res) => {
-    res.render('profile');
-});
-
-app.get('/settings', (req, res) => {
-    res.render('settings');
+    res.render('templates/base');
 });
 
 // catch 404 and forward to error handler
@@ -56,7 +36,7 @@ app.use((err, req, res, next) => {
 
     // render the error page
     res.status(err.status || 500);
-    res.render('error', {error: err});
+    res.render('/views/error', {error: err});
 });
 
 app.listen(3000);

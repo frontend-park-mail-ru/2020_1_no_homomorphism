@@ -8,12 +8,11 @@ export class LoginModel {
             *  чтобы после неудачного сабмита возвращать в форму
             */
             login: '',
-            password: '',
             remember: false,
         };
 
         this.eventBus.on('submit', this.submit);
-        this.eventBus.on('remember changed', this.data.changeRemember);
+        this.eventBus.on('remember changed', this.changeRemember);
     }
 
     submit(values) {

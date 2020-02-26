@@ -7,7 +7,7 @@ export class Router {
      * Конструктор
      * */
     constructor() {
-        this.root = document.getElementById('application');
+        this.root = document.getElementsByClassName('container')[0];
         this.curPath = null;
         this.views = {}
     }
@@ -40,7 +40,7 @@ export class Router {
             return;
         }
         this.curPath = newPath;
-        this.views[newPath].render();
+        this.views[newPath].render(this.root);
         //Обращение к ивентбасу
     }
     /**

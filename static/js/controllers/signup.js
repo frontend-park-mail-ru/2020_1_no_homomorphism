@@ -3,13 +3,9 @@ import {SignupModel} from '../models/signup.js'
 import {SignupView} from '../views/signup.js'
 
 export class SignupController {
-    constructor() {
+    constructor(baseTemplate) {
         this.eventBus = new EventBus();
         this.model = new SignupModel(this.eventBus);
-        this.view = new SignupView(this.eventBus);
-    }
-
-    load() {
-        this.view.render();
+        this.view = new SignupView(baseTemplate, this.eventBus);
     }
 };

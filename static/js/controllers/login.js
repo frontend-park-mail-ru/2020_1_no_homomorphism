@@ -3,13 +3,9 @@ import {LoginModel} from '../models/login.js'
 import {LoginView} from '../views/login.js'
 
 export class LoginController {
-    constructor() {
+    constructor(baseTemplate) {
         this.eventBus = new EventBus();
         this.model = new LoginModel(this.eventBus);
-        this.view = new LoginView(this.eventBus);
-    }
-
-    load() {
-        this.view.render();
+        this.view = new LoginView(baseTemplate, this.eventBus);
     }
 };

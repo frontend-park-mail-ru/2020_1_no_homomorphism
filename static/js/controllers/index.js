@@ -3,13 +3,9 @@ import {IndexModel} from '../models/index.js'
 import {IndexView} from '../views/index.js'
 
 export class IndexController {
-    constructor() {
+    constructor(baseTemplate) {
         this.eventBus = new EventBus();
         this.model = new IndexModel(this.eventBus);
-        this.view = new IndexView(this.eventBus);
-    }
-
-    load() {
-        this.view.render();
+        this.view = new IndexView(baseTemplate, this.eventBus);
     }
 };

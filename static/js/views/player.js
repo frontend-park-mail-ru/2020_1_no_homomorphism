@@ -170,7 +170,7 @@ export class PlayerView {
         this.elements.arrow.style.visibility = 'hidden';
     }
     triggerClick() {
-        if (this.elements.arrow.style.transform == 'rotate(180deg)') {
+        if (this.elements.arrow.style.transform === 'rotate(180deg)') {
             this.elements.arrow.style.transform = 'rotate(0)';
             this.elements.arrow.style.marginLeft = '-3px';
         } else {
@@ -179,7 +179,7 @@ export class PlayerView {
         }
         const body = document.getElementsByTagName('body')[0];
         let left = body.clientWidth - 13;
-        if (this.elements.player.style.left == left.toString() + 'px') {
+        if (this.elements.player.style.left === left.toString() + 'px') {
             left = left - this.elements.player.clientWidth + 13;
         }
         this.elements.player.style.left = left + 'px';

@@ -32,7 +32,7 @@ export class SignupView {
     render() {}
 
     showErrors(errors) {
-        for (let key in errors) {
+        for (const key in errors) {
             this.elements.key.setCustomValidity(errors.key);
         }
     }

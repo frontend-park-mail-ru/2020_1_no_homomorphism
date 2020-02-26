@@ -21,7 +21,7 @@ export default class Validation {
     validationLogin (login = '') {
         let regExpr = new RegExp('^[a-zA-Z][a-zA-Z0-9_.]{4,14}$');
         if (!login.match(regExpr)) {
-            return ' Логин может содержать латинские буквы или цифры';
+            return 'Логин может содержать латинские буквы или цифры';
         }
         return '';
     }
@@ -35,7 +35,7 @@ export default class Validation {
             return 'Пароли не совпадают';
         }
 
-        let regExpr = new RegExp ('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{7,}$');
+        let regExpr = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{7,}$');
 
         if (!password1.match(regExpr)) {
             return 'Пароль должен содержать 7 символов, как минимум одна заглавная, одна строчная латинская буква и одна цифра ';
