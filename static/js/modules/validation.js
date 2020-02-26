@@ -2,7 +2,7 @@
  * Валидация данных
  * @class Validation
  */
-export default class Validation {
+export  class Validation {
     /**
      * @param {String} email
      * @returns {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки

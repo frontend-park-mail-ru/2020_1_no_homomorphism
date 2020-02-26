@@ -12,5 +12,7 @@ export class ProfileController {
         this.eventBus.on('show profile', this.view.showProfile);
         this.eventBus.on('invalid', this.view.showErrors); // TODO Error
         this.eventBus.on('redirect to main', router.redirectToMain);
+        this.eventBus.on('no answer', router.redirectToMain);
+        //this.eventBus.on('no answer', nunjucks.render('error', {status: 'sosi', message: 'zhopy'}));
     }
 }

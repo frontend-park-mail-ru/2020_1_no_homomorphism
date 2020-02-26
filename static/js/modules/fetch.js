@@ -3,7 +3,7 @@
  * return {string}
  */
 const getServerPath = () => {
-    return ''
+    return '89.208.199.170:8082'
 };
 /**
  * POST
@@ -13,6 +13,7 @@ const getServerPath = () => {
  * return {Promise<Response>}
  */
 export let postFetch = (path = '/', body = {}) => {
+
     return fetch(getServerPath() + path, {
         method: 'POST',
         mode: 'cors', // no-cors, cors, *same-origin (последнее - значение оп умолчанию)
@@ -32,7 +33,10 @@ export let postFetch = (path = '/', body = {}) => {
  * return {Promise<Response>}
  */
 export let getFetch = (path = '/', body = {}) => {
-    return fetch(getServerPath() + path, {
+    const apiUrl = new URL(path, '89.208.199.170:8082');
+    console.log("HREFFF");
+    console.log(apiUrl.href);
+    return fetch(apiUrl.href, {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',

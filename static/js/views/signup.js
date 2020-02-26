@@ -1,9 +1,8 @@
 export class SignupView {
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.submit = this.submit.bind(this);
-        const button = document.getElementById('submit');
-        button.addEventListener('click', this.submit);
+        //this.submit = this.submit.bind(this);
+
     }
 
     render(root) {
@@ -19,6 +18,8 @@ export class SignupView {
 
     submit(ev) {
         ev.preventDefault();
+        const button = document.getElementById('submit');
+        button.addEventListener('click', this.submit);
         console.log("LOL");
         this.eventBus.emit('submit', {
             name            : document.getElementById('name').value,

@@ -8,4 +8,4 @@ export class IndexController {
         this.model = new IndexModel(this.eventBus);
         this.view = new IndexView(this.eventBus);
     }
-};
+}

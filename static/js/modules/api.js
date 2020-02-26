@@ -1,3 +1,4 @@
+'use strict';
 import {postFetch, getFetch, deleteFetch, patchFetch, putFetch, putImageFetch} from "./fetch.js";
 
 /**
@@ -5,7 +6,7 @@ import {postFetch, getFetch, deleteFetch, patchFetch, putFetch, putImageFetch} f
  * @class
  * @type {Api}
  */
-export default class Api {
+export class Api {
     /**
      * Логин вход
      * @param {string} email

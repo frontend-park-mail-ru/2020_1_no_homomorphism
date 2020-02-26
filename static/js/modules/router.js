@@ -2,7 +2,7 @@
  * Переход по страничкам
  * @class Router
  */
-export default class Router {
+export class Router {
     /**
      * Конструктор
      * */
@@ -29,13 +29,16 @@ export default class Router {
      * Редирект
      */
     redirectToMain() {
-        this.views['/'].render(this.root);
+        console.log("ROUTER");
+        //this.views['/'].render(this.root);
+        this.check('/');
     }
     /**
      * Запуск рендеринга
      * @param {string} newPath
      * */
     check(newPath) {
+        console.log("ROUTER CHECK");
         if (newPath === this.curPath) {
             // Уже на этой страничке
             return;
@@ -60,8 +63,9 @@ export default class Router {
     start() {
         window.addEventListener('click', (event) => {
             let current = event.target;
-            while (current != document.body) {
+            while (current !== document.body) {
                 if (current instanceof HTMLAnchorElement) {
+                    console.log("ROUTER START 1");
                     event.preventDefault();
                     this.check(current.pathname);
                     break;
@@ -70,6 +74,7 @@ export default class Router {
                 }
             }
         });
+        console.log("ROUTER START 2");
         this.check(window.location.pathname);
     }
 }

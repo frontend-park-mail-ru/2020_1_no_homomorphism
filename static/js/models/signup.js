@@ -1,5 +1,5 @@
-import Validation from '../modules/validation.js';
-import Api from "../modules/api.js";
+import {Validation} from '../modules/validation.js';
+import {Api} from "../modules/api.js";
 
 export class SignupModel {
     constructor(eventBus) {

@@ -1,10 +1,6 @@
 export class SettingsView {
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.submit = this.submit.bind(this);
-        this.setEventListeners();
-        //this.eventBus.on('invalid', this.showErrors.bind(this));
-        //this.eventBus.on('valid', this.showSuccess);
     }
 
     setEventListeners(){
@@ -24,7 +20,10 @@ export class SettingsView {
                 document.getElementById(`${key}`).value = data.key;
             }
         }
+    }
     render(root) {
+        this.setEventListeners();
+
         this.eventBus.on('user data', (data) => {
             root.innerHTML = nunjucks.render('../../../views/settings.njk', data);
         });
@@ -38,7 +37,7 @@ export class SettingsView {
 
     showErrors(errors) {
         for (const key in errors) {
-            this.elements.key.setCustomValidity(errors.key);
+            //this.elements.key.setCustomValidity(errors.key);
         }
     }
 

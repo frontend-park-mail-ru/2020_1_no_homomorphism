@@ -1,4 +1,4 @@
-import Api from "../modules/api.js";
+import {Api} from "../modules/api.js";
 export class LoginModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
@@ -16,9 +16,9 @@ export class LoginModel {
     }
 
     submit(values) {
-        if (values.login.empty()) {
+        /*if (values.login.empty) {
             this.eventBus.emit('invalid', 'Введите логин/email!')
-        } else if (values.password.empty()) {
+        } else if (values.password.empty) {
             this.eventBus.emit('invalid', 'Введите пароль!')
         } else {
             console.log('LOGIN');
@@ -30,7 +30,9 @@ export class LoginModel {
                         this.eventBus.emit('invalid', 'Ошибка входа!')
                     }
                 })
-        }
+        }*/
+        console.log('REDIRECT');
+        this.eventBus.emit('redirect to main', {});
     }
 
     changeRemember(state) {

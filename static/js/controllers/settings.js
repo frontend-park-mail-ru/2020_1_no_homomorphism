@@ -16,8 +16,7 @@ export class SettingsController {
         this.eventBus.on('load profile settings', this.model.loadProfile);
         this.eventBus.on('show profile settings', this.view.showProfile);
         //this.eventBus.on('add outer', this.model.addOuter);
+        this.eventBus.on('redirect to main', router.redirectToMain);
+
     }
 }
-        this.eventBus.on('redirect to main', router.redirectToMain);
-    }
-};

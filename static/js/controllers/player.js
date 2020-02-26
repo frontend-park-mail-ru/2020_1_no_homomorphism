@@ -9,4 +9,4 @@ export class PlayerController {
         this.view = new PlayerView(this.eventBus);
         this.eventBus.on('redirect to main', router.redirectToMain);
     }
-};
+}

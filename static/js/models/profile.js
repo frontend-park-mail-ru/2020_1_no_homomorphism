@@ -1,5 +1,5 @@
-import Api from "../modules/api.js";
-import Router from "../modules/router.js";
+import {Api} from "../modules/api.js";
+import {Router} from "../modules/router.js";
 export class ProfileModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
@@ -16,6 +16,11 @@ export class ProfileModel {
         };
         Api.profileFetch()
             .then((res) => {
+                console.log("API");
+                if (res === undefined){
+                    //return
+                    this.eventBus.emit('invalid', 'Ошибка загрузки профиля');
+                }
                 if (res.ok) {
                     res.json()
                         .then(data => {
@@ -23,7 +28,8 @@ export class ProfileModel {
                             //this.eventBus.emit('show profile', data);
                         })
                 } else {
-                    this.eventBus.emit('invalid', 'Ошибка загрузки профиля')
+                    //console.log("API");
+                    this.eventBus.emit('no answer', 'Ошибка загрузки профиля')
                 }
             })
 
