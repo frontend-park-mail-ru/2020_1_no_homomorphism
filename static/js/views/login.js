@@ -8,10 +8,12 @@ export class LoginView {
 
         const button = document.getElementById('submit');
         button.addEventListener('click', this.submit);
+        //console.log("LOL");
         //this.remember.addEventListener('change', this.changeRemember);
     }
 
     render() {
+        // отрисовочка - делает Никита
     }
 
     showErrors(errors) {
@@ -19,7 +21,6 @@ export class LoginView {
             if (errors.hasOwnProperty(key)) {
                 document.getElementById(`${key}`).setCustomValidity(errors.key);
             }
-            //this.elements.key.setCustomValidity(errors.key);
         }
     }
 

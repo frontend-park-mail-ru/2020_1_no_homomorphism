@@ -7,5 +7,8 @@ export class SignupController {
         this.eventBus = new EventBus();
         this.model = new SignupModel(this.eventBus);
         this.view = new SignupView(this.eventBus);
+
+        this.eventBus.on('submit', this.model.submit);
+        this.eventBus.on('invalid', this.view.showErrors);
     }
 }

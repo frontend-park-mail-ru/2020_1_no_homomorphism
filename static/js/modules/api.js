@@ -34,11 +34,10 @@ export default class Api {
      * @param {string} password
      * @returns {Promise<Response>}
      */
-    static signupFetch(name, login, sex, email, password) {
+    static signupFetch(name, login, email, password) {
         return postFetch('/signup', {
             name,
             login,
-            sex,
             email,
             password,
         }).catch(error => console.error(error))
@@ -60,11 +59,9 @@ export default class Api {
      * @param {string} newPassword
      * @returns {Promise<Response>}
      */
-    static profileEditFetch(name, login, sex, email, password, newPassword) {
+    static profileEditFetch(name, email, password, newPassword) {
         return patchFetch('/profile/settings', {
             name,
-            login,
-            sex,
             email,
             password,
             newPassword,
@@ -76,8 +73,7 @@ export default class Api {
      * @returns {Promise<Response>}
      */
     static profilePhotoFetch(image) {
-        const formData = new FormData();
-        formData.append('file', image[0]);
+
         return putImageFetch('/api/avatar', formData)
             .catch(error => console.error(error))
     }

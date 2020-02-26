@@ -13,14 +13,19 @@ export class ProfileView {
     }
 
     showProfile(data) {
-        for (let key in data) {
+        document.getElementById('avatar').src = data.avatar;
+        document.getElementById('login').value = data.login;
+        document.getElementById('name').value = data.name;
+        document.getElementById('email').value = data.email;
+        /*for (let key in data) {
             if (data.hasOwnProperty(key)) {
                 document.getElementById(`${key}`).value = data.key;
             }
-        }
+        }*/
     }
 
     render() {
+        // Отрисовочка страницы - Никита
         this.eventBus.emit('load profile', '');
     }
 }

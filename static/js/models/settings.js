@@ -1,30 +1,32 @@
 import Validation from '../modules/validation.js';
+import Api from "../modules/api";
 
 export class SettingsModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.data = {
-            // Такой же вопрос, как и в profile
-            avatar: {},
-            name: '',
-            email: '',
-            password: '',
-            passwordConfirm: '',
-            outer: [],
-        };
-
-        this.eventBus.on('avatar upload', this.resetAvatar);
-        this.eventBus.on('add outer', this.addOuter);
-        this.eventBus.on('submit', this.submit);
     }
 
-    /*getUserData() {
-        ...
-        return data;
-    }*/
+    loadProfile() {
+        Api.profileFetch()
+            .then((res) => {
+                if (res.ok) {
+                    res.json()
+                        .then(data => {
+                            this.eventBus.emit('show profile', data);
+                        })
+                } else {
+                    this.eventBus.emit('invalid', 'Ошибка загрузки профиля')
+                }
+            })
+    }
 
     resetAvatar(avatar) {
         //...
+
+        const formData = new FormData();
+        formData.append('file', image[0]);
+
+        Api.profilePhotoFetch()
         this.eventBus.emit('new avatar', avatar);
     }
 

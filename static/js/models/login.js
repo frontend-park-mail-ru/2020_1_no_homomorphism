@@ -13,12 +13,12 @@ export class LoginModel {
     }
 
     submit(values) {
-        if (values.email.empty()) {
-            this.eventBus.emit('invalid', 'Введите email!')
+        if (values.login.empty()) {
+            this.eventBus.emit('invalid', 'Введите логин/email!')
         } else if (values.password.empty()) {
             this.eventBus.emit('invalid', 'Введите пароль!')
         } else {
-            Api.loginFetch(values.email, values.password)
+            Api.loginFetch(values.login, values.password)
                 .then((res)=> {
                     if (res.ok) {
                         this.eventBus.emit('redirect to main', 'Успешный вход');
