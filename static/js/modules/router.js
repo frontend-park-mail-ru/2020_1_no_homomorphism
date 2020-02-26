@@ -15,7 +15,7 @@ export default class Router {
      * Новый root
      * */
     setRoot(root = '/') {
-        this.root = root;
+        this.root = root; // TODO разобраться
     }
     /**
      * Добавление path с view

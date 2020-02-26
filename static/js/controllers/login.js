@@ -11,5 +11,6 @@ export class LoginController {
         this.eventBus.on('submit', this.model.submit);
         this.eventBus.on('remember changed', this.model.changeRemember);
         this.eventBus.on('invalid', this.view.showErrors);
+        this.eventBus.on('redirect', this.view.showErrors);
     }
 }
