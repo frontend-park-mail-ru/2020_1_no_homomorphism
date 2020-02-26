@@ -8,6 +8,7 @@ export class PlayerView {
         this.repeatState = 0;
         this.muted = false;
         this.volume = 1;
+        this.mode = 'additional';
 
         this.eventBus.on('draw play', this.drawPlay.bind(this));
         this.eventBus.on('draw pause', this.drawPause.bind(this));
@@ -22,12 +23,20 @@ export class PlayerView {
         this.eventBus.on('draw unmute', this.drawUnmute.bind(this));
     }
 
-    render(root) {
-        root.innerHTML = nunjucks.render('player', {kek: 'topkek'});
-        this.eventBus.emit('init', {});
+    render(root, mode) {
+        this.mode = mode;
         const body = document.getElementsByTagName('body')[0];
-        const left = body.clientWidth - 13;
-        document.getElementsByClassName('main-pos')[0].style.left = left.toString() + 'px';
+        let left;
+        switch (mode) {
+            case 'additional':
+                root.innerHTML += nunjucks.render('../../../views/templates/player.njk');
+                left = body.clientWidth - 13;
+                break;
+            case 'main':
+                root.innerHTML = nunjucks.render('../../../views/templates/player.njk');
+                left = body.clientWidth / 2 - 200;
+        }
+        this.eventBus.emit('init', {});
         const navbar = document.getElementsByClassName('navbar')[0];
         let top = 0;
         let height = document.documentElement.clientHeight;
@@ -35,6 +44,9 @@ export class PlayerView {
             top = navbar.clientHeight;
             height -= navbar.clientHeight;
         }
+        document.getElementsByClassName('main-pos')[0].style.left = left.toString() + 'px';
+        document.getElementsByTagName('audio')[0].volume = this.volume;
+        this.drawVolume(height);
         document.getElementsByClassName('main-pos')[0].style.top = top.toString() + 'px';
         document.getElementsByClassName('main-pos')[0].style.height = height.toString() + 'px';
         document.getElementsByClassName('player-trigger')[0].style.height = height.toString() + 'px';
@@ -140,6 +152,9 @@ export class PlayerView {
         document.getElementsByClassName('player-trigger-arrow')[0].style.visibility = 'hidden';
     }
     triggerClick() {
+        if (this.mode === 'main') {
+            return;
+        }
         if (document.getElementsByClassName('player-trigger-arrow')[0].style.transform == 'rotate(180deg)') {
             document.getElementsByClassName('player-trigger-arrow')[0].style.transform = 'rotate(0)';
             document.getElementsByClassName('player-trigger-arrow')[0].style.marginLeft = '-3px';
@@ -283,11 +298,11 @@ export class PlayerView {
     }
 
     drawPlay() {
-        document.getElementsByClassName('play-pause')[0].src = '/img/play.svg';
+        document.getElementsByClassName('play-pause')[0].src = 'static/img/play.svg';
         this.playing = false;
     }
     drawPause() {
-        document.getElementsByClassName('play-pause')[0].src = '/img/pause.svg';
+        document.getElementsByClassName('play-pause')[0].src = 'static/img/pause.svg';
         this.playing = true;
     }
     updateTrack(track) {
@@ -319,24 +334,24 @@ export class PlayerView {
         this.repeatState = 1;
     }
     drawRepeatOne() {
-        document.getElementsByClassName('repeat')[0].src = '/img/repeat_one.svg';
+        document.getElementsByClassName('repeat')[0].src = 'static/img/repeat_one.svg';
         this.repeatState = 2;
     }
     drawUnrepeat() {
-        document.getElementsByClassName('repeat')[0].src = '/img/repeat.svg';
+        document.getElementsByClassName('repeat')[0].src = 'static/img/repeat.svg';
         document.getElementsByClassName('repeat')[0].style.opacity = '0.4';
         this.repeatState = 0;
     }
     drawMute() {
-        document.getElementsByClassName('volume')[0].src = '/img/volume_mute.svg';
+        document.getElementsByClassName('volume')[0].src = 'static/img/volume_mute.svg';
         this.drawVolume(0);
         this.muted = true;
     }
     drawUnmute() {
         if (this.volume <= 0.5) {
-            document.getElementsByClassName('volume')[0].src = '/img/volume_down.svg';
+            document.getElementsByClassName('volume')[0].src = 'static/img/volume_down.svg';
         } else {
-            document.getElementsByClassName('volume')[0].src = '/img/volume_up.svg';
+            document.getElementsByClassName('volume')[0].src = 'static/img/volume_up.svg';
         }
         this.drawVolume(document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().height * this.volume);
         this.muted = false;

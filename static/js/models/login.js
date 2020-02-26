@@ -12,7 +12,7 @@ export class LoginModel {
         };
 
         this.eventBus.on('submit', this.submit);
-        this.eventBus.on('remember changed', this.data.changeRemember);
+        this.eventBus.on('remember changed', this.changeRemember);
     }
 
     submit(values) {

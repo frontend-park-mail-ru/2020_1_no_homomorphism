@@ -6,7 +6,7 @@ export class ProfileModel {
 
     getUserData() {
         const data = {
-            avatar: '/img/new_empire_vol1.jpg',
+            avatar: 'static/img/new_empire_vol1.jpg',
             login: 'Митрофанов',
             name: 'Дмитрий Алексеевич Левен',
             email: 'leven@dima.go',

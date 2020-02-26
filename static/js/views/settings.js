@@ -7,7 +7,7 @@ export class SettingsView {
 
     render(root) {
         this.eventBus.on('user data', (data) => {
-            root.innerHTML = nunjucks.render('settings', data);
+            root.innerHTML = nunjucks.render('../../../views/settings.njk', data);
         });
         this.eventBus.emit('get user data', {});
         document.getElementById('submit').addEventListener('click', this.submit);
@@ -18,7 +18,7 @@ export class SettingsView {
     showSuccess() {}
 
     showErrors(errors) {
-        for (let key in errors) {
+        for (const key in errors) {
             this.elements.key.setCustomValidity(errors.key);
         }
     }

@@ -11,7 +11,7 @@ app.set('view engine', 'njk');
 
 app.use(favicon(path.join(__dirname, 'static', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(express.static(path.join(__dirname, 'static')));
+app.use(express.static(__dirname));
 nunjucks.configure('views', {
     autoescape: true,
     express: app

@@ -5,7 +5,7 @@ export class LoginView {
     }
 
     render(root) {
-        root.innerHTML = nunjucks.render('login');
+        root.innerHTML = nunjucks.render('../../../views/login.njk');
         document.getElementById('submit').addEventListener('click', this.submit.bind(this));
         document.getElementById('remember').addEventListener('change', this.changeRemember.bind(this));
     }

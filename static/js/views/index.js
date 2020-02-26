@@ -4,6 +4,6 @@ export class IndexView {
     }
 
     render(root) {
-        root.innerHTML = nunjucks.render('index');
+        root.innerHTML = nunjucks.render('../../../views/index.njk');
     }
 }

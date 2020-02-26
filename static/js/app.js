@@ -7,13 +7,13 @@ import {ProfileController} from './controllers/profile.js'
 import {SettingsController} from './controllers/settings.js'
 
 window.addEventListener('DOMContentLoaded', () => {
-    const indexController = new IndexController();
-    const loginController = new LoginController();
-    const signupController = new SignupController();
-    const playerController = new PlayerController();
-    const profileController = new ProfileController();
-    const settingsController = new SettingsController();
     const router = new Router();
+    const indexController = new IndexController(router);
+    const loginController = new LoginController(router);
+    const signupController = new SignupController(router);
+    const playerController = new PlayerController(router);
+    const profileController = new ProfileController(router);
+    const settingsController = new SettingsController(router);
 
     router.addView('/', indexController.view);
     router.addView('/login', loginController.view);

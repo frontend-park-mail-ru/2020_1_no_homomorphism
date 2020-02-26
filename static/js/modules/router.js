@@ -1,5 +1,5 @@
 /**
- * Роутер. Переход по страничкам
+ * Переход по страничкам
  * @class Router
  */
 export class Router {
@@ -10,7 +10,6 @@ export class Router {
         this.root = document.getElementsByClassName('container')[0];
         this.views = {};
     }
-
     /* *
      * Новый root
      * */
@@ -19,21 +18,42 @@ export class Router {
     }
 
     /**
-     * Добавление view
-     * @param {string} name
+     * Добавление path с view
+     * @param {string} path
      * @param {string} view
      * */
     addView(name, view) {
         this.views[name] = view;
-        this.views[name].eventBus.on('redirect to main', this.redirectToMain.bind(this));
     }
 
     redirectToMain() {
         this.views['/'].render(this.root);
     }
-
     /**
-     * Добавление обработки касания
+     * Запуск рендеринга
+     * @param {string} newPath
+     * */
+    check(newPath) {
+        if (newPath === this.curPath) {
+            // Уже на этой страничке
+            return;
+        }
+        if (!(newPath in this.views)) {
+            window.history.replaceState('', {}, '/');
+            this.views['/'].render(this.root);
+            return;
+        }
+        this.curPath = newPath;
+        window.history.replaceState('', {}, newPath);
+        if (newPath === '/player') {
+            this.views['/player'].render(this.root, 'main');
+        } else {
+            this.views[newPath].render(this.root);
+            this.views['/player'].render(this.root, 'additional');
+        }
+    }
+    /**
+     * Добавление EventListener'a
      * */
     start() {
         window.addEventListener('click', (event) => {
@@ -41,15 +61,13 @@ export class Router {
             while (current != document.body) {
                 if (current instanceof HTMLAnchorElement) {
                     event.preventDefault();
-                    this.views[current.pathname].render(this.root);
+                    this.check(current.pathname);
                     break;
                 } else {
                     current = current.parentNode;
                 }
             }
         });
-        if (this.views['/']) {
-            this.views['/'].render(this.root);
-        }
+        this.check(window.location.pathname);
     }
 }

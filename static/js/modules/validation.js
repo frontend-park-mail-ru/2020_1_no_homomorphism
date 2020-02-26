@@ -1,9 +1,8 @@
 /**
- * Проверка валидности введенных данных
+ * Валидация данных
  * @class Validation
  */
 export default class Validation {
-
     /**
      * @param {String} email
      * @returns {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
@@ -15,7 +14,6 @@ export default class Validation {
         }
         return '';
     }
-
     /**
      * @param {String} login
      * @returns {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
@@ -23,23 +21,21 @@ export default class Validation {
     validationLogin (login = '') {
         let regExpr = new RegExp('^[a-zA-Z][a-zA-Z0-9_.]{4,14}$');
         if (!login.match(regExpr)) {
-            return ' Логин может содержать латинские буквы или цифры';
+            return 'Логин может содержать латинские буквы или цифры';
         }
         return '';
     }
-
     /**
      * @param {String} password1 Пароль
      * @param {String} password2 Повтор пароля
      * @returns {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
      */
-
     validationPassword(password1 = '', password2 = '') {
         if (password1 !== password2) {
             return 'Пароли не совпадают';
         }
 
-        let regExpr = new RegExp ('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{7,}$');
+        let regExpr = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{7,}$');
 
         if (!password1.match(regExpr)) {
             return 'Пароль должен содержать 7 символов, как минимум одна заглавная, одна строчная латинская буква и одна цифра ';

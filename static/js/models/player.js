@@ -6,31 +6,31 @@ export class PlayerModel {
             queue     : [0, 1, 2, 3, 4],
             playlist  : [
                 {
-                    cover : '/img/new_empire_vol1.jpg',
+                    cover : 'static/img/new_empire_vol1.jpg',
                     artist : 'DJ Epoxxin',
                     title : 'New year dubstep minimix',
                     src : 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/9473/new_year_dubstep_minimix.ogg',
                     duration : 123,
                 },{
-                    cover : '/img/vk.jpg',
+                    cover : 'static/img/vk.jpg',
                     artist : 'Dillon',
                     title : 'Thirteen thirtyfive',
                     src : 'http://beloweb.ru/audio/dillon_-_thirteen_thirtyfive_.mp3',
                     duration : 223.190204,
                 },{
-                    cover : '/img/mm.png',
+                    cover : 'static/img/mm.png',
                     artist : 'Любе',
                     title : 'Синие море',
                     src : 'https://starper55plys.ru/wp-content/audio/lybe1.mp3',
                     duration : 229.411929,
                 },{
-                    cover : '/img/ok.png',
+                    cover : 'static/img/ok.png',
                     artist : 'Пчеловод',
                     title : 'Пчела',
                     src : 'https://dl2.mp3party.net/online/8905454.mp3',
                     duration : 170.266122,
                 },{
-                    cover : '/img/HU.jpeg',
+                    cover : 'static/img/HU.jpeg',
                     artist : 'Пошлая Молли',
                     title : 'Самый лучший эмо панк',
                     src : 'https://ns1.topzaycevs.ru/files/dl/Poshlaya_Molli_-_Samiiy_luchshiy_emo_pank.mp3',

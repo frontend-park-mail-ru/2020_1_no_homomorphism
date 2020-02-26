@@ -4,24 +4,24 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/css/grid.css">
-        <link rel="stylesheet" href="/css/navbar.css">
-        <link rel="stylesheet" href="/css/base.css">
-        <link rel="stylesheet" href="/css/player.css">
-        <link rel="stylesheet" href="/css/index.css">
-        <link rel="stylesheet" href="/css/profile.css">
-        <link rel="stylesheet" href="/css/signup.css">
-        <link rel="stylesheet" href="/css/login.css">
+        <link rel="stylesheet" href="/static/css/grid.css">
+        <link rel="stylesheet" href="/static/css/navbar.css">
+        <link rel="stylesheet" href="/static/css/base.css">
+        <link rel="stylesheet" href="/static/css/player.css">
+        <link rel="stylesheet" href="/static/css/index.css">
+        <link rel="stylesheet" href="/static/css/profile.css">
+        <link rel="stylesheet" href="/static/css/signup.css">
+        <link rel="stylesheet" href="/static/css/login.css">
         <title>No homo</title>
     </head>
     <body>
         <div class="navbar">
             <a href="/" class="logo">
-                <img src="/img/headphones.png" alt="logo" height="40px" width="40px">
+                <img src="/static/img/headphones.png" alt="logo" height="40px" width="40px">
             </a>
             <input type="text" class="search">
             <button type="button" class="search-button">
-                <img src="/img/search.svg" alt="lupa & pupa" height="20px" width="20px">
+                <img src="/static/img/search.svg" alt="lupa & pupa" height="20px" width="20px">
             </button>
             <a href="/player">
                 player
@@ -40,8 +40,8 @@
             {% block content %}
             {% endblock %}
         </div>
-        <script src="/js/app.js" type="module"></script>
-        <script src="/js/nunjucks.js"></script>
+        <script src="/static/js/app.js" type="module"></script>
+        <script src="/static/js/nunjucks.js"></script>
     </body>
 </html>
 {% endblock %}

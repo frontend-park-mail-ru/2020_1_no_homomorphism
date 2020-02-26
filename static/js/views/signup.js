@@ -5,7 +5,7 @@ export class SignupView {
     }
 
     render(root) {
-        root.innerHTML = nunjucks.render('signup', {kek: 'topkek'});
+        root.innerHTML = nunjucks.render('../../../views/signup.njk', {kek: 'topkek'});
         document.getElementById('submit').addEventListener('click', this.submit.bind(this));
     }
 
