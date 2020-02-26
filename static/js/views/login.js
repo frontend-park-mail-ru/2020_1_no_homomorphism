@@ -1,30 +1,26 @@
 export class LoginView {
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.elements = {
-            login    : document.getElementById('login'),
-            password : document.getElementById('password'),
-            remember : document.getElementById('remember'),
-            submit   : document.getElementById('submit'),
-        };
-        this.elements.submit.addEventListener('click', this.submit);
-        this.elements.remember.addEventListener('change', this.changeRemember);
         this.eventBus.on('invalid', this.showErrors);
     }
 
-    render() {}
+    render(root) {
+        root.innerHTML = nunjucks.render('login');
+        document.getElementById('submit').addEventListener('click', this.submit.bind(this));
+        document.getElementById('remember').addEventListener('change', this.changeRemember.bind(this));
+    }
 
     showErrors(errors) {
-        for (let key in errors) {
-            this.elements.key.setCustomValidity(errors.key);
+        for (const key in errors) {
+            document.getElementById(key).setCustomValidity(errors.key);
         }
     }
-    
+
     submit() {
         this.eventBus.emit('submit', {
-            login    : this.elements.login.value,
-            password : this.elements.password.value,
-            remember : this.elements.remember.checked,
+            login    : document.getElementById('login').value,
+            password : document.getElementById('password').value,
+            remember : document.getElementById('remember').checked,
         });
     }
 

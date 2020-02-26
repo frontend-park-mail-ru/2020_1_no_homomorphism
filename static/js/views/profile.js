@@ -1,18 +1,12 @@
 export class ProfileView {
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.elements = {
-            avatar   : document.getElementById('avatar'),
-            login    : document.getElementById('login'),
-            name     : document.getElementById('name'),
-            email    : document.getElementById('email'),
-            outer    : document.getElementsByClassName('outer'),
-        };
     }
 
-    render(data) {
-        for (let key in data) {
-            this.elements.key.value = data.key;
-        }
+    render(root) {
+        this.eventBus.on('user data', (data) => {
+            root.innerHTML = nunjucks.render('profile', data);
+        });
+        this.eventBus.emit('get user data', {});
     }
 }

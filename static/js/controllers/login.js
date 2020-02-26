@@ -8,8 +8,4 @@ export class LoginController {
         this.model = new LoginModel(this.eventBus);
         this.view = new LoginView(this.eventBus);
     }
-
-    load() {
-        this.view.render();
-    }
 };

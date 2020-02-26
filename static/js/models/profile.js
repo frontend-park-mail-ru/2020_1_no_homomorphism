@@ -1,18 +1,17 @@
 export class ProfileModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.data = {
-            // Брать из БД при создании класса или при загрузке страницы?
-            avatar   : {},
-            login    : '',
-            name     : '',
-            email    : '',
-            outer    : [],
-        };
+        this.eventBus.on('get user data', this.getUserData.bind(this));
     }
 
-    /*getUserData() {
-        ...
-        return data;
-    }*/
+    getUserData() {
+        const data = {
+            avatar: '/img/new_empire_vol1.jpg',
+            login: 'Митрофанов',
+            name: 'Дмитрий Алексеевич Левен',
+            email: 'leven@dima.go',
+            //outer: [],
+        };
+        this.eventBus.emit('user data', data);
+    }
 }

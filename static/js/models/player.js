@@ -1,7 +1,6 @@
 export class PlayerModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.audio = document.getElementsByTagName('audio')[0];
         this.data = {
             current   : 0,
             queue     : [0, 1, 2, 3, 4],
@@ -61,17 +60,17 @@ export class PlayerModel {
     }
 
     getFirst() {
-        this.audio.children[0].src = this.data.playlist[this.data.queue[this.data.current]].src;
-        this.audio.load();
+        document.getElementsByTagName('audio')[0].children[0].src = this.data.playlist[this.data.queue[this.data.current]].src;
+        document.getElementsByTagName('audio')[0].load();
         this.eventBus.emit('track update', this.data.playlist[this.data.queue[this.data.current]]);
     }
     pause() {
-        this.audio.pause();
+        document.getElementsByTagName('audio')[0].pause();
         this.data.playing = false;
         this.eventBus.emit('draw play', {});
     }
     play() {
-        this.audio.play();
+        document.getElementsByTagName('audio')[0].play();
         this.data.playing = true;
         this.eventBus.emit('draw pause', {});
     }
@@ -85,13 +84,13 @@ export class PlayerModel {
             }
         }
         this.data.current--;
-        this.audio.children[0].src = this.data.playlist[this.data.queue[this.data.current]].src;
+        document.getElementsByTagName('audio')[0].children[0].src = this.data.playlist[this.data.queue[this.data.current]].src;
         if (this.data.playing) {
-            this.audio.pause();
+            document.getElementsByTagName('audio')[0].pause();
         }
-        this.audio.load();
+        document.getElementsByTagName('audio')[0].load();
         if (this.data.playing) {
-            this.audio.play();
+            document.getElementsByTagName('audio')[0].play();
         }
         this.eventBus.emit('draw timeline', 0);
         this.eventBus.emit('track update', this.data.playlist[this.data.queue[this.data.current]]);
@@ -115,24 +114,24 @@ export class PlayerModel {
             }
         }
         this.data.current++;
-        this.audio.children[0].src = this.data.playlist[this.data.queue[this.data.current]].src;
+        document.getElementsByTagName('audio')[0].children[0].src = this.data.playlist[this.data.queue[this.data.current]].src;
         if (this.data.playing) {
-            this.audio.pause();
+            document.getElementsByTagName('audio')[0].pause();
         }
-        this.audio.load();
+        document.getElementsByTagName('audio')[0].load();
         if (this.data.playing) {
-            this.audio.play();
+            document.getElementsByTagName('audio')[0].play();
         }
         this.eventBus.emit('draw timeline', 0);
         this.eventBus.emit('track update', this.data.playlist[this.data.queue[this.data.current]]);
     }
     rewind(ratio) {
-        this.audio.currentTime = this.audio.duration * ratio;
+        document.getElementsByTagName('audio')[0].currentTime = document.getElementsByTagName('audio')[0].duration * ratio;
         this.eventBus.emit('draw timeline', ratio);
     }
     shuffle(positionOfCurrent) {
-        let tmp;
-	    for (let j, i = this.data.queue.length - 1; i > 0; i--) {
+        let j, tmp;
+	    for (let i = this.data.queue.length - 1; i > 0; i--) {
             j = Math.floor(Math.random() * (i + 1));
             if (j === this.data.current) {
                 this.data.current = i;
@@ -164,19 +163,19 @@ export class PlayerModel {
     }
     repeatOne() {
         this.data.repeat = false;
-        this.audio.loop = true;
+        document.getElementsByTagName('audio')[0].loop = true;
         this.eventBus.emit('draw repeat one', {});
     }
     unrepeat() {
-        this.audio.loop = false;
+        document.getElementsByTagName('audio')[0].loop = false;
         this.eventBus.emit('draw unrepeat', {});
     }
     mute() {
-        this.audio.muted = true;
+        document.getElementsByTagName('audio')[0].muted = true;
         this.eventBus.emit('draw mute', {});
     }
     unmute() {
-        this.audio.muted = false;
+        document.getElementsByTagName('audio')[0].muted = false;
         this.eventBus.emit('draw unmute', {});
     }
 }

@@ -8,8 +8,4 @@ export class SignupController {
         this.model = new SignupModel(this.eventBus);
         this.view = new SignupView(this.eventBus);
     }
-
-    load() {
-        this.view.render();
-    }
 };

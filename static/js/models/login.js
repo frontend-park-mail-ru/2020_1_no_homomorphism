@@ -8,7 +8,6 @@ export class LoginModel {
             *  чтобы после неудачного сабмита возвращать в форму
             */
             login: '',
-            password: '',
             remember: false,
         };
 

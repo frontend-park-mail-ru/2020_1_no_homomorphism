@@ -1,120 +1,13 @@
 export class PlayerView {
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.elements = {
-            audio           : document.getElementsByTagName('audio')[0],
-            trigger         : document.getElementsByClassName('player-trigger')[0],
-            arrow           : document.getElementsByClassName('player-trigger-arrow')[0],
-            player          : document.getElementsByClassName('main-pos')[0],
-            cover           : document.getElementById('cover'),
-            artist          : document.getElementById('artist'),
-            title           : document.getElementById('title'),
-            playPauseButton : document.getElementsByClassName('play-pause')[0],
-            prevButton      : document.getElementById('prev'),
-            nextButton      : document.getElementById('next'),
-            timeline        : {
-                zone        : document.getElementsByClassName('timeline')[0],
-                back        : document.getElementsByClassName('timeline-back')[0],
-                front       : document.getElementsByClassName('timeline-front')[0],
-                drag        : false,
-                currentTime : document.getElementsByClassName('current-time')[0],
-                duration    : document.getElementsByClassName('duration')[0],
-            },
-            shuffleButton   : document.getElementsByClassName('shuffle')[0],
-            repeatButton    : document.getElementsByClassName('repeat')[0],
-            volume          : {
-                button : document.getElementsByClassName('volume')[0],
-                scale  : document.getElementsByClassName('volume-scale')[0],
-                back   : document.getElementsByClassName('volume-scale-back')[0],
-                front  : document.getElementsByClassName('volume-scale-front')[0],
-                drag   : false,
-            },
-            //playlist        : document.getElementsByClassName('track-list')[0],
-            //addButtons : document.getElementsByClassName('add-buttons'),
-            //deleteButtons : document.getElementsByClassName('delete-buttons'),
-        };
+        this.timelineDrag = false;
+        this.volumeDrag = false;
         this.playing = false;
         this.shuffled = false;
         this.repeatState = 0;
         this.muted = false;
         this.volume = 1;
-
-        window.addEventListener('mouseup', this.windowMouseUp.bind(this));
-        this.elements.audio.addEventListener('timeupdate', this.audioTimeUpdate.bind(this));
-        this.elements.audio.addEventListener('ended', this.audioEnded.bind(this));
-        this.elements.trigger.addEventListener('mouseover', this.triggerMouseOver.bind(this));
-        this.elements.trigger.addEventListener('mouseout', this.triggerMouseOut.bind(this));
-        this.elements.trigger.addEventListener('click', this.triggerClick.bind(this));
-        this.elements.playPauseButton.addEventListener('click', this.playPauseButtonClick.bind(this));
-        this.elements.prevButton.addEventListener('click', this.prevButtonClick.bind(this));
-        this.elements.nextButton.addEventListener('click', this.nextButtonClick.bind(this));
-        this.elements.timeline.zone.addEventListener('mouseover', this.timelineMouseOver.bind(this));
-        this.elements.timeline.zone.addEventListener('mouseout', this.timelineMouseOut.bind(this));
-        this.elements.timeline.back.addEventListener('mousedown', this.timelineMouseDown.bind(this));
-        // Как это обойти?
-        this.elements.timeline.back.onmouseup = (event) => {
-            this.timelineMouseUp(event);
-        }
-        this.elements.timeline.front.addEventListener('mousedown', this.timelineMouseDown.bind(this));
-        // Как это обойти?
-        this.elements.timeline.front.onmouseup = (event) => {
-            this.timelineMouseUp(event);
-        }
-        // Как это обойти?
-        this.elements.timeline.back.onmousemove = (event) => {
-            this.timelineMouseMove(event);
-        };
-        // Как это обойти?
-        this.elements.timeline.front.onmousemove = (event) => {
-            this.timelineMouseMove(event);
-        };
-        // Как это обойти?
-        this.elements.timeline.back.onclick = (event) => {
-            this.timelineClick(event);
-        };
-        // Как это обойти?
-        this.elements.timeline.front.onclick = (event) => {
-            this.timelineClick(event);
-        };
-        this.elements.shuffleButton.addEventListener('mouseover', this.shuffleButtonMouseOver.bind(this));
-        this.elements.shuffleButton.addEventListener('mouseout', this.shuffleButtonMouseOut.bind(this));
-        this.elements.shuffleButton.addEventListener('click', this.shuffleButtonClick.bind(this));
-        this.elements.repeatButton.addEventListener('mouseover', this.repeatButtonMouseOver.bind(this));
-        this.elements.repeatButton.addEventListener('mouseout', this.repeatButtonMouseOut.bind(this));
-        this.elements.repeatButton.addEventListener('click', this.repeatButtonClick.bind(this));
-        this.elements.volume.button.addEventListener('mouseover', this.volumeButtonMouseOver.bind(this));
-        this.elements.volume.button.addEventListener('mouseout', this.volumeButtonMouseOut.bind(this));
-        this.elements.volume.button.addEventListener('click', this.volumeButtonClick.bind(this));
-        this.elements.volume.scale.addEventListener('mouseover', this.volumeButtonMouseOver.bind(this));
-        this.elements.volume.scale.addEventListener('mouseout', this.volumeButtonMouseOut.bind(this));
-        this.elements.volume.back.addEventListener('mousedown', this.volumeMouseDown.bind(this));
-        // Как это обойти?
-        this.elements.volume.back.onmouseup = (event) => {
-            this.volumeMouseUp(event);
-        }
-        this.elements.volume.front.addEventListener('mousedown', this.volumeMouseDown.bind(this));
-        // Как это обойти?
-        this.elements.volume.front.onmouseup = (event) => {
-            this.volumeMouseUp(event);
-        }
-        // Как это обойти?
-        this.elements.volume.back.onclick = (event) => {
-            this.volumeScaleClick(event);
-        };
-        // Как это обойти?
-        this.elements.volume.front.onclick = (event) => {
-            this.volumeScaleClick(event);
-        };
-        // Как это обойти?
-        this.elements.volume.back.onmousemove = (event) => {
-            this.volumeMouseMove(event);
-        };
-        // Как это обойти?
-        this.elements.volume.front.onmousemove = (event) => {
-            this.volumeMouseMove(event);
-        };
-        //this.elements.addButtons.addEventListener();
-        //this.elements.deleteButtons.addEventListener();
 
         this.eventBus.on('draw play', this.drawPlay.bind(this));
         this.eventBus.on('draw pause', this.drawPause.bind(this));
@@ -129,11 +22,12 @@ export class PlayerView {
         this.eventBus.on('draw unmute', this.drawUnmute.bind(this));
     }
 
-    render() {
+    render(root) {
+        root.innerHTML = nunjucks.render('player', {kek: 'topkek'});
         this.eventBus.emit('init', {});
         const body = document.getElementsByTagName('body')[0];
         const left = body.clientWidth - 13;
-        this.elements.player.style.left = left.toString() + 'px';
+        document.getElementsByClassName('main-pos')[0].style.left = left.toString() + 'px';
         const navbar = document.getElementsByClassName('navbar')[0];
         let top = 0;
         let height = document.documentElement.clientHeight;
@@ -141,48 +35,124 @@ export class PlayerView {
             top = navbar.clientHeight;
             height -= navbar.clientHeight;
         }
-        this.elements.player.style.top = top.toString() + 'px';
-        this.elements.player.style.height = height.toString() + 'px';
-        this.elements.trigger.style.height = height.toString() + 'px';
-        this.drawVolume(this.elements.volume.back.getBoundingClientRect().height * this.volume);
+        document.getElementsByClassName('main-pos')[0].style.top = top.toString() + 'px';
+        document.getElementsByClassName('main-pos')[0].style.height = height.toString() + 'px';
+        document.getElementsByClassName('player-trigger')[0].style.height = height.toString() + 'px';
+        this.drawVolume(document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().height * this.volume);
+        window.addEventListener('mouseup', this.windowMouseUp.bind(this));
+        document.getElementsByTagName('audio')[0].addEventListener('timeupdate', this.audioTimeUpdate.bind(this));
+        document.getElementsByTagName('audio')[0].addEventListener('ended', this.audioEnded.bind(this));
+        document.getElementsByClassName('player-trigger')[0].addEventListener('mouseover', this.triggerMouseOver.bind(this));
+        document.getElementsByClassName('player-trigger')[0].addEventListener('mouseout', this.triggerMouseOut.bind(this));
+        document.getElementsByClassName('player-trigger')[0].addEventListener('click', this.triggerClick.bind(this));
+        document.getElementsByClassName('play-pause')[0].addEventListener('click', this.playPauseButtonClick.bind(this));
+        document.getElementById('prev').addEventListener('click', this.prevButtonClick.bind(this));
+        document.getElementById('next').addEventListener('click', this.nextButtonClick.bind(this));
+        document.getElementsByClassName('timeline')[0].addEventListener('mouseover', this.timelineMouseOver.bind(this));
+        document.getElementsByClassName('timeline')[0].addEventListener('mouseout', this.timelineMouseOut.bind(this));
+        document.getElementsByClassName('timeline-back')[0].addEventListener('mousedown', this.timelineMouseDown.bind(this));
+        // Как это обойти?
+        document.getElementsByClassName('timeline-back')[0].onmouseup = (event) => {
+            this.timelineMouseUp(event);
+        }
+        document.getElementsByClassName('timeline-front')[0].addEventListener('mousedown', this.timelineMouseDown.bind(this));
+        // Как это обойти?
+        document.getElementsByClassName('timeline-front')[0].onmouseup = (event) => {
+            this.timelineMouseUp(event);
+        }
+        // Как это обойти?
+        document.getElementsByClassName('timeline-back')[0].onmousemove = (event) => {
+            this.timelineMouseMove(event);
+        };
+        // Как это обойти?
+        document.getElementsByClassName('timeline-front')[0].onmousemove = (event) => {
+            this.timelineMouseMove(event);
+        };
+        // Как это обойти?
+        document.getElementsByClassName('timeline-back')[0].onclick = (event) => {
+            this.timelineClick(event);
+        };
+        // Как это обойти?
+        document.getElementsByClassName('timeline-front')[0].onclick = (event) => {
+            this.timelineClick(event);
+        };
+        document.getElementsByClassName('shuffle')[0].addEventListener('mouseover', this.shuffleButtonMouseOver.bind(this));
+        document.getElementsByClassName('shuffle')[0].addEventListener('mouseout', this.shuffleButtonMouseOut.bind(this));
+        document.getElementsByClassName('shuffle')[0].addEventListener('click', this.shuffleButtonClick.bind(this));
+        document.getElementsByClassName('repeat')[0].addEventListener('mouseover', this.repeatButtonMouseOver.bind(this));
+        document.getElementsByClassName('repeat')[0].addEventListener('mouseout', this.repeatButtonMouseOut.bind(this));
+        document.getElementsByClassName('repeat')[0].addEventListener('click', this.repeatButtonClick.bind(this));
+        document.getElementsByClassName('volume')[0].addEventListener('mouseover', this.volumeButtonMouseOver.bind(this));
+        document.getElementsByClassName('volume')[0].addEventListener('mouseout', this.volumeButtonMouseOut.bind(this));
+        document.getElementsByClassName('volume')[0].addEventListener('click', this.volumeButtonClick.bind(this));
+        document.getElementsByClassName('volume-scale')[0].addEventListener('mouseover', this.volumeButtonMouseOver.bind(this));
+        document.getElementsByClassName('volume-scale')[0].addEventListener('mouseout', this.volumeButtonMouseOut.bind(this));
+        document.getElementsByClassName('volume-scale-back')[0].addEventListener('mousedown', this.volumeMouseDown.bind(this));
+        // Как это обойти?
+        document.getElementsByClassName('volume-scale-back')[0].onmouseup = (event) => {
+            this.volumeMouseUp(event);
+        }
+        document.getElementsByClassName('volume-scale-front')[0].addEventListener('mousedown', this.volumeMouseDown.bind(this));
+        // Как это обойти?
+        document.getElementsByClassName('volume-scale-front')[0].onmouseup = (event) => {
+            this.volumeMouseUp(event);
+        }
+        // Как это обойти?
+        document.getElementsByClassName('volume-scale-back')[0].onclick = (event) => {
+            this.volumeScaleClick(event);
+        };
+        // Как это обойти?
+        document.getElementsByClassName('volume-scale-front')[0].onclick = (event) => {
+            this.volumeScaleClick(event);
+        };
+        // Как это обойти?
+        document.getElementsByClassName('volume-scale-back')[0].onmousemove = (event) => {
+            this.volumeMouseMove(event);
+        };
+        // Как это обойти?
+        document.getElementsByClassName('volume-scale-front')[0].onmousemove = (event) => {
+            this.volumeMouseMove(event);
+        };
+        //this.elements.addButtons.addEventListener();
+        //this.elements.deleteButtons.addEventListener();
     }
 
     windowMouseUp() {
-        this.elements.timeline.drag = false;
-        this.elements.volume.drag = false;
+        this.timelineDrag = false;
+        this.volumeDrag = false;
     }
     audioTimeUpdate() {
         if (
-            isNaN(this.elements.audio.currentTime / this.elements.audio.duration) ||
-            this.elements.timeline.drag
+            isNaN(document.getElementsByTagName('audio')[0].currentTime / document.getElementsByTagName('audio')[0].duration) ||
+            this.timelineDrag
         ) {
             return;
         }
-        this.drawTimeline(this.elements.audio.currentTime / this.elements.audio.duration);
+        this.drawTimeline(document.getElementsByTagName('audio')[0].currentTime / document.getElementsByTagName('audio')[0].duration);
     }
     audioEnded() {
         this.eventBus.emit('next', 'self');
     }
     triggerMouseOver() {
-        this.elements.arrow.style.visibility = 'visible';
+        document.getElementsByClassName('player-trigger-arrow')[0].style.visibility = 'visible';
     }
     triggerMouseOut() {
-        this.elements.arrow.style.visibility = 'hidden';
+        document.getElementsByClassName('player-trigger-arrow')[0].style.visibility = 'hidden';
     }
     triggerClick() {
-        if (this.elements.arrow.style.transform == 'rotate(180deg)') {
-            this.elements.arrow.style.transform = 'rotate(0)';
-            this.elements.arrow.style.marginLeft = '-3px';
+        if (document.getElementsByClassName('player-trigger-arrow')[0].style.transform == 'rotate(180deg)') {
+            document.getElementsByClassName('player-trigger-arrow')[0].style.transform = 'rotate(0)';
+            document.getElementsByClassName('player-trigger-arrow')[0].style.marginLeft = '-3px';
         } else {
-            this.elements.arrow.style.transform = 'rotate(180deg)';
-            this.elements.arrow.style.marginLeft = '-1px';
+            document.getElementsByClassName('player-trigger-arrow')[0].style.transform = 'rotate(180deg)';
+            document.getElementsByClassName('player-trigger-arrow')[0].style.marginLeft = '-1px';
         }
         const body = document.getElementsByTagName('body')[0];
         let left = body.clientWidth - 13;
-        if (this.elements.player.style.left == left.toString() + 'px') {
-            left = left - this.elements.player.clientWidth + 13;
+        if (document.getElementsByClassName('main-pos')[0].style.left == left.toString() + 'px') {
+            left = left - document.getElementsByClassName('main-pos')[0].clientWidth + 13;
         }
-        this.elements.player.style.left = left + 'px';
+        document.getElementsByClassName('main-pos')[0].style.left = left + 'px';
     }
     playPauseButtonClick() {
         if (this.playing) {
@@ -198,42 +168,42 @@ export class PlayerView {
         this.eventBus.emit('next', 'click');
     }
     timelineMouseOver() {
-        this.elements.timeline.currentTime.style.fontSize = '11px';
-        this.elements.timeline.duration.style.fontSize = '11px';
+        document.getElementsByClassName('current-time')[0].style.fontSize = '11px';
+        document.getElementsByClassName('duration')[0].style.fontSize = '11px';
     }
     timelineMouseOut() {
-        this.elements.timeline.currentTime.style.fontSize = '0';
-        this.elements.timeline.duration.style.fontSize = '0';
+        document.getElementsByClassName('current-time')[0].style.fontSize = '0';
+        document.getElementsByClassName('duration')[0].style.fontSize = '0';
     }
     timelineMouseDown() {
-        this.elements.timeline.drag = true;
+        this.timelineDrag = true;
     }
     timelineMouseUp(event) {
-        this.elements.timeline.drag = false;
-        const width = event.clientX - this.elements.timeline.back.getBoundingClientRect().x;
-        const ratio = width / this.elements.timeline.back.getBoundingClientRect().width;
+        this.timelineDrag = false;
+        const width = event.clientX - document.getElementsByClassName('timeline-back')[0].getBoundingClientRect().x;
+        const ratio = width / document.getElementsByClassName('timeline-back')[0].getBoundingClientRect().width;
         this.eventBus.emit('rewind', ratio);
     }
     timelineMouseMove(event) {
-        if (this.elements.timeline.drag) {
-            const width = event.clientX - this.elements.timeline.back.getBoundingClientRect().x;
-            const ratio = width / this.elements.timeline.back.getBoundingClientRect().width;
+        if (this.timelineDrag) {
+            const width = event.clientX - document.getElementsByClassName('timeline-back')[0].getBoundingClientRect().x;
+            const ratio = width / document.getElementsByClassName('timeline-back')[0].getBoundingClientRect().width;
             this.drawTimeline(ratio);
         }
     }
     timelineClick(event) {
-        const width = event.clientX - this.elements.timeline.back.getBoundingClientRect().x;
-        const ratio = width / this.elements.timeline.back.getBoundingClientRect().width;
+        const width = event.clientX - document.getElementsByClassName('timeline-back')[0].getBoundingClientRect().x;
+        const ratio = width / document.getElementsByClassName('timeline-back')[0].getBoundingClientRect().width;
         this.eventBus.emit('rewind', ratio);
     }
     shuffleButtonMouseOver() {
         if (!this.shuffled) {
-            this.elements.shuffleButton.style.opacity = '1';
+            document.getElementsByClassName('shuffle')[0].style.opacity = '1';
         }
     }
     shuffleButtonMouseOut() {
         if (!this.shuffled) {
-            this.elements.shuffleButton.style.opacity = '0.4';
+            document.getElementsByClassName('shuffle')[0].style.opacity = '0.4';
         }
     }
     shuffleButtonClick() {
@@ -245,12 +215,12 @@ export class PlayerView {
     }
     repeatButtonMouseOver() {
         if (this.repeatState === 0) {
-            this.elements.repeatButton.style.opacity = '1';
+            document.getElementsByClassName('repeat')[0].style.opacity = '1';
         }
     }
     repeatButtonMouseOut() {
         if (this.repeatState === 0) {
-            this.elements.repeatButton.style.opacity = '0.4';
+            document.getElementsByClassName('repeat')[0].style.opacity = '0.4';
         }
     }
     repeatButtonClick() {
@@ -267,41 +237,41 @@ export class PlayerView {
         }
     }
     volumeButtonMouseOver() {
-        this.elements.volume.scale.style.transitionProperty = 'opacity, top';
-        this.elements.volume.scale.style.visibility = 'visible';
-        this.elements.volume.scale.style.opacity = '1';
-        this.elements.volume.scale.style.top = '48px';
-        this.elements.volume.button.style.opacity = '1';
+        document.getElementsByClassName('volume-scale')[0].style.transitionProperty = 'opacity, top';
+        document.getElementsByClassName('volume-scale')[0].style.visibility = 'visible';
+        document.getElementsByClassName('volume-scale')[0].style.opacity = '1';
+        document.getElementsByClassName('volume-scale')[0].style.top = '48px';
+        document.getElementsByClassName('volume')[0].style.opacity = '1';
     }
     volumeButtonMouseOut() {
-        this.elements.volume.scale.style.transitionProperty = 'opacity, visibility, top';
-        this.elements.volume.scale.style.visibility = 'hidden';
-        this.elements.volume.scale.style.opacity = '0';
-        this.elements.volume.scale.style.top = '58px';
-        this.elements.volume.button.style.opacity = '0.4';
+        document.getElementsByClassName('volume-scale')[0].style.transitionProperty = 'opacity, visibility, top';
+        document.getElementsByClassName('volume-scale')[0].style.visibility = 'hidden';
+        document.getElementsByClassName('volume-scale')[0].style.opacity = '0';
+        document.getElementsByClassName('volume-scale')[0].style.top = '58px';
+        document.getElementsByClassName('volume')[0].style.opacity = '0.4';
     }
     volumeMouseDown() {
-        this.elements.volume.drag = true;
+        this.volumeDrag = true;
     }
     volumeMouseUp(event) {
-        this.elements.volume.drag = false;
-        const height = this.elements.volume.back.getBoundingClientRect().height - (event.clientY - this.elements.volume.back.getBoundingClientRect().y);
-        this.volume = height / this.elements.volume.back.getBoundingClientRect().height;
-        this.elements.audio.volume = this.volume;
+        this.volumeDrag = false;
+        const height = document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().height - (event.clientY - document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().y);
+        this.volume = height / document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().height;
+        document.getElementsByTagName('audio')[0].volume = this.volume;
         this.drawVolume(height);
     }
     volumeMouseMove(event) {
-        if (this.elements.volume.drag) {
-            const height = this.elements.volume.back.getBoundingClientRect().height - (event.clientY - this.elements.volume.back.getBoundingClientRect().y);
-            this.volume = height / this.elements.volume.back.getBoundingClientRect().height;
-            this.elements.audio.volume = this.volume;
+        if (this.volumeDrag) {
+            const height = document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().height - (event.clientY - document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().y);
+            this.volume = height / document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().height;
+            document.getElementsByTagName('audio')[0].volume = this.volume;
             this.drawVolume(height);
         }
     }
     volumeScaleClick(event) {
-        const height = this.elements.volume.back.getBoundingClientRect().height - (event.clientY - this.elements.volume.back.getBoundingClientRect().y);
-        this.volume = height / this.elements.volume.back.getBoundingClientRect().height;
-        this.elements.audio.volume = this.volume;
+        const height = document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().height - (event.clientY - document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().y);
+        this.volume = height / document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().height;
+        document.getElementsByTagName('audio')[0].volume = this.volume;
         this.drawVolume(height);
     }
     volumeButtonClick() {
@@ -313,70 +283,70 @@ export class PlayerView {
     }
 
     drawPlay() {
-        this.elements.playPauseButton.src = '/img/play.svg';
+        document.getElementsByClassName('play-pause')[0].src = '/img/play.svg';
         this.playing = false;
     }
     drawPause() {
-        this.elements.playPauseButton.src = '/img/pause.svg';
+        document.getElementsByClassName('play-pause')[0].src = '/img/pause.svg';
         this.playing = true;
     }
     updateTrack(track) {
-        this.elements.cover.src = track.cover;
-        this.elements.artist.innerHTML = track.artist;
-        this.elements.title.innerHTML = track.title;
+        document.getElementById('cover').src = track.cover;
+        document.getElementById('artist').innerHTML = track.artist;
+        document.getElementById('title').innerHTML = track.title;
         const minutes = Math.floor(track.duration / 60);
         const seconds = Math.floor(track.duration % 60);
-        this.elements.timeline.duration.innerHTML = minutes.toString() + ':' + (seconds < 10 ? '0' : '') + seconds.toString();
-        this.elements.timeline.currentTime.innerHTML = '0:00';
+        document.getElementsByClassName('duration')[0].innerHTML = minutes.toString() + ':' + (seconds < 10 ? '0' : '') + seconds.toString();
+        document.getElementsByClassName('current-time')[0].innerHTML = '0:00';
     }
     drawTimeline(ratio) {
-        const width = ratio * this.elements.timeline.back.getBoundingClientRect().width;
-        this.elements.timeline.front.style.width = width.toString() + 'px';
-        const minutes = Math.floor((ratio * this.elements.audio.duration) / 60);
-        const seconds = Math.floor((ratio * this.elements.audio.duration) % 60);
-        this.elements.timeline.currentTime.innerHTML = minutes.toString() + ':' + (seconds < 10 ? '0' : '') + seconds.toString();
+        const width = ratio * document.getElementsByClassName('timeline-back')[0].getBoundingClientRect().width;
+        document.getElementsByClassName('timeline-front')[0].style.width = width.toString() + 'px';
+        const minutes = Math.floor((ratio * document.getElementsByTagName('audio')[0].duration) / 60);
+        const seconds = Math.floor((ratio * document.getElementsByTagName('audio')[0].duration) % 60);
+        document.getElementsByClassName('current-time')[0].innerHTML = minutes.toString() + ':' + (seconds < 10 ? '0' : '') + seconds.toString();
     }
     drawShuffle() {
-        this.elements.shuffleButton.style.opacity = '1';
+        document.getElementsByClassName('shuffle')[0].style.opacity = '1';
         this.shuffled = true;
     }
     drawUnshuffle() {
-        this.elements.shuffleButton.style.opacity = '0.4';
+        document.getElementsByClassName('shuffle')[0].style.opacity = '0.4';
         this.shuffled = false;
     }
     drawRepeat() {
-        this.elements.repeatButton.style.opacity = '1';
+        document.getElementsByClassName('repeat')[0].style.opacity = '1';
         this.repeatState = 1;
     }
     drawRepeatOne() {
-        this.elements.repeatButton.src = '/img/repeat_one.svg';
+        document.getElementsByClassName('repeat')[0].src = '/img/repeat_one.svg';
         this.repeatState = 2;
     }
     drawUnrepeat() {
-        this.elements.repeatButton.src = '/img/repeat.svg';
-        this.elements.repeatButton.style.opacity = '0.4';
+        document.getElementsByClassName('repeat')[0].src = '/img/repeat.svg';
+        document.getElementsByClassName('repeat')[0].style.opacity = '0.4';
         this.repeatState = 0;
     }
     drawMute() {
-        this.elements.volume.button.src = '/img/volume_mute.svg';
+        document.getElementsByClassName('volume')[0].src = '/img/volume_mute.svg';
         this.drawVolume(0);
         this.muted = true;
     }
     drawUnmute() {
         if (this.volume <= 0.5) {
-            this.elements.volume.button.src = '/img/volume_down.svg';
+            document.getElementsByClassName('volume')[0].src = '/img/volume_down.svg';
         } else {
-            this.elements.volume.button.src = '/img/volume_up.svg';
+            document.getElementsByClassName('volume')[0].src = '/img/volume_up.svg';
         }
-        this.drawVolume(this.elements.volume.back.getBoundingClientRect().height * this.volume);
+        this.drawVolume(document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().height * this.volume);
         this.muted = false;
     }
     drawVolume(height) {
         if (height === 0) {
-            this.elements.volume.front.style.height = '0';
+            document.getElementsByClassName('volume-scale-front')[0].style.height = '0';
             return;
         }
-        this.elements.volume.front.style.top = 0 - height.toString() + 'px';
-        this.elements.volume.front.style.height = height.toString() + 'px';
+        document.getElementsByClassName('volume-scale-front')[0].style.top = 0 - height.toString() + 'px';
+        document.getElementsByClassName('volume-scale-front')[0].style.height = height.toString() + 'px';
     }
 }

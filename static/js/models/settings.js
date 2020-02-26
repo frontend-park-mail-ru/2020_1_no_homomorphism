@@ -3,35 +3,32 @@ import Validation from '../modules/validation.js';
 export class SettingsModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.data = {
-            // Такой же вопрос, как и в profile
-            avatar: {},
-            name: '',
-            email: '',
-            password: '',
-            passwordConfirm: '',
-            outer: [],
-        };
-
-        this.eventBus.on('avatar upload', this.resetAvatar);
-        this.eventBus.on('add outer', this.addOuter);
-        this.eventBus.on('submit', this.submit);
+        this.eventBus.on('avatar upload', this.resetAvatar.bind(this));
+        //this.eventBus.on('add outer', this.addOuter.bind(this));
+        this.eventBus.on('submit', this.submit.bind(this));
+        this.eventBus.on('get user data', this.getUserData.bind(this));
     }
 
-    /*getUserData() {
-        ...
-        return data;
-    }*/
+    getUserData() {
+        const data = {
+            avatar: '/img/new_empire_vol1.jpg',
+            login: 'Митрофанов',
+            name: 'Дмитрий Алексеевич Левен',
+            email: 'leven@dima.go',
+            //outer: [],
+        };
+        this.eventBus.emit('user data', data);
+    }
 
     resetAvatar(avatar) {
         //...
         this.eventBus.emit('new avatar', avatar);
     }
 
-    addOuter(url) {
+    //addOuter(url) {
         //...
-        this.eventBus.emit('new outer', outer);
-    }
+    //    this.eventBus.emit('new outer', outer);
+    //}
 
     submit(values) {
         const validation = new Validation;

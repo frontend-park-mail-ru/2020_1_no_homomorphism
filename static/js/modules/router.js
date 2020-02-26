@@ -7,8 +7,8 @@ export class Router {
      * Конструктор
      * */
     constructor() {
-        this.root = document.getElementById('application');
-        this.views = {}
+        this.root = document.getElementsByClassName('container')[0];
+        this.views = {};
     }
 
     /* *
@@ -24,7 +24,12 @@ export class Router {
      * @param {string} view
      * */
     addView(name, view) {
-        this.views[name] = view
+        this.views[name] = view;
+        this.views[name].eventBus.on('redirect to main', this.redirectToMain.bind(this));
+    }
+
+    redirectToMain() {
+        this.views['/'].render(this.root);
     }
 
     /**
@@ -32,12 +37,19 @@ export class Router {
      * */
     start() {
         window.addEventListener('click', (event) => {
-            if (!(event.target instanceof HTMLAnchorElement)) {
-                return;
+            let current = event.target;
+            while (current != document.body) {
+                if (current instanceof HTMLAnchorElement) {
+                    event.preventDefault();
+                    this.views[current.pathname].render(this.root);
+                    break;
+                } else {
+                    current = current.parentNode;
+                }
             }
-            event.preventDefault();
-            this.views[event.target.pathname].render();
-        })
-        //Обращение к ивентбасу
+        });
+        if (this.views['/']) {
+            this.views['/'].render(this.root);
+        }
     }
 }
