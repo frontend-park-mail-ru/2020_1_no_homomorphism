@@ -1,6 +1,5 @@
-//import {Router} from "../modules/router";
-import Api from "../modules/api";
-
+//import {Router} from "../modules/router.js";
+import Api from "../modules/api.js";
 
 export class LoginModel {
     constructor(eventBus) {
@@ -18,6 +17,7 @@ export class LoginModel {
         } else if (values.password.empty()) {
             this.eventBus.emit('invalid', 'Введите пароль!')
         } else {
+            console.log('LOGIN');
             Api.loginFetch(values.login, values.password)
                 .then((res)=> {
                     if (res.ok) {

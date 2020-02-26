@@ -1,11 +1,12 @@
-import Api from "../modules/api";
-import Router from "../modules/router";
+import Api from "../modules/api.js";
+import Router from "../modules/router.js";
 export class ProfileModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
     }
 
     loadProfile() {
+        console.log('PROFILE');
         Api.profileFetch()
             .then((res) => {
                 if (res.ok) {

@@ -1,7 +1,7 @@
 export class SignupView {
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.submit = this.submit().bind(this);
+        this.submit = this.submit.bind(this);
         const button = document.getElementById('submit');
         button.addEventListener('click', this.submit);
     }

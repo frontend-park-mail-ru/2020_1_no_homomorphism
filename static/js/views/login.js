@@ -3,13 +3,17 @@ export class LoginView {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.root = document.getElementById('application');
-        this.submit = this.submit().bind(this);
+        this.submit = this.submit.bind(this);
         //this.submit.addEventListener('click', this.submit);
 
-        const button = document.getElementById('submit');
-        button.addEventListener('click', this.submit);
+        this.setEventListeners();
         //console.log("LOL");
         //this.remember.addEventListener('change', this.changeRemember);
+    }
+
+    setEventListeners(){
+        const button = document.getElementById('submit');
+        button.addEventListener('click', this.submit);
     }
 
     render() {

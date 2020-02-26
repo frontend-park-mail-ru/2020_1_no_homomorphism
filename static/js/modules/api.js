@@ -1,4 +1,4 @@
-import {postFetch, getFetch, deleteFetch, patchFetch, putFetch, putImageFetch} from "./fetch";
+import {postFetch, getFetch, deleteFetch, patchFetch, putFetch, putImageFetch} from "./fetch.js";
 
 /**
  * API object

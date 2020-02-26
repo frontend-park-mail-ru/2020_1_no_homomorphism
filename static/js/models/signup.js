@@ -1,5 +1,5 @@
 import Validation from '../modules/validation.js';
-import Api from "../modules/api";
+import Api from "../modules/api.js";
 
 export class SignupModel {
     constructor(eventBus) {
@@ -29,6 +29,7 @@ export class SignupModel {
         } else if (resPassword !== '') {
             this.eventBus.emit('invalid', resPassword);
         } else {
+            console.log('LOL');
             Api.signupFetch(values.name, values.login, values.email, values.password)
                 .then((res) => {
                     if (res.ok) {

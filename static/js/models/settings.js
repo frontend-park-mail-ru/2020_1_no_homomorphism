@@ -1,5 +1,5 @@
 import Validation from '../modules/validation.js';
-import Api from "../modules/api";
+import Api from "../modules/api.js";
 
 export class SettingsModel {
     constructor(eventBus) {
@@ -12,7 +12,7 @@ export class SettingsModel {
                 if (res.ok) {
                     res.json()
                         .then(data => {
-                            this.eventBus.emit('show profile', data);
+                            this.eventBus.emit('show profile settings', data);
                         })
                 } else {
                     this.eventBus.emit('invalid', 'Ошибка загрузки профиля')

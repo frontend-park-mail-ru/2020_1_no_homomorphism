@@ -4,7 +4,7 @@ import {SignupController} from './controllers/signup.js'
 import {PlayerController} from './controllers/player.js'
 import {ProfileController} from './controllers/profile.js'
 import {SettingsController} from './controllers/settings.js'
-import {Router} from '../js/modules/router.js'
+import Router from '../js/modules/router.js'
 
 window.addEventListener('DOMContentLoaded', () => {
     const indexController = new IndexController();

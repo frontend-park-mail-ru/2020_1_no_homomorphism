@@ -3,7 +3,7 @@
  * return {string}
  */
 const getServerPath = () => {
-    return 'https://kek.ru'
+    return ''
 };
 /**
  * POST

@@ -1,7 +1,7 @@
 export class SettingsView {
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.submit = this.submit().bind(this);
+        this.submit = this.submit.bind(this);
         this.setEventListeners();
     }
 
@@ -10,7 +10,7 @@ export class SettingsView {
         button.addEventListener('click', this.submit);
 
         const buttonAvatar = document.getElementById('avatar-upload');
-        buttonAvatar.addEventListener('avatar upload', this.avatarUpload);
+        buttonAvatar.addEventListener('change', this.avatarUpload);
     }
 
     showProfile(data) {
@@ -31,16 +31,26 @@ export class SettingsView {
     showSuccess() {}
 
     showErrors(errors) {
+
+        //for (let key in errors) {
+        //    this.elements.key.setCustomValidity(errors.key);
+        //}
+    }
+
+    showErrors(errors) {
         for (let key in errors) {
-            this.elements.key.setCustomValidity(errors.key);
+            if (errors.hasOwnProperty(key)) {
+                if (key === '')
+                document.getElementById(`${key}`).setCustomValidity(errors.key);
+            }
         }
     }
 
     submit(ev) {
         ev.preventDefault();
+
         this.eventBus.emit('submit', {
             avatar          : document.getElementById('avatar').value,
-            avatarUpload    : document.getElementById('avatar-upload').value,
             name            : document.getElementById('name').value,
             email           : document.getElementById('email').value,
             password        : document.getElementById('password').value,
@@ -51,7 +61,8 @@ export class SettingsView {
     avatarUpload() {
         this.eventBus.emit('avatar upload', document.getElementById('avatar-upload'));
     }
-    addOuterClick() {
-        this.eventBus.emit('add outer', this.elements.outerUrl.value);
-    }
+
+    //addOuterClick() {
+    //    this.eventBus.emit('add outer', this.elements.outerUrl.value);
+    //}
 }
