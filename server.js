@@ -12,34 +12,14 @@ app.set('view engine', 'njk');
 
 app.use(favicon(path.join(__dirname, 'static', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(express.static(path.join(__dirname, 'static')));
+app.use(express.static(__dirname));
 nunjucks.configure('views', {
     autoescape: true,
     express: app
 });
 
 app.get('/', (req, res) => {
-    res.render('index');
-});
-
-app.get('/login', (req, res) => {
-    res.render('login');
-});
-
-app.get('/signup', (req, res) => {
-    res.render('signup');
-});
-
-app.get('/player', (req, res) => {
-    res.render('player');
-});
-
-app.get('/profile', (req, res) => {
-    res.render('profile');
-});
-
-app.get('/settings', (req, res) => {
-    res.render('settings');
+    res.render('templates/base');
 });
 
 // catch 404 and forward to error handler

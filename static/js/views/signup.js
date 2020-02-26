@@ -6,15 +6,14 @@ export class SignupView {
         button.addEventListener('click', this.submit);
     }
 
-    render() {
-        // Отрисовка он Никитки
+    render(root) {
+        root.innerHTML = nunjucks.render('../../../views/signup.njk', {kek: 'topkek'});
+        document.getElementById('submit').addEventListener('click', this.submit.bind(this));
     }
 
     showErrors(errors) {
-        for (let key in errors) {
-            if (errors.hasOwnProperty(key)) {
-                document.getElementById(`${key}`).setCustomValidity(errors.key);
-            }
+        for (const key in errors) {
+            document.getElementById(key).setCustomValidity(errors.key);
         }
     }
 
@@ -23,7 +22,7 @@ export class SignupView {
         console.log("LOL");
         this.eventBus.emit('submit', {
             name            : document.getElementById('name').value,
-            login            : document.getElementById('login').value,
+            login           : document.getElementById('login').value,
             email           : document.getElementById('email').value,
             password        : document.getElementById('password').value,
             passwordConfirm : document.getElementById('password-confirm').value,

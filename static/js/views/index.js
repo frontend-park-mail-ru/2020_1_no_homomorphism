@@ -3,5 +3,7 @@ export class IndexView {
         this.eventBus = eventBus;
     }
 
-    render() {}
+    render(root) {
+        root.innerHTML = nunjucks.render('../../../views/index.njk');
+    }
 }

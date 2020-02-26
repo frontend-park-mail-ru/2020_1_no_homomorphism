@@ -1,14 +1,18 @@
-//import {Router} from "../modules/router.js";
 import Api from "../modules/api.js";
-
 export class LoginModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.data = {
+            /* Дефолтные значения. Наверное, надо бы их именно здесь сохранять,
+            *  чтобы после неудачного сабмита возвращать в форму
+            */
             login: '',
             password: '',
             remember: false,
         };
+
+        //this.eventBus.on('submit', this.submit);
+        //this.eventBus.on('remember changed', this.changeRemember);
     }
 
     submit(values) {

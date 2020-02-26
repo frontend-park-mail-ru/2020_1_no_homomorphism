@@ -3,7 +3,7 @@ import {SettingsModel} from '../models/settings.js'
 import {SettingsView} from '../views/settings.js'
 
 export class SettingsController {
-    constructor() {
+    constructor(router) {
         this.eventBus = new EventBus();
         this.model = new SettingsModel(this.eventBus);
         this.view = new SettingsView(this.eventBus);
@@ -18,3 +18,6 @@ export class SettingsController {
         //this.eventBus.on('add outer', this.model.addOuter);
     }
 }
+        this.eventBus.on('redirect to main', router.redirectToMain);
+    }
+};

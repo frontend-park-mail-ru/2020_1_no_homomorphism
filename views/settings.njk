@@ -1,21 +1,15 @@
-{% extends "templates/base.njk" %}
-
-{% block additional_css %}
-<link rel="stylesheet" href="/css/profile.css">
-{% endblock %}
-
 {% block content %}
 <div class="row profile">
     <div class="col col-1"></div>
     <div class="col col-3">
-        <img alt="avatar" src="/img/new_empire_vol1.jpg" class="avatar" id="avatar">
+        <img alt="avatar" src="{{ avatar }}" class="avatar" id="avatar">
         <div class="row">
             <input type="file" id="avatar-upload">
         </div>
     </div>
     <div class="info col col-4">
         <div class="login row">
-            Митрофанов
+            {{ login }}
         </div>
         <div calss="name row">
             <div class="col col-3">
@@ -24,7 +18,7 @@
                 </div>
             </div>
             <div class="col col-9">
-                <input type=text class="profile-content" id="name" value="Дмитрий Алексеевич Левен">
+                <input type=text class="profile-content" id="name" value="{{ name }}">
             </div>
         </div>
         <div calss="email row">
@@ -34,7 +28,7 @@
                 </div>
             </div>
             <div class="col col-9">
-                <input type="email" class="profile-content" id="email" value="leven@dima.go">
+                <input type="email" class="profile-content" id="email" value="{{ email }}">
             </div>
         </div>
         <div calss="row">
@@ -44,20 +38,26 @@
                 </div>
             </div>
             <div class="col col-9">
-                <input type=password class="profile-content" id="password" placeholder="Новый пароль">
+                <input type=password class="profile-content" id="new-password" placeholder="Новый пароль">
             </div>
         </div>
         <div class="row">
             <div class="col col-3"></div>
             <div class="col col-9">
-                <input type=password class="profile-content" id="password-confirm" placeholder="Повторите пароль">
+                <input type=password class="profile-content" id="new-password-confirm" placeholder="Повторите пароль">
             </div>
         </div>
         <div class="row">
+            <div class="col col-3"></div>
+            <div class="col col-9">
+                <input type=password class="profile-content" id="password" placeholder="Актуальный пароль">
+            </div>
+        </div>
+        <!--div class="row">
             <div class="col col-9 accounts-edit">
                 <div class="row">
                     <a href="#" class="col col-3">
-                        <img alt="avatar" src="/img/vk.jpg" class="outer">
+                        <img alt="avatar" src="/static/img/vk.jpg" class="outer">
                     </a>
                     <div class="col col-9">
                         <input type="url" class="accounts-info" value="vkontacteid">
@@ -65,7 +65,7 @@
                 </div>
                 <div class="row">
                     <a href="#" class ="col col-3">
-                        <img alt="avatar" src="/img/ok.png" class="outer">
+                        <img alt="avatar" src="/static/img/ok.png" class="outer">
                     </a>
                     <div class="col col-9">
                         <input type="url" class="accounts-info" value="vkontacteid">
@@ -73,7 +73,7 @@
                 </div>
                 <div class="row">
                     <a href="#" class ="col col-3">
-                        <img alt="avatar" src="/img/mm.png" class="outer">
+                        <img alt="avatar" src="/static/img/mm.png" class="outer">
                     </a>
                     <div class="col col-9">
                         <input type="url" class="accounts-info" value="vkontacteid">
@@ -90,7 +90,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div-->
         <div class="row">
             <button type="submit" id="submit">
                 Сохранить

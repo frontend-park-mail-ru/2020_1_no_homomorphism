@@ -7,61 +7,69 @@ export default class Router {
      * Конструктор
      * */
     constructor() {
-        this.root = document.getElementById('application');
-        this.curPath = null;
-        this.views = {}
+        this.root = document.getElementsByClassName('container')[0];
+        this.views = {};
     }
     /* *
      * Новый root
      * */
-    setRoot(root = '/') {
-        this.root = root; // TODO разобраться
+    setRoot(root) {
+        this.root = root;
     }
+
     /**
      * Добавление path с view
      * @param {string} path
      * @param {Object} view
      * */
-    addView(path, view) {
-        this.views[path] = view
+    addView(name, view) {
+        this.views[name] = view;
     }
     /**
      * Редирект
-     * @param {String} path
-     * @param {Object} data
      */
-    static redirect ( path, data = {}, ) {
-        this.checkAndRend( path, data);
+    redirectToMain() {
+        this.views['/'].render(this.root);
     }
     /**
      * Запуск рендеринга
      * @param {string} newPath
-     * @param {Object} data
      * */
-    checkAndRend(newPath, data = {}) {
+    check(newPath) {
         if (newPath === this.curPath) {
-            // Уже на это страничке
+            // Уже на этой страничке
             return;
         }
-        if (!this.views.has(newPath)) {
-            // Нет такого пути, показать ошибку
+        if (!(newPath in this.views)) {
+            window.history.replaceState('', {}, '/');
+            this.views['/'].render(this.root);
             return;
         }
         this.curPath = newPath;
-        this.views[newPath].render(data);
-        //Обращение к ивентбасу
+        window.history.replaceState('', {}, newPath);
+        if (newPath === '/player') {
+            this.views['/player'].render(this.root, 'main');
+        } else {
+            this.views[newPath].render(this.root);
+            this.views['/player'].render(this.root, 'additional');
+        }
     }
     /**
      * Добавление EventListener'a
      * */
-     start() {
+    start() {
         window.addEventListener('click', (event) => {
-            if (!(event.target instanceof HTMLAnchorElement)) {
-                this.checkAndRend(window.location.pathname);
-                return;
+            let current = event.target;
+            while (current != document.body) {
+                if (current instanceof HTMLAnchorElement) {
+                    event.preventDefault();
+                    this.check(current.pathname);
+                    break;
+                } else {
+                    current = current.parentNode;
+                }
             }
-            event.preventDefault();
-            this.checkAndRend(event.target.pathname);
-        })
+        });
+        this.check(window.location.pathname);
     }
 }

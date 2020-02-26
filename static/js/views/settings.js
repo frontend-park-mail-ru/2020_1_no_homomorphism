@@ -3,6 +3,8 @@ export class SettingsView {
         this.eventBus = eventBus;
         this.submit = this.submit.bind(this);
         this.setEventListeners();
+        //this.eventBus.on('invalid', this.showErrors.bind(this));
+        //this.eventBus.on('valid', this.showSuccess);
     }
 
     setEventListeners(){
@@ -22,27 +24,21 @@ export class SettingsView {
                 document.getElementById(`${key}`).value = data.key;
             }
         }
-    }
-
-    render() {
-        this.eventBus.emit('load profile settings', '');
+    render(root) {
+        this.eventBus.on('user data', (data) => {
+            root.innerHTML = nunjucks.render('../../../views/settings.njk', data);
+        });
+        this.eventBus.emit('get user data', {});
+        document.getElementById('submit').addEventListener('click', this.submit);
+        document.getElementById('avatar-upload').addEventListener('change', this.avatarUpload);
+        //document.getElementById('add-outer').addEventListener('click', this.addOuterClick);
     }
 
     showSuccess() {}
 
     showErrors(errors) {
-
-        //for (let key in errors) {
-        //    this.elements.key.setCustomValidity(errors.key);
-        //}
-    }
-
-    showErrors(errors) {
-        for (let key in errors) {
-            if (errors.hasOwnProperty(key)) {
-                if (key === '')
-                document.getElementById(`${key}`).setCustomValidity(errors.key);
-            }
+        for (const key in errors) {
+            this.elements.key.setCustomValidity(errors.key);
         }
     }
 
@@ -50,19 +46,20 @@ export class SettingsView {
         ev.preventDefault();
 
         this.eventBus.emit('submit', {
-            avatar          : document.getElementById('avatar').value,
-            name            : document.getElementById('name').value,
-            email           : document.getElementById('email').value,
-            password        : document.getElementById('password').value,
-            passwordConfirm : document.getElementById('password-confirm').value,
+            avatar             : document.getElementById('avatar-upload').value,
+            name               : document.getElementById('name').value,
+            email              : document.getElementById('email').value,
+            newPassword        : document.getElementById('new-password').value,
+            newPasswordConfirm : document.getElementById('new-password-confirm').value,
+            password           : document.getElementById('password').value,
+            //outer              : document.getElementById('outer-url').value,
         });
     }
 
     avatarUpload() {
-        this.eventBus.emit('avatar upload', document.getElementById('avatar-upload'));
+        this.eventBus.emit('avatar upload', document.getElementById('avatar-upload').value);
     }
-
     //addOuterClick() {
-    //    this.eventBus.emit('add outer', this.elements.outerUrl.value);
+    //    this.eventBus.emit('add outer', document.getElementById('outer-url').value);
     //}
 }

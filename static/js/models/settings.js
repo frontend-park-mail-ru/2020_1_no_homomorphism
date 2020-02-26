@@ -4,6 +4,10 @@ import Api from "../modules/api.js";
 export class SettingsModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
+        this.eventBus.on('avatar upload', this.resetAvatar.bind(this));
+        //this.eventBus.on('add outer', this.addOuter.bind(this));
+        this.eventBus.on('submit', this.submit.bind(this));
+        this.eventBus.on('get user data', this.getUserData.bind(this));
     }
 
     loadProfile() {
@@ -20,6 +24,18 @@ export class SettingsModel {
             })
     }
 
+
+    getUserData() {
+        const data = {
+            avatar: 'static/img/new_empire_vol1.jpg',
+            login: 'Митрофанов',
+            name: 'Дмитрий Алексеевич Левен',
+            email: 'leven@dima.go',
+            //outer: [],
+        };
+        this.eventBus.emit('user data', data);
+    }
+
     resetAvatar(avatar) {
         //...
 
@@ -30,10 +46,10 @@ export class SettingsModel {
         this.eventBus.emit('new avatar', avatar);
     }
 
-    addOuter(url) {
+    //addOuter(url) {
         //...
-        this.eventBus.emit('new outer', outer);
-    }
+    //    this.eventBus.emit('new outer', outer);
+    //}
 
     submit(values) {
         const validation = new Validation;
