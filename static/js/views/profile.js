@@ -1,18 +1,26 @@
 export class ProfileView {
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.elements = {
-            avatar   : document.getElementById('avatar'),
-            login    : document.getElementById('login'),
-            name     : document.getElementById('name'),
-            email    : document.getElementById('email'),
-            outer    : document.getElementsByClassName('outer'),
-        };
     }
 
-    render(data) {
-        for (let key in data) {
-            this.elements.key.value = data.key;
+    showErrors(errors) {
+        for (let key in errors) {
+            if (errors.hasOwnProperty(key)) {
+                document.getElementById(`${key}`).setCustomValidity(errors.key);
+            }
+            //this.elements.key.setCustomValidity(errors.key);
         }
+    }
+
+    showProfile(data) {
+        for (let key in data) {
+            if (data.hasOwnProperty(key)) {
+                document.getElementById(`${key}`).value = data.key;
+            }
+        }
+    }
+
+    render() {
+        this.eventBus.emit('load profile', '');
     }
 }

@@ -8,8 +8,4 @@ export class SettingsController {
         this.model = new SettingsModel(this.eventBus);
         this.view = new SettingsView(this.eventBus);
     }
-
-    load() {
-        this.view.render(/*this.model.getUserData()*/);
-    }
-};
+}

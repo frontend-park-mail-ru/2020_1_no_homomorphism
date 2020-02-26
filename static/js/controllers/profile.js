@@ -7,9 +7,9 @@ export class ProfileController {
         this.eventBus = new EventBus();
         this.model = new ProfileModel(this.eventBus);
         this.view = new ProfileView(this.eventBus);
-    }
 
-    load() {
-        this.view.render(/*this.model.getUserData()*/);
+        this.eventBus.on('load profile', this.model.loadProfile);
+        this.eventBus.on('show profile', this.view.showProfile);
+        this.eventBus.on('invalid', this.view.showErrors);
     }
-};
+}

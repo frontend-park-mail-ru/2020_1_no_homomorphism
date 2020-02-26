@@ -1,4 +1,5 @@
 import Validation from '../modules/validation.js';
+import Api from "../modules/api";
 
 export class SignupModel {
     constructor(eventBus) {
@@ -24,27 +25,32 @@ export class SignupModel {
         const resPassword = validation.validationPassword(values.password, values.passwordConfirm);
         const resEmail = validation.validationEmail(values.email);
 
-        if (resLogin !== '') {
-            this.eventBus.emit('invalid', {
-                login: resLogin,
-            })
+
+        if (values.name.empty()) {
+            this.eventBus.emit('invalid', 'Введите имя!')
+        } else if (values.login.empty()) {
+            this.eventBus.emit('invalid', 'Введите логин!')
+        } else if (values.sex.empty()) {
+            this.eventBus.emit('invalid', 'Укажите Ваш пол!')
+        } else if (values.email.empty()) {
+            this.eventBus.emit('invalid', 'Введите email!')
+        } else if (values.password.empty()) {
+                this.eventBus.emit('invalid', 'Введите пароль!')
+        } else if (resLogin !== '') {
+            this.eventBus.emit('invalid', resLogin);
         } else if (resEmail !== '') {
-            this.eventBus.emit('invalid', {
-                // Ты же понимаешь, что эти ошибки будут приписаны логину?
-                login: resEmail,
-            })
+            this.eventBus.emit('invalid', resEmail);
         } else if (resPassword !== '') {
-            this.eventBus.emit('invalid', {
-                // Ты же понимаешь, что эти ошибки будут приписаны логину?
-                login: resPassword,
-            })
+            this.eventBus.emit('invalid', resPassword);
+        } else {
+            Api.signupFetch(values.name, values.login, values.sex, values.email, values.password)
+                .then((res) => {
+                    if (res.ok) {
+                        this.eventBus.emit('redirect to main', 'Успешная регистрация')
+                    } else {
+                        this.eventBus.emit('invalid', 'Проблемы с регистарцией')
+                    }
+                });
         }
-
-        // Запрос в бд
-        // Если что, успешная вылидация -- emit('valid', {});
-
-        this.eventBus.emit('valid', {
-            login: 'Все огонь',
-        })
     }
 }

@@ -2,7 +2,7 @@
  * Переход по страничкам
  * @class Router
  */
-export class Router {
+export default class Router {
     /**
      * Конструктор
      * */
@@ -14,23 +14,31 @@ export class Router {
     /* *
      * Новый root
      * */
-    setRoot(root) {
+    setRoot(root = '/') {
         this.root = root;
     }
-
     /**
      * Добавление path с view
      * @param {string} path
-     * @param {string} view
+     * @param {Object} view
      * */
     addView(path, view) {
         this.views[path] = view
     }
     /**
+     * Редирект
+     * @param {String} path
+     * @param {Object} data
+     */
+    static redirect ( path, data = {}, ) {
+        this.checkAndRend( path, data);
+    }
+    /**
      * Запуск рендеринга
      * @param {string} newPath
+     * @param {Object} data
      * */
-    check(newPath) {
+    checkAndRend(newPath, data = {}) {
         if (newPath === this.curPath) {
             // Уже на это страничке
             return;
@@ -40,19 +48,20 @@ export class Router {
             return;
         }
         this.curPath = newPath;
-        this.views[newPath].render();
+        this.views[newPath].render(data);
         //Обращение к ивентбасу
     }
     /**
      * Добавление EventListener'a
      * */
-    start() {
+     start() {
         window.addEventListener('click', (event) => {
             if (!(event.target instanceof HTMLAnchorElement)) {
+                this.checkAndRend(window.location.pathname);
                 return;
             }
             event.preventDefault();
-            this.check(event.target.pathname);
+            this.checkAndRend(event.target.pathname);
         })
     }
 }

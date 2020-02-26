@@ -1,34 +1,37 @@
+
 export class LoginView {
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.elements = {
-            login    : document.getElementById('login'),
-            password : document.getElementById('password'),
-            remember : document.getElementById('remember'),
-            submit   : document.getElementById('submit'),
-        };
-        this.elements.submit.addEventListener('click', this.submit);
-        this.elements.remember.addEventListener('change', this.changeRemember);
-        this.eventBus.on('invalid', this.showErrors);
+        this.root = document.getElementById('application');
+        this.submit = this.submit().bind(this);
+        //this.submit.addEventListener('click', this.submit);
+
+        const button = document.getElementById('submit');
+        button.addEventListener('click', this.submit);
+        //this.remember.addEventListener('change', this.changeRemember);
     }
 
-    render() {}
+    render() {
+    }
 
     showErrors(errors) {
         for (let key in errors) {
-            this.elements.key.setCustomValidity(errors.key);
+            if (errors.hasOwnProperty(key)) {
+                document.getElementById(`${key}`).setCustomValidity(errors.key);
+            }
+            //this.elements.key.setCustomValidity(errors.key);
         }
     }
-    
-    submit() {
+
+    submit(event) {
+        event.preventDefault();
         this.eventBus.emit('submit', {
-            login    : this.elements.login.value,
-            password : this.elements.password.value,
-            remember : this.elements.remember.checked,
+            login: document.getElementById('login'),
+            password: document.getElementById('password'),
         });
     }
 
     changeRemember() {
-        this.eventBus.emit('remember changed', this.elements.remember.checked);
+        this.eventBus.emit('remember changed', document.getElementById('remember').checked);
     }
 }

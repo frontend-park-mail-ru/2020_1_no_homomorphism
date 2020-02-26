@@ -7,9 +7,9 @@ export class LoginController {
         this.eventBus = new EventBus();
         this.model = new LoginModel(this.eventBus);
         this.view = new LoginView(this.eventBus);
-    }
 
-    load() {
-        this.view.render();
+        this.eventBus.on('submit', this.model.submit);
+        this.eventBus.on('remember changed', this.model.changeRemember);
+        this.eventBus.on('invalid', this.view.showErrors);
     }
-};
+}
