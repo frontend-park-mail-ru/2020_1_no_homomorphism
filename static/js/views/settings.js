@@ -35,8 +35,6 @@ export class SettingsView {
         //document.getElementById('add-outer').addEventListener('click', this.addOuterClick);
     }
 
-    showSuccess() {}
-
     showErrors(errors) {
         for (let key in errors) {
             document.getElementById(key).setCustomValidity(errors.key);

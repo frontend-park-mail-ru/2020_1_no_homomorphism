@@ -39,22 +39,22 @@ export class SettingsModel {
     submit(values) {
         const validation = new Validation;
         const resPassword = validation.validationPassword(values.newPassword, values.newPasswordConfirm);
+        const resEmail = validation.validationEmail(values.email);
 
         if (resPassword !== '') {
             this.eventBus.emit('invalid', {
                 newPassword: resPassword,
-            })
-        } else if (!values.email.empty()) {
+            });
+            return;
+        } else if (values.email === '') {
             this.eventBus.emit('invalid', {
-                email: 'Менять email низя',
-            })
+                email: 'Удолять email низзя',
+            });
+        } else if (resEmail !== '') {
+            this.eventBus.emit('invalid', {
+                email: resEmail,
+            });
         }
-
-        // Запрос в БД
-        // Если что, успешная вылидация -- emit('valid', {});
-
-        this.eventBus.emit('invalid', {
-            email: 'Все огонь',
-        })
+        this.eventBus.emit('redirect to profile', {});
     }
 }

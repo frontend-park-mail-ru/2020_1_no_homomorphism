@@ -37,10 +37,9 @@ export class LoginView {
     }
 
     showErrors(errors) {
-        console.log("ORU");
-        /*for (const key in errors) {
+        for (const key in errors) {
             document.getElementById(key).setCustomValidity(errors.key);
-        }*/
+        }
     }
 
     submit() {

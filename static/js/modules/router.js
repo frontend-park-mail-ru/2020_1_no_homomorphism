@@ -33,6 +33,11 @@ export class Router {
         //this.views['/'].render(this.root);
         this.check('/');
     }
+    redirectToProfile() {
+        console.log("ROUTER");
+        //this.views['/'].render(this.root);
+        this.check('/profile');
+    }
     /**
      * Запуск рендеринга
      * @param {string} newPath
