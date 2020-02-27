@@ -31,7 +31,7 @@ export class SettingsModel {
         } else {
             const fileAttach = document.getElementById('avatar-upload');
             const fData = new FormData();
-            fData.append('avatar', fileAttach.files[0]);
+            fData.append('profile_image', fileAttach.files[0]);
             Api.profilePhotoFetch()
                 .then((response) => {
                     if (response.ok) {
