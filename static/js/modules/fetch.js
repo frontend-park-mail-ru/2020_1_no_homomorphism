@@ -2,9 +2,7 @@
  * Получение урла сервера
  * return {string}
  */
-const getServerPath = () => {
-    return 'http://89.208.199.170:8081'
-};
+const getServerPath = 'http://89.208.199.170:8081';
 /**
  * POST
  * @static
@@ -14,7 +12,6 @@ const getServerPath = () => {
  */
 
 export let postFetch = (path = '/', body = {}) => {
-
     return fetch(getServerPath() + path, {
         method: 'POST',
         mode: 'cors', // no-cors, cors, *same-origin (последнее - значение оп умолчанию)

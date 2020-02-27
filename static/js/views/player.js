@@ -306,9 +306,9 @@ export class PlayerView {
         this.playing = true;
     }
     updateTrack(track) {
-        document.getElementById('cover').src = track.cover;
+        document.getElementById('cover').src = track.image;
         document.getElementById('artist').innerHTML = track.artist;
-        document.getElementById('title').innerHTML = track.title;
+        document.getElementById('title').innerHTML = track.name;
         const minutes = Math.floor(track.duration / 60);
         const seconds = Math.floor(track.duration % 60);
         document.getElementsByClassName('duration')[0].innerHTML = minutes.toString() + ':' + (seconds < 10 ? '0' : '') + seconds.toString();

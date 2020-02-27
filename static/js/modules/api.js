@@ -88,4 +88,13 @@ export class Api {
         return getFetch(`/player/${name}`)
             .catch(error => console.error(error))
     }
+    /**
+     * Получение трека
+     * @param {string} id
+     * @returns {Promise<Response>}
+     */
+    static trackFetch(id) {
+        return getFetch(`/track/${id}`)
+            .catch(error => console.error(error))
+    }
 }
