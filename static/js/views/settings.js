@@ -10,8 +10,8 @@ export class SettingsView {
             //if (event.target.getAttribute('id') === 'submit-login') {
                 console.log("TOUCHED");
                 event.preventDefault();
-                this.submit.bind(this);
-                //this.submit();
+                //this.submit.bind(this);
+                this.submit();
                 console.log("TOUCHED2");
             //}
             /*if (event. === 'submit-login'){
@@ -44,8 +44,6 @@ export class SettingsView {
     }
 
     submit(ev) {
-        ev.preventDefault();
-
         this.eventBus.emit('submit', {
             avatar             : document.getElementById('avatar-upload').value,
             name               : document.getElementById('name').value,
