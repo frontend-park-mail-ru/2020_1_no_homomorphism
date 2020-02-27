@@ -11,6 +11,7 @@ export class SettingsController {
         this.eventBus.on('invalid', this.view.showErrors);
         this.eventBus.on('valid', this.view.showSuccess);
 
+        this.eventBus.on('get user data', this.model.getUserData.bind(this.model));
         this.eventBus.on('avatar upload', this.model.resetAvatar.bind(this.model));
         this.eventBus.on('submit', this.model.submit.bind(this.model));
         //this.eventBus.on('add outer', this.model.addOuter.bind(this.model));

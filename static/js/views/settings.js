@@ -5,7 +5,21 @@ export class SettingsView {
 
     setEventListeners(){
         const button = document.getElementById('submit');
-
+        button.addEventListener('click', (event) => {
+            //console.log(event.target);
+            //if (event.target.getAttribute('id') === 'submit-login') {
+                console.log("TOUCHED");
+                event.preventDefault();
+                this.submit.bind(this);
+                //this.submit();
+                console.log("TOUCHED2");
+            //}
+            /*if (event. === 'submit-login'){
+                console.log("TOUCHED");
+                event.preventDefault();
+                this.submit.bind(this);
+            }*/
+        });
         const buttonAvatar = document.getElementById('avatar-upload');
         buttonAvatar.addEventListener('change', this.avatarUpload.bind(this));
     }

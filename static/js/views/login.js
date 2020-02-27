@@ -18,7 +18,7 @@ export class LoginView {
                 console.log("TOUCHED");
                 event.preventDefault();
                 this.submit.bind(this);
-                this.submit();
+                //this.submit();
                 console.log("TOUCHED2");
             }
             /*if (event. === 'submit-login'){

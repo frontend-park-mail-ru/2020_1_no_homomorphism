@@ -4,7 +4,6 @@ import {Api} from "../modules/api.js";
 export class SettingsModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on('get user data', this.getUserData.bind(this));
     }
 
     getUserData() {
