@@ -5,7 +5,7 @@ export class SignupView {
     }
 
     render(root) {
-        root.innerHTML = nunjucks.render('../../../views/signup.njk') + root.innerHTML;
+        root.innerHTML = nunjucks.render('../../../views/signup.njk');
 
         console.log('RENDER');
         document.addEventListener('click', (event) => {

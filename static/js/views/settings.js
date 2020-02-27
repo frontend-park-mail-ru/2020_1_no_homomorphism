@@ -22,7 +22,7 @@ export class SettingsView {
 
     render(root) {
         this.eventBus.on('user data', (data) => {
-            root.innerHTML = nunjucks.render('../../../views/settings.njk', data) + root.innerHTML;
+            root.innerHTML = nunjucks.render('../../../views/settings.njk', data);
             this.setEventListeners();
         });
         this.eventBus.emit('get user data', {});
