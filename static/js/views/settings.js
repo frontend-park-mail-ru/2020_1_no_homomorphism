@@ -22,11 +22,11 @@ export class SettingsView {
         }
     }
     render(root) {
-        this.setEventListeners();
 
         this.eventBus.on('user data', (data) => {
             root.innerHTML = nunjucks.render('../../../views/settings.njk', data);
         });
+        this.setEventListeners();
         this.eventBus.emit('get user data', {});
         document.getElementById('submit').addEventListener('click', this.submit);
         document.getElementById('avatar-upload').addEventListener('change', this.avatarUpload);
