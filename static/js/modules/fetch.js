@@ -12,9 +12,10 @@ const getServerPath = 'http://89.208.199.170:8081';
  */
 
 export let postFetch = (path = '/', body = {}) => {
-    return fetch(getServerPath() + path, {
+    console.log(JSON.stringify(body));
+    return fetch(getServerPath + path, {
         method: 'POST',
-        mode: 'cors', // no-cors, cors, *same-origin (последнее - значение оп умолчанию)
+        mode: 'cors', // no-cors, cors, *same-origin (последнее - значение по умолчанию)
         credentials: 'include', // include, *same-origin, omit (относится к кукам)
         headers: {
             'Content-Type': 'application/json; charset=utf-8'
@@ -60,7 +61,7 @@ export let deleteFetch = (path = '/') => {
  * return {Promise<Response>}
  */
 export let putFetch = (path = '/', body = {}) => {
-    return fetch(getServerPath() + path, {
+    return fetch(getServerPath + path, {
         method: 'PUT',
         mode: 'cors',
         credentials: 'include',
@@ -79,7 +80,7 @@ export let putFetch = (path = '/', body = {}) => {
  * return {Promise<Response>}
  */
 export let putImageFetch = (path = '/image', body = {}) => {
-    return fetch(getServerPath() + path, {
+    return fetch(getServerPath + path, {
         method: 'PUT',
         mode: 'cors',
         credentials: 'include',
@@ -99,7 +100,7 @@ export let putImageFetch = (path = '/image', body = {}) => {
  * return {Promise<Response>}
  */
 export let patchFetch = (path = '/', body = {}) => {
-    return fetch(getServerPath() + path, {
+    return fetch(getServerPath + path, {
         method: 'PATCH',
         mode: 'cors',
         credentials: 'include',

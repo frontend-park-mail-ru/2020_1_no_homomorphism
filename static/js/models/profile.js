@@ -15,25 +15,25 @@ export class ProfileModel {
             //outer: [],
         };
         Api.profileFetch()
-            .then((res) => {
-                console.log("API");
-                if (res === undefined){
-                    //return
-                    console.log('EMPTY');
-                    this.eventBus.emit('redirect to main', 'Ошибка загрузки профиля');
-                    return
-                }
-                if (res.ok) {
-                    res.json()
-                        .then(data => {
-                            this.eventBus.emit('user data', data);
-                            //this.eventBus.emit('show profile', data);
-                        })
-                } else {
-                    //console.log("API");
-                    this.eventBus.emit('no answer', 'Ошибка загрузки профиля')
-                }
-            })
+        .then((res) => {
+            console.log("API");
+            if (res === undefined){
+                //return
+                console.log('EMPTY');
+                this.eventBus.emit('redirect to main', 'Ошибка загрузки профиля');
+                return
+            }
+            if (res.ok) {
+                res.text()
+                .then(data => {
+                    this.eventBus.emit('user data', JSON.parse(data));
+                    //this.eventBus.emit('show profile', data);
+                })
+            } else {
+                //console.log("API");
+                this.eventBus.emit('no answer', 'Ошибка загрузки профиля')
+            }
+        })
 
     }
 
