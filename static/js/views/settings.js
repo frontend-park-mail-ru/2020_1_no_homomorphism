@@ -47,8 +47,8 @@ export class SettingsView {
             avatar             : document.getElementById('avatar-upload').value,
             name               : document.getElementById('name').value,
             email              : document.getElementById('email').value,
-            newPassword        : document.getElementById('new-password').value,
-            newPasswordConfirm : document.getElementById('new-password-confirm').value,
+            newPassword        : document.getElementById('newPassword').value,
+            newPasswordConfirm : document.getElementById('newPasswordConfirm').value,
             password           : document.getElementById('password').value,
             //outer              : document.getElementById('outer-url').value,
         });
