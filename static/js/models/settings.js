@@ -12,33 +12,34 @@ export class SettingsModel {
 
     getUserData() {
         Api.profileFetch()
-        .then((res) => {
-            if (res.ok) {
-                res.text()
-                .then((data) => {
-                    //this.eventBus.emit('show profile settings', data);
-                    this.eventBus.emit('user data', JSON.parse(data));
-                })
-            } else {
-                this.eventBus.emit('invalid', 'Ошибка загрузки профиля')
-            }
-        })
+            .then((res) => {
+                if (res.ok) {
+                    res.text()
+                        .then((data) => {
+                            //this.eventBus.emit('show profile settings', data);
+                            this.eventBus.emit('user data', JSON.parse(data));
+                        })
+                } else {
+                    this.eventBus.emit('invalid', 'Ошибка загрузки профиля')
+                }
+            })
     }
 
     resetAvatar(avatar) {
-        //...
-
-        const formData = new FormData();
-        formData.append('file', image[0]);
-
-        Api.profilePhotoFetch()
-        this.eventBus.emit('new avatar', avatar);
+        if (avatar.size > 2 * 1024 * 1024) {
+            console.log('WRONG FORMAT')
+        } else {
+            const fileAttach = document.getElementById('avatar-upload');
+            const fData = new FormData();
+            fData.append('avatar', fileAttach.files[0]);
+            Api.profilePhotoFetch()
+                .then((response) => {
+                    if (response.ok) {
+                        this.eventBus.emit('redirect to profile', {});
+                    }
+                });
+        }
     }
-
-    //addOuter(url) {
-        //...
-    //    this.eventBus.emit('new outer', outer);
-    //}
 
     submit(values) {
         const validation = new Validation;
@@ -60,10 +61,10 @@ export class SettingsModel {
             });
         }
         Api.profileEditFetch(values.name, values.email, values.password, values.newPassword)
-        .then((response) => {
-            if (response.ok) {
-                this.eventBus.emit('redirect to profile', {});
-            }
-        });
+            .then((response) => {
+                if (response.ok) {
+                    this.eventBus.emit('redirect to profile', {});
+                }
+            });
     }
 }
