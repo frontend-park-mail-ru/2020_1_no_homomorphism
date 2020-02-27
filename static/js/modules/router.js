@@ -63,7 +63,7 @@ export class Router {
     start() {
         window.addEventListener('click', (event) => {
             let current = event.target;
-            while (current !== document.body) {
+            while (current != window && current != document.body && current != null) {
                 if (current instanceof HTMLAnchorElement) {
                     console.log("ROUTER START 1");
                     event.preventDefault();
