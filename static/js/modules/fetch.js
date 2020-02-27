@@ -67,7 +67,7 @@ export let putFetch = (path = '/', body = {}) => {
         headers: {
             'Content-Type': 'application/json; charset=utf-8'
         },
-        body: JSON.parse(body),
+        body: JSON.stringify(body),
     });
     //}).then(response => response.json());
 };
@@ -106,7 +106,7 @@ export let patchFetch = (path = '/', body = {}) => {
         headers: {
             'Content-Type': 'application/json; charset=utf-8'
         },
-        body: JSON.parse(body),
+        body: JSON.stringify(body),
     });
     //}).then(response => response.json());
 };
