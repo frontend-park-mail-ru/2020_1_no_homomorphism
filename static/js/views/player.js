@@ -21,7 +21,7 @@ export class PlayerView {
         this.eventBus.on('draw unrepeat', this.drawUnrepeat.bind(this));
         this.eventBus.on('draw mute', this.drawMute.bind(this));
         this.eventBus.on('draw unmute', this.drawUnmute.bind(this));
-        document.getElementById('logout-button').addEventListner('click', this.eventBus.emit('logout', {}));
+        document.getElementById('logout-button').addEventListener('click', this.eventBus.emit('logout', {}));
     }
 
     render(root, mode) {
