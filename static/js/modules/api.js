@@ -15,8 +15,8 @@ export class Api {
      */
     static loginFetch(login, password) {
         return postFetch('/login', {
-            login,
-            password,
+            'login': login,
+            'password': password,
         }).catch(error => console.error(error))
     }
     /**

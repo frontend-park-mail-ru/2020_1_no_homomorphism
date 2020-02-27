@@ -14,13 +14,13 @@ export class SignupModel {
         const resEmail = validation.validationEmail(values.email);
 
         // TODO Переместить пустые строчки в валидацию
-        if (values.name.empty()) {
+        if (values.name.empty) {
             this.eventBus.emit('invalid', 'Введите имя!')
-        } else if (values.login.empty()) {
+        } else if (values.login.empty) {
             this.eventBus.emit('invalid', 'Введите логин!')
-        } else if (values.email.empty()) {
+        } else if (values.email.empty) {
             this.eventBus.emit('invalid', 'Введите email!')
-        } else if (values.password.empty()) {
+        } else if (values.password.empty) {
                 this.eventBus.emit('invalid', 'Введите пароль!')
         } else if (resLogin !== '') {
             this.eventBus.emit('invalid', resLogin);

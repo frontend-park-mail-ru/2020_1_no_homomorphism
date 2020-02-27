@@ -10,6 +10,6 @@ export class SignupController {
 
         this.eventBus.on('submit', this.model.submit);
         this.eventBus.on('invalid', this.view.showErrors);
-        this.eventBus.on('redirect to main', router.redirectToMain);
+        this.eventBus.on('redirect to main', router.redirectToMain.bind(this));
     }
 }
