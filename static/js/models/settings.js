@@ -56,11 +56,10 @@ export class SettingsModel {
             });
         }
         Api.profileEditFetch(values.name, values.email, values.password, values.newPassword)
-        .then(response => response.text())
-        .then(answer => {
-            const status = JSON.parse(answer);
-            console.log(status);
-            //this.eventBus.emit('redirect to profile', {});
+        .then((response) => {
+            if (response.ok) {
+                this.eventBus.emit('redirect to profile', {});
+            }
         });
     }
 }
