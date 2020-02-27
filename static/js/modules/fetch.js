@@ -3,7 +3,7 @@
  * return {string}
  */
 const getServerPath = () => {
-    return 'http://89.208.199.170:8080'
+    return 'http://89.208.199.170:8081'
 };
 /**
  * POST
@@ -34,7 +34,7 @@ export let postFetch = (path = '/', body = {}) => {
  * return {Promise<Response>}
  */
 export let getFetch = (path = '/', body = {}) => {
-    return fetch('http://89.208.199.170:8082' + path, {
+    return fetch(getServerPath + path, {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
@@ -48,7 +48,7 @@ export let getFetch = (path = '/', body = {}) => {
  * return {Promise<Response>}
  */
 export let deleteFetch = (path = '/') => {
-    return fetch('http://89.208.199.170:8082' + path, {
+    return fetch(getServerPath + path, {
         method: 'DELETE',
         mode: 'cors',
         credentials: 'include',
