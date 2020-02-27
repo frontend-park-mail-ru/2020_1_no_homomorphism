@@ -7,30 +7,18 @@ export class ProfileModel {
     }
 
     getUserData() {
-        const data = {
-            avatar: 'static/img/new_empire_vol1.jpg',
-            login: 'Митрофанов',
-            name: 'Дмитрий Алексеевич Левен',
-            email: 'leven@dima.go',
-            //outer: [],
-        };
         Api.profileFetch()
         .then((res) => {
-            console.log("API");
             if (res === undefined){
-                //return
-                console.log('EMPTY');
                 this.eventBus.emit('redirect to main', 'Ошибка загрузки профиля');
                 return
             }
             if (res.ok) {
                 res.text()
-                .then(data => {
+                .then((data) => {
                     this.eventBus.emit('user data', JSON.parse(data));
-                    //this.eventBus.emit('show profile', data);
                 })
             } else {
-                //console.log("API");
                 this.eventBus.emit('no answer', 'Ошибка загрузки профиля')
             }
         })

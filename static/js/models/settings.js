@@ -11,29 +11,23 @@ export class SettingsModel {
     }
 
     loadProfile() {
-        Api.profileFetch()
-            .then((res) => {
-                if (res.ok) {
-                    res.json()
-                        .then(data => {
-                            this.eventBus.emit('show profile settings', data);
-                        })
-                } else {
-                    this.eventBus.emit('invalid', 'Ошибка загрузки профиля')
-                }
-            })
+
     }
 
 
     getUserData() {
-        const data = {
-            avatar: 'static/img/new_empire_vol1.jpg',
-            login: 'Митрофанов',
-            name: 'Дмитрий Алексеевич Левен',
-            email: 'leven@dima.go',
-            //outer: [],
-        };
-        this.eventBus.emit('user data', data);
+        Api.profileFetch()
+        .then((res) => {
+            if (res.ok) {
+                res.text()
+                .then((data) => {
+                    //this.eventBus.emit('show profile settings', data);
+                    this.eventBus.emit('user data', data);
+                })
+            } else {
+                this.eventBus.emit('invalid', 'Ошибка загрузки профиля')
+            }
+        })
     }
 
     resetAvatar(avatar) {
