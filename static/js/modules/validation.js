@@ -35,10 +35,10 @@ export  class Validation {
             return 'Пароли не совпадают';
         }
 
-        let regExpr = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{7,}$');
+        let regExpr = new RegExp('^[a-zA-Zd]{7,}$');
 
         if (!password1.match(regExpr)) {
-            return 'Пароль должен содержать 7 символов, как минимум одна заглавная, одна строчная латинская буква и одна цифра ';
+            return 'Пароль должен содержать не менее 7 заглавных или строчных букв';
         }
         return '';
     }
