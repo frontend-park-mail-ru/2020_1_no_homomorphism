@@ -4,14 +4,15 @@ export class LoginView {
     }
 
     render(root) {
+        console.log("MDA");
         root.innerHTML = nunjucks.render('../../../views/login.njk');
 
         document.addEventListener('click', (event) => {
             if (event.target.getAttribute('id') === 'submit-login') {
                 console.log("TOUCHED");
                 event.preventDefault();
-                this.submit.bind(this);
-                //this.submit();
+                //this.submit.bind(this);
+                this.submit();
                 console.log("TOUCHED2");
             }
         });
@@ -19,10 +20,9 @@ export class LoginView {
     }
 
     showErrors(errors) {
-        console.log("ORU");
-        /*for (const key in errors) {
+        for (const key in errors) {
             document.getElementById(key).setCustomValidity(errors.key);
-        }*/
+        }
     }
 
     submit() {

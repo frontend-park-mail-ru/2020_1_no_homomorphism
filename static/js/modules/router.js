@@ -33,6 +33,11 @@ export class Router {
         //this.views['/'].render(this.root);
         this.check('/');
     }
+    redirectToProfile() {
+        console.log("ROUTER");
+        //this.views['/'].render(this.root);
+        this.check('/profile');
+    }
     /**
      * Запуск рендеринга
      * @param {string} newPath
@@ -63,7 +68,7 @@ export class Router {
     start() {
         window.addEventListener('click', (event) => {
             let current = event.target;
-            while (current !== document.body) {
+            while (current != window && current != document.body && current != null) {
                 if (current instanceof HTMLAnchorElement) {
                     console.log("ROUTER START 1");
                     event.preventDefault();

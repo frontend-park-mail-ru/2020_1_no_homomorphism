@@ -5,58 +5,49 @@ export class SettingsView {
 
     setEventListeners(){
         const button = document.getElementById('submit');
-        button.addEventListener('click', this.submit);
-
-        const buttonAvatar = document.getElementById('avatar-upload');
-        buttonAvatar.addEventListener('change', this.avatarUpload);
-    }
-
-    showProfile(data) {
-        document.getElementById('avatar').src = data.avatar;
-        document.getElementById('name').value = data.name;
-        document.getElementById('email').value = data.email;
-        for (let key in data) {
-            if (data.hasOwnProperty(key)) {
-                document.getElementById(`${key}`).value = data.key;
-            }
-        }
-    }
-    render(root) {
-        //this.setEventListeners();
-        this.eventBus.on('user data', (data) => {
-            root.innerHTML = nunjucks.render('../../../views/settings.njk', data);
-        });
-
-        document.addEventListener('change', (event) => {
-            if (event.target.getAttribute('id') === 'submit-login') {
+        button.addEventListener('click', (event) => {
+            //console.log(event.target);
+            //if (event.target.getAttribute('id') === 'submit-login') {
+                console.log("TOUCHED");
+                event.preventDefault();
+                //this.submit.bind(this);
+                this.submit();
+                console.log("TOUCHED2");
+            //}
+            /*if (event. === 'submit-login'){
+                console.log("TOUCHED");
                 event.preventDefault();
                 this.submit.bind(this);
-                console.log()
-            }
+            }*/
+        });
+        const buttonAvatar = document.getElementById('avatar-upload');
+        buttonAvatar.addEventListener('change', this.avatarUpload.bind(this));
+    }
+
+    render(root) {
+        this.eventBus.on('user data', (data) => {
+            root.innerHTML = nunjucks.render('../../../views/settings.njk', data);
+            this.setEventListeners();
         });
         this.eventBus.emit('get user data', {});
-        document.getElementById('submit').addEventListener('click', this.submit);
-        document.getElementById('avatar-upload').addEventListener('change', this.avatarUpload);
+        //document.getElementById('submit').addEventListener('click', this.submit.bind(this));
+        //document.getElementById('avatar-upload').addEventListener('change', this.avatarUpload);
         //document.getElementById('add-outer').addEventListener('click', this.addOuterClick);
     }
 
-    showSuccess() {}
-
     showErrors(errors) {
-        for (const key in errors) {
-            //this.elements.key.setCustomValidity(errors.key);
+        for (let key in errors) {
+            document.getElementById(key).setCustomValidity(errors.key);
         }
     }
 
     submit(ev) {
-        ev.preventDefault();
-
         this.eventBus.emit('submit', {
             avatar             : document.getElementById('avatar-upload').value,
             name               : document.getElementById('name').value,
             email              : document.getElementById('email').value,
-            newPassword        : document.getElementById('new-password').value,
-            newPasswordConfirm : document.getElementById('new-password-confirm').value,
+            newPassword        : document.getElementById('newPassword').value,
+            newPasswordConfirm : document.getElementById('newPasswordConfirm').value,
             password           : document.getElementById('password').value,
             //outer              : document.getElementById('outer-url').value,
         });

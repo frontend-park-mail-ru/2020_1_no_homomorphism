@@ -4,33 +4,25 @@ import {Api} from "../modules/api.js";
 export class SettingsModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
-
+        this.eventBus.on('avatar upload', this.resetAvatar.bind(this));
+        //this.eventBus.on('add outer', this.addOuter.bind(this));
+        this.eventBus.on('submit', this.submit.bind(this));
+        this.eventBus.on('get user data', this.getUserData.bind(this));
     }
-
-    loadProfile() {
-        Api.profileFetch()
-            .then((res) => {
-                if (res.ok) {
-                    res.json()
-                        .then(data => {
-                            this.eventBus.emit('show profile settings', data);
-                        })
-                } else {
-                    this.eventBus.emit('invalid', 'Ошибка загрузки профиля')
-                }
-            })
-    }
-
 
     getUserData() {
-        const data = {
-            avatar: 'static/img/new_empire_vol1.jpg',
-            login: 'Митрофанов',
-            name: 'Дмитрий Алексеевич Левен',
-            email: 'leven@dima.go',
-            //outer: [],
-        };
-        this.eventBus.emit('user data', data);
+        Api.profileFetch()
+        .then((res) => {
+            if (res.ok) {
+                res.text()
+                .then((data) => {
+                    //this.eventBus.emit('show profile settings', data);
+                    this.eventBus.emit('user data', JSON.parse(data));
+                })
+            } else {
+                this.eventBus.emit('invalid', 'Ошибка загрузки профиля')
+            }
+        })
     }
 
     resetAvatar(avatar) {
@@ -50,30 +42,28 @@ export class SettingsModel {
 
     submit(values) {
         const validation = new Validation;
-        const resLogin = validation.validationLogin(values.login);
-        const resPassword = validation.validationPassword(values.password, values.passwordConfirm);
+        const resPassword = validation.validationPassword(values.newPassword, values.newPasswordConfirm);
+        const resEmail = validation.validationEmail(values.email);
 
-        if (resLogin !== '') {
+        if (values.newPassword !== '' && resPassword !== '') {
             this.eventBus.emit('invalid', {
-                login: resLogin,
-            })
-        } else if (resPassword !== '') {
+                newPassword: resPassword,
+            });
+            return;
+        } else if (values.email === '') {
             this.eventBus.emit('invalid', {
-                // Ты же понимаешь, что эти ошибки будут приписаны логину?
-                login: resPassword,
-            })
-        } else if (!values.email.empty()) {
+                email: 'Удолять email низзя',
+            });
+        } else if (resEmail !== '') {
             this.eventBus.emit('invalid', {
-                // Ты же понимаешь, что эти ошибки будут приписаны логину?
-                login: 'Менять email низя',
-            })
+                email: resEmail,
+            });
         }
-
-        // Запрос в БД
-        // Если что, успешная вылидация -- emit('valid', {});
-
-        this.eventBus.emit('invalid', {
-            email: 'Все огонь',
-        })
+        Api.profileEditFetch(values.name, values.email, values.password, values.newPassword)
+        .then((response) => {
+            if (response.ok) {
+                this.eventBus.emit('redirect to profile', {});
+            }
+        });
     }
 }

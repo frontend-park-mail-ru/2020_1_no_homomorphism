@@ -51,7 +51,7 @@ export class Api {
      * @returns {Promise<Response>}
      */
     static profileFetch() {
-        return getFetch('/profile').catch(error => console.error(error))
+        return getFetch('/profile/me').catch(error => console.error(error))
     }
     /**
      * Профиль настройка
@@ -62,7 +62,7 @@ export class Api {
      * @returns {Promise<Response>}
      */
     static profileEditFetch(name, email, password, newPassword) {
-        return patchFetch('/profile/settings', {
+        return putFetch('/profile/settings', {
             name,
             email,
             password,
@@ -86,6 +86,15 @@ export class Api {
      */
     static playerFetch(name) {
         return getFetch(`/player/${name}`)
+            .catch(error => console.error(error))
+    }
+    /**
+     * Получение трека
+     * @param {string} id
+     * @returns {Promise<Response>}
+     */
+    static trackFetch(id) {
+        return getFetch(`/track/${id}`)
             .catch(error => console.error(error))
     }
 }
