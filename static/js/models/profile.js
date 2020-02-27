@@ -7,13 +7,6 @@ export class ProfileModel {
     }
 
     getUserData() {
-        const data = {
-            avatar: 'static/img/new_empire_vol1.jpg',
-            login: 'Митрофанов',
-            name: 'Дмитрий Алексеевич Левен',
-            email: 'leven@dima.go',
-            //outer: [],
-        };
         Api.profileFetch()
             .then((res) => {
                 console.log("API");

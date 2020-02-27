@@ -4,36 +4,18 @@ export class LoginView {
     }
 
     render(root) {
-        console.log("MDA");
         root.innerHTML = nunjucks.render('../../../views/login.njk');
 
-        const form = document.getElementById('submit-login');
-        console.log(form.id);
-        console.log(form.nodeType);
-        console.log(form.on);
-
         document.addEventListener('click', (event) => {
-            //console.log(event.target);
             if (event.target.getAttribute('id') === 'submit-login') {
                 console.log("TOUCHED");
                 event.preventDefault();
                 this.submit.bind(this);
-                this.submit();
+                //this.submit();
                 console.log("TOUCHED2");
             }
-            /*if (event. === 'submit-login'){
-                console.log("TOUCHED");
-                event.preventDefault();
-                this.submit.bind(this);
-            }*/
         });
         console.log("DIE");
-        /*
-        document.getElementById('submit').onsubmit = (event) => {
-            console.log("TOPKEK");
-            this.submit(event);
-        };*/
-        //document.getElementById('remember').addEventListener('change', this.changeRemember.bind(this));
     }
 
     showErrors(errors) {

@@ -36,12 +36,12 @@ export class Api {
      * @returns {Promise<Response>}
      */
     static signupFetch(name, login, email, password) {
-        console.log('SIGNUP FETCH');
+        //console.log('SIGNUP FETCH');
         return postFetch('/signup', {
-            name,
-            login,
-            email,
-            password,
+            'name': name,
+            'login': login,
+            'email': email,
+            'password': password,
         }).catch(error => console.error(error))
     }
     /**
@@ -54,8 +54,6 @@ export class Api {
     /**
      * Профиль настройка
      * @param {string} name
-     * @param {string} login
-     * @param {string} sex
      * @param {string} email
      * @param {string} password
      * @param {string} newPassword

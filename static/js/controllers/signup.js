@@ -8,8 +8,9 @@ export class SignupController {
         this.model = new SignupModel(this.eventBus);
         this.view = new SignupView(this.eventBus);
 
-        this.eventBus.on('submit', this.model.submit);
-        this.eventBus.on('invalid', this.view.showErrors);
-        this.eventBus.on('redirect to main', router.redirectToMain.bind(this));
+        this.eventBus.on('submit', this.model.submit.bind(this.model));
+        this.eventBus.on('lol', this.view.showErrors);
+        //this.eventBus.on('invalid', router.redirectToMain);
+        this.eventBus.on('redirect to main', router.redirectToMain.bind(router));
     }
 }
