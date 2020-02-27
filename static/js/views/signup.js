@@ -7,16 +7,13 @@ export class SignupView {
 
     render(root) {
         root.innerHTML = nunjucks.render('../../../views/signup.njk', {kek: 'topkek'});
-        document.getElementById('submit').addEventListener('click', this.submit.bind(this));
-
-
 
         document.addEventListener('click', (event) => {
             //console.log(event.target);
             if (event.target.getAttribute('id') === 'submit') {
                 event.preventDefault();
                 this.submit.bind(this);
-                this.submit();
+                //this.submit();
             }
         })
     }
@@ -27,7 +24,7 @@ export class SignupView {
         }
     }
 
-    submit(ev) {
+    submit() {
         console.log("LOL");
         this.eventBus.emit('submit', {
             name            : document.getElementById('name').value,

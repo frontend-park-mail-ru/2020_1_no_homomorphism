@@ -22,10 +22,17 @@ export class SettingsView {
         }
     }
     render(root) {
-        this.setEventListeners();
-
+        //this.setEventListeners();
         this.eventBus.on('user data', (data) => {
             root.innerHTML = nunjucks.render('../../../views/settings.njk', data);
+        });
+
+        document.addEventListener('change', (event) => {
+            if (event.target.getAttribute('id') === 'submit-login') {
+                event.preventDefault();
+                this.submit.bind(this);
+                console.log()
+            }
         });
         this.eventBus.emit('get user data', {});
         document.getElementById('submit').addEventListener('click', this.submit);
