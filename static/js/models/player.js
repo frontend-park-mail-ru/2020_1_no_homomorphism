@@ -5,7 +5,7 @@ export class PlayerModel {
         this.eventBus = eventBus;
         this.data = {
             queue    : [],
-            playList : [],
+            playlist : [],
             current  : 0,
             playing  : false,
             shuffle  : false,
@@ -43,7 +43,8 @@ export class PlayerModel {
             const track = JSON.parse(data);
             document.getElementsByTagName('audio')[0].children[0].src = track.link;
             document.getElementsByTagName('audio')[0].load();
-            this.data.playlist += track;
+            this.data.playlist.push(track);
+            this.data.queue.push(this.data.playlist.length - 1);
             this.eventBus.emit('track update', track);
             console.log(this.data.playlist);
         });
@@ -52,7 +53,8 @@ export class PlayerModel {
             .then(response => response.text())
             .then(data => {
                 const track = JSON.parse(data);
-                this.data.playlist += track;
+                this.data.playlist.push(track);
+                this.data.queue.push(this.data.playlist.length - 1);
                 console.log(this.data.playlist);
             });
         }
@@ -77,7 +79,7 @@ export class PlayerModel {
             }
         }
         this.data.current--;
-        document.getElementsByTagName('audio')[0].children[0].src = this.data.playlist[this.data.queue[this.data.current]].src;
+        document.getElementsByTagName('audio')[0].children[0].src = this.data.playlist[this.data.queue[this.data.current]].link;
         if (this.data.playing) {
             document.getElementsByTagName('audio')[0].pause();
         }
@@ -107,7 +109,7 @@ export class PlayerModel {
             }
         }
         this.data.current++;
-        document.getElementsByTagName('audio')[0].children[0].src = this.data.playlist[this.data.queue[this.data.current]].src;
+        document.getElementsByTagName('audio')[0].children[0].src = this.data.playlist[this.data.queue[this.data.current]].link;
         if (this.data.playing) {
             document.getElementsByTagName('audio')[0].pause();
         }
