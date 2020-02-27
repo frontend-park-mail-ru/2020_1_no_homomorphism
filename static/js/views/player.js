@@ -64,31 +64,13 @@ export class PlayerView {
         document.getElementsByClassName('timeline')[0].addEventListener('mouseover', this.timelineMouseOver.bind(this));
         document.getElementsByClassName('timeline')[0].addEventListener('mouseout', this.timelineMouseOut.bind(this));
         document.getElementsByClassName('timeline-back')[0].addEventListener('mousedown', this.timelineMouseDown.bind(this));
-        // Как это обойти?
-        document.getElementsByClassName('timeline-back')[0].onmouseup = (event) => {
-            this.timelineMouseUp(event);
-        }
+        document.getElementsByClassName('timeline-back')[0].onmouseup = (event) => this.timelineMouseUp(event);
         document.getElementsByClassName('timeline-front')[0].addEventListener('mousedown', this.timelineMouseDown.bind(this));
-        // Как это обойти?
-        document.getElementsByClassName('timeline-front')[0].onmouseup = (event) => {
-            this.timelineMouseUp(event);
-        }
-        // Как это обойти?
-        document.getElementsByClassName('timeline-back')[0].onmousemove = (event) => {
-            this.timelineMouseMove(event);
-        };
-        // Как это обойти?
-        document.getElementsByClassName('timeline-front')[0].onmousemove = (event) => {
-            this.timelineMouseMove(event);
-        };
-        // Как это обойти?
-        document.getElementsByClassName('timeline-back')[0].onclick = (event) => {
-            this.timelineClick(event);
-        };
-        // Как это обойти?
-        document.getElementsByClassName('timeline-front')[0].onclick = (event) => {
-            this.timelineClick(event);
-        };
+        document.getElementsByClassName('timeline-front')[0].onmouseup = (event) => this.timelineMouseUp(event);
+        document.getElementsByClassName('timeline-back')[0].onmousemove = (event) => this.timelineMouseMove(event);
+        document.getElementsByClassName('timeline-front')[0].onmousemove = (event) => this.timelineMouseMove(event);
+        document.getElementsByClassName('timeline-back')[0].onclick = (event) => this.timelineClick(event);
+        document.getElementsByClassName('timeline-front')[0].onclick = (event) => this.timelineClick(event);
         document.getElementsByClassName('shuffle')[0].addEventListener('mouseover', this.shuffleButtonMouseOver.bind(this));
         document.getElementsByClassName('shuffle')[0].addEventListener('mouseout', this.shuffleButtonMouseOut.bind(this));
         document.getElementsByClassName('shuffle')[0].addEventListener('click', this.shuffleButtonClick.bind(this));
@@ -101,31 +83,14 @@ export class PlayerView {
         document.getElementsByClassName('volume-scale')[0].addEventListener('mouseover', this.volumeButtonMouseOver.bind(this));
         document.getElementsByClassName('volume-scale')[0].addEventListener('mouseout', this.volumeButtonMouseOut.bind(this));
         document.getElementsByClassName('volume-scale-back')[0].addEventListener('mousedown', this.volumeMouseDown.bind(this));
-        // Как это обойти?
-        document.getElementsByClassName('volume-scale-back')[0].onmouseup = (event) => {
-            this.volumeMouseUp(event);
-        }
+        document.getElementsByClassName('volume-scale-back')[0].onmouseup = (event) => this.volumeMouseUp(event);
         document.getElementsByClassName('volume-scale-front')[0].addEventListener('mousedown', this.volumeMouseDown.bind(this));
-        // Как это обойти?
-        document.getElementsByClassName('volume-scale-front')[0].onmouseup = (event) => {
-            this.volumeMouseUp(event);
-        }
-        // Как это обойти?
-        document.getElementsByClassName('volume-scale-back')[0].onclick = (event) => {
-            this.volumeScaleClick(event);
-        };
-        // Как это обойти?
-        document.getElementsByClassName('volume-scale-front')[0].onclick = (event) => {
-            this.volumeScaleClick(event);
-        };
-        // Как это обойти?
-        document.getElementsByClassName('volume-scale-back')[0].onmousemove = (event) => {
-            this.volumeMouseMove(event);
-        };
-        // Как это обойти?
-        document.getElementsByClassName('volume-scale-front')[0].onmousemove = (event) => {
-            this.volumeMouseMove(event);
-        };
+        document.getElementsByClassName('volume-scale-front')[0].onmouseup = (event) => this.volumeMouseUp(event);
+        document.getElementsByClassName('volume-scale-back')[0].onclick = (event) => this.volumeScaleClick(event);
+        document.getElementsByClassName('volume-scale-front')[0].onclick = (event) => this.volumeScaleClick(event);
+        document.getElementsByClassName('volume-scale-back')[0].onmousemove = (event) => this.volumeMouseMove(event);
+        document.getElementsByClassName('volume-scale-front')[0].onmousemove = (event) => this.volumeMouseMove(event);
+        window.onwheel = (event) => this.trackListWheel(event);
         //this.elements.addButtons.addEventListener();
         //this.elements.deleteButtons.addEventListener();
     }
@@ -295,6 +260,27 @@ export class PlayerView {
             this.eventBus.emit('unmute', {});
         } else {
             this.eventBus.emit('mute', {});
+        }
+    }
+    trackListWheel(event) {
+        const delta = event.deltaY;
+        const trackList = document.getElementsByClassName('track-list')[0];
+        if (event.clientX > trackList.getBoundingClientRect().x &&
+            event.clientX < trackList.getBoundingClientRect().x + trackList.getBoundingClientRect().width &&
+            event.clientY > trackList.getBoundingClientRect().y &&
+            event.clientY < trackList.getBoundingClientRect().y + trackList.getBoundingClientRect().height
+        ){
+            event.preventDefault();
+            const top = parseInt(trackList.style.top.slice(0, trackList.style.top.length - 2));
+            if (delta > 0 && trackList.getClientRects()[0].y + trackList.getClientRects()[0].height > document.documentElement.clientHeight ||
+                delta < 0 && top < 0
+            ){
+                if (delta > 0 && top - delta / 8 > 0) {
+                    trackList.style.top = '0';
+                } else {
+                    trackList.style.top = (top - delta / 6).toString() + 'px';
+                }
+            }
         }
     }
 
