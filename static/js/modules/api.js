@@ -62,7 +62,7 @@ export class Api {
      * @returns {Promise<Response>}
      */
     static profileEditFetch(name, email, password, newPassword) {
-        return patchFetch('/profile/settings', {
+        return putFetch('/profile/settings', {
             name,
             email,
             password,

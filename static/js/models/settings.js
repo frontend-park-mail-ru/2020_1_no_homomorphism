@@ -55,6 +55,12 @@ export class SettingsModel {
                 email: resEmail,
             });
         }
-        this.eventBus.emit('redirect to profile', {});
+        Api.profileEditFetch(values.name, values.email, values.password, values.newPassword)
+        .then(response => response.text())
+        .then(answer => {
+            const status = JSON.parse(answer);
+            console.log(status);
+            //this.eventBus.emit('redirect to profile', {});
+        });
     }
 }
