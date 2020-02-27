@@ -32,7 +32,7 @@ export class SignupModel {
             console.log(resPassword);
             this.eventBus.emit('lol', {password: resPassword});
         } else {
-        Api.signupFetch(values.name, values.login, values.email, values.password)
+        Api.signupFetch(values.name, values.login, '' , values.email, values.password)
             .then((res) => {
                 if (res.ok) {
                     this.eventBus.emit('redirect to main', {})

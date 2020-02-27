@@ -33,13 +33,15 @@ export class Api {
      * @param {string} sex
      * @param {string} email
      * @param {string} password
+     * @param {string} image
      * @returns {Promise<Response>}
      */
-    static signupFetch(name, login, email, password) {
+    static signupFetch(name = '', login, sex = '', email = '', password ) {
         //console.log('SIGNUP FETCH');
         return postFetch('/signup', {
             'name': name,
             'login': login,
+            'sex': '',
             'email': email,
             'password': password,
         }).catch(error => console.error(error))
