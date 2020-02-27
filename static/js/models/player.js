@@ -65,11 +65,10 @@ export class PlayerModel {
         Api.trackFetch('12345')
         .then((res) => {
             if (res.ok) {
-                JSON.stringify(res).then(track => {
-                    document.getElementsByTagName('audio')[0].children[0].src = track.link;
-                    document.getElementsByTagName('audio')[0].load();
-                    this.eventBus.emit('track update', track);
-                });
+                const track = JSON.parse(res);
+                document.getElementsByTagName('audio')[0].children[0].src = track.link;
+                document.getElementsByTagName('audio')[0].load();
+                this.eventBus.emit('track update', track);
             }
         });
         // document.getElementsByTagName('audio')[0].children[0].src = this.data.playlist[this.data.queue[this.data.current]].src;
