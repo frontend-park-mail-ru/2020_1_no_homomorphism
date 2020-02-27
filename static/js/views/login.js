@@ -5,7 +5,7 @@ export class LoginView {
 
     render(root) {
         console.log("MDA");
-        root.innerHTML = nunjucks.render('../../../views/login.njk');
+        root.innerHTML = nunjucks.render('../../../views/login.njk') + root.innerHTML;
 
         document.addEventListener('click', (event) => {
             if (event.target.getAttribute('id') === 'submit-login') {

@@ -5,11 +5,10 @@ export class SignupView {
     }
 
     render(root) {
-        root.innerHTML = nunjucks.render('../../../views/signup.njk', {kek: 'topkek'});
+        root.innerHTML = nunjucks.render('../../../views/signup.njk') + root.innerHTML;
 
         console.log('RENDER');
         document.addEventListener('click', (event) => {
-            //console.log(event.target);
             console.log('COME CLICK');
             console.log(event.target.getAttribute('id'));
             if (event.target.getAttribute('id') === 'submit') {

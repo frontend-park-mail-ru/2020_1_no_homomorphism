@@ -55,12 +55,7 @@ export class Router {
         }
         this.curPath = newPath;
         window.history.replaceState('', {}, newPath);
-        if (newPath === '/player') {
-            this.views['/player'].render(this.root, 'main');
-        } else {
-            this.views[newPath].render(this.root);
-            this.views['/player'].render(this.root, 'additional');
-        }
+        this.views[newPath].render(this.root);
     }
     /**
      * Добавление EventListener'a

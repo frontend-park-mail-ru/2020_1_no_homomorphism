@@ -22,4 +22,5 @@ window.addEventListener('DOMContentLoaded', () => {
     router.addView('/profile', profileController.view);
     router.addView('/settings', settingsController.view);
     router.start();
+    playerController.view.render()
 });

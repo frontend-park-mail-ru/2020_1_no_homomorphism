@@ -24,19 +24,10 @@ export class PlayerView {
         document.getElementById('logout-button').addEventListener('click', () => this.eventBus.emit('logout', {}));
     }
 
-    render(root, mode) {
-        this.mode = mode;
+    render() {
         const body = document.getElementsByTagName('body')[0];
-        let left;
-        switch (mode) {
-            case 'additional':
-                root.innerHTML += nunjucks.render('../../../views/templates/player.njk');
-                left = body.clientWidth - 13;
-                break;
-            case 'main':
-                root.innerHTML = nunjucks.render('../../../views/templates/player.njk');
-                left = body.clientWidth / 2 - 200;
-        }
+        //root.innerHTML += nunjucks.render('../../../views/templates/player.njk');
+        const left = body.clientWidth - 13;
         this.eventBus.emit('init', {});
         const navbar = document.getElementsByClassName('navbar')[0];
         let top = 0;
