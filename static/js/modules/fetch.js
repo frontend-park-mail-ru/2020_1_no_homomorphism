@@ -72,7 +72,7 @@ export let putFetch = (path = '/', body = {}) => {
     //}).then(response => response.json());
 };
 /**
- * PUT IMAGE
+ * POST IMAGE
  * @static
  * @param {string} path
  * @param {Object} body
@@ -80,7 +80,7 @@ export let putFetch = (path = '/', body = {}) => {
  */
 export let putImageFetch = (path = '/image', body = {}) => {
     return fetch(getServerPath + path, {
-        method: 'PUT',
+        method: 'POST',
         mode: 'cors',
         credentials: 'include',
         headers: {
