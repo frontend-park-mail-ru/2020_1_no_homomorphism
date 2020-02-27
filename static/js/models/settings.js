@@ -25,21 +25,19 @@ export class SettingsModel {
             })
     }
 
-    resetAvatar(avatar) {
-        if (avatar.size > 2 * 1024 * 1024) {
-            console.log('WRONG FORMAT')
-        } else {
-            console.log('CAME TO ADD');
-            const fileAttach = document.getElementById('avatar-upload');
-            const fData = new FormData();
-            fData.append('profile_image', fileAttach.files[0]);
-            Api.profilePhotoFetch()
-                .then((response) => {
-                    if (response.ok) {
-                        this.eventBus.emit('redirect to profile', {});
-                    }
-                });
-        }
+    resetAvatar() {
+
+        console.log('CAME TO ADD');
+        const fileAttach = document.getElementById('avatar-upload');
+        const fData = new FormData();
+        fData.append('profile_image', fileAttach.files[0]);
+        Api.profilePhotoFetch()
+            .then((response) => {
+                if (response.ok) {
+                    this.eventBus.emit('redirect to profile', {});
+                }
+            });
+
     }
 
     submit(values) {
