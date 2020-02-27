@@ -30,7 +30,7 @@ export class SettingsModel {
         console.log('CAME TO ADD');
         const fileAttach = document.getElementById('avatar-upload');
         const fData = new FormData();
-        fData.append('profile_image', fileAttach.files[0]);
+        fData.append('profile_image', fileAttach.files[0], 'kek.png');
         Api.profilePhotoFetch()
             .then((response) => {
                 if (response.ok) {
