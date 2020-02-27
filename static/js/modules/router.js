@@ -19,7 +19,7 @@ export class Router {
 
     /**
      * Добавление path с view
-     * @param {string} path
+     * @param {string} name
      * @param {Object} view
      * */
     addView(name, view) {

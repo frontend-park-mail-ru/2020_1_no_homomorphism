@@ -12,17 +12,21 @@ export class LoginView {
         console.log(form.nodeType);
         console.log(form.on);
 
-        form.addEventListener('click', () => {
-            console.log("EVENT LISTENER");
-            //event.preventDefault();
-            this.submit.bind(this);
-        }, false);
-
-        form.addEventListener('submit', (event) => {
-            console.log("EVENT LISTENER");
-            event.preventDefault();
-            this.submit.bind(this);
-        }, false);
+        document.addEventListener('click', (event) => {
+            //console.log(event.target);
+            if (event.target.getAttribute('id') === 'submit-login') {
+                console.log("TOUCHED");
+                event.preventDefault();
+                this.submit.bind(this);
+                this.submit();
+                console.log("TOUCHED2");
+            }
+            /*if (event. === 'submit-login'){
+                console.log("TOUCHED");
+                event.preventDefault();
+                this.submit.bind(this);
+            }*/
+        });
         console.log("DIE");
         /*
         document.getElementById('submit').onsubmit = (event) => {

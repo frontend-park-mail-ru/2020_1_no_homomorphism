@@ -36,6 +36,7 @@ export class Api {
      * @returns {Promise<Response>}
      */
     static signupFetch(name, login, email, password) {
+        console.log('SIGNUP FETCH');
         return postFetch('/signup', {
             name,
             login,

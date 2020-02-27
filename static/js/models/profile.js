@@ -19,7 +19,9 @@ export class ProfileModel {
                 console.log("API");
                 if (res === undefined){
                     //return
-                    this.eventBus.emit('invalid', 'Ошибка загрузки профиля');
+                    console.log('EMPTY');
+                    this.eventBus.emit('redirect to main', 'Ошибка загрузки профиля');
+                    return
                 }
                 if (res.ok) {
                     res.json()

@@ -3,7 +3,7 @@
  * return {string}
  */
 const getServerPath = () => {
-    return '89.208.199.170:8082'
+    return 'http://89.208.199.170:8080'
 };
 /**
  * POST
@@ -12,6 +12,7 @@ const getServerPath = () => {
  * @param {Object} body
  * return {Promise<Response>}
  */
+
 export let postFetch = (path = '/', body = {}) => {
 
     return fetch(getServerPath() + path, {
@@ -33,10 +34,7 @@ export let postFetch = (path = '/', body = {}) => {
  * return {Promise<Response>}
  */
 export let getFetch = (path = '/', body = {}) => {
-    const apiUrl = new URL(path, '89.208.199.170:8082');
-    console.log("HREFFF");
-    console.log(apiUrl.href);
-    return fetch(apiUrl.href, {
+    return fetch('http://89.208.199.170:8082' + path, {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
@@ -50,7 +48,7 @@ export let getFetch = (path = '/', body = {}) => {
  * return {Promise<Response>}
  */
 export let deleteFetch = (path = '/') => {
-    return fetch(getServerPath() + path, {
+    return fetch('http://89.208.199.170:8082' + path, {
         method: 'DELETE',
         mode: 'cors',
         credentials: 'include',
@@ -72,7 +70,7 @@ export let putFetch = (path = '/', body = {}) => {
         headers: {
             'Content-Type': 'application/json; charset=utf-8'
         },
-        body: JSON.stringify(body),
+        body: JSON.parse(body),
     });
     //}).then(response => response.json());
 };
@@ -111,7 +109,7 @@ export let patchFetch = (path = '/', body = {}) => {
         headers: {
             'Content-Type': 'application/json; charset=utf-8'
         },
-        body: JSON.stringify(body),
+        body: JSON.parse(body),
     });
     //}).then(response => response.json());
 };
