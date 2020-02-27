@@ -2,7 +2,6 @@ export class SignupView {
     constructor(eventBus) {
         this.eventBus = eventBus;
         //this.submit = this.submit.bind(this);
-        document.getElementById('logout-button').addEventListener('click', () => this.eventBus.emit('logout', {}));
     }
 
     render(root) {

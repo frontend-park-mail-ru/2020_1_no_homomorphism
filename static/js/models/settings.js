@@ -6,10 +6,6 @@ export class SettingsModel {
         this.eventBus = eventBus;
     }
 
-    logout() {
-        Api.logoutFetch();
-    }
-
     getUserData() {
         Api.profileFetch()
         .then((res) => {

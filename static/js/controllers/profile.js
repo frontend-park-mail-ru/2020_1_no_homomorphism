@@ -14,7 +14,5 @@ export class ProfileController {
         this.eventBus.on('redirect to main', router.redirectToMain.bind(router));
         this.eventBus.on('no answer', router.redirectToMain.bind(router));
         //this.eventBus.on('no answer', nunjucks.render('error', {status: 'sosi', message: 'zhopy'}));
-
-        this.eventBus.on('logout', this.model.logout);
     }
 }

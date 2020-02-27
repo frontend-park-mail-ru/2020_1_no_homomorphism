@@ -8,7 +8,7 @@ export class PlayerController {
         this.model = new PlayerModel(this.eventBus);
         this.view = new PlayerView(this.eventBus);
         this.eventBus.on('redirect to main', router.redirectToMain);
-        
-        this.eventBus.on('logout', this.model.logout);
+
+        this.eventBus.on('logout', this.model.logout)
     }
 }
