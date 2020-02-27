@@ -5,7 +5,7 @@ export class SettingsView {
     }
 
     setEventListeners() {
-        const button = document.getElementById('submit');
+        const button = document.getElementById('avatar-settings');
         button.addEventListener('click', (event) => {
             console.log("TOUCHED");
             event.preventDefault();
