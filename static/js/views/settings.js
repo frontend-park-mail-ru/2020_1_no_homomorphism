@@ -14,6 +14,7 @@ export class SettingsView {
         });
         const fileAttach = document.getElementById('avatar-upload');
         fileAttach.addEventListener('change', () => {
+            console.log('CATCH TOUCH');
             this.eventBus.emit('avatar upload');
         });
     }
@@ -34,13 +35,7 @@ export class SettingsView {
     }
 
     submit() {
-        let avatar = null;
-        if (this.imageUploaded) {
-            const fileAttach = document.getElementById('avatar-upload');
-            avatar = fileAttach.files[0]
-        }
         this.eventBus.emit('submit', {
-            avatar: avatar,
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
             newPassword: document.getElementById('newPassword').value,
