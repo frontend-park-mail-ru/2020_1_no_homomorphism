@@ -3,7 +3,7 @@ export class PlayerModel {
         this.eventBus = eventBus;
         this.data = {
             current   : 0,
-            queue     : [0, 1, 2, 3, 4],
+            queue     : [0, 1, 2, 3, 4, 5],
             playlist  : [
                 {
                     cover : 'static/img/new_empire_vol1.jpg',
@@ -35,6 +35,12 @@ export class PlayerModel {
                     title : 'Самый лучший эмо панк',
                     src : 'https://ns1.topzaycevs.ru/files/dl/Poshlaya_Molli_-_Samiiy_luchshiy_emo_pank.mp3',
                     duration : 208.718367,
+                },{
+                    cover : 'static/img/rocket.svg',
+                    artist : 'Стас',
+                    title : 'Крокодил',
+                    src : 'https://dl1.mp3party.net/online/8650950.mp3',
+                    duration : 40.045714,
                 },
             ],
             playing   : false,
