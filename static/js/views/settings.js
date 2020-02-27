@@ -15,7 +15,7 @@ export class SettingsView {
         const fileAttach = document.getElementById('avatar-upload');
         fileAttach.addEventListener('change', () => {
             console.log('CATCH TOUCH');
-            this.eventBus.emit('avatar upload');
+            this.eventBus.emit('avatar upload', {});
         });
     }
 
