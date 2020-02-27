@@ -9,13 +9,13 @@ import {postFetch, getFetch, deleteFetch, patchFetch, putFetch, putImageFetch} f
 export class Api {
     /**
      * Логин вход
-     * @param {string} email
+     * @param {string} login
      * @param {string} password
      * @returns {Promise<Response>}
      */
-    static loginFetch(email, password) {
+    static loginFetch(login, password) {
         return postFetch('/login', {
-            email,
+            login,
             password,
         }).catch(error => console.error(error))
     }

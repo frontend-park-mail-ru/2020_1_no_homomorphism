@@ -25,14 +25,15 @@ export class LoginModel {
             Api.loginFetch(values.login, values.password)
                 .then((res)=> {
                     if (res === undefined){
-                        //return
-                        console.log('EMPTY');
+                        console.log('-----Server error');
                         this.eventBus.emit('redirect to main', 'Ошибка загрузки логина');
                         return
                     }
                     if (res.ok) {
+                        console.log('-----SUCCESS');
                         this.eventBus.emit('redirect to main', 'Успешный вход');
                     } else {
+                        console.log('-----ENTRY ERROR');
                         this.eventBus.emit('invalid', 'Ошибка входа!')
                     }
                 })
