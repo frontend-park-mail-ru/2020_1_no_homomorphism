@@ -24,9 +24,4 @@ export class ProfileModel {
         })
 
     }
-
-    /*getUserData() {
-        ...
-        return data;
-    }*/
 }
