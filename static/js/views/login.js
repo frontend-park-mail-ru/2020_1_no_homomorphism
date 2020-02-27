@@ -17,8 +17,8 @@ export class LoginView {
             if (event.target.getAttribute('id') === 'submit-login') {
                 console.log("TOUCHED");
                 event.preventDefault();
-                this.submit.bind(this);
-                //this.submit();
+                //this.submit.bind(this);
+                this.submit();
                 console.log("TOUCHED2");
             }
             /*if (event. === 'submit-login'){
