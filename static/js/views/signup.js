@@ -33,4 +33,11 @@ export class SignupView {
             passwordConfirm: document.getElementById('password-confirm').value,
         });
     }
+
+    hideLoginShowLogout() {
+        document.getElementById('login-link').style.visibility = 'hidden';
+        document.getElementById('signup-link').style.visibility = 'hidden';
+        document.getElementById('logout-button').style.visibility = 'visible';
+        this.eventBus.emit('redirect to main', 'Успешная регистрация')
+    }
 }

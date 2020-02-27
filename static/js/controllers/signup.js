@@ -12,5 +12,6 @@ export class SignupController {
         this.eventBus.on('lol', this.view.showErrors);
         //this.eventBus.on('invalid', router.redirectToMain);
         this.eventBus.on('redirect to main', router.redirectToMain.bind(router));
+        this.eventBus.on('hide login, show logout', this.view.hideLoginShowLogout);
     }
 }

@@ -9,10 +9,4 @@ export class ProfileView {
         });
         this.eventBus.emit('get user data', {}); // load profile
     }
-    /*showProfile(data) {
-        document.getElementById('avatar').src = data.avatar;
-        document.getElementById('login').value = data.login;
-        document.getElementById('name').value = data.name;
-        document.getElementById('email').value = data.email;
-    }*/
 }
