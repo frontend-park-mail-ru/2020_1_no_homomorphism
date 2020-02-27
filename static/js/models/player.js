@@ -28,14 +28,14 @@ export class PlayerModel {
     }
 
     getFirst() {
-        Api.trackFetch('12345')
+        Api.trackFetch('12344')
         .then(response => response.text())
         .then(data => {
             const track = JSON.parse(data);
             document.getElementsByTagName('audio')[0].children[0].src = track.link;
             document.getElementsByTagName('audio')[0].load();
             this.eventBus.emit('track update', track);
-            this.data.playlist = [track];
+            this.data.playlist[0] = track;
         });
         console.log(this.data.playlist);
     }
