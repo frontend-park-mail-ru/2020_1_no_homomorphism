@@ -22,7 +22,7 @@ export class SettingsModel {
                 res.text()
                 .then((data) => {
                     //this.eventBus.emit('show profile settings', data);
-                    this.eventBus.emit('user data', data);
+                    this.eventBus.emit('user data', JSON.parse(data));
                 })
             } else {
                 this.eventBus.emit('invalid', 'Ошибка загрузки профиля')
