@@ -5,10 +5,10 @@ export class SettingsView {
 
     setEventListeners(){
         const button = document.getElementById('submit');
-        button.addEventListener('click', this.submit);
+        button.addEventListener('click', this.submit.bind(this));
 
         const buttonAvatar = document.getElementById('avatar-upload');
-        buttonAvatar.addEventListener('change', this.avatarUpload);
+        buttonAvatar.addEventListener('change', this.avatarUpload.bind(this));
     }
 
     showProfile(data) {
@@ -22,14 +22,13 @@ export class SettingsView {
         }
     }
     render(root) {
-
         this.eventBus.on('user data', (data) => {
             root.innerHTML = nunjucks.render('../../../views/settings.njk', data);
+            this.setEventListeners();
         });
-        this.setEventListeners();
         this.eventBus.emit('get user data', {});
-        document.getElementById('submit').addEventListener('click', this.submit);
-        document.getElementById('avatar-upload').addEventListener('change', this.avatarUpload);
+        //document.getElementById('submit').addEventListener('click', this.submit.bind(this));
+        //document.getElementById('avatar-upload').addEventListener('change', this.avatarUpload);
         //document.getElementById('add-outer').addEventListener('click', this.addOuterClick);
     }
 
