@@ -41,7 +41,7 @@ export class SettingsModel {
         const resPassword = validation.validationPassword(values.newPassword, values.newPasswordConfirm);
         const resEmail = validation.validationEmail(values.email);
 
-        if (resPassword !== '') {
+        if (values.newPassword !== '' && resPassword !== '') {
             this.eventBus.emit('invalid', {
                 newPassword: resPassword,
             });
