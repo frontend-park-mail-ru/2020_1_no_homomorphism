@@ -17,5 +17,7 @@ export class SettingsController {
         //this.eventBus.on('add outer', this.model.addOuter.bind(this.model));
         this.eventBus.on('redirect to main', router.redirectToMain.bind(router));
         this.eventBus.on('redirect to profile', router.redirectToProfile.bind(router));
+
+        this.eventBus.on('logout', this.model.logout);
     }
 }

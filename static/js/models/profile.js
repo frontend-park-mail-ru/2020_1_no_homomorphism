@@ -6,6 +6,10 @@ export class ProfileModel {
         this.eventBus.on('get user data', this.getUserData.bind(this));
     }
 
+    logout() {
+        Api.logoutFetch();
+    }
+
     getUserData() {
         Api.profileFetch()
         .then((res) => {

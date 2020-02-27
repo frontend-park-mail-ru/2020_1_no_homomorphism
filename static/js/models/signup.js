@@ -6,6 +6,10 @@ export class SignupModel {
         this.eventBus = eventBus;
     }
 
+    logout() {
+        Api.logoutFetch();
+    }
+
     submit(values) {
         const validation = new Validation;
 

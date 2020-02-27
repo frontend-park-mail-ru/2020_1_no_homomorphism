@@ -15,6 +15,10 @@ export class LoginModel {
         //this.eventBus.on('remember changed', this.changeRemember);
     }
 
+    logout() {
+        Api.logoutFetch();
+    }
+
     submit(values) {
         if (values.login.empty) {
             this.eventBus.emit('invalid', 'Введите логин/email!')

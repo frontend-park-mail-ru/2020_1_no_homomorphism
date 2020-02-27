@@ -12,5 +12,7 @@ export class LoginController {
         this.eventBus.on('remember changed', this.model.changeRemember);
         this.eventBus.on('invalid', this.view.showErrors);
         this.eventBus.on('redirect to main', router.redirectToMain.bind(router));
+        
+        this.eventBus.on('logout', this.model.logout);
     }
 }

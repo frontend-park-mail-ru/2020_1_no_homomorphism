@@ -27,6 +27,10 @@ export class PlayerModel {
         //this.eventBus.on('volume down', this.volumeDown);
     }
 
+    logout() {
+        Api.logoutFetch();
+    }
+
     getFirst() {
         Api.trackFetch('12344')
         .then(response => response.text())

@@ -1,6 +1,7 @@
 export class ProfileView {
     constructor(eventBus) {
         this.eventBus = eventBus;
+        document.getElementById('logout-button').addEventListner('click', this.eventBus.emit('logout', {}));
     }
 
     render(root) {
@@ -9,10 +10,4 @@ export class ProfileView {
         });
         this.eventBus.emit('get user data', {}); // load profile
     }
-    /*showProfile(data) {
-        document.getElementById('avatar').src = data.avatar;
-        document.getElementById('login').value = data.login;
-        document.getElementById('name').value = data.name;
-        document.getElementById('email').value = data.email;
-    }*/
 }
