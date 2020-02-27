@@ -31,7 +31,7 @@ export class LoginModel {
                     }
                     if (res.ok) {
                         console.log('-----SUCCESS');
-                        this.eventBus.emit('redirect to main', 'Успешный вход');
+                        this.eventBus.emit('hide login, show logout', {});
                     } else {
                         console.log('-----ENTRY ERROR');
                         this.eventBus.emit('invalid', 'Ошибка входа!')

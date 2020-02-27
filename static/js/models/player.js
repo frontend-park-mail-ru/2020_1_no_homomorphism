@@ -29,10 +29,13 @@ export class PlayerModel {
 
     logout() {
         Api.logoutFetch();
+        document.getElementById('login-link').style.visibility = 'visible';
+        document.getElementById('signup-link').style.visibility = 'visible';
+        document.getElementById('logout-button').style.visibility = 'hidden';
     }
 
     getFirst() {
-        Api.trackFetch('12344')
+        Api.trackFetch('12345')
         .then(response => response.text())
         .then(data => {
             const track = JSON.parse(data);

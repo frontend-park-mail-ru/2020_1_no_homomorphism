@@ -33,7 +33,7 @@ export class SignupModel {
             Api.signupFetch(values.name, values.login, values.email, values.password)
                 .then((res) => {
                     if (res.ok) {
-                        this.eventBus.emit('redirect to main', 'Успешная регистрация')
+                        this.eventBus.emit('hide login, show logout', {});
                     } else {
                         this.eventBus.emit('invalid', 'Проблемы с регистарцией')
                     }
