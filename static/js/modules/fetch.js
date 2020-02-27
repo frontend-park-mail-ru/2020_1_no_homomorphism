@@ -33,10 +33,11 @@ export let postFetch = (path = '/', body = {}) => {
  * return {Promise<Response>}
  */
 export let getFetch = (path = '/', body = {}) => {
-    const apiUrl = new URL(path, '89.208.199.170:8082');
+    //const apiUrl = new URL(path, '89.208.199.170:8082');
     console.log("HREFFF");
-    console.log(apiUrl.href);
-    return fetch(apiUrl.href, {
+    //console.log(apiUrl.href);
+    return fetch('http://89.208.199.170:8081' + path, {
+    //return fetch(apiUrl.href, {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
