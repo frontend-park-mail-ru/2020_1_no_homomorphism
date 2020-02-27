@@ -5,40 +5,6 @@ export class PlayerModel {
         this.eventBus = eventBus;
         this.data = {
             current   : 0,
-            queue     : [0, 1, 2, 3, 4],
-            playlist  : [
-                {
-                    cover : 'static/img/new_empire_vol1.jpg',
-                    artist : 'DJ Epoxxin',
-                    title : 'New year dubstep minimix',
-                    src : 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/9473/new_year_dubstep_minimix.ogg',
-                    duration : 123,
-                },{
-                    cover : 'static/img/vk.jpg',
-                    artist : 'Dillon',
-                    title : 'Thirteen thirtyfive',
-                    src : 'http://beloweb.ru/audio/dillon_-_thirteen_thirtyfive_.mp3',
-                    duration : 223.190204,
-                },{
-                    cover : 'static/img/mm.png',
-                    artist : 'Любе',
-                    title : 'Синие море',
-                    src : 'https://starper55plys.ru/wp-content/audio/lybe1.mp3',
-                    duration : 229.411929,
-                },{
-                    cover : 'static/img/ok.png',
-                    artist : 'Пчеловод',
-                    title : 'Пчела',
-                    src : 'https://dl2.mp3party.net/online/8905454.mp3',
-                    duration : 170.266122,
-                },{
-                    cover : 'static/img/HU.jpeg',
-                    artist : 'Пошлая Молли',
-                    title : 'Самый лучший эмо панк',
-                    src : 'https://ns1.topzaycevs.ru/files/dl/Poshlaya_Molli_-_Samiiy_luchshiy_emo_pank.mp3',
-                    duration : 208.718367,
-                },
-            ],
             playing   : false,
             shuffle   : false,
             repeat    : false,
@@ -69,7 +35,9 @@ export class PlayerModel {
             document.getElementsByTagName('audio')[0].children[0].src = track.link;
             document.getElementsByTagName('audio')[0].load();
             this.eventBus.emit('track update', track);
+            this.data.playlist = [track];
         });
+        console.log(this.data.playlist);
     }
     pause() {
         document.getElementsByTagName('audio')[0].pause();
