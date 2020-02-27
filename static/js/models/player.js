@@ -62,21 +62,14 @@ export class PlayerModel {
     }
 
     getFirst() {
-        Api.trackFetch('12345')
-        .then(response => response.json())
-        .then‌(data => { console.log(data); });
-        /*.then((res) => {
-            if (res.ok) {
-                console.log(res);
-                const track = JSON.parse(res);
-                document.getElementsByTagName('audio')[0].children[0].src = track.link;
-                document.getElementsByTagName('audio')[0].load();
-                this.eventBus.emit('track update', track);
-            }
-        });*/
-        // document.getElementsByTagName('audio')[0].children[0].src = this.data.playlist[this.data.queue[this.data.current]].src;
-        // document.getElementsByTagName('audio')[0].load();
-        // this.eventBus.emit('track update', this.data.playlist[this.data.queue[this.data.current]]);
+        Api.trackFetch('12344')
+        .then(response => response.text())
+        .then(data => {
+            const track = JSON.parse(data);
+            document.getElementsByTagName('audio')[0].children[0].src = track.link;
+            document.getElementsByTagName('audio')[0].load();
+            this.eventBus.emit('track update', track);
+        });
     }
     pause() {
         document.getElementsByTagName('audio')[0].pause();
