@@ -35,8 +35,8 @@ export class SettingsView {
     showSuccess() {}
 
     showErrors(errors) {
-        for (const key in errors) {
-            //this.elements.key.setCustomValidity(errors.key);
+        for (let key in errors) {
+            document.getElementById(key).setCustomValidity(errors.key);
         }
     }
 

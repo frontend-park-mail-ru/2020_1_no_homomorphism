@@ -47,22 +47,15 @@ export class SettingsModel {
 
     submit(values) {
         const validation = new Validation;
-        const resLogin = validation.validationLogin(values.login);
-        const resPassword = validation.validationPassword(values.password, values.passwordConfirm);
+        const resPassword = validation.validationPassword(values.newPassword, values.newPasswordConfirm);
 
-        if (resLogin !== '') {
+        if (resPassword !== '') {
             this.eventBus.emit('invalid', {
-                login: resLogin,
-            })
-        } else if (resPassword !== '') {
-            this.eventBus.emit('invalid', {
-                // Ты же понимаешь, что эти ошибки будут приписаны логину?
-                login: resPassword,
+                newPassword: resPassword,
             })
         } else if (!values.email.empty()) {
             this.eventBus.emit('invalid', {
-                // Ты же понимаешь, что эти ошибки будут приписаны логину?
-                login: 'Менять email низя',
+                email: 'Менять email низя',
             })
         }
 
