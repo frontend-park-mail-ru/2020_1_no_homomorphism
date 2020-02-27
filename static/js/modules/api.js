@@ -49,7 +49,7 @@ export class Api {
      * @returns {Promise<Response>}
      */
     static profileFetch() {
-        return getFetch('/profile').catch(error => console.error(error))
+        return getFetch('/profile/me').catch(error => console.error(error))
     }
     /**
      * Профиль настройка

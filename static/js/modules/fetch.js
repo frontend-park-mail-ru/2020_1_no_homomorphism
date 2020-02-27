@@ -12,7 +12,8 @@ const getServerPath = 'http://89.208.199.170:8081';
  */
 
 export let postFetch = (path = '/', body = {}) => {
-    return fetch(getServerPath() + path, {
+    console.log(JSON.stringify(body));
+    return fetch(getServerPath + path, {
         method: 'POST',
         mode: 'cors', // no-cors, cors, *same-origin (последнее - значение оп умолчанию)
         credentials: 'include', // include, *same-origin, omit (относится к кукам)
