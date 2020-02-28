@@ -22,6 +22,7 @@ export class LoginView {
     }
 
     showErrors(errors) {
+        console.log('LOGIN ERROR');
         for (const key in errors) {
             document.getElementById(key).setCustomValidity(errors.key);
         }

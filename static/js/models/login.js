@@ -14,7 +14,6 @@ export class LoginModel {
         } else if (values.password.empty) {
             this.eventBus.emit('invalid', 'Введите пароль!')
         } else {
-            console.log('LOGIN');
             Api.loginFetch(values.login, values.password)
                 .then((res)=> {
                     if (res === undefined){
@@ -23,16 +22,17 @@ export class LoginModel {
                         return
                     }
                     if (res.ok) {
-                        console.log('-----SUCCESS');
+                        console.log('SUCCESS');
                         this.eventBus.emit('hide login, show logout', {});
+                        console.log('REDIRECT');
+                        this.eventBus.emit('redirect to main', {});
                     } else {
-                        console.log('-----ENTRY ERROR');
+                        console.log('ENTRY ERROR');
                         this.eventBus.emit('invalid', 'Ошибка входа!')
                     }
                 })
         }
-        console.log('REDIRECT');
-        this.eventBus.emit('redirect to main', {});
+
     }
 
     /*changeRemember(state) {
