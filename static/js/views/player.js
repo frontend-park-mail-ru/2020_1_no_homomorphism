@@ -28,11 +28,13 @@ export class PlayerView {
         document.getElementById('logout-button').addEventListener('click', () => this.eventBus.emit('logout', {}));
     }
 
+    load() {
+        this.eventBus.emit('init', {});
+        this.render();
+    }
     render() {
         const body = document.getElementsByTagName('body')[0];
-        //root.innerHTML += nunjucks.render('../../../views/templates/player.njk');
         const left = body.clientWidth - 13;
-        this.eventBus.emit('init', {});
         const navbar = document.getElementsByClassName('navbar')[0];
         let top = 0;
         let height = document.documentElement.clientHeight;

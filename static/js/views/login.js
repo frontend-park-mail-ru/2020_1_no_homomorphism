@@ -39,7 +39,7 @@ export class LoginView {
      */
     showErrors(errors) {
         for (key in errors) {
-            console.log();
+            console.log(key);
         }
         console.log('LOGIN ERROR');
     }

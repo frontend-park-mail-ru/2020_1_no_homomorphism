@@ -58,6 +58,7 @@ export class Router {
                     this.views['/'].render(this.root, false);
                 }
             });
+            this.view['/player'].move();
             return;
         }
         this.curPath = newPath;
@@ -71,6 +72,7 @@ export class Router {
                 this.views[newPath].render(this.root, false);
             }
         });
+        this.view['/player'].move();
     }
 
     /**
