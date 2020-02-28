@@ -18,22 +18,6 @@ export class PlayerModel {
             shuffle  : false,
             repeat   : false,
         };
-
-        this.eventBus.on('init', this.getFirst.bind(this));
-        this.eventBus.on('pause', this.pause.bind(this));
-        this.eventBus.on('play', this.play.bind(this));
-        this.eventBus.on('prev', this.prev.bind(this));
-        this.eventBus.on('next', this.next.bind(this));
-        this.eventBus.on('rewind', this.rewind.bind(this));
-        this.eventBus.on('shuffle', this.shuffle.bind(this));
-        this.eventBus.on('unshuffle', this.unshuffle.bind(this));
-        this.eventBus.on('repeat', this.repeat.bind(this));
-        this.eventBus.on('repeat one', this.repeatOne.bind(this));
-        this.eventBus.on('unrepeat', this.unrepeat.bind(this));
-        this.eventBus.on('mute', this.mute.bind(this));
-        this.eventBus.on('unmute', this.unmute.bind(this));
-        //this.eventBus.on('volume up', this.volumeUp);
-        //this.eventBus.on('volume down', this.volumeDown);
     }
 
     /**

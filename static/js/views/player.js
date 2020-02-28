@@ -12,18 +12,6 @@ export class PlayerView {
         this.muted = false;
         this.volume = 1;
 
-        this.eventBus.on('draw play', this.drawPlay.bind(this));
-        this.eventBus.on('draw pause', this.drawPause.bind(this));
-        this.eventBus.on('track update', this.updateTrack.bind(this));
-        this.eventBus.on('draw tracklist', this.drawTracklist.bind(this));
-        this.eventBus.on('draw timeline', this.drawTimeline.bind(this));
-        this.eventBus.on('draw shuffle', this.drawShuffle.bind(this));
-        this.eventBus.on('draw unshuffle', this.drawUnshuffle.bind(this));
-        this.eventBus.on('draw repeat', this.drawRepeat.bind(this));
-        this.eventBus.on('draw repeat one', this.drawRepeatOne.bind(this));
-        this.eventBus.on('draw unrepeat', this.drawUnrepeat.bind(this));
-        this.eventBus.on('draw mute', this.drawMute.bind(this));
-        this.eventBus.on('draw unmute', this.drawUnmute.bind(this));
         document.getElementById('logout-button').addEventListener('click', () => this.eventBus.emit('logout', {}));
     }
 
@@ -50,6 +38,7 @@ export class PlayerView {
         this.drawVolume(document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().height * this.volume);
     }
     setEventListeners() {
+        window.addEventListener('resize', this.render.bind(this));
         window.addEventListener('mouseup', this.windowMouseUp.bind(this));
         document.getElementsByTagName('audio')[0].addEventListener('timeupdate', this.audioTimeUpdate.bind(this));
         document.getElementsByTagName('audio')[0].addEventListener('ended', this.audioEnded.bind(this));
