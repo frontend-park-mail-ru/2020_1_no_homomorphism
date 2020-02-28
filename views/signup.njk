@@ -1,55 +1,30 @@
-{% extends "base.njk" %}
-
-{% block additional_css %}
-<link rel="stylesheet" href="/css/signup.css">
-{% endblock %}
-
 {% block content %}
 <div class="row">
-    <div class="col">
-        <form class="sign-up-form">
+    <div class="col col-4"></div>
+    <div class="col col-4">
+        <form class="sign-up-form" onsubmit="return false;">
             <h2>Sign up</h2>
             <label>
                 Name
-                <input class="input-regular" type="text" name="name" value="" placeholder="John Smith" required>
+                <input class="input-regular" id="name" type="text" value="" placeholder="John Smith" required>
             </label>
             <label>
                 Login
-                <input class="input-regular" type="text" name="login" value="" placeholder="john99" required>
+                <input class="input-regular" id="login" type="text" value="" placeholder="john99" required>
             </label>
-            <h4>Sex:</h4>
-            <label class="signup-container">
-                Male
-                <input type="radio" checked="checked" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="signup-container">
-                Female
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="signup-container">
-                Other
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="block">
+            <label>
                 Email
-                <input class="input-regular" type="email" name="email" value="" placeholder="johnSmith@mail.ru" required>
+                <input class="input-regular" type="email" id="email" value="" placeholder="johnSmith@mail.ru" required>
             </label>
             <label>
                 Password
-                <input class="input-regular" type="password" name="pass" value="" required>
+                <input class="input-regular" type="password" id="password" value="" required>
             </label>
             <label>
                 Password Confirmation
-                <input class="input-regular" type="password" name="pass-confirm" value="" required>
+                <input class="input-regular" type="password" id="password-confirm" value="" required>
             </label>
-            <button class="button" type="submit">
-                <span>
-                    Go
-                </span>
-            </button>
+            <button class="button" type="submit" id="submit">Go</button>
         </form>
         <div class="div-center">
             <a class="tiny-ref" href="/login">
@@ -57,5 +32,6 @@
             </a>
         </div>
     </div>
+    <div class="col col-4"></div>
 </div>
 {% endblock %}

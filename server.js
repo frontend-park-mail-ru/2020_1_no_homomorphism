@@ -11,34 +11,14 @@ app.set('view engine', 'njk');
 
 app.use(favicon(path.join(__dirname, 'static', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(express.static(path.join(__dirname, 'static')));
+app.use(express.static(__dirname));
 nunjucks.configure('views', {
     autoescape: true,
     express: app
 });
 
 app.get('/', (req, res) => {
-    res.render('index');
-});
-
-app.get('/login', (req, res) => {
-    res.render('login');
-});
-
-app.get('/signup', (req, res) => {
-    res.render('signup')
-});
-
-app.get('/pleer', (req, res) => {
-    res.render('pleer');
-});
-
-app.get('/profile', (req, res) => {
-    res.render('profile');
-});
-
-app.get('/settings', (req, res) => {
-    res.render('settings')
+    res.render('templates/base');
 });
 
 // catch 404 and forward to error handler
@@ -49,7 +29,7 @@ app.use((req, res, next) => {
 });
 
 // error handler
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
