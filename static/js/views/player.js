@@ -11,7 +11,6 @@ export class PlayerView {
         this.repeatState = 0;
         this.muted = false;
         this.volume = 1;
-        this.mode = 'additional';
 
         this.eventBus.on('draw play', this.drawPlay.bind(this));
         this.eventBus.on('draw pause', this.drawPause.bind(this));
@@ -235,6 +234,7 @@ export class PlayerView {
     }
     volumeMouseUp(event) {
         this.volumeDrag = false;
+        this.muted = false;
         const height = document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().height - (event.clientY - document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().y);
         this.volume = height / document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().height;
         document.getElementsByTagName('audio')[0].volume = this.volume;
@@ -249,6 +249,7 @@ export class PlayerView {
         }
     }
     volumeScaleClick(event) {
+        this.muted = false;
         const height = document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().height - (event.clientY - document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().y);
         this.volume = height / document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().height;
         document.getElementsByTagName('audio')[0].volume = this.volume;
