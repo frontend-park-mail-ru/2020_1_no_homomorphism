@@ -79,17 +79,19 @@ export let putFetch = (path = '/', body = {}) => {
  * return {Promise<Response>}
  */
 export let postImageFetch = (path = '/image', body = {}) => {
-    console.log("File in post" + body.byteLength);
-    console.log("keklolatbidol");
+    let fileAttach = document.getElementById('avatar-upload');
+    let fData = new FormData();
+    fData.append('profile_image', fileAttach.files[0]);
+    console.log(fData.values());
     return fetch(getServerPath + path, {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',
-        headers: {
-            'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
-            'Content-Type': 'multipart/form-data'
-        },
-        body: body,
+        // headers: {
+        //     'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+        //     'Content-Type': 'multipart/form-data'
+        // },
+        body: fData,
     });
     //}).then(response => response.json());
 };
