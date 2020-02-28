@@ -2,7 +2,7 @@ export class LoginView {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.eventBus.on('invalid', this.showErrors);
-        this.eventBus.on('hide login, show logout', this.hideLoginShowLogout);
+        this.eventBus.on('hide login, show logout', this.hideLoginShowLogout.bind(this));
     }
 
     render(root) {

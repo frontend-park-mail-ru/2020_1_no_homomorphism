@@ -29,7 +29,7 @@ export class Router {
      * Редирект
      */
     redirectToMain() {
-        console.log("ROUTER");
+        console.log('REDIRECT TO MAIN');
         this.check('/');
     }
     redirectToProfile() {
