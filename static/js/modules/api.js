@@ -19,6 +19,7 @@ export class Api {
             'password': password,
         }).catch(error => console.error(error))
     }
+    
     /**
      * Логаут
      * @returns {Promise<Response>}
@@ -26,6 +27,7 @@ export class Api {
     static logoutFetch() {
         return deleteFetch('/logout').catch(error => console.error(error))
     }
+
     /**
      * Регистрация
      * @param {string} name
@@ -46,6 +48,7 @@ export class Api {
             'password': password,
         }).catch(error => console.error(error))
     }
+
     /**
      * Профиль просмотр
      * @returns {Promise<Response>}
@@ -53,6 +56,7 @@ export class Api {
     static profileFetch() {
         return getFetch('/profile/me').catch(error => console.error(error))
     }
+
     /**
      * Профиль настройка
      * @param {string} name
@@ -69,6 +73,7 @@ export class Api {
             newPassword,
         }).catch(error => console.error(error))
     }
+
     /**
      * Отправка фоточки
      * @param image
@@ -79,6 +84,7 @@ export class Api {
         return postImageFetch('/image', image)
             .catch(error => console.error(error))
     }
+
     /**
      * Получение плейлиста
      * @param {string} name
@@ -88,16 +94,17 @@ export class Api {
         return getFetch(`/player/${name}`)
             .catch(error => console.error(error))
     }
+
     /**
      * Проверка куки
-     * @param {string} name
      * @returns {Promise<Response>}
      */
-    static coockieFetch(name) {
+    static coockieFetch() {
         return getFetch(`/user`)
             .catch(error => console.error(error))
     }
-    /**gi
+
+    /**
      * Получение трека
      * @param {string} id
      * @returns {Promise<Response>}

@@ -1,8 +1,5 @@
-/**
- * Получение урла сервера
- * return {string}
- */
-const getServerPath = 'http://89.208.199.170:8081';
+const serverPath = 'http://89.208.199.170:8081';
+
 /**
  * POST
  * @static
@@ -10,9 +7,8 @@ const getServerPath = 'http://89.208.199.170:8081';
  * @param {Object} body
  * return {Promise<Response>}
  */
-
 export let postFetch = (path = '/', body = {}) => {
-    return fetch(getServerPath + path, {
+    return fetch(serverPath + path, {
         method: 'POST',
         mode: 'cors', // no-cors, cors, *same-origin (последнее - значение по умолчанию)
         credentials: 'include', // include, *same-origin, omit (относится к кукам)
@@ -21,8 +17,8 @@ export let postFetch = (path = '/', body = {}) => {
         },
         body: JSON.stringify(body),
     });
-    //}).then(response => response.json());
 };
+
 /**
  * GET
  * @static
@@ -31,13 +27,13 @@ export let postFetch = (path = '/', body = {}) => {
  * return {Promise<Response>}
  */
 export let getFetch = (path = '/', body = {}) => {
-    return fetch(getServerPath + path, {
+    return fetch(serverPath + path, {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
     });
-    //}).then(response => response.json());
 };
+
 /**
  * DELETE
  * @static
@@ -45,13 +41,13 @@ export let getFetch = (path = '/', body = {}) => {
  * return {Promise<Response>}
  */
 export let deleteFetch = (path = '/') => {
-    return fetch(getServerPath + path, {
+    return fetch(serverPath + path, {
         method: 'DELETE',
         mode: 'cors',
         credentials: 'include',
     });
-    //}).then(response => response.json());
 };
+
 /**
  * PUT
  * @static
@@ -60,7 +56,7 @@ export let deleteFetch = (path = '/') => {
  * return {Promise<Response>}
  */
 export let putFetch = (path = '/', body = {}) => {
-    return fetch(getServerPath + path, {
+    return fetch(serverPath + path, {
         method: 'PUT',
         mode: 'cors',
         credentials: 'include',
@@ -69,8 +65,8 @@ export let putFetch = (path = '/', body = {}) => {
         },
         body: JSON.stringify(body),
     });
-    //}).then(response => response.json());
 };
+
 /**
  * POST IMAGE
  * @static
@@ -79,14 +75,14 @@ export let putFetch = (path = '/', body = {}) => {
  * return {Promise<Response>}
  */
 export let postImageFetch = (path = '/image', body = {}) => {
-
-    return fetch(getServerPath + path, {
+    return fetch(serverPath + path, {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',
         body: body,
     });
 };
+
 /**
  * PATCH
  * @static
@@ -95,7 +91,7 @@ export let postImageFetch = (path = '/image', body = {}) => {
  * return {Promise<Response>}
  */
 export let patchFetch = (path = '/', body = {}) => {
-    return fetch(getServerPath + path, {
+    return fetch(serverPath + path, {
         method: 'PATCH',
         mode: 'cors',
         credentials: 'include',
@@ -104,5 +100,4 @@ export let patchFetch = (path = '/', body = {}) => {
         },
         body: JSON.stringify(body),
     });
-    //}).then(response => response.json());
 };

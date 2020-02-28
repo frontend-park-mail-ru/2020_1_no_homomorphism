@@ -5,10 +5,19 @@ export class LoginView {
         this.eventBus.on('hide login, show logout', this.hideLoginShowLogout.bind(this));
     }
 
-    render(root) {
-        console.log("MDA");
+    render(root, loggedIn) {
+        if (loggedIn) {
+            document.getElementById('profile-link').style.visibility = 'visible';
+            document.getElementById('logout-button').style.visibility = 'visible';
+            document.getElementById('signup-link').style.visibility = 'hidden';
+            document.getElementById('login-link').style.visibility = 'hidden';
+        } else {
+            document.getElementById('signup-link').style.visibility = 'visible';
+            document.getElementById('login-link').style.visibility = 'visible';
+            document.getElementById('profile-link').style.visibility = 'hidden';
+            document.getElementById('logout-button').style.visibility = 'hidden';
+        }
         root.innerHTML = nunjucks.render('../../../views/login.njk');
-
         document.addEventListener('click', (event) => {
             if (event.target.getAttribute('id') === 'submit-login') {
                 event.preventDefault();
