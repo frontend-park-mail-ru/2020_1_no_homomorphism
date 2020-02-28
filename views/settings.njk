@@ -3,15 +3,15 @@
     <div class="col col-1"></div>
     <div class="col col-3">
         <img alt="avatar" src="{{ image }}" class="avatar" id="avatar-settings">
-        <div class="row">
+        <form class="row">
             <input type="file" id="avatar-upload">
-        </div>
+        </form>
     </div>
     <div class="info col col-4">
         <div class="login row">
             {{ login }}
         </div>
-        <div calss="name row">
+        <div class="name row">
             <div class="col col-3">
                 <div class="profile-info">
                     Имя:
@@ -31,7 +31,7 @@
                 <input type="email" class="profile-content" id="email" value="{{ email }}">
             </div>
         </div>
-        <div calss="row">
+        <div class="row">
             <div class="col col-3">
                 <div class="profile-info">
                     Пароль:

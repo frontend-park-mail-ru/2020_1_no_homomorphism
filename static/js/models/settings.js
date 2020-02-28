@@ -6,6 +6,7 @@ export class SettingsModel {
         this.eventBus = eventBus;
         this.eventBus.on('avatar upload', this.resetAvatar.bind(this));
         //this.eventBus.on('add outer', this.addOuter.bind(this));
+        this.eventBus.on('redirect to profile', this.getUserData.bind(this));
         this.eventBus.on('submit', this.submit.bind(this));
         this.eventBus.on('get user data', this.getUserData.bind(this));
     }
@@ -29,9 +30,10 @@ export class SettingsModel {
 
         console.log('CAME TO ADD');
         const fileAttach = document.getElementById('avatar-upload');
+        console.log("File size:" + fileAttach.files[0].size);
         const fData = new FormData();
         fData.append('profile_image', fileAttach.files[0], 'kek.png');
-        Api.profilePhotoFetch()
+        Api.profilePhotoFetch(fData)
             .then((response) => {
                 if (response.ok) {
                     this.eventBus.emit('redirect to profile', {});
