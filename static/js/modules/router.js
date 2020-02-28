@@ -7,7 +7,7 @@ export class Router {
      * Конструктор
      * */
     constructor() {
-        this.root = document.getElementsByClassName('container')[0];
+        this.root = document.getElementsByClassName('container')[0].children[0];
         this.views = {};
     }
     /* *
@@ -30,12 +30,10 @@ export class Router {
      */
     redirectToMain() {
         console.log("ROUTER");
-        //this.views['/'].render(this.root);
         this.check('/');
     }
     redirectToProfile() {
         console.log("ROUTER");
-        //this.views['/'].render(this.root);
         this.check('/profile');
     }
     /**
@@ -76,5 +74,6 @@ export class Router {
         });
         console.log("ROUTER START 2");
         this.check(window.location.pathname);
+        this.views['/player'].setEventListeners();
     }
 }

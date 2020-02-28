@@ -43,6 +43,9 @@ export class PlayerView {
         document.getElementsByClassName('main-pos')[0].style.height = height.toString() + 'px';
         document.getElementsByClassName('player-trigger')[0].style.height = height.toString() + 'px';
         this.drawVolume(document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().height * this.volume);
+    }
+    setEventListeners() {
+        console.log('setting player event listeners');
         window.addEventListener('mouseup', this.windowMouseUp.bind(this));
         document.getElementsByTagName('audio')[0].addEventListener('timeupdate', this.audioTimeUpdate.bind(this));
         document.getElementsByTagName('audio')[0].addEventListener('ended', this.audioEnded.bind(this));

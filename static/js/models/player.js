@@ -46,7 +46,6 @@ export class PlayerModel {
             this.data.playlist.push(track);
             this.data.queue.push(this.data.playlist.length - 1);
             this.eventBus.emit('track update', track);
-            console.log(this.data.playlist);
         });
         for (let i = 12345; i < 12350; i++) {
             Api.trackFetch(i.toString())
@@ -55,7 +54,6 @@ export class PlayerModel {
                 const track = JSON.parse(data);
                 this.data.playlist.push(track);
                 this.data.queue.push(this.data.playlist.length - 1);
-                console.log(this.data.playlist);
             });
         }
     }
