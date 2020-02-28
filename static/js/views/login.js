@@ -27,12 +27,13 @@ export class LoginView {
     }
 
     showErrors(errors) {
+        for (key in errors) {
+            console.log();
+        }
         console.log('LOGIN ERROR');
     }
 
     submit() {
-        console.log("SUBMIT");
-        //event.preventDefault();
         this.eventBus.emit('submit', {
             login: document.getElementById('login').value,
             password: document.getElementById('password').value,

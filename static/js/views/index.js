@@ -2,7 +2,7 @@ export class IndexView {
     constructor(eventBus) {
         this.eventBus = eventBus;
     }
-    
+
     render(root, loggedIn) {
         if (loggedIn) {
             document.getElementById('profile-link').style.visibility = 'visible';
