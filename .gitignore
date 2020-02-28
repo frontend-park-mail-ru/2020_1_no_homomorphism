@@ -112,3 +112,5 @@ temp/
 .idea/
 
 views/*
+css/*
+img/*
