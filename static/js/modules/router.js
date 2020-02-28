@@ -57,8 +57,10 @@ export class Router {
                 } else {
                     this.views['/'].render(this.root, false);
                 }
-            });
-            this.view['/player'].move();
+            })
+	    .then(() => {
+                this.views['/player'].render();
+	    });
             return;
         }
         this.curPath = newPath;
@@ -71,8 +73,10 @@ export class Router {
             } else {
                 this.views[newPath].render(this.root, false);
             }
-        });
-        this.view['/player'].move();
+        })
+	.then(() => {
+            this.views['/player'].render();
+	});
     }
 
     /**
