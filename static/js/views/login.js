@@ -1,8 +1,15 @@
 export class LoginView {
+    /**
+     * @param eventBus {EventBus}
+     */
     constructor(eventBus) {
         this.eventBus = eventBus;
     }
 
+    /**
+     * рендерит страничку входа
+     * @param root
+     */
     render(root) {
         console.log("MDA");
         root.innerHTML = nunjucks.render('../../../views/login.njk');
@@ -19,12 +26,19 @@ export class LoginView {
         console.log("DIE");
     }
 
+    /**
+     * показывает какие поля неверно заполнены
+     * @param errors
+     */
     showErrors(errors) {
         for (const key in errors) {
             document.getElementById(key).setCustomValidity(errors.key);
         }
     }
 
+    /**
+     * отправляет данные формы
+     */
     submit() {
         console.log("SUBMIT");
         //event.preventDefault();
@@ -35,6 +49,9 @@ export class LoginView {
         });
     }
 
+    /**
+     * прячет кнопку логина и регистрации и показывает кнопку логаута
+     */
     hideLoginShowLogout() {
         document.getElementById('login-link').style.visibility = 'hidden';
         document.getElementById('signup-link').style.visibility = 'hidden';

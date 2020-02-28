@@ -1,11 +1,22 @@
 import {Validation} from '../modules/validation.js';
 import {Api} from "../modules/api.js";
 
+/**
+ * модель странички регистрации
+ */
 export class SignupModel {
+    /**
+     * конструктор
+     * @param eventBus {EventBus}
+     */
     constructor(eventBus) {
         this.eventBus = eventBus;
     }
 
+    /**
+     * отправляет форму с данными нового юзера
+     * @param values
+     */
     submit(values) {
         const validation = new Validation;
 

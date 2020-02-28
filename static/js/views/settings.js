@@ -1,9 +1,18 @@
+/**
+ * вью для настроек
+ */
 export class SettingsView {
+    /**
+     * @param eventBus {EventBus}
+     */
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.imageUploaded = false;
     }
 
+    /**
+     * слушатель событий для аватарки
+     */
     setEventListeners() {
         const button = document.getElementById('avatar-settings');
         button.addEventListener('click', (event) => {
@@ -19,7 +28,10 @@ export class SettingsView {
         });
     }
 
-
+    /**
+     * рендерит страничку профиля
+     * @param root
+     */
     render(root) {
         this.eventBus.on('user data', (data) => {
             root.innerHTML = nunjucks.render('../../../views/settings.njk', data);
@@ -28,12 +40,19 @@ export class SettingsView {
         this.eventBus.emit('get user data', {});
     }
 
+    /**
+     * показывает, какие поля формы заполнены неправильно
+     * @param errors
+     */
     showErrors(errors) {
         for (let key in errors) {
             document.getElementById(key).setCustomValidity(errors.key);
         }
     }
 
+    /**
+     * отправляет данные формы
+     */
     submit() {
         this.eventBus.emit('submit', {
             name: document.getElementById('name').value,
