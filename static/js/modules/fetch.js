@@ -79,10 +79,10 @@ export let putFetch = (path = '/', body = {}) => {
  * return {Promise<Response>}
  */
 export let postImageFetch = (path = '/image', body = {}) => {
-    let fileAttach = document.getElementById('avatar-upload');
-    let fData = new FormData();
-    fData.append('profile_image', fileAttach.files[0]);
-    console.log(fData.values());
+    // let fileAttach = document.getElementById('avatar-upload');
+    // let fData = new FormData();
+    // fData.append('profile_image', fileAttach.files[0]);
+    // console.log(fData.values());
     return fetch(getServerPath + path, {
         method: 'POST',
         mode: 'cors',
@@ -91,7 +91,7 @@ export let postImageFetch = (path = '/image', body = {}) => {
         //     'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
         //     'Content-Type': 'multipart/form-data'
         // },
-        body: fData,
+        body: body,
     });
     //}).then(response => response.json());
 };
