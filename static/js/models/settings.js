@@ -5,7 +5,6 @@ export class SettingsModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.eventBus.on('avatar upload', this.resetAvatar.bind(this));
-        //this.eventBus.on('add outer', this.addOuter.bind(this));
         this.eventBus.on('submit', this.submit.bind(this));
         this.eventBus.on('get user data', this.getUserData.bind(this));
     }
@@ -13,10 +12,11 @@ export class SettingsModel {
     getUserData() {
         Api.profileFetch()
             .then((res) => {
-                if (res.ok) {
+                if (res === undefined) {
+                    console.log('NO ANSWER FROM BACKEND');
+                } else if (res.ok) {
                     res.text()
                         .then((data) => {
-                            //this.eventBus.emit('show profile settings', data);
                             this.eventBus.emit('user data', JSON.parse(data));
                         })
                 } else {

@@ -2,23 +2,22 @@ export class SettingsView {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.imageUploaded = false;
+        this.eventBus.on('invalid', this.showErrors);
     }
 
     setEventListeners() {
-        const button = document.getElementById('avatar-settings');
+        const button = document.getElementById('submit-changes');
         button.addEventListener('click', (event) => {
-            console.log("TOUCHED");
             event.preventDefault();
-            this.submit.bind(this);
+            this.submit();
 
         });
         const fileAttach = document.getElementById('avatar-upload');
         fileAttach.addEventListener('change', () => {
-            console.log('CATCH TOUCH');
+            console.log('avatar-upload clicked');
             this.eventBus.emit('avatar upload', {});
         });
     }
-
 
     render(root) {
         this.eventBus.on('user data', (data) => {
@@ -30,11 +29,12 @@ export class SettingsView {
 
     showErrors(errors) {
         for (let key in errors) {
-            document.getElementById(key).setCustomValidity(errors.key);
+            console.log(errors.key);
         }
     }
 
     submit() {
+        console.log('submit-changes clicked');
         this.eventBus.emit('submit', {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,

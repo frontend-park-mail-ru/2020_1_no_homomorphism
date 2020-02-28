@@ -7,9 +7,6 @@ export class SignupController {
         this.eventBus = new EventBus();
         this.model = new SignupModel(this.eventBus);
         this.view = new SignupView(this.eventBus);
-
-
-        //this.eventBus.on('invalid', router.redirectToMain);
         this.eventBus.on('redirect to main', router.redirectToMain.bind(router));
     }
 }
