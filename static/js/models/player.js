@@ -56,6 +56,7 @@ export class PlayerModel {
                 this.data.queue.push(this.data.playlist.length - 1);
             });
         }
+        //this.eventBus.emit('draw tracklist', this.data.playlist);
     }
     pause() {
         document.getElementsByTagName('audio')[0].pause();

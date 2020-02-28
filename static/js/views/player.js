@@ -13,6 +13,7 @@ export class PlayerView {
         this.eventBus.on('draw play', this.drawPlay.bind(this));
         this.eventBus.on('draw pause', this.drawPause.bind(this));
         this.eventBus.on('track update', this.updateTrack.bind(this));
+        this.eventBus.on('draw tracklist', this.drawTracklist.bind(this));
         this.eventBus.on('draw timeline', this.drawTimeline.bind(this));
         this.eventBus.on('draw shuffle', this.drawShuffle.bind(this));
         this.eventBus.on('draw unshuffle', this.drawUnshuffle.bind(this));
@@ -45,7 +46,6 @@ export class PlayerView {
         this.drawVolume(document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().height * this.volume);
     }
     setEventListeners() {
-        console.log('setting player event listeners');
         window.addEventListener('mouseup', this.windowMouseUp.bind(this));
         document.getElementsByTagName('audio')[0].addEventListener('timeupdate', this.audioTimeUpdate.bind(this));
         document.getElementsByTagName('audio')[0].addEventListener('ended', this.audioEnded.bind(this));
@@ -294,6 +294,11 @@ export class PlayerView {
         const seconds = Math.floor(track.duration % 60);
         document.getElementsByClassName('duration')[0].innerHTML = minutes.toString() + ':' + (seconds < 10 ? '0' : '') + seconds.toString();
         document.getElementsByClassName('current-time')[0].innerHTML = '0:00';
+    }
+    drawTracklist(tracks) {
+        /*for (let track in tracks) {
+            this.document.getElementsByClassName('track-list')[0].innerHTML += nunjucks.render('../../../views/templates/track.njk', track);
+        }*/
     }
     drawTimeline(ratio) {
         const width = ratio * document.getElementsByClassName('timeline-back')[0].getBoundingClientRect().width;

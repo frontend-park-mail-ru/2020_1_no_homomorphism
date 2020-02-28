@@ -16,6 +16,10 @@
     text-align: left;
 }
 
+.main-pos .main-col {
+    width: 366px;
+}
+
 .patch {
     height: 1em;
     background: white;
