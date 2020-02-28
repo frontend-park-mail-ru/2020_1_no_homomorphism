@@ -2,6 +2,8 @@ export class SignupView {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.submit.bind(this);
+        this.eventBus.on('hide login, show logout', this.hideLoginShowLogout);
+        this.eventBus.on('invalid', this.showErrors);
     }
 
     render(root) {
@@ -9,12 +11,10 @@ export class SignupView {
 
         console.log('RENDER');
         document.addEventListener('click', (event) => {
-            console.log('COME CLICK');
             console.log(event.target.getAttribute('id'));
             if (event.target.getAttribute('id') === 'submit') {
-                console.log('WORK WITH CLICK');
                 event.preventDefault();
-                this.submit();
+                this.submit.bind(this);
             }
         })
     }
@@ -37,6 +37,5 @@ export class SignupView {
         document.getElementById('login-link').style.visibility = 'hidden';
         document.getElementById('signup-link').style.visibility = 'hidden';
         document.getElementById('logout-button').style.visibility = 'visible';
-        this.eventBus.emit('redirect to main', 'Успешная регистрация')
     }
 }

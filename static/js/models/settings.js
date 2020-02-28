@@ -26,7 +26,6 @@ export class SettingsModel {
     }
 
     resetAvatar() {
-
         console.log('CAME TO ADD');
         const fileAttach = document.getElementById('avatar-upload');
         const fData = new FormData();
@@ -60,8 +59,12 @@ export class SettingsModel {
             });
         }
         Api.profileEditFetch(values.name, values.email, values.password, values.newPassword)
-            .then((response) => {
-                if (response.ok) {
+            .then((res) => {
+                if (res === undefined) {
+                    console.log('NO ANSWER FROM BACKEND');
+                    return;
+                }
+                if (res.ok) {
                     this.eventBus.emit('redirect to profile', {});
                 }
             });

@@ -11,14 +11,10 @@ export class LoginView {
 
         document.addEventListener('click', (event) => {
             if (event.target.getAttribute('id') === 'submit-login') {
-                console.log("TOUCHED");
                 event.preventDefault();
-                //this.submit.bind(this);
                 this.submit();
-                console.log("TOUCHED2");
             }
         });
-        console.log("DIE");
     }
 
     showErrors(errors) {
@@ -31,7 +27,6 @@ export class LoginView {
         this.eventBus.emit('submit', {
             login: document.getElementById('login').value,
             password: document.getElementById('password').value,
-            //remember : document.getElementById('remember').checked,
         });
     }
 
