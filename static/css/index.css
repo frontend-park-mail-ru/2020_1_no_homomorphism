@@ -1,0 +1,54 @@
+.post {
+    margin: 1em 0;
+    padding: 1em;
+    background: white;
+    text-align: left;
+}
+
+.post .avatar {
+    height: 50px;
+    width: 50px;
+    border-radius: 100px;
+}
+
+.post .col {
+    text-align: left;
+}
+
+.post .name-row .col {
+    margin-bottom: 0;
+}
+
+.post .col-11 {
+    padding-left: 2.5%;
+}
+
+.post .name-row {
+    display: flex;
+    align-items: center;
+}
+
+.post .artist {
+    font-weight: bold;
+}
+
+.post .date {
+    color: silver;
+    font-size: 13px;
+}
+
+.post .release-image {
+    margin: 0.5em;
+    float: left;
+    height: 150px;
+    width: 150px;
+}
+
+.post .release-name {
+    font-weight: bolder;
+    font-size: 24px;
+}
+
+.post .release-description-p {
+    margin: 0.5em;
+}
