@@ -79,13 +79,16 @@ export let putFetch = (path = '/', body = {}) => {
  * return {Promise<Response>}
  */
 export let postImageFetch = (path = '/image', body = {}) => {
-    console.log("File in post" + body.toString());
+    console.log("File in post" + body.byteLength);
     console.log("keklolatbidol");
     return fetch(getServerPath + path, {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',
-        // headers: myHeaders,
+        headers: {
+            'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+            'Content-Type': 'multipart/form-data'
+        },
         body: body,
     });
     //}).then(response => response.json());
