@@ -10,7 +10,6 @@ export class SettingsView {
             console.log("TOUCHED");
             event.preventDefault();
             this.submit.bind(this);
-
         });
         const fileAttach = document.getElementById('avatar-upload');
         fileAttach.addEventListener('change', () => {
