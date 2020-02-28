@@ -15,7 +15,7 @@ export class SignupView {
             if (event.target.getAttribute('id') === 'submit') {
                 console.log('COME');
                 event.preventDefault();
-                this.submit.bind(this);
+                this.submit();
             }
         })
     }

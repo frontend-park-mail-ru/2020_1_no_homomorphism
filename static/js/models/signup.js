@@ -9,6 +9,7 @@ export class SignupModel {
 
     submit(values) {
         const validation = new Validation;
+
         const resLogin = validation.validationLogin(values.login);
         const resPassword = validation.validationPassword(values.password, values.passwordConfirm);
         const resEmail = validation.validationEmail(values.email);
