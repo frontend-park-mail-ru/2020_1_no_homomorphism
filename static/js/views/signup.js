@@ -1,4 +1,10 @@
+/**
+ * Вью для страницы регистрации
+ */
 export class SignupView {
+    /**
+     * @param eventBus {EventBus}
+     */
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.submit.bind(this);
@@ -6,6 +12,10 @@ export class SignupView {
         this.eventBus.on('invalid', this.showErrors);
     }
 
+    /**
+     * рендерит страничку регистрации
+     * @param root
+     */
     render(root) {
         root.innerHTML = nunjucks.render('../../../views/signup.njk');
 
@@ -20,10 +30,17 @@ export class SignupView {
         })
     }
 
+    /**
+     * показывает, что поля были заполнены неправильно
+     * @param error
+     */
     showErrors(error) {
         console.log('INPUT ERROR ');
     }
 
+    /**
+     * отправляет данные формы
+     */
     submit() {
         console.log('SUBMIT');
         this.eventBus.emit('submit', {

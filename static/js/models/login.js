@@ -1,10 +1,22 @@
 import {Api} from "../modules/api.js";
+
+/**
+ * Модель для страницы входа
+ */
 export class LoginModel {
+    /**
+     * Конструктор
+     * @param eventBus {EventBus}
+     */
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.eventBus.on('submit', this.submit.bind(this));
     }
 
+    /**
+     * отправка формы
+     * @param values
+     */
     submit(values) {
         if (values.login.empty) {
             this.eventBus.emit('invalid', 'Введите логин/email!')

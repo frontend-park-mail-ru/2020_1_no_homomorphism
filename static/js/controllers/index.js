@@ -2,6 +2,9 @@ import {EventBus} from '../eventBus.js'
 import {IndexModel} from '../models/index.js'
 import {IndexView} from '../views/index.js'
 
+/**
+ * Контроллер для главной страницы
+ */
 export class IndexController {
     constructor() {
         this.eventBus = new EventBus();

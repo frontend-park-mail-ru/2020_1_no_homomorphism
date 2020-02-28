@@ -2,7 +2,14 @@ import {EventBus} from '../eventBus.js'
 import {SettingsModel} from '../models/settings.js'
 import {SettingsView} from '../views/settings.js'
 
+/**
+ * Контроллер для страницы редактирования данных пользователя
+ */
 export class SettingsController {
+    /**
+     * Конструктор
+     * @param router {Router}
+     */
     constructor(router) {
         this.eventBus = new EventBus();
         this.model = new SettingsModel(this.eventBus);
