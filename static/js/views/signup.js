@@ -24,6 +24,7 @@ export class SignupView {
     }
 
     submit() {
+        console.log('SUBMIT');
         this.eventBus.emit('submit', {
             name: document.getElementById('name').value,
             login: document.getElementById('login').value,

@@ -20,16 +20,14 @@ export class SignupModel {
         } else if (resEmail !== '') {
             this.eventBus.emit('invalid', {email: resEmail});
         } else if (resPassword !== '') {
-            console.log(resPassword);
+            console.log('Введите корреткный пароль');
             this.eventBus.emit('invalid', {password: resPassword});
         } else {
             Api.signupFetch(values.name, values.login, '' , values.email, values.password)
             .then((res) => {
                 if (res === undefined) {
                     console.log('NO ANSWER FROM BACKEND');
-                    return;
-                }
-                if (res.ok) {
+                } else if (res.ok) {
                     this.eventBus.emit('hide login, show logout', {});
                     this.eventBus.emit('redirect to main', {})
                 } else {
