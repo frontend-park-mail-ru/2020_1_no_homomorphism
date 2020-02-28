@@ -3,10 +3,6 @@ export class LoginModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.eventBus.on('submit', this.submit.bind(this));
-
-        //this.eventBus.on('remember changed', this.changeRemember);
-        //this.eventBus.on('submit', this.submit);
-        //this.eventBus.on('remember changed', this.changeRemember);
     }
 
     submit(values) {
@@ -18,7 +14,7 @@ export class LoginModel {
             Api.loginFetch(values.login, values.password)
                 .then((res)=> {
                     if (res === undefined){
-                        console.log('-----Server error');
+                        console.log('NO ANSWER FROM BACKEND');
                         this.eventBus.emit('redirect to main', 'Ошибка загрузки логина');
                         return
                     }

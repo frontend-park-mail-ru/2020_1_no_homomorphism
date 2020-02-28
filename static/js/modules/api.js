@@ -89,6 +89,15 @@ export class Api {
             .catch(error => console.error(error))
     }
     /**
+     * Проверка куки
+     * @param {string} name
+     * @returns {Promise<Response>}
+     */
+    static coockieFetch(name) {
+        return getFetch(`/user`)
+            .catch(error => console.error(error))
+    }
+    /**gi
      * Получение трека
      * @param {string} id
      * @returns {Promise<Response>}

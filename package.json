@@ -5,12 +5,6 @@
         "start": "node server.js",
         "devstart": "nodemon server.js"
     },
-    "husky": {
-        "hooks": {
-            "pre-commit": "npx eslint .",
-            "pre-push": "npx eslint ."
-        }
-    },
     "dependencies": {
         "express": "^4.17.1",
         "morgan": "^1.9.1",
