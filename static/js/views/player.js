@@ -296,9 +296,9 @@ export class PlayerView {
         document.getElementsByClassName('current-time')[0].innerHTML = '0:00';
     }
     drawTracklist(tracks) {
-        /*for (let track in tracks) {
-            this.document.getElementsByClassName('track-list')[0].innerHTML += nunjucks.render('../../../views/templates/track.njk', track);
-        }*/
+	for (let i = 0; i < tracks.length; i++) {
+	    document.getElementsByClassName('track-list')[0].innerHTML += nunjucks.render('../../../views/templates/track.njk', tracks[i]);
+        }
     }
     drawTimeline(ratio) {
         const width = ratio * document.getElementsByClassName('timeline-back')[0].getBoundingClientRect().width;
