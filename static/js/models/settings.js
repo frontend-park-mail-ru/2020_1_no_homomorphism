@@ -30,7 +30,7 @@ export class SettingsModel {
         const fileAttach = document.getElementById('avatar-upload');
         const fData = new FormData();
         fData.append('profile_image', fileAttach.files[0], 'kek.png');
-        Api.profilePhotoFetch()
+        Api.profilePhotoFetch(fData)
             .then((response) => {
                 if (response.ok) {
                     this.eventBus.emit('redirect to profile', {});

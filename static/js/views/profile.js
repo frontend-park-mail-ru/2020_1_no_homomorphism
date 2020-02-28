@@ -1,6 +1,11 @@
 export class ProfileView {
     constructor(eventBus) {
         this.eventBus = eventBus;
+
+    }
+
+    showErrors(error) {
+        console.log('INPUT ERROR ');
     }
 
     render(root) {

@@ -25,20 +25,38 @@ export class PlayerModel {
         this.eventBus.on('unrepeat', this.unrepeat.bind(this));
         this.eventBus.on('mute', this.mute.bind(this));
         this.eventBus.on('unmute', this.unmute.bind(this));
+        this.eventBus.on('logout', this.logout);
         //this.eventBus.on('volume up', this.volumeUp);
         //this.eventBus.on('volume down', this.volumeDown);
     }
 
     logout() {
-        Api.logoutFetch();
-        document.getElementById('login-link').style.visibility = 'visible';
-        document.getElementById('signup-link').style.visibility = 'visible';
-        document.getElementById('logout-button').style.visibility = 'hidden';
+        Api.logoutFetch()
+            .then((res) => {
+                if (res === undefined) {
+                    console.log('NO ANSWER FROM BACKEND');
+                    return;
+                }
+                if (!res.ok){
+                    console.log('BAD REQUEST');
+                    return;
+                }
+                document.getElementById('login-link').style.visibility = 'visible';
+                document.getElementById('signup-link').style.visibility = 'visible';
+                document.getElementById('logout-button').style.visibility = 'hidden';
+            });
+
     }
 
     getFirst() {
         Api.trackFetch('12344')
-        .then(response => response.text())
+        .then(response => {
+            if (response === undefined){
+                console.log('NO ANSWER FROM BACKEND');
+                return
+            }
+            response.text()
+        })
         .then(data => {
             const track = JSON.parse(data);
             document.getElementsByTagName('audio')[0].children[0].src = track.link;
