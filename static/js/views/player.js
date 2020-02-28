@@ -4,6 +4,7 @@ export class PlayerView {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
+        this.expanded = false;
         this.timelineDrag = false;
         this.volumeDrag = false;
         this.playing = false;
@@ -21,14 +22,10 @@ export class PlayerView {
     }
     render() {
         const body = document.getElementsByTagName('body')[0];
-        const left = body.clientWidth - 13;
+        const left = (this.expanded ? body.clientWidth - document.getElementsByClassName('main-pos')[0].clientWidth : body.clientWidth - 13);
         const navbar = document.getElementsByClassName('navbar')[0];
-        let top = 0;
-        let height = document.documentElement.clientHeight;
-        if (navbar !== undefined) {
-            top = navbar.clientHeight;
-            height -= navbar.clientHeight;
-        }
+        const top = (navbar === undefined ? 0 : navbar.clientHeight);
+        const height = (navbar === undefined ? document.documentElement.clientHeight : document.documentElement.clientHeight - navbar.clientHeight);
         document.getElementsByClassName('main-pos')[0].style.left = left.toString() + 'px';
         document.getElementsByTagName('audio')[0].volume = this.volume;
         this.drawVolume(height);
@@ -105,22 +102,17 @@ export class PlayerView {
         document.getElementsByClassName('player-trigger-arrow')[0].style.visibility = 'hidden';
     }
     triggerClick() {
-        if (this.mode === 'main') {
-            return;
-        }
-        if (document.getElementsByClassName('player-trigger-arrow')[0].style.transform == 'rotate(180deg)') {
-            document.getElementsByClassName('player-trigger-arrow')[0].style.transform = 'rotate(0)';
-            document.getElementsByClassName('player-trigger-arrow')[0].style.marginLeft = '-3px';
-        } else {
+        if (this.expanded) {
             document.getElementsByClassName('player-trigger-arrow')[0].style.transform = 'rotate(180deg)';
             document.getElementsByClassName('player-trigger-arrow')[0].style.marginLeft = '-1px';
+        } else {
+            document.getElementsByClassName('player-trigger-arrow')[0].style.transform = 'rotate(0)';
+            document.getElementsByClassName('player-trigger-arrow')[0].style.marginLeft = '-3px';
         }
         const body = document.getElementsByTagName('body')[0];
-        let left = body.clientWidth - 13;
-        if (document.getElementsByClassName('main-pos')[0].style.left == left.toString() + 'px') {
-            left = left - document.getElementsByClassName('main-pos')[0].clientWidth + 13;
-        }
+        const left = (this.expanded ? body.clientWidth - 13 : body.clientWidth - document.getElementsByClassName('main-pos')[0].clientWidth);
         document.getElementsByClassName('main-pos')[0].style.left = left + 'px';
+        this.expanded = !this.expanded;
     }
     playPauseButtonClick() {
         if (this.playing) {
@@ -238,11 +230,11 @@ export class PlayerView {
         }
     }
     volumeScaleClick(event) {
-        this.muted = false;
         const height = document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().height - (event.clientY - document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().y);
         this.volume = height / document.getElementsByClassName('volume-scale-back')[0].getBoundingClientRect().height;
         document.getElementsByTagName('audio')[0].volume = this.volume;
         this.drawVolume(height);
+        this.drawUnmute();
     }
     volumeButtonClick() {
         if (this.muted) {
