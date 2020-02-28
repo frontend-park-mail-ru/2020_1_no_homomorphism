@@ -7,6 +7,6 @@ export class ProfileView {
         this.eventBus.on('user data', (data) => {
             root.innerHTML = nunjucks.render('../../../views/profile.njk', data);
         });
-        this.eventBus.emit('get user data', {}); // load profile
+        this.eventBus.emit('get user data', {});
     }
 }
