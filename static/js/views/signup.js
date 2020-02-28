@@ -13,6 +13,7 @@ export class SignupView {
         document.addEventListener('click', (event) => {
             console.log(event.target.getAttribute('id'));
             if (event.target.getAttribute('id') === 'submit') {
+                console.log('COME');
                 event.preventDefault();
                 this.submit.bind(this);
             }
