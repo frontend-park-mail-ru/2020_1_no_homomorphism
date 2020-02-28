@@ -29,6 +29,7 @@ export class SettingsModel {
 
         console.log('CAME TO ADD');
         const fileAttach = document.getElementById('avatar-upload');
+        console.log("File size:" + fileAttach.files[0].size);
         const fData = new FormData();
         fData.append('profile_image', fileAttach.files[0], 'kek.png');
         Api.profilePhotoFetch()
