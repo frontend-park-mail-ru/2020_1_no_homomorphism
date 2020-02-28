@@ -2,7 +2,14 @@ import {EventBus} from '../eventBus.js'
 import {ProfileModel} from '../models/profile.js'
 import {ProfileView} from '../views/profile.js'
 
+/**
+ * Контроллер для профиля
+ */
 export class ProfileController {
+    /**
+     * Конструктор
+     * @param router {Router}
+     */
     constructor(router) {
         this.eventBus = new EventBus();
         this.model = new ProfileModel(this.eventBus);

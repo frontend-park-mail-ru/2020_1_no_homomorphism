@@ -39,4 +39,4 @@ app.use((err, req, res, next) => {
     res.render('error', {error: err});
 });
 
-app.listen(3001);
+app.listen(3000);

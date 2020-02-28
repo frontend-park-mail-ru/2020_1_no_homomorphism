@@ -1,10 +1,19 @@
+/**
+ * вью для настроек
+ */
 export class SettingsView {
+    /**
+     * @param eventBus {EventBus}
+     */
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.imageUploaded = false;
         this.eventBus.on('invalid', this.showErrors);
     }
 
+    /**
+     * слушатель событий для аватарки
+     */
     setEventListeners() {
         const button = document.getElementById('submit-changes');
         button.addEventListener('click', (event) => {
@@ -20,7 +29,10 @@ export class SettingsView {
         });
     }
 
-
+    /**
+     * рендерит страничку профиля
+     * @param root
+     */
     render(root, loggedIn) {
         if (loggedIn) {
             document.getElementById('profile-link').style.visibility = 'visible';
@@ -40,10 +52,17 @@ export class SettingsView {
         this.eventBus.emit('get user data', {});
     }
 
+    /**
+     * показывает, какие поля формы заполнены неправильно
+     * @param errors
+     */
     showErrors(errors) {
         console.log(errors.key);
     }
 
+    /**
+     * отправляет данные формы
+     */
     submit() {
         console.log('submit-changes clicked');
         this.eventBus.emit('submit', {

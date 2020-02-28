@@ -1,4 +1,10 @@
+/**
+ * вью для профиля
+ */
 export class ProfileView {
+    /**
+     * @param eventBus {EventBus}
+     */
     constructor(eventBus) {
         this.eventBus = eventBus;
 
@@ -8,6 +14,10 @@ export class ProfileView {
         console.log('INPUT ERROR ');
     }
 
+    /**
+     * рендерит страничку с профилем
+     * @param root
+     */
     render(root, loggedIn) {
         if (loggedIn) {
             document.getElementById('profile-link').style.visibility = 'visible';

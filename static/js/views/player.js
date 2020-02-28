@@ -1,4 +1,7 @@
 export class PlayerView {
+    /**
+     * @param eventBus {EventBus}
+     */
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.timelineDrag = false;

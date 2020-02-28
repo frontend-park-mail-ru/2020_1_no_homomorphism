@@ -1,6 +1,13 @@
 import {Api} from "../modules/api.js";
 
+/**
+ * Модель плеера
+ */
 export class PlayerModel {
+    /**
+     * Конструктор
+     * @param eventBus {EventBus}
+     */
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.data = {
@@ -29,6 +36,9 @@ export class PlayerModel {
         //this.eventBus.on('volume down', this.volumeDown);
     }
 
+    /**
+     * рисует кнопочку логаута
+     */
     logout() {
         Api.logoutFetch();
         document.getElementById('login-link').style.visibility = 'visible';
@@ -36,6 +46,9 @@ export class PlayerModel {
         document.getElementById('logout-button').style.visibility = 'hidden';
     }
 
+    /**
+     * достает первый трек в листе
+     */
     getFirst() {
         Api.trackFetch('12344')
             .then(response => response.text())
@@ -62,16 +75,27 @@ export class PlayerModel {
                 });
         }
     }
+    /**
+     * останавливает воспроизведение
+     */
     pause() {
         document.getElementsByTagName('audio')[0].pause();
         this.data.playing = false;
         this.eventBus.emit('draw play', {});
     }
+
+    /**
+     * начинает воспроизведение
+     */
     play() {
         document.getElementsByTagName('audio')[0].play();
         this.data.playing = true;
         this.eventBus.emit('draw pause', {});
     }
+
+    /**
+     * переключает трек на предыдущий
+     */
     prev() {
         if (this.data.current === 0) {
             if (this.data.repeat) {
@@ -93,6 +117,11 @@ export class PlayerModel {
         this.eventBus.emit('draw timeline', 0);
         this.eventBus.emit('track update', this.data.playlist[this.data.queue[this.data.current]]);
     }
+
+    /**
+     * переключает трек на следующий
+     * @param cause {string}
+     */
     next(cause) {
         if (this.data.current === this.data.queue.length - 1) {
             if (this.data.repeat) {
@@ -123,6 +152,11 @@ export class PlayerModel {
         this.eventBus.emit('draw timeline', 0);
         this.eventBus.emit('track update', this.data.playlist[this.data.queue[this.data.current]]);
     }
+
+    /**
+     * перематывает  композицию
+     * @param ratio
+     */
     rewind(ratio) {
         document.getElementsByTagName('audio')[0].currentTime = document.getElementsByTagName('audio')[0].duration * ratio;
         this.eventBus.emit('draw timeline', ratio);
@@ -149,29 +183,53 @@ export class PlayerModel {
         this.data.shuffle = true;
         this.eventBus.emit('draw shuffle', {});
     }
+
+    /**
+     * шаффл выключен
+     */
     unshuffle() {
         this.data.current = this.data.queue[this.data.current];
         this.data.queue.sort();
         this.data.shuffle = false;
         this.eventBus.emit('draw unshuffle', {});
     }
+
+    /**
+     * повторение листа
+     */
     repeat() {
         this.data.repeat = true;
         this.eventBus.emit('draw repeat', {});
     }
+
+    /**
+     * повторение текущего трека
+     */
     repeatOne() {
         this.data.repeat = false;
         document.getElementsByTagName('audio')[0].loop = true;
         this.eventBus.emit('draw repeat one', {});
     }
+
+    /**
+     * повторение отключено
+     */
     unrepeat() {
         document.getElementsByTagName('audio')[0].loop = false;
         this.eventBus.emit('draw unrepeat', {});
     }
+
+    /**
+     * звук выключен
+     */
     mute() {
         document.getElementsByTagName('audio')[0].muted = true;
         this.eventBus.emit('draw mute', {});
     }
+
+    /**
+     * звук включен
+     */
     unmute() {
         document.getElementsByTagName('audio')[0].muted = false;
         this.eventBus.emit('draw unmute', {});

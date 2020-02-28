@@ -1,7 +1,14 @@
 import {Validation} from '../modules/validation.js';
 import {Api} from "../modules/api.js";
 
+/**
+ * Модель настроек
+ */
 export class SettingsModel {
+    /**
+     * конструктор
+     * @param eventBus {EventBus}
+     */
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.eventBus.on('avatar upload', this.resetAvatar.bind(this));
@@ -10,6 +17,9 @@ export class SettingsModel {
         this.eventBus.on('get user data', this.getUserData.bind(this));
     }
 
+    /**
+     * получает данный юзера
+     */
     getUserData() {
         Api.profileFetch()
             .then((res) => {
@@ -26,9 +36,13 @@ export class SettingsModel {
             })
     }
 
+    /**
+     * обновляет аватар юзера
+     */
     resetAvatar() {
         console.log('CAME TO ADD');
         const fileAttach = document.getElementById('avatar-upload');
+        console.log("File size:" + fileAttach.files[0].size);
         const fData = new FormData();
         fData.append('profile_image', fileAttach.files[0], 'kek.png');
         Api.profilePhotoFetch(fData)
@@ -40,6 +54,10 @@ export class SettingsModel {
 
     }
 
+    /**
+     * отправляет форму с  обновленными данными пользователя
+     * @param values
+     */
     submit(values) {
         const validation = new Validation;
         const resPassword = validation.validationPassword(values.newPassword, values.newPasswordConfirm);

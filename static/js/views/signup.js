@@ -1,4 +1,10 @@
+/**
+ * Вью для страницы регистрации
+ */
 export class SignupView {
+    /**
+     * @param eventBus {EventBus}
+     */
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.submit.bind(this);
@@ -6,6 +12,10 @@ export class SignupView {
         this.eventBus.on('invalid', this.showErrors);
     }
 
+    /**
+     * рендерит страничку регистрации
+     * @param root
+     */
     render(root, loggedIn) {
         if (loggedIn) {
             document.getElementById('profile-link').style.visibility = 'visible';
@@ -29,10 +39,17 @@ export class SignupView {
         })
     }
 
+    /**
+     * показывает, что поля были заполнены неправильно
+     * @param error
+     */
     showErrors(error) {
         console.log('INPUT ERROR ');
     }
 
+    /**
+     * отправляет данные формы
+     */
     submit() {
         this.eventBus.emit('submit', {
             name: document.getElementById('name').value,
