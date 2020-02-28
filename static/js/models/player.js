@@ -38,29 +38,29 @@ export class PlayerModel {
 
     getFirst() {
         Api.trackFetch('12344')
-        .then(response => response.text())
-        .then(data => {
-            const track = JSON.parse(data);
-            document.getElementsByTagName('audio')[0].children[0].src = track.link;
-            document.getElementsByTagName('audio')[0].load();
-            this.data.playlist.push(track);
-            this.data.queue.push(this.data.playlist.length - 1);
-            this.eventBus.emit('track update', track);
-        });
-        for (let i = 12345; i < 12350; i++) {
-            Api.trackFetch(i.toString())
             .then(response => response.text())
             .then(data => {
                 const track = JSON.parse(data);
+                document.getElementsByTagName('audio')[0].children[0].src = track.link;
+                document.getElementsByTagName('audio')[0].load();
                 this.data.playlist.push(track);
                 this.data.queue.push(this.data.playlist.length - 1);
-            })
-            .then(() => {
-		if (this.data.playlist.length === 6) {
-		    this.eventBus.emit('draw tracklist', this.data.playlist);
-		}
-	    });
-	}
+                this.eventBus.emit('track update', track);
+            });
+        for (let i = 12345; i < 12350; i++) {
+            Api.trackFetch(i.toString())
+                .then(response => response.text())
+                .then(data => {
+                    const track = JSON.parse(data);
+                    this.data.playlist.push(track);
+                    this.data.queue.push(this.data.playlist.length - 1);
+                })
+                .then(() => {
+                    if (this.data.playlist.length === 6) {
+                        this.eventBus.emit('draw tracklist', this.data.playlist);
+                    }
+                });
+        }
     }
     pause() {
         document.getElementsByTagName('audio')[0].pause();
@@ -129,16 +129,16 @@ export class PlayerModel {
     }
     shuffle(positionOfCurrent) {
         let j, tmp;
-	    for (let i = this.data.queue.length - 1; i > 0; i--) {
+        for (let i = this.data.queue.length - 1; i > 0; i--) {
             j = Math.floor(Math.random() * (i + 1));
             if (j === this.data.current) {
                 this.data.current = i;
             } else if (i === this.data.current) {
                 this.data.current = j;
             }
-                tmp = this.data.queue[j];
-                this.data.queue[j] = this.data.queue[i];
-                this.data.queue[i] = tmp;
+            tmp = this.data.queue[j];
+            this.data.queue[j] = this.data.queue[i];
+            this.data.queue[i] = tmp;
         }
         if (positionOfCurrent === 'first') {
             tmp = this.data.queue[0];

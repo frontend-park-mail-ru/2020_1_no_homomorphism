@@ -1,6 +1,8 @@
 export class LoginView {
     constructor(eventBus) {
         this.eventBus = eventBus;
+        this.eventBus.on('invalid', this.showErrors);
+        this.eventBus.on('hide login, show logout', this.hideLoginShowLogout.bind(this));
     }
 
     render(root) {
@@ -9,20 +11,14 @@ export class LoginView {
 
         document.addEventListener('click', (event) => {
             if (event.target.getAttribute('id') === 'submit-login') {
-                console.log("TOUCHED");
                 event.preventDefault();
-                //this.submit.bind(this);
                 this.submit();
-                console.log("TOUCHED2");
             }
         });
-        console.log("DIE");
     }
 
     showErrors(errors) {
-        for (const key in errors) {
-            document.getElementById(key).setCustomValidity(errors.key);
-        }
+        console.log('LOGIN ERROR');
     }
 
     submit() {
@@ -31,7 +27,6 @@ export class LoginView {
         this.eventBus.emit('submit', {
             login: document.getElementById('login').value,
             password: document.getElementById('password').value,
-            //remember : document.getElementById('remember').checked,
         });
     }
 

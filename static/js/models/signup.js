@@ -4,6 +4,7 @@ import {Api} from "../modules/api.js";
 export class SignupModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
+        this.eventBus.on('submit', this.submit.bind(this));
     }
 
     submit(values) {
@@ -13,31 +14,25 @@ export class SignupModel {
         const resPassword = validation.validationPassword(values.password, values.passwordConfirm);
         const resEmail = validation.validationEmail(values.email);
 
-        // TODO Переместить пустые строчки в валидацию
         if (values.name.empty) {
-            this.eventBus.emit('lol', {name: 'Введите имя'})
-        } else if (values.login.empty) {
-            this.eventBus.emit('lol', {login: 'Введите логин!'})
-        } else if (values.email.empty) {
-            this.eventBus.emit('lol', {email: 'Введите email!'})
-        } else if (values.password.empty) {
-                this.eventBus.emit('lol', {password: 'Введите пароль!'})
-        } else if (values.password !== values.passwordConfirm) {
-            this.eventBus.emit('lol', {password: 'Пароли не совпадают!'})
+            this.eventBus.emit('invalid', {name: 'Введите имя'})
         } else if (resLogin !== '') {
-            this.eventBus.emit('lol', {login: resLogin});
+            this.eventBus.emit('invalid', {login: resLogin});
         } else if (resEmail !== '') {
-            this.eventBus.emit('lol', {email: resEmail});
+            this.eventBus.emit('invalid', {email: resEmail});
         } else if (resPassword !== '') {
-            console.log(resPassword);
-            this.eventBus.emit('lol', {password: resPassword});
+            console.log('Введите корреткный пароль');
+            this.eventBus.emit('invalid', {password: resPassword});
         } else {
             Api.signupFetch(values.name, values.login, '' , values.email, values.password)
             .then((res) => {
-                if (res.ok) {
+                if (res === undefined) {
+                    console.log('NO ANSWER FROM BACKEND');
+                } else if (res.ok) {
                     this.eventBus.emit('hide login, show logout', {});
+                    this.eventBus.emit('redirect to main', {})
                 } else {
-                    this.eventBus.emit('lol', {name: 'Проблемы с регистарцией'})
+                    this.eventBus.emit('invalid', {name: 'Проблемы с регистарцией'})
                 }
             });
         }

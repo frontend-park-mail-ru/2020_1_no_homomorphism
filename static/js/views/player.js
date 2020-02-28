@@ -296,8 +296,8 @@ export class PlayerView {
         document.getElementsByClassName('current-time')[0].innerHTML = '0:00';
     }
     drawTracklist(tracks) {
-	for (let i = 0; i < tracks.length; i++) {
-	    document.getElementsByClassName('track-list')[0].innerHTML += nunjucks.render('../../../views/templates/track.njk', tracks[i]);
+        for (let i = 0; i < tracks.length; i++) {
+            document.getElementsByClassName('track-list')[0].innerHTML += nunjucks.render('../../../views/templates/track.njk', tracks[i]);
         }
     }
     drawTimeline(ratio) {

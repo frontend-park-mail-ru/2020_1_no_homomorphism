@@ -79,13 +79,13 @@ export let putFetch = (path = '/', body = {}) => {
  * return {Promise<Response>}
  */
 export let postImageFetch = (path = '/image', body = {}) => {
+
     return fetch(getServerPath + path, {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',
         body: body,
     });
-    //}).then(response => response.json());
 };
 /**
  * PATCH
