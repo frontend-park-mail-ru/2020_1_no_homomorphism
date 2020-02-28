@@ -34,7 +34,7 @@ export class SettingsModel {
         Api.profilePhotoFetch(fData)
             .then((response) => {
                 if (response.ok) {
-                    this.eventBus.emit('redirect to profile', {});
+                    this.eventBus.emit('get user data', {});
                 }
             });
 

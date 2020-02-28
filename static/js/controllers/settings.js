@@ -7,10 +7,6 @@ export class SettingsController {
         this.eventBus = new EventBus();
         this.model = new SettingsModel(this.eventBus);
         this.view = new SettingsView(this.eventBus);
-
-
-
-
         //this.eventBus.on('add outer', this.model.addOuter);
         this.eventBus.on('redirect to main', router.redirectToMain);
 

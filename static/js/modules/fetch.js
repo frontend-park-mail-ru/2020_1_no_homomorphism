@@ -79,20 +79,13 @@ export let putFetch = (path = '/', body = {}) => {
  * return {Promise<Response>}
  */
 export let postImageFetch = (path = '/image', body = {}) => {
-    let header = new Headers();
-    header.append("");
-
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "multipart/form-data");
 
     return fetch(getServerPath + path, {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',
-        headers: myHeaders,
         body: body,
     });
-    //}).then(response => response.json());
 };
 /**
  * PATCH
