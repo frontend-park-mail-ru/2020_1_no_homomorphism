@@ -6,7 +6,7 @@
 ## Команда
 - [Дмитрий Рыбаков](https://github.com/bulletmys)
 - [Натали Климова](https://github.com/TataKlim)
-- [Марго Бойко](https://github.com/mortawe)
+- [Маргорита Бойко](https://github.com/mortawe)
 - [Никита Панёв](https://github.com/tmible)
 
 ## Менторы
