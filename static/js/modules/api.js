@@ -1,5 +1,5 @@
 'use strict';
-import {postFetch, getFetch, deleteFetch, patchFetch, putFetch, putImageFetch} from "./fetch.js";
+import {postFetch, getFetch, deleteFetch, patchFetch, putFetch, postImageFetch} from "./fetch.js";
 
 /**
  * API object
@@ -76,7 +76,7 @@ export class Api {
      */
     static profilePhotoFetch(image) {
         console.log('PHOTO');
-        return putImageFetch('/image', image)
+        return postImageFetch('/image', image)
             .catch(error => console.error(error))
     }
     /**

@@ -78,7 +78,7 @@ export let putFetch = (path = '/', body = {}) => {
  * @param {Object} body
  * return {Promise<Response>}
  */
-export let putImageFetch = (path = '/image', body = {}) => {
+export let postImageFetch = (path = '/image', body = {}) => {
     let header = new Headers();
     header.append("");
 

@@ -5,6 +5,7 @@ export class SettingsModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.eventBus.on('avatar upload', this.resetAvatar.bind(this));
+        this.eventBus.on('redirect to profile', this.getUserData.bind(this));
         this.eventBus.on('submit', this.submit.bind(this));
         this.eventBus.on('get user data', this.getUserData.bind(this));
     }
