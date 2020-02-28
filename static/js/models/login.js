@@ -19,7 +19,7 @@ export class LoginModel {
      */
     submit(values) {
         if (values.login.empty) {
-            this.eventBus.emit('invalid', 'Введите логин/email!')
+            this.eventBus.emit('invalid', 'Введите логин!')
         } else if (values.password.empty) {
             this.eventBus.emit('invalid', 'Введите пароль!')
         } else {

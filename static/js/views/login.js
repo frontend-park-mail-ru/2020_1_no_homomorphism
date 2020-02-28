@@ -38,9 +38,7 @@ export class LoginView {
      * @param errors
      */
     showErrors(errors) {
-        for (key in errors) {
-            console.log(key);
-        }
+        document.get.getElementsByClassName('login-form').style.borderColor = 'red';
         console.log('LOGIN ERROR');
     }
 
