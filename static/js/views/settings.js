@@ -14,10 +14,12 @@ export class SettingsView {
         });
         const fileAttach = document.getElementById('avatar-upload');
         fileAttach.addEventListener('change', () => {
-            console.log('avatar-upload clicked');
-            this.eventBus.emit('avatar upload', {});
+            console.log('CATCH TOUCH');
+            this.imageUploaded = true;
+            this.eventBus.emit('avatar upload');
         });
     }
+
 
     render(root) {
         this.eventBus.on('user data', (data) => {
@@ -28,9 +30,7 @@ export class SettingsView {
     }
 
     showErrors(errors) {
-        for (let key in errors) {
             console.log(errors.key);
-        }
     }
 
     submit() {
