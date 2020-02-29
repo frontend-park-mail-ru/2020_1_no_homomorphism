@@ -20,5 +20,6 @@ export class SettingsController {
         this.eventBus.on('get user data', this.model.getUserData.bind(this));
         //this.eventBus.on('add outer', this.model.addOuter);
         this.eventBus.on('redirect to main', router.redirectToMain);
+        this.eventBus.on('redirect to profile', router.redirectToProfile.bind(router));
     }
 }

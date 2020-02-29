@@ -11,7 +11,8 @@
 
 .profile-content .col,
 .info .profile-info,
-.info .profile-content {
+.info .profile-content,
+.info .col {
     text-align: left;
 }
 

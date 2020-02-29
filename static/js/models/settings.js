@@ -60,15 +60,16 @@ export class SettingsModel {
         const resEmail = validation.validationEmail(values.email);
 
         let errors = {};
-        if (resPassword !== '') {
+        if (values.newPassword !== '' && resPassword !== '') {
             errors['newPassword'] = resPassword;
+            errors['newPasswordConfirm'] = resPassword;
         }
         if (values.email === '') {
                 errors['email'] = 'Удолять email низзя';
         } else if (resEmail !== '') {
                 errors['email'] = resEmail;
         }
-        if (JSON.srtingify(errors) !== '{}') {
+        if (JSON.stringify(errors) !== '{}') {
             this.eventBus.emit('invalid', errors);
         } else {
             Api.profileEditFetch(values.name, values.email, values.password, values.newPassword)

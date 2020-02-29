@@ -7,7 +7,7 @@ const serverPath = 'http://89.208.199.170:8081';
  * @param {Object} body
  * return {Promise<Response>}
  */
-export let postFetch = (path = '/', body = {}) => {
+export const postFetch = (path = '/', body = {}) => {
     return fetch(serverPath + path, {
         method: 'POST',
         mode: 'cors', // no-cors, cors, *same-origin (последнее - значение по умолчанию)
@@ -26,7 +26,7 @@ export let postFetch = (path = '/', body = {}) => {
  * @param {Object} body
  * return {Promise<Response>}
  */
-export let getFetch = (path = '/', body = {}) => {
+export const getFetch = (path = '/', body = {}) => {
     return fetch(serverPath + path, {
         method: 'GET',
         mode: 'cors',
@@ -40,7 +40,7 @@ export let getFetch = (path = '/', body = {}) => {
  * @param {string} path
  * return {Promise<Response>}
  */
-export let deleteFetch = (path = '/') => {
+export const deleteFetch = (path = '/') => {
     return fetch(serverPath + path, {
         method: 'DELETE',
         mode: 'cors',
@@ -55,7 +55,7 @@ export let deleteFetch = (path = '/') => {
  * @param {Object} body
  * return {Promise<Response>}
  */
-export let putFetch = (path = '/', body = {}) => {
+export const putFetch = (path = '/', body = {}) => {
     return fetch(serverPath + path, {
         method: 'PUT',
         mode: 'cors',
@@ -74,7 +74,7 @@ export let putFetch = (path = '/', body = {}) => {
  * @param {Object} body
  * return {Promise<Response>}
  */
-export let postImageFetch = (path = '/image', body = {}) => {
+export const postImageFetch = (path = '/image', body = {}) => {
     return fetch(serverPath + path, {
         method: 'POST',
         mode: 'cors',
@@ -90,7 +90,7 @@ export let postImageFetch = (path = '/image', body = {}) => {
  * @param {Object} body
  * return {Promise<Response>}
  */
-export let patchFetch = (path = '/', body = {}) => {
+export const patchFetch = (path = '/', body = {}) => {
     return fetch(serverPath + path, {
         method: 'PATCH',
         mode: 'cors',
