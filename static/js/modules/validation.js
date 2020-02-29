@@ -34,23 +34,15 @@ export  class Validation {
      * @returns {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
      */
     validationPassword(password1 = '', password2 = '') {
-
-        if(password2 === ''){
-            return '';
-        }
-
-        if (password1 !== password2) {
-            return 'Пароли не совпадают';
-        }
-
-        let regExpr = new RegExp('^[a-zA-Z0-9]{3,}$');
-
         if (password1 === '') {
             return 'Введите пароль';
         }
-
+        if (password1 !== password2) {
+            return 'Пароли не совпадают';
+        }
+        let regExpr = new RegExp('^[a-zA-Z0-9]{3,}$');
         if (!password1.match(regExpr)) {
-            return 'Пароль должен содержать не менее 3 заглавных или строчных букв';
+            return 'Пароль должен содержать не менее 3 заглавных или строчных латинских букв или цифр';
         }
         return '';
     }

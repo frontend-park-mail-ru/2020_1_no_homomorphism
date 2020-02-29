@@ -7,8 +7,6 @@ export class SettingsView {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.imageUploaded = false;
-        this.eventBus.on('invalid', this.showErrors);
     }
 
     /**
@@ -19,12 +17,10 @@ export class SettingsView {
         button.addEventListener('click', (event) => {
             event.preventDefault();
             this.submit();
-
         });
         const fileAttach = document.getElementById('avatar-upload');
         fileAttach.addEventListener('change', () => {
             console.log('CATCH TOUCH');
-            this.imageUploaded = true;
             this.eventBus.emit('avatar upload');
         });
     }
@@ -57,7 +53,14 @@ export class SettingsView {
      * @param errors
      */
     showErrors(errors) {
-        console.log(errors.key);
+        for (let key in errors) {
+            const message = document.getElementById(key).nextElementSibling;
+            message.previousElementSibling.style.borderColor = 'red';
+            message.innerText = errors[key];
+            message.style.height = '15px';
+            message.style.marginBottom = '10px';
+            message.style.visibility = 'visible';
+        }
     }
 
     /**
@@ -65,6 +68,13 @@ export class SettingsView {
      */
     submit() {
         console.log('submit-changes clicked');
+        document.querySelectorAll('.info input').forEach(input => {
+            input.style.borderColor = '#ccc';
+            input.nextElementSibling.innerText = '';
+            input.nextElementSibling.style.height = '0';
+            input.nextElementSibling.style.marginBottom = '0';
+            input.nextElementSibling.style.visibility = 'hidden';
+        });
         this.eventBus.emit('submit', {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
@@ -74,8 +84,6 @@ export class SettingsView {
             //outer              : document.getElementById('outer-url').value,
         });
     }
-
-
 
     //addOuterClick() {
     //    this.eventBus.emit('add outer', document.getElementById('outer-url').value);

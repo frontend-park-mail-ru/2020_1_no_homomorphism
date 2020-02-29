@@ -10,7 +10,6 @@ export class LoginModel {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on('submit', this.submit.bind(this));
     }
 
     /**
@@ -24,20 +23,20 @@ export class LoginModel {
             this.eventBus.emit('invalid', 'Введите пароль!')
         } else {
             Api.loginFetch(values.login, values.password)
-                .then((res)=> {
-                    if (res === undefined){
-                        console.log('NO ANSWER FROM BACKEND');
-                        this.eventBus.emit('redirect to main', 'Ошибка загрузки логина');
-                        return
-                    }
-                    if (res.ok) {
-                        console.log('SUCCESS');
-                        this.eventBus.emit('hide login, show logout', {});
-                    } else {
-                        console.log('ENTRY ERROR');
-                        this.eventBus.emit('invalid', 'Ошибка входа!')
-                    }
-                })
+            .then((res)=> {
+                if (res === undefined){
+                    console.log('NO ANSWER FROM BACKEND');
+                    this.eventBus.emit('redirect to main', 'Ошибка загрузки логина');
+                    return
+                }
+                if (res.ok) {
+                    console.log('SUCCESS');
+                    this.eventBus.emit('hide login, show logout', {});
+                } else {
+                    console.log('ENTRY ERROR');
+                    this.eventBus.emit('invalid', 'Ошибка входа!')
+                }
+            });
         }
 
     }

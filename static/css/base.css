@@ -13,7 +13,7 @@ body {
 input[type="text"], input[type="email"],
 input[type="url"], input[type="password"] {
     border-radius: 0.33em;
-    border: 1px solid silver;
+    border: 1px solid #ccc;
     outline: none;
     padding: 0 1%;
 }
@@ -21,4 +21,8 @@ input[type="url"], input[type="password"] {
 input[type="text"], input[type="email"],
 input[type="password"] {
     width: 20em;
+}
+
+img {
+    object-fit: cover;
 }
