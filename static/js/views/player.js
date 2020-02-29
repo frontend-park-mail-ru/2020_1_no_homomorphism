@@ -75,6 +75,9 @@ export class PlayerView {
         document.getElementsByClassName('volume-scale-back')[0].onmousemove = (event) => this.volumeMouseMove(event);
         document.getElementsByClassName('volume-scale-front')[0].onmousemove = (event) => this.volumeMouseMove(event);
         window.onwheel = (event) => this.trackListWheel(event);
+        document.querySelectorAll('.track-list .row').forEach(row => {
+            row.onmouseover = (event) => console.log(event);
+        });
         //this.elements.addButtons.addEventListener();
         //this.elements.deleteButtons.addEventListener();
     }
