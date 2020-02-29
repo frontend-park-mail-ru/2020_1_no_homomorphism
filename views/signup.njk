@@ -2,29 +2,39 @@
 <div class="row">
     <div class="col col-4"></div>
     <div class="col col-4">
-        <form class="sign-up-form" onsubmit="return false;">
+        <form class="sign-up-form card" onsubmit="return false;">
             <h2>Sign up</h2>
             <label>
                 Name
                 <input class="input-regular" id="name" type="text" value="" placeholder="John Smith" required>
+                <div class="error-message-small"></div>
             </label>
             <label>
                 Login
                 <input class="input-regular" id="login" type="text" value="" placeholder="john99" required>
+                <div class="error-message-small"></div>
             </label>
             <label>
                 Email
                 <input class="input-regular" type="email" id="email" value="" placeholder="johnSmith@mail.ru" required>
+                <div class="error-message-small"></div>
             </label>
             <label>
                 Password
                 <input class="input-regular" type="password" id="password" value="" required>
+                <div class="error-message-small"></div>
             </label>
             <label>
                 Password Confirmation
                 <input class="input-regular" type="password" id="password-confirm" value="" required>
+                <div class="error-message-small"></div>
             </label>
-            <button class="button" type="submit" id="submit">Go</button>
+            <button class="button" type="submit" id="submit">
+                Go
+            </button>
+            <div class="error-message" id="global">
+                Что-то пошло не так
+            </div>
         </form>
         <div class="div-center">
             <a class="tiny-ref" href="/login">

@@ -25,17 +25,25 @@ export class SignupModel {
         const resPassword = validation.validationPassword(values.password, values.passwordConfirm);
         const resEmail = validation.validationEmail(values.email);
 
-        if (values.name.empty) {
-            this.eventBus.emit('invalid', {name: 'Введите имя'})
-        } else if (resLogin !== '') {
-            this.eventBus.emit('invalid', {login: resLogin});
-        } else if (resEmail !== '') {
-            this.eventBus.emit('invalid', {email: resEmail});
-        } else if (resPassword !== '') {
+        let errors = {};
+        if (values.name === '') {
+            errors['name'] = 'Введите имя';
+        }
+        if (resLogin !== '') {
+            errors['login'] = resLogin;
+        }
+        if (resEmail !== '') {
+            errors['email'] = resEmail;
+        }
+        if (resPassword !== '') {
             console.log('Введите корреткный пароль');
-            this.eventBus.emit('invalid', {password: resPassword});
+            errors['password'] = resPassword;
+            errors['password-confirm'] = resPassword;
+        }
+        if (JSON.stringify(errors) != '{}') {
+            this.eventBus.emit('invalid', errors);
         } else {
-            Api.signupFetch(values.name, values.login, '' , values.email, values.password)
+            Api.signupFetch(values.name, values.login, 'yes' , values.email, values.password)
             .then((res) => {
                 if (res === undefined) {
                     console.log('NO ANSWER FROM BACKEND');
@@ -43,7 +51,7 @@ export class SignupModel {
                     this.eventBus.emit('hide login, show logout', {});
                     this.eventBus.emit('redirect to main', {})
                 } else {
-                    this.eventBus.emit('invalid', {name: 'Проблемы с регистарцией'})
+                    this.eventBus.emit('invalid', {global: 'Проблемы с регистарцией'})
                 }
             });
         }

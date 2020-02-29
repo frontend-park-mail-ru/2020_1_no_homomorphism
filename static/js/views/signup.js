@@ -41,16 +41,40 @@ export class SignupView {
 
     /**
      * показывает, что поля были заполнены неправильно
-     * @param error
+     * @param errors
      */
-    showErrors(error) {
-        console.log('INPUT ERROR ');
+    showErrors(errors) {
+        document.getElementsByClassName('sign-up-form')[0].style.borderColor = 'red';
+        for (let key in errors) {
+            if (key == 'global') {
+                document.getElementById('global').style.height = '20px';
+                document.getElementById('global').style.visibility = 'visible';
+                document.getElementById('global').style.marginTop = '21px';
+            } else {
+                const message = document.getElementById(key).nextElementSibling;
+                message.previousElementSibling.style.borderColor = 'red';
+                message.innerText = errors[key];
+                message.style.height = '15px';
+                message.style.marginBottom = '10px';
+                message.style.visibility = 'visible';
+            }
+        }
     }
 
     /**
      * отправляет данные формы
      */
     submit() {
+        document.querySelectorAll('.sign-up-form label').forEach(label => {
+            label.children[0].style.borderColor = '#ccc';
+            label.children[1].innerText = '';
+            label.children[1].style.height = '0';
+            label.children[1].style.marginBottom = '0';
+            label.children[1].style.visibility = 'hidden';
+        });
+        document.getElementById('global').style.height = '0';
+        document.getElementById('global').style.visibility = 'hidden';
+        document.getElementById('global').style.marginTop = '0';
         this.eventBus.emit('submit', {
             name: document.getElementById('name').value,
             login: document.getElementById('login').value,

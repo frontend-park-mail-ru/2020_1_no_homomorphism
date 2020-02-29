@@ -20,13 +20,12 @@ h2 {
     text-decoration: none
 }
 
-.sign-up-form {
+.sign-up-form, .login-form {
     width: 380px;
     margin: 32px auto;
     padding: 48px 32px 32px 32px;
     background: #fafafa;
     border: 1px solid #ebebeb;
-    box-shadow: #d9d9d9 0px 1px 1px 0px, #d9d9d9 0px 1px 2px 0px;
 }
 
 .sign-up-form .input-regular, select {
@@ -92,4 +91,12 @@ h2 {
 .button:hover span:after {
     opacity: 1;
     right: 0;
+}
+
+.error-message-small {
+    font-size: 13px;
+    text-align: left;
+    color: red;
+    padding-left: 8px;
+    height: 0;
 }
