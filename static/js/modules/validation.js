@@ -11,7 +11,7 @@ export  class Validation {
         if (email === '') {
             return 'Введите почту'
         }
-        let regExpr = new RegExp('^[a-z0-9_!#$%&+=*\\-]+(\.[a-z0-9_\\-]*)*@([a-z0-9][a-z0-9]+\.)*[a-z]{2,4}(\.[a-z]{2,4})+$');
+        let regExpr = new RegExp('(.)+@(.)+');
         if (!email.match(regExpr)) {
             return 'Некорректная почта';
         }
@@ -45,5 +45,9 @@ export  class Validation {
             return 'Пароль должен содержать не менее 3 заглавных или строчных латинских букв или цифр';
         }
         return '';
+    }
+
+    validationImage() {
+
     }
 }

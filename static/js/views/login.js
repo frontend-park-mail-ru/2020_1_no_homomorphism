@@ -42,6 +42,7 @@ export class LoginView {
         document.getElementsByClassName('error-message')[0].style.height = '20px';
         document.getElementsByClassName('error-message')[0].style.visibility = 'visible';
         document.getElementsByClassName('error-message')[0].style.marginTop = '21px';
+        document.getElementsByClassName('error-message')[0].innerHTML = 'KEKKEKEKKEKEKE';
         console.log('LOGIN ERROR');
     }
 
