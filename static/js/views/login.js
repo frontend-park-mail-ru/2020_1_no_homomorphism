@@ -39,10 +39,20 @@ export class LoginView {
      */
     showErrors(errors) {
         document.getElementsByClassName('login-form')[0].style.borderColor = 'red';
-        document.getElementsByClassName('error-message')[0].style.height = '20px';
-        document.getElementsByClassName('error-message')[0].style.visibility = 'visible';
-        document.getElementsByClassName('error-message')[0].style.marginTop = '21px';
-        document.getElementsByClassName('error-message')[0].innerHTML = 'KEKKEKEKKEKEKE';
+        for (let key in errors) {
+            if (key === 'global') {
+                document.getElementById('global').style.height = '20px';
+                document.getElementById('global').style.visibility = 'visible';
+                document.getElementById('global').style.marginTop = '21px';
+            } else {
+                const message = document.getElementById(key).nextElementSibling;
+                message.previousElementSibling.style.borderColor = 'red';
+                message.innerText = errors[key];
+                message.style.height = '15px';
+                message.style.marginBottom = '10px';
+                message.style.visibility = 'visible';
+            }
+        }
         console.log('LOGIN ERROR');
     }
 
@@ -50,6 +60,16 @@ export class LoginView {
      * отправляет данные формы
      */
     submit() {
+        document.querySelectorAll('.login-form label').forEach(label => {
+            label.children[0].style.borderColor = '#ccc';
+            label.children[1].innerText = '';
+            label.children[1].style.height = '0';
+            label.children[1].style.marginBottom = '0';
+            label.children[1].style.visibility = 'hidden';
+        });
+        document.getElementById('global').style.height = '0';
+        document.getElementById('global').style.visibility = 'hidden';
+        document.getElementById('global').style.marginTop = '0';
         this.eventBus.emit('submit', {
             login: document.getElementById('login').value,
             password: document.getElementById('password').value,

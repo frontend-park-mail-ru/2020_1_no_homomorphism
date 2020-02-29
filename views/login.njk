@@ -7,10 +7,12 @@
             <label>
                 Логин
                 <input type="text" id="login" required>
+                <div class="error-message-small"></div>
             </label>
             <label>
                 Пароль
                 <input type="password" id="password" required>
+                <div class="error-message-small"></div>
             </label>
             <div class="col col-6">
                 <!--label>
@@ -21,7 +23,7 @@
             <button class="button" type="submit" id="submit-login">
                 Войти
             </button>
-	    <div class="error-message">
+	    <div class="error-message" id="global">
                 Что-то пошло не так
         </div>
         </form>

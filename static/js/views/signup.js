@@ -46,7 +46,7 @@ export class SignupView {
     showErrors(errors) {
         document.getElementsByClassName('sign-up-form')[0].style.borderColor = 'red';
         for (let key in errors) {
-            if (key == 'global') {
+            if (key === 'global') {
                 document.getElementById('global').style.height = '20px';
                 document.getElementById('global').style.visibility = 'visible';
                 document.getElementById('global').style.marginTop = '21px';

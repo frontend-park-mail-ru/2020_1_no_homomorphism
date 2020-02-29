@@ -17,10 +17,15 @@ export class LoginModel {
      * @param values
      */
     submit(values) {
+        let errors = {};
         if (values.login.empty) {
-            this.eventBus.emit('invalid', 'Введите логин!')
-        } else if (values.password.empty) {
-            this.eventBus.emit('invalid', 'Введите пароль!')
+            errors['login'] = 'Введите логин!';
+        }
+        if (values.password.empty) {
+            errors['password'] = 'Введите пароль!';
+        }
+        if (JSON.stringify(errors) != '{}') {
+            this.eventBus.emit('invalid', errors);
         } else {
             Api.loginFetch(values.login, values.password)
             .then((res)=> {
@@ -34,7 +39,7 @@ export class LoginModel {
                     this.eventBus.emit('hide login, show logout', {});
                 } else {
                     console.log('ENTRY ERROR');
-                    this.eventBus.emit('invalid', 'Ошибка входа!')
+                    this.eventBus.emit('invalid', {global: 'Ошибка входа!'});
                 }
             });
         }
