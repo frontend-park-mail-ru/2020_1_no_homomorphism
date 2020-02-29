@@ -9,11 +9,11 @@ export  class Validation {
      */
     validationEmail(email = '') {
         if (email === '') {
-            return 'Введите почту'
+            return 'Enter email'
         }
         let regExpr = new RegExp('(.)+@(.)+');
         if (!email.match(regExpr)) {
-            return 'Некорректная почта';
+            return 'Incorrect email syntax';
         }
         return '';
     }
@@ -23,26 +23,33 @@ export  class Validation {
      */
     validationLogin (login = '') {
         let regExpr = new RegExp('^[a-zA-Z0-9_.]{3,}$');
+        if (login === '') {
+            return 'Enter login';
+        }
         if (!login.match(regExpr)) {
-            return 'Логин может содержать от 3 латинских букв или цифр';
+            return 'Login must contain at least 3 letters';
         }
         return '';
     }
     /**
      * @param {String} password1 Пароль
      * @param {String} password2 Повтор пароля
+     * @param {Boolean} signUp Валидация из регистрации?
      * @returns {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
      */
-    validationPassword(password1 = '', password2 = '') {
+    validationPassword(password1 = '', password2 = '', signUp = false) {
         if (password1 === '') {
-            return 'Введите пароль';
+            return 'Enter password';
         }
-        if (password1 !== password2) {
-            return 'Пароли не совпадают';
+        if (password2 === '' && signUp) {
+            return 'Repeat the password';
+        }
+        if (password1 !== password2 && signUp) {
+            return 'Passwords must match';
         }
         let regExpr = new RegExp('^[a-zA-Z0-9]{3,}$');
         if (!password1.match(regExpr)) {
-            return 'Пароль должен содержать не менее 3 заглавных или строчных латинских букв или цифр';
+            return 'Password must contain at least 3 letters or numbers';
         }
         return '';
     }

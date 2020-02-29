@@ -42,7 +42,7 @@ export class LoginView {
         document.getElementsByClassName('error-message')[0].style.height = '20px';
         document.getElementsByClassName('error-message')[0].style.visibility = 'visible';
         document.getElementsByClassName('error-message')[0].style.marginTop = '21px';
-        document.getElementsByClassName('error-message')[0].innerHTML = 'KEKKEKEKKEKEKE';
+        document.getElementsByClassName('error-message')[0].innerHTML = 'Error'; // TODO Вставка текста ошибки
         console.log('LOGIN ERROR');
     }
 

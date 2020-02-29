@@ -1,5 +1,5 @@
 import {Validation} from '../modules/validation.js';
-import {Api} from "../modules/api.js";
+import {Api} from '../modules/api.js';
 
 /**
  * модель странички регистрации
@@ -22,12 +22,12 @@ export class SignupModel {
         const validation = new Validation;
 
         const resLogin = validation.validationLogin(values.login);
-        const resPassword = validation.validationPassword(values.password, values.passwordConfirm);
+        const resPassword = validation.validationPassword(values.password, values.passwordConfirm, true);
         const resEmail = validation.validationEmail(values.email);
 
         let errors = {};
         if (values.name === '') {
-            errors['name'] = 'Введите имя';
+            errors['name'] = 'Enter your name';
         }
         if (resLogin !== '') {
             errors['login'] = resLogin;
@@ -36,24 +36,23 @@ export class SignupModel {
             errors['email'] = resEmail;
         }
         if (resPassword !== '') {
-            console.log('Введите корреткный пароль');
             errors['password'] = resPassword;
-            errors['password-confirm'] = resPassword;
+            //errors['password-confirm'] = resPassword;
         }
-        if (JSON.stringify(errors) != '{}') {
+        if (errors.size !== 0) {
             this.eventBus.emit('invalid', errors);
         } else {
-            Api.signupFetch(values.name, values.login, 'yes' , values.email, values.password)
-            .then((res) => {
-                if (res === undefined) {
-                    console.log('NO ANSWER FROM BACKEND');
-                } else if (res.ok) {
-                    this.eventBus.emit('hide login, show logout', {});
-                    this.eventBus.emit('redirect to main', {})
-                } else {
-                    this.eventBus.emit('invalid', {global: 'Проблемы с регистарцией'})
-                }
-            });
+            Api.signupFetch(values.name, values.login, 'yes', values.email, values.password)
+                .then((res) => {
+                    if (res === undefined) {
+                        console.log('NO ANSWER FROM BACKEND');
+                    } else if (res.ok) {
+                        this.eventBus.emit('hide login, show logout', {});
+                        this.eventBus.emit('redirect to main', {});
+                    } else {
+                        this.eventBus.emit('invalid', {global: 'Registration problems'}); // TODO Обрабатывать ответ бэка
+                    }
+                });
         }
     }
 }
