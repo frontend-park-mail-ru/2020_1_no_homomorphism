@@ -100,3 +100,11 @@ h2 {
     padding-left: 8px;
     height: 0;
 }
+
+.warning-message-small {
+    font-size: 13px;
+    text-align: left;
+    color: #ffae42;
+    padding-left: 8px;
+    height: 0;
+}

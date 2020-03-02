@@ -37,22 +37,21 @@ export class SignupModel {
         }
         if (resPassword !== '') {
             errors['password'] = resPassword;
-            //errors['password-confirm'] = resPassword;
         }
-        if (errors.size !== 0) {
+        if (JSON.stringify(errors) !== '{}') {
             this.eventBus.emit('invalid', errors);
         } else {
             Api.signupFetch(values.name, values.login, 'yes', values.email, values.password)
-                .then((res) => {
-                    if (res === undefined) {
-                        console.log('NO ANSWER FROM BACKEND');
-                    } else if (res.ok) {
-                        this.eventBus.emit('hide login, show logout', {});
-                        this.eventBus.emit('redirect to main', {});
-                    } else {
-                        this.eventBus.emit('invalid', {global: 'Registration problems'}); // TODO Обрабатывать ответ бэка
-                    }
-                });
+            .then((res) => {
+                if (res === undefined) {
+                    console.log('NO ANSWER FROM BACKEND');
+                } else if (res.ok) {
+                    this.eventBus.emit('hide login, show logout', {});
+                    this.eventBus.emit('redirect to main', {});
+                } else {
+                    this.eventBus.emit('invalid', {global: 'Signup error'}); // TODO Обрабатывать ответ бэка
+                }
+            });
         }
     }
 }

@@ -55,7 +55,7 @@ export class SettingsView {
     showErrors(errors) {
         for (let key in errors) {
             const message = document.getElementById(key).nextElementSibling;
-            message.previousElementSibling.style.borderColor = 'red';
+            message.previousElementSibling.style.borderColor = (message.getAttribute('class').indexOf('warning') !== -1 ? '#ffae42' : 'red');
             message.innerText = errors[key];
             message.style.height = '15px';
             message.style.marginBottom = '10px';

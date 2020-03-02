@@ -38,9 +38,11 @@ export class LoginView {
      * @param errors
      */
     showErrors(errors) {
+        console.log(errors);
         document.getElementsByClassName('login-form')[0].style.borderColor = 'red';
         for (let key in errors) {
             if (key === 'global') {
+                document.getElementById('global').innerText = errors[key];
                 document.getElementById('global').style.height = '20px';
                 document.getElementById('global').style.visibility = 'visible';
                 document.getElementById('global').style.marginTop = '21px';

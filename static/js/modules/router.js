@@ -67,7 +67,6 @@ export class Router {
         window.history.replaceState('', {}, newPath);
         Api.coockieFetch()
         .then((res) => {
-	    console.log(res);
             if (res.ok) {
                 this.views[newPath].render(this.root, true);
             } else {

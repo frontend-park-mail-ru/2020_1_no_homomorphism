@@ -37,14 +37,14 @@ export  class Validation {
      * @param {Boolean} signUp Валидация из регистрации?
      * @returns {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
      */
-    validationPassword(password1 = '', password2 = '', signUp = false) {
+    validationPassword(password1 = '', password2 = '', passwordConfirm = false) {
         if (password1 === '') {
             return 'Enter password';
         }
-        if (password2 === '' && signUp) {
+        if (password2 === '' && passwordConfirm) {
             return 'Repeat the password';
         }
-        if (password1 !== password2 && signUp) {
+        if (password1 !== password2 && passwordConfirm) {
             return 'Passwords must match';
         }
         let regExpr = new RegExp('^[a-zA-Z0-9]{3,}$');

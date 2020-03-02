@@ -30,7 +30,7 @@ export class LoginModel {
         if (resPassword !== '') {
             errors['password'] = resPassword;
         }
-        if (errors.size !== 0) {
+        if (JSON.stringify(errors) !== '{}') {
             this.eventBus.emit('invalid', errors);
         } else {
             Api.loginFetch(values.login, values.password)

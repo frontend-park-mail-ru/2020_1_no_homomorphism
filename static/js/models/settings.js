@@ -56,18 +56,19 @@ export class SettingsModel {
      */
     submit(values) {
         const validation = new Validation;
-        const resPassword = validation.validationPassword(values.newPassword, values.newPasswordConfirm);
+        const resPassword = validation.validationPassword(values.newPassword, values.newPasswordConfirm, values.newPassword !== '');
         const resEmail = validation.validationEmail(values.email);
-
         let errors = {};
         if (values.newPassword !== '' && resPassword !== '') {
             errors['newPassword'] = resPassword;
-            errors['newPasswordConfirm'] = resPassword;
+        }
+        if (values.password === '') {
+            errors['password'] = 'Enter your password to confirm changes';
         }
         if (values.email === '') {
-                errors['email'] = 'Удолять email низзя';
+            errors['email'] = 'Удолять email низзя';
         } else if (resEmail !== '') {
-                errors['email'] = resEmail;
+            errors['email'] = resEmail;
         }
         if (JSON.stringify(errors) !== '{}') {
             this.eventBus.emit('invalid', errors);
