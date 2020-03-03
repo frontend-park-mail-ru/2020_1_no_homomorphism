@@ -58,9 +58,9 @@ export class Router {
                     this.views['/'].render(this.root, false);
                 }
             })
-	    .then(() => {
+	        .then(() => {
                 this.views['/player'].render();
-	    });
+	        });
             return;
         }
         this.curPath = newPath;
@@ -73,9 +73,9 @@ export class Router {
                 this.views[newPath].render(this.root, false);
             }
         })
-	.then(() => {
+	    .then(() => {
             this.views['/player'].render();
-	});
+	    });
     }
 
     /**
