@@ -84,7 +84,6 @@ export class Router {
      * */
     start() {
         window.addEventListener('popstate', (event) => {
-            event.preventDefault();
             this.check(event.target.location.pathname, false);
         });
         window.addEventListener('click', (event) => {
