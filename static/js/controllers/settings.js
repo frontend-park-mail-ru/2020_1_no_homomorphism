@@ -19,7 +19,6 @@ export class SettingsController {
         this.eventBus.on('submit', this.model.submit.bind(this));
         this.eventBus.on('get user data', this.model.getUserData.bind(this));
         //this.eventBus.on('add outer', this.model.addOuter);
-        this.eventBus.on('redirect', router.redirect);
         this.eventBus.on('redirect', router.redirect.bind(router));
     }
 }
