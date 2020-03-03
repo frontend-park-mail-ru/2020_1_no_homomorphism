@@ -33,20 +33,22 @@ export class Router {
      * Редирект
      */
     redirect(to) {
-        this.check(to);
+        this.check(to, true);
     }
 
     /**
      * Запуск рендеринга
      * @param {string} newPath
      * */
-    check(newPath) {
+    check(newPath, pushState) {
         if (newPath === this.curPath) {
             // Уже на этой страничке
             return;
         }
         if (!(newPath in this.views)) {
-            window.history.pushState('', {}, '/');
+            if (pushState) {
+                window.history.pushState('', {}, '/');
+            }
             Api.coockieFetch()
             .then((res) => {
                 if (res.ok) {
@@ -61,7 +63,9 @@ export class Router {
             return;
         }
         this.curPath = newPath;
-        window.history.pushState('', {}, newPath);
+        if (pushState) {
+            window.history.pushState('', {}, newPath);
+        }
         Api.coockieFetch()
         .then((res) => {
             if (res.ok) {
@@ -80,21 +84,22 @@ export class Router {
      * */
     start() {
         window.addEventListener('popstate', (event) => {
-            this.check(event.target.location.pathname);
+            event.preventDefault();
+            this.check(event.target.location.pathname, false);
         });
         window.addEventListener('click', (event) => {
             let current = event.target;
             while (current != window && current != document.body && current != null) {
                 if (current instanceof HTMLAnchorElement) {
                     event.preventDefault();
-                    this.check(current.pathname);
+                    this.check(current.pathname, true);
                     break;
                 } else {
                     current = current.parentNode;
                 }
             }
         });
-        this.check(window.location.pathname);
+        this.check(window.location.pathname, true);
         this.views['/player'].setEventListeners();
     }
 }
