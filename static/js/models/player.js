@@ -21,16 +21,6 @@ export class PlayerModel {
     }
 
     /**
-     * рисует кнопочку логаута
-     */
-    logout() {
-        Api.logoutFetch();
-        document.getElementById('login-link').style.visibility = 'visible';
-        document.getElementById('signup-link').style.visibility = 'visible';
-        document.getElementById('logout-button').style.visibility = 'hidden';
-    }
-
-    /**
      * достает первый трек в листе
      */
     getFirst() {

@@ -52,30 +52,20 @@ export class Router {
             window.history.replaceState('', {}, '/');
             Api.coockieFetch()
             .then((res) => {
-                if (res.ok) {
-                    this.views['/'].render(this.root, true);
-                } else {
-                    this.views['/'].render(this.root, false);
-                }
-            })
-	    .then(() => {
-                this.views['/player'].render();
-	    });
+                this.views['/'].render(this.root);
+                this.views['navbar'].render(res.ok);
+                this.views['player'].render();
+            });
             return;
         }
         this.curPath = newPath;
         window.history.replaceState('', {}, newPath);
         Api.coockieFetch()
         .then((res) => {
-            if (res.ok) {
-                this.views[newPath].render(this.root, true);
-            } else {
-                this.views[newPath].render(this.root, false);
-            }
-        })
-	.then(() => {
-            this.views['/player'].render();
-	});
+            this.views[newPath].render(this.root);
+            this.views['navbar'].render(res.ok);
+            this.views['player'].render();
+        });
     }
 
     /**
@@ -95,6 +85,7 @@ export class Router {
             }
         });
         this.check(window.location.pathname);
-        this.views['/player'].setEventListeners();
+        this.views['player'].setEventListeners();
+        this.views['navbar'].setEventListeners();
     }
 }
