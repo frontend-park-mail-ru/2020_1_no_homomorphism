@@ -13,11 +13,11 @@ window.addEventListener('DOMContentLoaded', () => {
     const globalEventBus = new EventBus();
     const navbarController = new NavbarController(router, globalEventBus);
     const indexController = new IndexController();
-    const loginController = new LoginController(router);
-    const signupController = new SignupController(router);
-    const playerController = new PlayerController(router, globalEventBus);
+    const loginController = new LoginController(router, globalEventBus);
+    const signupController = new SignupController(router, globalEventBus);
+    const playerController = new PlayerController(router);
     const profileController = new ProfileController(router);
-    const settingsController = new SettingsController(router);
+    const settingsController = new SettingsController(router, globalEventBus);
 
     router.addView('navbar', navbarController.view);
     router.addView('player', playerController.view);

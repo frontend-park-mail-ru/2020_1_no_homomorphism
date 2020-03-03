@@ -9,8 +9,9 @@ export class SignupModel {
      * конструктор
      * @param eventBus {EventBus}
      */
-    constructor(eventBus) {
+    constructor(eventBus, globalEventBus) {
         this.eventBus = eventBus;
+        this.globalEventBus = globalEventBus;
         this.eventBus.on('submit', this.submit.bind(this));
     }
 
@@ -46,7 +47,7 @@ export class SignupModel {
                 if (res === undefined) {
                     console.log('NO ANSWER FROM BACKEND');
                 } else if (res.ok) {
-                    this.eventBus.emit('hide login, show logout', {});
+                    this.globalEventBus.emit('login', {});
                     this.eventBus.emit('redirect to main', {});
                 } else {
                     this.eventBus.emit('invalid', {global: 'Signup error'}); // TODO Обрабатывать ответ бэка

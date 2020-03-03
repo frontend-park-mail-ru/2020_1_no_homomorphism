@@ -33,7 +33,6 @@ export class ProfileModel {
             } else {
                 this.eventBus.emit('no answer', 'Ошибка загрузки профиля')
             }
-        })
-
+        });
     }
 }

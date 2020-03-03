@@ -5,7 +5,6 @@ export class LoginView {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.eventBus.on('invalid', this.showErrors);
-        this.eventBus.on('hide login, show logout', this.hideLoginShowLogout.bind(this));
     }
 
     /**
@@ -65,16 +64,6 @@ export class LoginView {
             login: document.getElementById('login').value,
             password: document.getElementById('password').value,
         });
-    }
-
-    /**
-     * прячет кнопку логина и регистрации и показывает кнопку логаута
-     */
-    hideLoginShowLogout() {
-        document.getElementById('login-link').style.visibility = 'hidden';
-        document.getElementById('signup-link').style.visibility = 'hidden';
-        document.getElementById('logout-button').style.visibility = 'visible';
-        this.eventBus.emit('redirect to main', 'Успешный вход');
     }
 
     //changeRemember() {

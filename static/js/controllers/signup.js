@@ -10,9 +10,10 @@ export class SignupController {
      * Конструктор
      * @param router {Router}
      */
-    constructor(router) {
+    constructor(router, globalEventBus) {
         this.eventBus = new EventBus();
-        this.model = new SignupModel(this.eventBus);
+        this.globalEventBus = globalEventBus;
+        this.model = new SignupModel(this.eventBus, this.globalEventBus);
         this.view = new SignupView(this.eventBus);
         this.eventBus.on('redirect to main', router.redirectToMain.bind(router));
     }

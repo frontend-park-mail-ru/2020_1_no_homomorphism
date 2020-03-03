@@ -9,8 +9,9 @@ export class LoginModel {
      * Конструктор
      * @param eventBus {EventBus}
      */
-    constructor(eventBus) {
+    constructor(eventBus, globalEventBus) {
         this.eventBus = eventBus;
+        this.globalEventBus = globalEventBus;
     }
 
     /**
@@ -42,7 +43,7 @@ export class LoginModel {
                 }
                 if (res.ok) {
                     console.log('SUCCESS');
-                    this.eventBus.emit('hide login, show logout', {});
+                    this.globalEventBus.emit('login', {});
                 } else {
                     console.log('ENTRY ERROR');
                     this.eventBus.emit('invalid', {global: 'Login error'});

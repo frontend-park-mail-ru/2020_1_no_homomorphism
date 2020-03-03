@@ -32,6 +32,11 @@ export class Router {
     /**
      * Редирект
      */
+    logoutRedirect(to) {
+        if (window.location.pathname === '/profile' || window.location.pathname === '/settings') {
+            this.check(to);
+        }
+    }
     redirectToMain() {
         this.check('/');
     }
