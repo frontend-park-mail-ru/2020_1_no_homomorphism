@@ -79,6 +79,9 @@ export class Router {
      * Добавление EventListener'a
      * */
     start() {
+        window.addEventListener('popstate', (event) => {
+            console.log(event);
+        });
         window.addEventListener('click', (event) => {
             let current = event.target;
             while (current != window && current != document.body && current != null) {
