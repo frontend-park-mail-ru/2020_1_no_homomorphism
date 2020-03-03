@@ -32,11 +32,8 @@ export class Router {
     /**
      * Редирект
      */
-    redirectToMain() {
-        this.check('/');
-    }
-    redirectToProfile() {
-        this.check('/profile');
+    redirect(to) {
+        this.check(to);
     }
 
     /**
@@ -49,7 +46,7 @@ export class Router {
             return;
         }
         if (!(newPath in this.views)) {
-            window.history.replaceState('', {}, '/');
+            window.history.pushState('', {}, '/');
             Api.coockieFetch()
             .then((res) => {
                 if (res.ok) {
@@ -58,13 +55,13 @@ export class Router {
                     this.views['/'].render(this.root, false);
                 }
             })
-	    .then(() => {
+            .then(() => {
                 this.views['/player'].render();
-	    });
+            });
             return;
         }
         this.curPath = newPath;
-        window.history.replaceState('', {}, newPath);
+        window.history.pushState('', {}, newPath);
         Api.coockieFetch()
         .then((res) => {
             if (res.ok) {
@@ -73,9 +70,9 @@ export class Router {
                 this.views[newPath].render(this.root, false);
             }
         })
-	.then(() => {
+        .then(() => {
             this.views['/player'].render();
-	});
+        });
     }
 
     /**

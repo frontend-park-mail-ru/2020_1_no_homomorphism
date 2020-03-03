@@ -22,7 +22,7 @@ export class ProfileModel {
         .then((res) => {
             if (res === undefined){
                 console.log('NO ANSWER FROM BACKEND');
-                this.eventBus.emit('redirect to main', 'Ошибка загрузки профиля');
+                this.eventBus.emit('redirect to main', '/');
                 return
             }
             if (res.ok) {
@@ -31,7 +31,7 @@ export class ProfileModel {
                     this.eventBus.emit('user data', JSON.parse(data));
                 })
             } else {
-                this.eventBus.emit('no answer', 'Ошибка загрузки профиля')
+                this.eventBus.emit('no answer', '/')
             }
         })
 

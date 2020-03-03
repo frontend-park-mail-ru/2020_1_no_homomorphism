@@ -14,6 +14,6 @@ export class SignupController {
         this.eventBus = new EventBus();
         this.model = new SignupModel(this.eventBus);
         this.view = new SignupView(this.eventBus);
-        this.eventBus.on('redirect to main', router.redirectToMain.bind(router));
+        this.eventBus.on('redirect', router.redirect.bind(router));
     }
 }

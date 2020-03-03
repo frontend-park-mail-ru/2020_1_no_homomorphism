@@ -37,7 +37,7 @@ export class LoginModel {
             .then((res) => {
                 if (res === undefined) {
                     console.log('NO ANSWER FROM BACKEND');
-                    this.eventBus.emit('redirect to main', 'No answer from backend');
+                    this.eventBus.emit('redirect to main', '/');
                     return;
                 }
                 if (res.ok) {
