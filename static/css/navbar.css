@@ -8,7 +8,16 @@
     box-shadow: 0 3px 6px silver;
     display: flex;
     align-items: center;
-    z-index: 2;
+    z-index: 3;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: black;
+}
+
+.navbar-row {
+    width: 100%;
 }
 
 .navbar .logo {
@@ -17,23 +26,50 @@
     margin: 5px 0;
 }
 
+.navbar .name {
+    margin-left: 4px;
+    margin-bottom: -13px;
+}
+
 .navbar .login {
-    margin-left: 0.5%;
+    margin-left: 1.5%;
+    font-weight: bold;
+}
+
+.navbar .login:hover {
+    background: silver;
+}
+
+.navbar .logout {
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    background: white;
 }
 
 .navbar .signup {
     margin-left: auto;
+    font-weight: bold;
+}
+
+.navbar .signup:hover {
+    background: silver;
 }
 
 .navbar .search {
+    box-shadow: inset 0px 0px 4px black;
     margin-left: 2%;
-    margin-right: 0.5%;
-    height: 2em;
+    height: 2.3em;
 }
 
 .navbar .search-button {
-    border-radius: 0.33em;
-    background: white;
-    outline: none;
-    height: 2em;
+    position: relative;
+    left: -33px;
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+.navbar .search-button:hover {
+    opacity: 1;
 }

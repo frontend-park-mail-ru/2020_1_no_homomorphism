@@ -25,9 +25,10 @@ export class PlayerModel {
      */
     logout() {
         Api.logoutFetch();
-        document.getElementById('login-link').style.visibility = 'visible';
-        document.getElementById('signup-link').style.visibility = 'visible';
-        document.getElementById('logout-button').style.visibility = 'hidden';
+        document.getElementById('login-link').style.display = 'block';
+        document.getElementById('signup-link').style.display = 'block';
+        document.getElementById('logout-button').style.display = 'none';
+        document.getElementById('profile-link').style.display = 'none';
     }
 
     /**

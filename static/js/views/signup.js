@@ -18,15 +18,15 @@ export class SignupView {
      */
     render(root, loggedIn) {
         if (loggedIn) {
-            document.getElementById('profile-link').style.visibility = 'visible';
-            document.getElementById('logout-button').style.visibility = 'visible';
-            document.getElementById('signup-link').style.visibility = 'hidden';
-            document.getElementById('login-link').style.visibility = 'hidden';
+            document.getElementById('profile-link').style.display = 'block';
+            document.getElementById('logout-button').style.display = 'block';
+            document.getElementById('signup-link').style.display = 'none';
+            document.getElementById('login-link').style.display = 'none';
         } else {
-            document.getElementById('signup-link').style.visibility = 'visible';
-            document.getElementById('login-link').style.visibility = 'visible';
-            document.getElementById('profile-link').style.visibility = 'hidden';
-            document.getElementById('logout-button').style.visibility = 'hidden';
+            document.getElementById('signup-link').style.display = 'block';
+            document.getElementById('login-link').style.display = 'block';
+            document.getElementById('profile-link').style.display = 'none';
+            document.getElementById('logout-button').style.display = 'none';
         }
         root.innerHTML = nunjucks.render('../../../views/signup.njk');
 
@@ -86,8 +86,9 @@ export class SignupView {
     }
 
     hideLoginShowLogout() {
-        document.getElementById('login-link').style.visibility = 'hidden';
-        document.getElementById('signup-link').style.visibility = 'hidden';
-        document.getElementById('logout-button').style.visibility = 'visible';
+        document.getElementById('login-link').style.display = 'none';
+        document.getElementById('signup-link').style.display = 'none';
+        document.getElementById('logout-button').style.display = 'block';
+        document.getElementById('profile-link').style.display = 'block';
     }
 }
