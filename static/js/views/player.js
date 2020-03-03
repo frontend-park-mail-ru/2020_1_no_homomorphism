@@ -12,8 +12,6 @@ export class PlayerView {
         this.repeatState = 0;
         this.muted = false;
         this.volume = 1;
-
-        document.getElementById('logout-button').addEventListener('click', () => this.eventBus.emit('logout', {}));
     }
 
     load() {

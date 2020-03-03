@@ -44,6 +44,7 @@ export class LoginModel {
                 if (res.ok) {
                     console.log('SUCCESS');
                     this.globalEventBus.emit('login', {});
+                    this.eventBus.emit('redirect to main', {});
                 } else {
                     console.log('ENTRY ERROR');
                     this.eventBus.emit('invalid', {global: 'Login error'});

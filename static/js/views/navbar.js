@@ -22,7 +22,7 @@ export class NavbarView {
         document.getElementById('login-link').style.visibility = (loggedIn ? 'hidden' : 'visible');
     }
     setEventListeners() {
-        document.getElementById('logout-button').addEventListener('click', this.logout);
+        document.getElementById('logout-button').addEventListener('click', this.logout.bind(this));
     }
 
     login() {
@@ -37,10 +37,10 @@ export class NavbarView {
      */
     logout() {
         this.eventBus.emit('logout', {});
-        this.globalEventBus.emit('logout redirect', '/');
         document.getElementById('login-link').style.visibility = 'visible';
         document.getElementById('signup-link').style.visibility = 'visible';
         document.getElementById('logout-button').style.visibility = 'hidden';
         document.getElementById('profile-link').style.visibility = 'hidden';
+        this.globalEventBus.emit('logout redirect', '/');
     }
 }

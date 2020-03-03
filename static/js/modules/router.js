@@ -33,7 +33,9 @@ export class Router {
      * Редирект
      */
     logoutRedirect(to) {
+        console.log('logout redirect');
         if (window.location.pathname === '/profile' || window.location.pathname === '/settings') {
+            console.log('redirecting...');
             this.check(to);
         }
     }
