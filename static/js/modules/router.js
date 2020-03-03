@@ -80,7 +80,7 @@ export class Router {
      * */
     start() {
         window.addEventListener('popstate', (event) => {
-            console.log(event);
+            this.check(event.target.location.pathname);
         });
         window.addEventListener('click', (event) => {
             let current = event.target;
