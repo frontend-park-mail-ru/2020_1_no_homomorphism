@@ -22,7 +22,7 @@ export class ProfileModel {
         .then((res) => {
             if (res === undefined){
                 console.log('NO ANSWER FROM BACKEND');
-                this.eventBus.emit('redirect to main', '/');
+                this.eventBus.emit('redirect', '/');
                 return
             }
             if (res.ok) {
