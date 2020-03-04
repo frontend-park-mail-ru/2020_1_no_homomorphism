@@ -36,18 +36,23 @@ export class SettingsModel {
      * обновляет аватар юзера
      */
     resetAvatar() {
-        console.log('CAME TO ADD');
         const fileAttach = document.getElementById('avatar-upload');
-        console.log("File size:" + fileAttach.files[0].size);
-        const fData = new FormData();
-        fData.append('profile_image', fileAttach.files[0], 'kek.png');
-        Api.profilePhotoFetch(fData)
-        .then((response) => {
-            if (response.ok) {
-                this.eventBus.emit('get user data', {});
-            }
-        });
-
+	const validation = new Validation;
+	const resImage = validation.validationImage(fileAttach.files[0].size, fileAttach.files[0].type.split('/').pop().toLowerCase());
+	if (resImage !== '') {
+	    console.log('WRONG FORMAT'); // TODO добавить обработку ошибочки
+	    this.eventBus.emit('invalid', resImage);
+	} else {
+	    console.log('UPLOADED');
+    	    const fData = new FormData();
+	    fData.append('profile_image', fileAttach.files[0], 'kek.png');
+            Api.profilePhotoFetch(fData)
+            .then((response) => {
+                if (response.ok) {
+                    this.eventBus.emit('get user data', {});
+                }
+            });
+	}
     }
 
     /**

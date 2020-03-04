@@ -54,7 +54,20 @@ export  class Validation {
         return '';
     }
 
-    validationImage() {
+    validationImage(size, extension) {
+        console.log("File size: " + size);
+        console.log("File extension: " + extension);
 
+	if (size > 1048576) {
+	    console.log('too big');
+	    return 'Max allowable size - 1Mb';
+	}
+	let allowableExtension = ['png','jpg','gif'];
+	if (allowableExtension.indexOf(extension) === -1) {
+	    console.log('wrong extension');
+	    return 'Allowable extensions - png, jpg, gif';
+	}
+	return '';
     }
 }
+
