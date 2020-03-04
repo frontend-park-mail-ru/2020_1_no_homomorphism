@@ -11,7 +11,7 @@ export class SettingsModel {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-    }
+    } // kek
 
     /**
      * получает данный юзера
