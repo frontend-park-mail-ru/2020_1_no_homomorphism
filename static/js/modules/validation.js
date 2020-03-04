@@ -2,14 +2,14 @@
  * Валидация данных
  * @class Validation
  */
-export  class Validation {
+export class Validation {
     /**
      * @param {String} email
      * @returns {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
      */
     validationEmail(email = '') {
         if (email === '') {
-            return 'Enter email'
+            return 'Enter email';
         }
         let regExpr = new RegExp('(.)+@(.)+');
         if (!email.match(regExpr)) {
@@ -17,11 +17,12 @@ export  class Validation {
         }
         return '';
     }
+
     /**
      * @param {String} login
      * @returns {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
      */
-    validationLogin (login = '') {
+    validationLogin(login = '') {
         let regExpr = new RegExp('^[a-zA-Z0-9_.]{3,}$');
         if (login === '') {
             return 'Enter login';
@@ -31,6 +32,7 @@ export  class Validation {
         }
         return '';
     }
+
     /**
      * @param {String} password1 Пароль
      * @param {String} password2 Повтор пароля
@@ -54,7 +56,19 @@ export  class Validation {
         return '';
     }
 
-    validationImage() {
+    validationImage(size, extension) {
+        console.log('File size: ' + size);
+        console.log('File extension: ' + extension);
 
+        if (size > 1048576) {
+            console.log('too big');
+            return 'Max allowable size - 1Mb';
+        }
+        let allowableExtension = ['png', 'jpg', 'gif'];
+        if (allowableExtension.indexOf(extension) === -1) {
+            console.log('wrong extension');
+            return 'Allowable extensions - png, jpg, gif';
+        }
+        return '';
     }
 }
