@@ -25,18 +25,18 @@ export class SignupModel {
         const resPassword = validation.validationPassword(values.password, values.passwordConfirm, true);
         const resEmail = validation.validationEmail(values.email);
 
-        let errors = {};
+        const errors = {};
         if (values.name === '') {
-            errors['name'] = 'Enter your name';
+            errors.name = 'Enter your name';
         }
         if (resLogin !== '') {
-            errors['login'] = resLogin;
+            errors.login = resLogin;
         }
         if (resEmail !== '') {
-            errors['email'] = resEmail;
+            errors.email = resEmail;
         }
         if (resPassword !== '') {
-            errors['password'] = resPassword;
+            errors.password = resPassword;
         }
         if (JSON.stringify(errors) !== '{}') {
             this.eventBus.emit('invalid', errors);

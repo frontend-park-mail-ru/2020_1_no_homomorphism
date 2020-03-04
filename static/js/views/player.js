@@ -13,13 +13,24 @@ export class PlayerView {
         this.muted = false;
         this.volume = 1;
 
+        this.eventBus.on('draw play', this.drawPlay.bind(this));
+        this.eventBus.on('draw pause', this.drawPause.bind(this));
+        this.eventBus.on('track update', this.updateTrack.bind(this));
+        this.eventBus.on('draw tracklist', this.drawTracklist.bind(this));
+        this.eventBus.on('draw timeline', this.drawTimeline.bind(this));
+        this.eventBus.on('draw shuffle', this.drawShuffle.bind(this));
+        this.eventBus.on('draw unshuffle', this.drawUnshuffle.bind(this));
+        this.eventBus.on('draw repeat', this.drawRepeat.bind(this));
+        this.eventBus.on('draw repeat one', this.drawRepeatOne.bind(this));
+        this.eventBus.on('draw unrepeat', this.drawUnrepeat.bind(this));
+        this.eventBus.on('draw mute', this.drawMute.bind(this));
+        this.eventBus.on('draw unmute', this.drawUnmute.bind(this));
+
+        this.eventBus.emit('init', {});
+
         document.getElementById('logout-button').addEventListener('click', () => this.eventBus.emit('logout', {}));
     }
 
-    load() {
-        this.eventBus.emit('init', {});
-        this.render();
-    }
     render() {
         const body = document.getElementsByTagName('body')[0];
         const left = (this.expanded ? body.clientWidth - document.getElementsByClassName('main-pos')[0].clientWidth : body.clientWidth - 13);

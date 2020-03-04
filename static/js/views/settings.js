@@ -7,6 +7,7 @@ export class SettingsView {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
+        this.eventBus.on('invalid', this.showErrors);
     }
 
     /**

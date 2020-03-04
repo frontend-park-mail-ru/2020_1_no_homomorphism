@@ -21,7 +21,6 @@ export class ProfileModel {
         Api.profileFetch()
         .then((res) => {
             if (res === undefined){
-                console.log('NO ANSWER FROM BACKEND');
                 this.eventBus.emit('redirect to main', 'Ошибка загрузки профиля');
                 return
             }

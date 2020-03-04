@@ -11,6 +11,7 @@ export class LoginModel {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
+        this.eventBus.on('submit', this.submit.bind(this));
     }
 
     /**
@@ -23,12 +24,12 @@ export class LoginModel {
         const resLogin = validation.validationLogin(values.login);
         const resPassword = validation.validationPassword(values.password, values.passwordConfirm);
 
-        let errors = {};
+        const errors = {};
         if (resLogin !== '') {
-            errors['login'] = resLogin;
+            errors.login = resLogin;
         }
         if (resPassword !== '') {
-            errors['password'] = resPassword;
+            errors.password = resPassword;
         }
         if (JSON.stringify(errors) !== '{}') {
             this.eventBus.emit('invalid', errors);
@@ -36,15 +37,12 @@ export class LoginModel {
             Api.loginFetch(values.login, values.password)
             .then((res) => {
                 if (res === undefined) {
-                    console.log('NO ANSWER FROM BACKEND');
                     this.eventBus.emit('redirect to main', 'No answer from backend');
                     return;
                 }
                 if (res.ok) {
-                    console.log('SUCCESS');
                     this.eventBus.emit('hide login, show logout', {});
                 } else {
-                    console.log('ENTRY ERROR');
                     this.eventBus.emit('invalid', {global: 'Login error'});
                 }
             });

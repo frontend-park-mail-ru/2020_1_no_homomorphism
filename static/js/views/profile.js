@@ -7,11 +7,7 @@ export class ProfileView {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-
-    }
-
-    showErrors(error) {
-        console.log('INPUT ERROR ');
+        this.eventBus.on('invalid', this.showErrors);
     }
 
     /**
