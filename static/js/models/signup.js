@@ -15,11 +15,14 @@ export class SignupModel {
         this.eventBus.on('cookie fetch request', this.cookieFetch.bind(this));
     }
 
+    /**
+     * Проверка, залогинен ли пользователь
+     */
     cookieFetch() {
         Api.cookieFetch()
-        .then((res) => {
-            this.eventBus.emit('cookie fetch response', res.ok);
-        });
+            .then((res) => {
+                this.eventBus.emit('cookie fetch response', res.ok);
+            });
     }
 
     /**
@@ -47,14 +50,14 @@ export class SignupModel {
             this.eventBus.emit('invalid', errors);
         } else {
             Api.signupFetch(values.name, values.login, 'yes', values.email, values.password)
-            .then((res) => {
-                if (res.ok) {
-                    this.eventBus.emit('hide login, show logout', {});
-                    this.eventBus.emit('redirect to main', {});
-                } else {
-                    this.eventBus.emit('invalid', {global: 'Signup error'}); // TODO Обрабатывать ответ бэка
-                }
-            });
+                .then((res) => {
+                    if (res.ok) {
+                        this.eventBus.emit('hide login, show logout', {});
+                        this.eventBus.emit('redirect to main', {});
+                    } else {
+                        this.eventBus.emit('invalid', {global: 'Signup error'}); // TODO Обрабатывать ответ бэка
+                    }
+                });
         }
     }
 }

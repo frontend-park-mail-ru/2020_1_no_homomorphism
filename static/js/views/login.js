@@ -13,7 +13,7 @@ export class LoginView {
 
     /**
     * рендерит страничку входа
-    * @param root
+    * @param {Object} root
     */
     render(root) {
         this.eventBus.on('cookie fetch response', (loggedIn) => {
@@ -29,7 +29,7 @@ export class LoginView {
                 document.getElementById('logout-button').style.visibility = 'hidden';
             }
             // eslint-disable-next-line no-undef
-            root.innerHTML = nunjucks.render('../../../views/login.njk'); // TODO Нужно ли это импортить как-то?
+            root.innerHTML = nunjucks.render('../../../views/login.njk');
         });
         this.eventBus.emit('cookie fetch request', {});
         document.addEventListener('click', (event) => {

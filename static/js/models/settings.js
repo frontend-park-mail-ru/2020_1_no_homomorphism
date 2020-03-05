@@ -14,15 +14,18 @@ export class SettingsModel {
         this.eventBus.on('avatar upload', this.resetAvatar.bind(this));
         this.eventBus.on('submit', this.submit.bind(this));
         this.eventBus.on('get user data', this.getUserData.bind(this));
-        //this.eventBus.on('add outer', this.model.addOuter);
+        // this.eventBus.on('add outer', this.model.addOuter);
         this.eventBus.on('cookie fetch request', this.cookieFetch.bind(this));
     }
 
+    /**
+     * Проверка, залогинен ли пользователь
+     */
     cookieFetch() {
         Api.cookieFetch()
-        .then((res) => {
-            this.eventBus.emit('cookie fetch response', res.ok);
-        });
+            .then((res) => {
+                this.eventBus.emit('cookie fetch response', res.ok);
+            });
     }
 
     /**
@@ -30,16 +33,16 @@ export class SettingsModel {
      */
     getUserData() {
         Api.profileFetch()
-        .then(res => {
-            if (res.ok) {
-                res.json()
-                .then(data => {
-                    this.eventBus.emit('user data', data);
-                });
-            } else {
-                this.eventBus.emit('no answer', 'Ошибка загрузки профиля');
-            }
-        });
+            .then((res) => {
+                if (res.ok) {
+                    res.json()
+                        .then((data) => {
+                            this.eventBus.emit('user data', data);
+                        });
+                } else {
+                    this.eventBus.emit('no answer', 'Ошибка загрузки профиля');
+                }
+            });
     }
 
     /**
@@ -59,11 +62,11 @@ export class SettingsModel {
             const fData = new FormData();
             fData.append('profile_image', fileAttach.files[0], 'kek.png');
             Api.profilePhotoFetch(fData)
-            .then((response) => {
-                if (response.ok) {
-                    this.eventBus.emit('get user data', {});
-                }
-            });
+                .then((response) => {
+                    if (response.ok) {
+                        this.eventBus.emit('get user data', {});
+                    }
+                });
         }
     }
 
@@ -73,7 +76,11 @@ export class SettingsModel {
      */
     submit(values) {
         // const validation = new Validation;
-        const resPassword = Validation.password(values.newPassword, values.newPasswordConfirm, values.newPassword !== '');
+        const resPassword = Validation.password(
+            values.newPassword,
+            values.newPasswordConfirm,
+            values.newPassword !== '',
+        );
         const resEmail = Validation.email(values.email);
         const errors = {};
         if (values.newPassword !== '' && resPassword !== '') {
@@ -91,14 +98,14 @@ export class SettingsModel {
             this.eventBus.emit('invalid', errors);
         } else {
             Api.profileEditFetch(values.name, values.email, values.password, values.newPassword)
-            .then((res) => {
-                if (res === undefined) {
-                    return;
-                }
-                if (res.ok) {
-                    this.eventBus.emit('redirect to profile', {});
-                }
-            });
+                .then((res) => {
+                    if (res === undefined) {
+                        return;
+                    }
+                    if (res.ok) {
+                        this.eventBus.emit('redirect to profile', {});
+                    }
+                });
         }
     }
 }

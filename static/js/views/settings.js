@@ -30,27 +30,34 @@ export class SettingsView {
     }
 
     /**
-     * рендерит страничку настроек профиля
+     * Проверяет, залогинен ли пользователь
      * @param {Object} root
      */
-     render(root) {
-         this.root = root;
-         this.eventBus.emit('cookie fetch request', {});
-     }
-     renderWithCookie(loggedIn) {
-         if (loggedIn) {
-             document.getElementById('profile-link').style.visibility = 'visible';
-             document.getElementById('logout-button').style.visibility = 'visible';
-             document.getElementById('signup-link').style.visibility = 'hidden';
-             document.getElementById('login-link').style.visibility = 'hidden';
-         } else {
-             document.getElementById('signup-link').style.visibility = 'visible';
-             document.getElementById('login-link').style.visibility = 'visible';
-             document.getElementById('profile-link').style.visibility = 'hidden';
-         }
-         this.root.innerHTML = this.template;
-     }
-
+    render(root) {
+        this.root = root;
+        this.eventBus.emit('cookie fetch request', {});
+    }
+    /**
+     * Подставляет отрендеренную страничку и меняет элеенты логина/логаута
+     * @param {Bool} loggedIn
+     */
+    renderWithCookie(loggedIn) {
+        if (loggedIn) {
+            document.getElementById('profile-link').style.visibility = 'visible';
+            document.getElementById('logout-button').style.visibility = 'visible';
+            document.getElementById('signup-link').style.visibility = 'hidden';
+            document.getElementById('login-link').style.visibility = 'hidden';
+        } else {
+            document.getElementById('signup-link').style.visibility = 'visible';
+            document.getElementById('login-link').style.visibility = 'visible';
+            document.getElementById('profile-link').style.visibility = 'hidden';
+        }
+        this.root.innerHTML = this.template;
+    }
+    /**
+     * рендерит страничку с профилем
+     * @param {Object} data
+     */
     prerender(data) {
         // eslint-disable-next-line no-undef
         this.template = nunjucks.render('../../../views/settings.njk', data);

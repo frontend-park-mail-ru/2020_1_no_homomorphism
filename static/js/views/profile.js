@@ -14,14 +14,17 @@ export class ProfileView {
     }
 
     /**
-     * рендерит страничку с профилем
+     * Проверяет, залогинен ли пользователь
      * @param {Object} root
-     * @param {boolean} loggedIn
      */
     render(root) {
         this.root = root;
         this.eventBus.emit('cookie fetch request', {});
     }
+    /**
+     * Подставляет отрендеренную страничку и меняет элеенты логина/логаута
+     * @param {Bool} loggedIn
+     */
     renderWithCookie(loggedIn) {
         if (loggedIn) {
             document.getElementById('profile-link').style.visibility = 'visible';
@@ -35,7 +38,10 @@ export class ProfileView {
         }
         this.root.innerHTML = this.template;
     }
-
+    /**
+     * рендерит страничку с профилем
+     * @param {Object} data
+     */
     prerender(data) {
         // eslint-disable-next-line no-undef
         this.template = nunjucks.render('../../../views/profile.njk', data);

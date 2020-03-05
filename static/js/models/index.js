@@ -1,4 +1,4 @@
-import {Api} from '../modules/api.js'
+import {Api} from '../modules/api.js';
 
 /**
  * Модель для главной странице
@@ -12,10 +12,13 @@ export class IndexModel {
         this.eventBus.on('cookie fetch request', this.cookieFetch.bind(this));
     }
 
+    /**
+     * Проверка, залогинен ли пользователь
+     */
     cookieFetch() {
         Api.cookieFetch()
-        .then((res) => {
-            this.eventBus.emit('cookie fetch response', res.ok);
-        });
+            .then((res) => {
+                this.eventBus.emit('cookie fetch response', res.ok);
+            });
     }
 }

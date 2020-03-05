@@ -15,11 +15,14 @@ export class LoginModel {
         this.eventBus.on('cookie fetch request', this.cookieFetch.bind(this));
     }
 
+    /**
+     * Проверка, залогинен ли пользователь
+     */
     cookieFetch() {
         Api.cookieFetch()
-        .then((res) => {
-            this.eventBus.emit('cookie fetch response', res.ok);
-        });
+            .then((res) => {
+                this.eventBus.emit('cookie fetch response', res.ok);
+            });
     }
 
     /**
@@ -40,17 +43,17 @@ export class LoginModel {
             this.eventBus.emit('invalid', errors);
         } else {
             Api.loginFetch(values.login, values.password)
-            .then((res) => {
-                if (res === undefined) {
-                    this.eventBus.emit('redirect to main', 'No answer from backend');
-                    return;
-                }
-                if (res.ok) {
-                    this.eventBus.emit('hide login, show logout', {});
-                } else {
-                    this.eventBus.emit('invalid', {global: 'Login error'});
-                }
-            });
+                .then((res) => {
+                    if (res === undefined) {
+                        this.eventBus.emit('redirect to main', 'No answer from backend');
+                        return;
+                    }
+                    if (res.ok) {
+                        this.eventBus.emit('hide login, show logout', {});
+                    } else {
+                        this.eventBus.emit('invalid', {global: 'Login error'});
+                    }
+                });
         }
     }
 
