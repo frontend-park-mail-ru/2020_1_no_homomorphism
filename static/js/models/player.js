@@ -50,28 +50,26 @@ export class PlayerModel {
      */
     getFirst() {
         Api.trackFetch('12344')
-            .then(response => response.json())
-            .then(data => {
-                const track = JSON.parse(data);
-                document.getElementsByTagName('audio')[0].children[0].src = track.link;
-                document.getElementsByTagName('audio')[0].load();
-                this.data.playlist.push(track);
-                this.data.queue.push(this.data.playlist.length - 1);
-                this.eventBus.emit('track update', track);
-            });
+        .then(response => response.json())
+        .then(track => {
+            document.getElementsByTagName('audio')[0].children[0].src = track.link;
+            document.getElementsByTagName('audio')[0].load();
+            this.data.playlist.push(track);
+            this.data.queue.push(this.data.playlist.length - 1);
+            this.eventBus.emit('track update', track);
+        });
         for (let i = 12345; i < 12350; i++) {
             Api.trackFetch(i.toString())
-                .then(response => response.json())
-                .then(data => {
-                    const track = JSON.parse(data);
-                    this.data.playlist.push(track);
-                    this.data.queue.push(this.data.playlist.length - 1);
-                })
-                .then(() => {
-                    if (this.data.playlist.length === 6) {
-                        this.eventBus.emit('draw tracklist', this.data.playlist);
-                    }
-                });
+            .then(response => response.json())
+            .then(track => {
+                this.data.playlist.push(track);
+                this.data.queue.push(this.data.playlist.length - 1);
+            })
+            .then(() => {
+                if (this.data.playlist.length === 6) {
+                    this.eventBus.emit('draw tracklist', this.data.playlist);
+                }
+            });
         }
     }
     /**

@@ -30,13 +30,13 @@ export class SettingsModel {
      */
     getUserData() {
         Api.profileFetch()
-        .then((res) => {
-            if (res === undefined) {
+        .then(res => {
+            if (res === undefined){
                 console.log('NO ANSWER FROM BACKEND');
             } else if (res.ok) {
                 res.json()
-                .then((data) => {
-                    this.eventBus.emit('user data', JSON.parse(data));
+                .then(data => {
+                    this.eventBus.emit('user data', data);
                 });
             } else {
                 this.eventBus.emit('invalid', 'Ошибка загрузки профиля');
