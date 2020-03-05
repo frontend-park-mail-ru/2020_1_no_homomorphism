@@ -34,7 +34,7 @@ export class SettingsModel {
             if (res === undefined) {
                 console.log('NO ANSWER FROM BACKEND');
             } else if (res.ok) {
-                res.json()
+                res.body.json()
                 .then((data) => {
                     this.eventBus.emit('user data', JSON.parse(data));
                 });

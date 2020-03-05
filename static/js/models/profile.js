@@ -33,7 +33,7 @@ export class ProfileModel {
                 return
             }
             if (res.ok) {
-                res.json()
+                res.body.json()
                 .then((data) => {
                     this.eventBus.emit('user data', JSON.parse(data));
                 })
