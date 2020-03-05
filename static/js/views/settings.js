@@ -61,6 +61,7 @@ export class SettingsView {
     prerender(data) {
         // eslint-disable-next-line no-undef
         this.template = nunjucks.render('../../../views/settings.njk', data);
+        this.setEventListeners();
     }
 
     /**
