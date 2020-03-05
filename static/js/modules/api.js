@@ -96,7 +96,7 @@ export class Api {
      * Проверка куки
      * @return {Promise<Response>}
      */
-    static coockieFetch() {
+    static cookieFetch() {
         return getFetch('/user')
             .catch((error) => console.error(error));
     }
