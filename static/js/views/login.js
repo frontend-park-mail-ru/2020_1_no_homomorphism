@@ -44,7 +44,8 @@ export class LoginView {
      */
     showErrors(errors) {
         document.getElementsByClassName('login-form')[0].style.borderColor = 'red';
-        errors.forEach((key) => {
+        for (const key in errors) {
+            // errors.forEach((key) => {
             if (key === 'global') {
                 document.getElementById('global').innerText = errors[key];
                 document.getElementById('global').style.height = '20px';
@@ -58,7 +59,7 @@ export class LoginView {
                 message.style.marginBottom = '10px';
                 message.style.visibility = 'visible';
             }
-        });
+        }
     }
 
     /**
