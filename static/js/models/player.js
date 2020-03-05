@@ -50,7 +50,7 @@ export class PlayerModel {
      */
     getFirst() {
         Api.trackFetch('12344')
-            .then(response => response.body.json())
+            .then(response => response.json())
             .then(data => {
                 const track = JSON.parse(data);
                 document.getElementsByTagName('audio')[0].children[0].src = track.link;
@@ -61,7 +61,7 @@ export class PlayerModel {
             });
         for (let i = 12345; i < 12350; i++) {
             Api.trackFetch(i.toString())
-                .then(response => response.body.json())
+                .then(response => response.json())
                 .then(data => {
                     const track = JSON.parse(data);
                     this.data.playlist.push(track);
