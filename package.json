@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "express": "^4.17.1",
+        "forever": "^2.0.0",
         "morgan": "^1.9.1",
         "nunjucks": "^3.2.0",
         "serve-favicon": "^2.5.0"
