@@ -53,6 +53,7 @@ export class SettingsView {
             document.getElementById('profile-link').style.visibility = 'hidden';
         }
         this.root.innerHTML = this.template;
+        this.setEventListeners();
     }
     /**
      * рендерит страничку с профилем
@@ -61,7 +62,6 @@ export class SettingsView {
     prerender(data) {
         // eslint-disable-next-line no-undef
         this.template = nunjucks.render('../../../views/settings.njk', data);
-        this.setEventListeners();
     }
 
     /**
