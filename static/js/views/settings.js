@@ -33,7 +33,7 @@ export class SettingsView {
      * @param root
      */
     render(root, loggedIn) {
-        this.eventBus.emit('cookie fetch response', (loggedIn) => {
+        this.eventBus.on('cookie fetch response', (loggedIn) => {
             if (loggedIn) {
                 document.getElementById('profile-link').style.visibility = 'visible';
                 document.getElementById('logout-button').style.visibility = 'visible';
