@@ -1,6 +1,9 @@
+/**
+ *  вью для входа
+ */
 export class LoginView {
     /**
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
@@ -9,9 +12,10 @@ export class LoginView {
     }
 
     /**
-    * рендерит страничку входа
-    * @param root
-    */
+     * рендерит страничку входа
+     * @param {Object} root
+     * @param {boolean} loggedIn
+     */
     render(root, loggedIn) {
         if (loggedIn) {
             document.getElementById('profile-link').style.visibility = 'visible';
@@ -24,7 +28,8 @@ export class LoginView {
             document.getElementById('profile-link').style.visibility = 'hidden';
             document.getElementById('logout-button').style.visibility = 'hidden';
         }
-        root.innerHTML = nunjucks.render('../../../views/login.njk');
+        // eslint-disable-next-line no-undef
+        root.innerHTML = nunjucks.render('../../../views/login.njk'); // TODO Нужно ли это импортить как-то?
         document.addEventListener('click', (event) => {
             if (event.target.getAttribute('id') === 'submit-login') {
                 event.preventDefault();
@@ -35,12 +40,11 @@ export class LoginView {
 
     /**
      * показывает какие поля неверно заполнены
-     * @param errors
+     * @param {Object} errors
      */
     showErrors(errors) {
-        console.log(errors);
         document.getElementsByClassName('login-form')[0].style.borderColor = 'red';
-        for (let key in errors) {
+        errors.forEach((key) => {
             if (key === 'global') {
                 document.getElementById('global').innerText = errors[key];
                 document.getElementById('global').style.height = '20px';
@@ -54,15 +58,14 @@ export class LoginView {
                 message.style.marginBottom = '10px';
                 message.style.visibility = 'visible';
             }
-        }
-        console.log('LOGIN ERROR');
+        });
     }
 
     /**
      * отправляет данные формы
      */
     submit() {
-        document.querySelectorAll('.login-form label').forEach(label => {
+        document.querySelectorAll('.login-form label').forEach((label) => {
             label.children[0].style.borderColor = '#ccc';
             label.children[1].innerText = '';
             label.children[1].style.height = '0';
@@ -88,7 +91,7 @@ export class LoginView {
         this.eventBus.emit('redirect to main', 'Успешный вход');
     }
 
-    //changeRemember() {
+    // changeRemember() {
     //    this.eventBus.emit('remember changed', document.getElementById('remember').checked);
-    //}
+    // }
 }

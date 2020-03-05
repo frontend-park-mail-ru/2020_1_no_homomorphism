@@ -1,19 +1,28 @@
-{
+{ //**/*.js - Для игнора всех js файлов
     "env": {
         "browser": true,
         "commonjs": true,
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    //"extends": "eslint:recommended",
+    "extends": ["eslint:recommended", "google"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
-        "ecmaVersion": 2018
+        "ecmaVersion": 2018,
+        "sourceType": "module"
     },
     "rules": {
+        "max-len": ["error", 100, 2, {
+            "ignoreUrls": true,
+            "ignoreComments": true,
+            "ignoreRegExpLiterals": true,
+            "ignoreStrings": false,
+            "ignoreTemplateLiterals": false
+        }],
         "indent": [
             "error",
             4

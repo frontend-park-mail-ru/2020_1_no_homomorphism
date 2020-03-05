@@ -1,96 +1,102 @@
-/*! Browser bundle of nunjucks 3.2.0  */
+/* ! Browser bundle of nunjucks 3.2.0  */
 (function webpackUniversalModuleDefinition(root, factory) {
-    if(typeof exports === 'object' && typeof module === 'object')
+    if (typeof exports === 'object' && typeof module === 'object') {
         module.exports = factory();
-    else if(typeof define === 'function' && define.amd)
+    } else if (typeof define === 'function' && define.amd) {
         define([], factory);
-    else if(typeof exports === 'object')
+    } else if (typeof exports === 'object') {
         exports['nunjucks'] = factory();
-    else
+    } else {
         root['nunjucks'] = factory();
+    }
 })(typeof self !== 'undefined' ? self : this, function() {
-    return /******/ (function(modules) { // webpackBootstrap
-        /******/ 	// The module cache
-        /******/ 	var installedModules = {};
-        /******/
-        /******/ 	// The require function
-        /******/ 	function __webpack_require__(moduleId) {
-            /******/
-            /******/ 		// Check if module is in cache
-            /******/ 		if(installedModules[moduleId]) {
-                /******/ 			return installedModules[moduleId].exports;
-                /******/ 		}
-            /******/ 		// Create a new module (and put it into the cache)
-            /******/ 		var module = installedModules[moduleId] = {
-                /******/ 			i: moduleId,
-                /******/ 			l: false,
-                /******/ 			exports: {}
-                /******/ 		};
-            /******/
-            /******/ 		// Execute the module function
-            /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-            /******/
-            /******/ 		// Flag the module as loaded
-            /******/ 		module.l = true;
-            /******/
-            /******/ 		// Return the exports of the module
-            /******/ 		return module.exports;
-            /******/ 	}
-        /******/
-        /******/
-        /******/ 	// expose the modules object (__webpack_modules__)
-        /******/ 	__webpack_require__.m = modules;
-        /******/
-        /******/ 	// expose the module cache
-        /******/ 	__webpack_require__.c = installedModules;
-        /******/
-        /******/ 	// define getter function for harmony exports
-        /******/ 	__webpack_require__.d = function(exports, name, getter) {
-            /******/ 		if(!__webpack_require__.o(exports, name)) {
-                /******/ 			Object.defineProperty(exports, name, {
-                    /******/ 				configurable: false,
-                    /******/ 				enumerable: true,
-                    /******/ 				get: getter
-                    /******/ 			});
-                /******/ 		}
-            /******/ 	};
-        /******/
-        /******/ 	// getDefaultExport function for compatibility with non-harmony modules
-        /******/ 	__webpack_require__.n = function(module) {
-            /******/ 		var getter = module && module.__esModule ?
-            /******/ 			function getDefault() { return module['default']; } :
-            /******/ 			function getModuleExports() { return module; };
-            /******/ 		__webpack_require__.d(getter, 'a', getter);
-            /******/ 		return getter;
-            /******/ 	};
-        /******/
-        /******/ 	// Object.prototype.hasOwnProperty.call
-        /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-        /******/
-        /******/ 	// __webpack_public_path__
-        /******/ 	__webpack_require__.p = '';
-        /******/
-        /******/ 	// Load entry module and return exports
-        /******/ 	return __webpack_require__(__webpack_require__.s = 11);
-        /******/ })
-    /************************************************************************/
-    /******/ ([
+    return /** ****/ (function(modules) { // webpackBootstrap
+        /** ****/ 	// The module cache
+        /** ****/ 	const installedModules = {};
+        /** ****/
+        /** ****/ 	// The require function
+        /** ****/ 	function __webpack_require__(moduleId) {
+            /** ****/
+            /** ****/ 		// Check if module is in cache
+            /** ****/ 		if (installedModules[moduleId]) {
+                /** ****/ 			return installedModules[moduleId].exports;
+                /** ****/}
+            /** ****/ 		// Create a new module (and put it into the cache)
+            /** ****/ 		const module = installedModules[moduleId] = {
+                /** ****/ 			i: moduleId,
+                /** ****/ 			l: false,
+                /** ****/ 			exports: {},
+                /** ****/};
+            /** ****/
+            /** ****/ 		// Execute the module function
+            /** ****/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+            /** ****/
+            /** ****/ 		// Flag the module as loaded
+            /** ****/ 		module.l = true;
+            /** ****/
+            /** ****/ 		// Return the exports of the module
+            /** ****/ 		return module.exports;
+            /** ****/}
+        /** ****/
+        /** ****/
+        /** ****/ 	// expose the modules object (__webpack_modules__)
+        /** ****/ 	__webpack_require__.m = modules;
+        /** ****/
+        /** ****/ 	// expose the module cache
+        /** ****/ 	__webpack_require__.c = installedModules;
+        /** ****/
+        /** ****/ 	// define getter function for harmony exports
+        /** ****/ 	__webpack_require__.d = function(exports, name, getter) {
+            /** ****/ 		if (!__webpack_require__.o(exports, name)) {
+                /** ****/ 			Object.defineProperty(exports, name, {
+                    /** ****/ 				configurable: false,
+                    /** ****/ 				enumerable: true,
+                    /** ****/ 				get: getter,
+                    /** ****/});
+                /** ****/}
+            /** ****/};
+        /** ****/
+        /** ****/ 	// getDefaultExport function for compatibility with non-harmony modules
+        /** ****/ 	__webpack_require__.n = function(module) {
+            /** ****/ 		const getter = module && module.__esModule ?
+            /** ****/ 			function getDefault() {
+                    return module['default'];
+                } :
+            /** ****/ 			function getModuleExports() {
+                    return module;
+                };
+            /** ****/ 		__webpack_require__.d(getter, 'a', getter);
+            /** ****/ 		return getter;
+            /** ****/};
+        /** ****/
+        /** ****/ 	// Object.prototype.hasOwnProperty.call
+        /** ****/ 	__webpack_require__.o = function(object, property) {
+            return Object.prototype.hasOwnProperty.call(object, property);
+        };
+        /** ****/
+        /** ****/ 	// __webpack_public_path__
+        /** ****/ 	__webpack_require__.p = '';
+        /** ****/
+        /** ****/ 	// Load entry module and return exports
+        /** ****/ 	return __webpack_require__(__webpack_require__.s = 11);
+        /** ****/ })
+    /** **********************************************************************/
+    /** ****/ ([
         /* 0 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
 
 
-            var ArrayProto = Array.prototype;
-            var ObjProto = Object.prototype;
-            var escapeMap = {
+            const ArrayProto = Array.prototype;
+            const ObjProto = Object.prototype;
+            const escapeMap = {
                 '&': '&amp;',
                 '"': '&quot;',
                 '\'': '&#39;',
                 '<': '&lt;',
-                '>': '&gt;'
+                '>': '&gt;',
             };
-            var escapeRegex = /[&"'<>]/g;
+            const escapeRegex = /[&"'<>]/g;
             var exports = module.exports = {};
 
             function hasOwnProp(obj, k) {
@@ -112,7 +118,7 @@
                 err.Update(path); // Unless they marked the dev flag, show them a trace from here
 
                 if (!withInternals) {
-                    var old = err;
+                    const old = err;
                     err = new Error(old.message);
                     err.name = old.name;
                 }
@@ -123,8 +129,8 @@
             exports._prettifyError = _prettifyError;
 
             function TemplateError(message, lineno, colno) {
-                var err;
-                var cause;
+                let err;
+                let cause;
 
                 if (message instanceof Error) {
                     cause = message;
@@ -139,24 +145,24 @@
                     Object.defineProperty(err, 'message', {
                         enumerable: false,
                         writable: true,
-                        value: message
+                        value: message,
                     });
                 }
 
                 Object.defineProperty(err, 'name', {
-                    value: 'Template render error'
+                    value: 'Template render error',
                 });
 
                 if (Error.captureStackTrace) {
                     Error.captureStackTrace(err, this.constructor);
                 }
 
-                var getStack;
+                let getStack;
 
                 if (cause) {
-                    var stackDescriptor = Object.getOwnPropertyDescriptor(cause, 'stack');
+                    const stackDescriptor = Object.getOwnPropertyDescriptor(cause, 'stack');
 
-                    getStack = stackDescriptor && (stackDescriptor.get || function () {
+                    getStack = stackDescriptor && (stackDescriptor.get || function() {
                         return stackDescriptor.value;
                     });
 
@@ -166,7 +172,7 @@
                         };
                     }
                 } else {
-                    var stack = new Error(message).stack;
+                    const stack = new Error(message).stack;
 
                     getStack = function getStack() {
                         return stack;
@@ -176,17 +182,17 @@
                 Object.defineProperty(err, 'stack', {
                     get: function get() {
                         return getStack.call(err);
-                    }
+                    },
                 });
                 Object.defineProperty(err, 'cause', {
-                    value: cause
+                    value: cause,
                 });
                 err.lineno = lineno;
                 err.colno = colno;
                 err.firstUpdate = true;
 
                 err.Update = function Update(path) {
-                    var msg = '(' + (path || 'unknown path') + ')'; // only show lineno + colno next to path of template
+                    let msg = '(' + (path || 'unknown path') + ')'; // only show lineno + colno next to path of template
                     // where error occurred
 
                     if (this.firstUpdate) {
@@ -216,8 +222,8 @@
             } else {
                 TemplateError.prototype = Object.create(Error.prototype, {
                     constructor: {
-                        value: TemplateError
-                    }
+                        value: TemplateError,
+                    },
                 });
             }
 
@@ -254,14 +260,14 @@
             exports.isObject = isObject;
 
             function groupBy(obj, val) {
-                var result = {};
-                var iterator = isFunction(val) ? val : function (o) {
+                const result = {};
+                const iterator = isFunction(val) ? val : function(o) {
                     return o[val];
                 };
 
-                for (var i = 0; i < obj.length; i++) {
-                    var value = obj[i];
-                    var key = iterator(value, i);
+                for (let i = 0; i < obj.length; i++) {
+                    const value = obj[i];
+                    const key = iterator(value, i);
                     (result[key] || (result[key] = [])).push(value);
                 }
 
@@ -277,15 +283,15 @@
             exports.toArray = toArray;
 
             function without(array) {
-                var result = [];
+                const result = [];
 
                 if (!array) {
                     return result;
                 }
 
-                var length = array.length;
-                var contains = toArray(arguments).slice(1);
-                var index = -1;
+                const length = array.length;
+                const contains = toArray(arguments).slice(1);
+                let index = -1;
 
                 while (++index < length) {
                     if (indexOf(contains, array[index]) === -1) {
@@ -299,9 +305,9 @@
             exports.without = without;
 
             function repeat(char_, n) {
-                var str = '';
+                let str = '';
 
-                for (var i = 0; i < n; i++) {
+                for (let i = 0; i < n; i++) {
                     str += char_;
                 }
 
@@ -318,7 +324,7 @@
                 if (ArrayProto.forEach && obj.forEach === ArrayProto.forEach) {
                     obj.forEach(func, context);
                 } else if (obj.length === +obj.length) {
-                    for (var i = 0, l = obj.length; i < l; i++) {
+                    for (let i = 0, l = obj.length; i < l; i++) {
                         func.call(context, obj[i], i, obj);
                     }
                 }
@@ -327,7 +333,7 @@
             exports.each = each;
 
             function map(obj, func) {
-                var results = [];
+                const results = [];
 
                 if (obj == null) {
                     return results;
@@ -337,7 +343,7 @@
                     return obj.map(func);
                 }
 
-                for (var i = 0; i < obj.length; i++) {
+                for (let i = 0; i < obj.length; i++) {
                     results[results.length] = func(obj[i], i);
                 }
 
@@ -351,7 +357,7 @@
             exports.map = map;
 
             function asyncIter(arr, iter, cb) {
-                var i = -1;
+                let i = -1;
 
                 function next() {
                     i++;
@@ -369,13 +375,13 @@
             exports.asyncIter = asyncIter;
 
             function asyncFor(obj, iter, cb) {
-                var keys = keys_(obj || {});
-                var len = keys.length;
-                var i = -1;
+                const keys = keys_(obj || {});
+                const len = keys.length;
+                let i = -1;
 
                 function next() {
                     i++;
-                    var k = keys[i];
+                    const k = keys[i];
 
                     if (i < len) {
                         iter(k, obj[k], i, len, next);
@@ -397,9 +403,9 @@
 
             function keys_(obj) {
                 /* eslint-disable no-restricted-syntax */
-                var arr = [];
+                const arr = [];
 
-                for (var k in obj) {
+                for (const k in obj) {
                     if (hasOwnProp(obj, k)) {
                         arr.push(k);
                     }
@@ -411,7 +417,7 @@
             exports.keys = keys_;
 
             function _entries(obj) {
-                return keys_(obj).map(function (k) {
+                return keys_(obj).map(function(k) {
                     return [k, obj[k]];
                 });
             }
@@ -419,7 +425,7 @@
             exports._entries = _entries;
 
             function _values(obj) {
-                return keys_(obj).map(function (k) {
+                return keys_(obj).map(function(k) {
                     return obj[k];
                 });
             }
@@ -428,7 +434,7 @@
 
             function extend(obj1, obj2) {
                 obj1 = obj1 || {};
-                keys_(obj2).forEach(function (k) {
+                keys_(obj2).forEach(function(k) {
                     obj1[k] = obj2[k];
                 });
                 return obj1;
@@ -447,23 +453,29 @@
             }
 
             exports.inOperator = inOperator;
-
-            /***/ }),
+            /***/}),
         /* 1 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
             // A simple class system, more documentation to come
 
-            function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+            function _defineProperties(target, props) {
+                for (let i = 0; i < props.length; i++) {
+                    const descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor);
+                }
+            }
 
-            function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+            function _createClass(Constructor, protoProps, staticProps) {
+                if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor;
+            }
 
-            function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
+            function _inheritsLoose(subClass, superClass) {
+                subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass;
+            }
 
-            var EventEmitter = __webpack_require__(16);
+            const EventEmitter = __webpack_require__(16);
 
-            var lib = __webpack_require__(0);
+            const lib = __webpack_require__(0);
 
             function parentWrap(parent, prop) {
                 if (typeof parent !== 'function' || typeof prop !== 'function') {
@@ -472,10 +484,10 @@
 
                 return function wrap() {
                     // Save the current parent method
-                    var tmp = this.parent; // Set parent to the previous method, call, and restore
+                    const tmp = this.parent; // Set parent to the previous method, call, and restore
 
                     this.parent = parent;
-                    var res = prop.apply(this, arguments);
+                    const res = prop.apply(this, arguments);
                     this.parent = tmp;
                     return res;
                 };
@@ -483,13 +495,13 @@
 
             function extendClass(cls, name, props) {
                 props = props || {};
-                lib.keys(props).forEach(function (k) {
+                lib.keys(props).forEach(function(k) {
                     props[k] = parentWrap(cls.prototype[k], props[k]);
                 });
 
-                var subclass =
-  /*#__PURE__*/
-  function (_cls) {
+                const subclass =
+  /* #__PURE__*/
+  function(_cls) {
       _inheritsLoose(subclass, _cls);
 
       function subclass() {
@@ -500,7 +512,7 @@
           key: 'typename',
           get: function get() {
               return name;
-          }
+          },
       }]);
 
       return subclass;
@@ -511,15 +523,15 @@
                 return subclass;
             }
 
-            var Obj =
-/*#__PURE__*/
-function () {
+            const Obj =
+/* #__PURE__*/
+function() {
     function Obj() {
     // Unfortunately necessary for backwards compatibility
         this.init.apply(this, arguments);
     }
 
-    var _proto = Obj.prototype;
+    const _proto = Obj.prototype;
 
     _proto.init = function init() {};
 
@@ -536,21 +548,21 @@ function () {
         key: 'typename',
         get: function get() {
             return this.constructor.name;
-        }
+        },
     }]);
 
     return Obj;
 }();
 
-            var EmitterObj =
-/*#__PURE__*/
-function (_EventEmitter) {
+            const EmitterObj =
+/* #__PURE__*/
+function(_EventEmitter) {
     _inheritsLoose(EmitterObj, _EventEmitter);
 
     function EmitterObj() {
-        var _this2;
+        let _this2;
 
-        var _this;
+        let _this;
 
         _this = _EventEmitter.call(this) || this; // Unfortunately necessary for backwards compatibility
 
@@ -559,7 +571,7 @@ function (_EventEmitter) {
         return _this;
     }
 
-    var _proto2 = EmitterObj.prototype;
+    const _proto2 = EmitterObj.prototype;
 
     _proto2.init = function init() {};
 
@@ -576,7 +588,7 @@ function (_EventEmitter) {
         key: 'typename',
         get: function get() {
             return this.constructor.name;
-        }
+        },
     }]);
 
     return EmitterObj;
@@ -584,26 +596,24 @@ function (_EventEmitter) {
 
             module.exports = {
                 Obj: Obj,
-                EmitterObj: EmitterObj
+                EmitterObj: EmitterObj,
             };
-
-            /***/ }),
+            /***/}),
         /* 2 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
 
 
-            var lib = __webpack_require__(0);
+            const lib = __webpack_require__(0);
 
-            var arrayFrom = Array.from;
-            var supportsIterators = typeof Symbol === 'function' && Symbol.iterator && typeof arrayFrom === 'function'; // Frames keep track of scoping both at compile-time and run-time so
+            const arrayFrom = Array.from;
+            const supportsIterators = typeof Symbol === 'function' && Symbol.iterator && typeof arrayFrom === 'function'; // Frames keep track of scoping both at compile-time and run-time so
             // we know how to access variables. Block tags can introduce special
             // variables, for example.
 
-            var Frame =
-/*#__PURE__*/
-function () {
+            const Frame =
+/* #__PURE__*/
+function() {
     function Frame(parent, isolateWrites) {
         this.variables = {};
         this.parent = parent;
@@ -613,14 +623,14 @@ function () {
         this.isolateWrites = isolateWrites;
     }
 
-    var _proto = Frame.prototype;
+    const _proto = Frame.prototype;
 
     _proto.set = function set(name, val, resolveUp) {
     // Allow variables with dots by automatically creating the
     // nested structure
-        var parts = name.split('.');
-        var obj = this.variables;
-        var frame = this;
+        const parts = name.split('.');
+        let obj = this.variables;
+        let frame = this;
 
         if (resolveUp) {
             if (frame = this.resolve(parts[0], true)) {
@@ -629,8 +639,8 @@ function () {
             }
         }
 
-        for (var i = 0; i < parts.length - 1; i++) {
-            var id = parts[i];
+        for (let i = 0; i < parts.length - 1; i++) {
+            const id = parts[i];
 
             if (!obj[id]) {
                 obj[id] = {};
@@ -643,7 +653,7 @@ function () {
     };
 
     _proto.get = function get(name) {
-        var val = this.variables[name];
+        const val = this.variables[name];
 
         if (val !== undefined) {
             return val;
@@ -653,8 +663,8 @@ function () {
     };
 
     _proto.lookup = function lookup(name) {
-        var p = this.parent;
-        var val = this.variables[name];
+        const p = this.parent;
+        const val = this.variables[name];
 
         if (val !== undefined) {
             return val;
@@ -664,8 +674,8 @@ function () {
     };
 
     _proto.resolve = function resolve(name, forWrite) {
-        var p = forWrite && this.isolateWrites ? undefined : this.parent;
-        var val = this.variables[name];
+        const p = forWrite && this.isolateWrites ? undefined : this.parent;
+        const val = this.variables[name];
 
         if (val !== undefined) {
             return this;
@@ -686,22 +696,22 @@ function () {
 }();
 
             function makeMacro(argNames, kwargNames, func) {
-                var _this = this;
+                const _this = this;
 
-                return function () {
+                return function() {
                     for (var _len = arguments.length, macroArgs = new Array(_len), _key = 0; _key < _len; _key++) {
                         macroArgs[_key] = arguments[_key];
                     }
 
-                    var argCount = numArgs(macroArgs);
-                    var args;
-                    var kwargs = getKeywordArgs(macroArgs);
+                    const argCount = numArgs(macroArgs);
+                    let args;
+                    const kwargs = getKeywordArgs(macroArgs);
 
                     if (argCount > argNames.length) {
                         args = macroArgs.slice(0, argNames.length); // Positional arguments that should be passed in as
                         // keyword arguments (essentially default values)
 
-                        macroArgs.slice(args.length, argCount).forEach(function (val, i) {
+                        macroArgs.slice(args.length, argCount).forEach(function(val, i) {
                             if (i < kwargNames.length) {
                                 kwargs[kwargNames[i]] = val;
                             }
@@ -710,8 +720,8 @@ function () {
                     } else if (argCount < argNames.length) {
                         args = macroArgs.slice(0, argCount);
 
-                        for (var i = argCount; i < argNames.length; i++) {
-                            var arg = argNames[i]; // Keyword arguments that should be passed as
+                        for (let i = argCount; i < argNames.length; i++) {
+                            const arg = argNames[i]; // Keyword arguments that should be passed as
                             // positional arguments, i.e. the caller explicitly
                             // used the name of a positional arg
 
@@ -738,10 +748,10 @@ function () {
             }
 
             function getKeywordArgs(args) {
-                var len = args.length;
+                const len = args.length;
 
                 if (len) {
-                    var lastArg = args[len - 1];
+                    const lastArg = args[len - 1];
 
                     if (isKeywordArgs(lastArg)) {
                         return lastArg;
@@ -752,13 +762,13 @@ function () {
             }
 
             function numArgs(args) {
-                var len = args.length;
+                const len = args.length;
 
                 if (len === 0) {
                     return 0;
                 }
 
-                var lastArg = args[len - 1];
+                const lastArg = args[len - 1];
 
                 if (isKeywordArgs(lastArg)) {
                     return len - 1;
@@ -783,8 +793,8 @@ function () {
                 length: {
                     writable: true,
                     configurable: true,
-                    value: 0
-                }
+                    value: 0,
+                },
             });
 
             SafeString.prototype.valueOf = function valueOf() {
@@ -804,7 +814,7 @@ function () {
             }
 
             function markSafe(val) {
-                var type = typeof val;
+                const type = typeof val;
 
                 if (type === 'string') {
                     return new SafeString(val);
@@ -812,7 +822,7 @@ function () {
                     return val;
                 } else {
                     return function wrapSafe(args) {
-                        var ret = val.apply(this, arguments);
+                        const ret = val.apply(this, arguments);
 
                         if (typeof ret === 'string') {
                             return new SafeString(ret);
@@ -847,7 +857,7 @@ function () {
                 }
 
                 if (typeof obj[val] === 'function') {
-                    return function () {
+                    return function() {
                         for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
                             args[_key2] = arguments[_key2];
                         }
@@ -870,7 +880,7 @@ function () {
             }
 
             function contextOrFrameLookup(context, frame, name) {
-                var val = frame.lookup(name);
+                const val = frame.lookup(name);
                 return val !== undefined ? val : context.lookup(name);
             }
 
@@ -884,7 +894,7 @@ function () {
 
             function asyncEach(arr, dimen, iter, cb) {
                 if (lib.isArray(arr)) {
-                    var len = arr.length;
+                    const len = arr.length;
                     lib.asyncIter(arr, function iterCallback(item, i, next) {
                         switch (dimen) {
                         case 1:
@@ -912,9 +922,9 @@ function () {
             }
 
             function asyncAll(arr, dimen, func, cb) {
-                var finished = 0;
-                var len;
-                var outputArr;
+                let finished = 0;
+                let len;
+                let outputArr;
 
                 function done(i, output) {
                     finished++;
@@ -932,8 +942,8 @@ function () {
                     if (len === 0) {
                         cb(null, '');
                     } else {
-                        for (var i = 0; i < arr.length; i++) {
-                            var item = arr[i];
+                        for (let i = 0; i < arr.length; i++) {
+                            const item = arr[i];
 
                             switch (dimen) {
                             case 1:
@@ -955,15 +965,15 @@ function () {
                         }
                     }
                 } else {
-                    var keys = lib.keys(arr || {});
+                    const keys = lib.keys(arr || {});
                     len = keys.length;
                     outputArr = new Array(len);
 
                     if (len === 0) {
                         cb(null, '');
                     } else {
-                        for (var _i = 0; _i < keys.length; _i++) {
-                            var k = keys[_i];
+                        for (let _i = 0; _i < keys.length; _i++) {
+                            const k = keys[_i];
                             func(k, arr[k], _i, len, done);
                         }
                     }
@@ -999,24 +1009,30 @@ function () {
                 asyncEach: asyncEach,
                 asyncAll: asyncAll,
                 inOperator: lib.inOperator,
-                fromIterator: fromIterator
+                fromIterator: fromIterator,
             };
-
-            /***/ }),
+            /***/}),
         /* 3 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
 
 
-            function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+            function _defineProperties(target, props) {
+                for (let i = 0; i < props.length; i++) {
+                    const descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor);
+                }
+            }
 
-            function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+            function _createClass(Constructor, protoProps, staticProps) {
+                if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor;
+            }
 
-            function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
+            function _inheritsLoose(subClass, superClass) {
+                subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass;
+            }
 
-            var _require = __webpack_require__(1),
-                Obj = _require.Obj;
+            const _require = __webpack_require__(1);
+            const Obj = _require.Obj;
 
             function traverseAndCheck(obj, type, results) {
                 if (obj instanceof type) {
@@ -1029,29 +1045,29 @@ function () {
             }
 
             var Node =
-/*#__PURE__*/
-function (_Obj) {
+/* #__PURE__*/
+function(_Obj) {
     _inheritsLoose(Node, _Obj);
 
     function Node() {
         return _Obj.apply(this, arguments) || this;
     }
 
-    var _proto = Node.prototype;
+    const _proto = Node.prototype;
 
     _proto.init = function init(lineno, colno) {
-        var _this = this,
-            _arguments = arguments;
+        const _this = this;
+        const _arguments = arguments;
 
-        for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+        for (let _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
             args[_key - 2] = arguments[_key];
         }
 
         this.lineno = lineno;
         this.colno = colno;
-        this.fields.forEach(function (field, i) {
+        this.fields.forEach(function(field, i) {
             // The first two args are line/col numbers, so offset by 2
-            var val = _arguments[i + 2]; // Fields should never be undefined, but null. It makes
+            let val = _arguments[i + 2]; // Fields should never be undefined, but null. It makes
             // testing easier to normalize values.
 
             if (val === undefined) {
@@ -1063,16 +1079,16 @@ function (_Obj) {
     };
 
     _proto.findAll = function findAll(type, results) {
-        var _this2 = this;
+        const _this2 = this;
 
         results = results || [];
 
         if (this instanceof NodeList) {
-            this.children.forEach(function (child) {
+            this.children.forEach(function(child) {
                 return traverseAndCheck(child, type, results);
             });
         } else {
-            this.fields.forEach(function (field) {
+            this.fields.forEach(function(field) {
                 return traverseAndCheck(_this2[field], type, results);
             });
         }
@@ -1081,9 +1097,9 @@ function (_Obj) {
     };
 
     _proto.iterFields = function iterFields(func) {
-        var _this3 = this;
+        const _this3 = this;
 
-        this.fields.forEach(function (field) {
+        this.fields.forEach(function(field) {
             func(_this3[field], field);
         });
     };
@@ -1092,9 +1108,9 @@ function (_Obj) {
 }(Obj); // Abstract nodes
 
 
-            var Value =
-/*#__PURE__*/
-function (_Node) {
+            const Value =
+/* #__PURE__*/
+function(_Node) {
     _inheritsLoose(Value, _Node);
 
     function Value() {
@@ -1105,12 +1121,12 @@ function (_Node) {
         key: 'typename',
         get: function get() {
             return 'Value';
-        }
+        },
     }, {
         key: 'fields',
         get: function get() {
             return ['value'];
-        }
+        },
     }]);
 
     return Value;
@@ -1118,15 +1134,15 @@ function (_Node) {
 
 
             var NodeList =
-/*#__PURE__*/
-function (_Node2) {
+/* #__PURE__*/
+function(_Node2) {
     _inheritsLoose(NodeList, _Node2);
 
     function NodeList() {
         return _Node2.apply(this, arguments) || this;
     }
 
-    var _proto2 = NodeList.prototype;
+    const _proto2 = NodeList.prototype;
 
     _proto2.init = function init(lineno, colno, nodes) {
         _Node2.prototype.init.call(this, lineno, colno, nodes || []);
@@ -1140,59 +1156,59 @@ function (_Node2) {
         key: 'typename',
         get: function get() {
             return 'NodeList';
-        }
+        },
     }, {
         key: 'fields',
         get: function get() {
             return ['children'];
-        }
+        },
     }]);
 
     return NodeList;
 }(Node);
 
-            var Root = NodeList.extend('Root');
-            var Literal = Value.extend('Literal');
-            var Symbol = Value.extend('Symbol');
-            var Group = NodeList.extend('Group');
-            var ArrayNode = NodeList.extend('Array');
-            var Pair = Node.extend('Pair', {
-                fields: ['key', 'value']
+            const Root = NodeList.extend('Root');
+            const Literal = Value.extend('Literal');
+            const Symbol = Value.extend('Symbol');
+            const Group = NodeList.extend('Group');
+            const ArrayNode = NodeList.extend('Array');
+            const Pair = Node.extend('Pair', {
+                fields: ['key', 'value'],
             });
-            var Dict = NodeList.extend('Dict');
-            var LookupVal = Node.extend('LookupVal', {
-                fields: ['target', 'val']
+            const Dict = NodeList.extend('Dict');
+            const LookupVal = Node.extend('LookupVal', {
+                fields: ['target', 'val'],
             });
-            var If = Node.extend('If', {
-                fields: ['cond', 'body', 'else_']
+            const If = Node.extend('If', {
+                fields: ['cond', 'body', 'else_'],
             });
-            var IfAsync = If.extend('IfAsync');
-            var InlineIf = Node.extend('InlineIf', {
-                fields: ['cond', 'body', 'else_']
+            const IfAsync = If.extend('IfAsync');
+            const InlineIf = Node.extend('InlineIf', {
+                fields: ['cond', 'body', 'else_'],
             });
-            var For = Node.extend('For', {
-                fields: ['arr', 'name', 'body', 'else_']
+            const For = Node.extend('For', {
+                fields: ['arr', 'name', 'body', 'else_'],
             });
-            var AsyncEach = For.extend('AsyncEach');
-            var AsyncAll = For.extend('AsyncAll');
-            var Macro = Node.extend('Macro', {
-                fields: ['name', 'args', 'body']
+            const AsyncEach = For.extend('AsyncEach');
+            const AsyncAll = For.extend('AsyncAll');
+            const Macro = Node.extend('Macro', {
+                fields: ['name', 'args', 'body'],
             });
-            var Caller = Macro.extend('Caller');
-            var Import = Node.extend('Import', {
-                fields: ['template', 'target', 'withContext']
+            const Caller = Macro.extend('Caller');
+            const Import = Node.extend('Import', {
+                fields: ['template', 'target', 'withContext'],
             });
 
-            var FromImport =
-/*#__PURE__*/
-function (_Node3) {
+            const FromImport =
+/* #__PURE__*/
+function(_Node3) {
     _inheritsLoose(FromImport, _Node3);
 
     function FromImport() {
         return _Node3.apply(this, arguments) || this;
     }
 
-    var _proto3 = FromImport.prototype;
+    const _proto3 = FromImport.prototype;
 
     _proto3.init = function init(lineno, colno, template, names, withContext) {
         _Node3.prototype.init.call(this, lineno, colno, template, names || new NodeList(), withContext);
@@ -1202,80 +1218,80 @@ function (_Node3) {
         key: 'typename',
         get: function get() {
             return 'FromImport';
-        }
+        },
     }, {
         key: 'fields',
         get: function get() {
             return ['template', 'names', 'withContext'];
-        }
+        },
     }]);
 
     return FromImport;
 }(Node);
 
-            var FunCall = Node.extend('FunCall', {
-                fields: ['name', 'args']
+            const FunCall = Node.extend('FunCall', {
+                fields: ['name', 'args'],
             });
-            var Filter = FunCall.extend('Filter');
-            var FilterAsync = Filter.extend('FilterAsync', {
-                fields: ['name', 'args', 'symbol']
+            const Filter = FunCall.extend('Filter');
+            const FilterAsync = Filter.extend('FilterAsync', {
+                fields: ['name', 'args', 'symbol'],
             });
-            var KeywordArgs = Dict.extend('KeywordArgs');
-            var Block = Node.extend('Block', {
-                fields: ['name', 'body']
+            const KeywordArgs = Dict.extend('KeywordArgs');
+            const Block = Node.extend('Block', {
+                fields: ['name', 'body'],
             });
-            var Super = Node.extend('Super', {
-                fields: ['blockName', 'symbol']
+            const Super = Node.extend('Super', {
+                fields: ['blockName', 'symbol'],
             });
-            var TemplateRef = Node.extend('TemplateRef', {
-                fields: ['template']
+            const TemplateRef = Node.extend('TemplateRef', {
+                fields: ['template'],
             });
-            var Extends = TemplateRef.extend('Extends');
-            var Include = Node.extend('Include', {
-                fields: ['template', 'ignoreMissing']
+            const Extends = TemplateRef.extend('Extends');
+            const Include = Node.extend('Include', {
+                fields: ['template', 'ignoreMissing'],
             });
-            var Set = Node.extend('Set', {
-                fields: ['targets', 'value']
+            const Set = Node.extend('Set', {
+                fields: ['targets', 'value'],
             });
-            var Switch = Node.extend('Switch', {
-                fields: ['expr', 'cases', 'default']
+            const Switch = Node.extend('Switch', {
+                fields: ['expr', 'cases', 'default'],
             });
-            var Case = Node.extend('Case', {
-                fields: ['cond', 'body']
+            const Case = Node.extend('Case', {
+                fields: ['cond', 'body'],
             });
-            var Output = NodeList.extend('Output');
-            var Capture = Node.extend('Capture', {
-                fields: ['body']
+            const Output = NodeList.extend('Output');
+            const Capture = Node.extend('Capture', {
+                fields: ['body'],
             });
-            var TemplateData = Literal.extend('TemplateData');
-            var UnaryOp = Node.extend('UnaryOp', {
-                fields: ['target']
+            const TemplateData = Literal.extend('TemplateData');
+            const UnaryOp = Node.extend('UnaryOp', {
+                fields: ['target'],
             });
-            var BinOp = Node.extend('BinOp', {
-                fields: ['left', 'right']
+            const BinOp = Node.extend('BinOp', {
+                fields: ['left', 'right'],
             });
-            var In = BinOp.extend('In');
-            var Is = BinOp.extend('Is');
-            var Or = BinOp.extend('Or');
-            var And = BinOp.extend('And');
-            var Not = UnaryOp.extend('Not');
-            var Add = BinOp.extend('Add');
-            var Concat = BinOp.extend('Concat');
-            var Sub = BinOp.extend('Sub');
-            var Mul = BinOp.extend('Mul');
-            var Div = BinOp.extend('Div');
-            var FloorDiv = BinOp.extend('FloorDiv');
-            var Mod = BinOp.extend('Mod');
-            var Pow = BinOp.extend('Pow');
-            var Neg = UnaryOp.extend('Neg');
-            var Pos = UnaryOp.extend('Pos');
-            var Compare = Node.extend('Compare', {
-                fields: ['expr', 'ops']
+            const In = BinOp.extend('In');
+            const Is = BinOp.extend('Is');
+            const Or = BinOp.extend('Or');
+            const And = BinOp.extend('And');
+            const Not = UnaryOp.extend('Not');
+            const Add = BinOp.extend('Add');
+            const Concat = BinOp.extend('Concat');
+            const Sub = BinOp.extend('Sub');
+            const Mul = BinOp.extend('Mul');
+            const Div = BinOp.extend('Div');
+            const FloorDiv = BinOp.extend('FloorDiv');
+            const Mod = BinOp.extend('Mod');
+            const Pow = BinOp.extend('Pow');
+            const Neg = UnaryOp.extend('Neg');
+            const Pos = UnaryOp.extend('Pos');
+            const Compare = Node.extend('Compare', {
+                fields: ['expr', 'ops'],
             });
-            var CompareOperand = Node.extend('CompareOperand', {
-                fields: ['expr', 'type']
+            const CompareOperand = Node.extend('CompareOperand', {
+                fields: ['expr', 'type'],
             });
-            var CallExtension = Node.extend('CallExtension', {
+            const CallExtension = Node.extend('CallExtension', {
                 init: function init(ext, prop, args, contentArgs) {
                     this.parent();
                     this.extName = ext.__name || ext;
@@ -1284,18 +1300,18 @@ function (_Node3) {
                     this.contentArgs = contentArgs || [];
                     this.autoescape = ext.autoescape;
                 },
-                fields: ['extName', 'prop', 'args', 'contentArgs']
+                fields: ['extName', 'prop', 'args', 'contentArgs'],
             });
-            var CallExtensionAsync = CallExtension.extend('CallExtensionAsync'); // This is hacky, but this is just a debugging function anyway
+            const CallExtensionAsync = CallExtension.extend('CallExtensionAsync'); // This is hacky, but this is just a debugging function anyway
 
             function print(str, indent, inline) {
-                var lines = str.split('\n');
-                lines.forEach(function (line, i) {
+                const lines = str.split('\n');
+                lines.forEach(function(line, i) {
                     if (line && (inline && i > 0 || !inline)) {
                         process.stdout.write(' '.repeat(indent));
                     }
 
-                    var nl = i === lines.length - 1 ? '' : '\n';
+                    const nl = i === lines.length - 1 ? '' : '\n';
                     process.stdout.write('' + line + nl);
                 });
             } // Print the AST in a nicely formatted tree format for debuggin
@@ -1307,7 +1323,7 @@ function (_Node3) {
 
                 if (node instanceof NodeList) {
                     print('\n');
-                    node.children.forEach(function (n) {
+                    node.children.forEach(function(n) {
                         printNodes(n, indent + 2);
                     });
                 } else if (node instanceof CallExtension) {
@@ -1318,14 +1334,14 @@ function (_Node3) {
                     }
 
                     if (node.contentArgs) {
-                        node.contentArgs.forEach(function (n) {
+                        node.contentArgs.forEach(function(n) {
                             printNodes(n, indent + 2);
                         });
                     }
                 } else {
-                    var nodes = [];
-                    var props = null;
-                    node.iterFields(function (val, fieldName) {
+                    const nodes = [];
+                    let props = null;
+                    node.iterFields(function(val, fieldName) {
                         if (val instanceof Node) {
                             nodes.push([fieldName, val]);
                         } else {
@@ -1340,9 +1356,9 @@ function (_Node3) {
                         print('\n');
                     }
 
-                    nodes.forEach(function (_ref) {
-                        var fieldName = _ref[0],
-                            n = _ref[1];
+                    nodes.forEach(function(_ref) {
+                        const fieldName = _ref[0];
+                        const n = _ref[1];
                         print('[' + fieldName + '] =>', indent + 2);
                         printNodes(n, indent + 4);
                     });
@@ -1405,42 +1421,41 @@ function (_Node3) {
                 CompareOperand: CompareOperand,
                 CallExtension: CallExtension,
                 CallExtensionAsync: CallExtensionAsync,
-                printNodes: printNodes
+                printNodes: printNodes,
             };
-
-            /***/ }),
+            /***/}),
         /* 4 */
         /***/ (function(module, exports) {
 
 
-
-            /***/ }),
+            /***/}),
         /* 5 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
 
 
-            function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
+            function _inheritsLoose(subClass, superClass) {
+                subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass;
+            }
 
-            var parser = __webpack_require__(8);
+            const parser = __webpack_require__(8);
 
-            var transformer = __webpack_require__(17);
+            const transformer = __webpack_require__(17);
 
-            var nodes = __webpack_require__(3);
+            const nodes = __webpack_require__(3);
 
-            var _require = __webpack_require__(0),
-                TemplateError = _require.TemplateError;
+            const _require = __webpack_require__(0);
+            const TemplateError = _require.TemplateError;
 
-            var _require2 = __webpack_require__(2),
-                Frame = _require2.Frame;
+            const _require2 = __webpack_require__(2);
+            const Frame = _require2.Frame;
 
-            var _require3 = __webpack_require__(1),
-                Obj = _require3.Obj; // These are all the same for now, but shouldn't be passed straight
+            const _require3 = __webpack_require__(1);
+            const Obj = _require3.Obj; // These are all the same for now, but shouldn't be passed straight
             // through
 
 
-            var compareOps = {
+            const compareOps = {
                 '==': '==',
                 '===': '===',
                 '!=': '!=',
@@ -1448,19 +1463,19 @@ function (_Node3) {
                 '<': '<',
                 '>': '>',
                 '<=': '<=',
-                '>=': '>='
+                '>=': '>=',
             };
 
-            var Compiler =
-/*#__PURE__*/
-function (_Obj) {
+            const Compiler =
+/* #__PURE__*/
+function(_Obj) {
     _inheritsLoose(Compiler, _Obj);
 
     function Compiler() {
         return _Obj.apply(this, arguments) || this;
     }
 
-    var _proto = Compiler.prototype;
+    const _proto = Compiler.prototype;
 
     _proto.init = function init(templateName, throwOnUndefined) {
         this.templateName = templateName;
@@ -1486,7 +1501,7 @@ function (_Obj) {
     };
 
     _proto._pushBuffer = function _pushBuffer() {
-        var id = this._tmpid();
+        const id = this._tmpid();
 
         this.bufferStack.push(this.buffer);
         this.buffer = id;
@@ -1509,13 +1524,13 @@ function (_Obj) {
     };
 
     _proto._emitLines = function _emitLines() {
-        var _this = this;
+        const _this = this;
 
         for (var _len = arguments.length, lines = new Array(_len), _key = 0; _key < _len; _key++) {
             lines[_key] = arguments[_key];
         }
 
-        lines.forEach(function (line) {
+        lines.forEach(function(line) {
             return _this._emitLine(line);
         });
     };
@@ -1564,7 +1579,7 @@ function (_Obj) {
     };
 
     _proto._withScopedSyntax = function _withScopedSyntax(func) {
-        var _scopeClosers = this._scopeClosers;
+        const _scopeClosers = this._scopeClosers;
         this._scopeClosers = '';
         func.call(this);
 
@@ -1574,7 +1589,7 @@ function (_Obj) {
     };
 
     _proto._makeCallback = function _makeCallback(res) {
-        var err = this._tmpid();
+        const err = this._tmpid();
 
         return 'function(' + err + (res ? ',' + res : '') + ') {\n' + 'if(' + err + ') { cb(' + err + '); return; }';
     };
@@ -1589,21 +1604,21 @@ function (_Obj) {
     };
 
     _proto._compileChildren = function _compileChildren(node, frame) {
-        var _this2 = this;
+        const _this2 = this;
 
-        node.children.forEach(function (child) {
+        node.children.forEach(function(child) {
             _this2.compile(child, frame);
         });
     };
 
     _proto._compileAggregate = function _compileAggregate(node, frame, startChar, endChar) {
-        var _this3 = this;
+        const _this3 = this;
 
         if (startChar) {
             this._emit(startChar);
         }
 
-        node.children.forEach(function (child, i) {
+        node.children.forEach(function(child, i) {
             if (i > 0) {
                 _this3._emit(',');
             }
@@ -1628,7 +1643,7 @@ function (_Obj) {
             types[_key2 - 1] = arguments[_key2];
         }
 
-        if (!types.some(function (t) {
+        if (!types.some(function(t) {
             return node instanceof t;
         })) {
             this.fail('assertType: invalid type: ' + node.typename, node.lineno, node.colno);
@@ -1636,11 +1651,11 @@ function (_Obj) {
     };
 
     _proto.compileCallExtension = function compileCallExtension(node, frame, async) {
-        var _this4 = this;
+        const _this4 = this;
 
-        var args = node.args;
-        var contentArgs = node.contentArgs;
-        var autoescape = typeof node.autoescape === 'boolean' ? node.autoescape : true;
+        const args = node.args;
+        const contentArgs = node.contentArgs;
+        const autoescape = typeof node.autoescape === 'boolean' ? node.autoescape : true;
 
         if (!async) {
             this._emit(this.buffer + ' += runtime.suppressValue(');
@@ -1659,7 +1674,7 @@ function (_Obj) {
                 this.fail('compileCallExtension: arguments must be a NodeList, ' + 'use `parser.parseSignature`');
             }
 
-            args.children.forEach(function (arg, i) {
+            args.children.forEach(function(arg, i) {
                 // Tag arguments are passed normally to the call. Note
                 // that keyword arguments are turned into a single js
                 // object as the last argument, if they exist.
@@ -1672,7 +1687,7 @@ function (_Obj) {
         }
 
         if (contentArgs.length) {
-            contentArgs.forEach(function (arg, i) {
+            contentArgs.forEach(function(arg, i) {
                 if (i > 0) {
                     _this4._emit(',');
                 }
@@ -1682,9 +1697,9 @@ function (_Obj) {
 
                     _this4._emitLine('if(!cb) { cb = function(err) { if(err) { throw err; }}}');
 
-                    var id = _this4._pushBuffer();
+                    const id = _this4._pushBuffer();
 
-                    _this4._withScopedSyntax(function () {
+                    _this4._withScopedSyntax(function() {
                         _this4.compile(arg, frame);
 
                         _this4._emitLine('cb(null, ' + id + ');');
@@ -1702,7 +1717,7 @@ function (_Obj) {
         }
 
         if (async) {
-            var res = this._tmpid();
+            const res = this._tmpid();
 
             this._emitLine(', ' + this._makeCallback(res));
 
@@ -1726,7 +1741,7 @@ function (_Obj) {
 
     _proto.compileLiteral = function compileLiteral(node) {
         if (typeof node.value === 'string') {
-            var val = node.value.replace(/\\/g, '\\\\');
+            let val = node.value.replace(/\\/g, '\\\\');
             val = val.replace(/"/g, '\\"');
             val = val.replace(/\n/g, '\\n');
             val = val.replace(/\r/g, '\\r');
@@ -1742,8 +1757,8 @@ function (_Obj) {
     };
 
     _proto.compileSymbol = function compileSymbol(node, frame) {
-        var name = node.value;
-        var v = frame.lookup(name);
+        const name = node.value;
+        const v = frame.lookup(name);
 
         if (v) {
             this._emit(v);
@@ -1765,8 +1780,8 @@ function (_Obj) {
     };
 
     _proto.compilePair = function compilePair(node, frame) {
-        var key = node.key;
-        var val = node.value;
+        let key = node.key;
+        const val = node.value;
 
         if (key instanceof nodes.Symbol) {
             key = new nodes.Literal(key.lineno, key.colno, key.value);
@@ -1816,8 +1831,8 @@ function (_Obj) {
     _proto.compileIs = function compileIs(node, frame) {
     // first, we need to try to get the name of the test function, if it's a
     // callable (i.e., has args) and not a symbol.
-        var right = node.right.name ? node.right.name.value // otherwise go with the symbol value
-            : node.right.value;
+        const right = node.right.name ? node.right.name.value : // otherwise go with the symbol value
+            node.right.value;
 
         this._emit('env.getTest("' + right + '").call(context, ');
 
@@ -1917,10 +1932,10 @@ function (_Obj) {
     };
 
     _proto.compileCompare = function compileCompare(node, frame) {
-        var _this5 = this;
+        const _this5 = this;
 
         this.compile(node.expr, frame);
-        node.ops.forEach(function (op) {
+        node.ops.forEach(function(op) {
             _this5._emit(' ' + compareOps[op.type] + ' ');
 
             _this5.compile(op.expr, frame);
@@ -1980,7 +1995,7 @@ function (_Obj) {
     };
 
     _proto.compileFilter = function compileFilter(node, frame) {
-        var name = node.name;
+        const name = node.name;
         this.assertType(name, nodes.Symbol);
 
         this._emit('env.getFilter("' + name.value + '").call(context, ');
@@ -1991,8 +2006,8 @@ function (_Obj) {
     };
 
     _proto.compileFilterAsync = function compileFilterAsync(node, frame) {
-        var name = node.name;
-        var symbol = node.symbol.value;
+        const name = node.name;
+        const symbol = node.symbol.value;
         this.assertType(name, nodes.Symbol);
         frame.set(symbol, symbol);
 
@@ -2014,14 +2029,14 @@ function (_Obj) {
     };
 
     _proto.compileSet = function compileSet(node, frame) {
-        var _this6 = this;
+        const _this6 = this;
 
-        var ids = []; // Lookup the variable names for each identifier and create
+        const ids = []; // Lookup the variable names for each identifier and create
         // new ones if necessary
 
-        node.targets.forEach(function (target) {
-            var name = target.value;
-            var id = frame.lookup(name);
+        node.targets.forEach(function(target) {
+            const name = target.value;
+            let id = frame.lookup(name);
 
             if (id === null || id === undefined) {
                 id = _this6._tmpid(); // Note: This relies on js allowing scope across
@@ -2047,9 +2062,9 @@ function (_Obj) {
             this._emitLine(';');
         }
 
-        node.targets.forEach(function (target, i) {
-            var id = ids[i];
-            var name = target.value; // We are running this for every var, but it's very
+        node.targets.forEach(function(target, i) {
+            const id = ids[i];
+            const name = target.value; // We are running this for every var, but it's very
             // uncommon to assign to multiple vars anyway
 
             _this6._emitLine('frame.set("' + name + '", ' + id + ', true);');
@@ -2071,7 +2086,7 @@ function (_Obj) {
     };
 
     _proto.compileSwitch = function compileSwitch(node, frame) {
-        var _this7 = this;
+        const _this7 = this;
 
         this._emit('switch (');
 
@@ -2079,7 +2094,7 @@ function (_Obj) {
 
         this._emit(') {');
 
-        node.cases.forEach(function (c, i) {
+        node.cases.forEach(function(c, i) {
             _this7._emit('case ');
 
             _this7.compile(c.cond, frame);
@@ -2104,7 +2119,7 @@ function (_Obj) {
     };
 
     _proto.compileIf = function compileIf(node, frame, async) {
-        var _this8 = this;
+        const _this8 = this;
 
         this._emit('if(');
 
@@ -2112,7 +2127,7 @@ function (_Obj) {
 
         this._emitLine(') {');
 
-        this._withScopedSyntax(function () {
+        this._withScopedSyntax(function() {
             _this8.compile(node.body, frame);
 
             if (async) {
@@ -2123,7 +2138,7 @@ function (_Obj) {
         if (node.else_) {
             this._emitLine('}\nelse {');
 
-            this._withScopedSyntax(function () {
+            this._withScopedSyntax(function() {
                 _this8.compile(node.else_, frame);
 
                 if (async) {
@@ -2150,46 +2165,46 @@ function (_Obj) {
     };
 
     _proto._emitLoopBindings = function _emitLoopBindings(node, arr, i, len) {
-        var _this9 = this;
+        const _this9 = this;
 
-        var bindings = [{
+        const bindings = [{
             name: 'index',
-            val: i + ' + 1'
+            val: i + ' + 1',
         }, {
             name: 'index0',
-            val: i
+            val: i,
         }, {
             name: 'revindex',
-            val: len + ' - ' + i
+            val: len + ' - ' + i,
         }, {
             name: 'revindex0',
-            val: len + ' - ' + i + ' - 1'
+            val: len + ' - ' + i + ' - 1',
         }, {
             name: 'first',
-            val: i + ' === 0'
+            val: i + ' === 0',
         }, {
             name: 'last',
-            val: i + ' === ' + len + ' - 1'
+            val: i + ' === ' + len + ' - 1',
         }, {
             name: 'length',
-            val: len
+            val: len,
         }];
-        bindings.forEach(function (b) {
+        bindings.forEach(function(b) {
             _this9._emitLine('frame.set("loop.' + b.name + '", ' + b.val + ');');
         });
     };
 
     _proto.compileFor = function compileFor(node, frame) {
-        var _this10 = this;
+        const _this10 = this;
 
         // Some of this code is ugly, but it keeps the generated code
         // as fast as possible. ForAsync also shares some of this, but
         // not much.
-        var i = this._tmpid();
+        const i = this._tmpid();
 
-        var len = this._tmpid();
+        const len = this._tmpid();
 
-        var arr = this._tmpid();
+        const arr = this._tmpid();
 
         frame = frame.push();
 
@@ -2220,8 +2235,8 @@ function (_Obj) {
             this._emitLine('for(' + i + '=0; ' + i + ' < ' + arr + '.length; ' + i + '++) {'); // Bind each declared var
 
 
-            node.name.children.forEach(function (child, u) {
-                var tid = _this10._tmpid();
+            node.name.children.forEach(function(child, u) {
+                const tid = _this10._tmpid();
 
                 _this10._emitLine('var ' + tid + ' = ' + arr + '[' + i + '][' + u + '];');
 
@@ -2232,7 +2247,7 @@ function (_Obj) {
 
             this._emitLoopBindings(node, arr, i, len);
 
-            this._withScopedSyntax(function () {
+            this._withScopedSyntax(function() {
                 _this10.compile(node.body, frame);
             });
 
@@ -2241,13 +2256,13 @@ function (_Obj) {
             this._emitLine('} else {'); // Iterate over the key/values of an object
 
 
-            var _node$name$children = node.name.children,
-                key = _node$name$children[0],
-                val = _node$name$children[1];
+            const _node$name$children = node.name.children;
+            const key = _node$name$children[0];
+            const val = _node$name$children[1];
 
-            var k = this._tmpid();
+            const k = this._tmpid();
 
-            var v = this._tmpid();
+            const v = this._tmpid();
 
             frame.set(key.value, k);
             frame.set(val.value, v);
@@ -2268,7 +2283,7 @@ function (_Obj) {
 
             this._emitLoopBindings(node, arr, i, len);
 
-            this._withScopedSyntax(function () {
+            this._withScopedSyntax(function() {
                 _this10.compile(node.body, frame);
             });
 
@@ -2277,7 +2292,7 @@ function (_Obj) {
             this._emitLine('}');
         } else {
             // Generate a typical array iteration
-            var _v = this._tmpid();
+            const _v = this._tmpid();
 
             frame.set(node.name.value, _v);
 
@@ -2291,7 +2306,7 @@ function (_Obj) {
 
             this._emitLoopBindings(node, arr, i, len);
 
-            this._withScopedSyntax(function () {
+            this._withScopedSyntax(function() {
                 _this10.compile(node.body, frame);
             });
 
@@ -2312,18 +2327,18 @@ function (_Obj) {
     };
 
     _proto._compileAsyncLoop = function _compileAsyncLoop(node, frame, parallel) {
-        var _this11 = this;
+        const _this11 = this;
 
         // This shares some code with the For tag, but not enough to
         // worry about. This iterates across an object asynchronously,
         // but not in parallel.
-        var i = this._tmpid();
+        const i = this._tmpid();
 
-        var len = this._tmpid();
+        const len = this._tmpid();
 
-        var arr = this._tmpid();
+        const arr = this._tmpid();
 
-        var asyncMethod = parallel ? 'asyncAll' : 'asyncEach';
+        const asyncMethod = parallel ? 'asyncAll' : 'asyncEach';
         frame = frame.push();
 
         this._emitLine('frame = frame.push();');
@@ -2335,24 +2350,24 @@ function (_Obj) {
         this._emitLine(');');
 
         if (node.name instanceof nodes.Array) {
-            var arrayLen = node.name.children.length;
+            const arrayLen = node.name.children.length;
 
             this._emit('runtime.' + asyncMethod + '(' + arr + ', ' + arrayLen + ', function(');
 
-            node.name.children.forEach(function (name) {
+            node.name.children.forEach(function(name) {
                 _this11._emit(name.value + ',');
             });
 
             this._emit(i + ',' + len + ',next) {');
 
-            node.name.children.forEach(function (name) {
-                var id = name.value;
+            node.name.children.forEach(function(name) {
+                const id = name.value;
                 frame.set(id, id);
 
                 _this11._emitLine('frame.set("' + id + '", ' + id + ');');
             });
         } else {
-            var id = node.name.value;
+            const id = node.name.value;
 
             this._emitLine('runtime.' + asyncMethod + '(' + arr + ', 1, function(' + id + ', ' + i + ', ' + len + ',next) {');
 
@@ -2363,8 +2378,8 @@ function (_Obj) {
 
         this._emitLoopBindings(node, arr, i, len);
 
-        this._withScopedSyntax(function () {
-            var buf;
+        this._withScopedSyntax(function() {
+            let buf;
 
             if (parallel) {
                 buf = _this11._pushBuffer();
@@ -2379,7 +2394,7 @@ function (_Obj) {
             }
         });
 
-        var output = this._tmpid();
+        const output = this._tmpid();
 
         this._emitLine('}, ' + this._makeCallback(output));
 
@@ -2409,16 +2424,16 @@ function (_Obj) {
     };
 
     _proto._compileMacro = function _compileMacro(node, frame) {
-        var _this12 = this;
+        const _this12 = this;
 
-        var args = [];
-        var kwargs = null;
+        const args = [];
+        let kwargs = null;
 
-        var funcId = 'macro_' + this._tmpid();
+        const funcId = 'macro_' + this._tmpid();
 
-        var keepFrame = frame !== undefined; // Type check the definition of the args
+        const keepFrame = frame !== undefined; // Type check the definition of the args
 
-        node.args.children.forEach(function (arg, i) {
+        node.args.children.forEach(function(arg, i) {
             if (i === node.args.children.length - 1 && arg instanceof nodes.Dict) {
                 kwargs = arg;
             } else {
@@ -2427,21 +2442,21 @@ function (_Obj) {
                 args.push(arg);
             }
         });
-        var realNames = [].concat(args.map(function (n) {
+        const realNames = [].concat(args.map(function(n) {
             return 'l_' + n.value;
         }), ['kwargs']); // Quoted argument names
 
-        var argNames = args.map(function (n) {
+        const argNames = args.map(function(n) {
             return '"' + n.value + '"';
         });
-        var kwargNames = (kwargs && kwargs.children || []).map(function (n) {
+        const kwargNames = (kwargs && kwargs.children || []).map(function(n) {
             return '"' + n.key.value + '"';
         }); // We pass a function to makeMacro which destructures the
         // arguments so support setting positional args with keywords
         // args and passing keyword args as positional args
         // (essentially default values). See runtime.js.
 
-        var currFrame;
+        let currFrame;
 
         if (keepFrame) {
             currFrame = frame.push(true);
@@ -2454,15 +2469,15 @@ function (_Obj) {
         // will create a new run-time scope for us
 
 
-        args.forEach(function (arg) {
+        args.forEach(function(arg) {
             _this12._emitLine('frame.set("' + arg.value + '", l_' + arg.value + ');');
 
             currFrame.set(arg.value, 'l_' + arg.value);
         }); // Expose the keyword arguments
 
         if (kwargs) {
-            kwargs.children.forEach(function (pair) {
-                var name = pair.key.value;
+            kwargs.children.forEach(function(pair) {
+                const name = pair.key.value;
 
                 _this12._emit('frame.set("' + name + '", ');
 
@@ -2476,9 +2491,9 @@ function (_Obj) {
             });
         }
 
-        var bufferId = this._pushBuffer();
+        const bufferId = this._pushBuffer();
 
-        this._withScopedSyntax(function () {
+        this._withScopedSyntax(function() {
             _this12.compile(node.body, currFrame);
         });
 
@@ -2494,10 +2509,10 @@ function (_Obj) {
     };
 
     _proto.compileMacro = function compileMacro(node, frame) {
-        var funcId = this._compileMacro(node); // Expose the macro to the templates
+        const funcId = this._compileMacro(node); // Expose the macro to the templates
 
 
-        var name = node.name.value;
+        const name = node.name.value;
         frame.set(name, funcId);
 
         if (frame.parent) {
@@ -2515,20 +2530,20 @@ function (_Obj) {
     // basically an anonymous "macro expression"
         this._emit('(function (){');
 
-        var funcId = this._compileMacro(node, frame);
+        const funcId = this._compileMacro(node, frame);
 
         this._emit('return ' + funcId + ';})()');
     };
 
     _proto._compileGetTemplate = function _compileGetTemplate(node, frame, eagerCompile, ignoreMissing) {
-        var parentTemplateId = this._tmpid();
+        const parentTemplateId = this._tmpid();
 
-        var parentName = this._templateName();
+        const parentName = this._templateName();
 
-        var cb = this._makeCallback(parentTemplateId);
+        const cb = this._makeCallback(parentTemplateId);
 
-        var eagerCompileArg = eagerCompile ? 'true' : 'false';
-        var ignoreMissingArg = ignoreMissing ? 'true' : 'false';
+        const eagerCompileArg = eagerCompile ? 'true' : 'false';
+        const ignoreMissingArg = ignoreMissing ? 'true' : 'false';
 
         this._emit('env.getTemplate(');
 
@@ -2540,9 +2555,9 @@ function (_Obj) {
     };
 
     _proto.compileImport = function compileImport(node, frame) {
-        var target = node.target.value;
+        const target = node.target.value;
 
-        var id = this._compileGetTemplate(node, frame, false, false);
+        const id = this._compileGetTemplate(node, frame, false, false);
 
         this._addScopeLevel();
 
@@ -2560,9 +2575,9 @@ function (_Obj) {
     };
 
     _proto.compileFromImport = function compileFromImport(node, frame) {
-        var _this13 = this;
+        const _this13 = this;
 
-        var importedId = this._compileGetTemplate(node, frame, false, false);
+        const importedId = this._compileGetTemplate(node, frame, false, false);
 
         this._addScopeLevel();
 
@@ -2570,11 +2585,11 @@ function (_Obj) {
 
         this._addScopeLevel();
 
-        node.names.children.forEach(function (nameNode) {
-            var name;
-            var alias;
+        node.names.children.forEach(function(nameNode) {
+            let name;
+            let alias;
 
-            var id = _this13._tmpid();
+            const id = _this13._tmpid();
 
             if (nameNode instanceof nodes.Pair) {
                 name = nameNode.key.value;
@@ -2605,7 +2620,7 @@ function (_Obj) {
     };
 
     _proto.compileBlock = function compileBlock(node) {
-        var id = this._tmpid(); // If we are executing outside a block (creating a top-level
+        const id = this._tmpid(); // If we are executing outside a block (creating a top-level
         // block), we really don't want to execute its code because it
         // will execute twice: once when the child template runs and
         // again when the parent template runs. Note that blocks
@@ -2635,10 +2650,10 @@ function (_Obj) {
     };
 
     _proto.compileSuper = function compileSuper(node, frame) {
-        var name = node.blockName.value;
-        var id = node.symbol.value;
+        const name = node.blockName.value;
+        const id = node.symbol.value;
 
-        var cb = this._makeCallback(id);
+        const cb = this._makeCallback(id);
 
         this._emitLine('context.getSuper(env, "' + name + '", b_' + name + ', frame, runtime, ' + cb);
 
@@ -2650,9 +2665,9 @@ function (_Obj) {
     };
 
     _proto.compileExtends = function compileExtends(node, frame) {
-        var k = this._tmpid();
+        const k = this._tmpid();
 
-        var parentTemplateId = this._compileGetTemplate(node, frame, true, false); // extends is a dynamic tag and can occur within a block like
+        const parentTemplateId = this._compileGetTemplate(node, frame, true, false); // extends is a dynamic tag and can occur within a block like
         // `if`, so if this happens we need to capture the parent
         // template in the top-level scope
 
@@ -2675,13 +2690,13 @@ function (_Obj) {
 
         this._emitLine('function(callback) {');
 
-        var id = this._compileGetTemplate(node, frame, false, node.ignoreMissing);
+        const id = this._compileGetTemplate(node, frame, false, node.ignoreMissing);
 
         this._emitLine('callback(null,' + id + ');});');
 
         this._emitLine('});');
 
-        var id2 = this._tmpid();
+        const id2 = this._tmpid();
 
         this._emitLine('tasks.push(');
 
@@ -2713,18 +2728,18 @@ function (_Obj) {
     };
 
     _proto.compileCapture = function compileCapture(node, frame) {
-        var _this14 = this;
+        const _this14 = this;
 
         // we need to temporarily override the current buffer id as 'output'
         // so the set block writes to the capture output instead of the buffer
-        var buffer = this.buffer;
+        const buffer = this.buffer;
         this.buffer = 'output';
 
         this._emitLine('(function() {');
 
         this._emitLine('var output = "";');
 
-        this._withScopedSyntax(function () {
+        this._withScopedSyntax(function() {
             _this14.compile(node.body, frame);
         });
 
@@ -2737,10 +2752,10 @@ function (_Obj) {
     };
 
     _proto.compileOutput = function compileOutput(node, frame) {
-        var _this15 = this;
+        const _this15 = this;
 
-        var children = node.children;
-        children.forEach(function (child) {
+        const children = node.children;
+        children.forEach(function(child) {
             // TemplateData is a special case because it is never
             // autoescaped, so simply output it for optimization
             if (child instanceof nodes.TemplateData) {
@@ -2770,7 +2785,7 @@ function (_Obj) {
     };
 
     _proto.compileRoot = function compileRoot(node, frame) {
-        var _this16 = this;
+        const _this16 = this;
 
         if (frame) {
             this.fail('compileRoot: root node can\'t have frame');
@@ -2797,10 +2812,10 @@ function (_Obj) {
         this._emitFuncEnd(true);
 
         this.inBlock = true;
-        var blockNames = [];
-        var blocks = node.findAll(nodes.Block);
-        blocks.forEach(function (block, i) {
-            var name = block.name.value;
+        const blockNames = [];
+        const blocks = node.findAll(nodes.Block);
+        blocks.forEach(function(block, i) {
+            const name = block.name.value;
 
             if (blockNames.indexOf(name) !== -1) {
                 throw new Error('Block "' + name + '" defined more than once.');
@@ -2810,7 +2825,7 @@ function (_Obj) {
 
             _this16._emitFuncBegin(block, 'b_' + name);
 
-            var tmpFrame = new Frame();
+            const tmpFrame = new Frame();
 
             _this16._emitLine('var frame = frame.push(true);');
 
@@ -2821,8 +2836,8 @@ function (_Obj) {
 
         this._emitLine('return {');
 
-        blocks.forEach(function (block, i) {
-            var blockName = 'b_' + block.name.value;
+        blocks.forEach(function(block, i) {
+            const blockName = 'b_' + block.name.value;
 
             _this16._emitLine(blockName + ': ' + blockName + ',');
         });
@@ -2831,7 +2846,7 @@ function (_Obj) {
     };
 
     _proto.compile = function compile(node, frame) {
-        var _compile = this['compile' + node.typename];
+        const _compile = this['compile' + node.typename];
 
         if (_compile) {
             _compile.call(this, node, frame);
@@ -2853,46 +2868,46 @@ function (_Obj) {
                         opts = {};
                     }
 
-                    var c = new Compiler(name, opts.throwOnUndefined); // Run the extension preprocessors against the source.
+                    const c = new Compiler(name, opts.throwOnUndefined); // Run the extension preprocessors against the source.
 
-                    var preprocessors = (extensions || []).map(function (ext) {
+                    const preprocessors = (extensions || []).map(function(ext) {
                         return ext.preprocess;
-                    }).filter(function (f) {
+                    }).filter(function(f) {
                         return !!f;
                     });
-                    var processedSrc = preprocessors.reduce(function (s, processor) {
+                    const processedSrc = preprocessors.reduce(function(s, processor) {
                         return processor(s);
                     }, src);
                     c.compile(transformer.transform(parser.parse(processedSrc, extensions, opts), asyncFilters, name));
                     return c.getCode();
                 },
-                Compiler: Compiler
+                Compiler: Compiler,
             };
-
-            /***/ }),
+            /***/}),
         /* 6 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
 
 
-            function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
+            function _inheritsLoose(subClass, superClass) {
+                subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass;
+            }
 
-            var path = __webpack_require__(4);
+            const path = __webpack_require__(4);
 
-            var _require = __webpack_require__(1),
-                EmitterObj = _require.EmitterObj;
+            const _require = __webpack_require__(1);
+            const EmitterObj = _require.EmitterObj;
 
             module.exports =
-/*#__PURE__*/
-function (_EmitterObj) {
+/* #__PURE__*/
+function(_EmitterObj) {
     _inheritsLoose(Loader, _EmitterObj);
 
     function Loader() {
         return _EmitterObj.apply(this, arguments) || this;
     }
 
-    var _proto = Loader.prototype;
+    const _proto = Loader.prototype;
 
     _proto.resolve = function resolve(from, to) {
         return path.resolve(path.dirname(from), to);
@@ -2904,50 +2919,50 @@ function (_EmitterObj) {
 
     return Loader;
 }(EmitterObj);
-
-            /***/ }),
+            /***/}),
         /* 7 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
 
 
-            function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
+            function _inheritsLoose(subClass, superClass) {
+                subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass;
+            }
 
-            var asap = __webpack_require__(12);
+            const asap = __webpack_require__(12);
 
-            var _waterfall = __webpack_require__(15);
+            const _waterfall = __webpack_require__(15);
 
-            var lib = __webpack_require__(0);
+            const lib = __webpack_require__(0);
 
-            var compiler = __webpack_require__(5);
+            const compiler = __webpack_require__(5);
 
-            var filters = __webpack_require__(18);
+            const filters = __webpack_require__(18);
 
-            var _require = __webpack_require__(10),
-                FileSystemLoader = _require.FileSystemLoader,
-                WebLoader = _require.WebLoader,
-                PrecompiledLoader = _require.PrecompiledLoader;
+            const _require = __webpack_require__(10);
+            const FileSystemLoader = _require.FileSystemLoader;
+            const WebLoader = _require.WebLoader;
+            const PrecompiledLoader = _require.PrecompiledLoader;
 
-            var tests = __webpack_require__(20);
+            const tests = __webpack_require__(20);
 
-            var globals = __webpack_require__(21);
+            const globals = __webpack_require__(21);
 
-            var _require2 = __webpack_require__(1),
-                Obj = _require2.Obj,
-                EmitterObj = _require2.EmitterObj;
+            const _require2 = __webpack_require__(1);
+            const Obj = _require2.Obj;
+            const EmitterObj = _require2.EmitterObj;
 
-            var globalRuntime = __webpack_require__(2);
+            const globalRuntime = __webpack_require__(2);
 
-            var handleError = globalRuntime.handleError,
-                Frame = globalRuntime.Frame;
+            const handleError = globalRuntime.handleError;
+            const Frame = globalRuntime.Frame;
 
-            var expressApp = __webpack_require__(22); // If the user is using the async API, *always* call it
+            const expressApp = __webpack_require__(22); // If the user is using the async API, *always* call it
             // asynchronously even if the template was synchronous.
 
 
             function callbackAsap(cb, err, res) {
-                asap(function () {
+                asap(function() {
                     cb(err, res);
                 });
             }
@@ -2956,7 +2971,7 @@ function (_EmitterObj) {
  */
 
 
-            var noopTmplSrc = {
+            const noopTmplSrc = {
                 type: 'code',
                 obj: {
                     root: function root(env, context, frame, runtime, cb) {
@@ -2965,23 +2980,23 @@ function (_EmitterObj) {
                         } catch (e) {
                             cb(handleError(e, null, null));
                         }
-                    }
-                }
+                    },
+                },
             };
 
-            var Environment =
-/*#__PURE__*/
-function (_EmitterObj) {
+            const Environment =
+/* #__PURE__*/
+function(_EmitterObj) {
     _inheritsLoose(Environment, _EmitterObj);
 
     function Environment() {
         return _EmitterObj.apply(this, arguments) || this;
     }
 
-    var _proto = Environment.prototype;
+    const _proto = Environment.prototype;
 
     _proto.init = function init(loaders, opts) {
-        var _this = this;
+        const _this = this;
 
         // The dev flag determines the trace that'll be shown on errors.
         // If set to true, returns the full trace from the error point,
@@ -3030,33 +3045,33 @@ function (_EmitterObj) {
         this.extensions = {};
         this.extensionsList = [];
 
-        lib._entries(filters).forEach(function (_ref) {
-            var name = _ref[0],
-                filter = _ref[1];
+        lib._entries(filters).forEach(function(_ref) {
+            const name = _ref[0];
+            const filter = _ref[1];
             return _this.addFilter(name, filter);
         });
 
-        lib._entries(tests).forEach(function (_ref2) {
-            var name = _ref2[0],
-                test = _ref2[1];
+        lib._entries(tests).forEach(function(_ref2) {
+            const name = _ref2[0];
+            const test = _ref2[1];
             return _this.addTest(name, test);
         });
     };
 
     _proto._initLoaders = function _initLoaders() {
-        var _this2 = this;
+        const _this2 = this;
 
-        this.loaders.forEach(function (loader) {
+        this.loaders.forEach(function(loader) {
             // Caching and cache busting
             loader.cache = {};
 
             if (typeof loader.on === 'function') {
-                loader.on('update', function (name, fullname) {
+                loader.on('update', function(name, fullname) {
                     loader.cache[name] = null;
 
                     _this2.emit('update', name, fullname, loader);
                 });
-                loader.on('load', function (name, source) {
+                loader.on('load', function(name, source) {
                     _this2.emit('load', name, source, loader);
                 });
             }
@@ -3064,7 +3079,7 @@ function (_EmitterObj) {
     };
 
     _proto.invalidateCache = function invalidateCache() {
-        this.loaders.forEach(function (loader) {
+        this.loaders.forEach(function(loader) {
             loader.cache = {};
         });
     };
@@ -3077,7 +3092,7 @@ function (_EmitterObj) {
     };
 
     _proto.removeExtension = function removeExtension(name) {
-        var extension = this.getExtension(name);
+        const extension = this.getExtension(name);
 
         if (!extension) {
             return;
@@ -3109,7 +3124,7 @@ function (_EmitterObj) {
     };
 
     _proto.addFilter = function addFilter(name, func, async) {
-        var wrapped = func;
+        const wrapped = func;
 
         if (async) {
             this.asyncFilters.push(name);
@@ -3141,15 +3156,15 @@ function (_EmitterObj) {
     };
 
     _proto.resolveTemplate = function resolveTemplate(loader, parentName, filename) {
-        var isRelative = loader.isRelative && parentName ? loader.isRelative(filename) : false;
+        const isRelative = loader.isRelative && parentName ? loader.isRelative(filename) : false;
         return isRelative && loader.resolve ? loader.resolve(parentName, filename) : filename;
     };
 
     _proto.getTemplate = function getTemplate(name, eagerCompile, parentName, ignoreMissing, cb) {
-        var _this3 = this;
+        const _this3 = this;
 
-        var that = this;
-        var tmpl = null;
+        const that = this;
+        let tmpl = null;
 
         if (name && name.raw) {
             // this fixes autoescape for templates referenced in symbols
@@ -3172,8 +3187,8 @@ function (_EmitterObj) {
         } else if (typeof name !== 'string') {
             throw new Error('template names must be a string: ' + name);
         } else {
-            for (var i = 0; i < this.loaders.length; i++) {
-                var loader = this.loaders[i];
+            for (let i = 0; i < this.loaders.length; i++) {
+                const loader = this.loaders[i];
                 tmpl = loader.cache[this.resolveTemplate(loader, parentName, name)];
 
                 if (tmpl) {
@@ -3195,9 +3210,9 @@ function (_EmitterObj) {
             }
         }
 
-        var syncResult;
+        let syncResult;
 
-        var createTemplate = function createTemplate(err, info) {
+        const createTemplate = function createTemplate(err, info) {
             if (!info && !err && !ignoreMissing) {
                 err = new Error('template not found: ' + name);
             }
@@ -3211,7 +3226,7 @@ function (_EmitterObj) {
                 }
             }
 
-            var newTmpl;
+            let newTmpl;
 
             if (!info) {
                 newTmpl = new Template(noopTmplSrc, _this3, '', eagerCompile);
@@ -3230,7 +3245,7 @@ function (_EmitterObj) {
             }
         };
 
-        lib.asyncIter(this.loaders, function (loader, i, next, done) {
+        lib.asyncIter(this.loaders, function(loader, i, next, done) {
             function handle(err, src) {
                 if (err) {
                     done(err);
@@ -3268,8 +3283,8 @@ function (_EmitterObj) {
         // synchronously.
 
 
-        var syncResult = null;
-        this.getTemplate(name, function (err, tmpl) {
+        let syncResult = null;
+        this.getTemplate(name, function(err, tmpl) {
             if (err && cb) {
                 callbackAsap(cb, err);
             } else if (err) {
@@ -3288,7 +3303,7 @@ function (_EmitterObj) {
         }
 
         opts = opts || {};
-        var tmpl = new Template(src, this, opts.path);
+        const tmpl = new Template(src, this, opts.path);
         return tmpl.render(ctx, cb);
     };
 
@@ -3299,19 +3314,19 @@ function (_EmitterObj) {
     return Environment;
 }(EmitterObj);
 
-            var Context =
-/*#__PURE__*/
-function (_Obj) {
+            const Context =
+/* #__PURE__*/
+function(_Obj) {
     _inheritsLoose(Context, _Obj);
 
     function Context() {
         return _Obj.apply(this, arguments) || this;
     }
 
-    var _proto2 = Context.prototype;
+    const _proto2 = Context.prototype;
 
     _proto2.init = function init(ctx, blocks, env) {
-        var _this4 = this;
+        const _this4 = this;
 
         // Has to be tied to an environment so we can tap into its globals.
         this.env = env || new Environment(); // Make a duplicate of ctx
@@ -3319,7 +3334,7 @@ function (_Obj) {
         this.ctx = lib.extend({}, ctx);
         this.blocks = {};
         this.exported = [];
-        lib.keys(blocks).forEach(function (name) {
+        lib.keys(blocks).forEach(function(name) {
             _this4.addBlock(name, blocks[name]);
         });
     };
@@ -3357,9 +3372,9 @@ function (_Obj) {
     };
 
     _proto2.getSuper = function getSuper(env, name, block, frame, runtime, cb) {
-        var idx = lib.indexOf(this.blocks[name] || [], block);
-        var blk = this.blocks[name][idx + 1];
-        var context = this;
+        const idx = lib.indexOf(this.blocks[name] || [], block);
+        const blk = this.blocks[name][idx + 1];
+        const context = this;
 
         if (idx === -1 || !blk) {
             throw new Error('no super block available for "' + name + '"');
@@ -3373,10 +3388,10 @@ function (_Obj) {
     };
 
     _proto2.getExported = function getExported() {
-        var _this5 = this;
+        const _this5 = this;
 
-        var exported = {};
-        this.exported.forEach(function (name) {
+        const exported = {};
+        this.exported.forEach(function(name) {
             exported[name] = _this5.ctx[name];
         });
         return exported;
@@ -3386,15 +3401,15 @@ function (_Obj) {
 }(Obj);
 
             var Template =
-/*#__PURE__*/
-function (_Obj2) {
+/* #__PURE__*/
+function(_Obj2) {
     _inheritsLoose(Template, _Obj2);
 
     function Template() {
         return _Obj2.apply(this, arguments) || this;
     }
 
-    var _proto3 = Template.prototype;
+    const _proto3 = Template.prototype;
 
     _proto3.init = function init(src, env, path, eagerCompile) {
         this.env = env || new Environment();
@@ -3432,7 +3447,7 @@ function (_Obj2) {
     };
 
     _proto3.render = function render(ctx, parentFrame, cb) {
-        var _this6 = this;
+        const _this6 = this;
 
         if (typeof ctx === 'function') {
             cb = ctx;
@@ -3446,12 +3461,12 @@ function (_Obj2) {
         // to be inherited, so force an async callback
 
 
-        var forceAsync = !parentFrame; // Catch compile errors for async rendering
+        const forceAsync = !parentFrame; // Catch compile errors for async rendering
 
         try {
             this.compile();
         } catch (e) {
-            var err = lib._prettifyError(this.path, this.env.opts.dev, e);
+            const err = lib._prettifyError(this.path, this.env.opts.dev, e);
 
             if (cb) {
                 return callbackAsap(cb, err);
@@ -3460,12 +3475,12 @@ function (_Obj2) {
             }
         }
 
-        var context = new Context(ctx || {}, this.blocks, this.env);
-        var frame = parentFrame ? parentFrame.push(true) : new Frame();
+        const context = new Context(ctx || {}, this.blocks, this.env);
+        const frame = parentFrame ? parentFrame.push(true) : new Frame();
         frame.topLevel = true;
-        var syncResult = null;
-        var didError = false;
-        this.rootRenderFunc(this.env, context, frame, globalRuntime, function (err, res) {
+        let syncResult = null;
+        let didError = false;
+        this.rootRenderFunc(this.env, context, frame, globalRuntime, function(err, res) {
             if (didError) {
                 // prevent multiple calls to cb
                 if (cb) {
@@ -3520,11 +3535,11 @@ function (_Obj2) {
             }
         }
 
-        var frame = parentFrame ? parentFrame.push() : new Frame();
+        const frame = parentFrame ? parentFrame.push() : new Frame();
         frame.topLevel = true; // Run the rootRenderFunc to populate the context with exported vars
 
-        var context = new Context(ctx || {}, this.blocks, this.env);
-        this.rootRenderFunc(this.env, context, frame, globalRuntime, function (err) {
+        const context = new Context(ctx || {}, this.blocks, this.env);
+        this.rootRenderFunc(this.env, context, frame, globalRuntime, function(err) {
             if (err) {
                 cb(err, null);
             } else {
@@ -3540,13 +3555,13 @@ function (_Obj2) {
     };
 
     _proto3._compile = function _compile() {
-        var props;
+        let props;
 
         if (this.tmplProps) {
             props = this.tmplProps;
         } else {
-            var source = compiler.compile(this.tmplStr, this.env.asyncFilters, this.env.extensionsList, this.path, this.env.opts);
-            var func = new Function(source); // eslint-disable-line no-new-func
+            const source = compiler.compile(this.tmplStr, this.env.asyncFilters, this.env.extensionsList, this.path, this.env.opts);
+            const func = new Function(source); // eslint-disable-line no-new-func
 
             props = func();
         }
@@ -3557,8 +3572,8 @@ function (_Obj2) {
     };
 
     _proto3._getBlocks = function _getBlocks(props) {
-        var blocks = {};
-        lib.keys(props).forEach(function (k) {
+        const blocks = {};
+        lib.keys(props).forEach(function(k) {
             if (k.slice(0, 2) === 'b_') {
                 blocks[k.slice(2)] = props[k];
             }
@@ -3571,36 +3586,36 @@ function (_Obj2) {
 
             module.exports = {
                 Environment: Environment,
-                Template: Template
+                Template: Template,
             };
-
-            /***/ }),
+            /***/}),
         /* 8 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
 
 
-            function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
+            function _inheritsLoose(subClass, superClass) {
+                subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass;
+            }
 
-            var lexer = __webpack_require__(9);
+            const lexer = __webpack_require__(9);
 
-            var nodes = __webpack_require__(3);
+            const nodes = __webpack_require__(3);
 
-            var Obj = __webpack_require__(1).Obj;
+            const Obj = __webpack_require__(1).Obj;
 
-            var lib = __webpack_require__(0);
+            const lib = __webpack_require__(0);
 
-            var Parser =
-/*#__PURE__*/
-function (_Obj) {
+            const Parser =
+/* #__PURE__*/
+function(_Obj) {
     _inheritsLoose(Parser, _Obj);
 
     function Parser() {
         return _Obj.apply(this, arguments) || this;
     }
 
-    var _proto = Parser.prototype;
+    const _proto = Parser.prototype;
 
     _proto.init = function init(tokens) {
         this.tokens = tokens;
@@ -3611,7 +3626,7 @@ function (_Obj) {
     };
 
     _proto.nextToken = function nextToken(withWhitespace) {
-        var tok;
+        let tok;
 
         if (this.peeked) {
             if (!withWhitespace && this.peeked.type === lexer.TOKEN_WHITESPACE) {
@@ -3649,7 +3664,7 @@ function (_Obj) {
 
     _proto.error = function error(msg, lineno, colno) {
         if (lineno === undefined || colno === undefined) {
-            var tok = this.peekToken() || {};
+            const tok = this.peekToken() || {};
             lineno = tok.lineno;
             colno = tok.colno;
         }
@@ -3670,7 +3685,7 @@ function (_Obj) {
     };
 
     _proto.skip = function skip(type) {
-        var tok = this.nextToken();
+        const tok = this.nextToken();
 
         if (!tok || tok.type !== type) {
             this.pushToken(tok);
@@ -3681,7 +3696,7 @@ function (_Obj) {
     };
 
     _proto.expect = function expect(type) {
-        var tok = this.nextToken();
+        const tok = this.nextToken();
 
         if (tok.type !== type) {
             this.fail('expected ' + type + ', got ' + tok.type, tok.lineno, tok.colno);
@@ -3691,7 +3706,7 @@ function (_Obj) {
     };
 
     _proto.skipValue = function skipValue(type, val) {
-        var tok = this.nextToken();
+        const tok = this.nextToken();
 
         if (!tok || tok.type !== type || tok.value !== val) {
             this.pushToken(tok);
@@ -3706,7 +3721,7 @@ function (_Obj) {
     };
 
     _proto.advanceAfterBlockEnd = function advanceAfterBlockEnd(name) {
-        var tok;
+        let tok;
 
         if (!name) {
             tok = this.peekToken();
@@ -3736,7 +3751,7 @@ function (_Obj) {
     };
 
     _proto.advanceAfterVariableEnd = function advanceAfterVariableEnd() {
-        var tok = this.nextToken();
+        const tok = this.nextToken();
 
         if (tok && tok.type === lexer.TOKEN_VARIABLE_END) {
             this.dropLeadingWhitespace = tok.value.charAt(tok.value.length - this.tokens.tags.VARIABLE_END.length - 1) === '-';
@@ -3747,9 +3762,9 @@ function (_Obj) {
     };
 
     _proto.parseFor = function parseFor() {
-        var forTok = this.peekToken();
-        var node;
-        var endBlock;
+        const forTok = this.peekToken();
+        let node;
+        let endBlock;
 
         if (this.skipSymbol('for')) {
             node = new nodes.For(forTok.lineno, forTok.colno);
@@ -3770,16 +3785,16 @@ function (_Obj) {
             this.fail('parseFor: variable name expected for loop');
         }
 
-        var type = this.peekToken().type;
+        const type = this.peekToken().type;
 
         if (type === lexer.TOKEN_COMMA) {
             // key/value iteration
-            var key = node.name;
+            const key = node.name;
             node.name = new nodes.Array(key.lineno, key.colno);
             node.name.addChild(key);
 
             while (this.skip(lexer.TOKEN_COMMA)) {
-                var prim = this.parsePrimary();
+                const prim = this.parsePrimary();
                 node.name.addChild(prim);
             }
         }
@@ -3802,15 +3817,15 @@ function (_Obj) {
     };
 
     _proto.parseMacro = function parseMacro() {
-        var macroTok = this.peekToken();
+        const macroTok = this.peekToken();
 
         if (!this.skipSymbol('macro')) {
             this.fail('expected macro');
         }
 
-        var name = this.parsePrimary(true);
-        var args = this.parseSignature();
-        var node = new nodes.Macro(macroTok.lineno, macroTok.colno, name, args);
+        const name = this.parsePrimary(true);
+        const args = this.parseSignature();
+        const node = new nodes.Macro(macroTok.lineno, macroTok.colno, name, args);
         this.advanceAfterBlockEnd(macroTok.value);
         node.body = this.parseUntilBlocks('endmacro');
         this.advanceAfterBlockEnd();
@@ -3820,34 +3835,34 @@ function (_Obj) {
     _proto.parseCall = function parseCall() {
     // a call block is parsed as a normal FunCall, but with an added
     // 'caller' kwarg which is a Caller node.
-        var callTok = this.peekToken();
+        const callTok = this.peekToken();
 
         if (!this.skipSymbol('call')) {
             this.fail('expected call');
         }
 
-        var callerArgs = this.parseSignature(true) || new nodes.NodeList();
-        var macroCall = this.parsePrimary();
+        const callerArgs = this.parseSignature(true) || new nodes.NodeList();
+        const macroCall = this.parsePrimary();
         this.advanceAfterBlockEnd(callTok.value);
-        var body = this.parseUntilBlocks('endcall');
+        const body = this.parseUntilBlocks('endcall');
         this.advanceAfterBlockEnd();
-        var callerName = new nodes.Symbol(callTok.lineno, callTok.colno, 'caller');
-        var callerNode = new nodes.Caller(callTok.lineno, callTok.colno, callerName, callerArgs, body); // add the additional caller kwarg, adding kwargs if necessary
+        const callerName = new nodes.Symbol(callTok.lineno, callTok.colno, 'caller');
+        const callerNode = new nodes.Caller(callTok.lineno, callTok.colno, callerName, callerArgs, body); // add the additional caller kwarg, adding kwargs if necessary
 
-        var args = macroCall.args.children;
+        const args = macroCall.args.children;
 
         if (!(args[args.length - 1] instanceof nodes.KeywordArgs)) {
             args.push(new nodes.KeywordArgs());
         }
 
-        var kwargs = args[args.length - 1];
+        const kwargs = args[args.length - 1];
         kwargs.addChild(new nodes.Pair(callTok.lineno, callTok.colno, callerName, callerNode));
         return new nodes.Output(callTok.lineno, callTok.colno, [macroCall]);
     };
 
     _proto.parseWithContext = function parseWithContext() {
-        var tok = this.peekToken();
-        var withContext = null;
+        const tok = this.peekToken();
+        let withContext = null;
 
         if (this.skipSymbol('with')) {
             withContext = true;
@@ -3865,44 +3880,44 @@ function (_Obj) {
     };
 
     _proto.parseImport = function parseImport() {
-        var importTok = this.peekToken();
+        const importTok = this.peekToken();
 
         if (!this.skipSymbol('import')) {
             this.fail('parseImport: expected import', importTok.lineno, importTok.colno);
         }
 
-        var template = this.parseExpression();
+        const template = this.parseExpression();
 
         if (!this.skipSymbol('as')) {
             this.fail('parseImport: expected "as" keyword', importTok.lineno, importTok.colno);
         }
 
-        var target = this.parseExpression();
-        var withContext = this.parseWithContext();
-        var node = new nodes.Import(importTok.lineno, importTok.colno, template, target, withContext);
+        const target = this.parseExpression();
+        const withContext = this.parseWithContext();
+        const node = new nodes.Import(importTok.lineno, importTok.colno, template, target, withContext);
         this.advanceAfterBlockEnd(importTok.value);
         return node;
     };
 
     _proto.parseFrom = function parseFrom() {
-        var fromTok = this.peekToken();
+        const fromTok = this.peekToken();
 
         if (!this.skipSymbol('from')) {
             this.fail('parseFrom: expected from');
         }
 
-        var template = this.parseExpression();
+        const template = this.parseExpression();
 
         if (!this.skipSymbol('import')) {
             this.fail('parseFrom: expected import', fromTok.lineno, fromTok.colno);
         }
 
-        var names = new nodes.NodeList();
-        var withContext;
+        const names = new nodes.NodeList();
+        let withContext;
 
         while (1) {
             // eslint-disable-line no-constant-condition
-            var nextTok = this.peekToken();
+            const nextTok = this.peekToken();
 
             if (nextTok.type === lexer.TOKEN_BLOCK_END) {
                 if (!names.children.length) {
@@ -3924,14 +3939,14 @@ function (_Obj) {
                 this.fail('parseFrom: expected comma', fromTok.lineno, fromTok.colno);
             }
 
-            var name = this.parsePrimary();
+            const name = this.parsePrimary();
 
             if (name.value.charAt(0) === '_') {
                 this.fail('parseFrom: names starting with an underscore cannot be imported', name.lineno, name.colno);
             }
 
             if (this.skipSymbol('as')) {
-                var alias = this.parsePrimary();
+                const alias = this.parsePrimary();
                 names.addChild(new nodes.Pair(name.lineno, name.colno, name, alias));
             } else {
                 names.addChild(name);
@@ -3944,13 +3959,13 @@ function (_Obj) {
     };
 
     _proto.parseBlock = function parseBlock() {
-        var tag = this.peekToken();
+        const tag = this.peekToken();
 
         if (!this.skipSymbol('block')) {
             this.fail('parseBlock: expected block', tag.lineno, tag.colno);
         }
 
-        var node = new nodes.Block(tag.lineno, tag.colno);
+        const node = new nodes.Block(tag.lineno, tag.colno);
         node.name = this.parsePrimary();
 
         if (!(node.name instanceof nodes.Symbol)) {
@@ -3961,7 +3976,7 @@ function (_Obj) {
         node.body = this.parseUntilBlocks('endblock');
         this.skipSymbol('endblock');
         this.skipSymbol(node.name.value);
-        var tok = this.peekToken();
+        const tok = this.peekToken();
 
         if (!tok) {
             this.fail('parseBlock: expected endblock, got end of file');
@@ -3972,28 +3987,28 @@ function (_Obj) {
     };
 
     _proto.parseExtends = function parseExtends() {
-        var tagName = 'extends';
-        var tag = this.peekToken();
+        const tagName = 'extends';
+        const tag = this.peekToken();
 
         if (!this.skipSymbol(tagName)) {
             this.fail('parseTemplateRef: expected ' + tagName);
         }
 
-        var node = new nodes.Extends(tag.lineno, tag.colno);
+        const node = new nodes.Extends(tag.lineno, tag.colno);
         node.template = this.parseExpression();
         this.advanceAfterBlockEnd(tag.value);
         return node;
     };
 
     _proto.parseInclude = function parseInclude() {
-        var tagName = 'include';
-        var tag = this.peekToken();
+        const tagName = 'include';
+        const tag = this.peekToken();
 
         if (!this.skipSymbol(tagName)) {
             this.fail('parseInclude: expected ' + tagName);
         }
 
-        var node = new nodes.Include(tag.lineno, tag.colno);
+        const node = new nodes.Include(tag.lineno, tag.colno);
         node.template = this.parseExpression();
 
         if (this.skipSymbol('ignore') && this.skipSymbol('missing')) {
@@ -4005,8 +4020,8 @@ function (_Obj) {
     };
 
     _proto.parseIf = function parseIf() {
-        var tag = this.peekToken();
-        var node;
+        const tag = this.peekToken();
+        let node;
 
         if (this.skipSymbol('if') || this.skipSymbol('elif') || this.skipSymbol('elseif')) {
             node = new nodes.If(tag.lineno, tag.colno);
@@ -4019,7 +4034,7 @@ function (_Obj) {
         node.cond = this.parseExpression();
         this.advanceAfterBlockEnd(tag.value);
         node.body = this.parseUntilBlocks('elif', 'elseif', 'else', 'endif');
-        var tok = this.peekToken();
+        const tok = this.peekToken();
 
         switch (tok && tok.value) {
         case 'elseif':
@@ -4046,14 +4061,14 @@ function (_Obj) {
     };
 
     _proto.parseSet = function parseSet() {
-        var tag = this.peekToken();
+        const tag = this.peekToken();
 
         if (!this.skipSymbol('set')) {
             this.fail('parseSet: expected set', tag.lineno, tag.colno);
         }
 
-        var node = new nodes.Set(tag.lineno, tag.colno, []);
-        var target;
+        const node = new nodes.Set(tag.lineno, tag.colno, []);
+        let target;
 
         while (target = this.parsePrimary()) {
             node.targets.push(target);
@@ -4084,35 +4099,35 @@ function (_Obj) {
      * Store the tag names in variables in case someone ever wants to
      * customize this.
      */
-        var switchStart = 'switch';
-        var switchEnd = 'endswitch';
-        var caseStart = 'case';
-        var caseDefault = 'default'; // Get the switch tag.
+        const switchStart = 'switch';
+        const switchEnd = 'endswitch';
+        const caseStart = 'case';
+        const caseDefault = 'default'; // Get the switch tag.
 
-        var tag = this.peekToken(); // fail early if we get some unexpected tag.
+        const tag = this.peekToken(); // fail early if we get some unexpected tag.
 
         if (!this.skipSymbol(switchStart) && !this.skipSymbol(caseStart) && !this.skipSymbol(caseDefault)) {
             this.fail('parseSwitch: expected "switch," "case" or "default"', tag.lineno, tag.colno);
         } // parse the switch expression
 
 
-        var expr = this.parseExpression(); // advance until a start of a case, a default case or an endswitch.
+        const expr = this.parseExpression(); // advance until a start of a case, a default case or an endswitch.
 
         this.advanceAfterBlockEnd(switchStart);
         this.parseUntilBlocks(caseStart, caseDefault, switchEnd); // this is the first case. it could also be an endswitch, we'll check.
 
-        var tok = this.peekToken(); // create new variables for our cases and default case.
+        let tok = this.peekToken(); // create new variables for our cases and default case.
 
-        var cases = [];
-        var defaultCase; // while we're dealing with new cases nodes...
+        const cases = [];
+        let defaultCase; // while we're dealing with new cases nodes...
 
         do {
             // skip the start symbol and get the case expression
             this.skipSymbol(caseStart);
-            var cond = this.parseExpression();
+            const cond = this.parseExpression();
             this.advanceAfterBlockEnd(switchStart); // get the body of the case node and add it to the array of cases.
 
-            var body = this.parseUntilBlocks(caseStart, caseDefault, switchEnd);
+            const body = this.parseUntilBlocks(caseStart, caseDefault, switchEnd);
             cases.push(new nodes.Case(tok.line, tok.col, cond, body)); // get our next case
 
             tok = this.peekToken();
@@ -4140,8 +4155,8 @@ function (_Obj) {
     };
 
     _proto.parseStatement = function parseStatement() {
-        var tok = this.peekToken();
-        var node;
+        const tok = this.peekToken();
+        let node;
 
         if (tok.type !== lexer.TOKEN_SYMBOL) {
             this.fail('tag name expected', tok.lineno, tok.colno);
@@ -4199,8 +4214,8 @@ function (_Obj) {
 
         default:
             if (this.extensions.length) {
-                for (var i = 0; i < this.extensions.length; i++) {
-                    var ext = this.extensions[i];
+                for (let i = 0; i < this.extensions.length; i++) {
+                    const ext = this.extensions[i];
 
                     if (lib.indexOf(ext.tags || [], tok.value) !== -1) {
                         return ext.parse(this, nodes, lexer);
@@ -4216,21 +4231,21 @@ function (_Obj) {
 
     _proto.parseRaw = function parseRaw(tagName) {
         tagName = tagName || 'raw';
-        var endTagName = 'end' + tagName; // Look for upcoming raw blocks (ignore all other kinds of blocks)
+        const endTagName = 'end' + tagName; // Look for upcoming raw blocks (ignore all other kinds of blocks)
 
-        var rawBlockRegex = new RegExp('([\\s\\S]*?){%\\s*(' + tagName + '|' + endTagName + ')\\s*(?=%})%}');
-        var rawLevel = 1;
-        var str = '';
-        var matches = null; // Skip opening raw token
+        const rawBlockRegex = new RegExp('([\\s\\S]*?){%\\s*(' + tagName + '|' + endTagName + ')\\s*(?=%})%}');
+        let rawLevel = 1;
+        let str = '';
+        let matches = null; // Skip opening raw token
         // Keep this token to track line and column numbers
 
-        var begun = this.advanceAfterBlockEnd(); // Exit when there's nothing to match
+        const begun = this.advanceAfterBlockEnd(); // Exit when there's nothing to match
         // or when we've found the matching "endraw" block
 
         while ((matches = this.tokens._extractRegex(rawBlockRegex)) && rawLevel > 0) {
-            var all = matches[0];
-            var pre = matches[1];
-            var blockName = matches[2]; // Adjust rawlevel
+            const all = matches[0];
+            const pre = matches[1];
+            const blockName = matches[2]; // Adjust rawlevel
 
             if (blockName === tagName) {
                 rawLevel += 1;
@@ -4253,8 +4268,8 @@ function (_Obj) {
     };
 
     _proto.parsePostfix = function parsePostfix(node) {
-        var lookup;
-        var tok = this.peekToken();
+        let lookup;
+        let tok = this.peekToken();
 
         while (tok) {
             if (tok.type === lexer.TOKEN_LEFT_PAREN) {
@@ -4272,7 +4287,7 @@ function (_Obj) {
             } else if (tok.type === lexer.TOKEN_OPERATOR && tok.value === '.') {
                 // Reference
                 this.nextToken();
-                var val = this.nextToken();
+                const val = this.nextToken();
 
                 if (val.type !== lexer.TOKEN_SYMBOL) {
                     this.fail('expected name as lookup value, got ' + val.value, val.lineno, val.colno);
@@ -4293,16 +4308,16 @@ function (_Obj) {
     };
 
     _proto.parseExpression = function parseExpression() {
-        var node = this.parseInlineIf();
+        const node = this.parseInlineIf();
         return node;
     };
 
     _proto.parseInlineIf = function parseInlineIf() {
-        var node = this.parseOr();
+        let node = this.parseOr();
 
         if (this.skipSymbol('if')) {
-            var condNode = this.parseOr();
-            var bodyNode = node;
+            const condNode = this.parseOr();
+            const bodyNode = node;
             node = new nodes.InlineIf(node.lineno, node.colno);
             node.body = bodyNode;
             node.cond = condNode;
@@ -4318,10 +4333,10 @@ function (_Obj) {
     };
 
     _proto.parseOr = function parseOr() {
-        var node = this.parseAnd();
+        let node = this.parseAnd();
 
         while (this.skipSymbol('or')) {
-            var node2 = this.parseAnd();
+            const node2 = this.parseAnd();
             node = new nodes.Or(node.lineno, node.colno, node, node2);
         }
 
@@ -4329,10 +4344,10 @@ function (_Obj) {
     };
 
     _proto.parseAnd = function parseAnd() {
-        var node = this.parseNot();
+        let node = this.parseNot();
 
         while (this.skipSymbol('and')) {
-            var node2 = this.parseNot();
+            const node2 = this.parseNot();
             node = new nodes.And(node.lineno, node.colno, node, node2);
         }
 
@@ -4340,7 +4355,7 @@ function (_Obj) {
     };
 
     _proto.parseNot = function parseNot() {
-        var tok = this.peekToken();
+        const tok = this.peekToken();
 
         if (this.skipSymbol('not')) {
             return new nodes.Not(tok.lineno, tok.colno, this.parseNot());
@@ -4350,25 +4365,25 @@ function (_Obj) {
     };
 
     _proto.parseIn = function parseIn() {
-        var node = this.parseIs();
+        let node = this.parseIs();
 
         while (1) {
             // eslint-disable-line no-constant-condition
             // check if the next token is 'not'
-            var tok = this.nextToken();
+            const tok = this.nextToken();
 
             if (!tok) {
                 break;
             }
 
-            var invert = tok.type === lexer.TOKEN_SYMBOL && tok.value === 'not'; // if it wasn't 'not', put it back
+            const invert = tok.type === lexer.TOKEN_SYMBOL && tok.value === 'not'; // if it wasn't 'not', put it back
 
             if (!invert) {
                 this.pushToken(tok);
             }
 
             if (this.skipSymbol('in')) {
-                var node2 = this.parseIs();
+                const node2 = this.parseIs();
                 node = new nodes.In(node.lineno, node.colno, node, node2);
 
                 if (invert) {
@@ -4390,13 +4405,13 @@ function (_Obj) {
     ;
 
     _proto.parseIs = function parseIs() {
-        var node = this.parseCompare(); // look for an is
+        let node = this.parseCompare(); // look for an is
 
         if (this.skipSymbol('is')) {
             // look for a not
-            var not = this.skipSymbol('not'); // get the next node
+            const not = this.skipSymbol('not'); // get the next node
 
-            var node2 = this.parseCompare(); // create an Is node using the next node and the info from our Is node.
+            const node2 = this.parseCompare(); // create an Is node using the next node and the info from our Is node.
 
             node = new nodes.Is(node.lineno, node.colno, node, node2); // if we have a Not, create a Not node from our Is node.
 
@@ -4410,13 +4425,13 @@ function (_Obj) {
     };
 
     _proto.parseCompare = function parseCompare() {
-        var compareOps = ['==', '===', '!=', '!==', '<', '>', '<=', '>='];
-        var expr = this.parseConcat();
-        var ops = [];
+        const compareOps = ['==', '===', '!=', '!==', '<', '>', '<=', '>='];
+        const expr = this.parseConcat();
+        const ops = [];
 
         while (1) {
             // eslint-disable-line no-constant-condition
-            var tok = this.nextToken();
+            const tok = this.nextToken();
 
             if (!tok) {
                 break;
@@ -4437,10 +4452,10 @@ function (_Obj) {
     ;
 
     _proto.parseConcat = function parseConcat() {
-        var node = this.parseAdd();
+        let node = this.parseAdd();
 
         while (this.skipValue(lexer.TOKEN_TILDE, '~')) {
-            var node2 = this.parseAdd();
+            const node2 = this.parseAdd();
             node = new nodes.Concat(node.lineno, node.colno, node, node2);
         }
 
@@ -4448,10 +4463,10 @@ function (_Obj) {
     };
 
     _proto.parseAdd = function parseAdd() {
-        var node = this.parseSub();
+        let node = this.parseSub();
 
         while (this.skipValue(lexer.TOKEN_OPERATOR, '+')) {
-            var node2 = this.parseSub();
+            const node2 = this.parseSub();
             node = new nodes.Add(node.lineno, node.colno, node, node2);
         }
 
@@ -4459,10 +4474,10 @@ function (_Obj) {
     };
 
     _proto.parseSub = function parseSub() {
-        var node = this.parseMul();
+        let node = this.parseMul();
 
         while (this.skipValue(lexer.TOKEN_OPERATOR, '-')) {
-            var node2 = this.parseMul();
+            const node2 = this.parseMul();
             node = new nodes.Sub(node.lineno, node.colno, node, node2);
         }
 
@@ -4470,10 +4485,10 @@ function (_Obj) {
     };
 
     _proto.parseMul = function parseMul() {
-        var node = this.parseDiv();
+        let node = this.parseDiv();
 
         while (this.skipValue(lexer.TOKEN_OPERATOR, '*')) {
-            var node2 = this.parseDiv();
+            const node2 = this.parseDiv();
             node = new nodes.Mul(node.lineno, node.colno, node, node2);
         }
 
@@ -4481,10 +4496,10 @@ function (_Obj) {
     };
 
     _proto.parseDiv = function parseDiv() {
-        var node = this.parseFloorDiv();
+        let node = this.parseFloorDiv();
 
         while (this.skipValue(lexer.TOKEN_OPERATOR, '/')) {
-            var node2 = this.parseFloorDiv();
+            const node2 = this.parseFloorDiv();
             node = new nodes.Div(node.lineno, node.colno, node, node2);
         }
 
@@ -4492,10 +4507,10 @@ function (_Obj) {
     };
 
     _proto.parseFloorDiv = function parseFloorDiv() {
-        var node = this.parseMod();
+        let node = this.parseMod();
 
         while (this.skipValue(lexer.TOKEN_OPERATOR, '//')) {
-            var node2 = this.parseMod();
+            const node2 = this.parseMod();
             node = new nodes.FloorDiv(node.lineno, node.colno, node, node2);
         }
 
@@ -4503,10 +4518,10 @@ function (_Obj) {
     };
 
     _proto.parseMod = function parseMod() {
-        var node = this.parsePow();
+        let node = this.parsePow();
 
         while (this.skipValue(lexer.TOKEN_OPERATOR, '%')) {
-            var node2 = this.parsePow();
+            const node2 = this.parsePow();
             node = new nodes.Mod(node.lineno, node.colno, node, node2);
         }
 
@@ -4514,10 +4529,10 @@ function (_Obj) {
     };
 
     _proto.parsePow = function parsePow() {
-        var node = this.parseUnary();
+        let node = this.parseUnary();
 
         while (this.skipValue(lexer.TOKEN_OPERATOR, '**')) {
-            var node2 = this.parseUnary();
+            const node2 = this.parseUnary();
             node = new nodes.Pow(node.lineno, node.colno, node, node2);
         }
 
@@ -4525,8 +4540,8 @@ function (_Obj) {
     };
 
     _proto.parseUnary = function parseUnary(noFilters) {
-        var tok = this.peekToken();
-        var node;
+        const tok = this.peekToken();
+        let node;
 
         if (this.skipValue(lexer.TOKEN_OPERATOR, '-')) {
             node = new nodes.Neg(tok.lineno, tok.colno, this.parseUnary(true));
@@ -4544,9 +4559,9 @@ function (_Obj) {
     };
 
     _proto.parsePrimary = function parsePrimary(noPostfix) {
-        var tok = this.nextToken();
-        var val;
-        var node = null;
+        const tok = this.nextToken();
+        let val;
+        let node = null;
 
         if (!tok) {
             this.fail('expected expression, got end of file');
@@ -4593,8 +4608,8 @@ function (_Obj) {
     };
 
     _proto.parseFilterName = function parseFilterName() {
-        var tok = this.expect(lexer.TOKEN_SYMBOL);
-        var name = tok.value;
+        const tok = this.expect(lexer.TOKEN_SYMBOL);
+        let name = tok.value;
 
         while (this.skipValue(lexer.TOKEN_OPERATOR, '.')) {
             name += '.' + this.expect(lexer.TOKEN_SYMBOL).value;
@@ -4607,7 +4622,7 @@ function (_Obj) {
         if (this.peekToken().type === lexer.TOKEN_LEFT_PAREN) {
             // Get a FunCall node and add the parameters to the
             // filter
-            var call = this.parsePostfix(node);
+            const call = this.parsePostfix(node);
             return call.args.children;
         }
 
@@ -4616,7 +4631,7 @@ function (_Obj) {
 
     _proto.parseFilter = function parseFilter(node) {
         while (this.skip(lexer.TOKEN_PIPE)) {
-            var name = this.parseFilterName();
+            const name = this.parseFilterName();
             node = new nodes.Filter(name.lineno, name.colno, name, new nodes.NodeList(name.lineno, name.colno, [node].concat(this.parseFilterArgs(node))));
         }
 
@@ -4624,24 +4639,24 @@ function (_Obj) {
     };
 
     _proto.parseFilterStatement = function parseFilterStatement() {
-        var filterTok = this.peekToken();
+        const filterTok = this.peekToken();
 
         if (!this.skipSymbol('filter')) {
             this.fail('parseFilterStatement: expected filter');
         }
 
-        var name = this.parseFilterName();
-        var args = this.parseFilterArgs(name);
+        const name = this.parseFilterName();
+        const args = this.parseFilterArgs(name);
         this.advanceAfterBlockEnd(filterTok.value);
-        var body = new nodes.Capture(name.lineno, name.colno, this.parseUntilBlocks('endfilter'));
+        const body = new nodes.Capture(name.lineno, name.colno, this.parseUntilBlocks('endfilter'));
         this.advanceAfterBlockEnd();
-        var node = new nodes.Filter(name.lineno, name.colno, name, new nodes.NodeList(name.lineno, name.colno, [body].concat(args)));
+        const node = new nodes.Filter(name.lineno, name.colno, name, new nodes.NodeList(name.lineno, name.colno, [body].concat(args)));
         return new nodes.Output(name.lineno, name.colno, [node]);
     };
 
     _proto.parseAggregate = function parseAggregate() {
-        var tok = this.nextToken();
-        var node;
+        const tok = this.nextToken();
+        let node;
 
         switch (tok.type) {
         case lexer.TOKEN_LEFT_PAREN:
@@ -4662,7 +4677,7 @@ function (_Obj) {
 
         while (1) {
             // eslint-disable-line no-constant-condition
-            var type = this.peekToken().type;
+            const type = this.peekToken().type;
 
             if (type === lexer.TOKEN_RIGHT_PAREN || type === lexer.TOKEN_RIGHT_BRACKET || type === lexer.TOKEN_RIGHT_CURLY) {
                 this.nextToken();
@@ -4677,7 +4692,7 @@ function (_Obj) {
 
             if (node instanceof nodes.Dict) {
                 // TODO: check for errors
-                var key = this.parsePrimary(); // We expect a key/value pair for dicts, separated by a
+                const key = this.parsePrimary(); // We expect a key/value pair for dicts, separated by a
                 // colon
 
                 if (!this.skip(lexer.TOKEN_COLON)) {
@@ -4685,11 +4700,11 @@ function (_Obj) {
                 } // TODO: check for errors
 
 
-                var value = this.parseExpression();
+                const value = this.parseExpression();
                 node.addChild(new nodes.Pair(key.lineno, key.colno, key, value));
             } else {
                 // TODO: check for errors
-                var expr = this.parseExpression();
+                const expr = this.parseExpression();
                 node.addChild(expr);
             }
         }
@@ -4698,7 +4713,7 @@ function (_Obj) {
     };
 
     _proto.parseSignature = function parseSignature(tolerant, noParens) {
-        var tok = this.peekToken();
+        let tok = this.peekToken();
 
         if (!noParens && tok.type !== lexer.TOKEN_LEFT_PAREN) {
             if (tolerant) {
@@ -4712,9 +4727,9 @@ function (_Obj) {
             tok = this.nextToken();
         }
 
-        var args = new nodes.NodeList(tok.lineno, tok.colno);
-        var kwargs = new nodes.KeywordArgs(tok.lineno, tok.colno);
-        var checkComma = false;
+        const args = new nodes.NodeList(tok.lineno, tok.colno);
+        const kwargs = new nodes.KeywordArgs(tok.lineno, tok.colno);
+        let checkComma = false;
 
         while (1) {
             // eslint-disable-line no-constant-condition
@@ -4730,7 +4745,7 @@ function (_Obj) {
             if (checkComma && !this.skip(lexer.TOKEN_COMMA)) {
                 this.fail('parseSignature: expected comma after expression', tok.lineno, tok.colno);
             } else {
-                var arg = this.parseExpression();
+                const arg = this.parseExpression();
 
                 if (this.skipValue(lexer.TOKEN_OPERATOR, '=')) {
                     kwargs.addChild(new nodes.Pair(arg.lineno, arg.colno, arg, this.parseExpression()));
@@ -4750,27 +4765,27 @@ function (_Obj) {
     };
 
     _proto.parseUntilBlocks = function parseUntilBlocks() {
-        var prev = this.breakOnBlocks;
+        const prev = this.breakOnBlocks;
 
         for (var _len = arguments.length, blockNames = new Array(_len), _key = 0; _key < _len; _key++) {
             blockNames[_key] = arguments[_key];
         }
 
         this.breakOnBlocks = blockNames;
-        var ret = this.parse();
+        const ret = this.parse();
         this.breakOnBlocks = prev;
         return ret;
     };
 
     _proto.parseNodes = function parseNodes() {
-        var tok;
-        var buf = [];
+        let tok;
+        const buf = [];
 
         while (tok = this.nextToken()) {
             if (tok.type === lexer.TOKEN_DATA) {
-                var data = tok.value;
-                var nextToken = this.peekToken();
-                var nextVal = nextToken && nextToken.value; // If the last token has "-" we need to trim the
+                let data = tok.value;
+                const nextToken = this.peekToken();
+                const nextVal = nextToken && nextToken.value; // If the last token has "-" we need to trim the
                 // leading whitespace of the data. This is marked with
                 // the `dropLeadingWhitespace` variable.
 
@@ -4789,7 +4804,7 @@ function (_Obj) {
                 buf.push(new nodes.Output(tok.lineno, tok.colno, [new nodes.TemplateData(tok.lineno, tok.colno, data)]));
             } else if (tok.type === lexer.TOKEN_BLOCK_START) {
                 this.dropLeadingWhitespace = false;
-                var n = this.parseStatement();
+                const n = this.parseStatement();
 
                 if (!n) {
                     break;
@@ -4797,7 +4812,7 @@ function (_Obj) {
 
                 buf.push(n);
             } else if (tok.type === lexer.TOKEN_VARIABLE_START) {
-                var e = this.parseExpression();
+                const e = this.parseExpression();
                 this.dropLeadingWhitespace = false;
                 this.advanceAfterVariableEnd();
                 buf.push(new nodes.Output(tok.lineno, tok.colno, [e]));
@@ -4836,7 +4851,7 @@ function (_Obj) {
 
             module.exports = {
                 parse: function parse(src, extensions, opts) {
-                    var p = new Parser(lexer.lex(src, opts));
+                    const p = new Parser(lexer.lex(src, opts));
 
                     if (extensions !== undefined) {
                         p.extensions = extensions;
@@ -4844,66 +4859,64 @@ function (_Obj) {
 
                     return p.parseAsRoot();
                 },
-                Parser: Parser
+                Parser: Parser,
             };
-
-            /***/ }),
+            /***/}),
         /* 9 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
 
 
-            var lib = __webpack_require__(0);
+            const lib = __webpack_require__(0);
 
-            var whitespaceChars = ' \n\t\r\xA0';
-            var delimChars = '()[]{}%*-+~/#,:|.<>=!';
-            var intChars = '0123456789';
-            var BLOCK_START = '{%';
-            var BLOCK_END = '%}';
-            var VARIABLE_START = '{{';
-            var VARIABLE_END = '}}';
-            var COMMENT_START = '{#';
-            var COMMENT_END = '#}';
-            var TOKEN_STRING = 'string';
-            var TOKEN_WHITESPACE = 'whitespace';
-            var TOKEN_DATA = 'data';
-            var TOKEN_BLOCK_START = 'block-start';
-            var TOKEN_BLOCK_END = 'block-end';
-            var TOKEN_VARIABLE_START = 'variable-start';
-            var TOKEN_VARIABLE_END = 'variable-end';
-            var TOKEN_COMMENT = 'comment';
-            var TOKEN_LEFT_PAREN = 'left-paren';
-            var TOKEN_RIGHT_PAREN = 'right-paren';
-            var TOKEN_LEFT_BRACKET = 'left-bracket';
-            var TOKEN_RIGHT_BRACKET = 'right-bracket';
-            var TOKEN_LEFT_CURLY = 'left-curly';
-            var TOKEN_RIGHT_CURLY = 'right-curly';
-            var TOKEN_OPERATOR = 'operator';
-            var TOKEN_COMMA = 'comma';
-            var TOKEN_COLON = 'colon';
-            var TOKEN_TILDE = 'tilde';
-            var TOKEN_PIPE = 'pipe';
-            var TOKEN_INT = 'int';
-            var TOKEN_FLOAT = 'float';
-            var TOKEN_BOOLEAN = 'boolean';
-            var TOKEN_NONE = 'none';
-            var TOKEN_SYMBOL = 'symbol';
-            var TOKEN_SPECIAL = 'special';
-            var TOKEN_REGEX = 'regex';
+            const whitespaceChars = ' \n\t\r\xA0';
+            const delimChars = '()[]{}%*-+~/#,:|.<>=!';
+            const intChars = '0123456789';
+            const BLOCK_START = '{%';
+            const BLOCK_END = '%}';
+            const VARIABLE_START = '{{';
+            const VARIABLE_END = '}}';
+            const COMMENT_START = '{#';
+            const COMMENT_END = '#}';
+            const TOKEN_STRING = 'string';
+            const TOKEN_WHITESPACE = 'whitespace';
+            const TOKEN_DATA = 'data';
+            const TOKEN_BLOCK_START = 'block-start';
+            const TOKEN_BLOCK_END = 'block-end';
+            const TOKEN_VARIABLE_START = 'variable-start';
+            const TOKEN_VARIABLE_END = 'variable-end';
+            const TOKEN_COMMENT = 'comment';
+            const TOKEN_LEFT_PAREN = 'left-paren';
+            const TOKEN_RIGHT_PAREN = 'right-paren';
+            const TOKEN_LEFT_BRACKET = 'left-bracket';
+            const TOKEN_RIGHT_BRACKET = 'right-bracket';
+            const TOKEN_LEFT_CURLY = 'left-curly';
+            const TOKEN_RIGHT_CURLY = 'right-curly';
+            const TOKEN_OPERATOR = 'operator';
+            const TOKEN_COMMA = 'comma';
+            const TOKEN_COLON = 'colon';
+            const TOKEN_TILDE = 'tilde';
+            const TOKEN_PIPE = 'pipe';
+            const TOKEN_INT = 'int';
+            const TOKEN_FLOAT = 'float';
+            const TOKEN_BOOLEAN = 'boolean';
+            const TOKEN_NONE = 'none';
+            const TOKEN_SYMBOL = 'symbol';
+            const TOKEN_SPECIAL = 'special';
+            const TOKEN_REGEX = 'regex';
 
             function token(type, value, lineno, colno) {
                 return {
                     type: type,
                     value: value,
                     lineno: lineno,
-                    colno: colno
+                    colno: colno,
                 };
             }
 
-            var Tokenizer =
-/*#__PURE__*/
-function () {
+            const Tokenizer =
+/* #__PURE__*/
+function() {
     function Tokenizer(str, opts) {
         this.str = str;
         this.index = 0;
@@ -4912,29 +4925,29 @@ function () {
         this.colno = 0;
         this.in_code = false;
         opts = opts || {};
-        var tags = opts.tags || {};
+        const tags = opts.tags || {};
         this.tags = {
             BLOCK_START: tags.blockStart || BLOCK_START,
             BLOCK_END: tags.blockEnd || BLOCK_END,
             VARIABLE_START: tags.variableStart || VARIABLE_START,
             VARIABLE_END: tags.variableEnd || VARIABLE_END,
             COMMENT_START: tags.commentStart || COMMENT_START,
-            COMMENT_END: tags.commentEnd || COMMENT_END
+            COMMENT_END: tags.commentEnd || COMMENT_END,
         };
         this.trimBlocks = !!opts.trimBlocks;
         this.lstripBlocks = !!opts.lstripBlocks;
     }
 
-    var _proto = Tokenizer.prototype;
+    const _proto = Tokenizer.prototype;
 
     _proto.nextToken = function nextToken() {
-        var lineno = this.lineno;
-        var colno = this.colno;
-        var tok;
+        const lineno = this.lineno;
+        const colno = this.colno;
+        let tok;
 
         if (this.in_code) {
             // Otherwise, if we are in a block parse it as code
-            var cur = this.current();
+            let cur = this.current();
 
             if (this.isFinished()) {
                 // We have nothing else to parse
@@ -4983,7 +4996,7 @@ function () {
                 // Skip past 'r/'.
                 this.forwardN(2); // Extract until the end of the regex -- / ends it, \/ does not.
 
-                var regexBody = '';
+                let regexBody = '';
 
                 while (!this.isFinished()) {
                     if (this.current() === '/' && this.previous() !== '\\') {
@@ -4997,11 +5010,11 @@ function () {
                 // The possible flags are according to https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/RegExp)
 
 
-                var POSSIBLE_FLAGS = ['g', 'i', 'm', 'y'];
-                var regexFlags = '';
+                const POSSIBLE_FLAGS = ['g', 'i', 'm', 'y'];
+                let regexFlags = '';
 
                 while (!this.isFinished()) {
-                    var isCurrentAFlag = POSSIBLE_FLAGS.indexOf(this.current()) !== -1;
+                    const isCurrentAFlag = POSSIBLE_FLAGS.indexOf(this.current()) !== -1;
 
                     if (isCurrentAFlag) {
                         regexFlags += this.current();
@@ -5013,14 +5026,14 @@ function () {
 
                 return token(TOKEN_REGEX, {
                     body: regexBody,
-                    flags: regexFlags
+                    flags: regexFlags,
                 }, lineno, colno);
             } else if (delimChars.indexOf(cur) !== -1) {
                 // We've hit a delimiter (a special char like a bracket)
                 this.forward();
-                var complexOps = ['==', '===', '!=', '!==', '<=', '>=', '//', '**'];
-                var curComplex = cur + this.current();
-                var type;
+                const complexOps = ['==', '===', '!=', '!==', '<=', '>=', '//', '**'];
+                const curComplex = cur + this.current();
+                let type;
 
                 if (lib.indexOf(complexOps, curComplex) !== -1) {
                     this.forward();
@@ -5087,7 +5100,7 @@ function () {
                     if (this.current() === '.') {
                         this.forward();
 
-                        var dec = this._extract(intChars);
+                        const dec = this._extract(intChars);
 
                         return token(TOKEN_FLOAT, tok + '.' + dec, lineno, colno);
                     } else {
@@ -5116,7 +5129,7 @@ function () {
             // Parse out the template text, breaking on tag
             // delimiters because we need to look for block/variable start
             // tags (don't use the full delimChars for optimization)
-            var beginChars = this.tags.BLOCK_START.charAt(0) + this.tags.VARIABLE_START.charAt(0) + this.tags.COMMENT_START.charAt(0) + this.tags.COMMENT_END.charAt(0);
+            const beginChars = this.tags.BLOCK_START.charAt(0) + this.tags.VARIABLE_START.charAt(0) + this.tags.COMMENT_START.charAt(0) + this.tags.COMMENT_END.charAt(0);
 
             if (this.isFinished()) {
                 return null;
@@ -5128,8 +5141,8 @@ function () {
                 return token(TOKEN_VARIABLE_START, tok, lineno, colno);
             } else {
                 tok = '';
-                var data;
-                var inComment = false;
+                let data;
+                let inComment = false;
 
                 if (this._matches(this.tags.COMMENT_START)) {
                     inComment = true;
@@ -5147,7 +5160,7 @@ function () {
 
                     if ((this._matches(this.tags.BLOCK_START) || this._matches(this.tags.VARIABLE_START) || this._matches(this.tags.COMMENT_START)) && !inComment) {
                         if (this.lstripBlocks && this._matches(this.tags.BLOCK_START) && this.colno > 0 && this.colno <= tok.length) {
-                            var lastLine = tok.slice(-this.colno);
+                            const lastLine = tok.slice(-this.colno);
 
                             if (/^\s+$/.test(lastLine)) {
                                 // Remove block leading whitespace from beginning of the string
@@ -5189,10 +5202,10 @@ function () {
 
     _proto._parseString = function _parseString(delimiter) {
         this.forward();
-        var str = '';
+        let str = '';
 
         while (!this.isFinished() && this.current() !== delimiter) {
-            var cur = this.current();
+            const cur = this.current();
 
             if (cur === '\\') {
                 this.forward();
@@ -5230,7 +5243,7 @@ function () {
             return null;
         }
 
-        var m = this.str.slice(this.index, this.index + str.length);
+        const m = this.str.slice(this.index, this.index + str.length);
         return m === str;
     };
 
@@ -5263,14 +5276,14 @@ function () {
             return null;
         }
 
-        var first = charString.indexOf(this.current()); // Only proceed if the first character doesn't meet our condition
+        const first = charString.indexOf(this.current()); // Only proceed if the first character doesn't meet our condition
 
         if (breakOnMatch && first === -1 || !breakOnMatch && first !== -1) {
-            var t = this.current();
+            let t = this.current();
             this.forward(); // And pull out all the chars one at a time until we hit a
             // breaking char
 
-            var idx = charString.indexOf(this.current());
+            let idx = charString.indexOf(this.current());
 
             while ((breakOnMatch && idx === -1 || !breakOnMatch && idx !== -1) && !this.isFinished()) {
                 t += this.current();
@@ -5285,7 +5298,7 @@ function () {
     };
 
     _proto._extractRegex = function _extractRegex(regex) {
-        var matches = this.currentStr().match(regex);
+        const matches = this.currentStr().match(regex);
 
         if (!matches) {
             return null;
@@ -5301,7 +5314,7 @@ function () {
     };
 
     _proto.forwardN = function forwardN(n) {
-        for (var i = 0; i < n; i++) {
+        for (let i = 0; i < n; i++) {
             this.forward();
         }
     };
@@ -5318,7 +5331,7 @@ function () {
     };
 
     _proto.backN = function backN(n) {
-        for (var i = 0; i < n; i++) {
+        for (let i = 0; i < n; i++) {
             this.back();
         }
     };
@@ -5328,7 +5341,7 @@ function () {
 
         if (this.current() === '\n') {
             this.lineno--;
-            var idx = this.src.lastIndexOf('\n', this.index - 1);
+            const idx = this.src.lastIndexOf('\n', this.index - 1);
 
             if (idx === -1) {
                 this.colno = this.index;
@@ -5394,30 +5407,30 @@ function () {
                 TOKEN_NONE: TOKEN_NONE,
                 TOKEN_SYMBOL: TOKEN_SYMBOL,
                 TOKEN_SPECIAL: TOKEN_SPECIAL,
-                TOKEN_REGEX: TOKEN_REGEX
+                TOKEN_REGEX: TOKEN_REGEX,
             };
-
-            /***/ }),
+            /***/}),
         /* 10 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
 
 
-            function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
+            function _inheritsLoose(subClass, superClass) {
+                subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass;
+            }
 
-            var Loader = __webpack_require__(6);
+            const Loader = __webpack_require__(6);
 
-            var _require = __webpack_require__(19),
-                PrecompiledLoader = _require.PrecompiledLoader;
+            const _require = __webpack_require__(19);
+            const PrecompiledLoader = _require.PrecompiledLoader;
 
-            var WebLoader =
-/*#__PURE__*/
-function (_Loader) {
+            const WebLoader =
+/* #__PURE__*/
+function(_Loader) {
     _inheritsLoose(WebLoader, _Loader);
 
     function WebLoader(baseURL, opts) {
-        var _this;
+        let _this;
 
         _this = _Loader.call(this) || this;
         _this.baseURL = baseURL || '.';
@@ -5436,18 +5449,18 @@ function (_Loader) {
         return _this;
     }
 
-    var _proto = WebLoader.prototype;
+    const _proto = WebLoader.prototype;
 
     _proto.resolve = function resolve(from, to) {
         throw new Error('relative templates not support in the browser yet');
     };
 
     _proto.getSource = function getSource(name, cb) {
-        var _this2 = this;
+        const _this2 = this;
 
-        var useCache = this.useCache;
-        var result;
-        this.fetch(this.baseURL + '/' + name, function (err, src) {
+        const useCache = this.useCache;
+        let result;
+        this.fetch(this.baseURL + '/' + name, function(err, src) {
             if (err) {
                 if (cb) {
                     cb(err.content);
@@ -5460,7 +5473,7 @@ function (_Loader) {
                 result = {
                     src: src,
                     path: name,
-                    noCache: !useCache
+                    noCache: !useCache,
                 };
 
                 _this2.emit('load', name, result);
@@ -5482,10 +5495,10 @@ function (_Loader) {
             throw new Error('WebLoader can only by used in a browser');
         }
 
-        var ajax = new XMLHttpRequest();
-        var loading = true;
+        const ajax = new XMLHttpRequest();
+        let loading = true;
 
-        ajax.onreadystatechange = function () {
+        ajax.onreadystatechange = function() {
             if (ajax.readyState === 4 && loading) {
                 loading = false;
 
@@ -5494,7 +5507,7 @@ function (_Loader) {
                 } else {
                     cb({
                         status: ajax.status,
-                        content: ajax.responseText
+                        content: ajax.responseText,
                     });
                 }
             }
@@ -5510,42 +5523,40 @@ function (_Loader) {
 
             module.exports = {
                 WebLoader: WebLoader,
-                PrecompiledLoader: PrecompiledLoader
+                PrecompiledLoader: PrecompiledLoader,
             };
-
-            /***/ }),
+            /***/}),
         /* 11 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
 
 
-            var lib = __webpack_require__(0);
+            const lib = __webpack_require__(0);
 
-            var _require = __webpack_require__(7),
-                Environment = _require.Environment,
-                Template = _require.Template;
+            const _require = __webpack_require__(7);
+            const Environment = _require.Environment;
+            const Template = _require.Template;
 
-            var Loader = __webpack_require__(6);
+            const Loader = __webpack_require__(6);
 
-            var loaders = __webpack_require__(10);
+            const loaders = __webpack_require__(10);
 
-            var precompile = __webpack_require__(23);
+            const precompile = __webpack_require__(23);
 
-            var compiler = __webpack_require__(5);
+            const compiler = __webpack_require__(5);
 
-            var parser = __webpack_require__(8);
+            const parser = __webpack_require__(8);
 
-            var lexer = __webpack_require__(9);
+            const lexer = __webpack_require__(9);
 
-            var runtime = __webpack_require__(2);
+            const runtime = __webpack_require__(2);
 
-            var nodes = __webpack_require__(3);
+            const nodes = __webpack_require__(3);
 
-            var installJinjaCompat = __webpack_require__(25); // A single instance of an environment, since this is so commonly used
+            const installJinjaCompat = __webpack_require__(25); // A single instance of an environment, since this is so commonly used
 
 
-            var e;
+            let e;
 
             function configure(templatesPath, opts) {
                 opts = opts || {};
@@ -5555,17 +5566,17 @@ function (_Loader) {
                     templatesPath = null;
                 }
 
-                var TemplateLoader;
+                let TemplateLoader;
 
                 if (loaders.FileSystemLoader) {
                     TemplateLoader = new loaders.FileSystemLoader(templatesPath, {
                         watch: opts.watch,
-                        noCache: opts.noCache
+                        noCache: opts.noCache,
                     });
                 } else if (loaders.WebLoader) {
                     TemplateLoader = new loaders.WebLoader(templatesPath, {
                         useCache: opts.web && opts.web.useCache,
-                        async: opts.web && opts.web.async
+                        async: opts.web && opts.web.async,
                     });
                 }
 
@@ -5619,24 +5630,22 @@ function (_Loader) {
                     return e.renderString(src, ctx, cb);
                 },
                 precompile: precompile ? precompile.precompile : undefined,
-                precompileString: precompile ? precompile.precompileString : undefined
+                precompileString: precompile ? precompile.precompileString : undefined,
             };
-
-            /***/ }),
+            /***/}),
         /* 12 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
 
 
             // rawAsap provides everything we need except exception management.
-            var rawAsap = __webpack_require__(13);
+            const rawAsap = __webpack_require__(13);
             // RawTasks are recycled to reduce GC churn.
-            var freeTasks = [];
+            const freeTasks = [];
             // We queue errors to ensure they are thrown in right order (FIFO).
             // Array-as-queue is good enough here, since we are just dealing with exceptions.
-            var pendingErrors = [];
-            var requestErrorThrow = rawAsap.makeRequestCallFromTimer(throwFirstError);
+            const pendingErrors = [];
+            const requestErrorThrow = rawAsap.makeRequestCallFromTimer(throwFirstError);
 
             function throwFirstError() {
                 if (pendingErrors.length) {
@@ -5654,7 +5663,7 @@ function (_Loader) {
  */
             module.exports = asap;
             function asap(task) {
-                var rawTask;
+                let rawTask;
                 if (freeTasks.length) {
                     rawTask = freeTasks.pop();
                 } else {
@@ -5672,7 +5681,7 @@ function (_Loader) {
 
             // The sole purpose of wrapping the task is to catch the exception and recycle
             // the task object after its single use.
-            RawTask.prototype.call = function () {
+            RawTask.prototype.call = function() {
                 try {
                     this.task.call();
                 } catch (error) {
@@ -5693,15 +5702,11 @@ function (_Loader) {
                     freeTasks[freeTasks.length] = this;
                 }
             };
-
-
-            /***/ }),
+            /***/}),
         /* 13 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
             /* WEBPACK VAR INJECTION */(function(global) {
-
                 // Use the fastest means possible to execute a task in its own turn, with
                 // priority over other events including IO, animation, reflow, and redraw
                 // events in browsers.
@@ -5729,15 +5734,15 @@ function (_Loader) {
                 // `requestFlush` is an implementation-specific method that attempts to kick
                 // off a `flush` event as quickly as possible. `flush` will attempt to exhaust
                 // the event queue before yielding to the browser's own event loop.
-                var requestFlush;
+                let requestFlush;
                 // The position of the next task to execute in the task queue. This is
                 // preserved between calls to `flush` so that it can be resumed if
                 // a task throws an exception.
-                var index = 0;
+                let index = 0;
                 // If a task schedules additional tasks recursively, the task queue can grow
                 // unbounded. To prevent memory exhaustion, the task queue will periodically
                 // truncate already-completed tasks.
-                var capacity = 1024;
+                const capacity = 1024;
 
                 // The flush function processes all tasks that have been scheduled with
                 // `rawAsap` unless and until one of those tasks throws an exception.
@@ -5747,7 +5752,7 @@ function (_Loader) {
                 // exception is thrown.
                 function flush() {
                     while (index < queue.length) {
-                        var currentIndex = index;
+                        const currentIndex = index;
                         // Advance the index before calling the task. This ensures that we will
                         // begin flushing on the next task the task throws an error.
                         index = index + 1;
@@ -5760,7 +5765,7 @@ function (_Loader) {
                         if (index > capacity) {
                             // Manually shift all values starting at the index back to the
                             // beginning of the queue.
-                            for (var scan = 0, newLength = queue.length - index; scan < newLength; scan++) {
+                            for (let scan = 0, newLength = queue.length - index; scan < newLength; scan++) {
                                 queue[scan] = queue[scan + index];
                             }
                             queue.length -= index;
@@ -5782,8 +5787,8 @@ function (_Loader) {
                 // workers. `global` is a provision of Browserify, Mr, Mrs, or Mop.
 
                 /* globals self */
-                var scope = typeof global !== 'undefined' ? global : self;
-                var BrowserMutationObserver = scope.MutationObserver || scope.WebKitMutationObserver;
+                const scope = typeof global !== 'undefined' ? global : self;
+                const BrowserMutationObserver = scope.MutationObserver || scope.WebKitMutationObserver;
 
                 // MutationObservers are desirable because they have high priority and work
                 // reliably everywhere they are implemented.
@@ -5840,9 +5845,9 @@ function (_Loader) {
                 // To request a high priority event, we induce a mutation observer by toggling
                 // the text of a text node between "1" and "-1".
                 function makeRequestCallFromMutationObserver(callback) {
-                    var toggle = 1;
-                    var observer = new BrowserMutationObserver(callback);
-                    var node = document.createTextNode('');
+                    let toggle = 1;
+                    const observer = new BrowserMutationObserver(callback);
+                    const node = document.createTextNode('');
                     observer.observe(node, {characterData: true});
                     return function requestCall() {
                         toggle = -toggle;
@@ -5896,11 +5901,11 @@ function (_Loader) {
                         // can reliably accommodate that request. This will usually be snapped
                         // to a 4 milisecond delay, but once we're flushing, there's no delay
                         // between events.
-                        var timeoutHandle = setTimeout(handleTimer, 0);
+                        const timeoutHandle = setTimeout(handleTimer, 0);
                         // However, since this timer gets frequently dropped in Firefox
                         // workers, we enlist an interval handle that will try to fire
                         // an event 20 times per second until it succeeds.
-                        var intervalHandle = setInterval(handleTimer, 50);
+                        const intervalHandle = setInterval(handleTimer, 50);
 
                         function handleTimer() {
                             // Whichever timer succeeds will cancel both timers and
@@ -5923,14 +5928,11 @@ function (_Loader) {
                 // to capture the MutationObserver implementation in a closure, were integrated
                 // back into ASAP proper.
                 // https://github.com/tildeio/rsvp.js/blob/cddf7232546a9cf858524b75cde6f9edf72620a7/lib/rsvp/asap.js
-
                 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)));
-
-            /***/ }),
+            /***/}),
         /* 14 */
         /***/ (function(module, exports) {
-
-            var g;
+            let g;
 
             // This works in non-strict mode
             g = (function() {
@@ -5939,11 +5941,12 @@ function (_Loader) {
 
             try {
                 // This works if eval is allowed (see CSP)
-                g = g || Function('return this')() || (1,eval)('this');
-            } catch(e) {
+                g = g || Function('return this')() || (1, eval)('this');
+            } catch (e) {
                 // This works if the window reference is available
-                if(typeof window === 'object')
+                if (typeof window === 'object') {
                     g = window;
+                }
             }
 
             // g can still be undefined, but nothing to do about it...
@@ -5951,24 +5954,21 @@ function (_Loader) {
             // easier to handle this case. if(!global) { ...}
 
             module.exports = g;
-
-
-            /***/ }),
+            /***/}),
         /* 15 */
         /***/ (function(module, exports, __webpack_require__) {
-
-            var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// MIT license (by Elan Shanker).
+            let __WEBPACK_AMD_DEFINE_ARRAY__; let __WEBPACK_AMD_DEFINE_RESULT__;// MIT license (by Elan Shanker).
             (function(globals) {
                 'use strict';
 
-                var executeSync = function(){
-                    var args = Array.prototype.slice.call(arguments);
-                    if (typeof args[0] === 'function'){
+                const executeSync = function() {
+                    const args = Array.prototype.slice.call(arguments);
+                    if (typeof args[0] === 'function') {
                         args[0].apply(null, args.splice(1));
                     }
                 };
 
-                var executeAsync = function(fn){
+                const executeAsync = function(fn) {
                     if (typeof setImmediate === 'function') {
                         setImmediate(fn);
                     } else if (typeof process !== 'undefined' && process.nextTick) {
@@ -5978,15 +5978,15 @@ function (_Loader) {
                     }
                 };
 
-                var makeIterator = function (tasks) {
-                    var makeCallback = function (index) {
-                        var fn = function () {
+                const makeIterator = function(tasks) {
+                    var makeCallback = function(index) {
+                        var fn = function() {
                             if (tasks.length) {
                                 tasks[index].apply(null, arguments);
                             }
                             return fn.next();
                         };
-                        fn.next = function () {
+                        fn.next = function() {
                             return (index < tasks.length - 1) ? makeCallback(index + 1): null;
                         };
                         return fn;
@@ -5994,34 +5994,34 @@ function (_Loader) {
                     return makeCallback(0);
                 };
 
-                var _isArray = Array.isArray || function(maybeArray){
+                const _isArray = Array.isArray || function(maybeArray) {
                     return Object.prototype.toString.call(maybeArray) === '[object Array]';
                 };
 
-                var waterfall = function (tasks, callback, forceAsync) {
-                    var nextTick = forceAsync ? executeAsync : executeSync;
-                    callback = callback || function () {};
+                const waterfall = function(tasks, callback, forceAsync) {
+                    const nextTick = forceAsync ? executeAsync : executeSync;
+                    callback = callback || function() {};
                     if (!_isArray(tasks)) {
-                        var err = new Error('First argument to waterfall must be an array of functions');
+                        const err = new Error('First argument to waterfall must be an array of functions');
                         return callback(err);
                     }
                     if (!tasks.length) {
                         return callback();
                     }
-                    var wrapIterator = function (iterator) {
-                        return function (err) {
+                    var wrapIterator = function(iterator) {
+                        return function(err) {
                             if (err) {
                                 callback.apply(null, arguments);
-                                callback = function () {};
+                                callback = function() {};
                             } else {
-                                var args = Array.prototype.slice.call(arguments, 1);
-                                var next = iterator.next();
+                                const args = Array.prototype.slice.call(arguments, 1);
+                                const next = iterator.next();
                                 if (next) {
                                     args.push(wrapIterator(next));
                                 } else {
                                     args.push(callback);
                                 }
-                                nextTick(function () {
+                                nextTick(function() {
                                     iterator.apply(null, args);
                                 });
                             }
@@ -6031,7 +6031,7 @@ function (_Loader) {
                 };
 
                 if (true) {
-                    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+                    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
                         return waterfall;
                     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
                     __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); // RequireJS
@@ -6041,12 +6041,9 @@ function (_Loader) {
                     globals.waterfall = waterfall; // <script>
                 }
             })(this);
-
-
-            /***/ }),
+            /***/}),
         /* 16 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
             // Copyright Joyent, Inc. and other Node contributors.
             //
@@ -6070,15 +6067,14 @@ function (_Loader) {
             // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-
-            var R = typeof Reflect === 'object' ? Reflect : null;
-            var ReflectApply = R && typeof R.apply === 'function'
-                ? R.apply
-                : function ReflectApply(target, receiver, args) {
+            const R = typeof Reflect === 'object' ? Reflect : null;
+            const ReflectApply = R && typeof R.apply === 'function' ?
+                R.apply :
+                function ReflectApply(target, receiver, args) {
                     return Function.prototype.apply.call(target, receiver, args);
                 };
 
-            var ReflectOwnKeys;
+            let ReflectOwnKeys;
             if (R && typeof R.ownKeys === 'function') {
                 ReflectOwnKeys = R.ownKeys;
             } else if (Object.getOwnPropertySymbols) {
@@ -6096,7 +6092,7 @@ function (_Loader) {
                 if (console && console.warn) console.warn(warning);
             }
 
-            var NumberIsNaN = Number.isNaN || function NumberIsNaN(value) {
+            const NumberIsNaN = Number.isNaN || function NumberIsNaN(value) {
                 return value !== value;
             };
 
@@ -6114,7 +6110,7 @@ function (_Loader) {
 
             // By default EventEmitters will print a warning if more than 10 listeners are
             // added to it. This is a useful default which helps finding memory leaks.
-            var defaultMaxListeners = 10;
+            let defaultMaxListeners = 10;
 
             Object.defineProperty(EventEmitter, 'defaultMaxListeners', {
                 enumerable: true,
@@ -6126,11 +6122,10 @@ function (_Loader) {
                         throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + arg + '.');
                     }
                     defaultMaxListeners = arg;
-                }
+                },
             });
 
             EventEmitter.init = function() {
-
                 if (this._events === undefined ||
       this._events === Object.getPrototypeOf(this)._events) {
                     this._events = Object.create(null);
@@ -6151,8 +6146,9 @@ function (_Loader) {
             };
 
             function $getMaxListeners(that) {
-                if (that._maxListeners === undefined)
+                if (that._maxListeners === undefined) {
                     return EventEmitter.defaultMaxListeners;
+                }
                 return that._maxListeners;
             }
 
@@ -6161,53 +6157,57 @@ function (_Loader) {
             };
 
             EventEmitter.prototype.emit = function emit(type) {
-                var args = [];
+                const args = [];
                 for (var i = 1; i < arguments.length; i++) args.push(arguments[i]);
-                var doError = (type === 'error');
+                let doError = (type === 'error');
 
-                var events = this._events;
-                if (events !== undefined)
+                const events = this._events;
+                if (events !== undefined) {
                     doError = (doError && events.error === undefined);
-                else if (!doError)
+                } else if (!doError) {
                     return false;
+                }
 
                 // If there is no 'error' event listener then throw.
                 if (doError) {
-                    var er;
-                    if (args.length > 0)
+                    let er;
+                    if (args.length > 0) {
                         er = args[0];
+                    }
                     if (er instanceof Error) {
                         // Note: The comments on the `throw` lines are intentional, they show
                         // up in Node's output if this results in an unhandled exception.
                         throw er; // Unhandled 'error' event
                     }
                     // At least give some kind of context to the user
-                    var err = new Error('Unhandled error.' + (er ? ' (' + er.message + ')' : ''));
+                    const err = new Error('Unhandled error.' + (er ? ' (' + er.message + ')' : ''));
                     err.context = er;
                     throw err; // Unhandled 'error' event
                 }
 
-                var handler = events[type];
+                const handler = events[type];
 
-                if (handler === undefined)
+                if (handler === undefined) {
                     return false;
+                }
 
                 if (typeof handler === 'function') {
                     ReflectApply(handler, this, args);
                 } else {
-                    var len = handler.length;
-                    var listeners = arrayClone(handler, len);
-                    for (var i = 0; i < len; ++i)
+                    const len = handler.length;
+                    const listeners = arrayClone(handler, len);
+                    for (var i = 0; i < len; ++i) {
                         ReflectApply(listeners[i], this, args);
+                    }
                 }
 
                 return true;
             };
 
             function _addListener(target, type, listener, prepend) {
-                var m;
-                var events;
-                var existing;
+                let m;
+                let events;
+                let existing;
 
                 if (typeof listener !== 'function') {
                     throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
@@ -6253,7 +6253,7 @@ function (_Loader) {
                         existing.warned = true;
                         // No error code for this since it is a Warning
                         // eslint-disable-next-line no-restricted-syntax
-                        var w = new Error('Possible EventEmitter memory leak detected. ' +
+                        const w = new Error('Possible EventEmitter memory leak detected. ' +
                           existing.length + ' ' + String(type) + ' listeners ' +
                           'added. Use emitter.setMaxListeners() to ' +
                           'increase limit');
@@ -6280,8 +6280,8 @@ function (_Loader) {
     };
 
             function onceWrapper() {
-                var args = [];
-                for (var i = 0; i < arguments.length; i++) args.push(arguments[i]);
+                const args = [];
+                for (let i = 0; i < arguments.length; i++) args.push(arguments[i]);
                 if (!this.fired) {
                     this.target.removeListener(this.type, this.wrapFn);
                     this.fired = true;
@@ -6290,8 +6290,8 @@ function (_Loader) {
             }
 
             function _onceWrap(target, type, listener) {
-                var state = { fired: false, wrapFn: undefined, target: target, type: type, listener: listener };
-                var wrapped = onceWrapper.bind(state);
+                const state = {fired: false, wrapFn: undefined, target: target, type: type, listener: listener};
+                const wrapped = onceWrapper.bind(state);
                 wrapped.listener = listener;
                 state.wrapFn = wrapped;
                 return wrapped;
@@ -6317,27 +6317,30 @@ function (_Loader) {
             // Emits a 'removeListener' event if and only if the listener was removed.
             EventEmitter.prototype.removeListener =
     function removeListener(type, listener) {
-        var list, events, position, i, originalListener;
+        let list; let events; let position; let i; let originalListener;
 
         if (typeof listener !== 'function') {
             throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
         }
 
         events = this._events;
-        if (events === undefined)
+        if (events === undefined) {
             return this;
+        }
 
         list = events[type];
-        if (list === undefined)
+        if (list === undefined) {
             return this;
+        }
 
         if (list === listener || list.listener === listener) {
-            if (--this._eventsCount === 0)
+            if (--this._eventsCount === 0) {
                 this._events = Object.create(null);
-            else {
+            } else {
                 delete events[type];
-                if (events.removeListener)
+                if (events.removeListener) {
                     this.emit('removeListener', type, list.listener || listener);
+                }
             }
         } else if (typeof list !== 'function') {
             position = -1;
@@ -6350,20 +6353,23 @@ function (_Loader) {
                 }
             }
 
-            if (position < 0)
+            if (position < 0) {
                 return this;
+            }
 
-            if (position === 0)
+            if (position === 0) {
                 list.shift();
-            else {
+            } else {
                 spliceOne(list, position);
             }
 
-            if (list.length === 1)
+            if (list.length === 1) {
                 events[type] = list[0];
+            }
 
-            if (events.removeListener !== undefined)
+            if (events.removeListener !== undefined) {
                 this.emit('removeListener', type, originalListener || listener);
+            }
         }
 
         return this;
@@ -6373,11 +6379,12 @@ function (_Loader) {
 
             EventEmitter.prototype.removeAllListeners =
     function removeAllListeners(type) {
-        var listeners, events, i;
+        let listeners; let events; let i;
 
         events = this._events;
-        if (events === undefined)
+        if (events === undefined) {
             return this;
+        }
 
         // not listening for removeListener, no need to emit
         if (events.removeListener === undefined) {
@@ -6385,18 +6392,19 @@ function (_Loader) {
                 this._events = Object.create(null);
                 this._eventsCount = 0;
             } else if (events[type] !== undefined) {
-                if (--this._eventsCount === 0)
+                if (--this._eventsCount === 0) {
                     this._events = Object.create(null);
-                else
+                } else {
                     delete events[type];
+                }
             }
             return this;
         }
 
         // emit removeListener for all listeners on all events
         if (arguments.length === 0) {
-            var keys = Object.keys(events);
-            var key;
+            const keys = Object.keys(events);
+            let key;
             for (i = 0; i < keys.length; ++i) {
                 key = keys[i];
                 if (key === 'removeListener') continue;
@@ -6423,17 +6431,20 @@ function (_Loader) {
     };
 
             function _listeners(target, type, unwrap) {
-                var events = target._events;
+                const events = target._events;
 
-                if (events === undefined)
+                if (events === undefined) {
                     return [];
+                }
 
-                var evlistener = events[type];
-                if (evlistener === undefined)
+                const evlistener = events[type];
+                if (evlistener === undefined) {
                     return [];
+                }
 
-                if (typeof evlistener === 'function')
+                if (typeof evlistener === 'function') {
                     return unwrap ? [evlistener.listener || evlistener] : [evlistener];
+                }
 
                 return unwrap ?
                     unwrapListeners(evlistener) : arrayClone(evlistener, evlistener.length);
@@ -6457,10 +6468,10 @@ function (_Loader) {
 
             EventEmitter.prototype.listenerCount = listenerCount;
             function listenerCount(type) {
-                var events = this._events;
+                const events = this._events;
 
                 if (events !== undefined) {
-                    var evlistener = events[type];
+                    const evlistener = events[type];
 
                     if (typeof evlistener === 'function') {
                         return 1;
@@ -6477,39 +6488,38 @@ function (_Loader) {
             };
 
             function arrayClone(arr, n) {
-                var copy = new Array(n);
-                for (var i = 0; i < n; ++i)
+                const copy = new Array(n);
+                for (let i = 0; i < n; ++i) {
                     copy[i] = arr[i];
+                }
                 return copy;
             }
 
             function spliceOne(list, index) {
-                for (; index + 1 < list.length; index++)
+                for (; index + 1 < list.length; index++) {
                     list[index] = list[index + 1];
+                }
                 list.pop();
             }
 
             function unwrapListeners(arr) {
-                var ret = new Array(arr.length);
-                for (var i = 0; i < ret.length; ++i) {
+                const ret = new Array(arr.length);
+                for (let i = 0; i < ret.length; ++i) {
                     ret[i] = arr[i].listener || arr[i];
                 }
                 return ret;
             }
-
-
-            /***/ }),
+            /***/}),
         /* 17 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
 
 
-            var nodes = __webpack_require__(3);
+            const nodes = __webpack_require__(3);
 
-            var lib = __webpack_require__(0);
+            const lib = __webpack_require__(0);
 
-            var sym = 0;
+            let sym = 0;
 
             function gensym() {
                 return 'hole_' + sym++;
@@ -6517,10 +6527,10 @@ function (_Loader) {
 
 
             function mapCOW(arr, func) {
-                var res = null;
+                let res = null;
 
-                for (var i = 0; i < arr.length; i++) {
-                    var item = func(arr[i]);
+                for (let i = 0; i < arr.length; i++) {
+                    const item = func(arr[i]);
 
                     if (item !== arr[i]) {
                         if (!res) {
@@ -6540,7 +6550,7 @@ function (_Loader) {
                 }
 
                 if (!depthFirst) {
-                    var astT = func(ast);
+                    const astT = func(ast);
 
                     if (astT && astT !== ast) {
                         return astT;
@@ -6548,7 +6558,7 @@ function (_Loader) {
                 }
 
                 if (ast instanceof nodes.NodeList) {
-                    var children = mapCOW(ast.children, function (node) {
+                    const children = mapCOW(ast.children, function(node) {
                         return walk(node, func, depthFirst);
                     });
 
@@ -6556,8 +6566,8 @@ function (_Loader) {
                         ast = new nodes[ast.typename](ast.lineno, ast.colno, children);
                     }
                 } else if (ast instanceof nodes.CallExtension) {
-                    var args = walk(ast.args, func, depthFirst);
-                    var contentArgs = mapCOW(ast.contentArgs, function (node) {
+                    const args = walk(ast.args, func, depthFirst);
+                    const contentArgs = mapCOW(ast.contentArgs, function(node) {
                         return walk(node, func, depthFirst);
                     });
 
@@ -6565,16 +6575,16 @@ function (_Loader) {
                         ast = new nodes[ast.typename](ast.extName, ast.prop, args, contentArgs);
                     }
                 } else {
-                    var props = ast.fields.map(function (field) {
+                    const props = ast.fields.map(function(field) {
                         return ast[field];
                     });
-                    var propsT = mapCOW(props, function (prop) {
+                    const propsT = mapCOW(props, function(prop) {
                         return walk(prop, func, depthFirst);
                     });
 
                     if (propsT !== props) {
                         ast = new nodes[ast.typename](ast.lineno, ast.colno);
-                        propsT.forEach(function (prop, i) {
+                        propsT.forEach(function(prop, i) {
                             ast[ast.fields[i]] = prop;
                         });
                     }
@@ -6588,9 +6598,9 @@ function (_Loader) {
             }
 
             function _liftFilters(node, asyncFilters, prop) {
-                var children = [];
-                var walked = depthWalk(prop ? node[prop] : node, function (descNode) {
-                    var symbol;
+                const children = [];
+                const walked = depthWalk(prop ? node[prop] : node, function(descNode) {
+                    let symbol;
 
                     if (descNode instanceof nodes.Block) {
                         return descNode;
@@ -6617,7 +6627,7 @@ function (_Loader) {
             }
 
             function liftFilters(ast, asyncFilters) {
-                return depthWalk(ast, function (node) {
+                return depthWalk(ast, function(node) {
                     if (node instanceof nodes.Output) {
                         return _liftFilters(node, asyncFilters);
                     } else if (node instanceof nodes.Set) {
@@ -6635,14 +6645,14 @@ function (_Loader) {
             }
 
             function liftSuper(ast) {
-                return walk(ast, function (blockNode) {
+                return walk(ast, function(blockNode) {
                     if (!(blockNode instanceof nodes.Block)) {
                         return;
                     }
 
-                    var hasSuper = false;
-                    var symbol = gensym();
-                    blockNode.body = walk(blockNode.body, function (node) {
+                    let hasSuper = false;
+                    const symbol = gensym();
+                    blockNode.body = walk(blockNode.body, function(node) {
                         // eslint-disable-line consistent-return
                         if (node instanceof nodes.FunCall && node.name.value === 'super') {
                             hasSuper = true;
@@ -6657,13 +6667,13 @@ function (_Loader) {
             }
 
             function convertStatements(ast) {
-                return depthWalk(ast, function (node) {
+                return depthWalk(ast, function(node) {
                     if (!(node instanceof nodes.If) && !(node instanceof nodes.For)) {
                         return undefined;
                     }
 
-                    var async = false;
-                    walk(node, function (child) {
+                    let async = false;
+                    walk(node, function(child) {
                         if (child instanceof nodes.FilterAsync || child instanceof nodes.IfAsync || child instanceof nodes.AsyncEach || child instanceof nodes.AsyncAll || child instanceof nodes.CallExtensionAsync) {
                             async = true; // Stop iterating by returning the node
 
@@ -6698,19 +6708,17 @@ function (_Loader) {
 
 
             module.exports = {
-                transform: transform
+                transform: transform,
             };
-
-            /***/ }),
+            /***/}),
         /* 18 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
 
 
-            var lib = __webpack_require__(0);
+            const lib = __webpack_require__(0);
 
-            var r = __webpack_require__(2);
+            const r = __webpack_require__(2);
 
             var exports = module.exports = {};
 
@@ -6729,9 +6737,9 @@ function (_Loader) {
             }
 
             function batch(arr, linecount, fillWith) {
-                var i;
-                var res = [];
-                var tmp = [];
+                let i;
+                const res = [];
+                let tmp = [];
 
                 for (i = 0; i < arr.length; i++) {
                     if (i % linecount === 0 && tmp.length) {
@@ -6759,7 +6767,7 @@ function (_Loader) {
 
             function capitalize(str) {
                 str = normalize(str, '');
-                var ret = str.toLowerCase();
+                const ret = str.toLowerCase();
                 return r.copySafeness(str, ret.charAt(0).toUpperCase() + ret.slice(1));
             }
 
@@ -6773,9 +6781,9 @@ function (_Loader) {
                     return str;
                 }
 
-                var spaces = width - str.length;
-                var pre = lib.repeat(' ', spaces / 2 - spaces % 2);
-                var post = lib.repeat(' ', spaces / 2);
+                const spaces = width - str.length;
+                const pre = lib.repeat(' ', spaces / 2 - spaces % 2);
+                const post = lib.repeat(' ', spaces / 2);
                 return r.copySafeness(str, pre + str + post);
             }
 
@@ -6797,14 +6805,14 @@ function (_Loader) {
                     throw new lib.TemplateError('dictsort filter: val must be an object');
                 }
 
-                var array = []; // deliberately include properties from the object's prototype
+                const array = []; // deliberately include properties from the object's prototype
 
-                for (var k in val) {
+                for (const k in val) {
                     // eslint-disable-line guard-for-in, no-restricted-syntax
                     array.push([k, val[k]]);
                 }
 
-                var si;
+                let si;
 
                 if (by === undefined || by === 'key') {
                     si = 0;
@@ -6814,9 +6822,9 @@ function (_Loader) {
                     throw new lib.TemplateError('dictsort filter: You can only sort by either key or value');
                 }
 
-                array.sort(function (t1, t2) {
-                    var a = t1[si];
-                    var b = t2[si];
+                array.sort(function(t1, t2) {
+                    let a = t1[si];
+                    let b = t2[si];
 
                     if (!caseSensitive) {
                         if (lib.isString(a)) {
@@ -6891,9 +6899,9 @@ function (_Loader) {
 
                 width = width || 4; // let res = '';
 
-                var lines = str.split('\n');
-                var sp = lib.repeat(' ', width);
-                var res = lines.map(function (l, i) {
+                const lines = str.split('\n');
+                const sp = lib.repeat(' ', width);
+                const res = lines.map(function(l, i) {
                     return i === 0 && !indentfirst ? l + '\n' : '' + sp + l + '\n';
                 }).join('');
                 return r.copySafeness(str, res);
@@ -6905,7 +6913,7 @@ function (_Loader) {
                 del = del || '';
 
                 if (attr) {
-                    arr = lib.map(arr, function (v) {
+                    arr = lib.map(arr, function(v) {
                         return v[attr];
                     });
                 }
@@ -6922,7 +6930,7 @@ function (_Loader) {
             exports.last = last;
 
             function lengthFilter(val) {
-                var value = normalize(val, '');
+                const value = normalize(val, '');
 
                 if (value !== undefined) {
                     if (typeof Map === 'function' && value instanceof Map || typeof Set === 'function' && value instanceof Set) {
@@ -6947,12 +6955,12 @@ function (_Loader) {
                 if (lib.isString(val)) {
                     return val.split('');
                 } else if (lib.isObject(val)) {
-                    return lib._entries(val || {}).map(function (_ref) {
-                        var key = _ref[0],
-                            value = _ref[1];
+                    return lib._entries(val || {}).map(function(_ref) {
+                        const key = _ref[0];
+                        const value = _ref[1];
                         return {
                             key: key,
-                            value: value
+                            value: value,
                         };
                     });
                 } else if (lib.isArray(val)) {
@@ -6988,7 +6996,7 @@ function (_Loader) {
             exports.random = random;
 
             function rejectattr(arr, attr) {
-                return arr.filter(function (item) {
+                return arr.filter(function(item) {
                     return !item[attr];
                 });
             }
@@ -6996,7 +7004,7 @@ function (_Loader) {
             exports.rejectattr = rejectattr;
 
             function selectattr(arr, attr) {
-                return arr.filter(function (item) {
+                return arr.filter(function(item) {
                     return !!item[attr];
                 });
             }
@@ -7004,7 +7012,7 @@ function (_Loader) {
             exports.selectattr = selectattr;
 
             function replace(str, old, new_, maxCount) {
-                var originalStr = str;
+                const originalStr = str;
 
                 if (old instanceof RegExp) {
                     return str.replace(old, new_);
@@ -7014,7 +7022,7 @@ function (_Loader) {
                     maxCount = -1;
                 }
 
-                var res = ''; // Output
+                let res = ''; // Output
                 // Cast Numbers in the search term to string
 
                 if (typeof old === 'number') {
@@ -7043,15 +7051,15 @@ function (_Loader) {
                     return r.copySafeness(str, res);
                 }
 
-                var nextIndex = str.indexOf(old); // if # of replacements to perform is 0, or the string to does
+                let nextIndex = str.indexOf(old); // if # of replacements to perform is 0, or the string to does
                 // not contain the old value, return the string
 
                 if (maxCount === 0 || nextIndex === -1) {
                     return str;
                 }
 
-                var pos = 0;
-                var count = 0; // # of replacements made
+                let pos = 0;
+                let count = 0; // # of replacements made
 
                 while (nextIndex > -1 && (maxCount === -1 || count < maxCount)) {
                     // Grab the next chunk of src string and add it with the
@@ -7076,13 +7084,13 @@ function (_Loader) {
             exports.replace = replace;
 
             function reverse(val) {
-                var arr;
+                let arr;
 
                 if (lib.isString(val)) {
                     arr = list(val);
                 } else {
                     // Copy it
-                    arr = lib.map(val, function (v) {
+                    arr = lib.map(val, function(v) {
                         return v;
                     });
                 }
@@ -7100,8 +7108,8 @@ function (_Loader) {
 
             function round(val, precision, method) {
                 precision = precision || 0;
-                var factor = Math.pow(10, precision);
-                var rounder;
+                const factor = Math.pow(10, precision);
+                let rounder;
 
                 if (method === 'ceil') {
                     rounder = Math.ceil;
@@ -7117,20 +7125,20 @@ function (_Loader) {
             exports.round = round;
 
             function slice(arr, slices, fillWith) {
-                var sliceLength = Math.floor(arr.length / slices);
-                var extra = arr.length % slices;
-                var res = [];
-                var offset = 0;
+                const sliceLength = Math.floor(arr.length / slices);
+                const extra = arr.length % slices;
+                const res = [];
+                let offset = 0;
 
-                for (var i = 0; i < slices; i++) {
-                    var start = offset + i * sliceLength;
+                for (let i = 0; i < slices; i++) {
+                    const start = offset + i * sliceLength;
 
                     if (i < extra) {
                         offset++;
                     }
 
-                    var end = offset + (i + 1) * sliceLength;
-                    var currSlice = arr.slice(start, end);
+                    const end = offset + (i + 1) * sliceLength;
+                    const currSlice = arr.slice(start, end);
 
                     if (fillWith && i >= extra) {
                         currSlice.push(fillWith);
@@ -7150,25 +7158,25 @@ function (_Loader) {
                 }
 
                 if (attr) {
-                    arr = lib.map(arr, function (v) {
+                    arr = lib.map(arr, function(v) {
                         return v[attr];
                     });
                 }
 
-                return start + arr.reduce(function (a, b) {
+                return start + arr.reduce(function(a, b) {
                     return a + b;
                 }, 0);
             }
 
             exports.sum = sum;
-            exports.sort = r.makeMacro(['value', 'reverse', 'case_sensitive', 'attribute'], [], function (arr, reversed, caseSens, attr) {
+            exports.sort = r.makeMacro(['value', 'reverse', 'case_sensitive', 'attribute'], [], function(arr, reversed, caseSens, attr) {
                 // Copy it
-                var array = lib.map(arr, function (v) {
+                const array = lib.map(arr, function(v) {
                     return v;
                 });
-                array.sort(function (a, b) {
-                    var x = attr ? a[attr] : a;
-                    var y = attr ? b[attr] : b;
+                array.sort(function(a, b) {
+                    let x = attr ? a[attr] : a;
+                    let y = attr ? b[attr] : b;
 
                     if (!caseSens && lib.isString(x) && lib.isString(y)) {
                         x = x.toLowerCase();
@@ -7194,9 +7202,9 @@ function (_Loader) {
 
             function striptags(input, preserveLinebreaks) {
                 input = normalize(input, '');
-                var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>|<!--[\s\S]*?-->/gi;
-                var trimmedInput = trim(input.replace(tags, ''));
-                var res = '';
+                const tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>|<!--[\s\S]*?-->/gi;
+                const trimmedInput = trim(input.replace(tags, ''));
+                let res = '';
 
                 if (preserveLinebreaks) {
                     res = trimmedInput.replace(/^ +| +$/gm, '') // remove leading and trailing spaces
@@ -7214,7 +7222,7 @@ function (_Loader) {
 
             function title(str) {
                 str = normalize(str, '');
-                var words = str.split(' ').map(function (word) {
+                const words = str.split(' ').map(function(word) {
                     return capitalize(word);
                 });
                 return r.copySafeness(str, words.join(' '));
@@ -7229,7 +7237,7 @@ function (_Loader) {
             exports.trim = trim;
 
             function truncate(input, length, killwords, end) {
-                var orig = input;
+                const orig = input;
                 input = normalize(input, '');
                 length = length || 255;
 
@@ -7240,7 +7248,7 @@ function (_Loader) {
                 if (killwords) {
                     input = input.substring(0, length);
                 } else {
-                    var idx = input.lastIndexOf(' ', length);
+                    let idx = input.lastIndexOf(' ', length);
 
                     if (idx === -1) {
                         idx = length;
@@ -7263,15 +7271,15 @@ function (_Loader) {
             exports.upper = upper;
 
             function urlencode(obj) {
-                var enc = encodeURIComponent;
+                const enc = encodeURIComponent;
 
                 if (lib.isString(obj)) {
                     return enc(obj);
                 } else {
-                    var keyvals = lib.isArray(obj) ? obj : lib._entries(obj);
-                    return keyvals.map(function (_ref2) {
-                        var k = _ref2[0],
-                            v = _ref2[1];
+                    const keyvals = lib.isArray(obj) ? obj : lib._entries(obj);
+                    return keyvals.map(function(_ref2) {
+                        const k = _ref2[0];
+                        const v = _ref2[1];
                         return enc(k) + '=' + enc(v);
                     }).join('&');
                 }
@@ -7280,27 +7288,27 @@ function (_Loader) {
             exports.urlencode = urlencode; // For the jinja regexp, see
             // https://github.com/mitsuhiko/jinja2/blob/f15b814dcba6aa12bc74d1f7d0c881d55f7126be/jinja2/utils.py#L20-L23
 
-            var puncRe = /^(?:\(|<|&lt;)?(.*?)(?:\.|,|\)|\n|&gt;)?$/; // from http://blog.gerv.net/2011/05/html5_email_address_regexp/
+            const puncRe = /^(?:\(|<|&lt;)?(.*?)(?:\.|,|\)|\n|&gt;)?$/; // from http://blog.gerv.net/2011/05/html5_email_address_regexp/
 
-            var emailRe = /^[\w.!#$%&'*+\-\/=?\^`{|}~]+@[a-z\d\-]+(\.[a-z\d\-]+)+$/i;
-            var httpHttpsRe = /^https?:\/\/.*$/;
-            var wwwRe = /^www\./;
-            var tldRe = /\.(?:org|net|com)(?:\:|\/|$)/;
+            const emailRe = /^[\w.!#$%&'*+\-\/=?\^`{|}~]+@[a-z\d\-]+(\.[a-z\d\-]+)+$/i;
+            const httpHttpsRe = /^https?:\/\/.*$/;
+            const wwwRe = /^www\./;
+            const tldRe = /\.(?:org|net|com)(?:\:|\/|$)/;
 
             function urlize(str, length, nofollow) {
                 if (isNaN(length)) {
                     length = Infinity;
                 }
 
-                var noFollowAttr = nofollow === true ? ' rel="nofollow"' : '';
-                var words = str.split(/(\s+)/).filter(function (word) {
+                const noFollowAttr = nofollow === true ? ' rel="nofollow"' : '';
+                const words = str.split(/(\s+)/).filter(function(word) {
                     // If the word has no length, bail. This can happen for str with
                     // trailing whitespace.
                     return word && word.length;
-                }).map(function (word) {
-                    var matches = word.match(puncRe);
-                    var possibleUrl = matches ? matches[1] : word;
-                    var shortUrl = possibleUrl.substr(0, length); // url that starts with http or https
+                }).map(function(word) {
+                    const matches = word.match(puncRe);
+                    const possibleUrl = matches ? matches[1] : word;
+                    const shortUrl = possibleUrl.substr(0, length); // url that starts with http or https
 
                     if (httpHttpsRe.test(possibleUrl)) {
                         return '<a href="' + possibleUrl + '"' + noFollowAttr + '>' + shortUrl + '</a>';
@@ -7330,21 +7338,21 @@ function (_Loader) {
 
             function wordcount(str) {
                 str = normalize(str, '');
-                var words = str ? str.match(/\w+/g) : null;
+                const words = str ? str.match(/\w+/g) : null;
                 return words ? words.length : null;
             }
 
             exports.wordcount = wordcount;
 
             function float(val, def) {
-                var res = parseFloat(val);
+                const res = parseFloat(val);
                 return isNaN(res) ? def : res;
             }
 
             exports.float = float;
 
             function int(val, def) {
-                var res = parseInt(val, 10);
+                const res = parseInt(val, 10);
                 return isNaN(res) ? def : res;
             }
 
@@ -7352,41 +7360,41 @@ function (_Loader) {
 
             exports.d = exports.default;
             exports.e = exports.escape;
-
-            /***/ }),
+            /***/}),
         /* 19 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
 
 
-            function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
+            function _inheritsLoose(subClass, superClass) {
+                subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass;
+            }
 
-            var Loader = __webpack_require__(6);
+            const Loader = __webpack_require__(6);
 
-            var PrecompiledLoader =
-/*#__PURE__*/
-function (_Loader) {
+            const PrecompiledLoader =
+/* #__PURE__*/
+function(_Loader) {
     _inheritsLoose(PrecompiledLoader, _Loader);
 
     function PrecompiledLoader(compiledTemplates) {
-        var _this;
+        let _this;
 
         _this = _Loader.call(this) || this;
         _this.precompiled = compiledTemplates || {};
         return _this;
     }
 
-    var _proto = PrecompiledLoader.prototype;
+    const _proto = PrecompiledLoader.prototype;
 
     _proto.getSource = function getSource(name) {
         if (this.precompiled[name]) {
             return {
                 src: {
                     type: 'code',
-                    obj: this.precompiled[name]
+                    obj: this.precompiled[name],
                 },
-                path: name
+                path: name,
             };
         }
 
@@ -7397,17 +7405,15 @@ function (_Loader) {
 }(Loader);
 
             module.exports = {
-                PrecompiledLoader: PrecompiledLoader
+                PrecompiledLoader: PrecompiledLoader,
             };
-
-            /***/ }),
+            /***/}),
         /* 20 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
 
 
-            var SafeString = __webpack_require__(2).SafeString;
+            const SafeString = __webpack_require__(2).SafeString;
             /**
  * Returns `true` if the object is a function, otherwise `false`.
  * @param { any } value
@@ -7681,7 +7687,7 @@ function (_Loader) {
 
             function mapping(value) {
                 // only maps and object hashes
-                var bool = value !== null && value !== undefined && typeof value === 'object' && !Array.isArray(value);
+                const bool = value !== null && value !== undefined && typeof value === 'object' && !Array.isArray(value);
 
                 if (Set) {
                     return bool && !(value instanceof Set);
@@ -7691,16 +7697,14 @@ function (_Loader) {
             }
 
             exports.mapping = mapping;
-
-            /***/ }),
+            /***/}),
         /* 21 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
 
 
             function _cycler(items) {
-                var index = -1;
+                let index = -1;
                 return {
                     current: null,
                     reset: function reset() {
@@ -7716,15 +7720,15 @@ function (_Loader) {
 
                         this.current = items[index];
                         return this.current;
-                    }
+                    },
                 };
             }
 
             function _joiner(sep) {
                 sep = sep || ',';
-                var first = true;
-                return function () {
-                    var val = first ? '' : sep;
+                let first = true;
+                return function() {
+                    const val = first ? '' : sep;
                     first = false;
                     return val;
                 };
@@ -7744,14 +7748,14 @@ function (_Loader) {
                             step = 1;
                         }
 
-                        var arr = [];
+                        const arr = [];
 
                         if (step > 0) {
-                            for (var i = start; i < stop; i += step) {
+                            for (let i = start; i < stop; i += step) {
                                 arr.push(i);
                             }
                         } else {
-                            for (var _i = start; _i > stop; _i += step) {
+                            for (let _i = start; _i > stop; _i += step) {
                                 // eslint-disable-line for-direction
                                 arr.push(_i);
                             }
@@ -7764,17 +7768,15 @@ function (_Loader) {
                     },
                     joiner: function joiner(sep) {
                         return _joiner(sep);
-                    }
+                    },
                 };
             }
 
             module.exports = globals;
-
-            /***/ }),
+            /***/}),
         /* 22 */
         /***/ (function(module, exports, __webpack_require__) {
-
-            var path = __webpack_require__(4);
+            const path = __webpack_require__(4);
 
             module.exports = function express(env, app) {
                 function NunjucksView(name, opts) {
@@ -7800,34 +7802,32 @@ function (_Loader) {
                 app.set('nunjucksEnv', env);
                 return env;
             };
-
-            /***/ }),
+            /***/}),
         /* 23 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
 
 
-            var fs = __webpack_require__(4);
+            const fs = __webpack_require__(4);
 
-            var path = __webpack_require__(4);
+            const path = __webpack_require__(4);
 
-            var _require = __webpack_require__(0),
-                _prettifyError = _require._prettifyError;
+            const _require = __webpack_require__(0);
+            const _prettifyError = _require._prettifyError;
 
-            var compiler = __webpack_require__(5);
+            const compiler = __webpack_require__(5);
 
-            var _require2 = __webpack_require__(7),
-                Environment = _require2.Environment;
+            const _require2 = __webpack_require__(7);
+            const Environment = _require2.Environment;
 
-            var precompileGlobal = __webpack_require__(24);
+            const precompileGlobal = __webpack_require__(24);
 
             function match(filename, patterns) {
                 if (!Array.isArray(patterns)) {
                     return false;
                 }
 
-                return patterns.some(function (pattern) {
+                return patterns.some(function(pattern) {
                     return filename.match(pattern);
                 });
             }
@@ -7835,8 +7835,8 @@ function (_Loader) {
             function precompileString(str, opts) {
                 opts = opts || {};
                 opts.isString = true;
-                var env = opts.env || new Environment([]);
-                var wrapper = opts.wrapper || precompileGlobal;
+                const env = opts.env || new Environment([]);
+                const wrapper = opts.wrapper || precompileGlobal;
 
                 if (!opts.name) {
                     throw new Error('the "name" option is required when compiling a string');
@@ -7860,22 +7860,22 @@ function (_Loader) {
                 //       By default, templates are stored in a global variable used by the runtime.
                 //       A custom loader will be necessary to load your custom wrapper.
                 opts = opts || {};
-                var env = opts.env || new Environment([]);
-                var wrapper = opts.wrapper || precompileGlobal;
+                const env = opts.env || new Environment([]);
+                const wrapper = opts.wrapper || precompileGlobal;
 
                 if (opts.isString) {
                     return precompileString(input, opts);
                 }
 
-                var pathStats = fs.existsSync(input) && fs.statSync(input);
-                var precompiled = [];
-                var templates = [];
+                const pathStats = fs.existsSync(input) && fs.statSync(input);
+                const precompiled = [];
+                const templates = [];
 
                 function addTemplates(dir) {
-                    fs.readdirSync(dir).forEach(function (file) {
-                        var filepath = path.join(dir, file);
-                        var subpath = filepath.substr(path.join(input, '/').length);
-                        var stat = fs.statSync(filepath);
+                    fs.readdirSync(dir).forEach(function(file) {
+                        const filepath = path.join(dir, file);
+                        let subpath = filepath.substr(path.join(input, '/').length);
+                        const stat = fs.statSync(filepath);
 
                         if (stat && stat.isDirectory()) {
                             subpath += '/';
@@ -7894,8 +7894,8 @@ function (_Loader) {
                 } else if (pathStats.isDirectory()) {
                     addTemplates(input);
 
-                    for (var i = 0; i < templates.length; i++) {
-                        var name = templates[i].replace(path.join(input, '/'), '');
+                    for (let i = 0; i < templates.length; i++) {
+                        const name = templates[i].replace(path.join(input, '/'), '');
 
                         try {
                             precompiled.push(_precompile(fs.readFileSync(templates[i], 'utf-8'), name, env));
@@ -7916,9 +7916,9 @@ function (_Loader) {
 
             function _precompile(str, name, env) {
                 env = env || new Environment([]);
-                var asyncFilters = env.asyncFilters;
-                var extensions = env.extensionsList;
-                var template;
+                const asyncFilters = env.asyncFilters;
+                const extensions = env.extensionsList;
+                let template;
                 name = name.replace(/\\/g, '/');
 
                 try {
@@ -7929,29 +7929,27 @@ function (_Loader) {
 
                 return {
                     name: name,
-                    template: template
+                    template: template,
                 };
             }
 
             module.exports = {
                 precompile: precompile,
-                precompileString: precompileString
+                precompileString: precompileString,
             };
-
-            /***/ }),
+            /***/}),
         /* 24 */
         /***/ (function(module, exports, __webpack_require__) {
-
             'use strict';
 
 
             function precompileGlobal(templates, opts) {
-                var out = '';
+                let out = '';
                 opts = opts || {};
 
-                for (var i = 0; i < templates.length; i++) {
-                    var name = JSON.stringify(templates[i].name);
-                    var template = templates[i].template;
+                for (let i = 0; i < templates.length; i++) {
+                    const name = JSON.stringify(templates[i].name);
+                    const template = templates[i].template;
                     out += '(function() {' + '(window.nunjucksPrecompiled = window.nunjucksPrecompiled || {})' + '[' + name + '] = (function() {\n' + template + '\n})();\n';
 
                     if (opts.asFunction) {
@@ -7965,28 +7963,26 @@ function (_Loader) {
             }
 
             module.exports = precompileGlobal;
-
-            /***/ }),
+            /***/}),
         /* 25 */
         /***/ (function(module, exports, __webpack_require__) {
-
             function installCompat() {
                 'use strict';
                 /* eslint-disable camelcase */
                 // This must be called like `nunjucks.installCompat` so that `this`
                 // references the nunjucks instance
 
-                var runtime = this.runtime;
-                var lib = this.lib; // Handle slim case where these 'modules' are excluded from the built source
+                const runtime = this.runtime;
+                const lib = this.lib; // Handle slim case where these 'modules' are excluded from the built source
 
-                var Compiler = this.compiler.Compiler;
-                var Parser = this.parser.Parser;
-                var nodes = this.nodes;
-                var lexer = this.lexer;
-                var orig_contextOrFrameLookup = runtime.contextOrFrameLookup;
-                var orig_memberLookup = runtime.memberLookup;
-                var orig_Compiler_assertType;
-                var orig_Parser_parseAggregate;
+                const Compiler = this.compiler.Compiler;
+                const Parser = this.parser.Parser;
+                const nodes = this.nodes;
+                const lexer = this.lexer;
+                const orig_contextOrFrameLookup = runtime.contextOrFrameLookup;
+                const orig_memberLookup = runtime.memberLookup;
+                let orig_Compiler_assertType;
+                let orig_Parser_parseAggregate;
 
                 if (Compiler) {
                     orig_Compiler_assertType = Compiler.prototype.assertType;
@@ -8010,7 +8006,7 @@ function (_Loader) {
                 }
 
                 runtime.contextOrFrameLookup = function contextOrFrameLookup(context, frame, key) {
-                    var val = orig_contextOrFrameLookup.apply(this, arguments);
+                    const val = orig_contextOrFrameLookup.apply(this, arguments);
 
                     if (val !== undefined) {
                         return val;
@@ -8035,20 +8031,20 @@ function (_Loader) {
                     return {
                         index: tokens.index,
                         lineno: tokens.lineno,
-                        colno: tokens.colno
+                        colno: tokens.colno,
                     };
                 }
 
                 if ('STD' !== 'SLIM' && nodes && Compiler && Parser) {
                     // i.e., not slim mode
-                    var Slice = nodes.Node.extend('Slice', {
+                    const Slice = nodes.Node.extend('Slice', {
                         fields: ['start', 'stop', 'step'],
                         init: function init(lineno, colno, start, stop, step) {
                             start = start || new nodes.Literal(lineno, colno, null);
                             stop = stop || new nodes.Literal(lineno, colno, null);
                             step = step || new nodes.Literal(lineno, colno, 1);
                             this.parent(lineno, colno, start, stop, step);
-                        }
+                        },
                     });
 
                     Compiler.prototype.assertType = function assertType(node) {
@@ -8076,9 +8072,9 @@ function (_Loader) {
                     };
 
                     Parser.prototype.parseAggregate = function parseAggregate() {
-                        var _this = this;
+                        const _this = this;
 
-                        var origState = getTokensState(this.tokens); // Set back one accounting for opening bracket/parens
+                        const origState = getTokensState(this.tokens); // Set back one accounting for opening bracket/parens
 
                         origState.colno--;
                         origState.index--;
@@ -8086,9 +8082,9 @@ function (_Loader) {
                         try {
                             return orig_Parser_parseAggregate.apply(this);
                         } catch (e) {
-                            var errState = getTokensState(this.tokens);
+                            const errState = getTokensState(this.tokens);
 
-                            var rethrow = function rethrow() {
+                            const rethrow = function rethrow() {
                                 lib._assign(_this.tokens, errState);
 
                                 return e;
@@ -8098,7 +8094,7 @@ function (_Loader) {
                             lib._assign(this.tokens, origState);
 
                             this.peeked = false;
-                            var tok = this.peekToken();
+                            const tok = this.peekToken();
 
                             if (tok.type !== lexer.TOKEN_LEFT_BRACKET) {
                                 throw rethrow();
@@ -8106,12 +8102,12 @@ function (_Loader) {
                                 this.nextToken();
                             }
 
-                            var node = new Slice(tok.lineno, tok.colno); // If we don't encounter a colon while parsing, this is not a slice,
+                            const node = new Slice(tok.lineno, tok.colno); // If we don't encounter a colon while parsing, this is not a slice,
                             // so re-raise the original exception.
 
-                            var isSlice = false;
+                            let isSlice = false;
 
-                            for (var i = 0; i <= node.fields.length; i++) {
+                            for (let i = 0; i <= node.fields.length; i++) {
                                 if (this.skip(lexer.TOKEN_RIGHT_BRACKET)) {
                                     break;
                                 }
@@ -8127,7 +8123,7 @@ function (_Loader) {
                                 if (this.skip(lexer.TOKEN_COLON)) {
                                     isSlice = true;
                                 } else {
-                                    var field = node.fields[i];
+                                    const field = node.fields[i];
                                     node[field] = this.parseExpression();
                                     isSlice = this.skip(lexer.TOKEN_COLON) || isSlice;
                                 }
@@ -8159,9 +8155,9 @@ function (_Loader) {
                         start += obj.length;
                     }
 
-                    var results = [];
+                    const results = [];
 
-                    for (var i = start;; i += step) {
+                    for (let i = start; ; i += step) {
                         if (i < 0 || i > obj.length) {
                             break;
                         }
@@ -8184,7 +8180,7 @@ function (_Loader) {
                     return Object.prototype.hasOwnProperty.call(obj, key);
                 }
 
-                var ARRAY_MEMBERS = {
+                const ARRAY_MEMBERS = {
                     pop: function pop(index) {
                         if (index === undefined) {
                             return this.pop();
@@ -8200,7 +8196,7 @@ function (_Loader) {
                         return this.push(element);
                     },
                     remove: function remove(element) {
-                        for (var i = 0; i < this.length; i++) {
+                        for (let i = 0; i < this.length; i++) {
                             if (this[i] === element) {
                                 return this.splice(i, 1);
                             }
@@ -8209,9 +8205,9 @@ function (_Loader) {
                         throw new Error('ValueError');
                     },
                     count: function count(element) {
-                        var count = 0;
+                        let count = 0;
 
-                        for (var i = 0; i < this.length; i++) {
+                        for (let i = 0; i < this.length; i++) {
                             if (this[i] === element) {
                                 count++;
                             }
@@ -8220,7 +8216,7 @@ function (_Loader) {
                         return count;
                     },
                     index: function index(element) {
-                        var i;
+                        let i;
 
                         if ((i = this.indexOf(element)) === -1) {
                             throw new Error('ValueError');
@@ -8233,9 +8229,9 @@ function (_Loader) {
                     },
                     insert: function insert(index, elem) {
                         return this.splice(index, 0, elem);
-                    }
+                    },
                 };
-                var OBJECT_MEMBERS = {
+                const OBJECT_MEMBERS = {
                     items: function items() {
                         return lib._entries(this);
                     },
@@ -8246,7 +8242,7 @@ function (_Loader) {
                         return lib.keys(this);
                     },
                     get: function get(key, def) {
-                        var output = this[key];
+                        let output = this[key];
 
                         if (output === undefined) {
                             output = def;
@@ -8258,7 +8254,7 @@ function (_Loader) {
                         return hasOwnProp(this, key);
                     },
                     pop: function pop(key, def) {
-                        var output = this[key];
+                        let output = this[key];
 
                         if (output === undefined && def !== undefined) {
                             output = def;
@@ -8271,14 +8267,14 @@ function (_Loader) {
                         return output;
                     },
                     popitem: function popitem() {
-                        var keys = lib.keys(this);
+                        const keys = lib.keys(this);
 
                         if (!keys.length) {
                             throw new Error('KeyError');
                         }
 
-                        var k = keys[0];
-                        var val = this[k];
+                        const k = keys[0];
+                        const val = this[k];
                         delete this[k];
                         return [k, val];
                     },
@@ -8297,7 +8293,7 @@ function (_Loader) {
                         lib._assign(this, kwargs);
 
                         return null; // Always returns None
-                    }
+                    },
                 };
                 OBJECT_MEMBERS.iteritems = OBJECT_MEMBERS.items;
                 OBJECT_MEMBERS.itervalues = OBJECT_MEMBERS.values;
@@ -8326,8 +8322,7 @@ function (_Loader) {
             }
 
             module.exports = installCompat;
-
-            /***/ })
-        /******/ ]);
+            /***/}),
+        /** ****/ ]);
 });
-//# sourceMappingURL=nunjucks.js.map
+// # sourceMappingURL=nunjucks.js.map

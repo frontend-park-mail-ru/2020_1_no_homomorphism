@@ -1,4 +1,4 @@
-import {Api} from './api.js'
+import {Api} from './api.js';
 
 /**
  * Переход по страничкам
@@ -13,10 +13,11 @@ export class Router {
         this.views = {};
     }
 
-    /* *
+    /**
      * Новый root
+     *  @param {Element} root
      * */
-    setRoot(root) {
+    setRoot(root) { // TODO Мб убрать метод?
         this.root = root;
     }
 
@@ -35,6 +36,10 @@ export class Router {
     redirectToMain() {
         this.check('/');
     }
+
+    /**
+     * Редирект на профиль
+     */
     redirectToProfile() {
         this.check('/profile');
     }
@@ -49,33 +54,33 @@ export class Router {
             return;
         }
         if (!(newPath in this.views)) {
-            window.history.replaceState('', {}, '/');
+            window.history.replaceState('', {}, '/'); // TODO Ожидается строка
             Api.coockieFetch()
-            .then((res) => {
-                if (res.ok) {
-                    this.views['/'].render(this.root, true);
-                } else {
-                    this.views['/'].render(this.root, false);
-                }
-            })
-	    .then(() => {
-                this.views['/player'].render();
-	    });
+                .then((res) => {
+                    if (res.ok) {
+                        this.views['/'].render(this.root, true);
+                    } else {
+                        this.views['/'].render(this.root, false);
+                    }
+                })
+                .then(() => {
+                    this.views['/player'].render();
+                });
             return;
         }
         this.curPath = newPath;
-        window.history.replaceState('', {}, newPath);
+        window.history.replaceState('', {}, newPath); // TODO почему ожидается строка, а передаешь{}
         Api.coockieFetch()
-        .then((res) => {
-            if (res.ok) {
-                this.views[newPath].render(this.root, true);
-            } else {
-                this.views[newPath].render(this.root, false);
-            }
-        })
-	.then(() => {
-            this.views['/player'].render();
-	});
+            .then((res) => {
+                if (res.ok) {
+                    this.views[newPath].render(this.root, true);
+                } else {
+                    this.views[newPath].render(this.root, false);
+                }
+            })
+            .then(() => {
+                this.views['/player'].render();
+            });
     }
 
     /**
@@ -84,7 +89,7 @@ export class Router {
     start() {
         window.addEventListener('click', (event) => {
             let current = event.target;
-            while (current != window && current != document.body && current != null) {
+            while (current !== window && current !== document.body && current != null) {
                 if (current instanceof HTMLAnchorElement) {
                     event.preventDefault();
                     this.check(current.pathname);

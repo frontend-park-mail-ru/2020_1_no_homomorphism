@@ -7,7 +7,7 @@ import {Validation} from '../modules/validation.js';
 export class LoginModel {
     /**
      * Конструктор
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
@@ -15,15 +15,13 @@ export class LoginModel {
 
     /**
      * отправка формы
-     * @param values
+     * @param {Object} values
      */
     submit(values) {
-        const validation = new Validation;
+        const resLogin = Validation.login(values.login);
+        const resPassword = Validation.password(values.password, values.passwordConfirm);
 
-        const resLogin = validation.validationLogin(values.login);
-        const resPassword = validation.validationPassword(values.password, values.passwordConfirm);
-
-        let errors = {};
+        const errors = {};
         if (resLogin !== '') {
             errors['login'] = resLogin;
         }
@@ -34,24 +32,24 @@ export class LoginModel {
             this.eventBus.emit('invalid', errors);
         } else {
             Api.loginFetch(values.login, values.password)
-            .then((res) => {
-                if (res === undefined) {
-                    console.log('NO ANSWER FROM BACKEND');
-                    this.eventBus.emit('redirect to main', 'No answer from backend');
-                    return;
-                }
-                if (res.ok) {
-                    console.log('SUCCESS');
-                    this.eventBus.emit('hide login, show logout', {});
-                } else {
-                    console.log('ENTRY ERROR');
-                    this.eventBus.emit('invalid', {global: 'Login error'});
-                }
-            });
+                .then((res) => {
+                    if (res === undefined) {
+                        console.log('NO ANSWER FROM BACKEND');
+                        this.eventBus.emit('redirect to main', 'No answer from backend');
+                        return;
+                    }
+                    if (res.ok) {
+                        console.log('SUCCESS');
+                        this.eventBus.emit('hide login, show logout', {});
+                    } else {
+                        console.log('ENTRY ERROR');
+                        this.eventBus.emit('invalid', {global: 'Login error'});
+                    }
+                });
         }
     }
 
-    /*changeRemember(state) {
+    /* changeRemember(state) {
         this.data.remember = state;
     }*/
 }

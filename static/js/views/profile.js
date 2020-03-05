@@ -3,20 +3,23 @@
  */
 export class ProfileView {
     /**
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-
     }
 
+    /**
+     * @param {Object} error
+     */
     showErrors(error) {
         console.log('INPUT ERROR ');
     }
 
     /**
      * рендерит страничку с профилем
-     * @param root
+     * @param {Object} root
+     * @param {boolean} loggedIn
      */
     render(root, loggedIn) {
         if (loggedIn) {
@@ -31,6 +34,7 @@ export class ProfileView {
             document.getElementById('logout-button').style.visibility = 'hidden';
         }
         this.eventBus.on('user data', (data) => {
+            // eslint-disable-next-line no-undef
             root.innerHTML = nunjucks.render('../../../views/profile.njk', data);
         });
         this.eventBus.emit('get user data', {});

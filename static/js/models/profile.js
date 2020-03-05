@@ -1,5 +1,6 @@
-import {Api} from "../modules/api.js";
-import {Router} from "../modules/router.js";
+import {Api} from '../modules/api.js';
+
+// import {Router} from '../modules/router.js';
 
 /**
  * Модель Профиля
@@ -7,7 +8,7 @@ import {Router} from "../modules/router.js";
 export class ProfileModel {
     /**
      * конструктор
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
@@ -19,21 +20,20 @@ export class ProfileModel {
      */
     getUserData() {
         Api.profileFetch()
-        .then((res) => {
-            if (res === undefined){
-                console.log('NO ANSWER FROM BACKEND');
-                this.eventBus.emit('redirect to main', 'Ошибка загрузки профиля');
-                return
-            }
-            if (res.ok) {
-                res.text()
-                .then((data) => {
-                    this.eventBus.emit('user data', JSON.parse(data));
-                })
-            } else {
-                this.eventBus.emit('no answer', 'Ошибка загрузки профиля')
-            }
-        })
-
+            .then((res) => {
+                if (res === undefined) {
+                    console.log('NO ANSWER FROM BACKEND');
+                    this.eventBus.emit('redirect to main', 'Ошибка загрузки профиля');
+                    return;
+                }
+                if (res.ok) {
+                    res.text()
+                        .then((data) => {
+                            this.eventBus.emit('user data', JSON.parse(data));
+                        });
+                } else {
+                    this.eventBus.emit('no answer', 'Ошибка загрузки профиля');
+                }
+            });
     }
 }
