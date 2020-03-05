@@ -48,7 +48,7 @@ export class SignupView {
      */
     showErrors(errors) {
         document.getElementsByClassName('sign-up-form')[0].style.borderColor = 'red';
-        errors.forEach((key) => {
+        for (const key in errors) {
             if (key === 'global') {
                 document.getElementById('global').innerText = errors[key];
                 document.getElementById('global').style.height = '20px';
@@ -62,7 +62,7 @@ export class SignupView {
                 message.style.marginBottom = '10px';
                 message.style.visibility = 'visible';
             }
-        });
+        }
     }
 
     /**
