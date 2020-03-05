@@ -18,6 +18,7 @@ export class ProfileView {
      * @param root
      */
     render(root) {
+        this.root = root;
         this.eventBus.emit('cookie fetch request', {});
     }
     renderWithCookie(loggedIn) {
@@ -31,7 +32,7 @@ export class ProfileView {
             document.getElementById('login-link').style.visibility = 'visible';
             document.getElementById('profile-link').style.visibility = 'hidden';
         }
-        root.innerHTML = this.template;
+        this.root.innerHTML = this.template;
     }
 
     prerender(data) {
