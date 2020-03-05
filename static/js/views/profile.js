@@ -3,7 +3,7 @@
  */
 export class ProfileView {
     /**
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
@@ -15,7 +15,8 @@ export class ProfileView {
 
     /**
      * рендерит страничку с профилем
-     * @param root
+     * @param {Object} root
+     * @param {boolean} loggedIn
      */
     render(root) {
         this.root = root;
@@ -36,6 +37,7 @@ export class ProfileView {
     }
 
     prerender(data) {
+        // eslint-disable-next-line no-undef
         this.template = nunjucks.render('../../../views/profile.njk', data);
     }
 }

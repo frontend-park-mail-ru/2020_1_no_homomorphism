@@ -14,7 +14,7 @@ app.use(logger('dev'));
 app.use(express.static(__dirname));
 nunjucks.configure('views', {
     autoescape: true,
-    express: app
+    express: app,
 });
 
 app.get('/', (req, res) => {

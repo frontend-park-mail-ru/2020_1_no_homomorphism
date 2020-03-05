@@ -1,6 +1,9 @@
+/**
+ *  вью для плеера
+ */
 export class PlayerView {
     /**
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
@@ -87,11 +90,11 @@ export class PlayerView {
         document.getElementsByClassName('volume-scale-back')[0].onmousemove = (event) => this.volumeMouseMove(event);
         document.getElementsByClassName('volume-scale-front')[0].onmousemove = (event) => this.volumeMouseMove(event);
         window.onwheel = (event) => this.trackListWheel(event);
-        document.querySelectorAll('.track-list .row').forEach(row => {
+        document.querySelectorAll('.track-list .row').forEach((row) => {
             row.onmouseover = (event) => console.log(event);
         });
-        //this.elements.addButtons.addEventListener();
-        //this.elements.deleteButtons.addEventListener();
+        // this.elements.addButtons.addEventListener();
+        // this.elements.deleteButtons.addEventListener();
     }
 
     windowMouseUp() {
@@ -200,19 +203,20 @@ export class PlayerView {
     }
     repeatButtonClick() {
         switch (this.repeatState) {
-            case 0:
-                this.eventBus.emit('repeat', {});
-                break;
-            case 1:
-                this.eventBus.emit('repeat one', {});
-                break;
-            case 2:
-                this.eventBus.emit('unrepeat', {});
-                break;
+        case 0:
+            this.eventBus.emit('repeat', {});
+            break;
+        case 1:
+            this.eventBus.emit('repeat one', {});
+            break;
+        case 2:
+            this.eventBus.emit('unrepeat', {});
+            break;
         }
     }
     volumeButtonMouseOver() {
-        document.getElementsByClassName('volume-scale')[0].style.transitionProperty = 'opacity, top';
+        document.getElementsByClassName('volume-scale')[0]
+            .style.transitionProperty = 'opacity, top';
         document.getElementsByClassName('volume-scale')[0].style.visibility = 'visible';
         document.getElementsByClassName('volume-scale')[0].style.opacity = '1';
         document.getElementsByClassName('volume-scale')[0].style.top = '48px';
@@ -265,12 +269,12 @@ export class PlayerView {
             event.clientX < trackList.getBoundingClientRect().x + trackList.getBoundingClientRect().width &&
             event.clientY > trackList.getBoundingClientRect().y &&
             event.clientY < trackList.getBoundingClientRect().y + trackList.getBoundingClientRect().height
-        ){
+        ) {
             event.preventDefault();
             const top = parseInt(trackList.style.top.slice(0, trackList.style.top.length - 2));
             if (delta > 0 && trackList.getClientRects()[0].y + trackList.getClientRects()[0].height > document.documentElement.clientHeight ||
                 delta < 0 && top < 0
-            ){
+            ) {
                 if (delta > 0 && top - delta / 8 > 0) {
                     trackList.style.top = '0';
                 } else {

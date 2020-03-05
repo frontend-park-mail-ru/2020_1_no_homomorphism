@@ -1,6 +1,6 @@
-import {EventBus} from '../eventBus.js'
-import {SettingsModel} from '../models/settings.js'
-import {SettingsView} from '../views/settings.js'
+import {EventBus} from '../eventBus.js';
+import {SettingsModel} from '../models/settings.js';
+import {SettingsView} from '../views/settings.js';
 
 /**
  * Контроллер для страницы редактирования данных пользователя
@@ -8,7 +8,7 @@ import {SettingsView} from '../views/settings.js'
 export class SettingsController {
     /**
      * Конструктор
-     * @param router {Router}
+     * @param {Router} router
      */
     constructor(router) {
         this.eventBus = new EventBus();

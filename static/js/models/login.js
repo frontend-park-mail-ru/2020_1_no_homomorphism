@@ -7,7 +7,7 @@ import {Validation} from '../modules/validation.js';
 export class LoginModel {
     /**
      * Конструктор
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
@@ -24,14 +24,11 @@ export class LoginModel {
 
     /**
      * отправка формы
-     * @param values
+     * @param {Object} values
      */
     submit(values) {
-        const validation = new Validation;
-
-        const resLogin = validation.validationLogin(values.login);
-        const resPassword = validation.validationPassword(values.password, values.passwordConfirm);
-
+        const resLogin = Validation.login(values.login);
+        const resPassword = Validation.password(values.password, values.passwordConfirm);
         const errors = {};
         if (resLogin !== '') {
             errors.login = resLogin;
@@ -57,7 +54,7 @@ export class LoginModel {
         }
     }
 
-    /*changeRemember(state) {
+    /* changeRemember(state) {
         this.data.remember = state;
     }*/
 }

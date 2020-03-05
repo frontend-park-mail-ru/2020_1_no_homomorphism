@@ -1,5 +1,6 @@
-import {Api} from "../modules/api.js";
-import {Router} from "../modules/router.js";
+import {Api} from '../modules/api.js';
+
+// import {Router} from '../modules/router.js';
 
 /**
  * Модель Профиля
@@ -7,7 +8,7 @@ import {Router} from "../modules/router.js";
 export class ProfileModel {
     /**
      * конструктор
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
      */
     constructor(eventBus) {
         this.eventBus = eventBus;

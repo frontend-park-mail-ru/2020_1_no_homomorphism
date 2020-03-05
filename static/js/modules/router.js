@@ -11,10 +11,11 @@ export class Router {
         this.views = {};
     }
 
-    /* *
+    /**
      * Новый root
+     *  @param {Element} root
      * */
-    setRoot(root) {
+    setRoot(root) { // TODO Мб убрать метод?
         this.root = root;
     }
 
@@ -33,6 +34,10 @@ export class Router {
     redirectToMain() {
         this.check('/');
     }
+
+    /**
+     * Редирект на профиль
+     */
     redirectToProfile() {
         this.check('/profile');
     }
@@ -64,7 +69,7 @@ export class Router {
     start() {
         window.addEventListener('click', (event) => {
             let current = event.target;
-            while (current != window && current != document.body && current != null) {
+            while (current !== window && current !== document.body && current != null) {
                 if (current instanceof HTMLAnchorElement) {
                     event.preventDefault();
                     this.check(current.pathname);

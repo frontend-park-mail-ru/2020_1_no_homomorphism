@@ -1,9 +1,9 @@
 /**
- *  вью для главной страницы
+ *  вью для навбара
  */
 export class IndexView {
     /**
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
@@ -26,7 +26,8 @@ export class IndexView {
                 document.getElementById('profile-link').style.visibility = 'hidden';
                 document.getElementById('logout-button').style.visibility = 'hidden';
             }
-            root.innerHTML = nunjucks.render('../../../views/index.njk');
+            // eslint-disable-next-line no-undef
+            root.innerHTML = nunjucks.render('../../../views/index.njk'); // TODO Нужно ли это импортить как-то?
         });
         this.eventBus.emit('cookie fetch request', {});
     }

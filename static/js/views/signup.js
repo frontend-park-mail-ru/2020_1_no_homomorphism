@@ -3,7 +3,7 @@
  */
 export class SignupView {
     /**
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
@@ -14,7 +14,7 @@ export class SignupView {
 
     /**
      * рендерит страничку регистрации
-     * @param root
+     * @param {Object} root
      */
     render(root) {
         this.eventBus.on('cookie fetch response', (loggedIn) => {
@@ -29,6 +29,7 @@ export class SignupView {
                 document.getElementById('profile-link').style.visibility = 'hidden';
                 document.getElementById('logout-button').style.visibility = 'hidden';
             }
+            // eslint-disable-next-line no-undef
             root.innerHTML = nunjucks.render('../../../views/signup.njk');
         });
         this.eventBus.emit('cookie fetch request', {});
@@ -38,16 +39,16 @@ export class SignupView {
                 event.preventDefault();
                 this.submit();
             }
-        })
+        });
     }
 
     /**
      * показывает, что поля были заполнены неправильно
-     * @param errors
+     * @param {Object} errors
      */
     showErrors(errors) {
         document.getElementsByClassName('sign-up-form')[0].style.borderColor = 'red';
-        for (let key in errors) {
+        errors.forEach((key) => {
             if (key === 'global') {
                 document.getElementById('global').innerText = errors[key];
                 document.getElementById('global').style.height = '20px';
@@ -61,14 +62,14 @@ export class SignupView {
                 message.style.marginBottom = '10px';
                 message.style.visibility = 'visible';
             }
-        }
+        });
     }
 
     /**
      * отправляет данные формы
      */
     submit() {
-        document.querySelectorAll('.sign-up-form label').forEach(label => {
+        document.querySelectorAll('.sign-up-form label').forEach((label) => {
             label.children[0].style.borderColor = '#ccc';
             label.children[1].innerText = '';
             label.children[1].style.height = '0';
@@ -87,6 +88,9 @@ export class SignupView {
         });
     }
 
+    /**
+    /* Смена кнопочек в профиле при регистрации
+     */
     hideLoginShowLogout() {
         document.getElementById('login-link').style.visibility = 'hidden';
         document.getElementById('signup-link').style.visibility = 'hidden';

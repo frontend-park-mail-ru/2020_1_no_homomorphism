@@ -7,7 +7,7 @@ import {Api} from '../modules/api.js';
 export class SignupModel {
     /**
      * конструктор
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
@@ -24,15 +24,12 @@ export class SignupModel {
 
     /**
      * отправляет форму с данными нового юзера
-     * @param values
+     * @param {Object} values
      */
     submit(values) {
-        const validation = new Validation;
-
-        const resLogin = validation.validationLogin(values.login);
-        const resPassword = validation.validationPassword(values.password, values.passwordConfirm, true);
-        const resEmail = validation.validationEmail(values.email);
-
+        const resLogin = Validation.login(values.login);
+        const resPassword = Validation.password(values.password, values.passwordConfirm, true);
+        const resEmail = Validation.email(values.email);
         const errors = {};
         if (values.name === '') {
             errors.name = 'Enter your name';
@@ -51,9 +48,7 @@ export class SignupModel {
         } else {
             Api.signupFetch(values.name, values.login, 'yes', values.email, values.password)
             .then((res) => {
-                if (res === undefined) {
-                    console.log('NO ANSWER FROM BACKEND');
-                } else if (res.ok) {
+                if (res.ok) {
                     this.eventBus.emit('hide login, show logout', {});
                     this.eventBus.emit('redirect to main', {});
                 } else {

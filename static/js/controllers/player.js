@@ -1,6 +1,6 @@
-import {EventBus} from '../eventBus.js'
-import {PlayerModel} from '../models/player.js'
-import {PlayerView} from '../views/player.js'
+import {EventBus} from '../eventBus.js';
+import {PlayerModel} from '../models/player.js';
+import {PlayerView} from '../views/player.js';
 
 /**
  * контроллер для плеера
@@ -8,7 +8,7 @@ import {PlayerView} from '../views/player.js'
 export class PlayerController {
     /**
      * Конструктор
-     * @param router {Router}
+     * @param {Router} router
      */
     constructor(router) {
         this.eventBus = new EventBus();

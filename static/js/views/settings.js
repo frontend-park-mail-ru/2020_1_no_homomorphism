@@ -3,7 +3,7 @@
  */
 export class SettingsView {
     /**
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
@@ -30,8 +30,8 @@ export class SettingsView {
     }
 
     /**
-     * рендерит страничку профиля
-     * @param root
+     * рендерит страничку настроек профиля
+     * @param {Object} root
      */
      render(root) {
          this.root = root;
@@ -52,22 +52,24 @@ export class SettingsView {
      }
 
     prerender(data) {
+        // eslint-disable-next-line no-undef
         this.template = nunjucks.render('../../../views/settings.njk', data);
     }
 
     /**
      * показывает, какие поля формы заполнены неправильно
-     * @param errors
+     * @param {Object} errors
      */
     showErrors(errors) {
-        for (let key in errors) {
+        errors.forEach((key) => {
             const message = document.getElementById(key).nextElementSibling;
-            message.previousElementSibling.style.borderColor = (message.getAttribute('class').indexOf('warning') !== -1 ? '#ffae42' : 'red');
+            message.previousElementSibling.style.borderColor =
+                (message.getAttribute('class').indexOf('warning') !== -1 ? '#ffae42' : 'red');
             message.innerText = errors[key];
             message.style.height = '15px';
             message.style.marginBottom = '10px';
             message.style.visibility = 'visible';
-        }
+        });
     }
 
     /**
@@ -75,7 +77,7 @@ export class SettingsView {
      */
     submit() {
         console.log('submit-changes clicked');
-        document.querySelectorAll('.info input').forEach(input => {
+        document.querySelectorAll('.info input').forEach((input) => {
             input.style.borderColor = '#ccc';
             input.nextElementSibling.innerText = '';
             input.nextElementSibling.style.height = '0';
@@ -88,11 +90,11 @@ export class SettingsView {
             newPassword: document.getElementById('newPassword').value,
             newPasswordConfirm: document.getElementById('newPasswordConfirm').value,
             password: document.getElementById('password').value,
-            //outer              : document.getElementById('outer-url').value,
+            // outer              : document.getElementById('outer-url').value,
         });
     }
 
-    //addOuterClick() {
+    // addOuterClick() {
     //    this.eventBus.emit('add outer', document.getElementById('outer-url').value);
-    //}
+    // }
 }
