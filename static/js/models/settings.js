@@ -39,7 +39,7 @@ export class SettingsModel {
                     this.eventBus.emit('user data', data);
                 });
             } else {
-                this.eventBus.emit('invalid', 'Ошибка загрузки профиля');
+                this.eventBus.emit('no answer', 'Ошибка загрузки профиля');
             }
         });
     }
