@@ -11,25 +11,25 @@ export class SettingsModel {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-    } // kek
+    }
 
     /**
      * получает данный юзера
      */
     getUserData() {
         Api.profileFetch()
-            .then((res) => {
-                if (res === undefined) {
-                    console.log('NO ANSWER FROM BACKEND');
-                } else if (res.ok) {
-                    res.text()
-                        .then((data) => {
-                            this.eventBus.emit('user data', JSON.parse(data));
-                        });
-                } else {
-                    this.eventBus.emit('invalid', 'Ошибка загрузки профиля');
-                }
-            });
+        .then((res) => {
+            if (res === undefined) {
+                console.log('NO ANSWER FROM BACKEND');
+            } else if (res.ok) {
+                res.text()
+                .then((data) => {
+                    this.eventBus.emit('user data', JSON.parse(data));
+                });
+            } else {
+                this.eventBus.emit('invalid', 'Ошибка загрузки профиля');
+            }
+        });
     }
 
     /**
@@ -79,15 +79,15 @@ export class SettingsModel {
             this.eventBus.emit('invalid', errors);
         } else {
             Api.profileEditFetch(values.name, values.email, values.password, values.newPassword)
-                .then((res) => {
-                    if (res === undefined) {
-                        console.log('NO ANSWER FROM BACKEND');
-                        return;
-                    }
-                    if (res.ok) {
-                        this.eventBus.emit('redirect to profile', {});
-                    }
-                });
+            .then((res) => {
+                if (res === undefined) {
+                    console.log('NO ANSWER FROM BACKEND');
+                    return;
+                }
+                if (res.ok) {
+                    this.eventBus.emit('redirect to profile', {});
+                }
+            });
         }
     }
 }
