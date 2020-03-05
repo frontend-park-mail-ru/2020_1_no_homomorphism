@@ -89,7 +89,7 @@ export class SignupView {
     }
 
     /**
-    /* Смена кнопочек в профиле при регистрации
+     /* Смена кнопочек в профиле при регистрации
      */
     hideLoginShowLogout() {
         document.getElementById('login-link').style.visibility = 'hidden';
