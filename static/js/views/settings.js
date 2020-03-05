@@ -68,15 +68,17 @@ export class SettingsView {
      * @param {Object} errors
      */
     showErrors(errors) {
-        errors.forEach((key) => {
-            const message = document.getElementById(key).nextElementSibling;
-            message.previousElementSibling.style.borderColor =
-                (message.getAttribute('class').indexOf('warning') !== -1 ? '#ffae42' : 'red');
-            message.innerText = errors[key];
-            message.style.height = '15px';
-            message.style.marginBottom = '10px';
-            message.style.visibility = 'visible';
-        });
+        for (const key in errors) {
+            if (key !== undefined) {
+                const message = document.getElementById(key).nextElementSibling;
+                message.previousElementSibling.style.borderColor =
+                    (message.getAttribute('class').indexOf('warning') !== -1 ? '#ffae42' : 'red');
+                message.innerText = errors[key];
+                message.style.height = '15px';
+                message.style.marginBottom = '10px';
+                message.style.visibility = 'visible';
+            }
+        }
     }
 
     /**
