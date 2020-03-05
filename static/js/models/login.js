@@ -12,6 +12,14 @@ export class LoginModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.eventBus.on('submit', this.submit.bind(this));
+        this.eventBus.on('cookie fetch request', this.cookieFetch.bind(this));
+    }
+
+    cookieFetch() {
+        Api.cookieFetch()
+        .then((res) => {
+            this.eventBus.emit('cookie fetch response', res.ok);
+        });
     }
 
     /**

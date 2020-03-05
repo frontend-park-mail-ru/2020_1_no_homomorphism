@@ -8,6 +8,8 @@ export class SettingsView {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.eventBus.on('invalid', this.showErrors);
+        this.eventBus.on('user data', this.prerender.bind(this));
+        this.eventBus.emit('get user data', {});
     }
 
     /**
@@ -31,22 +33,25 @@ export class SettingsView {
      * @param root
      */
     render(root, loggedIn) {
-        if (loggedIn) {
-            document.getElementById('profile-link').style.visibility = 'visible';
-            document.getElementById('logout-button').style.visibility = 'visible';
-            document.getElementById('signup-link').style.visibility = 'hidden';
-            document.getElementById('login-link').style.visibility = 'hidden';
-        } else {
-            document.getElementById('signup-link').style.visibility = 'visible';
-            document.getElementById('login-link').style.visibility = 'visible';
-            document.getElementById('profile-link').style.visibility = 'hidden';
-            document.getElementById('logout-button').style.visibility = 'hidden';
-        }
-        this.eventBus.on('user data', (data) => {
-            root.innerHTML = nunjucks.render('../../../views/settings.njk', data);
-            this.setEventListeners();
+        this.eventBus.emit('cookie fetch response', (loggedIn) => {
+            if (loggedIn) {
+                document.getElementById('profile-link').style.visibility = 'visible';
+                document.getElementById('logout-button').style.visibility = 'visible';
+                document.getElementById('signup-link').style.visibility = 'hidden';
+                document.getElementById('login-link').style.visibility = 'hidden';
+            } else {
+                document.getElementById('signup-link').style.visibility = 'visible';
+                document.getElementById('login-link').style.visibility = 'visible';
+                document.getElementById('profile-link').style.visibility = 'hidden';
+                document.getElementById('logout-button').style.visibility = 'hidden';
+            }
+            root.innerHTML = this.template;
         });
-        this.eventBus.emit('get user data', {});
+        this.eventBus.emit('cookie fetch request', {});
+    }
+
+    prerender(data) {
+        this.template = nunjucks.render('../../../views/settings.njk', data);
     }
 
     /**

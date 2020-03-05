@@ -12,6 +12,14 @@ export class ProfileModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.eventBus.on('get user data', this.getUserData.bind(this));
+        this.eventBus.on('cookie fetch request', this.cookieFetch.bind(this));
+    }
+
+    cookieFetch() {
+        Api.cookieFetch()
+        .then((res) => {
+            this.eventBus.emit('cookie fetch response', res.ok);
+        });
     }
 
     /**
@@ -25,7 +33,7 @@ export class ProfileModel {
                 return
             }
             if (res.ok) {
-                res.text()
+                res.json()
                 .then((data) => {
                     this.eventBus.emit('user data', JSON.parse(data));
                 })

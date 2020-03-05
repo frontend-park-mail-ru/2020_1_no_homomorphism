@@ -15,6 +15,14 @@ export class SettingsModel {
         this.eventBus.on('submit', this.submit.bind(this));
         this.eventBus.on('get user data', this.getUserData.bind(this));
         //this.eventBus.on('add outer', this.model.addOuter);
+        this.eventBus.on('cookie fetch request', this.cookieFetch.bind(this));
+    }
+
+    cookieFetch() {
+        Api.cookieFetch()
+        .then((res) => {
+            this.eventBus.emit('cookie fetch response', res.ok);
+        });
     }
 
     /**
@@ -26,7 +34,7 @@ export class SettingsModel {
             if (res === undefined) {
                 console.log('NO ANSWER FROM BACKEND');
             } else if (res.ok) {
-                res.text()
+                res.json()
                 .then((data) => {
                     this.eventBus.emit('user data', JSON.parse(data));
                 });
