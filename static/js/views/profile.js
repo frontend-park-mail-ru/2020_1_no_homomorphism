@@ -7,8 +7,6 @@ export class ProfileView {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on('user data', this.prerender.bind(this));
-        this.eventBus.emit('get user data', {});
     }
 
     /**
@@ -16,15 +14,10 @@ export class ProfileView {
      * @param {Object} root
      */
     render(root) {
-        root.innerHTML = this.template;
-    }
-
-    /**
-     * Получает данные пользователя
-     * @param {Object} data
-     */
-    prerender(data) {
-        // eslint-disable-next-line no-undef
-        this.template = nunjucks.render('../../../views/profile.njk', data);
+        this.eventBus.on('user data', data => {
+            // eslint-disable-next-line no-undef
+            root.innerHTML = nunjucks.render('../../../views/profile.njk', data);
+        });
+        this.eventBus.emit('get user data', {});
     }
 }
