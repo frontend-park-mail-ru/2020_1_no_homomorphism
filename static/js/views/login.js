@@ -1,6 +1,9 @@
+/**
+ *  вью для входа
+ */
 export class LoginView {
     /**
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
@@ -10,21 +13,25 @@ export class LoginView {
 
     /**
     * рендерит страничку входа
-    * @param root
+    * @param {Object} root
     */
-    render(root, loggedIn) {
-        if (loggedIn) {
-            document.getElementById('profile-link').style.visibility = 'visible';
-            document.getElementById('logout-button').style.visibility = 'visible';
-            document.getElementById('signup-link').style.visibility = 'hidden';
-            document.getElementById('login-link').style.visibility = 'hidden';
-        } else {
-            document.getElementById('signup-link').style.visibility = 'visible';
-            document.getElementById('login-link').style.visibility = 'visible';
-            document.getElementById('profile-link').style.visibility = 'hidden';
-            document.getElementById('logout-button').style.visibility = 'hidden';
-        }
-        root.innerHTML = nunjucks.render('../../../views/login.njk');
+    render(root) {
+        this.eventBus.on('cookie fetch response', (loggedIn) => {
+            if (loggedIn) {
+                document.getElementById('profile-link').style.visibility = 'visible';
+                document.getElementById('logout-button').style.visibility = 'visible';
+                document.getElementById('signup-link').style.visibility = 'hidden';
+                document.getElementById('login-link').style.visibility = 'hidden';
+            } else {
+                document.getElementById('signup-link').style.visibility = 'visible';
+                document.getElementById('login-link').style.visibility = 'visible';
+                document.getElementById('profile-link').style.visibility = 'hidden';
+                document.getElementById('logout-button').style.visibility = 'hidden';
+            }
+            // eslint-disable-next-line no-undef
+            root.innerHTML = nunjucks.render('../../../views/login.njk');
+        });
+        this.eventBus.emit('cookie fetch request', {});
         document.addEventListener('click', (event) => {
             if (event.target.getAttribute('id') === 'submit-login') {
                 event.preventDefault();
@@ -35,12 +42,11 @@ export class LoginView {
 
     /**
      * показывает какие поля неверно заполнены
-     * @param errors
+     * @param {Object} errors
      */
     showErrors(errors) {
-        console.log(errors);
         document.getElementsByClassName('login-form')[0].style.borderColor = 'red';
-        for (let key in errors) {
+        for (const key in errors) {
             if (key === 'global') {
                 document.getElementById('global').innerText = errors[key];
                 document.getElementById('global').style.height = '20px';
@@ -55,14 +61,13 @@ export class LoginView {
                 message.style.visibility = 'visible';
             }
         }
-        console.log('LOGIN ERROR');
     }
 
     /**
      * отправляет данные формы
      */
     submit() {
-        document.querySelectorAll('.login-form label').forEach(label => {
+        document.querySelectorAll('.login-form label').forEach((label) => {
             label.children[0].style.borderColor = '#ccc';
             label.children[1].innerText = '';
             label.children[1].style.height = '0';
@@ -88,7 +93,7 @@ export class LoginView {
         this.eventBus.emit('redirect', '/');
     }
 
-    //changeRemember() {
+    // changeRemember() {
     //    this.eventBus.emit('remember changed', document.getElementById('remember').checked);
-    //}
+    // }
 }

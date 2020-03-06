@@ -6,7 +6,7 @@
 ## Команда
 - [Дмитрий Рыбаков](https://github.com/bulletmys)
 - [Натали Климова](https://github.com/TataKlim)
-- [Маргорита Бойко](https://github.com/mortawe)
+- [Маргарита Бойко](https://github.com/mortawe)
 - [Никита Панёв](https://github.com/tmible)
 
 ## Менторы
@@ -14,6 +14,7 @@
 - [Владимир Северов](https://github.com/hackallcode)
 
 ## Ссылка на проект
+http://89.208.199.170:3000/
 
 ## Репозиторий бекенда
 https://github.com/go-park-mail-ru/2020_1_no_homomorphism
