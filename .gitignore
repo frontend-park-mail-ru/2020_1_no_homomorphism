@@ -107,6 +107,8 @@ dist/
 tmp/
 temp/
 
+static/js/nunjucks.js
+
 # End of https://www.gitignore.io/api/node
 
 .idea/
