@@ -1,17 +1,23 @@
-import {Api} from "../modules/api.js";
+import {Api} from '../modules/api.js';
 
+/**
+ * Модель плеера
+ */
 export class PlayerModel {
+    /**
+     * Конструктор
+     * @param {EventBus} eventBus
+     */
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.data = {
-            queue    : [],
-            playlist : [],
-            current  : 0,
-            playing  : false,
-            shuffle  : false,
-            repeat   : false,
+            queue: [],
+            playlist: [],
+            current: 0,
+            playing: false,
+            shuffle: false,
+            repeat: false,
         };
-
         this.eventBus.on('init', this.getFirst.bind(this));
         this.eventBus.on('pause', this.pause.bind(this));
         this.eventBus.on('play', this.play.bind(this));
@@ -25,22 +31,32 @@ export class PlayerModel {
         this.eventBus.on('unrepeat', this.unrepeat.bind(this));
         this.eventBus.on('mute', this.mute.bind(this));
         this.eventBus.on('unmute', this.unmute.bind(this));
-        //this.eventBus.on('volume up', this.volumeUp);
-        //this.eventBus.on('volume down', this.volumeDown);
+
+        this.eventBus.on('logout', this.logout);
     }
 
+    /**
+     * рисует кнопочку логаута
+     */
     logout() {
-        Api.logoutFetch();
+        Api.logoutFetch()
+            .then((response) => {
+                if (!response.ok) {
+                    console.log('BACKEND PROBLEM');
+                }
+            });
         document.getElementById('login-link').style.visibility = 'visible';
         document.getElementById('signup-link').style.visibility = 'visible';
         document.getElementById('logout-button').style.visibility = 'hidden';
     }
 
+    /**
+     * достает первый трек в листе
+     */
     getFirst() {
         Api.trackFetch('12344')
-            .then(response => response.text())
-            .then(data => {
-                const track = JSON.parse(data);
+            .then((response) => response.json())
+            .then((track) => {
                 document.getElementsByTagName('audio')[0].children[0].src = track.link;
                 document.getElementsByTagName('audio')[0].load();
                 this.data.playlist.push(track);
@@ -49,9 +65,8 @@ export class PlayerModel {
             });
         for (let i = 12345; i < 12350; i++) {
             Api.trackFetch(i.toString())
-                .then(response => response.text())
-                .then(data => {
-                    const track = JSON.parse(data);
+                .then((response) => response.json())
+                .then((track) => {
                     this.data.playlist.push(track);
                     this.data.queue.push(this.data.playlist.length - 1);
                 })
@@ -62,16 +77,28 @@ export class PlayerModel {
                 });
         }
     }
+
+    /**
+     * останавливает воспроизведение
+     */
     pause() {
         document.getElementsByTagName('audio')[0].pause();
         this.data.playing = false;
         this.eventBus.emit('draw play', {});
     }
+
+    /**
+     * начинает воспроизведение
+     */
     play() {
-        document.getElementsByTagName('audio')[0].play();
+        document.getElementsByTagName('audio')[0].play(); // TODO обработать promise
         this.data.playing = true;
         this.eventBus.emit('draw pause', {});
     }
+
+    /**
+     * переключает трек на предыдущий
+     */
     prev() {
         if (this.data.current === 0) {
             if (this.data.repeat) {
@@ -82,7 +109,8 @@ export class PlayerModel {
             }
         }
         this.data.current--;
-        document.getElementsByTagName('audio')[0].children[0].src = this.data.playlist[this.data.queue[this.data.current]].link;
+        document.getElementsByTagName('audio')[0].children[0].src =
+            this.data.playlist[this.data.queue[this.data.current]].link;
         if (this.data.playing) {
             document.getElementsByTagName('audio')[0].pause();
         }
@@ -93,6 +121,11 @@ export class PlayerModel {
         this.eventBus.emit('draw timeline', 0);
         this.eventBus.emit('track update', this.data.playlist[this.data.queue[this.data.current]]);
     }
+
+    /**
+     * переключает трек на следующий
+     * @param {string} cause
+     */
     next(cause) {
         if (this.data.current === this.data.queue.length - 1) {
             if (this.data.repeat) {
@@ -112,7 +145,8 @@ export class PlayerModel {
             }
         }
         this.data.current++;
-        document.getElementsByTagName('audio')[0].children[0].src = this.data.playlist[this.data.queue[this.data.current]].link;
+        document.getElementsByTagName('audio')[0].children[0].src =
+            this.data.playlist[this.data.queue[this.data.current]].link;
         if (this.data.playing) {
             document.getElementsByTagName('audio')[0].pause();
         }
@@ -123,12 +157,24 @@ export class PlayerModel {
         this.eventBus.emit('draw timeline', 0);
         this.eventBus.emit('track update', this.data.playlist[this.data.queue[this.data.current]]);
     }
+
+    /**
+     * перематывает  композицию
+     * @param {number} ratio
+     */
     rewind(ratio) {
-        document.getElementsByTagName('audio')[0].currentTime = document.getElementsByTagName('audio')[0].duration * ratio;
+        document.getElementsByTagName('audio')[0].currentTime =
+            document.getElementsByTagName('audio')[0].duration * ratio;
         this.eventBus.emit('draw timeline', ratio);
     }
+
+    /**
+     * перемешать
+     * @param {string} positionOfCurrent
+     */
     shuffle(positionOfCurrent) {
-        let j, tmp;
+        let j;
+        let tmp;
         for (let i = this.data.queue.length - 1; i > 0; i--) {
             j = Math.floor(Math.random() * (i + 1));
             if (j === this.data.current) {
@@ -149,29 +195,53 @@ export class PlayerModel {
         this.data.shuffle = true;
         this.eventBus.emit('draw shuffle', {});
     }
+
+    /**
+     * шаффл выключен
+     */
     unshuffle() {
         this.data.current = this.data.queue[this.data.current];
         this.data.queue.sort();
         this.data.shuffle = false;
         this.eventBus.emit('draw unshuffle', {});
     }
+
+    /**
+     * повторение листа
+     */
     repeat() {
         this.data.repeat = true;
         this.eventBus.emit('draw repeat', {});
     }
+
+    /**
+     * повторение текущего трека
+     */
     repeatOne() {
         this.data.repeat = false;
         document.getElementsByTagName('audio')[0].loop = true;
         this.eventBus.emit('draw repeat one', {});
     }
+
+    /**
+     * повторение отключено
+     */
     unrepeat() {
         document.getElementsByTagName('audio')[0].loop = false;
         this.eventBus.emit('draw unrepeat', {});
     }
+
+    /**
+     * звук выключен
+     */
     mute() {
         document.getElementsByTagName('audio')[0].muted = true;
         this.eventBus.emit('draw mute', {});
     }
+
+    /**
+     * звук включен
+     */
     unmute() {
         document.getElementsByTagName('audio')[0].muted = false;
         this.eventBus.emit('draw unmute', {});

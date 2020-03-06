@@ -2,55 +2,74 @@
  * Валидация данных
  * @class Validation
  */
-export  class Validation {
+export class Validation {
     /**
      * @param {String} email
-     * @returns {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
+     * @return {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
      */
-    validationEmail(email = '') {
+    static email(email = '') {
         if (email === '') {
-            return 'Введите почту'
+            return 'Enter email';
         }
-        let regExpr = new RegExp('^[a-z0-9_!#$%&+=*\\-]+(\.[a-z0-9_\\-]*)*@([a-z0-9][a-z0-9]+\.)*[a-z]{2,4}(\.[a-z]{2,4})+$');
+        const regExpr = new RegExp('(.)+@(.)+');
         if (!email.match(regExpr)) {
-            return 'Некорректная почта';
+            return 'Incorrect email syntax';
         }
         return '';
     }
+
     /**
      * @param {String} login
-     * @returns {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
+     * @return {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
      */
-    validationLogin (login = '') {
-        let regExpr = new RegExp('^[a-zA-Z0-9_.]{3,}$');
+    static login(login = '') {
+        const regExpr = new RegExp('^[a-zA-Z0-9_.]{3,}$');
+        if (login === '') {
+            return 'Enter login';
+        }
         if (!login.match(regExpr)) {
-            return 'Логин может содержать от 3 латинских букв или цифр';
+            return 'Login must contain at least 3 letters';
         }
         return '';
     }
+
     /**
-     * @param {String} password1 Пароль
-     * @param {String} password2 Повтор пароля
-     * @returns {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
+     * @param {String} pass1 Пароль
+     * @param {String} pass2 Повтор пароля
+     * @param {Boolean} passConfirm Введено ли подтвержение пароля?
+     * @return {String} error Пустая строчка / текст ошибки
      */
-    validationPassword(password1 = '', password2 = '') {
-
-        if(password2 === ''){
-            return '';
+    static password(pass1 = '', pass2 = '', passConfirm = false) {
+        if (pass1 === '') {
+            return 'Enter password';
         }
-
-        if (password1 !== password2) {
-            return 'Пароли не совпадают';
+        if (pass2 === '' && passConfirm) {
+            return 'Repeat the password';
         }
-
-        let regExpr = new RegExp('^[a-zA-Z0-9]{3,}$');
-
-        if (password1 === '') {
-            return 'Введите пароль';
+        if (pass1 !== pass2 && passConfirm) {
+            return 'Passwords must match';
         }
+        const regExpr = new RegExp('^[a-zA-Z0-9]{3,}$');
+        if (!pass1.match(regExpr)) {
+            return 'Password must contain at least 3 letters or numbers';
+        }
+        return '';
+    }
 
-        if (!password1.match(regExpr)) {
-            return 'Пароль должен содержать не менее 3 заглавных или строчных букв';
+    /**
+     * @param {number} size Размер файла
+     * @param {String} extension Расширение
+     * @return {String} error Пустая строчка / текст ошибки
+     */
+    static image(size, extension) {
+        if (size > 1048576) {
+            console.log('Too big');
+            return 'Max allowable size - 1Mb';
+        }
+        const allowableExtension = ['png', 'jpg', 'gif'];
+        if (allowableExtension.indexOf(extension) === -1) {
+            console.log('Wrong extension');
+            return 'Allowable extensions - png, jpg, gif';
         }
         return '';
     }

@@ -1,8 +1,15 @@
-import {EventBus} from '../eventBus.js'
-import {LoginModel} from '../models/login.js'
-import {LoginView} from '../views/login.js'
+import {EventBus} from '../eventBus.js';
+import {LoginModel} from '../models/login.js';
+import {LoginView} from '../views/login.js';
 
+/**
+ * Контроллер для страницы со входом
+ */
 export class LoginController {
+    /**
+     * Конструктор
+     * @param {Router} router
+     */
     constructor(router) {
         this.eventBus = new EventBus();
         this.model = new LoginModel(this.eventBus);

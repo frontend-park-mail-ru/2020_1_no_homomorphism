@@ -1,0 +1,35 @@
+{% block content %}
+<div class="row">
+    <div class="col col-1"></div>
+    <div class="col col-7">
+        {% for i in range(1, 10) %}
+        <div class="post card">
+            <div class="row name-row">
+                <div class="col col-1">
+                    <img src="/static/img/HU.jpeg" alt="avatar" class="avatar">
+                </div>
+                <div class="col col-11">
+                    <div class="artist">Hollywood Undead</div>
+                    <div class="date">14 февраля 2020</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-1"></div>
+                <div class="col col-11">
+                    <div class="text">добавили новый альбом</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="release-description">
+                        <img src="/static/img/new_empire_vol1.jpg" alt="cover" class="release-image">
+                        <div class="release-name">New Empire Vol. 1</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="col col-4"></div>
+</div>
+{% endblock %}

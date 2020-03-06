@@ -13,12 +13,14 @@
     },
     "dependencies": {
         "express": "^4.17.1",
+        "forever": "^2.0.0",
         "morgan": "^1.9.1",
         "nunjucks": "^3.2.0",
         "serve-favicon": "^2.5.0"
     },
     "devDependencies": {
         "eslint": "^6.8.0",
+        "eslint-config-google": "^0.14.0",
         "husky": "^4.2.3",
         "nodemon": "^2.0.2"
     }

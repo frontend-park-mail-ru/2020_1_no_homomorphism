@@ -1,8 +1,15 @@
-import {EventBus} from '../eventBus.js'
-import {SignupModel} from '../models/signup.js'
-import {SignupView} from '../views/signup.js'
+import {EventBus} from '../eventBus.js';
+import {SignupModel} from '../models/signup.js';
+import {SignupView} from '../views/signup.js';
 
+/**
+ * Контроллер для страницы регистрации
+ */
 export class SignupController {
+    /**
+     * Конструктор
+     * @param {Router} router
+     */
     constructor(router) {
         this.eventBus = new EventBus();
         this.model = new SignupModel(this.eventBus);
