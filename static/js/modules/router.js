@@ -12,14 +12,6 @@ export class Router {
     }
 
     /**
-     * Новый root
-     *  @param {Element} root
-     * */
-    setRoot(root) { // TODO Мб убрать метод?
-        this.root = root;
-    }
-
-    /**
      * Добавление path с view
      * @param {string} name
      * @param {Object} view
@@ -35,7 +27,6 @@ export class Router {
     logoutRedirect(to) {
         console.log('logout redirect');
         if (window.location.pathname === '/profile' || window.location.pathname === '/settings') {
-            console.log('redirecting...');
             this.check(to);
         }
     }
@@ -65,13 +56,13 @@ export class Router {
         if (!(newPath in this.views)) {
             window.history.replaceState('', {}, '/');
             this.views['/'].render(this.root);
-            this.views['/player'].render();
+            this.views['player'].render();
             return;
         }
         this.curPath = newPath;
         window.history.replaceState('', {}, newPath);
         this.views[newPath].render(this.root);
-        this.views['/player'].render();
+        this.views['player'].render();
     }
 
     /**

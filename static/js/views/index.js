@@ -3,10 +3,9 @@
  */
 export class IndexView {
     /**
-     * @param {EventBus} eventBus
+     * Конструктор
      */
-    constructor(eventBus) {
-        this.eventBus = eventBus;
+    constructor() {
     }
 
     /**

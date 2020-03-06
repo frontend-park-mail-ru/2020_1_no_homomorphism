@@ -8,7 +8,6 @@ export class SignupView {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.submit.bind(this);
-        this.eventBus.on('hide login, show logout', this.hideLoginShowLogout);
         this.eventBus.on('invalid', this.showErrors);
     }
 

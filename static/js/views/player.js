@@ -29,10 +29,6 @@ export class PlayerView {
         this.eventBus.on('draw unmute', this.drawUnmute.bind(this));
 
         this.eventBus.emit('init', {});
-
-        document.getElementById('logout-button').addEventListener('click', () => {
-            this.eventBus.emit('logout', {});
-        });
     }
 
     /**

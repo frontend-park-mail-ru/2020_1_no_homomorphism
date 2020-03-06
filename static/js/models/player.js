@@ -31,8 +31,6 @@ export class PlayerModel {
         this.eventBus.on('unrepeat', this.unrepeat.bind(this));
         this.eventBus.on('mute', this.mute.bind(this));
         this.eventBus.on('unmute', this.unmute.bind(this));
-
-        this.eventBus.on('logout', this.logout);
     }
 
     /**

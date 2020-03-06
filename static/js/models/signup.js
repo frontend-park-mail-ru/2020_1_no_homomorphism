@@ -14,17 +14,6 @@ export class SignupModel {
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
         this.eventBus.on('submit', this.submit.bind(this));
-        this.eventBus.on('cookie fetch request', this.cookieFetch.bind(this));
-    }
-
-    /**
-     * Проверка, залогинен ли пользователь
-     */
-    cookieFetch() {
-        Api.cookieFetch()
-            .then((res) => {
-                this.eventBus.emit('cookie fetch response', res.ok);
-            });
     }
 
     /**

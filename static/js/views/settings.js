@@ -9,7 +9,6 @@ export class SettingsView {
         this.eventBus = eventBus;
         this.eventBus.on('invalid', this.showErrors);
         this.eventBus.on('user data', this.prerender.bind(this));
-        this.eventBus.on('cookie fetch response', this.renderWithCookie.bind(this));
         this.eventBus.emit('get user data', {});
     }
 
@@ -34,12 +33,17 @@ export class SettingsView {
      * @param {Object} root
      */
     render(root) {
-        this.eventBus.on('user data', (data) => {
-            // eslint-disable-next-line no-undef
-            root.innerHTML = nunjucks.render('../../../views/settings.njk', data);
-            this.setEventListeners();
-        });
-        this.eventBus.emit('get user data', {});
+        root.innerHTML = this.template;
+        this.setEventListeners();
+    }
+
+    /**
+     * Получает данные пользователя
+     * @param {Object} data
+     */
+    prerender(data) {
+        // eslint-disable-next-line no-undef
+        this.template = nunjucks.render('../../../views/settings.njk', data);
     }
 
     /**
