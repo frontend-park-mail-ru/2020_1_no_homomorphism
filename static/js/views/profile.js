@@ -14,7 +14,7 @@ export class ProfileView {
      * @param {Object} root
      */
     render(root) {
-        this.eventBus.on('user data', data => {
+        this.eventBus.on('user data', (data) => {
             // eslint-disable-next-line no-undef
             root.innerHTML = nunjucks.render('../../../views/profile.njk', data);
         });
