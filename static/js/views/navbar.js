@@ -3,31 +3,42 @@
  */
 export class NavbarView {
     /**
-     * @param eventBus {EventBus}
-     * @param globalEventBus {EventBus}
+     * @param {EventBus} eventBus
+     * @param {EventBus} globalEventBus
      */
     constructor(eventBus, globalEventBus) {
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
+        this.globalEventBus.on('login', this.view.login.bind(this.view));
     }
 
     /**
     * рендерит навбар
-    * @param loggedIn {bool}
+    * @param {bool} loggedIn
     */
     render(loggedIn) {
-        document.getElementById('profile-link').style.visibility = (loggedIn ? 'visible' : 'hidden');
-        document.getElementById('logout-button').style.visibility = (loggedIn ? 'visible' : 'hidden');
+        document.getElementById('profile-link').style.visibility =
+            (loggedIn ? 'visible' : 'hidden');
+        document.getElementById('logout-button').style.visibility =
+            (loggedIn ? 'visible' : 'hidden');
         document.getElementById('signup-link').style.visibility = (loggedIn ? 'hidden' : 'visible');
         document.getElementById('login-link').style.visibility = (loggedIn ? 'hidden' : 'visible');
     }
+    /**
+     * Sets event listeners
+     */
     setEventListeners() {
         document.getElementById('logout-button').addEventListener('click', this.logout.bind(this));
     }
 
+    /**
+     * Реагирует на логин
+     */
     login() {
         this.eventBus.on('user data', (data) => {
-            document.getElementById('profile-link').innerHTML = nunjucks.render('../../../views/templates/profileLink.njk', data);
+            document.getElementById('profile-link').innerHTML =
+                // eslint-disable-next-line no-undef
+                nunjucks.render('../../../views/templates/profileLink.njk', data);
         });
         this.eventBus.emit('get user data', {});
     }

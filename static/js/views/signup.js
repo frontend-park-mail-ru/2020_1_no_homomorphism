@@ -3,7 +3,7 @@
  */
 export class SignupView {
     /**
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
@@ -14,27 +14,27 @@ export class SignupView {
 
     /**
      * рендерит страничку регистрации
-     * @param root
+     * @param {Object} root
      */
     render(root) {
+        // eslint-disable-next-line no-undef
         root.innerHTML = nunjucks.render('../../../views/signup.njk');
-
         document.addEventListener('click', (event) => {
             console.log(event.target.getAttribute('id'));
             if (event.target.getAttribute('id') === 'submit') {
                 event.preventDefault();
                 this.submit();
             }
-        })
+        });
     }
 
     /**
      * показывает, что поля были заполнены неправильно
-     * @param errors
+     * @param {Object} errors
      */
     showErrors(errors) {
         document.getElementsByClassName('sign-up-form')[0].style.borderColor = 'red';
-        for (let key in errors) {
+        for (const key in errors) {
             if (key === 'global') {
                 document.getElementById('global').innerText = errors[key];
                 document.getElementById('global').style.height = '20px';
@@ -55,7 +55,7 @@ export class SignupView {
      * отправляет данные формы
      */
     submit() {
-        document.querySelectorAll('.sign-up-form label').forEach(label => {
+        document.querySelectorAll('.sign-up-form label').forEach((label) => {
             label.children[0].style.borderColor = '#ccc';
             label.children[1].innerText = '';
             label.children[1].style.height = '0';

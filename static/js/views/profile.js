@@ -3,23 +3,23 @@
  */
 export class ProfileView {
     /**
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-
-    }
-
-    showErrors(error) {
-        console.log('INPUT ERROR ');
+        this.eventBus.on('invalid', this.showErrors);
+        this.eventBus.on('user data', this.prerender.bind(this));
+        this.eventBus.on('cookie fetch response', this.renderWithCookie.bind(this));
+        this.eventBus.emit('get user data', {});
     }
 
     /**
-     * рендерит страничку с профилем
-     * @param root
+     * Рендер
+     * @param {Object} root
      */
     render(root) {
         this.eventBus.on('user data', (data) => {
+            // eslint-disable-next-line no-undef
             root.innerHTML = nunjucks.render('../../../views/profile.njk', data);
         });
         this.eventBus.emit('get user data', {});

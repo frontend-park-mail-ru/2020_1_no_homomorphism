@@ -1,5 +1,3 @@
-import {Api} from './api.js'
-
 /**
  * Переход по страничкам
  * @class Router
@@ -13,10 +11,11 @@ export class Router {
         this.views = {};
     }
 
-    /* *
+    /**
      * Новый root
+     *  @param {Element} root
      * */
-    setRoot(root) {
+    setRoot(root) { // TODO Мб убрать метод?
         this.root = root;
     }
 
@@ -30,7 +29,8 @@ export class Router {
     }
 
     /**
-     * Редирект
+     * Редирект послн логаута
+     * @param {string} to
      */
     logoutRedirect(to) {
         console.log('logout redirect');
@@ -39,9 +39,16 @@ export class Router {
             this.check(to);
         }
     }
+    /**
+     * Редирект на главную
+     */
     redirectToMain() {
         this.check('/');
     }
+
+    /**
+     * Редирект на профиль
+     */
     redirectToProfile() {
         this.check('/profile');
     }
@@ -57,22 +64,14 @@ export class Router {
         }
         if (!(newPath in this.views)) {
             window.history.replaceState('', {}, '/');
-            Api.coockieFetch()
-            .then((res) => {
-                this.views['/'].render(this.root);
-                this.views['navbar'].render(res.ok);
-                this.views['player'].render();
-            });
+            this.views['/'].render(this.root);
+            this.views['/player'].render();
             return;
         }
         this.curPath = newPath;
         window.history.replaceState('', {}, newPath);
-        Api.coockieFetch()
-        .then((res) => {
-            this.views[newPath].render(this.root);
-            this.views['navbar'].render(res.ok);
-            this.views['player'].render();
-        });
+        this.views[newPath].render(this.root);
+        this.views['/player'].render();
     }
 
     /**
@@ -81,7 +80,7 @@ export class Router {
     start() {
         window.addEventListener('click', (event) => {
             let current = event.target;
-            while (current != window && current != document.body && current != null) {
+            while (current !== window && current !== document.body && current != null) {
                 if (current instanceof HTMLAnchorElement) {
                     event.preventDefault();
                     this.check(current.pathname);
