@@ -9,7 +9,7 @@ export class NavbarView {
     constructor(eventBus, globalEventBus) {
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
-        this.globalEventBus.on('login', this.view.login.bind(this.view));
+        this.globalEventBus.on('login', this.login.bind(this));
     }
 
     /**
