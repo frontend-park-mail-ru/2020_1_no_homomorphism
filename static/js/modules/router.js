@@ -48,7 +48,7 @@ export class Router {
         }
         this.curPath = newPath;
         if (pushState) {
-            window.history.pushState('', {}, '/');
+            window.history.pushState('', {}, newPath);
         }
         this.views[newPath].render(this.root);
         this.views['player'].render();
