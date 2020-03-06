@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
     router.addView('/', indexController.view);
     router.addView('/login', loginController.view);
     router.addView('/signup', signupController.view);
-    router.addView('/player', playerController.view);
+    router.addView('player', playerController.view);
     router.addView('/profile', profileController.view);
     router.addView('/settings', settingsController.view);
     router.start();
