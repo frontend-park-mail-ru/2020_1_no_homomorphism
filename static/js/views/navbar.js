@@ -39,6 +39,10 @@ export class NavbarView {
             document.getElementById('profile-link').innerHTML =
                 // eslint-disable-next-line no-undef
                 nunjucks.render('../../../views/templates/profileLink.njk', data);
+            document.getElementById('login-link').style.visibility = 'hidden';
+            document.getElementById('signup-link').style.visibility = 'hidden';
+            document.getElementById('logout-button').style.visibility = 'visible';
+            document.getElementById('profile-link').style.visibility = 'visible';
         });
         this.eventBus.emit('get user data', {});
     }
