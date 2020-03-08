@@ -90,7 +90,7 @@ export class LoginView {
         document.getElementById('login-link').style.visibility = 'hidden';
         document.getElementById('signup-link').style.visibility = 'hidden';
         document.getElementById('logout-button').style.visibility = 'visible';
-        this.eventBus.emit('redirect to main', 'Успешный вход');
+        this.eventBus.emit('redirect', '/');
     }
 
     // changeRemember() {

@@ -14,6 +14,6 @@ export class PlayerController {
         this.eventBus = new EventBus();
         this.model = new PlayerModel(this.eventBus);
         this.view = new PlayerView(this.eventBus);
-        this.eventBus.on('redirect to main', router.redirectToMain);
+        this.eventBus.on('redirect', router.redirect.bind(router));
     }
 }

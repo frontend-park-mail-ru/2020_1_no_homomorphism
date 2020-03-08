@@ -53,7 +53,7 @@ export class SignupModel {
                 .then((res) => {
                     if (res.ok) {
                         this.eventBus.emit('hide login, show logout', {});
-                        this.eventBus.emit('redirect to main', {});
+                        this.eventBus.emit('redirect', '/');
                     } else {
                         this.eventBus.emit('invalid', {global: 'Signup error'}); // TODO Обрабатывать ответ бэка
                     }

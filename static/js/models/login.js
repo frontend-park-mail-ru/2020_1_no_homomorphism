@@ -45,7 +45,7 @@ export class LoginModel {
             Api.loginFetch(values.login, values.password)
                 .then((res) => {
                     if (res === undefined) {
-                        this.eventBus.emit('redirect to main', 'No answer from backend');
+                        this.eventBus.emit('redirect', '/');
                         return;
                     }
                     if (res.ok) {

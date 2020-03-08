@@ -14,7 +14,7 @@ export class ProfileController {
         this.eventBus = new EventBus();
         this.model = new ProfileModel(this.eventBus);
         this.view = new ProfileView(this.eventBus);
-        this.eventBus.on('redirect to main', router.redirectToMain.bind(router));
-        this.eventBus.on('no answer', router.redirectToMain.bind(router));
+        this.eventBus.on('redirect', router.redirect.bind(router));
+        this.eventBus.on('no answer', router.redirect.bind(router));
     }
 }
