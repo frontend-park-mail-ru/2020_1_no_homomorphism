@@ -92,7 +92,7 @@ export class SettingsModel {
                         return;
                     }
                     if (res.ok) {
-                        this.eventBus.emit('redirect to profile', {});
+                        this.eventBus.emit('redirect', '/profile');
                     }
                 });
         }

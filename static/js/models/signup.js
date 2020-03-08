@@ -44,7 +44,7 @@ export class SignupModel {
                 .then((res) => {
                     if (res.ok) {
                         this.globalEventBus.emit('login', {});
-                        this.eventBus.emit('redirect to main', {});
+                        this.eventBus.emit('redirect', '/');
                     } else {
                         this.eventBus.emit('invalid', {global: 'Signup error'}); // TODO Обрабатывать ответ бэка
                     }

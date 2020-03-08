@@ -22,7 +22,7 @@ export class ProfileModel {
         Api.profileFetch()
             .then((res) => {
                 if (res === undefined) {
-                    this.eventBus.emit('redirect to main', 'Ошибка загрузки профиля');
+                    this.eventBus.emit('redirect', '/');
                     return;
                 }
                 if (res.ok) {
@@ -31,7 +31,7 @@ export class ProfileModel {
                             this.eventBus.emit('user data', data);
                         });
                 } else {
-                    this.eventBus.emit('no answer', 'Ошибка загрузки профиля');
+                    this.eventBus.emit('no answer', '/');
                 }
             });
     }
