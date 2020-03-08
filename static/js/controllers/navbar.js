@@ -13,11 +13,10 @@ export class NavbarController {
      */
     constructor(router, globalEventBus) {
         this.eventBus = new EventBus();
-        this.globalEventBus = globalEventBus;
-        this.model = new NavbarModel(this.eventBus, this.globalEventBus);
-        this.view = new NavbarView(this.eventBus, this.globalEventBus);
+        this.model = new NavbarModel(this.eventBus, globalEventBus);
+        this.view = new NavbarView(this.eventBus, globalEventBus);
 
-        this.globalEventBus.on('logout redirect', router.logoutRedirect.bind(router));
+        globalEventBus.on('logout redirect', router.logoutRedirect.bind(router));
         this.eventBus.on('redirect', router.redirect.bind(router));
         this.eventBus.on('no answer', router.redirect.bind(router));
     }

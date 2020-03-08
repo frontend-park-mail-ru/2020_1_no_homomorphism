@@ -18,11 +18,11 @@ export class NavbarView {
     */
     render(loggedIn) {
         document.getElementById('profile-link').style.visibility =
-            (loggedIn ? 'visible' : 'hidden');
+            loggedIn ? 'visible' : 'hidden';
         document.getElementById('logout-button').style.visibility =
-            (loggedIn ? 'visible' : 'hidden');
-        document.getElementById('signup-link').style.visibility = (loggedIn ? 'hidden' : 'visible');
-        document.getElementById('login-link').style.visibility = (loggedIn ? 'hidden' : 'visible');
+            loggedIn ? 'visible' : 'hidden';
+        document.getElementById('signup-link').style.visibility = loggedIn ? 'hidden' : 'visible';
+        document.getElementById('login-link').style.visibility = loggedIn ? 'hidden' : 'visible';
     }
     /**
      * Sets event listeners

@@ -13,8 +13,7 @@ export class SignupController {
      */
     constructor(router, globalEventBus) {
         this.eventBus = new EventBus();
-        this.globalEventBus = globalEventBus;
-        this.model = new SignupModel(this.eventBus, this.globalEventBus);
+        this.model = new SignupModel(this.eventBus, globalEventBus);
         this.view = new SignupView(this.eventBus);
         this.eventBus.on('redirect', router.redirect.bind(router));
     }

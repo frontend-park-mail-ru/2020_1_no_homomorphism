@@ -26,7 +26,7 @@ export class Router {
      */
     logoutRedirect(to) {
         console.log('logout redirect');
-        if (window.location.pathname === '/profile' || window.location.pathname === '/settings') {
+        if (['/profile', '/settings'].includes(window.location.pathname)) {
             this.check(to, true);
         }
     }

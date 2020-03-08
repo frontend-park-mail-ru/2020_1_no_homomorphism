@@ -5,8 +5,7 @@ export class IndexView {
     /**
      * Конструктор
      */
-    constructor() {
-    }
+    constructor() {}
 
     /**
     * рендерит главную страничку
