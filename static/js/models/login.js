@@ -41,7 +41,7 @@ export class LoginModel {
                     }
                     if (res.ok) {
                         this.globalEventBus.emit('login', {});
-                        this.eventBus.emit('redirect to main', {});
+                        this.eventBus.emit('redirect', '/');
                     } else {
                         this.eventBus.emit('invalid', {global: 'Login error'});
                     }

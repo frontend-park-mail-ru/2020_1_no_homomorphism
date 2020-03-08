@@ -31,7 +31,7 @@ export class NavbarModel {
             .then((res) => {
                 if (res === undefined) {
                     console.log('NO ANSWER FROM BACKEND');
-                    this.eventBus.emit('redirect to main', 'Ошибка загрузки профиля');
+                    this.eventBus.emit('redirect', '/');
                     return;
                 }
                 if (res.ok) {
@@ -39,8 +39,6 @@ export class NavbarModel {
                         .then((data) => {
                             this.eventBus.emit('user data', data);
                         });
-                } else {
-                    this.eventBus.emit('no answer', 'Ошибка загрузки профиля');
                 }
             });
     }

@@ -18,7 +18,7 @@ export class NavbarController {
         this.view = new NavbarView(this.eventBus, this.globalEventBus);
 
         this.globalEventBus.on('logout redirect', router.logoutRedirect.bind(router));
-        this.eventBus.on('redirect to main', router.redirectToMain.bind(router));
-        this.eventBus.on('no answer', router.redirectToMain.bind(router));
+        this.eventBus.on('redirect', router.redirect.bind(router));
+        this.eventBus.on('no answer', router.redirect.bind(router));
     }
 }
