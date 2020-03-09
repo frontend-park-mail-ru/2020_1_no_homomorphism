@@ -5,7 +5,7 @@
     padding: 0 5%;
     margin-bottom: 2%;
     background: white;
-    box-shadow: 0 3px 6px silver;
+    box-shadow: 0 3px 6px #ebeae7;
     display: flex;
     align-items: center;
     z-index: 3;
@@ -40,7 +40,7 @@
 }
 
 .navbar .login:hover {
-    background: silver;
+    background: #ebeae7;
 }
 
 .navbar .logout {
@@ -56,12 +56,12 @@
     font-weight: bold;
     height: 55px;
     width: 6%;
-    padding-top: 19px;
+    padding-top: 7px;
     text-align: center;
 }
 
 .navbar .signup:hover {
-    background: silver;
+    background: #ebeae7;
 }
 
 .navbar .signup img {
