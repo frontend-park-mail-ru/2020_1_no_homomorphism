@@ -1,29 +1,21 @@
+/**
+ *  вью для входа
+ */
 export class LoginView {
     /**
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.eventBus.on('invalid', this.showErrors);
-        this.eventBus.on('hide login, show logout', this.hideLoginShowLogout.bind(this));
     }
 
     /**
     * рендерит страничку входа
-    * @param root
+    * @param {Object} root
     */
-    render(root, loggedIn) {
-        if (loggedIn) {
-            document.getElementById('profile-link').style.display = 'block';
-            document.getElementById('logout-button').style.display = 'block';
-            document.getElementById('signup-link').style.display = 'none';
-            document.getElementById('login-link').style.display = 'none';
-        } else {
-            document.getElementById('signup-link').style.display = 'block';
-            document.getElementById('login-link').style.display = 'block';
-            document.getElementById('profile-link').style.display = 'none';
-            document.getElementById('logout-button').style.display = 'none';
-        }
+    render(root) {
+        // eslint-disable-next-line no-undef
         root.innerHTML = nunjucks.render('../../../views/login.njk');
         document.addEventListener('click', (event) => {
             if (event.target.getAttribute('id') === 'submit-login') {
@@ -35,11 +27,11 @@ export class LoginView {
 
     /**
      * показывает какие поля неверно заполнены
-     * @param errors
+     * @param {Object} errors
      */
     showErrors(errors) {
         document.getElementsByClassName('login-form')[0].style.borderColor = 'red';
-        for (let key in errors) {
+        for (const key in errors) {
             if (key === 'global') {
                 document.getElementById('global').innerText = errors[key];
                 document.getElementById('global').style.height = '20px';
@@ -54,14 +46,13 @@ export class LoginView {
                 message.style.visibility = 'visible';
             }
         }
-        console.log('LOGIN ERROR');
     }
 
     /**
      * отправляет данные формы
      */
     submit() {
-        document.querySelectorAll('.login-form label').forEach(label => {
+        document.querySelectorAll('.login-form label').forEach((label) => {
             label.children[0].style.borderColor = '#ccc';
             label.children[1].innerText = '';
             label.children[1].style.height = '0';
@@ -77,18 +68,7 @@ export class LoginView {
         });
     }
 
-    /**
-     * прячет кнопку логина и регистрации и показывает кнопку логаута
-     */
-    hideLoginShowLogout() {
-        document.getElementById('login-link').style.display = 'none';
-        document.getElementById('signup-link').style.display = 'none';
-        document.getElementById('logout-button').style.display = 'block';
-        document.getElementById('profile-link').style.display = 'block';
-        this.eventBus.emit('redirect to main', 'Успешный вход');
-    }
-
-    //changeRemember() {
+    // changeRemember() {
     //    this.eventBus.emit('remember changed', document.getElementById('remember').checked);
-    //}
+    // }
 }

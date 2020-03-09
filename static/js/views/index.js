@@ -1,30 +1,18 @@
 /**
- *  вью для главной страницы
+ *  вью для главной
  */
 export class IndexView {
     /**
-     * @param eventBus {EventBus}
+     * Конструктор
      */
-    constructor(eventBus) {
-        this.eventBus = eventBus;
-    }
+    constructor() {}
 
     /**
     * рендерит главную страничку
-    * @param root {Object}
+    * @param {Object} root
     */
-    render(root, loggedIn) {
-        if (loggedIn) {
-            document.getElementById('profile-link').style.display = 'block';
-            document.getElementById('logout-button').style.display = 'block';
-            document.getElementById('signup-link').style.display = 'none';
-            document.getElementById('login-link').style.display = 'none';
-        } else {
-            document.getElementById('signup-link').style.display = 'block';
-            document.getElementById('login-link').style.display = 'block';
-            document.getElementById('profile-link').style.display = 'none';
-            document.getElementById('logout-button').style.display = 'none';
-        }
+    render(root) {
+        // eslint-disable-next-line no-undef
         root.innerHTML = nunjucks.render('../../../views/index.njk');
     }
 }

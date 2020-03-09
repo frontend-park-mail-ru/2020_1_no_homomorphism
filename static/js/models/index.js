@@ -1,9 +1,9 @@
 /**
- * Модель для главной странице
+ * Модель для главной страницы
  */
-
 export class IndexModel {
-    constructor(eventBus) {
-        this.eventBus = eventBus;
-    }
+    /**
+     * Конструктор
+     */
+    constructor() {}
 }

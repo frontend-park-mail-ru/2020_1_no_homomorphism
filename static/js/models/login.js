@@ -1,5 +1,5 @@
-import {Api} from '../modules/api.js';
-import {Validation} from '../modules/validation.js';
+import {Api} from '../libs/api.js';
+import {Validation} from '../libs/validation.js';
 
 /**
  * Модель для страницы входа
@@ -7,51 +7,49 @@ import {Validation} from '../modules/validation.js';
 export class LoginModel {
     /**
      * Конструктор
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
+     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus) {
+    constructor(eventBus, globalEventBus) {
         this.eventBus = eventBus;
+        this.globalEventBus = globalEventBus;
+        this.eventBus.on('submit', this.submit.bind(this));
     }
 
     /**
      * отправка формы
-     * @param values
+     * @param {Object} values
      */
     submit(values) {
-        const validation = new Validation;
-
-        const resLogin = validation.validationLogin(values.login);
-        const resPassword = validation.validationPassword(values.password, values.passwordConfirm);
-
-        let errors = {};
+        const resLogin = Validation.login(values.login);
+        const resPassword = Validation.password(values.password, values.passwordConfirm);
+        const errors = {};
         if (resLogin !== '') {
-            errors['login'] = resLogin;
+            errors.login = resLogin;
         }
         if (resPassword !== '') {
-            errors['password'] = resPassword;
+            errors.password = resPassword;
         }
         if (JSON.stringify(errors) !== '{}') {
             this.eventBus.emit('invalid', errors);
         } else {
             Api.loginFetch(values.login, values.password)
-            .then((res) => {
-                if (res === undefined) {
-                    console.log('NO ANSWER FROM BACKEND');
-                    this.eventBus.emit('redirect to main', 'No answer from backend');
-                    return;
-                }
-                if (res.ok) {
-                    console.log('SUCCESS');
-                    this.eventBus.emit('hide login, show logout', {});
-                } else {
-                    console.log('ENTRY ERROR');
-                    this.eventBus.emit('invalid', {global: 'Login error'});
-                }
-            });
+                .then((res) => {
+                    if (res === undefined) {
+                        this.eventBus.emit('redirect', '/');
+                        return;
+                    }
+                    if (res.ok) {
+                        this.globalEventBus.emit('login');
+                        this.eventBus.emit('redirect', '/');
+                    } else {
+                        this.eventBus.emit('invalid', {global: 'Login error'});
+                    }
+                });
         }
     }
 
-    /*changeRemember(state) {
+    /* changeRemember(state) {
         this.data.remember = state;
     }*/
 }

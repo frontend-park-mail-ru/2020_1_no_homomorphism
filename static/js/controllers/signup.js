@@ -1,6 +1,6 @@
-import {EventBus} from '../eventBus.js'
-import {SignupModel} from '../models/signup.js'
-import {SignupView} from '../views/signup.js'
+import {EventBus} from '../libs/eventBus.js';
+import {SignupModel} from '../models/signup.js';
+import {SignupView} from '../views/signup.js';
 
 /**
  * Контроллер для страницы регистрации
@@ -8,12 +8,13 @@ import {SignupView} from '../views/signup.js'
 export class SignupController {
     /**
      * Конструктор
-     * @param router {Router}
+     * @param {Router} router
+     * @param {EventBus} globalEventBus
      */
-    constructor(router) {
+    constructor(router, globalEventBus) {
         this.eventBus = new EventBus();
-        this.model = new SignupModel(this.eventBus);
+        this.model = new SignupModel(this.eventBus, globalEventBus);
         this.view = new SignupView(this.eventBus);
-        this.eventBus.on('redirect to main', router.redirectToMain.bind(router));
+        this.eventBus.on('redirect', router.redirect.bind(router));
     }
 }

@@ -64,6 +64,10 @@
     background: silver;
 }
 
+.navbar .signup img {
+    border-radius: 20px;
+}
+
 .navbar .search {
     box-shadow: inset 0px 0px 4px black;
     margin-left: 2%;

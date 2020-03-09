@@ -1,6 +1,6 @@
-import {EventBus} from '../eventBus.js'
-import {ProfileModel} from '../models/profile.js'
-import {ProfileView} from '../views/profile.js'
+import {EventBus} from '../libs/eventBus.js';
+import {ProfileModel} from '../models/profile.js';
+import {ProfileView} from '../views/profile.js';
 
 /**
  * Контроллер для профиля
@@ -8,14 +8,13 @@ import {ProfileView} from '../views/profile.js'
 export class ProfileController {
     /**
      * Конструктор
-     * @param router {Router}
+     * @param {Router} router
      */
     constructor(router) {
         this.eventBus = new EventBus();
         this.model = new ProfileModel(this.eventBus);
         this.view = new ProfileView(this.eventBus);
-        this.eventBus.on('invalid', this.view.showErrors); // TODO Error
-        this.eventBus.on('redirect to main', router.redirectToMain.bind(router));
-        this.eventBus.on('no answer', router.redirectToMain.bind(router));
+        this.eventBus.on('redirect', router.redirect.bind(router));
+        this.eventBus.on('no answer', router.redirect.bind(router));
     }
 }

@@ -1,5 +1,5 @@
-import {Validation} from '../modules/validation.js';
-import {Api} from "../modules/api.js";
+import {Validation} from '../libs/validation.js';
+import {Api} from '../libs/api.js';
 
 /**
  * Модель настроек
@@ -7,58 +7,70 @@ import {Api} from "../modules/api.js";
 export class SettingsModel {
     /**
      * конструктор
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
+        this.eventBus.on('avatar upload', this.resetAvatar.bind(this));
+        this.eventBus.on('submit', this.submit.bind(this));
+        this.eventBus.on('get user data', this.getUserData.bind(this));
+        // this.eventBus.on('add outer', this.model.addOuter);
     }
 
     /**
-     * получает данный юзера
+     * получает данные юзера
      */
     getUserData() {
         Api.profileFetch()
-        .then((res) => {
-            if (res === undefined) {
-                console.log('NO ANSWER FROM BACKEND');
-            } else if (res.ok) {
-                res.text()
-                .then((data) => {
-                    this.eventBus.emit('user data', JSON.parse(data));
-                });
-            } else {
-                this.eventBus.emit('invalid', 'Ошибка загрузки профиля');
-            }
-        });
+            .then((res) => {
+                if (res.ok) {
+                    res.json()
+                        .then((data) => {
+                            this.eventBus.emit('user data', data);
+                        });
+                } else {
+                    this.eventBus.emit('no answer', '/');
+                }
+            });
     }
 
     /**
      * обновляет аватар юзера
      */
     resetAvatar() {
-        console.log('CAME TO ADD');
         const fileAttach = document.getElementById('avatar-upload');
-        console.log("File size:" + fileAttach.files[0].size);
-        const fData = new FormData();
-        fData.append('profile_image', fileAttach.files[0], 'kek.png');
-        Api.profilePhotoFetch(fData)
-        .then((response) => {
-            if (response.ok) {
-                this.eventBus.emit('get user data', {});
-            }
-        });
-
+        const resImage = Validation
+            .image(fileAttach.files[0].size, fileAttach.files[0].type
+                .split('/')
+                .pop()
+                .toLowerCase());
+        if (resImage !== '') {
+            this.eventBus.emit('invalid', {'avatar-upload': resImage});
+        } else {
+            const fData = new FormData();
+            fData.append('profile_image', fileAttach.files[0], 'kek.png');
+            Api.profilePhotoFetch(fData)
+                .then((response) => {
+                    if (response.ok) {
+                        this.eventBus.emit('get user data');
+                    }
+                });
+        }
     }
 
     /**
      * отправляет форму с  обновленными данными пользователя
-     * @param values
+     * @param {Object} values
      */
     submit(values) {
-        const validation = new Validation;
-        const resPassword = validation.validationPassword(values.newPassword, values.newPasswordConfirm, values.newPassword !== '');
-        const resEmail = validation.validationEmail(values.email);
-        let errors = {};
+        // const validation = new Validation;
+        const resPassword = Validation.password(
+            values.newPassword,
+            values.newPasswordConfirm,
+            values.newPassword !== '',
+        );
+        const resEmail = Validation.email(values.email);
+        const errors = {};
         if (values.newPassword !== '' && resPassword !== '') {
             errors['newPassword'] = resPassword;
         }
@@ -74,15 +86,14 @@ export class SettingsModel {
             this.eventBus.emit('invalid', errors);
         } else {
             Api.profileEditFetch(values.name, values.email, values.password, values.newPassword)
-            .then((res) => {
-                if (res === undefined) {
-                    console.log('NO ANSWER FROM BACKEND');
-                    return;
-                }
-                if (res.ok) {
-                    this.eventBus.emit('redirect to profile', {});
-                }
-            });
+                .then((res) => {
+                    if (res === undefined) {
+                        return;
+                    }
+                    if (res.ok) {
+                        this.eventBus.emit('redirect', '/profile');
+                    }
+                });
         }
     }
 }
