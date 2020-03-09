@@ -22,7 +22,7 @@ export class NavbarModel {
      */
     cookieFetch() {
         Api.cookieFetch()
-            .then((res) => this.eventBus.emit(res.ok));
+            .then((res) => this.eventBus.emit('cookie', res.ok));
     }
 
     /**
