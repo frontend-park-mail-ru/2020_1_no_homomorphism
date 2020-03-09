@@ -20,6 +20,8 @@ export class NavbarView {
         this.eventBus.on('cookie', (loggedIn) => {
             if (loggedIn) {
                 this.login();
+            } else {
+                this.logout();
             }
         });
         this.eventBus.emit('cookie fetch', {});
