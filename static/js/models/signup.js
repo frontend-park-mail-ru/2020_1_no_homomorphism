@@ -1,5 +1,5 @@
-import {Validation} from '../modules/validation.js';
-import {Api} from '../modules/api.js';
+import {Validation} from '../libs/validation.js';
+import {Api} from '../libs/api.js';
 
 /**
  * модель странички регистрации
@@ -43,7 +43,7 @@ export class SignupModel {
             Api.signupFetch(values.name, values.login, 'yes', values.email, values.password)
                 .then((res) => {
                     if (res.ok) {
-                        this.globalEventBus.emit('login', {});
+                        this.globalEventBus.emit('login');
                         this.eventBus.emit('redirect', '/');
                     } else {
                         this.eventBus.emit('invalid', {global: 'Signup error'}); // TODO Обрабатывать ответ бэка

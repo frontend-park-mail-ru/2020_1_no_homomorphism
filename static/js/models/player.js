@@ -1,4 +1,4 @@
-import {Api} from '../modules/api.js';
+import {Api} from '../libs/api.js';
 
 /**
  * Модель плеера
@@ -67,7 +67,7 @@ export class PlayerModel {
     pause() {
         document.getElementsByTagName('audio')[0].pause();
         this.data.playing = false;
-        this.eventBus.emit('draw play', {});
+        this.eventBus.emit('draw play');
     }
 
     /**
@@ -76,7 +76,7 @@ export class PlayerModel {
     play() {
         document.getElementsByTagName('audio')[0].play(); // TODO обработать promise
         this.data.playing = true;
-        this.eventBus.emit('draw pause', {});
+        this.eventBus.emit('draw pause');
     }
 
     /**
@@ -118,7 +118,7 @@ export class PlayerModel {
                 this.data.current = -1;
             } else {
                 if (cause === 'self') {
-                    this.eventBus.emit('draw play', {});
+                    this.eventBus.emit('draw play');
                     this.data.current = 0;
                     this.eventBus.emit('draw timeline', 0);
                     this.eventBus.emit('track update', this.data.playlist[this.data.queue[0]]);
@@ -176,7 +176,7 @@ export class PlayerModel {
         }
         this.data.current = 0;
         this.data.shuffle = true;
-        this.eventBus.emit('draw shuffle', {});
+        this.eventBus.emit('draw shuffle');
     }
 
     /**
@@ -186,7 +186,7 @@ export class PlayerModel {
         this.data.current = this.data.queue[this.data.current];
         this.data.queue.sort();
         this.data.shuffle = false;
-        this.eventBus.emit('draw unshuffle', {});
+        this.eventBus.emit('draw unshuffle');
     }
 
     /**
@@ -194,7 +194,7 @@ export class PlayerModel {
      */
     repeat() {
         this.data.repeat = true;
-        this.eventBus.emit('draw repeat', {});
+        this.eventBus.emit('draw repeat');
     }
 
     /**
@@ -203,7 +203,7 @@ export class PlayerModel {
     repeatOne() {
         this.data.repeat = false;
         document.getElementsByTagName('audio')[0].loop = true;
-        this.eventBus.emit('draw repeat one', {});
+        this.eventBus.emit('draw repeat one');
     }
 
     /**
@@ -211,7 +211,7 @@ export class PlayerModel {
      */
     unrepeat() {
         document.getElementsByTagName('audio')[0].loop = false;
-        this.eventBus.emit('draw unrepeat', {});
+        this.eventBus.emit('draw unrepeat');
     }
 
     /**
@@ -219,7 +219,7 @@ export class PlayerModel {
      */
     mute() {
         document.getElementsByTagName('audio')[0].muted = true;
-        this.eventBus.emit('draw mute', {});
+        this.eventBus.emit('draw mute');
     }
 
     /**
@@ -227,6 +227,6 @@ export class PlayerModel {
      */
     unmute() {
         document.getElementsByTagName('audio')[0].muted = false;
-        this.eventBus.emit('draw unmute', {});
+        this.eventBus.emit('draw unmute');
     }
 }

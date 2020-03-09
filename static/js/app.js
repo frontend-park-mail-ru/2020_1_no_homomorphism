@@ -1,5 +1,5 @@
-import {Router} from './modules/router.js';
-import {EventBus} from './eventBus.js';
+import {Router} from './libs/router.js';
+import {EventBus} from './libs/eventBus.js';
 import {NavbarController} from './controllers/navbar.js';
 import {IndexController} from './controllers/index.js';
 import {LoginController} from './controllers/login.js';
@@ -28,4 +28,5 @@ window.addEventListener('DOMContentLoaded', () => {
     router.addView('/settings', settingsController.view);
     router.start();
     playerController.view.render();
+    navbarController.view.render();
 });

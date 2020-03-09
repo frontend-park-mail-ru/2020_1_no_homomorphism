@@ -28,7 +28,7 @@ export class PlayerView {
         this.eventBus.on('draw mute', this.drawMute.bind(this));
         this.eventBus.on('draw unmute', this.drawUnmute.bind(this));
 
-        this.eventBus.emit('init', {});
+        this.eventBus.emit('init');
     }
 
     /**
@@ -210,16 +210,16 @@ export class PlayerView {
      */
     playPauseButtonClick() {
         if (this.playing) {
-            this.eventBus.emit('pause', {});
+            this.eventBus.emit('pause');
         } else {
-            this.eventBus.emit('play', {});
+            this.eventBus.emit('play');
         }
     }
     /**
      * Слушает клик по кнопке включения предыдущего трека
      */
     prevButtonClick() {
-        this.eventBus.emit('prev', {});
+        this.eventBus.emit('prev');
     }
     /**
      * Слушает клик по кнопке включения следующего трека
@@ -306,7 +306,7 @@ export class PlayerView {
         if (!this.shuffled) {
             this.eventBus.emit('shuffle', 'first');
         } else {
-            this.eventBus.emit('unshuffle', {});
+            this.eventBus.emit('unshuffle');
         }
     }
     /**
@@ -331,13 +331,13 @@ export class PlayerView {
     repeatButtonClick() {
         switch (this.repeatState) {
         case 0:
-            this.eventBus.emit('repeat', {});
+            this.eventBus.emit('repeat');
             break;
         case 1:
-            this.eventBus.emit('repeat one', {});
+            this.eventBus.emit('repeat one');
             break;
         case 2:
-            this.eventBus.emit('unrepeat', {});
+            this.eventBus.emit('unrepeat');
             break;
         }
     }
@@ -421,9 +421,9 @@ export class PlayerView {
      */
     volumeButtonClick() {
         if (this.muted) {
-            this.eventBus.emit('unmute', {});
+            this.eventBus.emit('unmute');
         } else {
-            this.eventBus.emit('mute', {});
+            this.eventBus.emit('mute');
         }
     }
     /**

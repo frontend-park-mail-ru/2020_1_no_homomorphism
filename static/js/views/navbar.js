@@ -16,13 +16,11 @@ export class NavbarView {
     * рендерит навбар
     * @param {bool} loggedIn
     */
-    render(loggedIn) {
-        document.getElementById('profile-link').style.visibility =
-            loggedIn ? 'visible' : 'hidden';
-        document.getElementById('logout-button').style.visibility =
-            loggedIn ? 'visible' : 'hidden';
-        document.getElementById('signup-link').style.visibility = loggedIn ? 'hidden' : 'visible';
-        document.getElementById('login-link').style.visibility = loggedIn ? 'hidden' : 'visible';
+    render() {
+        this.eventBus.on('cookie', (loggedIn) => {
+            loggedIn ? this.login() : this.logout();
+        });
+        this.eventBus.emit('cookie fetch');
     }
     /**
      * Sets event listeners
@@ -44,14 +42,14 @@ export class NavbarView {
             document.getElementById('logout-button').style.visibility = 'visible';
             document.getElementById('profile-link').style.visibility = 'visible';
         });
-        this.eventBus.emit('get user data', {});
+        this.eventBus.emit('get user data');
     }
 
     /**
      * рисует кнопочку логаута
      */
     logout() {
-        this.eventBus.emit('logout', {});
+        this.eventBus.emit('logout');
         document.getElementById('login-link').style.visibility = 'visible';
         document.getElementById('signup-link').style.visibility = 'visible';
         document.getElementById('logout-button').style.visibility = 'hidden';

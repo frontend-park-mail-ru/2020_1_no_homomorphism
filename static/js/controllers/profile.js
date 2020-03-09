@@ -1,4 +1,4 @@
-import {EventBus} from '../eventBus.js';
+import {EventBus} from '../libs/eventBus.js';
 import {ProfileModel} from '../models/profile.js';
 import {ProfileView} from '../views/profile.js';
 

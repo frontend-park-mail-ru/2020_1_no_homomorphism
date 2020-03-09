@@ -24,7 +24,7 @@ export class EventBus {
      * @param {string} event
      * @param {Object} arg
      */
-    emit(event, arg) {
-        (this.events[event] || []).slice().forEach((listener) => listener(arg));
+    emit(event, ...arg) {
+        (this.events[event] || []).slice().forEach((listener) => listener(...arg));
     }
 }

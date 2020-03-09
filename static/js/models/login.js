@@ -1,5 +1,5 @@
-import {Api} from '../modules/api.js';
-import {Validation} from '../modules/validation.js';
+import {Api} from '../libs/api.js';
+import {Validation} from '../libs/validation.js';
 
 /**
  * Модель для страницы входа
@@ -40,7 +40,7 @@ export class LoginModel {
                         return;
                     }
                     if (res.ok) {
-                        this.globalEventBus.emit('login', {});
+                        this.globalEventBus.emit('login');
                         this.eventBus.emit('redirect', '/');
                     } else {
                         this.eventBus.emit('invalid', {global: 'Login error'});

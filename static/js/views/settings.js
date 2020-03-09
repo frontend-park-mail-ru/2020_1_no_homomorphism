@@ -36,7 +36,7 @@ export class SettingsView {
             root.innerHTML = nunjucks.render('../../../views/settings.njk', data);
             this.setEventListeners();
         });
-        this.eventBus.emit('get user data', {});
+        this.eventBus.emit('get user data');
     }
 
     /**
