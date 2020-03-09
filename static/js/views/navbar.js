@@ -22,9 +22,10 @@ export class NavbarView {
                 loggedIn ? 'visible' : 'hidden';
             document.getElementById('logout-button').style.visibility =
                 loggedIn ? 'visible' : 'hidden';
-            document.getElementById('signup-link').style.visibility = loggedIn ? 'hidden' : 'visible';
-            document.getElementById('login-link').style.visibility = loggedIn ? 'hidden' : 'visible';
-
+            document.getElementById('signup-link').style.visibility =
+                loggedIn ? 'hidden' : 'visible';
+            document.getElementById('login-link').style.visibility =
+                loggedIn ? 'hidden' : 'visible';
         });
         this.eventBus.emit('cookie fetch', {});
     }
