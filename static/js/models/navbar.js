@@ -14,6 +14,8 @@ export class NavbarModel {
         this.globalEventBus = globalEventBus;
         this.eventBus.on('get user data', this.getUserData.bind(this));
         this.eventBus.on('logout', this.logout.bind(this));
+
+        Api.cookieFetch();
     }
 
     /**
