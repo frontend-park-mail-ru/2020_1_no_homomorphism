@@ -45,8 +45,7 @@ export class SettingsModel {
                 .pop()
                 .toLowerCase());
         if (resImage !== '') {
-            // TODO добавить обработку ошибочки
-            this.eventBus.emit('invalid', resImage);
+            this.eventBus.emit('invalid', {'avatar-upload': resImage});
         } else {
             const fData = new FormData();
             fData.append('profile_image', fileAttach.files[0], 'kek.png');
