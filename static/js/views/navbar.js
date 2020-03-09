@@ -18,14 +18,9 @@ export class NavbarView {
     */
     render() {
         this.eventBus.on('cookie', (loggedIn) => {
-            document.getElementById('profile-link').style.visibility =
-                loggedIn ? 'visible' : 'hidden';
-            document.getElementById('logout-button').style.visibility =
-                loggedIn ? 'visible' : 'hidden';
-            document.getElementById('signup-link').style.visibility =
-                loggedIn ? 'hidden' : 'visible';
-            document.getElementById('login-link').style.visibility =
-                loggedIn ? 'hidden' : 'visible';
+            if (loggedIn) {
+                this.login();
+            }
         });
         this.eventBus.emit('cookie fetch', {});
     }
