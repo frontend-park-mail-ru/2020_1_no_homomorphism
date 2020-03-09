@@ -4,7 +4,7 @@
     position: fixed;
     top: 55px;
     left: 150%;
-    z-index: 0;
+    z-index: 1;
     padding-left: 0;
     padding-top: 0;
     transition-property: left;
@@ -23,10 +23,14 @@
 .patch {
     height: 1em;
     background: white;
+    position: relative;
+    z-index: 1;
 }
 
 .music-bar {
     background: white;
+    position: relative;
+    z-index: 1;
 }
 
 .music-bar .col {
@@ -49,9 +53,10 @@
 .container-audio {
     height: auto;
     color: #444;
-    margin-bottom: 5px;
     overflow: hidden;
     background: white;
+    position: relative;
+    z-index: 1;
 }
 
 .timeline .timeline-back {
@@ -116,7 +121,7 @@
     position: relative;
     top: 5px;
     left: 203px;
-    z-index: 1;
+    z-index: 2;
 }
 
 .volume-scale {
@@ -183,7 +188,7 @@
 
 .track-list {
     position: relative;
-    z-index: -1;
+    z-index: 0;
 }
 
 .track-list .track-group-names {
@@ -225,33 +230,6 @@
     text-decoration: none;
     color: black;
     font-size: 15px;
-}
-
-.track-list .buttons-in-playlist {
-    margin-left: 172px;
-    padding-top: 14px;
-}
-
-.track-list .add-button {
-    padding-top: 11px;
-}
-
-.track-list .share-button {
-    padding-top: 13.5px;
-}
-
-.track-list .delete-button {
-    margin-left: 10px;
-    padding-top: 13.5px;
-}
-
-.share-button {
-    padding-bottom: 46px;
-}
-
-.add-to-playlist-button {
-    padding-left: 150px;
-    padding-bottom: 46px;
 }
 
 .main-pos .player-trigger {
