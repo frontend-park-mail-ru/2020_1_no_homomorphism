@@ -1,4 +1,4 @@
-import {EventBus} from '../eventBus.js';
+import {EventBus} from '../libs/eventBus.js';
 import {PlayerModel} from '../models/player.js';
 import {PlayerView} from '../views/player.js';
 

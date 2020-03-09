@@ -1,4 +1,4 @@
-import {EventBus} from '../eventBus.js';
+import {EventBus} from '../libs/eventBus.js';
 import {SettingsModel} from '../models/settings.js';
 import {SettingsView} from '../views/settings.js';
 
