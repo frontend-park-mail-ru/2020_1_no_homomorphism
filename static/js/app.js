@@ -1,4 +1,4 @@
-import {Router} from './modules/router.js';
+import {Router} from './libs/router.js';
 import {EventBus} from './eventBus.js';
 import {NavbarController} from './controllers/navbar.js';
 import {IndexController} from './controllers/index.js';

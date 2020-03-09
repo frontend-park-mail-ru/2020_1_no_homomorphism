@@ -18,6 +18,6 @@ export class ProfileView {
             // eslint-disable-next-line no-undef
             root.innerHTML = nunjucks.render('../../../views/profile.njk', data);
         });
-        this.eventBus.emit('get user data', {});
+        this.eventBus.emit('get user data');
     }
 }

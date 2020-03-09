@@ -18,13 +18,9 @@ export class NavbarView {
     */
     render() {
         this.eventBus.on('cookie', (loggedIn) => {
-            if (loggedIn) {
-                this.login();
-            } else {
-                this.logout();
-            }
+            loggedIn ? this.login() : this.logout();
         });
-        this.eventBus.emit('cookie fetch', {});
+        this.eventBus.emit('cookie fetch');
     }
     /**
      * Sets event listeners
@@ -46,14 +42,14 @@ export class NavbarView {
             document.getElementById('logout-button').style.visibility = 'visible';
             document.getElementById('profile-link').style.visibility = 'visible';
         });
-        this.eventBus.emit('get user data', {});
+        this.eventBus.emit('get user data');
     }
 
     /**
      * рисует кнопочку логаута
      */
     logout() {
-        this.eventBus.emit('logout', {});
+        this.eventBus.emit('logout');
         document.getElementById('login-link').style.visibility = 'visible';
         document.getElementById('signup-link').style.visibility = 'visible';
         document.getElementById('logout-button').style.visibility = 'hidden';
