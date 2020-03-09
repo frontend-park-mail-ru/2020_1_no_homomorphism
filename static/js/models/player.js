@@ -31,23 +31,6 @@ export class PlayerModel {
         this.eventBus.on('unrepeat', this.unrepeat.bind(this));
         this.eventBus.on('mute', this.mute.bind(this));
         this.eventBus.on('unmute', this.unmute.bind(this));
-
-        this.eventBus.on('logout', this.logout);
-    }
-
-    /**
-     * рисует кнопочку логаута
-     */
-    logout() {
-        Api.logoutFetch()
-            .then((response) => {
-                if (!response.ok) {
-                    console.log('BACKEND PROBLEM');
-                }
-            });
-        document.getElementById('login-link').style.visibility = 'visible';
-        document.getElementById('signup-link').style.visibility = 'visible';
-        document.getElementById('logout-button').style.visibility = 'hidden';
     }
 
     /**

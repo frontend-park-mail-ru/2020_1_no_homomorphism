@@ -8,21 +8,12 @@ export class SignupModel {
     /**
      * конструктор
      * @param {EventBus} eventBus
+     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus) {
+    constructor(eventBus, globalEventBus) {
         this.eventBus = eventBus;
+        this.globalEventBus = globalEventBus;
         this.eventBus.on('submit', this.submit.bind(this));
-        this.eventBus.on('cookie fetch request', this.cookieFetch.bind(this));
-    }
-
-    /**
-     * Проверка, залогинен ли пользователь
-     */
-    cookieFetch() {
-        Api.cookieFetch()
-            .then((res) => {
-                this.eventBus.emit('cookie fetch response', res.ok);
-            });
     }
 
     /**
@@ -52,7 +43,7 @@ export class SignupModel {
             Api.signupFetch(values.name, values.login, 'yes', values.email, values.password)
                 .then((res) => {
                     if (res.ok) {
-                        this.eventBus.emit('hide login, show logout', {});
+                        this.globalEventBus.emit('login', {});
                         this.eventBus.emit('redirect', '/');
                     } else {
                         this.eventBus.emit('invalid', {global: 'Signup error'}); // TODO Обрабатывать ответ бэка

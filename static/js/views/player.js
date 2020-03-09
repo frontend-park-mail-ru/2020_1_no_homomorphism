@@ -15,7 +15,6 @@ export class PlayerView {
         this.repeatState = 0;
         this.muted = false;
         this.volume = 1;
-
         this.eventBus.on('draw play', this.drawPlay.bind(this));
         this.eventBus.on('draw pause', this.drawPause.bind(this));
         this.eventBus.on('track update', this.updateTrack.bind(this));
@@ -30,10 +29,6 @@ export class PlayerView {
         this.eventBus.on('draw unmute', this.drawUnmute.bind(this));
 
         this.eventBus.emit('init', {});
-
-        document.getElementById('logout-button').addEventListener('click', () => {
-            this.eventBus.emit('logout', {});
-        });
     }
 
     /**

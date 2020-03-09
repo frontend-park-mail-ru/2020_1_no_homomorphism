@@ -25,6 +25,10 @@
     margin-left: auto;
 }
 
+.navbar .signup img {
+    border-radius: 20px;
+}
+
 .navbar .search {
     margin-left: 2%;
     margin-right: 0.5%;

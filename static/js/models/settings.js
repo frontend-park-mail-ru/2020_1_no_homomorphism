@@ -15,21 +15,10 @@ export class SettingsModel {
         this.eventBus.on('submit', this.submit.bind(this));
         this.eventBus.on('get user data', this.getUserData.bind(this));
         // this.eventBus.on('add outer', this.model.addOuter);
-        this.eventBus.on('cookie fetch request', this.cookieFetch.bind(this));
     }
 
     /**
-     * Проверка, залогинен ли пользователь
-     */
-    cookieFetch() {
-        Api.cookieFetch()
-            .then((res) => {
-                this.eventBus.emit('cookie fetch response', res.ok);
-            });
-    }
-
-    /**
-     * получает данный юзера
+     * получает данные юзера
      */
     getUserData() {
         Api.profileFetch()
@@ -40,7 +29,7 @@ export class SettingsModel {
                             this.eventBus.emit('user data', data);
                         });
                 } else {
-                    this.eventBus.emit('no answer', 'Ошибка загрузки профиля');
+                    this.eventBus.emit('no answer', '/');
                 }
             });
     }

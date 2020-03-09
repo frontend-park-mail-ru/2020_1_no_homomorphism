@@ -21,6 +21,16 @@ export class Router {
     }
 
     /**
+     * Редирект после логаута
+     * @param {string} to
+     */
+    logoutRedirect(to) {
+        console.log('logout redirect');
+        if (['/profile', '/settings'].includes(window.location.pathname)) {
+            this.check(to, true);
+        }
+    }
+    /**
      * Редирект
      * @param {string} to
      */
@@ -75,5 +85,6 @@ export class Router {
         });
         this.check(window.location.pathname, true);
         this.views['player'].setEventListeners();
+        this.views['navbar'].setEventListeners();
     }
 }
