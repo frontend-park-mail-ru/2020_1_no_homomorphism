@@ -13,16 +13,17 @@ export class NavbarView {
     }
 
     /**
-    * рендерит навбар
-    * @param {bool} loggedIn
-    */
-    render(loggedIn) {
-        document.getElementById('profile-link').style.visibility =
-            loggedIn ? 'visible' : 'hidden';
-        document.getElementById('logout-button').style.visibility =
-            loggedIn ? 'visible' : 'hidden';
-        document.getElementById('signup-link').style.visibility = loggedIn ? 'hidden' : 'visible';
-        document.getElementById('login-link').style.visibility = loggedIn ? 'hidden' : 'visible';
+     * рендерит навбар
+     */
+    render() {
+        this.eventBus.on('cookie', (loggedIn) => {
+            if (loggedIn) {
+                this.login();
+            } else {
+                this.logout();
+            }
+        });
+        this.eventBus.emit('cookie fetch', {});
     }
     /**
      * Sets event listeners

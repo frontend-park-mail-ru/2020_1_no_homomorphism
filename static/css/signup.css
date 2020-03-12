@@ -51,12 +51,13 @@ h2 {
 
 .sign-up-form .input-regular[type=submit]:hover {
     background-color: #387f9c;
+
 }
 
 .button {
     border-radius: 6px;
     margin-left: 213px;
-    background-color: #2196F3;
+    background-color: #673ab7;
     border: none;
     color: #FFFFFF;
     text-align: center;

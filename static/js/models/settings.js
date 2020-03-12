@@ -1,5 +1,5 @@
-import {Validation} from '../modules/validation.js';
-import {Api} from '../modules/api.js';
+import {Validation} from '../libs/validation.js';
+import {Api} from '../libs/api.js';
 
 /**
  * Модель настроек
@@ -45,8 +45,7 @@ export class SettingsModel {
                 .pop()
                 .toLowerCase());
         if (resImage !== '') {
-            // TODO добавить обработку ошибочки
-            this.eventBus.emit('invalid', resImage);
+            this.eventBus.emit('invalid', {'avatar-upload': resImage});
         } else {
             const fData = new FormData();
             fData.append('profile_image', fileAttach.files[0], 'kek.png');

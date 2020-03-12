@@ -1,4 +1,5 @@
-const serverPath = 'http://89.208.199.170:8081';
+// const serverPath = 'http://89.208.199.170:8081';
+const serverPath = 'http://localhost:8081';
 
 /* *
  * POST

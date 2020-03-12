@@ -1,4 +1,4 @@
-import {Api} from '../modules/api.js';
+import {Api} from '../libs/api.js';
 
 /**
  * Модель для навбара
@@ -14,6 +14,15 @@ export class NavbarModel {
         this.globalEventBus = globalEventBus;
         this.eventBus.on('get user data', this.getUserData.bind(this));
         this.eventBus.on('logout', this.logout.bind(this));
+        this.eventBus.on('cookie fetch', this.cookieFetch.bind(this));
+    }
+
+    /**
+     * Узнаёт, залогинен ли пользователь
+     */
+    cookieFetch() {
+        Api.cookieFetch()
+            .then((res) => this.eventBus.emit('cookie', res.ok));
     }
 
     /**

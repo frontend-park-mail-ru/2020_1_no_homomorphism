@@ -1,6 +1,6 @@
-import {Api} from '../modules/api.js';
+import {Api} from '../libs/api.js';
 
-// import {Router} from '../modules/router.js';
+// import {Router} from '../libs/router.js';
 
 /**
  * Модель Профиля

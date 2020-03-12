@@ -1,34 +1,34 @@
 {% block content %}
 <div class="row">
     <div class="l-profile col col-9">
-        <div class="l-profile-top">
-
-            <div class="l-profile-top-image"></div>
-
-            <div class="l-profile-top-info row">
-                <div class="l-profile-avatar col col-3">
-                    <img alt="avatar" src="{{image}}" class="m-profile-avatar" id="avatar">
-                </div>
-                <div class="l-profile-login " id="login">
-                    @{{ login }}
+        <div class="l-profile-top-image">
+            <div class="l-profile-top">
+                <img alt="avatar" src="{{image}}" class="m-profile-avatar" id="avatar">
+                <div class="m-profile-login" id="login">
+                    <a href="/settings" class="m-profile-settings">
+                        <span class="no-ref"> {{ login }} </span>
+                        <img src="/static/img/settings-24px.svg" class="m-profile-settings" id="profile-settings-icon"
+                             alt="logo"
+                             height="35px" width="35px">
+                    </a>
                 </div>
             </div>
-
         </div>
+
         <div class="l-profile-base">
             <div class="l-music-titles row">
                 <div class="col col-3"></div>
                 <div class="m-my-music col col-2" id="title-my-music">
                     <h2>543</h2>
-                    <p>Tracks</p>
+                    <p>My music</p>
                 </div>
                 <div class="m-info col col-2" id="title-info">
                     <h2>43</h2>
-                    <p>Albums</p>
+                    <p>Info</p>
                 </div>
                 <div class="m-settings col col-2" id="title-settings">
                     <h2>53</h2>
-                    <p>Playlists</p>
+                    <p>Settings</p>
                 </div>
             </div>
 
@@ -122,147 +122,124 @@
                     </div>
                     <div class="col col-8"></div>
                 </div>
-                <div class="row track">
-                    <div class="col col-1">
-                        5
+                <div class="selection-card">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-4"></div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+    <div class="l-profile col col-9">
+
+        <div class="l-profile-top">
+            <img alt="avatar" src="{{image}}" class="m-profile-avatar" id="avatar">
+            <div class="m-profile-login" id="login">
+                <a href="/settings" class="m-profile-settings">
+                    <span class="no-ref"> {{ login }} </span>
+                    <img src="/static/img/settings-24px.svg" class="m-profile-settings" id="profile-settings-icon"
+                         alt="logo"
+                         height="35px" width="35px">
+                </a>
+            </div>
+        </div>
+
+        <div class="l-profile-base">
+            <div class="l-music-titles row">
+                <div class="col col-3"></div>
+                <div class="m-my-music col col-2" id="title-my-music">
+                    <h2>543</h2>
+                    <p>My music</p>
+                </div>
+                <div class="m-info col col-2" id="title-info">
+                    <h2>43</h2>
+                    <p>Info</p>
+                </div>
+                <div class="m-settings col col-2" id="title-settings">
+                    <h2>53</h2>
+                    <p>Settings</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="l-profile-albums">
+                <div class="row deeping">
+                    <div class="col col-2">
+                        <div class="deeping-list-item-selected">
+                            <img src="../static/img/avatar/default.png" alt="" height="150" width="150">
+                            <div class="deeping-list-item-name-selected">
+                                New empire vol. 1
+                            </div>
+                        </div>
                     </div>
                     <div class="col col-2">
-                        Killin It
+                        <div class="deeping-list-item">
+                            <img src="../static/img/avatar/default.png" alt="" height="120" width="120">
+                            <div class="deeping-list-item-name">
+                                New empire vol. 1
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-2">
+                        <div class="deeping-list-item">
+                            <img src="../static/img/avatar/default.png" alt="" height="120" width="120">
+                            <div class="deeping-list-item-name">
+                                New empire vol. 1
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row track">
+                    <div class="col col-1">
+                        1
+                    </div>
+                    <div class="col col-2">
+                        Time Bomb
                     </div>
                     <div class="col col-1">
-                        2:55
+                        3:37
                     </div>
                     <div class="col col-8"></div>
                 </div>
                 <div class="row track">
                     <div class="col col-1">
-                        5
+                        2
                     </div>
                     <div class="col col-2">
-                        Killin It
+                        Heart Of A Champion
                     </div>
                     <div class="col col-1">
-                        2:55
+                        3:30
                     </div>
                     <div class="col col-8"></div>
                 </div>
                 <div class="row track">
                     <div class="col col-1">
-                        5
+                        3
                     </div>
                     <div class="col col-2">
-                        Killin It
+                        Already Dead
                     </div>
                     <div class="col col-1">
-                        2:55
+                        3:56
                     </div>
                     <div class="col col-8"></div>
                 </div>
                 <div class="row track">
                     <div class="col col-1">
-                        5
+                        4
                     </div>
                     <div class="col col-2">
-                        Killin It
+                        Empire
                     </div>
                     <div class="col col-1">
-                        2:55
-                    </div>
-                    <div class="col col-8"></div>
-                </div>
-                <div class="row track">
-                    <div class="col col-1">
-                        5
-                    </div>
-                    <div class="col col-2">
-                        Killin It
-                    </div>
-                    <div class="col col-1">
-                        2:55
-                    </div>
-                    <div class="col col-8"></div>
-                </div>
-                <div class="row track">
-                    <div class="col col-1">
-                        5
-                    </div>
-                    <div class="col col-2">
-                        Killin It
-                    </div>
-                    <div class="col col-1">
-                        2:55
-                    </div>
-                    <div class="col col-8"></div>
-                </div>
-                <div class="row track">
-                    <div class="col col-1">
-                        5
-                    </div>
-                    <div class="col col-2">
-                        Killin It
-                    </div>
-                    <div class="col col-1">
-                        2:55
-                    </div>
-                    <div class="col col-8"></div>
-                </div>
-                <div class="row track">
-                    <div class="col col-1">
-                        5
-                    </div>
-                    <div class="col col-2">
-                        Killin It
-                    </div>
-                    <div class="col col-1">
-                        2:55
-                    </div>
-                    <div class="col col-8"></div>
-                </div>
-                <div class="row track">
-                    <div class="col col-1">
-                        5
-                    </div>
-                    <div class="col col-2">
-                        Killin It
-                    </div>
-                    <div class="col col-1">
-                        2:55
-                    </div>
-                    <div class="col col-8"></div>
-                </div>
-                <div class="row track">
-                    <div class="col col-1">
-                        5
-                    </div>
-                    <div class="col col-2">
-                        Killin It
-                    </div>
-                    <div class="col col-1">
-                        2:55
-                    </div>
-                    <div class="col col-8"></div>
-                </div>
-                <div class="row track">
-                    <div class="col col-1">
-                        5
-                    </div>
-                    <div class="col col-2">
-                        Killin It
-                    </div>
-                    <div class="col col-1">
-                        2:55
-                    </div>
-                    <div class="col col-8"></div>
-                </div>
-                <div class="row track">
-                    <div class="col col-1">
-                        5
-                    </div>
-                    <div class="col col-2">
-                        Killin It
-                    </div>
-                    <div class="col col-1">
-                        2:55
+                        3:59
                     </div>
                     <div class="col col-8"></div>
                 </div>

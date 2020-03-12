@@ -1,5 +1,5 @@
-import {Validation} from '../modules/validation.js';
-import {Api} from '../modules/api.js';
+import {Validation} from '../libs/validation.js';
+import {Api} from '../libs/api.js';
 
 /**
  * модель странички регистрации

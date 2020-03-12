@@ -1,4 +1,4 @@
-import {EventBus} from '../eventBus.js';
+import {EventBus} from '../libs/eventBus.js';
 import {LoginModel} from '../models/login.js';
 import {LoginView} from '../views/login.js';
 

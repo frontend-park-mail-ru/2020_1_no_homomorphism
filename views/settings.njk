@@ -1,63 +1,79 @@
 {% block content %}
-<div class="row profile">
-    <div class="col col-1"></div>
-    <div class="col col-3">
-        <img alt="avatar" src="{{ image }}" class="avatar" id="avatar-settings">
-        <div class="row">
-            <input type="file" id="avatar-upload">
-            <div class="error-message-small"></div>
+<div class="l-profile-settings col col-9">
+    <div class="l-profile-top">
+
+        <div class="l-profile-top-image-settings"></div>
+        <div class="l-profile-top-info row">
+            <div class="l-profile-avatar-settings col col-3">
+                <label class="label">
+                    <i class="material-icons"></i>
+                    <img alt="avatar" src="{{image}}" class="m-profile-avatar" id="avatar" title="Add new image">
+                    <input type="file" id="avatar-upload">
+                    <span class="error-message-small"></span>
+                </label>
+            </div>
+
+            <div class="l-profile-login " id="login">
+                @{{ login }}
+            </div>
         </div>
     </div>
-    <div class="info col col-4">
-        <div class="login row">
-            {{ login }}
+    <div class="col col-4"></div>
+    <div class="l-profile-settings-data col col-6">
+
+        <div class="col col-9 m-tag-settings">
+            <span class="profile-info"> Name</span>
+            <label for="name">
+                <input type="text" class="profile-content m-settings-input" id="name" value="{{ name }}"
+                       autocomplete="off">
+            </label>
+            <span class="error-message-small"></span>
         </div>
-        <div calss="name row">
-            <div class="col col-3">
-                <div class="profile-info">
-                    Name:
-                </div>
-            </div>
-            <div class="col col-9">
-                <input type=text class="profile-content" id="name" value="{{ name }}">
+
+        <div class="col col-9 m-tag-settings">
+            <span class="profile-info"> Email</span>
+            <label for="email">
+                <input type="text" class="profile-content m-settings-input" id="email" value="{{ email }} "
+                       autocomplete="off">
+            </label>
+            <div class="error-message-small"></div>
+        </div>
+        <div class="col col-3">
+            <button type="submit" id="submit-setting-changes-data">
+                Save
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div class="l-profile-settings-pass col col-6">
+        <div class="col col-9">
+            <div class="m-tag-settings">
+                <span class="profile-info"> New password</span>
+                <label for="newPassword">
+                    <input type="text" class="profile-content m-settings-input" id="newPassword" value=""
+                           autocomplete="off">
+                </label>
                 <div class="error-message-small"></div>
             </div>
         </div>
-        <div calss="email row">
-            <div class="col col-3">
-                <div class="profile-info">
-                    e-mail:
-                </div>
-            </div>
-            <div class="col col-9">
-                <input type="email" class="profile-content" id="email" value="{{ email }}">
+        <div class="col col-9">
+            <div class="m-tag-settings">
+                <span class="profile-info"> Repeat password</span>
+                <label for="newPasswordConfirm">
+                    <input type="text" class="profile-content m-settings-input" id="newPasswordConfirm"
+                           autocomplete="off">
+                </label>
                 <div class="error-message-small"></div>
             </div>
         </div>
-        <div calss="row">
-            <div class="col col-3">
-                <div class="profile-info">
-                    Password:
-                </div>
-            </div>
-            <div class="col col-9">
-                <input type=password class="profile-content" id="newPassword" placeholder="New Password">
-                <div class="error-message-small"></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col-3"></div>
-            <div class="col col-9">
-                <input type=password class="profile-content" id="newPasswordConfirm" placeholder="New Password Confirmation">
-                <div class="error-message-small"></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col-3"></div>
-            <div class="col col-9">
-                <input type=password class="profile-content" id="password" placeholder="Current password">
-                <div class="warning-message-small"></div>
-            </div>
+        <div class="col col-3"></div>
+        <div class="col col-9 m-tag-settings">
+            <span class="profile-info"> Old password</span>
+            <label for="password">
+                <input type="text" class="profile-content m-settings-input" id="password" placeholder=""
+                       autocomplete="off">
+            </label>
+            <div class="error-message-small"></div>
         </div>
         <!--div class="row">
             <div class="col col-9 accounts-edit">
@@ -97,12 +113,14 @@
                 </div>
             </div>
         </div-->
-        <div class="row">
-            <button type="submit" id="submit-changes">
-                Save
+        <div class="col col-3">
+
+            <button type="submit" id="submit-setting-changes-pass">
+                Change
             </button>
         </div>
     </div>
-    <div class="col col-4"></div>
 </div>
+
+<div class="col col-4"></div>
 {% endblock %}

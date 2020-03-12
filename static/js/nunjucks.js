@@ -38,7 +38,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	}
 /******/
 /******/
-/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	// expose the libs object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
 /******/
 /******/ 	// expose the module cache
@@ -55,7 +55,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 		}
 /******/ 	};
 /******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	// getDefaultExport function for compatibility with non-harmony libs
 /******/ 	__webpack_require__.n = function(module) {
 /******/ 		var getter = module && module.__esModule ?
 /******/ 			function getDefault() { return module['default']; } :
@@ -7977,7 +7977,7 @@ function installCompat() {
   // references the nunjucks instance
 
   var runtime = this.runtime;
-  var lib = this.lib; // Handle slim case where these 'modules' are excluded from the built source
+  var lib = this.lib; // Handle slim case where these 'libs' are excluded from the built source
 
   var Compiler = this.compiler.Compiler;
   var Parser = this.parser.Parser;

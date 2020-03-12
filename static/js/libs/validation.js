@@ -28,7 +28,7 @@ export class Validation {
             return 'Enter login';
         }
         if (!login.match(regExpr)) {
-            return 'Login must contain at least 3 letters';
+            return 'Login must contain at least 3 letters or numbers';
         }
         return '';
     }
@@ -66,10 +66,10 @@ export class Validation {
             console.log('Too big');
             return 'Max allowable size - 1Mb';
         }
-        const allowableExtension = ['png', 'jpg', 'gif'];
+        const allowableExtension = ['png', 'jpg', 'jpeg', 'gif'];
         if (allowableExtension.indexOf(extension) === -1) {
             console.log('Wrong extension');
-            return 'Allowable extensions - png, jpg, gif';
+            return 'Allowable extensions - png, jpg, jpeg, gif';
         }
         return '';
     }

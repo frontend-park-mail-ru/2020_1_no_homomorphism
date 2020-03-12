@@ -1,4 +1,4 @@
-import {EventBus} from '../eventBus.js';
+import {EventBus} from '../libs/eventBus.js';
 import {NavbarModel} from '../models/navbar.js';
 import {NavbarView} from '../views/navbar.js';
 

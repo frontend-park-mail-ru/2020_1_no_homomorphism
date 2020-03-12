@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col col-4"></div>
     <div class="col col-4">
-        <form class="sign-up-form card" onsubmit="return false;">
+        <form class="sign-up-form card" onsubmit="return false;" autocomplete="none">
             <h2>SIGN UP</h2>
             <label>
                 Name
@@ -16,17 +16,17 @@
             </label>
             <label>
                 Email
-                <input class="input-regular" type="email" id="email" value="" placeholder="johnSmith@mail.ru" required>
+                <input class="input-regular" type="text" id="email" value="" placeholder="johnSmith@mail.ru" required>
                 <div class="error-message-small"></div>
             </label>
             <label>
                 Password
-                <input class="input-regular" type="password" id="password" value="" required>
+                <input class="input-regular" type="text" id="password" value="" required>
                 <div class="error-message-small"></div>
             </label>
             <label>
                 Password Confirmation
-                <input class="input-regular" type="password" id="password-confirm" value="" required>
+                <input class="input-regular" type="text" id="password-confirm" value="" required>
                 <div class="error-message-small"></div>
             </label>
             <button class="button" type="submit" id="submit">
