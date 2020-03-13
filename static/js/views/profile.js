@@ -157,6 +157,5 @@ export class ProfileView {
             this.musicClick();
         }
     }
-
 }
 
