@@ -14,14 +14,18 @@ p {
     margin: 6px;
 }
 
+.vl {
+    border-left: 1px solid #070025;
+    height: 200px;
+    width: 1px;
+}
+
 .l-profile .info {
     font-size: 25px;
     margin: 10px 10px 20px;
 }
 
 .l-profile-top {
-    background-color: #ede7f6;
-    border-radius: 30px 30px 0 0;
 }
 
 .l-profile-top-image {
@@ -29,14 +33,13 @@ p {
     background-color: #b39ddb;
     /*background-size: cover;*/
     background-clip: padding-box;
-    border-radius: 30px 30px 0 0;
-    height: 300px;
+    border-radius: 6px 6px 0 0;
+    height: 220px;
     z-index: 2;
-    box-shadow: 0 0 10px #070025;
 }
 
 .l-profile-top-info {
-    margin-top: -120px;
+    margin-top: -240px;
     border-left: #b39ddb;
     border-right: #b39ddb;
 }
@@ -46,10 +49,10 @@ p {
 
 .m-profile-avatar {
     z-index: 3;
-    height: 180px;
-    width: 180px;
+    height: 150px;
+    width: 150px;
     border-radius: 100px;
-    margin-left: 100px;
+    float: right;
 }
 
 .m-profile-avatar:hover {
@@ -65,21 +68,66 @@ p {
 }
 
 img#avatar {
-    margin-top: 16px;
-    margin-bottom: 8px;
+    margin-top: 50px;
 }
 
-.l-profile-login {
-    color: #070025;
-    font-size: 40px;
+.l-profile-login-name {
     padding-bottom: 16px;
-    text-align: left;
     padding-top: 128px;
+    text-align: left;
 }
 
 .m-profile-login {
-    margin-left: 300px;
+    color: #070025;
+    font-size: 30px;
 }
+
+.m-profile-name {
+    color: #5c4b6b;
+    font-size: 15px;
+}
+
+#profile-login #profile-name {
+    text-align: left;
+}
+
+.m-empty-box-100 {
+    height: 100px;
+    width: 1px;
+}
+
+.m-empty-box-30 {
+    height: 30px;
+    width: 1px;
+}
+
+.l-profile-music-titles {
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-left-color: #673ab7;
+}
+
+#profile-music-titles {
+    margin-top: 50px;
+}
+
+.l-profile-base {
+    z-index: 1;
+    background-color: #ede7f6;
+    border-radius: 0 0 30px 30px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 .m-profile-settings {
     pointer-events: none; /* делаем ссылку некликабельной */
@@ -95,13 +143,7 @@ img#avatar {
     cursor: pointer;
 }
 
-.l-profile-base {
-    z-index: 1;
-    background-color: #ede7f6;
-    box-shadow: 0 0 10px #b39ddb;
-    border-radius: 0 0 30px 30px;
-    padding-top: 16px;
-}
+
 
 .m-my-music .m-info .m-settings {
     margin-bottom: 10px;
