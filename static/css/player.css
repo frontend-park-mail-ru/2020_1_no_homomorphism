@@ -271,3 +271,7 @@
     position: relative;
     top: 50%;
 }
+
+.small_line {
+    border-top: 1px solid #ebeae7;
+}

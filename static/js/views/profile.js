@@ -70,7 +70,7 @@ export class ProfileView {
      * Нажатие
      */
     musicClick() {
-        if ( this.openedTracks) {
+        if (this.openedTracks) {
             this.undrawTracks();
             this.openedTracks = false;
             console.log('CLOSED');
@@ -142,16 +142,18 @@ export class ProfileView {
     undrawTracks() {
         document.getElementsByClassName('profile-track-list')[0].innerHTML = '';
     }
+
     /**
      * Отрисовка списка треков
      * @param {Object} tracks
      */
     drawTracks(tracks) {
         console.log('draw');
+        console.log(tracks);
+        const elem = document.getElementById('profile-body-list');
         for (let i = 0; i < tracks.length; i++) {
-            document.getElementsByClassName('profile-track-list')[0].innerHTML +=
-                // eslint-disable-next-line no-undef
-                nunjucks.render('../../../views/templates/track.njk', tracks[i]);
+            // eslint-disable-next-line no-undef,max-len
+            elem.innerHTML += nunjucks.render('../../../views/templates/audio_track.njk', tracks[i]);
         }
     }
 }

@@ -7,7 +7,7 @@ hr {
 }
 
 h2 {
-   margin: 0;
+    margin: 0;
 }
 
 p {
@@ -26,11 +26,14 @@ p {
 }
 
 .l-profile-top {
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 32px;
+    padding: 32px;
 }
 
 .l-profile-top-image {
     /*background: url(/static/img/background/back-def.png);*/
-    background-color: #b39ddb;
+    /*background-color: #b39ddb;*/
     /*background-size: cover;*/
     background-clip: padding-box;
     border-radius: 6px 6px 0 0;
@@ -44,7 +47,7 @@ p {
     border-right: #b39ddb;
 }
 
-.l-profile-avatar{
+.l-profile-avatar {
 }
 
 .m-profile-avatar {
@@ -57,14 +60,14 @@ p {
 
 .m-profile-avatar:hover {
     transition: 0.6s;
-    box-shadow: 0 0 30px #673ab7;
+    box-shadow: 0 0 30px #6b6b6b;
     -webkit-transform: scale(2);
     transform: scale(1.2);
 }
 
 .m-profile-avatar:not(:hover) {
     transition: 1s;
-    box-shadow: 0 0 10px 4px #673ab7
+    box-shadow: 0 0 10px 4px rgba(129, 129, 129, 0.65);
 }
 
 img#avatar {
@@ -102,9 +105,9 @@ img#avatar {
 }
 
 .l-profile-music-titles {
-    border-left-style: solid;
-    border-left-width: 1px;
-    border-left-color: #673ab7;
+    /*border-left-style: solid;*/
+    /*border-left-width: 1px;*/
+    /*border-left-color: #673ab7;*/
 }
 
 #profile-music-titles {
@@ -113,25 +116,18 @@ img#avatar {
 
 .l-profile-base {
     z-index: 1;
-    background-color: #ede7f6;
-    border-radius: 0 0 30px 30px;
-
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 32px;
+    padding: 32px;
+    margin-top: 16px;
+    /*background-color: #ede7f6;*/
+    /*border-radius: 0 0 30px 30px;*/
 }
-
-
-
-
-
-
-
-
-
-
 
 
 .m-profile-settings {
     pointer-events: none; /* делаем ссылку некликабельной */
-    cursor: default;  /* устанавливаем курсор в виде стрелки */
+    cursor: default; /* устанавливаем курсор в виде стрелки */
     color: #000 !important;
     text-decoration: none
 }
@@ -142,7 +138,6 @@ img#avatar {
     pointer-events: all;
     cursor: pointer;
 }
-
 
 
 .m-my-music .m-info .m-settings {
@@ -192,4 +187,32 @@ img#avatar {
 
 .l-profile-albums {
 
+}
+
+.list-of-tracks {
+    list-style-type: none;
+    width: inherit;
+}
+
+.headline {
+    font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+}
+
+.NATALY-CHANGE-STYLE-NAMING img {
+    float: left;
+    margin: 0 15px 0 0;
+}
+
+.NATALY-CHANGE-STYLE-NAMING {
+    padding: 10px;
+    overflow: auto;
+}
+
+.NATALY-CHANGE-STYLE-NAMING:hover {
+    background: #eee;
+    cursor: pointer;
+}
+
+.artist-h {
+    width: 300px;
 }
