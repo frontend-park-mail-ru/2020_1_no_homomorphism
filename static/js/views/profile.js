@@ -7,7 +7,9 @@ export class ProfileView {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on('draw profile tracklist', this.drawTracklist.bind(this));
+        this.eventBus.on('draw profile tracks', this.drawTracks.bind(this));
+        this.openedTracks = false;
+        this.openedAlbums = false;
     }
 
     /**
@@ -68,8 +70,15 @@ export class ProfileView {
      * Нажатие
      */
     musicClick() {
-        console.log('CLICKED MY MUSIC');
-        this.eventBus.emit('get user tracks', {});
+        if ( this.openedTracks) {
+            this.undrawTracks();
+            this.openedTracks = false;
+            console.log('CLOSED');
+        } else {
+            console.log('OPENED');
+            this.openedTracks = true;
+            this.eventBus.emit('get user tracks', {});
+        }
         /* const deeping = document.getElementsByClassName('deeping')[0];
         if (deeping.style.height == '0px') {
             deeping.style.height = '13em';
@@ -128,16 +137,21 @@ export class ProfileView {
     }
 
     /**
+     * Удаление отрисовки списка треков
+     */
+    undrawTracks() {
+        document.getElementsByClassName('profile-track-list')[0].innerHTML = '';
+    }
+    /**
      * Отрисовка списка треков
      * @param {Object} tracks
      */
-    drawTracklist(tracks) {
+    drawTracks(tracks) {
         console.log('draw');
         for (let i = 0; i < tracks.length; i++) {
             document.getElementsByClassName('profile-track-list')[0].innerHTML +=
                 // eslint-disable-next-line no-undef
                 nunjucks.render('../../../views/templates/track.njk', tracks[i]);
-            console.log('added');
         }
     }
 }

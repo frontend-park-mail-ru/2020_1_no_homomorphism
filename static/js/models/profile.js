@@ -50,19 +50,22 @@ export class ProfileModel {
      */
     getTracks() {
         console.log('getTracks');
-        for (let i = 12345; i < 12350; i++) {
-            Api.trackFetch(i.toString())
-                .then((response) => response.json())
-                .then((track) => {
-                    this.data.playlist.push(track);
-                    this.data.queue.push(this.data.playlist.length - 1);
-                })
-                .then(() => {
-                    console.log('EMIT');
-                    if (this.data.playlist.length === 5) {
-                        this.eventBus.emit('draw profile tracklist', this.data.playlist);
-                    }
-                });
+        if (this.data.playlist.length === 6) {
+            this.eventBus.emit('draw profile tracks', this.data.playlist);
+        } else {
+            for (let i = 12344; i < 12350; i++) {
+                Api.trackFetch(i.toString())
+                    .then((response) => response.json())
+                    .then((track) => {
+                        this.data.playlist.push(track);
+                        this.data.queue.push(this.data.playlist.length - 1);
+                    })
+                    .then(() => {
+                        if (this.data.playlist.length === 6) {
+                            this.eventBus.emit('draw profile tracks', this.data.playlist);
+                        }
+                    });
+            }
         }
     }
 }
