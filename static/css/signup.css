@@ -33,9 +33,6 @@ h2 {
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
 }
 
 .sign-up-form .input-regular[type=submit] {
@@ -51,7 +48,6 @@ h2 {
 
 .sign-up-form .input-regular[type=submit]:hover {
     background-color: #387f9c;
-
 }
 
 .button {
@@ -108,4 +104,9 @@ h2 {
     color: #ffae42;
     padding-left: 8px;
     height: 0;
+}
+
+.l-signup-input  {
+    margin-top: 32px;
+    padding-bottom: 32px;
 }

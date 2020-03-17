@@ -10,6 +10,8 @@ export class ProfileView {
         this.eventBus.on('draw profile tracks', this.drawTracks.bind(this));
         this.openedTracks = false;
         this.openedAlbums = false;
+        this.openedPlaylist = false;
+        this.openedArtists = false;
     }
 
     /**
@@ -17,18 +19,14 @@ export class ProfileView {
      * */
     setEventListeners() {
         console.log('SET EVENT LISTENER');
-        // document.addEventListener('scroll', this.scrolling);
-        /* document.addEventListener('scroll', (event) => {
-            event.preventDefault();
-            this.scrolling();
-        }); */
-        // this.eventBus.emit('get user tracks', {});
-        document.getElementById('title-my-music').addEventListener('click',
-            this.musicClick.bind(this));
-        document.getElementById('title-settings').addEventListener('click',
-            this.musicClick.bind(this));
-        document.getElementById('title-info').addEventListener('click',
-            this.musicClick.bind(this));
+        document.getElementById('profile-tracks-title').addEventListener('click',
+            this.trackClick.bind(this));
+        document.getElementById('profile-albums-title').addEventListener('click',
+            this.albumClick.bind(this));
+        document.getElementById('profile-playlists-title').addEventListener('click',
+            this.playlistClick.bind(this));
+        document.getElementById('profile-subscriptions-title').addEventListener('click',
+            this.subscriptionsClick.bind(this));
         /* document.addEventListener('click', (event) => {
             while (event !== window && event !== document.body && event != null) {
                 console.log(event.target);
@@ -52,7 +50,6 @@ export class ProfileView {
         });*/
     }
 
-
     /**
      * Рендер
      * @param {Object} root
@@ -69,10 +66,12 @@ export class ProfileView {
     /**
      * Нажатие
      */
-    musicClick() {
+    trackClick() {
+        this.openedAlbums = false;
         if (this.openedTracks) {
             this.undrawTracks();
             this.openedTracks = false;
+
             console.log('CLOSED');
         } else {
             console.log('OPENED');
@@ -119,8 +118,28 @@ export class ProfileView {
     /**
      * Нажатие
      */
-    settingsClick() {
-        console.log('CLICKED SETTINGS');
+    albumClick() {
+        if (this.openedTracks) {
+            this.undrawTracks();
+            this.openedTracks = false;
+        }
+        console.log(this.openedAlbums);
+        if (this.openedAlbums) {
+            this.undrawAlbums();
+            this.openedAlbums = false;
+        } else {
+            this.openedAlbums = true;
+            const elem = document.getElementById('profile-album-list');
+            // eslint-disable-next-line no-undef,max-len
+            elem.innerHTML += nunjucks.render('../../../views/templates/profile_albums.njk');
+        }
+    }
+
+    /**
+     * Нажатие
+     */
+    playlistClick() {
+        console.log('CLICKED INFO');
         if (document.getElementsByClassName('deeping')[0].style.height == '13em') {
             this.musicClick();
         }
@@ -129,7 +148,7 @@ export class ProfileView {
     /**
      * Нажатие
      */
-    infoClick() {
+    subscriptionsClick() {
         console.log('CLICKED INFO');
         if (document.getElementsByClassName('deeping')[0].style.height == '13em') {
             this.musicClick();
@@ -139,8 +158,17 @@ export class ProfileView {
     /**
      * Удаление отрисовки списка треков
      */
+    undrawAlbums() {
+        document.getElementsByClassName('l-profile-album-list')[0].innerHTML = '';
+    }
+
+    /**
+     * Удаление отрисовки списка треков
+     */
     undrawTracks() {
-        document.getElementsByClassName('profile-track-list')[0].innerHTML = '';
+        document.getElementsByClassName('l-profile-track-list')[0].innerHTML = '';
+        const elem = document.getElementById('profile-track-list');
+        elem.classList.remove('l-profile-base');
     }
 
     /**
@@ -150,45 +178,54 @@ export class ProfileView {
     drawTracks(tracks) {
         console.log('draw');
         console.log(tracks);
-        const elem = document.getElementById('profile-body-list');
+        const elem = document.getElementById('profile-track-list');
         for (let i = 0; i < tracks.length; i++) {
+            elem.className += ' l-profile-base';
             // eslint-disable-next-line no-undef,max-len
-            elem.innerHTML += nunjucks.render('../../../views/templates/audio_track.njk', tracks[i]);
+            elem.innerHTML += nunjucks.render('../../../views/templates/profile_track.njk', tracks[i]);
         }
     }
 }
 
 /*
-    scrolling() {
-        document.getElementById('title-my-music');
-        const top = document.getElementsByClassName('l-profile-top-image')[0];
-        const size = top.getBoundingClientRect();
-        const offset = 100;
-        const intElemScrollTop = document.scrollTop;
-        console.log(intElemScrollTop);
-        if ( size.bottom-offset < window.scrollY) {
-            // Смещение раздела фото+логин
-            document.getElementsByClassName('l-profile-top-info')[0].style.marginTop = '-150px';
-            document.getElementsByClassName('l-profile-top-info')[0].style.transition = '0.3s';
-            // Дополнительное смещение логина
-            document.getElementsByClassName('l-profile-login')[0].style.marginTop = '-90px';
-            document.getElementsByClassName('l-profile-login')[0].style.transition = '0.3s';
-            // Уменьшение аватаро4ки
-            document.getElementsByClassName('m-profile-avatar')[0].style.height = '100px';
-            document.getElementsByClassName('m-profile-avatar')[0].style.width = '100px';
-            document.getElementsByClassName('m-profile-avatar')[0].style.transition = '0.3s';
-        } else { // Изменение размера картинки фона
-            document.getElementsByClassName('l-profile-top-image')[0].style.marginTop=
-                `${window.scrollY }px`;
-            document.getElementsByClassName('l-profile-top-image')[0].style.height =
-                `${300-window.scrollY}px`;
-            document.getElementsByClassName('l-profile-top-info')[0].style.marginTop = '-120px';
-            document.getElementsByClassName('l-profile-top-info')[0].style.transition = '0.3s';
-            document.getElementsByClassName('m-profile-avatar')[0].style.height = '180px';
-            document.getElementsByClassName('m-profile-avatar')[0].style.width = '180px';
-            document.getElementsByClassName('m-profile-avatar')[0].style.transition = '0.3s';
-            document.getElementsByClassName('l-profile-login')[0].style.marginTop = '0';
-            document.getElementsByClassName('l-profile-login')[0].style.transition = '0.3s';
-        }
+scrolling();
+{
+    document.addEventListener('scroll', this.scrolling);
+    document.addEventListener('scroll', (event) => {
+        event.preventDefault();
+        this.scrolling();
+    });
+    this.eventBus.emit('get user tracks', {});
+
+    document.getElementById('title-my-music');
+    const top = document.getElementsByClassName('l-profile-top-image')[0];
+    const size = top.getBoundingClientRect();
+    const offset = 100;
+    const intElemScrollTop = document.scrollTop;
+    console.log(intElemScrollTop);
+    if (size.bottom - offset < window.scrollY) {
+        // Смещение раздела фото+логин
+        document.getElementsByClassName('l-profile-top-info')[0].style.marginTop = '-150px';
+        document.getElementsByClassName('l-profile-top-info')[0].style.transition = '0.3s';
+        // Дополнительное смещение логина
+        document.getElementsByClassName('l-profile-login')[0].style.marginTop = '-90px';
+        document.getElementsByClassName('l-profile-login')[0].style.transition = '0.3s';
+        // Уменьшение аватаро4ки
+        document.getElementsByClassName('m-profile-avatar')[0].style.height = '100px';
+        document.getElementsByClassName('m-profile-avatar')[0].style.width = '100px';
+        document.getElementsByClassName('m-profile-avatar')[0].style.transition = '0.3s';
+    } else { // Изменение размера картинки фона
+        document.getElementsByClassName('l-profile-top-image')[0].style.marginTop =
+            `${window.scrollY}px`;
+        document.getElementsByClassName('l-profile-top-image')[0].style.height =
+            `${300 - window.scrollY}px`;
+        document.getElementsByClassName('l-profile-top-info')[0].style.marginTop = '-120px';
+        document.getElementsByClassName('l-profile-top-info')[0].style.transition = '0.3s';
+        document.getElementsByClassName('m-profile-avatar')[0].style.height = '180px';
+        document.getElementsByClassName('m-profile-avatar')[0].style.width = '180px';
+        document.getElementsByClassName('m-profile-avatar')[0].style.transition = '0.3s';
+        document.getElementsByClassName('l-profile-login')[0].style.marginTop = '0';
+        document.getElementsByClassName('l-profile-login')[0].style.transition = '0.3s';
     }
+}
 */

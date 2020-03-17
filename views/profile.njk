@@ -4,32 +4,30 @@
             <div class="l-profile-top">
                 <div class="l-profile-top-image"></div>
                 <div class="l-profile-top-info row">
-                    <div class="col col-6">
+                    <div class="col col-5">
                         <div class="l-profile-avatar col col-4">
                             <img alt="avatar" src="{{ image }}" class="m-profile-avatar" id="avatar">
                         </div>
-                        <div class="m-empty-box-100"></div>
-                        <div class="l-profile-login-name col col-3" id="login">
+                        <div class="l-profile-login-name col col-7" id="login-name">
                             <div class="m-profile-login" id="profile-login">@{{ login }}</div>
                             <div class="m-profile-name" id="profile-name">{{ name }}</div>
                         </div>
                     </div>
 
-                    <div class="l-profile-music-titles col col-6" id="profile-music-titles">
-                        <div class="m-empty-box-30"></div>
-                        <div class="m-profile-title-music col col-3" id="title-my-music">
+                    <div class="l-profile-titles col col-6" id="profile-music-titles">
+                        <div class="m-profile-music col col-3" id="profile-tracks-title">
                             <h2>543</h2>
                             <p>Tracks</p>
                         </div>
-                        <div class="m-profile-info col col-3" id="title-info">
+                        <div class="m-profile-albums col col-3" id="profile-albums-title">
                             <h2>43</h2>
                             <p>Albums</p>
                         </div>
-                        <div class="m-profile-settings col col-3" id="title-settings">
+                        <div class="m-profile-playlists col col-3" id="profile-playlists-title">
                             <h2>53</h2>
                             <p>Playlists</p>
                         </div>
-                        <div class="m-profile-subscriptions col col-3" id="subscriptions">
+                        <div class="m-profile-subscriptions col col-3" id="profile-subscriptions-title">
                             <h2>53</h2>
                             <p>Subscriptions</p>
                         </div>
@@ -38,13 +36,21 @@
                 </div>
 
             </div>
-            <div class="l-profile-base">
-                <div class="profile-track-list" id="profile-body-list" style="top: 0;">
-{#                    {% set variable = "bar" %}#}
-{#                    {% for data in variable %}#}
-{#                        {% include "views/templates/track.njk" %}#}
-{#                    {% endfor %}#}
+            <div class="">
+                <div class="kek lol" id="kek"></div>
+                <div class="l-profile-track-list" id="profile-track-list" style="top: 0;">
+                    {#                    {% set variable = "bar" %}#}
+                    {#                    {% for data in variable %}#}
+                    {#                        {% include "views/templates/track.njk" %}#}
+                    {#                    {% endfor %}#}
                 </div>
+                <div class="l-profile-album-list" id="profile-album-list" style="top: 0;">
+                </div>
+                <div class="l-profile-playlist-list" id="profile-playlist-list" style="top: 0;">
+                </div>
+                <div class="l-profile-artist-list" id="profile-artist-list" style="top: 0;">
+                </div>
+
             </div>
         </div>
         <div class="col col-4"></div>

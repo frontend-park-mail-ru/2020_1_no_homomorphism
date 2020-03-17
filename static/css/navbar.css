@@ -5,7 +5,7 @@
     padding: 0 5%;
     margin-bottom: 2%;
     background: white;
-    box-shadow: 0 3px 6px silver;
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     z-index: 2;

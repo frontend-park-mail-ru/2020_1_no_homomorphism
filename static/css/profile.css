@@ -74,44 +74,30 @@ img#avatar {
     margin-top: 50px;
 }
 
-.l-profile-login-name {
-    padding-bottom: 16px;
+#login-name {
     padding-top: 128px;
+    margin-left: 16px;
     text-align: left;
 }
 
 .m-profile-login {
     color: #070025;
     font-size: 30px;
+    word-wrap: break-word;
 }
 
 .m-profile-name {
     color: #5c4b6b;
     font-size: 15px;
+    word-wrap: break-word;
 }
 
-#profile-login #profile-name {
-    text-align: left;
-}
-
-.m-empty-box-100 {
-    height: 100px;
-    width: 1px;
-}
-
-.m-empty-box-30 {
-    height: 30px;
-    width: 1px;
-}
-
-.l-profile-music-titles {
+.l-profile-titles .col {
+    margin-top: 100px;
+    padding-top: 8px;
     /*border-left-style: solid;*/
     /*border-left-width: 1px;*/
     /*border-left-color: #673ab7;*/
-}
-
-#profile-music-titles {
-    margin-top: 50px;
 }
 
 .l-profile-base {
@@ -123,7 +109,6 @@ img#avatar {
     /*background-color: #ede7f6;*/
     /*border-radius: 0 0 30px 30px;*/
 }
-
 
 .m-profile-settings {
     pointer-events: none; /* делаем ссылку некликабельной */
@@ -139,7 +124,6 @@ img#avatar {
     cursor: pointer;
 }
 
-
 .m-my-music .m-info .m-settings {
     margin-bottom: 10px;
 }
@@ -149,15 +133,25 @@ img#avatar {
     color: red;
 }
 
-.l-profile-field .col,
-.info .profile-info,
-.info .profile-content,
-.info .col {
-    text-align: left;
-}
-
 .m-profile-data {
     padding-top: 32px;
+}
+
+.m-profile-albums:hover, .m-profile-music:hover, .m-profile-playlists:hover, .m-profile-subscriptions:hover {
+    background: #eee;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    /*transform: scale(1.1);*/
+    box-shadow: 1px 1px #c1c1c1,
+    2px 2px #c1c1c1,
+    3px 3px #c1c1c1,
+    4px 4px #c1c1c1,
+    5px 5px #c1c1c1,
+    6px 6px #c1c1c1,
+    7px 7px #c1c1c1;
+    -webkit-transform: translateX(-3px);
+    transform: translateX(-3px);
 }
 
 .accounts .add-outer {
@@ -194,25 +188,84 @@ img#avatar {
     width: inherit;
 }
 
-.headline {
+.m-profile-track-name {
     font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
 }
 
-.NATALY-CHANGE-STYLE-NAMING img {
+.l-profile-track img {
     float: left;
     margin: 0 15px 0 0;
 }
 
-.NATALY-CHANGE-STYLE-NAMING {
+.l-profile-track {
     padding: 10px;
-    overflow: auto;
+    overflow: hidden;
 }
 
-.NATALY-CHANGE-STYLE-NAMING:hover {
+.l-profile-track:hover {
     background: #eee;
     cursor: pointer;
 }
 
-.artist-h {
-    width: 300px;
+.m-profile-track{
+    animation-duration: 1s;
+    animation-name: slidein;
 }
+
+@keyframes slidein {
+    from {
+        margin-left: 100%;
+        width: 100%;
+    }
+
+    to {
+        margin-left: 0%;
+        /*width: 100%;*/
+    }
+}
+
+.m-profile-track-image {
+    height: 60px;
+    width: 60px;
+    z-index: 2;
+    border-radius: 5px;
+}
+
+
+.l-profile-track:hover .m-profile-track-image {
+    transition: 0.3s;
+    -webkit-transform: scale(2);
+    transform: scale(1.2);
+    opacity: 0.5;
+    box-shadow: 0 0 10px 4px rgba(129, 129, 129, 0.65);
+}
+
+.l-profile-track:not(:hover) .m-profile-track-image {
+    transition: 0.1s;
+
+}
+
+.l-profile-track:hover .m-profile-button-play {
+    opacity: 1;
+    -webkit-transform: scale(2);
+    transform: scale(2);
+}
+
+.m-profile-button-play {
+    height: 30px;
+    width: 30px;
+    background: url(../img/play.svg) no-repeat;
+    border: yellow;
+    cursor: pointer;
+    opacity: 0;
+    margin-left: -56px;
+    margin-top: 20px;
+
+}
+
+.m-profile-track-name {
+    margin-top: -40px;
+}
+
+
+

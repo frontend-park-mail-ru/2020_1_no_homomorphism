@@ -22,7 +22,14 @@ input[type="checkbox"] {
 }
 
 .error-message {
-    height: 0;
     visibility: hidden;
     color: red;
+}
+.l-login-input-login{
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.l-login-input-password {
+    padding-top: 32px;
 }

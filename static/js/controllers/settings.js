@@ -9,8 +9,9 @@ export class SettingsController {
     /**
      * Конструктор
      * @param {Router} router
+     *  @param {EventBus} globalEventBus
      */
-    constructor(router) {
+    constructor(router, globalEventBus) {
         this.eventBus = new EventBus();
         this.model = new SettingsModel(this.eventBus);
         this.view = new SettingsView(this.eventBus);
