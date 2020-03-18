@@ -100,6 +100,12 @@ img#avatar {
     /*border-left-color: #673ab7;*/
 }
 
+.m-profile-tiny-ref {
+    font-weight: lighter;
+    color: #000000;
+    text-decoration: none
+}
+
 .l-profile-base {
     z-index: 1;
     box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
@@ -137,21 +143,20 @@ img#avatar {
     padding-top: 32px;
 }
 
-.m-profile-albums:hover, .m-profile-music:hover, .m-profile-playlists:hover, .m-profile-subscriptions:hover {
+.m-profile-albums:hover, .m-profile-tracks:hover, .m-profile-playlists:hover, .m-profile-artists:hover {
     background: #eee;
     border-radius: 5px;
     cursor: pointer;
-    transition: 0.3s;
-    /*transform: scale(1.1);*/
-    box-shadow: 1px 1px #c1c1c1,
-    2px 2px #c1c1c1,
-    3px 3px #c1c1c1,
-    4px 4px #c1c1c1,
-    5px 5px #c1c1c1,
-    6px 6px #c1c1c1,
-    7px 7px #c1c1c1;
-    -webkit-transform: translateX(-3px);
-    transform: translateX(-3px);
+    transition: 0.1s;
+    transform: scale(1.1);
+}
+
+.is-touched-profile-selection{
+    background: #eee;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.1s;
+    transform: scale(1.1);
 }
 
 .accounts .add-outer {
@@ -254,7 +259,7 @@ img#avatar {
 .m-profile-button-play {
     height: 30px;
     width: 30px;
-    background: url(../img/play.svg) no-repeat;
+    background: url(../../static/img/play.svg) no-repeat;
     border: yellow;
     cursor: pointer;
     opacity: 0;
@@ -266,6 +271,3 @@ img#avatar {
 .m-profile-track-name {
     margin-top: -40px;
 }
-
-
-

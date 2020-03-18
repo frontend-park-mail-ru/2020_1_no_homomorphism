@@ -9,6 +9,8 @@ export class Router {
     constructor() {
         this.root = document.getElementsByClassName('container')[0].children[0];
         this.views = {};
+        this.profileUrl = ['/profile', '/profile/tracks', '/profile/albums',
+            '/profile/playlists', '/profile/artists'];
     }
 
     /**
@@ -25,11 +27,11 @@ export class Router {
      * @param {string} to
      */
     logoutRedirect(to) {
-        console.log('logout redirect');
         if (['/profile', '/settings'].includes(window.location.pathname)) {
             this.check(to, true);
         }
     }
+
     /**
      * Редирект
      * @param {string} to
@@ -56,12 +58,18 @@ export class Router {
             this.views['player'].render();
             return;
         }
+        newPath = newPath === '/profile' ? '/profile/tracks' : newPath;
         this.curPath = newPath;
         if (pushState) {
             window.history.pushState('', {}, newPath);
         }
-        this.views[newPath].render(this.root);
-        this.views['player'].render();
+        if (this.profileUrl.indexOf(newPath) !== -1) {
+            this.views[newPath].render(this.root, newPath);
+            this.views['player'].render();
+        } else {
+            this.views[newPath].render(this.root);
+            this.views['player'].render();
+        }
     }
 
     /**

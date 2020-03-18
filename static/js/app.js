@@ -5,7 +5,7 @@ import {IndexController} from './controllers/index.js';
 import {LoginController} from './controllers/login.js';
 import {SignupController} from './controllers/signup.js';
 import {PlayerController} from './controllers/player.js';
-import {ProfileController} from './controllers/profile.js';
+import {ProfileController} from './controllers/profile/profile.js';
 import {SettingsController} from './controllers/settings.js';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -25,6 +25,10 @@ window.addEventListener('DOMContentLoaded', () => {
     router.addView('/login', loginController.view);
     router.addView('/signup', signupController.view);
     router.addView('/profile', profileController.view);
+    router.addView('/profile/tracks', profileController.view);
+    router.addView('/profile/albums', profileController.view);
+    router.addView('/profile/playlists', profileController.view);
+    router.addView('/profile/artists', profileController.view);
     router.addView('/settings', settingsController.view);
     router.start();
     playerController.view.render();

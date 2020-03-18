@@ -19,7 +19,6 @@ export class SignupView {
         // eslint-disable-next-line no-undef
         root.innerHTML = nunjucks.render('../../../views/signup.njk');
         document.addEventListener('click', (event) => {
-            console.log(event.target.getAttribute('id'));
             if (event.target.getAttribute('id') === 'submit') {
                 event.preventDefault();
                 this.submit();

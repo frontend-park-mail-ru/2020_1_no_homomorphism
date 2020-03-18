@@ -77,7 +77,6 @@ export class Api {
      * @return {Promise<Response>}
      */
     static profilePhotoFetch(image) {
-        console.log('PHOTO');
         return postImageFetch('/image', image)
             .catch((error) => console.error(error));
     }

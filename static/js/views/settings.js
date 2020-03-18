@@ -21,7 +21,6 @@ export class SettingsView {
         });
         const fileAttach = document.getElementById('avatar-upload');
         fileAttach.addEventListener('change', () => {
-            console.log('CATCH TOUCH');
             this.eventBus.emit('avatar upload');
         });
     }
@@ -60,7 +59,6 @@ export class SettingsView {
      * отправляет данные формы
      */
     submit() {
-        console.log('submit-changes clicked');
         document.querySelectorAll('.info input').forEach((input) => {
             input.style.borderColor = '#ccc';
             input.nextElementSibling.innerText = '';

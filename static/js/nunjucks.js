@@ -1617,8 +1617,6 @@ function (_Obj) {
   };
 
   _proto._compileExpression = function _compileExpression(node, frame) {
-    // TODO: I'm not really sure if this type check is worth it or
-    // not.
     this.assertType(node, nodes.Literal, nodes.Symbol, nodes.Group, nodes.Array, nodes.Dict, nodes.FunCall, nodes.Caller, nodes.Filter, nodes.LookupVal, nodes.Compare, nodes.InlineIf, nodes.In, nodes.Is, nodes.And, nodes.Or, nodes.Not, nodes.Add, nodes.Concat, nodes.Sub, nodes.Mul, nodes.Div, nodes.FloorDiv, nodes.Mod, nodes.Pow, nodes.Neg, nodes.Pos, nodes.Compare, nodes.NodeList);
     this.compile(node, frame);
   };
@@ -4676,19 +4674,17 @@ function (_Obj) {
       }
 
       if (node instanceof nodes.Dict) {
-        // TODO: check for errors
         var key = this.parsePrimary(); // We expect a key/value pair for dicts, separated by a
         // colon
 
         if (!this.skip(lexer.TOKEN_COLON)) {
           this.fail('parseAggregate: expected colon after dict key', tok.lineno, tok.colno);
-        } // TODO: check for errors
+        }
 
 
         var value = this.parseExpression();
         node.addChild(new nodes.Pair(key.lineno, key.colno, key, value));
       } else {
-        // TODO: check for errors
         var expr = this.parseExpression();
         node.addChild(expr);
       }
@@ -4775,14 +4771,12 @@ function (_Obj) {
         // the `dropLeadingWhitespace` variable.
 
         if (this.dropLeadingWhitespace) {
-          // TODO: this could be optimized (don't use regex)
           data = data.replace(/^\s*/, '');
           this.dropLeadingWhitespace = false;
         } // Same for the succeeding block start token
 
 
         if (nextToken && (nextToken.type === lexer.TOKEN_BLOCK_START && nextVal.charAt(nextVal.length - 1) === '-' || nextToken.type === lexer.TOKEN_VARIABLE_START && nextVal.charAt(this.tokens.tags.VARIABLE_START.length) === '-' || nextToken.type === lexer.TOKEN_COMMENT && nextVal.charAt(this.tokens.tags.COMMENT_START.length) === '-')) {
-          // TODO: this could be optimized (don't use regex)
           data = data.replace(/\s*$/, '');
         }
 
@@ -6787,7 +6781,7 @@ function default_(val, def, bool) {
   } else {
     return val !== undefined ? val : def;
   }
-} // TODO: it is confusing to export something called 'default'
+}
 
 
 exports['default'] = default_; // eslint-disable-line dot-notation

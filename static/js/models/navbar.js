@@ -39,7 +39,6 @@ export class NavbarModel {
         Api.profileFetch()
             .then((res) => {
                 if (res === undefined) {
-                    console.log('NO ANSWER FROM BACKEND');
                     this.eventBus.emit('redirect', '/');
                     return;
                 }

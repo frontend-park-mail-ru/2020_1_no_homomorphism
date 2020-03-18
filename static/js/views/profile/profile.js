@@ -1,3 +1,5 @@
+import * as C from '../../libs/constans.js';
+
 /**
  * вью для профиля
  */
@@ -7,77 +9,76 @@ export class ProfileView {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on('draw profile tracks', this.drawTracks.bind(this));
-        this.openedTracks = false;
-        this.openedAlbums = false;
-        this.openedPlaylist = false;
-        this.openedArtists = false;
+        this.currentOpen = '';
+        this.eventBus.on(C.CHOOSE_SECTION, this.chooseSection.bind(this));
     }
+
 
     /**
      * Подписка на события
      * */
     setEventListeners() {
-        console.log('SET EVENT LISTENER');
-        document.getElementById('profile-tracks-title').addEventListener('click',
+        document.getElementById(C.ID_TRACKS_SECTION).addEventListener('click',
             this.trackClick.bind(this));
-        document.getElementById('profile-albums-title').addEventListener('click',
-            this.albumClick.bind(this));
-        document.getElementById('profile-playlists-title').addEventListener('click',
+        document.getElementById(C.ID_PLAYLISTS_SECTION).addEventListener('click',
             this.playlistClick.bind(this));
-        document.getElementById('profile-subscriptions-title').addEventListener('click',
-            this.subscriptionsClick.bind(this));
-        /* document.addEventListener('click', (event) => {
-            while (event !== window && event !== document.body && event != null) {
-                console.log(event.target);
-                if (event.target.getAttribute('id') === 'title-my-music') {
-                    event.preventDefault();
-                    this.musicClick();
-                    break;
-                } else if (event.target.getAttribute('id') === 'title-settings') {
-                    event.preventDefault();
-                    this.settingsClick();
-                    break;
-                } else if (event.target.getAttribute('id') === 'title-info') {
-                    event.preventDefault();
-                    this.infoClick();
-                    break;
-                } else {
-                    console.log(event.target.parentElement);
-                    event = event.target.parentNode;
-                }
-            }
-        });*/
+        document.getElementById(C.ID_ALBUMS_SECTION).addEventListener('click',
+            this.albumClick.bind(this));
+        document.getElementById(C.ID_ARTISTS_SECTION).addEventListener('click',
+            this.artistsClick.bind(this));
     }
 
     /**
      * Рендер
      * @param {Object} root
+     * @param {string} url
      */
-    render(root) {
-        this.eventBus.on('user data', (data) => {
+    render(root, url) {
+        this.eventBus.on(C.RENDER_PROFILE_DATA, (data) => {
             // eslint-disable-next-line no-undef
-            root.innerHTML = nunjucks.render('../../../views/profile.njk', data);
+            root.innerHTML = nunjucks.render(C.PROFILE_TEMPLATE, data);
             this.setEventListeners();
+            this.eventBus.emit(this.currentOpen, {});
         });
-        this.eventBus.emit('get user data', {});
+        this.eventBus.emit(C.GET_PROFILE_DATA, {});
+        this.eventBus.emit(C.CHOOSE_SECTION, {url});
     }
 
     /**
-     * Нажатие
+     * Определение секции нажатия
+     * @param {Object} str
+     */
+    chooseSection(str) {
+        switch (str.url) {
+        case C.URL_PROFILE:
+        case C.URL_TRACKS:
+            this.currentOpen = C.GET_PROFILE_TRACKS;
+            break;
+        case C.URL_PLAYLISTS:
+            this.currentOpen = C.GET_PROFILE_PLAYLISTS;
+            break;
+        case C.URL_ALBUMS:
+            this.currentOpen = C.GET_PROFILE_ALBUMS;
+            break;
+        case C.URL_ARTISTS:
+            this.currentOpen = C.GET_PROFILE_ALBUMS;
+            break;
+        }
+    }
+
+    /**
+     * Нажатие на треки
      */
     trackClick() {
-        this.openedAlbums = false;
-        if (this.openedTracks) {
-            this.undrawTracks();
-            this.openedTracks = false;
-
-            console.log('CLOSED');
-        } else {
-            console.log('OPENED');
-            this.openedTracks = true;
-            this.eventBus.emit('get user tracks', {});
+        if (this.currentOpen !== C.GET_PROFILE_TRACKS) {
+            const prevSection = document.getElementById(this.currentOpen);
+            const curSection = document.getElementById(C.ID_TRACKS_SECTION);
+            prevSection.classList.remove(C.SELECTED_CLASS);
+            curSection.className += ' ' + C.SELECTED_CLASS;
+            console.log(C.GET_PROFILE_TRACKS);
+            this.eventBus.emit(C.GET_PROFILE_TRACKS, {});
         }
+        // }
         /* const deeping = document.getElementsByClassName('deeping')[0];
         if (deeping.style.height == '0px') {
             deeping.style.height = '13em';
@@ -116,30 +117,17 @@ export class ProfileView {
     }
 
     /**
-     * Нажатие
+     * Нажатие на альбомы
      */
     albumClick() {
-        if (this.openedTracks) {
-            this.undrawTracks();
-            this.openedTracks = false;
-        }
-        console.log(this.openedAlbums);
-        if (this.openedAlbums) {
-            this.undrawAlbums();
-            this.openedAlbums = false;
-        } else {
-            this.openedAlbums = true;
-            const elem = document.getElementById('profile-album-list');
-            // eslint-disable-next-line no-undef,max-len
-            elem.innerHTML += nunjucks.render('../../../views/templates/profile_albums.njk');
-        }
+        this.eventBus.emit(С.GET_PROFILE_ALBUMS, {});
     }
 
+
     /**
-     * Нажатие
+     * Нажатие на плейлисты
      */
     playlistClick() {
-        console.log('CLICKED INFO');
         if (document.getElementsByClassName('deeping')[0].style.height == '13em') {
             this.musicClick();
         }
@@ -148,8 +136,7 @@ export class ProfileView {
     /**
      * Нажатие
      */
-    subscriptionsClick() {
-        console.log('CLICKED INFO');
+    artistsClick() {
         if (document.getElementsByClassName('deeping')[0].style.height == '13em') {
             this.musicClick();
         }
@@ -172,18 +159,31 @@ export class ProfileView {
     }
 
     /**
-     * Отрисовка списка треков
-     * @param {Object} tracks
+     * Удаление отрисовки списка треков
      */
-    drawTracks(tracks) {
-        console.log('draw');
-        console.log(tracks);
-        const elem = document.getElementById('profile-track-list');
-        for (let i = 0; i < tracks.length; i++) {
-            elem.className += ' l-profile-base';
-            // eslint-disable-next-line no-undef,max-len
-            elem.innerHTML += nunjucks.render('../../../views/templates/profile_track.njk', tracks[i]);
-        }
+    setCurrentOpenTracks() {
+        this.currentOpen = 0;
+    }
+
+    /**
+     * Удаление отрисовки списка треков
+     */
+    setCurrentOpenPlaylists() {
+        this.currentOpen = 1;
+    }
+
+    /**
+     * Удаление отрисовки списка треков
+     */
+    setCurrentOpenAlbums() {
+        this.currentOpen = 2;
+    }
+
+    /**
+     * Удаление отрисовки списка треков
+     */
+    setCurrentOpenArtists() {
+        this.currentOpen = 3;
     }
 }
 

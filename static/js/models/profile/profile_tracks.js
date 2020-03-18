@@ -1,16 +1,18 @@
-import {Api} from '../libs/api.js';
+import {Api} from '../../libs/api.js';
+import * as C from '../../libs/constans.js';
 
 // import {Router} from '../libs/router.js';
 
 /**
  * Модель Профиля
  */
-export class ProfileModel {
+export class ProfileTracksModel {
     /**
      * конструктор
      * @param {EventBus} eventBus
      */
     constructor(eventBus) {
+        eventBus.on(C.GET_PROFILE_TRACKS, this.getTracks.bind(this));
         this.eventBus = eventBus;
         this.data = {
             queue: [],
@@ -20,38 +22,14 @@ export class ProfileModel {
             shuffle: false,
             repeat: false,
         };
-        this.eventBus.on('get user data', this.getUserData.bind(this));
-        this.eventBus.on('get user tracks', this.getTracks.bind(this));
-    }
-
-    /**
-     * получает профиль юзера
-     */
-    getUserData() {
-        Api.profileFetch()
-            .then((res) => {
-                if (res === undefined) {
-                    this.eventBus.emit('redirect', '/');
-                    return;
-                }
-                if (res.ok) {
-                    res.json()
-                        .then((data) => {
-                            this.eventBus.emit('user data', data);
-                        });
-                } else {
-                    this.eventBus.emit('no answer', '/');
-                }
-            });
     }
 
     /**
      * Получение списка треков
      */
     getTracks() {
-        console.log('getTracks');
         if (this.data.playlist.length === 6) {
-            this.eventBus.emit('draw profile tracks', this.data.playlist);
+            this.eventBus.emit(C.RENDER_PROFILE_TRACKS, this.data.playlist);
         } else {
             for (let i = 12344; i < 12350; i++) {
                 Api.trackFetch(i.toString())
@@ -62,7 +40,7 @@ export class ProfileModel {
                     })
                     .then(() => {
                         if (this.data.playlist.length === 6) {
-                            this.eventBus.emit('draw profile tracks', this.data.playlist);
+                            this.eventBus.emit(C.RENDER_PROFILE_TRACKS, this.data.playlist);
                         }
                     });
             }

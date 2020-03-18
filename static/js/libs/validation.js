@@ -63,12 +63,10 @@ export class Validation {
      */
     static image(size, extension) {
         if (size > 1048576) {
-            console.log('Too big');
             return 'Max allowable size - 1Mb';
         }
         const allowableExtension = ['png', 'jpg', 'jpeg', 'gif'];
         if (allowableExtension.indexOf(extension) === -1) {
-            console.log('Wrong extension');
             return 'Allowable extensions - png, jpg, jpeg, gif';
         }
         return '';
