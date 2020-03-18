@@ -1,3 +1,4 @@
+import * as C from '../../libs/constans.js';
 /**
  * вью для альбомов профиля
  */
@@ -6,7 +7,7 @@ export class ProfileAlbumsView {
      * @param {EventBus} eventBus
      */
     constructor(eventBus) {
-        eventBus.on('get-profile-albums', this.drawAlbums.bind(this));
+        eventBus.on('profile-albums-title', this.drawAlbums.bind(this));
         this.eventBus = eventBus;
     }
 
@@ -19,5 +20,4 @@ export class ProfileAlbumsView {
         // eslint-disable-next-line no-undef,max-len
         elem.innerHTML += nunjucks.render('../../../views/profile/profile_albums.njk');
     }
-
 }

@@ -12,7 +12,7 @@ export class ProfileTracksModel {
      * @param {EventBus} eventBus
      */
     constructor(eventBus) {
-        eventBus.on(C.GET_PROFILE_TRACKS, this.getTracks.bind(this));
+        eventBus.on(C.ID_TRACKS_SECTION, this.getTracks.bind(this));
         this.eventBus = eventBus;
         this.data = {
             queue: [],
