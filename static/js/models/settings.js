@@ -1,5 +1,6 @@
 import {Validation} from '../libs/validation.js';
 import {Api} from '../libs/api.js';
+import * as C from '../libs/constans.js';
 
 /**
  * Модель настроек
@@ -11,9 +12,9 @@ export class SettingsModel {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on('avatar upload', this.resetAvatar.bind(this));
-        this.eventBus.on('submit', this.submit.bind(this));
-        this.eventBus.on('get user data', this.getUserData.bind(this));
+        this.eventBus.on(C.AVATAR_UPLOAD, this.resetAvatar.bind(this));
+        this.eventBus.on(C.SUBMIT, this.submit.bind(this));
+        this.eventBus.on(C.GET_USER_DATA, this.getUserData.bind(this));
         // this.eventBus.on('add outer', this.model.addOuter);
     }
 
@@ -26,10 +27,10 @@ export class SettingsModel {
                 if (res.ok) {
                     res.json()
                         .then((data) => {
-                            this.eventBus.emit('user data', data);
+                            this.eventBus.emit(C.RENDER_LOGGED, data);
                         });
                 } else {
-                    this.eventBus.emit('no answer', '/');
+                    this.eventBus.emit(C.NO_ANSWER, C.URL_MAIN);
                 }
             });
     }
@@ -38,21 +39,21 @@ export class SettingsModel {
      * обновляет аватар юзера
      */
     resetAvatar() {
-        const fileAttach = document.getElementById('avatar-upload');
+        const fileAttach = document.getElementById(C.AVATAR_UPLOAD);
         const resImage = Validation
             .image(fileAttach.files[0].size, fileAttach.files[0].type
                 .split('/')
                 .pop()
                 .toLowerCase());
         if (resImage !== '') {
-            this.eventBus.emit('invalid', {'avatar-upload': resImage});
+            this.eventBus.emit(C.INVALID, {'avatar-upload': resImage});
         } else {
             const fData = new FormData();
             fData.append('profile_image', fileAttach.files[0], 'kek.png');
             Api.profilePhotoFetch(fData)
                 .then((response) => {
                     if (response.ok) {
-                        this.eventBus.emit('get user data', {});
+                        this.eventBus.emit(C.GET_USER_DATA, {});
                     }
                 });
         }
@@ -83,7 +84,7 @@ export class SettingsModel {
             errors['email'] = resEmail;
         }
         if (JSON.stringify(errors) !== '{}') {
-            this.eventBus.emit('invalid', errors);
+            this.eventBus.emit(C.INVALID, errors);
         } else {
             Api.profileEditFetch(values.name, values.email, values.password, values.newPassword)
                 .then((res) => {
@@ -91,7 +92,7 @@ export class SettingsModel {
                         return;
                     }
                     if (res.ok) {
-                        this.eventBus.emit('redirect', '/profile');
+                        this.eventBus.emit(C.REDIRECT, C.URL_PROFILE_TRACKS);
                     }
                 });
         }

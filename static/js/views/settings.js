@@ -1,3 +1,4 @@
+import * as C from '../libs/constans.js';
 /**
  * вью для настроек
  */
@@ -7,21 +8,21 @@ export class SettingsView {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on('invalid', this.showErrors);
+        this.eventBus.on(C.INVALID, this.showErrors);
     }
 
     /**
      * слушатель событий для аватарки
      */
     setEventListeners() {
-        const button = document.getElementById('submit-changes');
+        const button = document.getElementById('submit-setting-changes-data');
         button.addEventListener('click', (event) => {
             event.preventDefault();
             this.submit();
         });
         const fileAttach = document.getElementById('avatar-upload');
         fileAttach.addEventListener('change', () => {
-            this.eventBus.emit('avatar upload');
+            this.eventBus.emit(C.AVATAR_UPLOAD, {});
         });
     }
 
@@ -30,12 +31,12 @@ export class SettingsView {
      * @param {Object} root
      */
     render(root) {
-        this.eventBus.on('user data', (data) => {
+        this.eventBus.on(C.RENDER_LOGGED, (data) => {
             // eslint-disable-next-line no-undef
             root.innerHTML = nunjucks.render('../../../views/settings.njk', data);
             this.setEventListeners();
         });
-        this.eventBus.emit('get user data', {});
+        this.eventBus.emit(C.GET_USER_DATA, {});
     }
 
     /**
@@ -66,7 +67,7 @@ export class SettingsView {
             input.nextElementSibling.style.marginBottom = '0';
             input.nextElementSibling.style.visibility = 'hidden';
         });
-        this.eventBus.emit('submit', {
+        this.eventBus.emit(C.SUBMIT, {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
             newPassword: document.getElementById('newPassword').value,

@@ -14,7 +14,5 @@ export class ProfileTracksController {
         this.eventBus = eventBus;
         this.model = new ProfileTracksModel(this.eventBus);
         this.view = new ProfileTracksView(this.eventBus);
-        // this.eventBus.on('redirect', router.redirect.bind(router));
-        // this.eventBus.on('no answer', router.redirect.bind(router));
     }
 }

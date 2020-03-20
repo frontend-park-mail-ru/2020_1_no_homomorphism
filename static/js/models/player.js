@@ -1,4 +1,5 @@
 import {Api} from '../libs/api.js';
+import * as C from '../libs/constans.js';
 
 /**
  * Модель плеера
@@ -18,19 +19,19 @@ export class PlayerModel {
             shuffle: false,
             repeat: false,
         };
-        this.eventBus.on('init', this.getFirst.bind(this));
-        this.eventBus.on('pause', this.pause.bind(this));
-        this.eventBus.on('play', this.play.bind(this));
-        this.eventBus.on('prev', this.prev.bind(this));
-        this.eventBus.on('next', this.next.bind(this));
-        this.eventBus.on('rewind', this.rewind.bind(this));
-        this.eventBus.on('shuffle', this.shuffle.bind(this));
-        this.eventBus.on('unshuffle', this.unshuffle.bind(this));
-        this.eventBus.on('repeat', this.repeat.bind(this));
-        this.eventBus.on('repeat one', this.repeatOne.bind(this));
-        this.eventBus.on('unrepeat', this.unrepeat.bind(this));
-        this.eventBus.on('mute', this.mute.bind(this));
-        this.eventBus.on('unmute', this.unmute.bind(this));
+        this.eventBus.on(C.GET_TRACKS, this.getFirst.bind(this));
+        this.eventBus.on(C.PAUSE, this.pause.bind(this));
+        this.eventBus.on(C.PLAY, this.play.bind(this));
+        this.eventBus.on(C.PREVIOUS, this.prev.bind(this));
+        this.eventBus.on(C.NEXT, this.next.bind(this));
+        this.eventBus.on(C.REWIND, this.rewind.bind(this));
+        this.eventBus.on(C.SHUFFLE, this.shuffle.bind(this));
+        this.eventBus.on(C.UNSHUFFLE, this.unshuffle.bind(this));
+        this.eventBus.on(C.REPEAT, this.repeat.bind(this));
+        this.eventBus.on(C.REPEAT_ONE, this.repeatOne.bind(this));
+        this.eventBus.on(C.UNREPEAT, this.unrepeat.bind(this));
+        this.eventBus.on(C.MUTE, this.mute.bind(this));
+        this.eventBus.on(C.UNMUTE, this.unmute.bind(this));
     }
 
     /**
@@ -44,7 +45,7 @@ export class PlayerModel {
                 document.getElementsByTagName('audio')[0].load();
                 this.data.playlist.push(track);
                 this.data.queue.push(this.data.playlist.length - 1);
-                this.eventBus.emit('track update', track);
+                this.eventBus.emit(C.TRACK_UPDATE, track);
             });
         for (let i = 12345; i < 12350; i++) {
             Api.trackFetch(i.toString())
@@ -55,7 +56,7 @@ export class PlayerModel {
                 })
                 .then(() => {
                     if (this.data.playlist.length === 6) {
-                        this.eventBus.emit('draw tracklist', this.data.playlist);
+                        this.eventBus.emit(C.DRAW_TRACKLIST, this.data.playlist);
                     }
                 });
         }
@@ -67,7 +68,7 @@ export class PlayerModel {
     pause() {
         document.getElementsByTagName('audio')[0].pause();
         this.data.playing = false;
-        this.eventBus.emit('draw play', {});
+        this.eventBus.emit(C.DRAW_PLAY, {});
     }
 
     /**
@@ -76,7 +77,7 @@ export class PlayerModel {
     play() {
         document.getElementsByTagName('audio')[0].play(); // TODO обработать promise
         this.data.playing = true;
-        this.eventBus.emit('draw pause', {});
+        this.eventBus.emit(C.DRAW_PAUSE, {});
     }
 
     /**
@@ -101,8 +102,8 @@ export class PlayerModel {
         if (this.data.playing) {
             document.getElementsByTagName('audio')[0].play();
         }
-        this.eventBus.emit('draw timeline', 0);
-        this.eventBus.emit('track update', this.data.playlist[this.data.queue[this.data.current]]);
+        this.eventBus.emit(C.DRAW_TIMELINE, 0);
+        this.eventBus.emit(C.TRACK_UPDATE, this.data.playlist[this.data.queue[this.data.current]]);
     }
 
     /**
@@ -118,10 +119,10 @@ export class PlayerModel {
                 this.data.current = -1;
             } else {
                 if (cause === 'self') {
-                    this.eventBus.emit('draw play', {});
+                    this.eventBus.emit(C.DRAW_PLAY, {});
                     this.data.current = 0;
-                    this.eventBus.emit('draw timeline', 0);
-                    this.eventBus.emit('track update', this.data.playlist[this.data.queue[0]]);
+                    this.eventBus.emit(C.DRAW_TIMELINE, 0);
+                    this.eventBus.emit(C.TRACK_UPDATE, this.data.playlist[this.data.queue[0]]);
                 }
                 this.data.playing = false;
                 return;
@@ -137,8 +138,8 @@ export class PlayerModel {
         if (this.data.playing) {
             document.getElementsByTagName('audio')[0].play();
         }
-        this.eventBus.emit('draw timeline', 0);
-        this.eventBus.emit('track update', this.data.playlist[this.data.queue[this.data.current]]);
+        this.eventBus.emit(C.DRAW_TIMELINE, 0);
+        this.eventBus.emit(C.TRACK_UPDATE, this.data.playlist[this.data.queue[this.data.current]]);
     }
 
     /**
@@ -148,7 +149,7 @@ export class PlayerModel {
     rewind(ratio) {
         document.getElementsByTagName('audio')[0].currentTime =
             document.getElementsByTagName('audio')[0].duration * ratio;
-        this.eventBus.emit('draw timeline', ratio);
+        this.eventBus.emit(C.DRAW_TIMELINE, ratio);
     }
 
     /**
@@ -176,7 +177,7 @@ export class PlayerModel {
         }
         this.data.current = 0;
         this.data.shuffle = true;
-        this.eventBus.emit('draw shuffle', {});
+        this.eventBus.emit(C.DRAW_SHUFFLE, {});
     }
 
     /**
@@ -186,7 +187,7 @@ export class PlayerModel {
         this.data.current = this.data.queue[this.data.current];
         this.data.queue.sort();
         this.data.shuffle = false;
-        this.eventBus.emit('draw unshuffle', {});
+        this.eventBus.emit(C.DRAW_UNSHUFLE, {});
     }
 
     /**
@@ -194,7 +195,7 @@ export class PlayerModel {
      */
     repeat() {
         this.data.repeat = true;
-        this.eventBus.emit('draw repeat', {});
+        this.eventBus.emit(C.DRAW_REPEAT, {});
     }
 
     /**
@@ -203,7 +204,7 @@ export class PlayerModel {
     repeatOne() {
         this.data.repeat = false;
         document.getElementsByTagName('audio')[0].loop = true;
-        this.eventBus.emit('draw repeat one', {});
+        this.eventBus.emit(C.DRAW_REPEAT_ONE, {});
     }
 
     /**
@@ -211,7 +212,7 @@ export class PlayerModel {
      */
     unrepeat() {
         document.getElementsByTagName('audio')[0].loop = false;
-        this.eventBus.emit('draw unrepeat', {});
+        this.eventBus.emit(C.DRAW_UNREPEAT, {});
     }
 
     /**
@@ -219,7 +220,7 @@ export class PlayerModel {
      */
     mute() {
         document.getElementsByTagName('audio')[0].muted = true;
-        this.eventBus.emit('draw mute', {});
+        this.eventBus.emit(C.DRAW_MUTE, {});
     }
 
     /**
@@ -227,6 +228,6 @@ export class PlayerModel {
      */
     unmute() {
         document.getElementsByTagName('audio')[0].muted = false;
-        this.eventBus.emit('draw unmute', {});
+        this.eventBus.emit(C.DRAW_UNMUTE, {});
     }
 }

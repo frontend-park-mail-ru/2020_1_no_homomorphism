@@ -16,6 +16,7 @@ export class ProfileTracksView {
      * @param {Object} tracks
      */
     drawTracks(tracks) {
+        console.log('drawTracks');
         const elem = document.getElementById('profile-track-list');
         elem.className += ' l-profile-base';
         for (let i = 0; i < tracks.length; i++) {
@@ -24,7 +25,8 @@ export class ProfileTracksView {
                 tracks[i].image = '/' + temp;
             }
             // eslint-disable-next-line no-undef,max-len
-            elem.innerHTML += nunjucks.render('../../../views/profile/profile_track.njk', tracks[i]);
+            elem.innerHTML += nunjucks.render('../../../views/profile/profile_tracks.njk', tracks[i]);
+            // elem.innerHTML += nunjucks.render('../../../views/profile/profile_albums.njk');
         }
     }
 }

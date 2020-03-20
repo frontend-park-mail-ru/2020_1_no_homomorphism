@@ -1,3 +1,4 @@
+import * as C from '../libs/constans.js';
 /**
  * Переход по страничкам
  * @class Router
@@ -9,8 +10,10 @@ export class Router {
     constructor() {
         this.root = document.getElementsByClassName('container')[0].children[0];
         this.views = {};
-        this.profileUrl = ['/profile', '/profile/tracks', '/profile/albums',
-            '/profile/playlists', '/profile/artists'];
+        this.profileUrl = [C.URL_PROFILE, C.URL_PROFILE_TRACKS, C.URL_PROFILE_PLAYLISTS,
+            C.URL_PROFILE_ARTISTS, C.URL_PROFILE_ALBUMS];
+        this.forbiddenForLogout = [C.URL_PROFILE, C.URL_PROFILE_TRACKS, C.URL_PROFILE_PLAYLISTS,
+            C.URL_PROFILE_ARTISTS, C.URL_PROFILE_ALBUMS, C.URL_SETTINGS];
     }
 
     /**
@@ -27,7 +30,7 @@ export class Router {
      * @param {string} to
      */
     logoutRedirect(to) {
-        if (['/profile', '/settings'].includes(window.location.pathname)) {
+        if (this.forbiddenForLogout.includes(window.location.pathname)) {
             this.check(to, true);
         }
     }
@@ -52,24 +55,23 @@ export class Router {
         }
         if (!(newPath in this.views)) {
             if (pushState) {
-                window.history.pushState('', {}, '/');
+                window.history.pushState('', {}, C.URL_MAIN);
             }
-            this.views['/'].render(this.root);
-            this.views['player'].render();
+            this.views[C.URL_MAIN].render(this.root);
+            this.views[C.URL_PLAYER].render();
             return;
         }
-        newPath = newPath === '/profile' ? '/profile/tracks' : newPath;
+        newPath = newPath === C.URL_PROFILE ? C.URL_PROFILE_TRACKS : newPath;
         this.curPath = newPath;
         if (pushState) {
             window.history.pushState('', {}, newPath);
         }
         if (this.profileUrl.indexOf(newPath) !== -1) {
             this.views[newPath].render(this.root, newPath);
-            this.views['player'].render();
         } else {
             this.views[newPath].render(this.root);
-            this.views['player'].render();
         }
+        this.views[C.URL_PLAYER].render();
     }
 
     /**
@@ -92,7 +94,7 @@ export class Router {
             }
         });
         this.check(window.location.pathname, true);
-        this.views['player'].setEventListeners();
-        this.views['navbar'].setEventListeners();
+        this.views[C.URL_PLAYER].setEventListeners();
+        this.views[C.URL_NAVBAR].setEventListeners();
     }
 }

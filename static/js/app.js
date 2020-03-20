@@ -7,6 +7,7 @@ import {SignupController} from './controllers/signup.js';
 import {PlayerController} from './controllers/player.js';
 import {ProfileController} from './controllers/profile/profile.js';
 import {SettingsController} from './controllers/settings.js';
+import * as C from '/static/js/libs/constans.js';
 
 window.addEventListener('DOMContentLoaded', () => {
     const router = new Router();
@@ -19,17 +20,17 @@ window.addEventListener('DOMContentLoaded', () => {
     const profileController = new ProfileController(router);
     const settingsController = new SettingsController(router, globalEventBus);
 
-    router.addView('navbar', navbarController.view);
-    router.addView('player', playerController.view);
-    router.addView('/', indexController.view);
-    router.addView('/login', loginController.view);
-    router.addView('/signup', signupController.view);
-    router.addView('/profile', profileController.view);
-    router.addView('/profile/tracks', profileController.view);
-    router.addView('/profile/albums', profileController.view);
-    router.addView('/profile/playlists', profileController.view);
-    router.addView('/profile/artists', profileController.view);
-    router.addView('/settings', settingsController.view);
+    router.addView(C.URL_NAVBAR, navbarController.view);
+    router.addView(C.URL_PLAYER, playerController.view);
+    router.addView(C.URL_MAIN, indexController.view);
+    router.addView(C.URL_LOGIN, loginController.view);
+    router.addView(C.URL_SIGN_UP, signupController.view);
+    router.addView(C.URL_PROFILE, profileController.view);
+    router.addView(C.URL_PROFILE_TRACKS, profileController.view);
+    router.addView(C.URL_PROFILE_PLAYLISTS, profileController.view);
+    router.addView(C.URL_PROFILE_ALBUMS, profileController.view);
+    router.addView(C.URL_PROFILE_ARTISTS, profileController.view);
+    router.addView(C.URL_SETTINGS, settingsController.view);
     router.start();
     playerController.view.render();
     navbarController.view.render();

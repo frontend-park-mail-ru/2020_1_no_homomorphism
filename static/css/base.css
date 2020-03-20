@@ -43,3 +43,9 @@ img {
     margin: 16px;
 }
 
+button,
+button:active,
+button:focus {
+    outline: none;
+}
+

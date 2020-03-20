@@ -1,3 +1,4 @@
+import * as C from '../libs/constans.js';
 /**
  *  вью для входа
  */
@@ -7,7 +8,7 @@ export class LoginView {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on('invalid', this.showErrors);
+        this.eventBus.on(C.INVALID, this.showErrors);
     }
 
     /**
@@ -62,7 +63,7 @@ export class LoginView {
         document.getElementById('global').style.height = '0';
         document.getElementById('global').style.visibility = 'hidden';
         document.getElementById('global').style.marginTop = '0';
-        this.eventBus.emit('submit', {
+        this.eventBus.emit(C.SUBMIT, {
             login: document.getElementById('login').value,
             password: document.getElementById('password').value,
         });

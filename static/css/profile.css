@@ -151,7 +151,7 @@ img#avatar {
     transform: scale(1.1);
 }
 
-.is-touched-profile-selection{
+.is-touched-profile-section {
     background: #eee;
     border-radius: 5px;
     cursor: pointer;
@@ -184,9 +184,13 @@ img#avatar {
     transition-duration: 0.5s;
 }
 
-.l-profile-albums {
-
+.l-profile-playlist-list, .l-profile-album-playlist-list .l-profile-artist-list{
+    display: block;
+    padding: 0;
+    list-style: none;
 }
+
+/* STYLES FOR TRACKS */
 
 .list-of-tracks {
     list-style-type: none;
@@ -212,7 +216,7 @@ img#avatar {
     cursor: pointer;
 }
 
-.m-profile-track{
+.m-profile-track {
     animation-duration: 1s;
     animation-name: slidein;
 }
@@ -236,7 +240,6 @@ img#avatar {
     border-radius: 5px;
 }
 
-
 .l-profile-track:hover .m-profile-track-image {
     transition: 0.3s;
     -webkit-transform: scale(2);
@@ -247,7 +250,6 @@ img#avatar {
 
 .l-profile-track:not(:hover) .m-profile-track-image {
     transition: 0.1s;
-
 }
 
 .l-profile-track:hover .m-profile-button-play {
@@ -265,9 +267,84 @@ img#avatar {
     opacity: 0;
     margin-left: -56px;
     margin-top: 20px;
-
 }
 
 .m-profile-track-name {
     margin-top: -40px;
+}
+
+/* STYLES FOR PLAYLISTS */
+
+.l-profile-playlists img {
+    float: left;
+    /*margin: 0 15px 0 0;*/
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+}
+
+.l-profile-playlists {
+    float: top;
+    animation-duration: 1s;
+    /*animation-name: slidein;*/
+    /*padding: 16px;*/
+    overflow: hidden;
+    margin: 16px;
+    display: inline-block;
+    width: 90%;
+    max-width: 200px;
+    max-height: 270px;
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px -3px rgba(0, 0, 0, 0.5);
+    transition: transform 0.1s ease-in-out, box-shadow 0.1s;
+}
+
+.l-profile-playlists:hover {
+    background: #eee;
+    cursor: pointer;
+    transform: translateY(-0.5rem) scale(1.0125);
+    box-shadow: 0 3px 10px -3px rgba(0, 0, 0, 0.5);
+}
+
+.l-profile-playlists-description {
+    display: block;
+    color: #515151;
+    margin-top: -20px;
+    padding-bottom: 32px;
+    padding-left: 6px;
+    padding-right: 6px;
+    text-decoration: none;
+    /*white-space: nowrap; */
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis; */
+}
+.card-list {
+    display: block;
+    padding: 0;
+    list-style: none;
+}
+
+.l-profile-playlists:hover .m-profile-button-play-playlist {
+    opacity: 1;
+    -webkit-transform: scale(6);
+    transform: translateY(-100px) translateX(-16px) scale(6);
+}
+
+.l-profile-playlists:hover .m-profile-playlist-image {
+    transition: 0.3s;
+    opacity: 0.5;
+}
+
+.m-profile-button-play-playlist {
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+    background: url(../../static/img/play.svg) no-repeat;
+    border: yellow;
+    cursor: pointer;
+    opacity: 0;
+    margin-left: 56px !important;
+
+    /*margin-top: 20px;*/
 }

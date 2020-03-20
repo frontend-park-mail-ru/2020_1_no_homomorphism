@@ -13,14 +13,6 @@ export class ProfileModel {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.data = {
-            queue: [],
-            playlist: [],
-            current: 0,
-            playing: false,
-            shuffle: false,
-            repeat: false,
-        };
         this.eventBus.on(C.GET_PROFILE_DATA, this.getUserData.bind(this));
         // this.eventBus.on('get user tracks', this.getTracks.bind(this));
     }
@@ -28,11 +20,11 @@ export class ProfileModel {
     /**
      * получает профиль юзера
      */
-    getUserData() {
+    getUserData() { // TODO обработать некорректные события
         Api.profileFetch()
             .then((res) => {
                 if (res === undefined) {
-                    this.eventBus.emit('redirect', '/');
+                    this.eventBus.emit(C.REDIRECT, C.URL_MAIN);
                     return;
                 }
                 if (res.ok) {
@@ -41,7 +33,7 @@ export class ProfileModel {
                             this.eventBus.emit(C.RENDER_PROFILE_DATA, data);
                         });
                 } else {
-                    this.eventBus.emit('no answer', '/');
+                    this.eventBus.emit(C.NO_ANSWER, C.URL_MAIN);
                 }
             });
     }

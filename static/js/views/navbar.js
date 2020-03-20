@@ -1,3 +1,4 @@
+import * as C from '../libs/constans.js';
 /**
  *  вью для навбара
  */
@@ -9,21 +10,21 @@ export class NavbarView {
     constructor(eventBus, globalEventBus) {
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
-        this.globalEventBus.on('login', this.login.bind(this));
+        this.globalEventBus.on(C.LOGIN_SUCCESS, this.login.bind(this));
     }
 
     /**
      * рендерит навбар
      */
     render() {
-        this.eventBus.on('cookie', (loggedIn) => {
+        this.eventBus.on(C.DRAW_COOKIE_RESULT, (loggedIn) => {
             if (loggedIn) {
                 this.login();
             } else {
                 this.logout();
             }
         });
-        this.eventBus.emit('cookie fetch', {});
+        this.eventBus.emit(C.CHECK_COOKIE, {});
     }
     /**
      * Sets event listeners
@@ -36,7 +37,7 @@ export class NavbarView {
      * Реагирует на логин
      */
     login() {
-        this.eventBus.on('user data', (data) => {
+        this.eventBus.on(C.RENDER_LOGGED, (data) => {
             document.getElementById('profile-link').innerHTML =
                 // eslint-disable-next-line no-undef
                 nunjucks.render('../../../views/templates/profileLink.njk', data);
@@ -45,18 +46,18 @@ export class NavbarView {
             document.getElementById('logout-button').style.visibility = 'visible';
             document.getElementById('profile-link').style.visibility = 'visible';
         });
-        this.eventBus.emit('get user data', {});
+        this.eventBus.emit(C.GET_USER_DATA, {});
     }
 
     /**
      * рисует кнопочку логаута
      */
     logout() {
-        this.eventBus.emit('logout', {});
+        this.eventBus.emit(C.RENDER_NOT_LOGGED, {});
         document.getElementById('login-link').style.visibility = 'visible';
         document.getElementById('signup-link').style.visibility = 'visible';
         document.getElementById('logout-button').style.visibility = 'hidden';
         document.getElementById('profile-link').style.visibility = 'hidden';
-        this.globalEventBus.emit('logout redirect', '/');
+        this.globalEventBus.emit(C.LOGOUT_REDIRECT, '/');
     }
 }

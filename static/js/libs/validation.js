@@ -1,3 +1,4 @@
+import * as C from '../libs/constans.js';
 /**
  * Валидация данных
  * @class Validation
@@ -9,30 +10,28 @@ export class Validation {
      */
     static email(email = '') {
         if (email === '') {
-            return 'Enter email';
+            return C.VALID_EMAIL_EMPTY;
         }
-        const regExpr = new RegExp('(.)+@(.)+');
+        const regExpr = new RegExp(C.REGEX_EMAIL);
         if (!email.match(regExpr)) {
-            return 'Incorrect email syntax';
+            return C.VALID_EMAIL_INCORRECT;
         }
         return '';
     }
-
     /**
      * @param {String} login
      * @return {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
      */
     static login(login = '') {
-        const regExpr = new RegExp('^[a-zA-Z0-9_.]{3,}$');
+        const regExpr = new RegExp(C.REGEX_LOGIN);
         if (login === '') {
-            return 'Enter login';
+            return C.VALID_LOGIN_EMPTY;
         }
         if (!login.match(regExpr)) {
-            return 'Login must contain at least 3 letters or numbers';
+            return C.VALID_LOGIN_INCORRECT;
         }
         return '';
     }
-
     /**
      * @param {String} pass1 Пароль
      * @param {String} pass2 Повтор пароля
@@ -41,21 +40,20 @@ export class Validation {
      */
     static password(pass1 = '', pass2 = '', passConfirm = false) {
         if (pass1 === '') {
-            return 'Enter password';
+            return C.VALID_PASS_EMPTY;
         }
         if (pass2 === '' && passConfirm) {
-            return 'Repeat the password';
+            return C.VALID_REPEAT_PASS_EMPTY;
         }
         if (pass1 !== pass2 && passConfirm) {
-            return 'Passwords must match';
+            return C.VALID_PASSES_DIFF;
         }
-        const regExpr = new RegExp('^[a-zA-Z0-9]{3,}$');
+        const regExpr = new RegExp(C.REGEX_PASSWORD);
         if (!pass1.match(regExpr)) {
-            return 'Password must contain at least 3 letters or numbers';
+            return C.VALID_PASS_INCORRECT;
         }
         return '';
     }
-
     /**
      * @param {number} size Размер файла
      * @param {String} extension Расширение
@@ -63,11 +61,10 @@ export class Validation {
      */
     static image(size, extension) {
         if (size > 1048576) {
-            return 'Max allowable size - 1Mb';
+            return C.VALID_IMG_TOO_BIG;
         }
-        const allowableExtension = ['png', 'jpg', 'jpeg', 'gif'];
-        if (allowableExtension.indexOf(extension) === -1) {
-            return 'Allowable extensions - png, jpg, jpeg, gif';
+        if (C.ALLOWABLE_EXTENSIONS.indexOf(extension) === -1) {
+            return C.VALID_IMG_WRONG_EXT;
         }
         return '';
     }

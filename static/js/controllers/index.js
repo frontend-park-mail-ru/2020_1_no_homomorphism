@@ -1,6 +1,5 @@
 import {IndexModel} from '../models/index.js';
 import {IndexView} from '../views/index.js';
-
 /**
  * Контроллер для главной страницы
  */

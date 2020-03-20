@@ -13,33 +13,25 @@ export class ProfileAlbumsModel {
     constructor(eventBus) {
         eventBus.on(C.ID_ALBUMS_SECTION, this.getAlbums.bind(this));
         this.eventBus = eventBus;
-        this.data = {
-            queue: [],
-            playlist: [],
-            current: 0,
-            playing: false,
-            shuffle: false,
-            repeat: false,
-        };
+        this.playlist = [];
     }
 
     /**
      * Получение списка альбомов
      */
     getAlbums() {
-        if (this.data.playlist.length === 6) {
-            this.eventBus.emit('render profile albums', {});
+        if (this.playlist.length === 6) {
+            this.eventBus.emit(C.RENDER_PROFILE_ALBUMS, this.playlist);
         } else {
             for (let i = 12344; i < 12350; i++) {
                 Api.trackFetch(i.toString())
                     .then((response) => response.json())
                     .then((track) => {
-                        this.data.playlist.push(track);
-                        this.data.queue.push(this.data.playlist.length - 1);
+                        this.playlist.push(track);
                     })
                     .then(() => {
-                        if (this.data.playlist.length === 6) {
-                            this.eventBus.emit('render profile albums', {});
+                        if (this.playlist.length === 6) {
+                            this.eventBus.emit(C.RENDER_PROFILE_ALBUMS, this.playlist);
                         }
                     });
             }

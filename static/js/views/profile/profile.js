@@ -1,5 +1,4 @@
 import * as C from '../../libs/constans.js';
-
 /**
  * вью для профиля
  */
@@ -11,22 +10,9 @@ export class ProfileView {
         this.eventBus = eventBus;
         this.previousOpen = '';
         this.currentOpen = '';
+        this.url = '';
+        this.timeRendered = 0;
         this.eventBus.on(C.CHOOSE_SECTION, this.chooseSection.bind(this));
-    }
-
-
-    /**
-     * Подписка на события
-     * */
-    setEventListeners() {
-        document.getElementById(C.ID_TRACKS_SECTION).addEventListener('click',
-            this.trackClick.bind(this));
-        document.getElementById(C.ID_PLAYLISTS_SECTION).addEventListener('click',
-            this.playlistClick.bind(this));
-        document.getElementById(C.ID_ALBUMS_SECTION).addEventListener('click',
-            this.albumClick.bind(this));
-        document.getElementById(C.ID_ARTISTS_SECTION).addEventListener('click',
-            this.artistsClick.bind(this));
     }
 
     /**
@@ -35,37 +21,39 @@ export class ProfileView {
      * @param {string} url
      */
     render(root, url) {
-        this.eventBus.on(C.RENDER_PROFILE_DATA, (data) => {
-            // eslint-disable-next-line no-undef
-            root.innerHTML = nunjucks.render(C.PROFILE_TEMPLATE, data);
-            this.setEventListeners();
-            this.eventBus.emit(C.CHOOSE_SECTION, {url});
-            this.eventBus.emit(this.currentOpen, {});
-        });
+        if (this.timeRendered === 0) {
+            this.eventBus.on(C.RENDER_PROFILE_DATA, (data) => {
+                // eslint-disable-next-line no-undef
+                root.innerHTML = nunjucks.render(C.PROFILE_TEMPLATE, data);
+                this.eventBus.emit(C.CHOOSE_SECTION, {});
+                console.log(this.currentOpen);
+                this.eventBus.emit(this.currentOpen, {});
+            });
+        }
+        this.url = url;
         this.eventBus.emit(C.GET_PROFILE_DATA, {});
+        this.timeRendered++;
     }
 
     /**
      * Определение секции нажатия
-     * @param {Object} str
      */
-    chooseSection(str) {
-        switch (str.url) {
+    chooseSection() {
+        switch (this.url) {
         case C.URL_PROFILE:
-        case C.URL_TRACKS:
+        case C.URL_PROFILE_TRACKS:
             this.currentOpen = C.ID_TRACKS_SECTION;
             break;
-        case C.URL_PLAYLISTS:
+        case C.URL_PROFILE_PLAYLISTS:
             this.currentOpen = C.ID_PLAYLISTS_SECTION;
             break;
-        case C.URL_ALBUMS:
+        case C.URL_PROFILE_ALBUMS:
             this.currentOpen = C.ID_ALBUMS_SECTION;
             break;
-        case C.URL_ARTISTS:
+        case C.URL_PROFILE_ARTISTS:
             this.currentOpen = C.ID_ARTISTS_SECTION;
             break;
         }
-        this.previousOpen = this.currentOpen;
         const curSection = document.getElementById(this.currentOpen);
         curSection.classList.add(C.SELECTED_CLASS);
     }
@@ -74,7 +62,10 @@ export class ProfileView {
      * Нажатие на треки
      */
     trackClick() {
+        console.log('----trackClick  ' + this.previousOpen);
         if (this.previousOpen !== C.ID_TRACKS_SECTION) {
+            this.previousOpen = this.currentOpen;
+            this.currentOpen = C.ID_TRACKS_SECTION;
             this.eventBus.emit(C.ID_TRACKS_SECTION, {});
         }
         // }
@@ -119,39 +110,40 @@ export class ProfileView {
      * Нажатие на альбомы
      */
     albumClick() {
-        if (this.previousOpen !== C.ID_ALBUMS_SECTION) {
-            this.eventBus.emit(C.ID_ALBUMS_SECTION, {});
-        }
+        console.log('----albumClick  ' + this.previousOpen);
+        this.currentOpen = C.ID_ALBUMS_SECTION;
+        // if (this.previousOpen !== C.ID_ALBUMS_SECTION) {
+        //     this.previousOpen = this.currentOpen;
+        //     this.currentOpen = C.ID_ALBUMS_SECTION;
+        //     this.eventBus.emit(C.ID_ALBUMS_SECTION, {});
+        // }
     }
 
     /**
      * Нажатие на плейлисты
      */
     playlistClick() {
-        this.trackClick();
+        console.log('----playlistClick  ' + this.previousOpen);
+        console.log(this.eventBus);
+        this.currentOpen = C.ID_PLAYLISTS_SECTION;
+        // if (this.previousOpen !== C.ID_PLAYLISTS_SECTION) {
+        //     this.previousOpen = this.currentOpen;
+        //     this.currentOpen = C.ID_PLAYLISTS_SECTION;
+        //     this.eventBus.emit(C.ID_PLAYLISTS_SECTION, {});
+        // }
     }
 
     /**
      * Нажатие
      */
     artistsClick() {
-        this.trackClick();
-    }
-
-    /**
-     * Удаление отрисовки списка треков
-     */
-    undrawAlbums() {
-        document.getElementsByClassName('l-profile-album-list')[0].innerHTML = '';
-    }
-
-    /**
-     * Удаление отрисовки списка треков
-     */
-    undrawTracks() {
-        document.getElementsByClassName('l-profile-track-list')[0].innerHTML = '';
-        const elem = document.getElementById('profile-track-list');
-        elem.classList.remove('l-profile-base');
+        console.log('artistsClick  ' + this.previousOpen);
+        this.currentOpen = C.ID_ARTISTS_SECTION;
+        // if (this.previousOpen !== C.ID_ARTISTS_SECTION) {
+        //     this.previousOpen = this.currentOpen;
+        //     this.currentOpen = C.ID_ARTISTS_SECTION;
+        //     this.eventBus.emit(C.ID_ARTISTS_SECTION, {});
+        // }
     }
 }
 
