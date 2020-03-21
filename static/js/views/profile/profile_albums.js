@@ -17,10 +17,7 @@ export class ProfileAlbumsView {
      * @param {Object} albums
      */
     drawAlbums(albums) {
-        console.log('drawAlbums');
         const elem = document.getElementById('profile-album-playlist-list');
-        console.log(elem);
-        console.log(albums.length);
         elem.className += ' l-profile-base';
         for (let i = 0; i < albums.length; i++) {
             const temp = albums[i].image;
@@ -30,6 +27,5 @@ export class ProfileAlbumsView {
             // eslint-disable-next-line no-undef,max-len
             elem.innerHTML += nunjucks.render(TEMPLATES.PROFILE_ALBUMS, albums[i]);
         }
-        console.log(elem);
     }
 }

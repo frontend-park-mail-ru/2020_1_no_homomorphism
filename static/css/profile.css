@@ -32,9 +32,6 @@ p {
 }
 
 .l-profile-top-image {
-    /*background: url(/static/img/background/back-def.png);*/
-    /*background-color: #b39ddb;*/
-    /*background-size: cover;*/
     background-clip: padding-box;
     border-radius: 6px 6px 0 0;
     height: 220px;
@@ -95,9 +92,6 @@ img#avatar {
 .l-profile-titles .col {
     margin-top: 100px;
     padding-top: 8px;
-    /*border-left-style: solid;*/
-    /*border-left-width: 1px;*/
-    /*border-left-color: #673ab7;*/
 }
 
 .m-profile-tiny-ref {
@@ -112,13 +106,11 @@ img#avatar {
     border-radius: 32px;
     padding: 32px;
     margin-top: 16px;
-    /*background-color: #ede7f6;*/
-    /*border-radius: 0 0 30px 30px;*/
 }
 
 .m-profile-settings {
-    pointer-events: none; /* делаем ссылку некликабельной */
-    cursor: default; /* устанавливаем курсор в виде стрелки */
+    pointer-events: none;
+    cursor: default;
     color: #000 !important;
     text-decoration: none
 }
@@ -277,7 +269,6 @@ img#avatar {
 
 .l-profile-playlists img {
     float: left;
-    /*margin: 0 15px 0 0;*/
     object-fit: cover;
     width: 200px;
     height: 200px;
@@ -286,8 +277,6 @@ img#avatar {
 .l-profile-playlists {
     float: top;
     animation-duration: 1s;
-    /*animation-name: slidein;*/
-    /*padding: 16px;*/
     overflow: hidden;
     margin: 16px;
     display: inline-block;
@@ -315,9 +304,6 @@ img#avatar {
     padding-left: 6px;
     padding-right: 6px;
     text-decoration: none;
-    /*white-space: nowrap; */
-    /*overflow: hidden;*/
-    /*text-overflow: ellipsis; */
 }
 .card-list {
     display: block;
@@ -345,6 +331,4 @@ img#avatar {
     cursor: pointer;
     opacity: 0;
     margin-left: 56px !important;
-
-    /*margin-top: 20px;*/
 }

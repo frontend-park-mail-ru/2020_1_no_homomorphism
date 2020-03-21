@@ -18,8 +18,6 @@ export class ProfileArtistsView {
      */
     drawArtists(artists) {
         const elem = document.getElementById('profile-album-playlist-list');
-        console.log(elem);
-        console.log(artists.length);
         elem.className += ' l-profile-base';
         for (let i = 0; i < artists.length; i++) {
             const temp = artists[i].image;
@@ -29,6 +27,5 @@ export class ProfileArtistsView {
             // eslint-disable-next-line no-undef,max-len
             elem.innerHTML += nunjucks.render(TEMPLATES.PROFILE_ARTISTS, artists[i]);
         }
-        console.log(elem);
     }
 }

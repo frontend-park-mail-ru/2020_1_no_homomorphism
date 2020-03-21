@@ -139,8 +139,6 @@ export class PlayerView {
         document.querySelectorAll('.track-list .row').forEach((row) => {
             row.onmouseover = (event) => console.log(event);
         });
-        // this.elements.addButtons.addEventListener();
-        // this.elements.deleteButtons.addEventListener();
     }
     /**
      * Слушает отпускание клавиши мыши

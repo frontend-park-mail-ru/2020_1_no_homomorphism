@@ -17,7 +17,6 @@ export class ProfileTracksView {
      * @param {Object} tracks
      */
     drawTracks(tracks) {
-        console.log('drawTracks');
         const elem = document.getElementById('profile-track-list');
         elem.className += ' l-profile-base';
         for (let i = 0; i < tracks.length; i++) {
