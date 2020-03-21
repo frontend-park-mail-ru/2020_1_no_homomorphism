@@ -5,7 +5,7 @@ import {postFetch, getFetch, deleteFetch, putFetch, postImageFetch} from './fetc
  * @class
  * @type {Api}
  */
-export class Api {
+export default class Api {
     /**
      * Логин вход
      * @param {string} login

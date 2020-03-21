@@ -1,4 +1,4 @@
-import {Api} from '../../libs/api.js';
+import Api from '../../libs/api.js';
 import {PROFILE} from '../../libs/constans.js';
 
 // import {Router} from '../libs/router.js';

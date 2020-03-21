@@ -1,4 +1,4 @@
-import {Api} from '../../libs/api.js';
+import Api from '../../libs/api.js';
 import {PROFILE} from '../../libs/constans.js';
 
 // import {Router} from '../libs/PROFILE.js';
@@ -14,7 +14,6 @@ export class ProfileModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.eventBus.on(PROFILE.GET_DATA, this.getUserData.bind(this));
-        // this.eventBus.on('get user tracks', this.getTracks.bind(this));
     }
 
     /**

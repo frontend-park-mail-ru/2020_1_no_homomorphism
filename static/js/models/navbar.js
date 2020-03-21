@@ -1,4 +1,4 @@
-import {Api} from '../libs/api.js';
+import Api from '../libs/api.js';
 import {NAVBAR} from '../libs/constans.js';
 
 /**

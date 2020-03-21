@@ -3,7 +3,7 @@ import {VALIDATION} from '../libs/constans.js';
  * Валидация данных
  * @class Validation
  */
-export class Validation {
+export default class Validation {
     /**
      * @param {String} email
      * @return {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки

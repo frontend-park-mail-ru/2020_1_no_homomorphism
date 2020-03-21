@@ -1,4 +1,4 @@
-import * as C from '../libs/constans.js';
+import {SERVER_PATH} from '../libs/constans.js';
 
 /* *
  * POST
@@ -8,7 +8,7 @@ import * as C from '../libs/constans.js';
  * return {Promise<Response>}
  */
 export const postFetch = (path = '/', body = {}) => {
-    return fetch(C.SERVER_PATH + path, {
+    return fetch(SERVER_PATH + path, {
         method: 'POST',
         mode: 'cors', // no-cors, cors, *same-origin (последнее - значение по умолчанию)
         credentials: 'include', // include, *same-origin, omit (относится к кукам)
@@ -27,7 +27,7 @@ export const postFetch = (path = '/', body = {}) => {
  * return {Promise<Response>}
  */
 export const getFetch = (path = '/') => {
-    return fetch(C.SERVER_PATH + path, {
+    return fetch(SERVER_PATH + path, {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
@@ -41,7 +41,7 @@ export const getFetch = (path = '/') => {
  * return {Promise<Response>}
  */
 export const deleteFetch = (path = '/') => {
-    return fetch(C.SERVER_PATH + path, {
+    return fetch(SERVER_PATH + path, {
         method: 'DELETE',
         mode: 'cors',
         credentials: 'include',
@@ -56,7 +56,7 @@ export const deleteFetch = (path = '/') => {
  * return {Promise<Response>}
  */
 export const putFetch = (path = '/', body = {}) => {
-    return fetch(C.SERVER_PATH + path, {
+    return fetch(SERVER_PATH + path, {
         method: 'PUT',
         mode: 'cors',
         credentials: 'include',
@@ -75,7 +75,7 @@ export const putFetch = (path = '/', body = {}) => {
  * return {Promise<Response>}
  */
 export const postImageFetch = (path = '/image', body = {}) => {
-    return fetch(C.SERVER_PATH + path, {
+    return fetch(SERVER_PATH + path, {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',
@@ -91,7 +91,7 @@ export const postImageFetch = (path = '/image', body = {}) => {
  * return {Promise<Response>}
  */
 export const patchFetch = (path = '/', body = {}) => {
-    return fetch(C.SERVER_PATH + path, {
+    return fetch(SERVER_PATH + path, {
         method: 'PATCH',
         mode: 'cors',
         credentials: 'include',

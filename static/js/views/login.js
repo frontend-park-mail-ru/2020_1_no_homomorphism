@@ -1,4 +1,5 @@
 import {LOGIN, TEMPLATES} from '../libs/constans.js';
+
 /**
  *  вью для входа
  */
@@ -12,9 +13,9 @@ export class LoginView {
     }
 
     /**
-    * рендерит страничку входа
-    * @param {Object} root
-    */
+     * рендерит страничку входа
+     * @param {Object} root
+     */
     render(root) {
         // eslint-disable-next-line no-undef
         root.innerHTML = nunjucks.render(TEMPLATES.LOGIN);
@@ -68,8 +69,4 @@ export class LoginView {
             password: document.getElementById('password').value,
         });
     }
-
-    // changeRemember() {
-    //    this.eventBus.emit('remember changed', document.getElementById('remember').checked);
-    // }
 }

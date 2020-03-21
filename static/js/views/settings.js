@@ -1,4 +1,5 @@
 import {SETTINGS} from '../libs/constans.js';
+
 /**
  * вью для настроек
  */
@@ -76,8 +77,4 @@ export class SettingsView {
             // outer              : document.getElementById('outer-url').value,
         });
     }
-
-    // addOuterClick() {
-    //    this.eventBus.emit('add outer', document.getElementById('outer-url').value);
-    // }
 }

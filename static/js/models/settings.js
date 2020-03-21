@@ -1,5 +1,5 @@
-import {Validation} from '../libs/validation.js';
-import {Api} from '../libs/api.js';
+import Validation from '../libs/validation.js';
+import Api from '../libs/api.js';
 import {SETTINGS} from '../libs/constans.js';
 
 /**
@@ -15,7 +15,6 @@ export class SettingsModel {
         this.eventBus.on(SETTINGS.AVATAR_UPLOAD, this.resetAvatar.bind(this));
         this.eventBus.on(SETTINGS.SUBMIT, this.submit.bind(this));
         this.eventBus.on(SETTINGS.GET_USER_DATA, this.getUserData.bind(this));
-        // this.eventBus.on('add outer', this.model.addOuter);
     }
 
     /**
@@ -64,7 +63,6 @@ export class SettingsModel {
      * @param {Object} values
      */
     submit(values) {
-        // const validation = new Validation;
         const resPassword = Validation.password(
             values.newPassword,
             values.newPasswordConfirm,

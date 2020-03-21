@@ -1,4 +1,4 @@
-import {Api} from '../libs/api.js';
+import Api from '../libs/api.js';
 import {PLAYER} from '../libs/constans.js';
 
 /**
@@ -103,7 +103,8 @@ export class PlayerModel {
             document.getElementsByTagName('audio')[0].play();
         }
         this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
-        this.eventBus.emit(PLAYER.TRACK_UPDATE, this.data.playlist[this.data.queue[this.data.current]]);
+        this.eventBus.emit(PLAYER.TRACK_UPDATE,
+            this.data.playlist[this.data.queue[this.data.current]]);
     }
 
     /**
@@ -139,7 +140,8 @@ export class PlayerModel {
             document.getElementsByTagName('audio')[0].play();
         }
         this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
-        this.eventBus.emit(PLAYER.TRACK_UPDATE, this.data.playlist[this.data.queue[this.data.current]]);
+        this.eventBus.emit(PLAYER.TRACK_UPDATE,
+            this.data.playlist[this.data.queue[this.data.current]]);
     }
 
     /**

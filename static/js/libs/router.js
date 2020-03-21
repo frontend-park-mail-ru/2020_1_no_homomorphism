@@ -1,4 +1,4 @@
-import * as C from '../libs/constans.js';
+import {URL} from '../libs/constans.js';
 
 /**
  * Переход по страничкам
@@ -11,10 +11,10 @@ export class Router {
     constructor() {
         this.root = document.getElementsByClassName('container')[0].children[0];
         this.views = {};
-        this.profileUrl = [C.URL.PROFILE, C.URL.PROFILE_TRACKS, C.URL.PROFILE_PLAYLISTS,
-            C.URL.PROFILE_ARTISTS, C.URL.PROFILE_ALBUMS];
-        this.forbiddenForLogout = [C.URL.PROFILE, C.URL.PROFILE_TRACKS, C.URL.PROFILE_PLAYLISTS,
-            C.URL.PROFILE_ARTISTS, C.URL.PROFILE_ALBUMS, C.URL.SETTINGS];
+        this.profileUrl = [URL.PROFILE, URL.PROFILE_TRACKS, URL.PROFILE_PLAYLISTS,
+            URL.PROFILE_ARTISTS, URL.PROFILE_ALBUMS];
+        this.forbiddenForLogout = [URL.PROFILE, URL.PROFILE_TRACKS, URL.PROFILE_PLAYLISTS,
+            URL.PROFILE_ARTISTS, URL.PROFILE_ALBUMS, URL.SETTINGS];
     }
 
     /**
@@ -56,20 +56,20 @@ export class Router {
         }
         if (!(newPath in this.views)) {
             if (pushState) {
-                window.history.pushState('', {}, C.URL.MAIN);
+                window.history.pushState('', {}, URL.MAIN);
             }
-            this.views[C.URL.MAIN].render(this.root);
-            this.views[C.URL.PLAYER].render();
+            this.views[URL.MAIN].render(this.root);
+            this.views[URL.PLAYER].render();
             return;
         }
-        newPath = newPath === C.URL.PROFILE ? C.URL.PROFILE_TRACKS : newPath;
+        newPath = newPath === URL.PROFILE ? URL.PROFILE_TRACKS : newPath;
         this.curPath = newPath;
         if (pushState) {
             window.history.pushState('', {}, newPath);
         }
         (this.profileUrl.indexOf(newPath) !== -1) ? this.views[newPath].render(this.root, newPath):
             this.views[newPath].render(this.root);
-        this.views[C.URL.PLAYER].render();
+        this.views[URL.PLAYER].render();
     }
 
     /**
@@ -92,7 +92,7 @@ export class Router {
             }
         });
         this.check(window.location.pathname, true);
-        this.views[C.URL.PLAYER].setEventListeners();
-        this.views[C.URL.NAVBAR].setEventListeners();
+        this.views[URL.PLAYER].setEventListeners();
+        this.views[URL.NAVBAR].setEventListeners();
     }
 }

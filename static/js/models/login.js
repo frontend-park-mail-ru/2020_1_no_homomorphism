@@ -1,5 +1,5 @@
-import {Api} from '../libs/api.js';
-import {Validation} from '../libs/validation.js';
+import Api from '../libs/api.js';
+import Validation from '../libs/validation.js';
 import {LOGIN, URL} from '../libs/constans.js';
 
 /**
@@ -49,8 +49,4 @@ export class LoginModel {
                 });
         }
     }
-
-    /* changeRemember(state) {
-        this.data.remember = state;
-    }*/
 }

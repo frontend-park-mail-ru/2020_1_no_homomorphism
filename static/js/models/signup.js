@@ -1,5 +1,5 @@
-import {Validation} from '../libs/validation.js';
-import {Api} from '../libs/api.js';
+import Validation from '../libs/validation.js';
+import Api from '../libs/api.js';
 import {SIGN_UP} from '../libs/constans.js';
 
 /**
