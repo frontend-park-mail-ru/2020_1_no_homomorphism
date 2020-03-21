@@ -1,4 +1,5 @@
-import * as C from '../../libs/constans.js';
+import {PROFILE, TEMPLATES} from '../../libs/constans.js';
+
 /**
  * вью для профиля
  */
@@ -7,7 +8,7 @@ export class ProfileTracksView {
      * @param {EventBus} eventBus
      */
     constructor(eventBus) {
-        eventBus.on(C.RENDER_PROFILE_TRACKS, this.drawTracks.bind(this));
+        eventBus.on(PROFILE.RENDER_TRACKS, this.drawTracks.bind(this));
         this.eventBus = eventBus;
     }
 
@@ -25,8 +26,7 @@ export class ProfileTracksView {
                 tracks[i].image = '/' + temp;
             }
             // eslint-disable-next-line no-undef,max-len
-            elem.innerHTML += nunjucks.render('../../../views/profile/profile_tracks.njk', tracks[i]);
-            // elem.innerHTML += nunjucks.render('../../../views/profile/profile_albums.njk');
+            elem.innerHTML += nunjucks.render(TEMPLATES.PROFILE_TRACKS, tracks[i]);
         }
     }
 }

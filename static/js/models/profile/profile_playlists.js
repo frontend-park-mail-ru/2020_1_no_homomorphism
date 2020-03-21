@@ -1,5 +1,5 @@
 import {Api} from '../../libs/api.js';
-import * as C from '../../libs/constans.js';
+import {PROFILE} from '../../libs/constans.js';
 /**
  * Модель Профиля
  */
@@ -9,7 +9,7 @@ export class ProfilePlaylistsModel {
      * @param {EventBus} eventBus
      */
     constructor(eventBus) {
-        eventBus.on(C.ID_PLAYLISTS_SECTION, this.getTracks.bind(this));
+        eventBus.on(PROFILE.ID_PLAYLISTS_SECTION, this.getTracks.bind(this));
         this.eventBus = eventBus;
         this.data = {
             queue: [],
@@ -26,7 +26,7 @@ export class ProfilePlaylistsModel {
      */
     getTracks() {
         if (this.data.playlist.length === 6) {
-            this.eventBus.emit(C.RENDER_PROFILE_PLAYLISTS, this.data.playlist);
+            this.eventBus.emit(PROFILE.RENDER_PLAYLISTS, this.data.playlist);
         } else {
             for (let i = 12344; i < 12350; i++) {
                 Api.trackFetch(i.toString())
@@ -37,7 +37,7 @@ export class ProfilePlaylistsModel {
                     })
                     .then(() => {
                         if (this.data.playlist.length === 6) {
-                            this.eventBus.emit(C.RENDER_PROFILE_PLAYLISTS, this.data.playlist);
+                            this.eventBus.emit(PROFILE.RENDER_PLAYLISTS, this.data.playlist);
                         }
                     });
             }

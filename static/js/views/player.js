@@ -1,4 +1,4 @@
-import * as C from '../libs/constans.js';
+import {PLAYER} from '../libs/constans.js';
 /**
  *  вью для плеера
  */
@@ -16,19 +16,19 @@ export class PlayerView {
         this.repeatState = 0;
         this.muted = false;
         this.volume = 1;
-        this.eventBus.on(C.DRAW_PLAY, this.drawPlay.bind(this));
-        this.eventBus.on(C.DRAW_PAUSE, this.drawPause.bind(this));
-        this.eventBus.on(C.TRACK_UPDATE, this.updateTrack.bind(this));
-        this.eventBus.on(C.DRAW_TRACKLIST, this.drawTracklist.bind(this));
-        this.eventBus.on(C.DRAW_TIMELINE, this.drawTimeline.bind(this));
-        this.eventBus.on(C.DRAW_SHUFFLE, this.drawShuffle.bind(this));
-        this.eventBus.on(C.DRAW_UNSHUFLE, this.drawUnshuffle.bind(this));
-        this.eventBus.on(C.DRAW_REPEAT, this.drawRepeat.bind(this));
-        this.eventBus.on(C.DRAW_REPEAT_ONE, this.drawRepeatOne.bind(this));
-        this.eventBus.on(C.DRAW_UNREPEAT, this.drawUnrepeat.bind(this));
-        this.eventBus.on(C.DRAW_MUTE, this.drawMute.bind(this));
-        this.eventBus.on(C.DRAW_UNMUTE, this.drawUnmute.bind(this));
-        this.eventBus.emit(C.GET_TRACKS, {});
+        this.eventBus.on(PLAYER.DRAW_PLAY, this.drawPlay.bind(this));
+        this.eventBus.on(PLAYER.DRAW_PAUSE, this.drawPause.bind(this));
+        this.eventBus.on(PLAYER.TRACK_UPDATE, this.updateTrack.bind(this));
+        this.eventBus.on(PLAYER.DRAW_TRACKLIST, this.drawTracklist.bind(this));
+        this.eventBus.on(PLAYER.DRAW_TIMELINE, this.drawTimeline.bind(this));
+        this.eventBus.on(PLAYER.DRAW_SHUFFLE, this.drawShuffle.bind(this));
+        this.eventBus.on(PLAYER.DRAW_UNSHUFLE, this.drawUnshuffle.bind(this));
+        this.eventBus.on(PLAYER.DRAW_REPEAT, this.drawRepeat.bind(this));
+        this.eventBus.on(PLAYER.DRAW_REPEAT_ONE, this.drawRepeatOne.bind(this));
+        this.eventBus.on(PLAYER.DRAW_UNREPEAT, this.drawUnrepeat.bind(this));
+        this.eventBus.on(PLAYER.DRAW_MUTE, this.drawMute.bind(this));
+        this.eventBus.on(PLAYER.DRAW_UNMUTE, this.drawUnmute.bind(this));
+        this.eventBus.emit(PLAYER.GET_TRACKS, {});
     }
     /**
      * Позиционирует плеер
@@ -208,22 +208,22 @@ export class PlayerView {
      */
     playPauseButtonClick() {
         if (this.playing) {
-            this.eventBus.emit(C.PAUSE, {});
+            this.eventBus.emit(PLAYER.PAUSE, {});
         } else {
-            this.eventBus.emit(C.PLAY, {});
+            this.eventBus.emit(PLAYER.PLAY, {});
         }
     }
     /**
      * Слушает клик по кнопке включения предыдущего трека
      */
     prevButtonClick() {
-        this.eventBus.emit(C.PREVIOUS, {});
+        this.eventBus.emit(PLAYER.PREVIOUS, {});
     }
     /**
      * Слушает клик по кнопке включения следующего трека
      */
     nextButtonClick() {
-        this.eventBus.emit(C.NEXT, 'click');
+        this.eventBus.emit(PLAYER.NEXT, 'click');
     }
     /**
      * Слушает вход курсора в зону таймлайна
@@ -255,7 +255,7 @@ export class PlayerView {
             .getBoundingClientRect().x;
         const ratio = width / document.getElementsByClassName('timeline-back')[0]
             .getBoundingClientRect().width;
-        this.eventBus.emit(C.REWIND, ratio);
+        this.eventBus.emit(PLAYER.REWIND, ratio);
     }
     /**
      * Слушает движение мыши по таймлайну
@@ -279,7 +279,7 @@ export class PlayerView {
             .getBoundingClientRect().x;
         const ratio = width / document.getElementsByClassName('timeline-back')[0]
             .getBoundingClientRect().width;
-        this.eventBus.emit(C.REWIND, ratio);
+        this.eventBus.emit(PLAYER.REWIND, ratio);
     }
     /**
      * Слушает вход курсора на кнопку перемешивания
@@ -302,9 +302,9 @@ export class PlayerView {
      */
     shuffleButtonClick() {
         if (!this.shuffled) {
-            this.eventBus.emit(C.SHUFFLE, 'first');
+            this.eventBus.emit(PLAYER.SHUFFLE, 'first');
         } else {
-            this.eventBus.emit(C.UNSHUFFLE, {});
+            this.eventBus.emit(PLAYER.UNSHUFFLE, {});
         }
     }
     /**
@@ -329,13 +329,13 @@ export class PlayerView {
     repeatButtonClick() {
         switch (this.repeatState) {
         case 0:
-            this.eventBus.emit(C.REPEAT, {});
+            this.eventBus.emit(PLAYER.REPEAT, {});
             break;
         case 1:
-            this.eventBus.emit(C.REPEAT_ONE, {});
+            this.eventBus.emit(PLAYER.REPEAT_ONE, {});
             break;
         case 2:
-            this.eventBus.emit(C.UNREPEAT, {});
+            this.eventBus.emit(PLAYER.UNREPEAT, {});
             break;
         }
     }
@@ -419,9 +419,9 @@ export class PlayerView {
      */
     volumeButtonClick() {
         if (this.muted) {
-            this.eventBus.emit(C.UNMUTE, {});
+            this.eventBus.emit(PLAYER.UNMUTE, {});
         } else {
-            this.eventBus.emit(C.MUTE, {});
+            this.eventBus.emit(PLAYER.MUTE, {});
         }
     }
     /**
@@ -457,7 +457,7 @@ export class PlayerView {
      * (воспроизвдение по нажатию)
      */
     drawPlay() {
-        document.getElementsByClassName('play-pause')[0].src = 'static/img/play.svg';
+        document.getElementsByClassName('play-pause')[0].src = '/static/img/play.svg';
         this.playing = false;
     }
     /**
@@ -465,7 +465,7 @@ export class PlayerView {
      * (пауза по нажатию)
      */
     drawPause() {
-        document.getElementsByClassName('play-pause')[0].src = 'static/img/pause.svg';
+        document.getElementsByClassName('play-pause')[0].src = '/static/img/pause.svg';
         this.playing = true;
     }
     /**
@@ -541,14 +541,14 @@ export class PlayerView {
      * Рисует кнопку зацикливания в режиме зацикливания одного трека (активной, с единичкой внутри)
      */
     drawRepeatOne() {
-        document.getElementsByClassName('repeat')[0].src = 'static/img/repeat_one.svg';
+        document.getElementsByClassName('repeat')[0].src = '/static/img/repeat_one.svg';
         this.repeatState = 2;
     }
     /**
      * Рисует кнопку зацикливания в режиме одноразового проигрывания (неактивной)
      */
     drawUnrepeat() {
-        document.getElementsByClassName('repeat')[0].src = 'static/img/repeat.svg';
+        document.getElementsByClassName('repeat')[0].src = '/static/img/repeat.svg';
         document.getElementsByClassName('repeat')[0].style.opacity = '0.4';
         this.repeatState = 0;
     }
@@ -556,7 +556,7 @@ export class PlayerView {
      * Рисует кнопку громкости в беззучном режиме (без волн)
      */
     drawMute() {
-        document.getElementsByClassName('volume')[0].src = 'static/img/volume_mute.svg';
+        document.getElementsByClassName('volume')[0].src = '/static/img/volume_mute.svg';
         this.drawVolume(0);
         this.muted = true;
     }
@@ -565,9 +565,9 @@ export class PlayerView {
      */
     drawUnmute() {
         if (this.volume <= 0.5) {
-            document.getElementsByClassName('volume')[0].src = 'static/img/volume_down.svg';
+            document.getElementsByClassName('volume')[0].src = '/static/img/volume_down.svg';
         } else {
-            document.getElementsByClassName('volume')[0].src = 'static/img/volume_up.svg';
+            document.getElementsByClassName('volume')[0].src = '/static/img/volume_up.svg';
         }
         this.drawVolume(document.getElementsByClassName('volume-scale-back')[0]
             .getBoundingClientRect().height * this.volume);

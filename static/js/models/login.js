@@ -1,6 +1,6 @@
 import {Api} from '../libs/api.js';
 import {Validation} from '../libs/validation.js';
-import * as C from '../libs/constans.js';
+import {LOGIN, URL} from '../libs/constans.js';
 
 /**
  * Модель для страницы входа
@@ -14,7 +14,7 @@ export class LoginModel {
     constructor(eventBus, globalEventBus) {
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
-        this.eventBus.on(C.SUBMIT, this.submit.bind(this));
+        this.eventBus.on(LOGIN.SUBMIT, this.submit.bind(this));
     }
 
     /**
@@ -32,19 +32,19 @@ export class LoginModel {
             errors.password = resPassword;
         }
         if (JSON.stringify(errors) !== '{}') {
-            this.eventBus.emit(C.INVALID, errors);
+            this.eventBus.emit(LOGIN.INVALID, errors);
         } else {
             Api.loginFetch(values.login, values.password)
                 .then((res) => {
                     if (res === undefined) {
-                        this.eventBus.emit(C.REDIRECT, C.URL_MAIN);
+                        this.eventBus.emit(LOGIN.REDIRECT, URL.MAIN);
                         return;
                     }
                     if (res.ok) {
-                        this.globalEventBus.emit(C.LOGIN_SUCCESS, {});
-                        this.eventBus.emit(C.REDIRECT, C.URL_MAIN);
+                        this.globalEventBus.emit(LOGIN.LOGIN_SUCCESS, {});
+                        this.eventBus.emit(LOGIN.REDIRECT, URL.MAIN);
                     } else {
-                        this.eventBus.emit(C.INVALID, {global: 'Login error'}); // TODO ошибка может быть не только такой
+                        this.eventBus.emit(LOGIN.INVALID, {global: 'Login error'}); // TODO ошибка может быть не только такой
                     }
                 });
         }

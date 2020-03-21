@@ -1,4 +1,4 @@
-import * as C from '../libs/constans.js';
+import {LOGIN, TEMPLATES} from '../libs/constans.js';
 /**
  *  вью для входа
  */
@@ -8,7 +8,7 @@ export class LoginView {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on(C.INVALID, this.showErrors);
+        this.eventBus.on(LOGIN.INVALID, this.showErrors);
     }
 
     /**
@@ -17,7 +17,7 @@ export class LoginView {
     */
     render(root) {
         // eslint-disable-next-line no-undef
-        root.innerHTML = nunjucks.render('../../../views/login.njk');
+        root.innerHTML = nunjucks.render(TEMPLATES.LOGIN);
         document.addEventListener('click', (event) => {
             if (event.target.getAttribute('id') === 'submit-login') {
                 event.preventDefault();
@@ -63,7 +63,7 @@ export class LoginView {
         document.getElementById('global').style.height = '0';
         document.getElementById('global').style.visibility = 'hidden';
         document.getElementById('global').style.marginTop = '0';
-        this.eventBus.emit(C.SUBMIT, {
+        this.eventBus.emit(LOGIN.SUBMIT, {
             login: document.getElementById('login').value,
             password: document.getElementById('password').value,
         });

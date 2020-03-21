@@ -1,4 +1,4 @@
-import * as C from '../../libs/constans.js';
+import {PROFILE, TEMPLATES} from '../../libs/constans.js';
 
 /**
  * вью для альбомов профиля
@@ -8,13 +8,13 @@ export class ProfileArtistsView {
      * @param {EventBus} eventBus
      */
     constructor(eventBus) {
-        eventBus.on(C.RENDER_PROFILE_ARTISTS, this.drawArtists.bind(this));
+        eventBus.on(PROFILE.RENDER_ARTISTS, this.drawArtists.bind(this));
         this.eventBus = eventBus;
     }
 
     /**
      * Нажатие
-     ** @param {Object} artists
+     * @param {Object} artists
      */
     drawArtists(artists) {
         const elem = document.getElementById('profile-album-playlist-list');
@@ -27,7 +27,7 @@ export class ProfileArtistsView {
                 artists[i].image = '/' + temp;
             }
             // eslint-disable-next-line no-undef,max-len
-            elem.innerHTML += nunjucks.render('../../../views/profile/profile_artists.njk', artists[i]);
+            elem.innerHTML += nunjucks.render(TEMPLATES.PROFILE_ARTISTS, artists[i]);
         }
         console.log(elem);
     }

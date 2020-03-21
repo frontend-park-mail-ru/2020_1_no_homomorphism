@@ -1,6 +1,6 @@
 import {Validation} from '../libs/validation.js';
 import {Api} from '../libs/api.js';
-import * as C from '../libs/constans.js';
+import {SIGN_UP} from '../libs/constans.js';
 
 /**
  * модель странички регистрации
@@ -14,7 +14,7 @@ export class SignupModel {
     constructor(eventBus, globalEventBus) {
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
-        this.eventBus.on(C.SUBMIT, this.submit.bind(this));
+        this.eventBus.on(SIGN_UP.SUBMIT, this.submit.bind(this));
     }
 
     /**
@@ -39,15 +39,15 @@ export class SignupModel {
             errors.password = resPassword;
         }
         if (JSON.stringify(errors) !== '{}') {
-            this.eventBus.emit(C.INVALID, errors);
+            this.eventBus.emit(SIGN_UP.INVALID, errors);
         } else {
             Api.signupFetch(values.name, values.login, 'yes', values.email, values.password)
                 .then((res) => {
                     if (res.ok) {
-                        this.globalEventBus.emit(C.LOGIN_SUCCESS, {});
-                        this.eventBus.emit(C.REDIRECT, '/');
+                        this.globalEventBus.emit(SIGN_UP.LOGIN_SUCCESS, {});
+                        this.eventBus.emit(SIGN_UP.REDIRECT, '/');
                     } else {
-                        this.eventBus.emit(C.INVALID, {global: 'Signup error'});
+                        this.eventBus.emit(SIGN_UP.INVALID, {global: 'Signup error'});
                     }
                 });
         }

@@ -1,5 +1,5 @@
 import {Api} from '../../libs/api.js';
-import * as C from '../../libs/constans.js';
+import {PROFILE} from '../../libs/constans.js';
 // import {Router} from '../libs/router.js';
 
 /**
@@ -11,7 +11,7 @@ export class ProfileAlbumsModel {
      * @param {EventBus} eventBus
      */
     constructor(eventBus) {
-        eventBus.on(C.ID_ALBUMS_SECTION, this.getAlbums.bind(this));
+        eventBus.on(PROFILE.ID_ALBUMS_SECTION, this.getAlbums.bind(this));
         this.eventBus = eventBus;
         this.playlist = [];
     }
@@ -21,7 +21,7 @@ export class ProfileAlbumsModel {
      */
     getAlbums() {
         if (this.playlist.length === 6) {
-            this.eventBus.emit(C.RENDER_PROFILE_ALBUMS, this.playlist);
+            this.eventBus.emit(PROFILE.RENDER_ALBUMS, this.playlist);
         } else {
             for (let i = 12344; i < 12350; i++) {
                 Api.trackFetch(i.toString())
@@ -31,7 +31,7 @@ export class ProfileAlbumsModel {
                     })
                     .then(() => {
                         if (this.playlist.length === 6) {
-                            this.eventBus.emit(C.RENDER_PROFILE_ALBUMS, this.playlist);
+                            this.eventBus.emit(PROFILE.RENDER_ALBUMS, this.playlist);
                         }
                     });
             }

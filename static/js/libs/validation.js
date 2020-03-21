@@ -1,4 +1,4 @@
-import * as C from '../libs/constans.js';
+import {VALIDATION} from '../libs/constans.js';
 /**
  * Валидация данных
  * @class Validation
@@ -10,11 +10,11 @@ export class Validation {
      */
     static email(email = '') {
         if (email === '') {
-            return C.VALID_EMAIL_EMPTY;
+            return VALIDATION.EMAIL_EMPTY;
         }
-        const regExpr = new RegExp(C.REGEX_EMAIL);
+        const regExpr = new RegExp(VALIDATION.REGEX_EMAIL);
         if (!email.match(regExpr)) {
-            return C.VALID_EMAIL_INCORRECT;
+            return VALIDATION.EMAIL_INCORRECT;
         }
         return '';
     }
@@ -23,12 +23,12 @@ export class Validation {
      * @return {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
      */
     static login(login = '') {
-        const regExpr = new RegExp(C.REGEX_LOGIN);
+        const regExpr = new RegExp(VALIDATION.REGEX_LOGIN);
         if (login === '') {
-            return C.VALID_LOGIN_EMPTY;
+            return VALIDATION.LOGIN_EMPTY;
         }
         if (!login.match(regExpr)) {
-            return C.VALID_LOGIN_INCORRECT;
+            return VALIDATION.LOGIN_INCORRECT;
         }
         return '';
     }
@@ -40,17 +40,17 @@ export class Validation {
      */
     static password(pass1 = '', pass2 = '', passConfirm = false) {
         if (pass1 === '') {
-            return C.VALID_PASS_EMPTY;
+            return VALIDATION.PASS_EMPTY;
         }
         if (pass2 === '' && passConfirm) {
-            return C.VALID_REPEAT_PASS_EMPTY;
+            return VALIDATION.REPEAT_PASS_EMPTY;
         }
         if (pass1 !== pass2 && passConfirm) {
-            return C.VALID_PASSES_DIFF;
+            return VALIDATION.PASSES_DIFF;
         }
-        const regExpr = new RegExp(C.REGEX_PASSWORD);
+        const regExpr = new RegExp(VALIDATION.REGEX_PASSWORD);
         if (!pass1.match(regExpr)) {
-            return C.VALID_PASS_INCORRECT;
+            return VALIDATION.PASS_INCORRECT;
         }
         return '';
     }
@@ -61,10 +61,10 @@ export class Validation {
      */
     static image(size, extension) {
         if (size > 1048576) {
-            return C.VALID_IMG_TOO_BIG;
+            return VALIDATION.IMG_TOO_BIG;
         }
-        if (C.ALLOWABLE_EXTENSIONS.indexOf(extension) === -1) {
-            return C.VALID_IMG_WRONG_EXT;
+        if (VALIDATION.ALLOWABLE_EXTENSIONS.indexOf(extension) === -1) {
+            return VALIDATION.IMG_WRONG_EXT;
         }
         return '';
     }

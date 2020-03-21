@@ -1,7 +1,7 @@
 import {Api} from '../../libs/api.js';
-import * as C from '../../libs/constans.js';
+import {PROFILE} from '../../libs/constans.js';
 
-// import {Router} from '../libs/router.js';
+// import {Router} from '../libs/PROFILE.js';
 
 /**
  * Модель Профиля
@@ -13,7 +13,7 @@ export class ProfileModel {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on(C.GET_PROFILE_DATA, this.getUserData.bind(this));
+        this.eventBus.on(PROFILE.GET_DATA, this.getUserData.bind(this));
         // this.eventBus.on('get user tracks', this.getTracks.bind(this));
     }
 
@@ -24,16 +24,16 @@ export class ProfileModel {
         Api.profileFetch()
             .then((res) => {
                 if (res === undefined) {
-                    this.eventBus.emit(C.REDIRECT, C.URL_MAIN);
+                    this.eventBus.emit(PROFILE.REDIRECT, PROFILE.URL.MAIN);
                     return;
                 }
                 if (res.ok) {
                     res.json()
                         .then((data) => {
-                            this.eventBus.emit(C.RENDER_PROFILE_DATA, data);
+                            this.eventBus.emit(PROFILE.RENDER_DATA, data);
                         });
                 } else {
-                    this.eventBus.emit(C.NO_ANSWER, C.URL_MAIN);
+                    this.eventBus.emit(PROFILE.NO_ANSWER, PROFILE.URL.MAIN);
                 }
             });
     }

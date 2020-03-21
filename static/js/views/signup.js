@@ -1,4 +1,4 @@
-import * as C from '../libs/constans.js';
+import {SIGN_UP, TEMPLATES} from '../libs/constans.js';
 /**
  * Вью для страницы регистрации
  */
@@ -9,7 +9,7 @@ export class SignupView {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.submit.bind(this);
-        this.eventBus.on(C.INVALID, this.showErrors);
+        this.eventBus.on(SIGN_UP.INVALID, this.showErrors);
     }
 
     /**
@@ -18,9 +18,9 @@ export class SignupView {
      */
     render(root) {
         // eslint-disable-next-line no-undef
-        root.innerHTML = nunjucks.render('../../../views/signup.njk');
+        root.innerHTML = nunjucks.render(TEMPLATES.SIGN_UP);
         document.addEventListener('click', (event) => {
-            if (event.target.getAttribute('id') === C.SUBMIT) {
+            if (event.target.getAttribute('id') === SIGN_UP.SUBMIT) {
                 event.preventDefault();
                 this.submit();
             }
@@ -64,7 +64,7 @@ export class SignupView {
         document.getElementById('global').style.height = '0';
         document.getElementById('global').style.visibility = 'hidden';
         document.getElementById('global').style.marginTop = '0';
-        this.eventBus.emit(C.SUBMIT, {
+        this.eventBus.emit(SIGN_UP.SUBMIT, {
             name: document.getElementById('name').value,
             login: document.getElementById('login').value,
             email: document.getElementById('email').value,

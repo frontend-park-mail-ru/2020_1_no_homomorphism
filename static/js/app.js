@@ -20,17 +20,17 @@ window.addEventListener('DOMContentLoaded', () => {
     const profileController = new ProfileController(router);
     const settingsController = new SettingsController(router, globalEventBus);
 
-    router.addView(C.URL_NAVBAR, navbarController.view);
-    router.addView(C.URL_PLAYER, playerController.view);
-    router.addView(C.URL_MAIN, indexController.view);
-    router.addView(C.URL_LOGIN, loginController.view);
-    router.addView(C.URL_SIGN_UP, signupController.view);
-    router.addView(C.URL_PROFILE, profileController.view);
-    router.addView(C.URL_PROFILE_TRACKS, profileController.view);
-    router.addView(C.URL_PROFILE_PLAYLISTS, profileController.view);
-    router.addView(C.URL_PROFILE_ALBUMS, profileController.view);
-    router.addView(C.URL_PROFILE_ARTISTS, profileController.view);
-    router.addView(C.URL_SETTINGS, settingsController.view);
+    router.addView(C.URL.NAVBAR, navbarController.view);
+    router.addView(C.URL.PLAYER, playerController.view);
+    router.addView(C.URL.MAIN, indexController.view);
+    router.addView(C.URL.LOGIN, loginController.view);
+    router.addView(C.URL.SIGN_UP, signupController.view);
+    router.addView(C.URL.PROFILE, profileController.view);
+    router.addView(C.URL.PROFILE_TRACKS, profileController.view);
+    router.addView(C.URL.PROFILE_PLAYLISTS, profileController.view);
+    router.addView(C.URL.PROFILE_ALBUMS, profileController.view);
+    router.addView(C.URL.PROFILE_ARTISTS, profileController.view);
+    router.addView(C.URL.SETTINGS, settingsController.view);
     router.start();
     playerController.view.render();
     navbarController.view.render();
