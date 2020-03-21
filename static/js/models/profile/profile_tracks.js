@@ -1,12 +1,10 @@
 import Api from '../../libs/api.js';
 import {PROFILE} from '../../libs/constans.js';
 
-// import {Router} from '../libs/router.js';
-
 /**
  * Модель Профиля
  */
-export class ProfileTracksModel {
+export default class ProfileTracksModel {
     /**
      * конструктор
      * @param {EventBus} eventBus

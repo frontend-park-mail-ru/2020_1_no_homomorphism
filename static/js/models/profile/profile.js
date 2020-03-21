@@ -1,10 +1,10 @@
 import Api from '../../libs/api.js';
-import {PROFILE} from '../../libs/constans.js';
+import {PROFILE, URL} from '../../libs/constans.js';
 
 /**
  * Модель Профиля
  */
-export class ProfileModel {
+export default class ProfileModel {
     /**
      * конструктор
      * @param {EventBus} eventBus
@@ -21,7 +21,7 @@ export class ProfileModel {
         Api.profileFetch()
             .then((res) => {
                 if (res === undefined) {
-                    this.eventBus.emit(PROFILE.REDIRECT, PROFILE.URL.MAIN);
+                    this.eventBus.emit(PROFILE.REDIRECT, URL.MAIN);
                     return;
                 }
                 if (res.ok) {
@@ -30,7 +30,7 @@ export class ProfileModel {
                             this.eventBus.emit(PROFILE.RENDER_DATA, data);
                         });
                 } else {
-                    this.eventBus.emit(PROFILE.NO_ANSWER, PROFILE.URL.MAIN);
+                    this.eventBus.emit(PROFILE.NO_ANSWER, URL.MAIN);
                 }
             });
     }

@@ -3,7 +3,7 @@ import {LOGIN, TEMPLATES} from '../libs/constans.js';
 /**
  *  вью для входа
  */
-export class LoginView {
+export default class LoginView {
     /**
      * @param {EventBus} eventBus
      */

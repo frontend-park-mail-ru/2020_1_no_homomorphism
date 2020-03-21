@@ -1,6 +1,6 @@
-import {EventBus} from '../libs/eventBus.js';
-import {SignupModel} from '../models/signup.js';
-import {SignupView} from '../views/signup.js';
+import EventBus from '../libs/eventBus.js';
+import SignupModel from '../models/signup.js';
+import SignupView from '../views/signup.js';
 import * as C from '../libs/constans.js';
 
 /**

@@ -4,7 +4,7 @@ import {PROFILE} from '../../libs/constans.js';
 /**
  * Модель альбомов профиля
  */
-export class ProfileArtistsModel {
+export default class ProfileArtistsModel {
     /**
      * конструктор
      * @param {EventBus} eventBus

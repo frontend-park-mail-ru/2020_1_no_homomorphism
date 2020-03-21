@@ -1,7 +1,7 @@
 /**
  * Модель для главной страницы
  */
-export class IndexModel {
+export default class IndexModel {
     /**
      * Конструктор
      */

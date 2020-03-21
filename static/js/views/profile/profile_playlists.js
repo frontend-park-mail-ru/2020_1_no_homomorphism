@@ -3,7 +3,7 @@ import {PROFILE, TEMPLATES} from '../../libs/constans.js';
 /**
  * вью для профиля
  */
-export class ProfilePlaylistsView {
+export default class ProfilePlaylistsView {
     /**
      * @param {EventBus} eventBus
      */

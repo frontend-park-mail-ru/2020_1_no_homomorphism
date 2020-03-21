@@ -3,7 +3,7 @@ import {SETTINGS} from '../libs/constans.js';
 /**
  * вью для настроек
  */
-export class SettingsView {
+export default class SettingsView {
     /**
      * @param {EventBus} eventBus
      */
@@ -74,7 +74,6 @@ export class SettingsView {
             newPassword: document.getElementById('newPassword').value,
             newPasswordConfirm: document.getElementById('newPasswordConfirm').value,
             password: document.getElementById('password').value,
-            // outer              : document.getElementById('outer-url').value,
         });
     }
 }

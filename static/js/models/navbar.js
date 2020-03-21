@@ -1,10 +1,10 @@
 import Api from '../libs/api.js';
-import {NAVBAR} from '../libs/constans.js';
+import {NAVBAR, URL} from '../libs/constans.js';
 
 /**
  * Модель для навбара
  */
-export class NavbarModel {
+export default class NavbarModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus
@@ -40,7 +40,7 @@ export class NavbarModel {
         Api.profileFetch()
             .then((res) => {
                 if (res === undefined) {
-                    this.eventBus.emit(NAVBAR.REDIRECT, NAVBAR.URL.MAIN);
+                    this.eventBus.emit(NAVBAR.REDIRECT, URL.MAIN);
                     return;
                 }
                 if (res.ok) {

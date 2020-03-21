@@ -1,12 +1,10 @@
 import Api from '../../libs/api.js';
 import {PROFILE} from '../../libs/constans.js';
 
-// import {Router} from '../libs/router.js';
-
 /**
  * Модель альбомов профиля
  */
-export class ProfileAlbumsModel {
+export default class ProfileAlbumsModel {
     /**
      * конструктор
      * @param {EventBus} eventBus

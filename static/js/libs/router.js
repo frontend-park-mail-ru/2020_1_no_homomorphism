@@ -4,7 +4,7 @@ import {URL} from '../libs/constans.js';
  * Переход по страничкам
  * @class Router
  */
-export class Router {
+export default class Router {
     /**
      * Конструктор
      * */

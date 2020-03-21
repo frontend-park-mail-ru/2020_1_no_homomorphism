@@ -5,7 +5,7 @@ import {LOGIN, URL} from '../libs/constans.js';
 /**
  * Модель для страницы входа
  */
-export class LoginModel {
+export default class LoginModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus

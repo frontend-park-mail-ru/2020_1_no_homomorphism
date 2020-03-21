@@ -1,8 +1,9 @@
 import {SIGN_UP, TEMPLATES} from '../libs/constans.js';
+
 /**
  * Вью для страницы регистрации
  */
-export class SignupView {
+export default class SignupView {
     /**
      * @param {EventBus} eventBus
      */

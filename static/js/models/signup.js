@@ -1,11 +1,11 @@
 import Validation from '../libs/validation.js';
 import Api from '../libs/api.js';
-import {SIGN_UP} from '../libs/constans.js';
+import {SIGN_UP, URL} from '../libs/constans.js';
 
 /**
  * модель странички регистрации
  */
-export class SignupModel {
+export default class SignupModel {
     /**
      * конструктор
      * @param {EventBus} eventBus
@@ -45,7 +45,7 @@ export class SignupModel {
                 .then((res) => {
                     if (res.ok) {
                         this.globalEventBus.emit(SIGN_UP.LOGIN_SUCCESS, {});
-                        this.eventBus.emit(SIGN_UP.REDIRECT, '/');
+                        this.eventBus.emit(SIGN_UP.REDIRECT, URL.MAIN);
                     } else {
                         this.eventBus.emit(SIGN_UP.INVALID, {global: 'Signup error'});
                     }

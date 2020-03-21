@@ -2,7 +2,7 @@ import {PROFILE, TEMPLATES, URL} from '../../libs/constans.js';
 /**
  * вью для профиля
  */
-export class ProfileView {
+export default class ProfileView {
     /**
      * @param {EventBus} eventBus
      */

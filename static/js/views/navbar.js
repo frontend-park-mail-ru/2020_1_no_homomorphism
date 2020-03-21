@@ -1,8 +1,9 @@
 import {NAVBAR} from '../libs/constans.js';
+
 /**
  *  вью для навбара
  */
-export class NavbarView {
+export default class NavbarView {
     /**
      * @param {EventBus} eventBus
      * @param {EventBus} globalEventBus
@@ -26,6 +27,7 @@ export class NavbarView {
         });
         this.eventBus.emit(NAVBAR.CHECK_COOKIE, {});
     }
+
     /**
      * Sets event listeners
      */

@@ -4,7 +4,7 @@ import {PLAYER} from '../libs/constans.js';
 /**
  * Модель плеера
  */
-export class PlayerModel {
+export default class PlayerModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus

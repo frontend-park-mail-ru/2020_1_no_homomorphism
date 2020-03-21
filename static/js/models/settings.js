@@ -1,11 +1,11 @@
 import Validation from '../libs/validation.js';
 import Api from '../libs/api.js';
-import {SETTINGS} from '../libs/constans.js';
+import {SETTINGS, URL} from '../libs/constans.js';
 
 /**
  * Модель настроек
  */
-export class SettingsModel {
+export default class SettingsModel {
     /**
      * конструктор
      * @param {EventBus} eventBus
@@ -29,7 +29,7 @@ export class SettingsModel {
                             this.eventBus.emit(SETTINGS.RENDER_LOGGED, data);
                         });
                 } else {
-                    this.eventBus.emit(SETTINGS.NO_ANSWER, SETTINGS.URL.MAIN);
+                    this.eventBus.emit(SETTINGS.NO_ANSWER, URL.MAIN);
                 }
             });
     }
@@ -90,7 +90,7 @@ export class SettingsModel {
                         return;
                     }
                     if (res.ok) {
-                        this.eventBus.emit(SETTINGS.REDIRECT, SETTINGS.URL.PROFILE_TRACKS);
+                        this.eventBus.emit(SETTINGS.REDIRECT, URL.PROFILE_TRACKS);
                     }
                 });
         }

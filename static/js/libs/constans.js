@@ -42,12 +42,14 @@ export const VALIDATION = {
 };
 
 export const LOGIN = {
+    REDIRECT: 'redirect',
     INVALID: 'invalid',
     SUBMIT: 'submit',
     LOGIN_SUCCESS: 'login-success',
 };
 
 export const NAVBAR = {
+    LOGIN_SUCCESS: 'login-success',
     CHECK_COOKIE: 'check-cookie',
     DRAW_COOKIE_RESULT: 'draw-cookie-result',
     RENDER_LOGGED: 'logged-in',
@@ -57,6 +59,7 @@ export const NAVBAR = {
 };
 
 export const PLAYER = {
+    REDIRECT: 'redirect',
     GET_TRACKS: 'init',
     PAUSE: 'pause',
     PLAY: 'play',
@@ -93,6 +96,7 @@ export const SETTINGS = {
 };
 
 export const SIGN_UP = {
+    LOGIN_SUCCESS: 'login-success',
     SUBMIT: 'submit',
     INVALID: 'invalid',
 };

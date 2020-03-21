@@ -1,7 +1,7 @@
 /**
  *  вью для главной
  */
-export class IndexView {
+export default class IndexView {
     /**
      * Конструктор
      */
