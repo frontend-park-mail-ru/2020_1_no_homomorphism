@@ -8,6 +8,7 @@ import {SERVER_PATH} from '../libs/constans.js';
  * return {Promise<Response>}
  */
 export const postFetch = (path = '/', body = {}) => {
+    console.log(body);
     return fetch(SERVER_PATH + path, {
         method: 'POST',
         mode: 'cors', // no-cors, cors, *same-origin (последнее - значение по умолчанию)

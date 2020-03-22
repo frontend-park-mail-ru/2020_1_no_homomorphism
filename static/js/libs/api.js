@@ -40,7 +40,7 @@ export default class Api {
         return postFetch('/signup', {
             'name': name,
             'login': login,
-            'sex': '',
+            'sex': 'yes',
             'email': email,
             'password': password,
         }).catch((error) => console.error(error));
