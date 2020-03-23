@@ -8,7 +8,7 @@ export default class ProfileTracksView {
      * @param {EventBus} eventBus
      */
     constructor(eventBus) {
-        eventBus.on(PROFILE.RENDER_TRACKS, this.drawTracks.bind(this));
+        eventBus.on(PROFILE.RENDER_TRACKS, this.renderTracks.bind(this));
         this.eventBus = eventBus;
     }
 
@@ -16,14 +16,11 @@ export default class ProfileTracksView {
      * Отрисовка списка треков
      * @param {Object} tracks
      */
-    drawTracks(tracks) {
+    renderTracks(tracks) {
         const elem = document.getElementById('profile-track-list');
         elem.className += ' l-profile-base';
         for (let i = 0; i < tracks.length; i++) {
-            const temp = tracks[i].image;
-            if (temp.split('/')[0] === 'static') {
-                tracks[i].image = '/' + temp;
-            }
+            tracks[i].image = tracks[i].link; // TODO временное решение
             // eslint-disable-next-line no-undef,max-len
             elem.innerHTML += nunjucks.render(TEMPLATES.PROFILE_TRACKS, tracks[i]);
         }

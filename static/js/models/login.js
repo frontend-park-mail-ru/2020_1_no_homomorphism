@@ -42,7 +42,8 @@ export default class LoginModel {
                     }
                     if (res.ok) {
                         this.globalEventBus.emit(LOGIN.LOGIN_SUCCESS, {});
-                        this.eventBus.emit(LOGIN.REDIRECT, URL.MAIN);
+                        // this.eventBus.emit(LOGIN.REDIRECT, URL.MAIN);
+                        this.eventBus.emit(LOGIN.REDIRECT, URL.SETTINGS);
                     } else {
                         this.eventBus.emit(LOGIN.INVALID, {global: 'Login error'}); // TODO ошибка может быть не только такой
                     }

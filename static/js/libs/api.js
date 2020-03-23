@@ -82,6 +82,44 @@ export default class Api {
     }
 
     /**
+     * Получение плейлистов пользователя
+     * @return {Promise<Response>}
+     */
+    static profilePlaylistsFetch() {
+        return getFetch('/profile/playlists')
+            .catch((error) => console.error(error));
+    }
+
+    /**
+     * Получение треков альбома
+     * @param {number} id
+     * @return {Promise<Response>}
+     */
+    static albumFetch(id) {
+        return getFetch(`/albums/${id}`)
+            .catch((error) => console.error(error));
+    }
+
+    /**
+     * Получение альбомов пользователя
+     * @return {Promise<Response>}
+     */
+    static profileAlbumFetch() {
+        return getFetch('/profile/albums')
+            .catch((error) => console.error(error));
+    }
+
+    /**
+     * Получение треков плейлиста
+     * @param {number} id
+     * @return {Promise<Response>}
+     */
+    static playlistTracksFetch(id) {
+        return getFetch(`/playlists/${id}`)
+            .catch((error) => console.error(error));
+    }
+
+    /**
      * Получение плейлиста
      * @param {string} name
      * @return {Promise<Response>}
