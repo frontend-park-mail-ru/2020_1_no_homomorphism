@@ -13,6 +13,9 @@
         <link rel="stylesheet" href="/static/css/settings.css">
         <link rel="stylesheet" href="/static/css/signup.css">
         <link rel="stylesheet" href="/static/css/login.css">
+        <link rel="preload" href="/static/img/headphones.png" as="image">
+        <link rel="preconnect" href="http://localhost:8081" /> {# TODO Исправить адрес бэка#}
+        <link rel="dns-prefetch" href="http://localhost:8081" />
         <title>No homo</title>
     </head>
     <body>
@@ -32,7 +35,7 @@
         <a href="/signup" class="signup" style="visibility: hidden;" id="signup-link">
             sign up
         </a>
-        <a href="/login" class="login" style="visibility: visibile;" id="login-link">
+        <a href="/login" class="login" style="visibility: hidden;" id="login-link">
             log in
         </a>
     </div>

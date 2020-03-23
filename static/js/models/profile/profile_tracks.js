@@ -31,7 +31,6 @@ export default class ProfileTracksModel {
         let length = this.playlists.length;
         // eslint-disable-next-line guard-for-in
         for (const playlist in this.playlists) {
-            console.log(this.playlists[playlist].id);
             Api.playlistTracksFetch(this.playlists[playlist].id)
                 .then((response) => response.json())
                 .then((list) => {
@@ -51,7 +50,6 @@ export default class ProfileTracksModel {
      * Получение плейлистов
      */
     getPlaylists() {
-        console.log('getTracks');
         Api.profilePlaylistsFetch().then((response) => response.json())
             .then((list) => {
                 if (!this.loaded) { // TODO временное решение

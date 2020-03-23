@@ -28,7 +28,6 @@ export const postFetch = (path = '/', body = {}) => {
  * return {Promise<Response>}
  */
 export const getFetch = (path = '/') => {
-    console.log(SERVER_PATH + path);
     return fetch(SERVER_PATH + path, {
         method: 'GET',
         mode: 'cors',
