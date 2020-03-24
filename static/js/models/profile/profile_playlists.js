@@ -21,7 +21,6 @@ export default class ProfilePlaylistsModel {
     getPlaylists() {
         Api.profilePlaylistsFetch().then((response) => response.json())
             .then((list) => {
-                console.log(list.playlists);
                 this.playlists = list.playlists;
             })
             .then(() => {

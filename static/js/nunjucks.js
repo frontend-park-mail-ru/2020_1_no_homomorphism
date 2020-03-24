@@ -5427,6 +5427,7 @@ function (_Loader) {
     // happen in development. PRECOMPILE YOUR TEMPLATES.
 
     _this.async = !!opts.async;
+    // _this.async = true;
     return _this;
   }
 

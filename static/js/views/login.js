@@ -18,7 +18,10 @@ export default class LoginView {
      */
     render(root) {
         // eslint-disable-next-line no-undef
-        root.innerHTML = nunjucks.render(TEMPLATES.LOGIN);
+        nunjucks.render(TEMPLATES.LOGIN, function(err, res) {
+            console.log(err);
+            root.innerHTML = res;
+        });
         document.addEventListener('click', (event) => {
             if (event.target.getAttribute('id') === 'submit-login') {
                 event.preventDefault();

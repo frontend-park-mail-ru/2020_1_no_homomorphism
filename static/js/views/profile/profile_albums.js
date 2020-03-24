@@ -25,7 +25,9 @@ export default class ProfileAlbumsView {
                 albums[i].image = '/' + temp;
             }
             // eslint-disable-next-line no-undef,max-len
-            elem.innerHTML += nunjucks.render(TEMPLATES.PROFILE_ALBUMS, albums[i]);
+            elem.innerHTML += nunjucks.render(TEMPLATES.PROFILE_ALBUMS, albums[i], function(err, res) {
+                console.log('ERROR RENDERING');
+            });
         }
     }
 }

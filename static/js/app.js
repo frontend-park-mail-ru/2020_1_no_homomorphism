@@ -31,26 +31,23 @@ window.addEventListener('DOMContentLoaded', () => {
     // }
 
     // if ('serviceWorker' in navigator) {
-    //     navigator.serviceWorker.register('static/js/sw.js').then(function(registration) {
+    //     navigator.serviceWorker.register('sw.js').then(function(registration) {
     //             console.log('service worker registration succeeded:', registration);
     //         },
     //         function (error) {
     //             console.log('service worker registration failed:', error);
     //         });
-    // } else {
-    //     console.log('service workers are not supported.');
     // }
 
-    console.log('KEKEKEKKEKEKE');
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/static/js/sw.js')
-            .then((registration) => {
-                console.log('ServiceWorker registration', registration);
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-    }
+    // if ('serviceWorker' in navigator) {
+    //     navigator.serviceWorker.register('../../sw.js')
+    //         .then((registration) => {
+    //             console.log('ServiceWorker registration', registration);
+    //         })
+    //         .catch((err) => {
+    //             console.error(err);
+    //         });
+    // }
 
     router.addView(URL.NAVBAR, navbarController.view);
     router.addView(URL.PLAYER, playerController.view);
