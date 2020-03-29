@@ -1,6 +1,6 @@
 import EventBus from '../libs/eventBus.js';
 import NavbarModel from '../models/navbar.js';
-import NavbarView from '../views/navbar.js';
+import NavbarView from '../views/navbar/navbar.js';
 import {NAVBAR} from '../libs/constans.js';
 /**
  * Контроллер для навбара

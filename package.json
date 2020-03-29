@@ -1,27 +1,47 @@
 {
-    "name": "no_homomorphism",
-    "main": "server.js",
-    "scripts": {
-        "start": "node server.js",
-        "devstart": "nodemon server.js"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "npx eslint .",
-            "pre-push": "npx eslint ."
-        }
-    },
-    "dependencies": {
-        "express": "^4.17.1",
-        "forever": "^2.0.0",
-        "morgan": "^1.9.1",
-        "nunjucks": "^3.2.0",
-        "serve-favicon": "^2.5.0"
-    },
-    "devDependencies": {
-        "eslint": "^6.8.0",
-        "eslint-config-google": "^0.14.0",
-        "husky": "^4.2.3",
-        "nodemon": "^2.0.2"
+  "name": "no_homomorphism",
+  "main": "server.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node server.js",
+    "watch": "cross-env NODE_ENV=development webpack --mode development --watch",
+    "dev": "cross-env NODE_ENV=development webpack --mode development",
+    "devstart": "cross-env NODE_ENV=development nodemon server.js",
+    "build": "cross-env NODE_ENV=development fest-build --dir=./static/js/views",
+    "tmpl": "cross-env NODE_ENV=development ./node_modules/.bin/fest-build --dir=static",
+    "prestart": "cross-env NODE_ENV=development npm run tmpl"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx eslint .",
+      "pre-push": "npx eslint ."
     }
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "fest": "^0.12.1",
+    "forever": "^2.0.0",
+    "morgan": "^1.9.1",
+    "requirejs": "^2.3.6",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^7.0.2",
+    "css-loader": "^3.4.2",
+    "eslint": "^6.8.0",
+    "eslint-config-google": "^0.14.0",
+    "fest-webpack-loader": "^2.0.0",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.0.3",
+    "husky": "^4.2.3",
+    "mini-css-extract-plugin": "^0.9.0",
+    "nodemon": "^2.0.2",
+    "style-loader": "^1.1.3",
+    "vue-style-loader": "^4.1.2",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  }
 }

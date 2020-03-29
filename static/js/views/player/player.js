@@ -1,4 +1,4 @@
-import {PLAYER} from '../libs/constans.js';
+import {PLAYER} from '../../libs/constans.js';
 
 /**
  *  вью для плеера
@@ -36,28 +36,28 @@ export default class PlayerView {
      * Позиционирует плеер
      */
     render() {
-        const body = document.getElementsByTagName('body')[0];
-        const left = (
-            this.expanded ?
-                body.clientWidth - document.getElementsByClassName('main-pos')[0].clientWidth :
-                body.clientWidth - 13
-        );
-        document.getElementsByClassName('main-pos')[0].style.left = left.toString() + 'px';
-        const navbar = document.getElementsByClassName('navbar')[0];
-        const top = (navbar === undefined ? 0 : navbar.clientHeight);
-        const height = (
-            navbar === undefined ?
-                document.documentElement.clientHeight :
-                document.documentElement.clientHeight - navbar.clientHeight
-        );
-        document.getElementsByTagName('audio')[0].volume = this.volume;
-        this.drawVolume(height);
-        document.getElementsByClassName('main-pos')[0].style.top = top.toString() + 'px';
-        document.getElementsByClassName('main-pos')[0].style.height = height.toString() + 'px';
-        document.getElementsByClassName('player-trigger')[0]
-            .style.height = height.toString() + 'px';
-        this.drawVolume(document.getElementsByClassName('volume-scale-back')[0]
-            .getBoundingClientRect().height * this.volume);
+        // const body = document.getElementsByTagName('body')[0];
+        // const left = (
+        //     this.expanded ?
+        //         body.clientWidth - document.getElementsByClassName('main-pos')[0].clientWidth :
+        //         body.clientWidth - 13
+        // );
+        // document.getElementsByClassName('main-pos')[0].style.left = left.toString() + 'px';
+        // const navbar = document.getElementsByClassName('navbar')[0];
+        // const top = (navbar === undefined ? 0 : navbar.clientHeight);
+        // const height = (
+        //     navbar === undefined ?
+        //         document.documentElement.clientHeight :
+        //         document.documentElement.clientHeight - navbar.clientHeight
+        // );
+        // document.getElementsByTagName('audio')[0].volume = this.volume;
+        // this.drawVolume(height);
+        // document.getElementsByClassName('main-pos')[0].style.top = top.toString() + 'px';
+        // document.getElementsByClassName('main-pos')[0].style.height = height.toString() + 'px';
+        // document.getElementsByClassName('player-trigger')[0]
+        //     .style.height = height.toString() + 'px';
+        // this.drawVolume(document.getElementsByClassName('volume-scale-back')[0]
+        //     .getBoundingClientRect().height * this.volume);
     }
 
     /**

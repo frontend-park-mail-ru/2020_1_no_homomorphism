@@ -1,4 +1,4 @@
-import {NAVBAR} from '../libs/constans.js';
+import {NAVBAR} from '../../libs/constans.js';
 
 /**
  *  вью для навбара
@@ -39,16 +39,16 @@ export default class NavbarView {
      * Реагирует на логин
      */
     login() {
-        this.eventBus.on(NAVBAR.RENDER_LOGGED, (data) => {
-            document.getElementById('profile-link').innerHTML =
-                // eslint-disable-next-line no-undef
-                nunjucks.render('../../../views/templates/profileLink.njk', data);
-            document.getElementById('login-link').style.visibility = 'hidden';
-            document.getElementById('signup-link').style.visibility = 'hidden';
-            document.getElementById('logout-button').style.visibility = 'visible';
-            document.getElementById('profile-link').style.visibility = 'visible';
-        });
-        this.eventBus.emit(NAVBAR.GET_USER_DATA, {});
+        // this.eventBus.on(NAVBAR.RENDER_LOGGED, (data) => {
+        //     document.getElementById('profile-link').innerHTML =
+        //         // eslint-disable-next-line no-undef
+        //         nunjucks.render('../../../views/templates/profileLink.njk', data);
+        //     document.getElementById('login-link').style.visibility = 'hidden';
+        //     document.getElementById('signup-link').style.visibility = 'hidden';
+        //     document.getElementById('logout-button').style.visibility = 'visible';
+        //     document.getElementById('profile-link').style.visibility = 'visible';
+        // });
+        // this.eventBus.emit(NAVBAR.GET_USER_DATA, {});
     }
 
     /**

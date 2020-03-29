@@ -1,15 +1,18 @@
-import Router from './libs/router.js';
-import EventBus from './libs/eventBus.js';
-import {NavbarController} from './controllers/navbar.js';
-import {IndexController} from './controllers/index.js';
-import {LoginController} from './controllers/login.js';
-import {SignupController} from './controllers/signup.js';
-import {PlayerController} from './controllers/player.js';
-import {ProfileController} from './controllers/profile/profile.js';
-import {SettingsController} from './controllers/settings.js';
-import {URL} from '/static/js/libs/constans.js';
+import Router from '@libs/router.js';
+import EventBus from '@libs/eventBus.js';
+import {URL} from '@libs/constans.js';
+import {NavbarController} from '@controllers/navbar.js';
+import {IndexController} from '@controllers/index.js';
+import {LoginController} from '@controllers/login.js';
+import {SignupController} from '@controllers/signup.js';
+import {PlayerController} from '@controllers/player.js';
+import {ProfileController} from '@controllers/profile/profile.js';
+import {SettingsController} from '@controllers/settings.js';
+// import xml from '@views/login.xml';
 
 window.addEventListener('DOMContentLoaded', () => {
+    console.log('START');
+    // console.log('START', xml);
     const router = new Router();
     const globalEventBus = new EventBus();
     const navbarController = new NavbarController(router, globalEventBus);

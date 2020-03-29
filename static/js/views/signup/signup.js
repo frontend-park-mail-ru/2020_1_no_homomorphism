@@ -1,4 +1,4 @@
-import {SIGN_UP, TEMPLATES} from '../libs/constans.js';
+import {SIGN_UP, TEMPLATES} from '../../libs/constans.js';
 
 /**
  * Вью для страницы регистрации
@@ -17,15 +17,14 @@ export default class SignupView {
      * рендерит страничку регистрации
      * @param {Object} root
      */
-    render(root) {
-        // eslint-disable-next-line no-undef
-        root.innerHTML = nunjucks.render(TEMPLATES.SIGN_UP);
-        document.addEventListener('click', (event) => {
-            if (event.target.getAttribute('id') === SIGN_UP.SUBMIT) {
-                event.preventDefault();
-                this.submit();
-            }
-        });
+    render(root) { // TODO лул
+        // root.innerHTML = nunjucks.render(TEMPLATES.SIGN_UP);
+        // document.addEventListener('click', (event) => {
+        //     if (event.target.getAttribute('id') === SIGN_UP.SUBMIT) {
+        //         event.preventDefault();
+        //         this.submit();
+        //     }
+        // });
     }
 
     /**

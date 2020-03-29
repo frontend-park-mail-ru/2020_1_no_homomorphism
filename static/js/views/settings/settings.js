@@ -1,4 +1,4 @@
-import {SETTINGS} from '../libs/constans.js';
+import {SETTINGS} from '../../libs/constans.js';
 
 /**
  * вью для настроек
@@ -31,13 +31,13 @@ export default class SettingsView {
      * Рендер
      * @param {Object} root
      */
-    render(root) {
-        this.eventBus.on(SETTINGS.RENDER_LOGGED, (data) => {
-            // eslint-disable-next-line no-undef
-            root.innerHTML = nunjucks.render('../../../views/settings.njk', data);
-            this.setEventListeners();
-        });
-        this.eventBus.emit(SETTINGS.GET_USER_DATA, {});
+    render(root) { // TODO lol
+        // this.eventBus.on(SETTINGS.RENDER_LOGGED, (data) => {
+        //     // eslint-disable-next-line no-undef
+        //     root.innerHTML = nunjucks.render('../../../views/settings.njk', data);
+        //     this.setEventListeners();
+        // });
+        // this.eventBus.emit(SETTINGS.GET_USER_DATA, {});
     }
 
     /**
