@@ -1,4 +1,6 @@
 import {PROFILE, TEMPLATES, URL} from '../../libs/constans.js';
+import template from './profile.tmpl.xml';
+
 /**
  * вью для профиля
  */
@@ -20,17 +22,17 @@ export default class ProfileView {
      * @param {string} url
      */
     render(root, url) {
-        // if (this.timeRendered === 0) {
-        //     this.eventBus.on(PROFILE.RENDER_DATA, (data) => {
-        //         // eslint-disable-next-line no-undef
-        //         root.innerHTML = nunjucks.render(TEMPLATES.PROFILE, data);
-        //         this.eventBus.emit(PROFILE.CHOOSE_SECTION, {});
-        //         this.eventBus.emit(this.currentOpen, {});
-        //     });
-        // }
-        // this.url = url;
-        // this.eventBus.emit(PROFILE.GET_DATA, {});
-        // this.timeRendered++;
+        if (this.timeRendered === 0) {
+            this.eventBus.on(PROFILE.RENDER_DATA, (data) => {
+                document.getElementsByClassName('container')[0].innerHTML = template(data);
+
+                this.eventBus.emit(PROFILE.CHOOSE_SECTION, {});
+                this.eventBus.emit(this.currentOpen, {});
+            });
+        }
+        this.url = url;
+        this.eventBus.emit(PROFILE.GET_DATA, {});
+        this.timeRendered++;
     }
 
     /**

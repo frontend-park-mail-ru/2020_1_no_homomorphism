@@ -9,7 +9,8 @@ export default class Router {
      * Конструктор
      * */
     constructor() {
-        this.root = document.getElementsByClassName('container')[0].children[0];
+        // this.root = document.getElementsByClassName('container')[0].children[0];
+        this.root = document.getElementsByClassName('container')[0];
         this.views = {};
         this.profileUrl = [URL.PROFILE, URL.PROFILE_TRACKS, URL.PROFILE_PLAYLISTS,
             URL.PROFILE_ARTISTS, URL.PROFILE_ALBUMS];
@@ -59,7 +60,7 @@ export default class Router {
                 window.history.pushState('', {}, URL.MAIN);
             }
             this.views[URL.MAIN].render(this.root);
-            this.views[URL.PLAYER].render();
+            // this.views[URL.PLAYER].render();
             return;
         }
         newPath = newPath === URL.PROFILE ? URL.PROFILE_TRACKS : newPath;
@@ -67,7 +68,7 @@ export default class Router {
         if (pushState) {
             window.history.pushState('', {}, newPath);
         }
-        (this.profileUrl.indexOf(newPath) !== -1) ? this.views[newPath].render(this.root, newPath):
+        (this.profileUrl.indexOf(newPath) !== -1) ? this.views[newPath].render(this.root, newPath) :
             this.views[newPath].render(this.root);
         this.views[URL.PLAYER].render();
     }
@@ -91,8 +92,8 @@ export default class Router {
                 }
             }
         });
-        this.check(window.location.pathname, true);
-        this.views[URL.PLAYER].setEventListeners();
-        this.views[URL.NAVBAR].setEventListeners();
+        this.check(window.location.pathname, false);
+        // this.views[URL.PLAYER].setEventListeners();
+        // this.views[URL.NAVBAR].setEventListeners();
     }
 }

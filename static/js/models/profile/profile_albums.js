@@ -19,21 +19,12 @@ export default class ProfileAlbumsModel {
      * Получение списка альбомов
      */
     getAlbums() {
-        if (this.playlist.length === 6) {
-            this.eventBus.emit(PROFILE.RENDER_ALBUMS, this.playlist);
-        } else {
-            for (let i = 12344; i < 12350; i++) {
-                Api.trackFetch(i.toString())
-                    .then((response) => response.json())
-                    .then((track) => {
-                        this.playlist.push(track);
-                    })
-                    .then(() => {
-                        if (this.playlist.length === 6) {
-                            this.eventBus.emit(PROFILE.RENDER_ALBUMS, this.playlist);
-                        }
-                    });
-            }
-        }
+        Api.profilePlaylistsFetch().then((response) => response.json())
+            .then((list) => {
+                this.playlists = list.playlists;
+            })
+            .then(() => {
+                this.eventBus.emit(PROFILE.RENDER_PLAYLISTS, this.playlists);
+            });
     }
 }

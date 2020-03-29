@@ -1,5 +1,5 @@
-import IndexModel from '../models/index.js';
-import IndexView from '../views/index.js';
+import NewsModel from '@models/news';
+import NewsView from '@views/news/news';
 /**
  * Контроллер для главной страницы
  */
@@ -8,7 +8,7 @@ export class IndexController {
      * Конструктор
      */
     constructor() {
-        this.model = new IndexModel();
-        this.view = new IndexView();
+        this.model = new NewsModel();
+        this.view = new NewsView();
     }
 }

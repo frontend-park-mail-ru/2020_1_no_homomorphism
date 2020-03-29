@@ -1,7 +1,7 @@
 /**
  * Модель для главной страницы
  */
-export default class IndexModel {
+export default class NewsModel {
     /**
      * Конструктор
      */

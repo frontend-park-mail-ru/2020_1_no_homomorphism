@@ -1,15 +1,14 @@
-// import temp from './login.xml';
+import template from './news.tmpl.xml';
 import '@css/base.css';
 
 /**
  *  вью для главной
  */
-export default class IndexView {
+export default class NewsView {
     /**
      * Конструктор
      */
     constructor() {
-        this.element = document.createElement('div');
     }
 
     /**
@@ -18,7 +17,7 @@ export default class IndexView {
      */
     render(root) {
         // root.getElementById('container').innerHTML += temp();
-        console.log('kkk');
+        document.getElementsByClassName('container')[0].innerHTML = template();
         // document.getElementById('container').innerHTML = window.fest['js/views/login.tmpl']();
     }
 

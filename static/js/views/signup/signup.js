@@ -1,4 +1,5 @@
 import {SIGN_UP, TEMPLATES} from '../../libs/constans.js';
+import template from '@views/signup/signup.tmpl.xml';
 
 /**
  * Вью для страницы регистрации
@@ -18,13 +19,14 @@ export default class SignupView {
      * @param {Object} root
      */
     render(root) { // TODO лул
+        document.getElementsByClassName('container')[0].innerHTML = template();
         // root.innerHTML = nunjucks.render(TEMPLATES.SIGN_UP);
-        // document.addEventListener('click', (event) => {
-        //     if (event.target.getAttribute('id') === SIGN_UP.SUBMIT) {
-        //         event.preventDefault();
-        //         this.submit();
-        //     }
-        // });
+        document.addEventListener('click', (event) => {
+            if (event.target.getAttribute('id') === SIGN_UP.SUBMIT) {
+                event.preventDefault();
+                this.submit();
+            }
+        });
     }
 
     /**

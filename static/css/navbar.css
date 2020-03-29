@@ -1,4 +1,4 @@
-.navbar {
+.l-navbar {
     width: 100%;
     position: sticky;
     top: 0;
@@ -11,31 +11,31 @@
     z-index: 2;
 }
 
-.navbar .logo {
+.logo {
     height: 3%;
     width: 3%;
     margin: 5px 0;
 }
 
-.navbar .login {
+.login {
     margin-left: 0.5%;
 }
 
-.navbar .signup {
+.signup {
     margin-left: auto;
 }
 
-.navbar .signup img {
+.signup img {
     border-radius: 20px;
 }
 
-.navbar .search {
+.search {
     margin-left: 2%;
     margin-right: 0.5%;
     height: 2em;
 }
 
-.navbar .search-button {
+.search-button {
     border-radius: 0.33em;
     background: white;
     outline: none;

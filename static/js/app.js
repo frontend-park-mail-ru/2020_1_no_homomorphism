@@ -2,7 +2,7 @@ import Router from '@libs/router.js';
 import EventBus from '@libs/eventBus.js';
 import {URL} from '@libs/constans.js';
 import {NavbarController} from '@controllers/navbar.js';
-import {IndexController} from '@controllers/index.js';
+import {IndexController} from '@controllers/news.js';
 import {LoginController} from '@controllers/login.js';
 import {SignupController} from '@controllers/signup.js';
 import {PlayerController} from '@controllers/player.js';
@@ -11,8 +11,6 @@ import {SettingsController} from '@controllers/settings.js';
 // import xml from '@views/login.xml';
 
 window.addEventListener('DOMContentLoaded', () => {
-    console.log('START');
-    // console.log('START', xml);
     const router = new Router();
     const globalEventBus = new EventBus();
     const navbarController = new NavbarController(router, globalEventBus);
@@ -51,7 +49,6 @@ window.addEventListener('DOMContentLoaded', () => {
     //             console.error(err);
     //         });
     // }
-
     router.addView(URL.NAVBAR, navbarController.view);
     router.addView(URL.PLAYER, playerController.view);
     router.addView(URL.MAIN, indexController.view);

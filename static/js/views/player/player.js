@@ -1,4 +1,5 @@
 import {PLAYER} from '../../libs/constans.js';
+import template from './track.tmpl.xml';
 
 /**
  *  вью для плеера
@@ -36,28 +37,28 @@ export default class PlayerView {
      * Позиционирует плеер
      */
     render() {
-        // const body = document.getElementsByTagName('body')[0];
-        // const left = (
-        //     this.expanded ?
-        //         body.clientWidth - document.getElementsByClassName('main-pos')[0].clientWidth :
-        //         body.clientWidth - 13
-        // );
-        // document.getElementsByClassName('main-pos')[0].style.left = left.toString() + 'px';
-        // const navbar = document.getElementsByClassName('navbar')[0];
-        // const top = (navbar === undefined ? 0 : navbar.clientHeight);
-        // const height = (
-        //     navbar === undefined ?
-        //         document.documentElement.clientHeight :
-        //         document.documentElement.clientHeight - navbar.clientHeight
-        // );
-        // document.getElementsByTagName('audio')[0].volume = this.volume;
-        // this.drawVolume(height);
-        // document.getElementsByClassName('main-pos')[0].style.top = top.toString() + 'px';
-        // document.getElementsByClassName('main-pos')[0].style.height = height.toString() + 'px';
-        // document.getElementsByClassName('player-trigger')[0]
-        //     .style.height = height.toString() + 'px';
-        // this.drawVolume(document.getElementsByClassName('volume-scale-back')[0]
-        //     .getBoundingClientRect().height * this.volume);
+        const body = document.getElementsByTagName('body')[0];
+        const left = (
+            this.expanded ?
+                body.clientWidth - document.getElementsByClassName('main-pos')[0].clientWidth :
+                body.clientWidth - 13
+        );
+        document.getElementsByClassName('main-pos')[0].style.left = left.toString() + 'px';
+        const navbar = document.getElementsByClassName('navbar')[0];
+        const top = (navbar === undefined ? 0 : navbar.clientHeight);
+        const height = (
+            navbar === undefined ?
+                document.documentElement.clientHeight :
+                document.documentElement.clientHeight - navbar.clientHeight
+        );
+        document.getElementsByTagName('audio')[0].volume = this.volume;
+        this.drawVolume(height);
+        document.getElementsByClassName('main-pos')[0].style.top = top.toString() + 'px';
+        document.getElementsByClassName('main-pos')[0].style.height = height.toString() + 'px';
+        document.getElementsByClassName('player-trigger')[0]
+            .style.height = height.toString() + 'px';
+        this.drawVolume(document.getElementsByClassName('volume-scale-back')[0]
+            .getBoundingClientRect().height * this.volume);
     }
 
     /**
@@ -401,7 +402,7 @@ export default class PlayerView {
         this.volumeDrag = false;
         this.muted = false;
         const height = document.getElementsByClassName('volume-scale-back')[0]
-            .getBoundingClientRect().height -
+                .getBoundingClientRect().height -
             (event.clientY - document.getElementsByClassName('volume-scale-back')[0]
                 .getBoundingClientRect().y);
         this.volume = height / document.getElementsByClassName('volume-scale-back')[0]
@@ -417,7 +418,7 @@ export default class PlayerView {
     volumeMouseMove(event) {
         if (this.volumeDrag) {
             const height = document.getElementsByClassName('volume-scale-back')[0]
-                .getBoundingClientRect().height -
+                    .getBoundingClientRect().height -
                 (event.clientY - document.getElementsByClassName('volume-scale-back')[0]
                     .getBoundingClientRect().y);
             this.volume = height / document.getElementsByClassName('volume-scale-back')[0]
@@ -433,7 +434,7 @@ export default class PlayerView {
      */
     volumeScaleClick(event) {
         const height = document.getElementsByClassName('volume-scale-back')[0]
-            .getBoundingClientRect().height -
+                .getBoundingClientRect().height -
             (event.clientY - document.getElementsByClassName('volume-scale-back')[0]
                 .getBoundingClientRect().y);
         this.volume = height / document.getElementsByClassName('volume-scale-back')[0]
@@ -525,15 +526,14 @@ export default class PlayerView {
      * @param {Object} tracks
      */
     drawTracklist(tracks) {
-        for (let i = 0; i < tracks.length; i++) {
-            const temp = tracks[i].image;
-            if (temp.split('/')[0] === 'static') {
-                tracks[i].image = '/' + temp;
-            }
-            document.getElementsByClassName('track-list')[0].innerHTML +=
-                // eslint-disable-next-line no-undef
-                nunjucks.render('../../../../views/templates/track.njk', tracks[i]);
-        }
+        // for (let i = 0; i < tracks.length; i++) {
+        //     const temp = tracks[i].image;
+        //     if (temp.split('/')[0] === 'static') {
+        //         tracks[i].image = '/' + temp;
+        //     }
+        console.log(tracks);
+        document.getElementsByClassName('track-list')[0].innerHTML += template(tracks);
+        // }
     }
 
     /**

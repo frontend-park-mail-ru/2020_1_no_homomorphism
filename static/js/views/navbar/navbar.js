@@ -1,4 +1,5 @@
 import {NAVBAR} from '../../libs/constans.js';
+import template from '@views/navbar/navbar.tmpl.xml';
 
 /**
  *  вью для навбара
@@ -12,19 +13,18 @@ export default class NavbarView {
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
         this.globalEventBus.on(NAVBAR.LOGIN_SUCCESS, this.login.bind(this));
+        this.firstRender = true;
     }
 
     /**
      * рендерит навбар
      */
     render() {
-        this.eventBus.on(NAVBAR.DRAW_COOKIE_RESULT, (loggedIn) => {
-            if (loggedIn) {
-                this.login();
-            } else {
-                this.logout();
-            }
-        });
+        document.getElementsByClassName('l-navbar')[0].innerHTML = template();
+        if (this.firstRender) {
+            this.setEventListeners.bind(this)();
+        }
+
         this.eventBus.emit(NAVBAR.CHECK_COOKIE, {});
     }
 
@@ -32,34 +32,49 @@ export default class NavbarView {
      * Sets event listeners
      */
     setEventListeners() {
-        document.getElementById('logout-button').addEventListener('click', this.logout.bind(this));
+        this.eventBus.on(NAVBAR.DRAW_COOKIE_RESULT, (loggedIn) => {
+            if (loggedIn) {
+                this.login();
+            } else {
+                this.logout();
+            }
+        });
+        document.getElementById('logout-link').addEventListener('click', this.logout.bind(this));
+        this.firstRender = false;
     }
 
     /**
-     * Реагирует на логин
+     * Залогинен
      */
     login() {
-        // this.eventBus.on(NAVBAR.RENDER_LOGGED, (data) => {
-        //     document.getElementById('profile-link').innerHTML =
-        //         // eslint-disable-next-line no-undef
-        //         nunjucks.render('../../../views/templates/profileLink.njk', data);
-        //     document.getElementById('login-link').style.visibility = 'hidden';
-        //     document.getElementById('signup-link').style.visibility = 'hidden';
-        //     document.getElementById('logout-button').style.visibility = 'visible';
-        //     document.getElementById('profile-link').style.visibility = 'visible';
-        // });
-        // this.eventBus.emit(NAVBAR.GET_USER_DATA, {});
+        this.eventBus.on(NAVBAR.RENDER_LOGGED, (data) => {
+            document.getElementsByClassName('m-navbar-avatar')[0].src = data.image;
+            document.getElementsByClassName('m-navbar-name')[0].innerHTML = data.login;
+            document.getElementById('login-link').classList.remove('is-visible');
+            document.getElementById('login-link').classList.add('is-hidden');
+            document.getElementById('signup-link').classList.remove('is-visible');
+            document.getElementById('signup-link').classList.add('is-hidden');
+            document.getElementById('logout-link').classList.remove('is-hidden');
+            document.getElementById('logout-link').classList.add('is-visible');
+            document.getElementById('profile-link').classList.remove('is-hidden');
+            document.getElementById('profile-link').classList.add('is-visible');
+        });
+        this.eventBus.emit(NAVBAR.GET_USER_DATA, {});
     }
 
     /**
-     * рисует кнопочку логаута
+     * не залогинен
      */
     logout() {
         this.eventBus.emit(NAVBAR.RENDER_NOT_LOGGED, {});
-        document.getElementById('login-link').style.visibility = 'visible';
-        document.getElementById('signup-link').style.visibility = 'visible';
-        document.getElementById('logout-button').style.visibility = 'hidden';
-        document.getElementById('profile-link').style.visibility = 'hidden';
-        this.globalEventBus.emit(NAVBAR.LOGOUT_REDIRECT, '/');
+        document.getElementById('login-link').classList.remove('is-hidden');
+        document.getElementById('login-link').classList.add('is-visible');
+        document.getElementById('signup-link').classList.remove('is-hidden');
+        document.getElementById('signup-link').classList.add('is-visible');
+        document.getElementById('logout-link').classList.remove('is-visible');
+        document.getElementById('logout-link').classList.add('is-hidden');
+        document.getElementById('profile-link').classList.remove('is-visible');
+        document.getElementById('profile-link').classList.add('is-hidden');
+        this.globalEventBus.emit(NAVBAR.LOGOUT_REDIRECT, URL.MAIN);
     }
 }

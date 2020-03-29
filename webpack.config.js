@@ -16,18 +16,22 @@ module.exports = {
     entry: {
         app: './js/app.js',
     },
+    devServer: {
+        port: 3000,
+    },
     output: {
         filename: filename('js'),
         path: path.resolve(__dirname, 'dist'),
+        publicPath: '/',
     },
     resolve: {
         extensions: ['.js', '.json'],
         alias: {
             '@': path.resolve(__dirname, 'static'),
+            '@models': path.resolve(__dirname, 'static/js/models'),
             '@views': path.resolve(__dirname, 'static/js/views'),
-            '@components': path.resolve(__dirname, 'static/js/components'),
-            '@libs': path.resolve(__dirname, 'static/js/libs'),
             '@controllers': path.resolve(__dirname, 'static/js/controllers'),
+            '@libs': path.resolve(__dirname, 'static/js/libs'),
             '@css': path.resolve(__dirname, 'static/css'),
         },
     },

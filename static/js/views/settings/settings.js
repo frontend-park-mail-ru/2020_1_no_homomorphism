@@ -1,4 +1,5 @@
 import {SETTINGS} from '../../libs/constans.js';
+import template from '@views/settings/settings.tmpl.xml';
 
 /**
  * вью для настроек
@@ -32,19 +33,20 @@ export default class SettingsView {
      * @param {Object} root
      */
     render(root) { // TODO lol
-        // this.eventBus.on(SETTINGS.RENDER_LOGGED, (data) => {
-        //     // eslint-disable-next-line no-undef
-        //     root.innerHTML = nunjucks.render('../../../views/settings.njk', data);
-        //     this.setEventListeners();
-        // });
-        // this.eventBus.emit(SETTINGS.GET_USER_DATA, {});
+        this.eventBus.on(SETTINGS.RENDER_LOGGED, (data) => {
+            console.log(data);
+            document.getElementsByClassName('container')[0].innerHTML = template(data);
+            this.setEventListeners();
+        });
+         this.eventBus.emit(SETTINGS.GET_USER_DATA, {});
     }
 
     /**
      * показывает, какие поля формы заполнены неправильно
      * @param {Object} errors
      */
-    showErrors(errors) {
+    showErrors(errors) { //TODO починить вывод ошибок
+        console.log(errors);
         // eslint-disable-next-line guard-for-in
         for (const key in errors) {
             const message = document.getElementById(key).nextElementSibling;
