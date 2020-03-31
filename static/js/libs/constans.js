@@ -62,7 +62,6 @@ export const NAVBAR = {
 export const PLAYER = {
     REDIRECT: 'redirect',
     GET_TRACKS: 'get-tracks',
-    // GET_PLAYLIST: '',
     RESIZE: 'resize',
     PAUSE: 'pause',
     PLAY: 'play',
