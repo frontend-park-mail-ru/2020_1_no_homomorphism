@@ -1,4 +1,4 @@
-import {URL} from '@libs/constans.js';
+import {URL, DOM} from '@libs/constans.js';
 
 /**
  * Переход по страничкам
@@ -9,7 +9,8 @@ export default class Router {
      * Конструктор
      * */
     constructor() {
-        this.root = document.getElementsByClassName('container')[0];
+        // this.root = document.getElementsByClassName('container')[0];
+        this.root = document.getElementsByClassName(DOM.CONTENT)[0];
         this.views = {};
         this.profileUrl = [URL.PROFILE, URL.PROFILE_TRACKS, URL.PROFILE_PLAYLISTS,
             URL.PROFILE_ARTISTS, URL.PROFILE_ALBUMS];

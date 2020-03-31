@@ -22,7 +22,7 @@ export default class ProfileTracksView {
         elem.className += ' l-profile-base';
         for (let i = 0; i < tracks.length; i++) {
             tracks[i].image = tracks[i].link; // TODO временное решение - из-за того, как в БД хранится
-            elem.innerHTML += template(tracks[i]);
         }
+        elem.innerHTML += template(tracks);
     }
 }

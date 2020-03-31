@@ -1,14 +1,16 @@
-import {SIGN_UP, TEMPLATES} from '@libs/constans.js';
-import template from '@views/signup/signup.tmpl.xml';
+import {SIGN_UP, TEMPLATES, DOM} from '@libs/constans.js';
+import signup from '@views/signup/signup.tmpl.xml';
+import BaseView from '@libs/base_view';
 
 /**
  * Вью для страницы регистрации
  */
-export default class SignupView {
+export default class SignupView extends BaseView {
     /**
      * @param {EventBus} eventBus
      */
     constructor(eventBus) {
+        super(signup);
         this.eventBus = eventBus;
         this.submit.bind(this);
         this.eventBus.on(SIGN_UP.INVALID, this.showErrors);
@@ -16,10 +18,16 @@ export default class SignupView {
 
     /**
      * рендерит страничку регистрации
-     * @param {Object} root
      */
-    render(root) { // TODO лул
-        document.getElementsByClassName('container')[0].innerHTML = template();
+    render(root, url) {
+        super.render(root, url);
+        this.setEventListeners();
+    }
+
+    /**
+     * Обработчик событий
+     */
+    setEventListeners() {
         document.addEventListener('click', (event) => {
             if (event.target.getAttribute('id') === SIGN_UP.SUBMIT) {
                 event.preventDefault();
