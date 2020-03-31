@@ -47,24 +47,8 @@ export default class PlayerModel {
                     this.data.playlist.push(list.tracks[song]);
                     this.data.queue.push(this.data.playlist.length - 1);
                 }
-                // this.tracks.push(list.tracks[song]);
                 this.eventBus.emit(PLAYER.DRAW_TRACKLIST, this.data.playlist);
             });
-        // for (let i = 1; i < 4; i++) {
-        //     Api.trackFetch(i.toString())
-        //         .then((response) => response.json())
-        //         .then((track) => {
-        //             console.log('kek');
-        //             this.data.playlist.push(track);
-        //             this.data.queue.push(this.data.playlist.length - 1);
-        //         })
-        //         .then(() => {
-        //             if (this.data.playlist.length === 3) {
-        //                 console.log(this.data.playlist);
-        //                 this.eventBus.emit(PLAYER.DRAW_TRACKLIST, this.data.playlist);
-        //             }
-        //         });
-        // }
     }
 
     /**

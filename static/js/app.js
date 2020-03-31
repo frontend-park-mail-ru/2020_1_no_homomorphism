@@ -43,6 +43,5 @@ window.addEventListener('DOMContentLoaded', () => {
     router.addView(URL.PROFILE_ARTISTS, profileController.view);
     router.addView(URL.SETTINGS, settingsController.view);
     router.start();
-    // playerController.view.render();
     navbarController.view.render();
 });

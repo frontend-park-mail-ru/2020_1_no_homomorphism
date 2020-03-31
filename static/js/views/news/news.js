@@ -16,7 +16,6 @@ export default class NewsView {
      * @param {Object} root
      */
     render(root) {
-        // root.getElementById('container').innerHTML += temp();
         document.getElementsByClassName('container')[0].innerHTML = template();
     }
 }
