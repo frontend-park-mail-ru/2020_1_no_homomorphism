@@ -20,7 +20,6 @@ export default class LoginView extends BaseView{
 	 */
 	render(root, url) {
 		super.render(root);
-		// document.getElementsByClassName(DOM.CONTENT)[0].innerHTML = template();
 		this.setEventListeners.bind(this)();
 	}
 

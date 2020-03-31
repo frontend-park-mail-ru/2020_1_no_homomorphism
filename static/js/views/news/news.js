@@ -17,7 +17,7 @@ export default class NewsView extends BaseView{
     /**
      * рендерит главную страничку
      */
-    render(root, url = null) {
+    render(root, url ) {
         super.render(root);
     }
 }
