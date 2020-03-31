@@ -1,4 +1,4 @@
-import template from './news.tmpl.xml';
+import template from '@views/news/news.tmpl.xml';
 import '@css/base.css';
 
 /**

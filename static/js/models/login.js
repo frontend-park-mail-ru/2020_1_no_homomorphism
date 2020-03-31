@@ -1,6 +1,6 @@
-import Api from '../libs/api.js';
-import Validation from '../libs/validation.js';
-import {LOGIN, URL} from '../libs/constans.js';
+import Api from '@libs/api.js';
+import Validation from '@libs/validation.js';
+import {LOGIN, URL} from '@libs/constans.js';
 
 /**
  * Модель для страницы входа

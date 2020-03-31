@@ -1,4 +1,4 @@
-import {NAVBAR} from '../../libs/constans.js';
+import {NAVBAR} from '@libs/constans.js';
 import navbar from '@views/navbar/navbar.tmpl.xml';
 
 /**

@@ -1,6 +1,6 @@
-import Validation from '../libs/validation.js';
-import Api from '../libs/api.js';
-import {SETTINGS, URL} from '../libs/constans.js';
+import Validation from '@libs/validation.js';
+import Api from '@libs/api.js';
+import {SETTINGS, URL} from '@libs/constans.js';
 
 /**
  * Модель настроек

@@ -1,4 +1,4 @@
-import {SETTINGS} from '../../libs/constans.js';
+import {SETTINGS} from '@libs/constans.js';
 import template from '@views/settings/settings.tmpl.xml';
 
 /**

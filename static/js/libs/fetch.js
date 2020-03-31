@@ -1,4 +1,4 @@
-import {SERVER_PATH} from '../libs/constans.js';
+import {SERVER_PATH} from '@libs/constans.js';
 
 /* *
  * POST

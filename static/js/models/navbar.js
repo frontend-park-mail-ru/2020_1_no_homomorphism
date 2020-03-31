@@ -1,5 +1,5 @@
-import Api from '../libs/api.js';
-import {NAVBAR, URL} from '../libs/constans.js';
+import Api from '@libs/api.js';
+import {NAVBAR, URL} from '@libs/constans.js';
 
 /**
  * Модель для навбара

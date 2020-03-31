@@ -1,4 +1,4 @@
-import {SIGN_UP, TEMPLATES} from '../../libs/constans.js';
+import {SIGN_UP, TEMPLATES} from '@libs/constans.js';
 import template from '@views/signup/signup.tmpl.xml';
 
 /**

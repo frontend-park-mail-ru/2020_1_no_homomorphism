@@ -1,5 +1,5 @@
-import Api from '../../libs/api.js';
-import {PROFILE, URL} from '../../libs/constans.js';
+import Api from '@libs/api.js';
+import {PROFILE, URL} from '@libs/constans.js';
 
 /**
  * Модель Профиля

@@ -1,4 +1,4 @@
-import {VALIDATION} from '../libs/constans.js';
+import {VALIDATION} from '@libs/constans.js';
 /**
  * Валидация данных
  * @class Validation

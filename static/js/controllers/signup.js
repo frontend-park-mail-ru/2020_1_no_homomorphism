@@ -1,7 +1,7 @@
-import EventBus from '../libs/eventBus.js';
-import SignupModel from '../models/signup.js';
-import SignupView from '../views/signup/signup.js';
-import {SIGN_UP} from '../libs/constans.js';
+import EventBus from '@libs/eventBus.js';
+import SignupModel from '@models/signup.js';
+import SignupView from '@views/signup/signup.js';
+import {SIGN_UP} from '@libs/constans.js';
 
 /**
  * Контроллер для страницы регистрации

@@ -1,4 +1,4 @@
-import {URL} from '../libs/constans.js';
+import {URL} from '@libs/constans.js';
 
 /**
  * Переход по страничкам

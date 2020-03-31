@@ -1,6 +1,6 @@
-import Validation from '../libs/validation.js';
-import Api from '../libs/api.js';
-import {SIGN_UP, URL} from '../libs/constans.js';
+import Validation from '@libs/validation.js';
+import Api from '@libs/api.js';
+import {SIGN_UP, URL} from '@libs/constans.js';
 
 /**
  * модель странички регистрации

@@ -1,6 +1,6 @@
-import {PLAYER, NAVBAR} from '../../libs/constans.js';
-import track from './track.tmpl.xml';
-import player from './player.tmpl.xml';
+import {PLAYER, NAVBAR} from '@libs/constans.js';
+import track from '@views/player/track.tmpl.xml';
+import player from '@views/player/player.tmpl.xml';
 
 /**
  *  вью для плеера

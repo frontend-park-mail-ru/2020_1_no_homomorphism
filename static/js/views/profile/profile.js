@@ -1,5 +1,5 @@
-import {PROFILE, TEMPLATES, URL} from '../../libs/constans.js';
-import template from './profile.tmpl.xml';
+import {PROFILE, TEMPLATES, URL} from '@libs/constans.js';
+import template from '@views/profile/profile.tmpl.xml';
 
 /**
  * вью для профиля
