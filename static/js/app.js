@@ -8,7 +8,6 @@ import {SignupController} from '@controllers/signup.js';
 import {PlayerController} from '@controllers/player.js';
 import {ProfileController} from '@controllers/profile/profile.js';
 import {SettingsController} from '@controllers/settings.js';
-// import xml from '@views/login.xml';
 
 window.addEventListener('DOMContentLoaded', () => {
     const router = new Router();
@@ -20,35 +19,18 @@ window.addEventListener('DOMContentLoaded', () => {
     const playerController = new PlayerController(router);
     const profileController = new ProfileController(router);
     const settingsController = new SettingsController(router, globalEventBus);
+
     // if ('serviceWorker' in navigator) {
     //     navigator.serviceWorker
     //         .register('sw.js')
     //         .then((registration) => {
-    //             console.log('ServiceWorker registration', registration);
+    //             console.log('SW registration ', registration);
     //         })
     //         .catch((err) => {
     //             console.log('SW Registration failed with ' + err);
     //         });
     // }
 
-    // if ('serviceWorker' in navigator) {
-    //     navigator.serviceWorker.register('sw.js').then(function(registration) {
-    //             console.log('service worker registration succeeded:', registration);
-    //         },
-    //         function (error) {
-    //             console.log('service worker registration failed:', error);
-    //         });
-    // }
-
-    // if ('serviceWorker' in navigator) {
-    //     navigator.serviceWorker.register('../../sw.js')
-    //         .then((registration) => {
-    //             console.log('ServiceWorker registration', registration);
-    //         })
-    //         .catch((err) => {
-    //             console.error(err);
-    //         });
-    // }
     router.addView(URL.NAVBAR, navbarController.view);
     router.addView(URL.PLAYER, playerController.view);
     router.addView(URL.MAIN, indexController.view);
@@ -61,6 +43,6 @@ window.addEventListener('DOMContentLoaded', () => {
     router.addView(URL.PROFILE_ARTISTS, profileController.view);
     router.addView(URL.SETTINGS, settingsController.view);
     router.start();
-    playerController.view.render();
+    // playerController.view.render();
     navbarController.view.render();
 });

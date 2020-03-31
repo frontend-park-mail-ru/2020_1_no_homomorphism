@@ -20,6 +20,10 @@ p {
     width: 1px;
 }
 
+.l-profile {
+    margin-left: 3em;
+}
+
 .l-profile .info {
     font-size: 25px;
     margin: 10px 10px 20px;
@@ -56,14 +60,14 @@ p {
 }
 
 .m-profile-avatar:hover {
-    transition: 0.6s;
+    transition: 0.3s;
     box-shadow: 0 0 30px #6b6b6b;
     -webkit-transform: scale(2);
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 .m-profile-avatar:not(:hover) {
-    transition: 1s;
+    transition: 0.3s;
     box-shadow: 0 0 10px 4px rgba(129, 129, 129, 0.65);
 }
 

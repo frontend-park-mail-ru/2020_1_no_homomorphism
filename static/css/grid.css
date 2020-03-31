@@ -2,12 +2,20 @@
     box-sizing: border-box;
 }
 
-.container {
+.l-container {
     width: 90%;
     margin: 0 auto;
 }
 
-.container .col {
+.col {
+    float: left;
+    margin: 0 0 1em;
+    padding: 0;
+    text-align: center;
+    height: 100%;
+}
+
+.main-pos .col {
     float: left;
     margin: 0 0 1em;
     padding: 0;

@@ -9,7 +9,6 @@ export default class Router {
      * Конструктор
      * */
     constructor() {
-        // this.root = document.getElementsByClassName('container')[0].children[0];
         this.root = document.getElementsByClassName('container')[0];
         this.views = {};
         this.profileUrl = [URL.PROFILE, URL.PROFILE_TRACKS, URL.PROFILE_PLAYLISTS,
@@ -52,15 +51,13 @@ export default class Router {
      * */
     check(newPath, pushState) {
         if (newPath === this.curPath) {
-            // Уже на этой страничке
             return;
         }
         if (!(newPath in this.views)) {
             if (pushState) {
                 window.history.pushState('', {}, URL.MAIN);
             }
-            this.views[URL.MAIN].render(this.root);
-            // this.views[URL.PLAYER].render();
+            this.redirect(URL.MAIN); // TODO добавить вывод пользователю
             return;
         }
         newPath = newPath === URL.PROFILE ? URL.PROFILE_TRACKS : newPath;
@@ -70,7 +67,6 @@ export default class Router {
         }
         (this.profileUrl.indexOf(newPath) !== -1) ? this.views[newPath].render(this.root, newPath) :
             this.views[newPath].render(this.root);
-        this.views[URL.PLAYER].render();
     }
 
     /**
@@ -93,7 +89,6 @@ export default class Router {
             }
         });
         this.check(window.location.pathname, false);
-        // this.views[URL.PLAYER].setEventListeners();
-        // this.views[URL.NAVBAR].setEventListeners();
+        this.views[URL.PLAYER].render();
     }
 }

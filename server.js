@@ -9,9 +9,14 @@ const root = path.resolve(__dirname, 'static');
 
 // app.use('/static', express.static('static'));
 app.use( express.static(root));
+// app.use(express.static(__dirname + '/static'));
 
-app.get('*', (req, res) => {
-    res.sendFile(root + 'index.html');
+app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'index.html'), function(err) {
+        if (err) {
+            res.status(500).send(err);
+        }
+    });
 });
 
 // catch 404 and forward to error handler

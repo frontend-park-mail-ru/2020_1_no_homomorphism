@@ -49,6 +49,7 @@ export const LOGIN = {
 };
 
 export const NAVBAR = {
+    HEIGHT: 55,
     LOGIN_SUCCESS: 'login-success',
     CHECK_COOKIE: 'check-cookie',
     DRAW_COOKIE_RESULT: 'draw-cookie-result',
@@ -60,7 +61,9 @@ export const NAVBAR = {
 
 export const PLAYER = {
     REDIRECT: 'redirect',
-    GET_TRACKS: 'init',
+    GET_TRACKS: 'get-tracks',
+    // GET_PLAYLIST: '',
+    RESIZE: 'resize',
     PAUSE: 'pause',
     PLAY: 'play',
     PREVIOUS: 'previous-track',

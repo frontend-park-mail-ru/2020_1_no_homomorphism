@@ -4,12 +4,9 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node server.js",
     "go": "cross-env NODE_ENV=development webpack-dev-server --mode development --watch",
-    "watch": "cross-env NODE_ENV=development webpack --mode development --watch",
     "dev": "cross-env NODE_ENV=development webpack --mode development",
-    "devstart": "cross-env NODE_ENV=development nodemon server.js",
-    "build": "cross-env NODE_ENV=development fest-build --dir=./static/js/views",
-    "tmpl": "cross-env NODE_ENV=development ./node_modules/.bin/fest-build --dir=static",
-    "prestart": "cross-env NODE_ENV=development npm run tmpl"
+    "tmpl": "cross-env NODE_ENV=development fest-build --dir=./static/js/views",
+    "devstart": "cross-env NODE_ENV=development nodemon server.js"
   },
   "husky": {
     "hooks": {
@@ -40,6 +37,7 @@
     "husky": "^4.2.3",
     "mini-css-extract-plugin": "^0.9.0",
     "nodemon": "^2.0.2",
+    "serviceworker-webpack-plugin": "^1.0.1",
     "style-loader": "^1.1.3",
     "vue-style-loader": "^4.1.2",
     "webpack": "^4.42.1",

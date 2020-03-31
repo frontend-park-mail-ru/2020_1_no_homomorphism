@@ -1,5 +1,5 @@
 import {NAVBAR} from '../../libs/constans.js';
-import template from '@views/navbar/navbar.tmpl.xml';
+import navbar from '@views/navbar/navbar.tmpl.xml';
 
 /**
  *  вью для навбара
@@ -20,7 +20,7 @@ export default class NavbarView {
      * рендерит навбар
      */
     render() {
-        document.getElementsByClassName('l-navbar')[0].innerHTML = template();
+        document.getElementsByClassName('l-navbar')[0].innerHTML = navbar();
         if (this.firstRender) {
             this.setEventListeners.bind(this)();
         }

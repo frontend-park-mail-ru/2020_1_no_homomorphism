@@ -20,7 +20,6 @@ export default class SignupView {
      */
     render(root) { // TODO лул
         document.getElementsByClassName('container')[0].innerHTML = template();
-        // root.innerHTML = nunjucks.render(TEMPLATES.SIGN_UP);
         document.addEventListener('click', (event) => {
             if (event.target.getAttribute('id') === SIGN_UP.SUBMIT) {
                 event.preventDefault();

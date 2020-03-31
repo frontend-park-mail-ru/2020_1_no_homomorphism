@@ -10,7 +10,7 @@
                         </div>
                         <div class="l-profile-login-name col col-7" id="login-name">
                             <div class="m-profile-login" id="profile-login">
-                                <fest:value>data.login</fest:value>
+                                @<fest:value>data.login</fest:value>
                             </div>
                             <div class="m-profile-name" id="profile-name">
                                 <fest:value>data.name</fest:value>
@@ -58,6 +58,5 @@
                 </div>
             </div>
         </div>
-        <div class="col col-4"></div>
     </div>
 </fest:template>

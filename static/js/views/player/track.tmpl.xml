@@ -1,39 +1,63 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
 
-    <div class="row m-player-track">
-        <div class="col">
-            <div class="track-photo">
-                <img src="{data.image }" height="50px" width="50px" alt="..."/>
+    <fest:for iterate="data" index="i" value="track">
+        <div class="row m-player-track">
+            <div class="col">
+                <div class="track-photo">
+                    <img src="{track.link}" height="50px" width="50px" alt="..."/>
+                </div>
             </div>
-        </div>
-        <div class="col track-group-names">
-            <div class="track-name">
-                <fest:value> data.name</fest:value>
+            <div class="col track-group-names">
+                <div class="track-name">
+                    <fest:value>track.name</fest:value>
+                </div>
+                <a class="group-name" href="/player">
+                    <fest:value>track.artist</fest:value>
+                </a>
             </div>
-            <a class="group-name" href="/player">
-                <fest:value> data.artist</fest:value>
-            </a>
+            <!--div class="col buttons-in-playlist">
+                <a href="/player">
+                    <img src="/static/img/access_time-24px.svg" height="20px" alt="...">
+                </a>
+            </div>
+            <div class="col add-button">
+                <a href="/player">
+                    <img src="/static/img/add-24px.svg" height="25px" alt="...">
+                </a>
+            </div>
+            <div class="col share-button">
+                <a href="/player">
+                    <img src="/static/img/send-24px.svg" height="20px" alt="...">
+                </a>
+            </div>
+            <div class="col delete-button">
+                <a href="/player">
+                    <img src="/static/img/clear-24px.svg" height="20px" alt="...">
+                </a>
+            </div-->
         </div>
-        <!--div class="col buttons-in-playlist">
-            <a href="/player">
-                <img src="/static/img/access_time-24px.svg" height="20px" alt="...">
-            </a>
-        </div>
-        <div class="col add-button">
-            <a href="/player">
-                <img src="/static/img/add-24px.svg" height="25px" alt="...">
-            </a>
-        </div>
-        <div class="col share-button">
-            <a href="/player">
-                <img src="/static/img/send-24px.svg" height="20px" alt="...">
-            </a>
-        </div>
-        <div class="col delete-button">
-            <a href="/player">
-                <img src="/static/img/clear-24px.svg" height="20px" alt="...">
-            </a>
-        </div-->
+        <div class="top-line"></div>
+    </fest:for>
+    <!--div class="col buttons-in-playlist">
+        <a href="/player">
+            <img src="/static/img/access_time-24px.svg" height="20px" alt="...">
+        </a>
     </div>
-    <div class="top-line"></div>
+    <div class="col add-button">
+        <a href="/player">
+            <img src="/static/img/add-24px.svg" height="25px" alt="...">
+        </a>
+    </div>
+    <div class="col share-button">
+        <a href="/player">
+            <img src="/static/img/send-24px.svg" height="20px" alt="...">
+        </a>
+    </div>
+    <div class="col delete-button">
+        <a href="/player">
+            <img src="/static/img/clear-24px.svg" height="20px" alt="...">
+        </a>
+    </div-->
+    <!--    </div>-->
+    <!--    <div class="top-line"></div>-->
 </fest:template>

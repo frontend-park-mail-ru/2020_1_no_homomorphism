@@ -1,5 +1,5 @@
-import Api from '../libs/api.js';
-import {PLAYER} from '../libs/constans.js';
+import Api from '@libs/api.js';
+import {PLAYER} from '@libs/constans.js';
 
 /**
  * Модель плеера
@@ -19,7 +19,7 @@ export default class PlayerModel {
             shuffle: false,
             repeat: false,
         };
-        this.eventBus.on(PLAYER.GET_TRACKS, this.getFirst.bind(this));
+        this.eventBus.on(PLAYER.GET_TRACKS, this.getPlaylistTracks.bind(this));
         this.eventBus.on(PLAYER.PAUSE, this.pause.bind(this));
         this.eventBus.on(PLAYER.PLAY, this.play.bind(this));
         this.eventBus.on(PLAYER.PREVIOUS, this.prev.bind(this));
@@ -35,31 +35,36 @@ export default class PlayerModel {
     }
 
     /**
-     * достает первый трек в листе
+     * Получение треков плейлиста
      */
-    getFirst() {
-        Api.trackFetch('12344')
+    getPlaylistTracks(index) {
+    console.log(index);
+        Api.playlistTracksFetch(index.index)
             .then((response) => response.json())
-            .then((track) => {
-                document.getElementsByTagName('audio')[0].children[0].src = track.link;
-                document.getElementsByTagName('audio')[0].load();
-                this.data.playlist.push(track);
-                this.data.queue.push(this.data.playlist.length - 1);
-                this.eventBus.emit(PLAYER.TRACK_UPDATE, track);
-            });
-        for (let i = 12345; i < 12350; i++) {
-            Api.trackFetch(i.toString())
-                .then((response) => response.json())
-                .then((track) => {
-                    this.data.playlist.push(track);
+            .then((list) => {
+                // eslint-disable-next-line guard-for-in
+                for (const song in list.tracks) {
+                    this.data.playlist.push(list.tracks[song]);
                     this.data.queue.push(this.data.playlist.length - 1);
-                })
-                .then(() => {
-                    if (this.data.playlist.length === 6) {
-                        this.eventBus.emit(PLAYER.DRAW_TRACKLIST, this.data.playlist);
-                    }
-                });
-        }
+                }
+                // this.tracks.push(list.tracks[song]);
+                this.eventBus.emit(PLAYER.DRAW_TRACKLIST, this.data.playlist);
+            });
+        // for (let i = 1; i < 4; i++) {
+        //     Api.trackFetch(i.toString())
+        //         .then((response) => response.json())
+        //         .then((track) => {
+        //             console.log('kek');
+        //             this.data.playlist.push(track);
+        //             this.data.queue.push(this.data.playlist.length - 1);
+        //         })
+        //         .then(() => {
+        //             if (this.data.playlist.length === 3) {
+        //                 console.log(this.data.playlist);
+        //                 this.eventBus.emit(PLAYER.DRAW_TRACKLIST, this.data.playlist);
+        //             }
+        //         });
+        // }
     }
 
     /**

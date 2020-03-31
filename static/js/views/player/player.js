@@ -1,5 +1,6 @@
-import {PLAYER} from '../../libs/constans.js';
-import template from './track.tmpl.xml';
+import {PLAYER, NAVBAR} from '../../libs/constans.js';
+import track from './track.tmpl.xml';
+import player from './player.tmpl.xml';
 
 /**
  *  вью для плеера
@@ -18,7 +19,9 @@ export default class PlayerView {
         this.repeatState = 0;
         this.muted = false;
         this.volume = 1;
+        this.firstEntry = true;
         this.eventBus.on(PLAYER.DRAW_PLAY, this.drawPlay.bind(this));
+        this.eventBus.on(PLAYER.RESIZE, this.resize.bind(this));
         this.eventBus.on(PLAYER.DRAW_PAUSE, this.drawPause.bind(this));
         this.eventBus.on(PLAYER.TRACK_UPDATE, this.updateTrack.bind(this));
         this.eventBus.on(PLAYER.DRAW_TRACKLIST, this.drawTracklist.bind(this));
@@ -30,13 +33,25 @@ export default class PlayerView {
         this.eventBus.on(PLAYER.DRAW_UNREPEAT, this.drawUnrepeat.bind(this));
         this.eventBus.on(PLAYER.DRAW_MUTE, this.drawMute.bind(this));
         this.eventBus.on(PLAYER.DRAW_UNMUTE, this.drawUnmute.bind(this));
-        this.eventBus.emit(PLAYER.GET_TRACKS, {});
+
     }
 
     /**
      * Позиционирует плеер
      */
     render() {
+        document.getElementsByClassName('main-pos')[0].innerHTML = player();
+        if (this.firstEntry) {
+            this.eventBus.emit(PLAYER.GET_TRACKS, {index: 1}); // TODO получение плейлиста с индексом 1 - далее изменим
+        }
+        this.eventBus.emit(PLAYER.RESIZE, {});
+    }
+
+    /**
+     * Действия при изменении размера
+     */
+    resize() {
+        console.log(document);
         const body = document.getElementsByTagName('body')[0];
         const left = (
             this.expanded ?
@@ -44,13 +59,8 @@ export default class PlayerView {
                 body.clientWidth - 13
         );
         document.getElementsByClassName('main-pos')[0].style.left = left.toString() + 'px';
-        const navbar = document.getElementsByClassName('navbar')[0];
-        const top = (navbar === undefined ? 0 : navbar.clientHeight);
-        const height = (
-            navbar === undefined ?
-                document.documentElement.clientHeight :
-                document.documentElement.clientHeight - navbar.clientHeight
-        );
+        const top = NAVBAR.HEIGHT;
+        const height = document.documentElement.clientHeight - top;
         document.getElementsByTagName('audio')[0].volume = this.volume;
         this.drawVolume(height);
         document.getElementsByClassName('main-pos')[0].style.top = top.toString() + 'px';
@@ -62,10 +72,20 @@ export default class PlayerView {
     }
 
     /**
+     * Рисует треки в плейлисте
+     * @param {Object} tracks
+     */
+    drawTracklist(tracks) {
+        this.eventBus.emit(PLAYER.TRACK_UPDATE, tracks[0]);
+        document.getElementsByClassName('track-list')[0].innerHTML += track(tracks);
+        this.setEventListeners();
+    }
+
+    /**
      * Sets EventListeners
      */
     setEventListeners() {
-        window.addEventListener('resize', this.render.bind(this));
+        window.addEventListener('resize', this.resize.bind(this));
         window.addEventListener('mouseup', this.windowMouseUp.bind(this));
         document.getElementsByTagName('audio')[0]
             .addEventListener('timeupdate', this.audioTimeUpdate.bind(this));
@@ -507,11 +527,12 @@ export default class PlayerView {
      * @param {Object} track
      */
     updateTrack(track) {
+        console.log(track);
         const temp = track.image;
         if (temp.split('/')[0] === 'static') {
             track.image = '/' + temp;
         }
-        document.getElementById('cover').src = track.image;
+        document.getElementById('cover').src = track.link; // TODO ВЫНУЖДЕННО из-за текущей базы данных
         document.getElementById('artist').innerHTML = track.artist;
         document.getElementById('title').innerHTML = track.name;
         const minutes = Math.floor(track.duration / 60);
@@ -519,21 +540,6 @@ export default class PlayerView {
         document.getElementsByClassName('duration')[0].innerHTML = minutes.toString() + ':' +
             (seconds < 10 ? '0' : '') + seconds.toString();
         document.getElementsByClassName('current-time')[0].innerHTML = '0:00';
-    }
-
-    /**
-     * Рисует треки в плейлисте
-     * @param {Object} tracks
-     */
-    drawTracklist(tracks) {
-        // for (let i = 0; i < tracks.length; i++) {
-        //     const temp = tracks[i].image;
-        //     if (temp.split('/')[0] === 'static') {
-        //         tracks[i].image = '/' + temp;
-        //     }
-        console.log(tracks);
-        document.getElementsByClassName('track-list')[0].innerHTML += template(tracks);
-        // }
     }
 
     /**

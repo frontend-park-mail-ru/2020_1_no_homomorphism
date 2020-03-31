@@ -56,14 +56,9 @@ self.addEventListener('install', (event) => {
 // });
 
 self.addEventListener('fetch', function(event) {
-    console.log('KEK');
     event.respondWith(
         caches.match(event.request).then(function(cachedResponse) {
-            console.log(navigator.onLine);
-            console.log(cachedResponse);
             if (cachedResponse && !navigator.onLine) {
-                console.log('CACHED');
-                console.log(cachedResponse);
                 return cachedResponse;
             }
 

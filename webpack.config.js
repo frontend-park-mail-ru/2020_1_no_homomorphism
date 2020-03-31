@@ -1,6 +1,7 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -18,6 +19,7 @@ module.exports = {
     },
     devServer: {
         port: 3000,
+        historyApiFallback: true,
     },
     output: {
         filename: filename('js'),
@@ -45,6 +47,9 @@ module.exports = {
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             filename: '[name].css',
+        }),
+        new ServiceWorkerWebpackPlugin({
+            entry: path.join(__dirname, 'sw.js'),
         }),
     ],
     module: {
@@ -94,6 +99,4 @@ module.exports = {
             },
         ],
     },
-
-
 };

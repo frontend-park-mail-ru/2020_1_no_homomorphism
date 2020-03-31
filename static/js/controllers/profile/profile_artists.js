@@ -1,5 +1,5 @@
-import ProfileArtistsModel from '../../models/profile/profile_artists.js';
-import ProfileArtistsView from '../../views/profile/profile_artists.js';
+import ProfileArtistsModel from '@models/profile/profile_artists.js';
+import ProfileArtistsView from '@views/profile/profile_artists.js';
 
 /**
  * Контроллер для треков профиля
