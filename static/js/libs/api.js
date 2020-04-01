@@ -1,5 +1,5 @@
 import {postFetch, getFetch, deleteFetch, putFetch, postImageFetch} from '@libs/fetch.js';
-
+import {API} from '@libs/constans';
 /**
  * API object
  * @class
@@ -13,6 +13,7 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static loginFetch(login, password) {
+        console.log('loginFetch');
         return postFetch('/login', {
             'login': login,
             'password': password,
@@ -24,6 +25,7 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static logoutFetch() {
+        console.log('logoutFetch');
         return deleteFetch('/logout').catch((error) => console.error(error));
     }
 
@@ -37,6 +39,7 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static signupFetch(name = '', login, sex = '', email = '', password) {
+        console.log('signupFetch');
         return postFetch('/signup', {
             'name': name,
             'login': login,
@@ -51,6 +54,7 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static profileFetch() {
+        console.log('profileFetch');
         return getFetch('/profile/me').catch((error) => console.error(error));
     }
 
@@ -63,6 +67,7 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static profileEditFetch(name, email, password, newPassword) {
+        console.log('profileEditFetch');
         return putFetch('/profile/settings', {
             name,
             email,
@@ -77,6 +82,7 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static profilePhotoFetch(image) {
+        console.log('profilePhotoFetch');
         return postImageFetch('/image', image)
             .catch((error) => console.error(error));
     }
@@ -86,6 +92,7 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static profilePlaylistsFetch() {
+        console.log('profilePlaylistsFetch');
         return getFetch('/profile/playlists')
             .catch((error) => console.error(error));
     }
@@ -96,6 +103,7 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static albumFetch(id) {
+        console.log('albumFetch');
         return getFetch(`/albums/${id}`)
             .catch((error) => console.error(error));
     }
@@ -105,6 +113,7 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static profileAlbumFetch() {
+        console.log('profileAlbumFetch');
         return getFetch('/profile/albums')
             .catch((error) => console.error(error));
     }
@@ -115,6 +124,7 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static playlistTracksFetch(id) {
+        console.log('playlistTracksFetch');
         return getFetch(`/playlists/${id}`)
             .catch((error) => console.error(error));
     }
@@ -125,6 +135,7 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static playerFetch(name) {
+        console.log('playerFetch');
         return getFetch(`/player/${name}`)
             .catch((error) => console.error(error));
     }
@@ -134,6 +145,7 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static cookieFetch() {
+        console.log('cookieFetch');
         return getFetch('/user')
             .catch((error) => console.error(error));
     }
@@ -144,6 +156,7 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static trackFetch(id) {
+        console.log('trackFetch');
         return getFetch(`/track/${id}`)
             .catch((error) => console.error(error));
     }

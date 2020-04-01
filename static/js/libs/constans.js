@@ -1,5 +1,7 @@
 export const SERVER_PATH = 'http://localhost:8081'; // 'http://89.208.199.170:8081',
 
+export const API = '/api/v1';
+
 export const DOM = {
     CONTENT: 'l-content',
     PLAYER: 'l-player',
