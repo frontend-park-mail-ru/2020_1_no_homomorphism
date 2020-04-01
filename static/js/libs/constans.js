@@ -65,6 +65,7 @@ export const NAVBAR = {
     RENDER_NOT_LOGGED: 'guest',
     GET_USER_DATA: 'get-user-data',
     LOGOUT_REDIRECT: 'logout-redirect',
+    LOGOUT_CLICKED: 'logout-clicked',
 };
 
 export const PLAYER = {

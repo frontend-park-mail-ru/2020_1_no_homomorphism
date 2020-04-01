@@ -14,7 +14,8 @@ export default class NavbarModel {
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
         this.eventBus.on(NAVBAR.GET_USER_DATA, this.getUserData.bind(this));
-        this.eventBus.on(NAVBAR.RENDER_NOT_LOGGED, this.logout.bind(this));
+        // this.eventBus.on(NAVBAR.RENDER_NOT_LOGGED, this.logout.bind(this));
+        this.eventBus.on(NAVBAR.LOGOUT_CLICKED, this.doLogout.bind(this));
         this.eventBus.on(NAVBAR.CHECK_COOKIE, this.cookieFetch.bind(this));
     }
 
@@ -29,7 +30,8 @@ export default class NavbarModel {
     /**
      * Разлогинивает пользователя
      */
-    logout() {
+    doLogout() {
+        console.log('WHY?');
         Api.logoutFetch(); // TODO обработать ответ
     }
 

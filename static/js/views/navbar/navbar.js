@@ -14,7 +14,8 @@ export default class NavbarView extends BaseView {
         super(navbar);
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
-        this.globalEventBus.on(NAVBAR.LOGIN_SUCCESS, this.login.bind(this));
+        this.globalEventBus.on(NAVBAR.LOGIN_SUCCESS, this.renderLogin.bind(this));
+        this.eventBus.on(NAVBAR.DRAW_COOKIE_RESULT, this.analyzeCookie.bind(this));
         this.firstRender = true;
     }
 
@@ -26,7 +27,6 @@ export default class NavbarView extends BaseView {
         if (this.firstRender) {
             this.setEventListeners.bind(this)();
         }
-
         this.eventBus.emit(NAVBAR.CHECK_COOKIE, {});
     }
 
@@ -34,21 +34,43 @@ export default class NavbarView extends BaseView {
      * Sets event listeners
      */
     setEventListeners() {
-        this.eventBus.on(NAVBAR.DRAW_COOKIE_RESULT, (loggedIn) => {
-            if (loggedIn) {
-                this.login();
-            } else {
-                this.logout();
-            }
-        });
-        document.getElementById('logout-link').addEventListener('click', this.logout.bind(this));
+        // this.eventBus.on(NAVBAR.DRAW_COOKIE_RESULT, (loggedIn) => {
+        //     if (loggedIn) {
+        //         this.login();
+        //     } else {
+        //         this.logout();
+        //     }
+        // });
+        // document.getElementById('logout-link').addEventListener('click', this.renderLogout.bind(this));
+        document.getElementById('logout-link').addEventListener('click', this.logoutClicked.bind(this));
         this.firstRender = false;
+    }
+    /**
+     * не залогинен
+     */
+    logoutClicked() {
+        this.eventBus.emit(NAVBAR.LOGOUT_CLICKED, {});
+        this.renderLogout.bind(this)();
+        this.globalEventBus.emit(NAVBAR.LOGOUT_REDIRECT, URL.MAIN);
+    }
+
+    /**
+     * Залогинен
+     * @param {boolean} loggedIn
+     */
+    analyzeCookie(loggedIn) {
+        if (loggedIn) {
+            this.renderLogin.bind(this)();
+            // this.eventBus.emit(NAVBAR.GET_USER_DATA, {});
+        } else {
+            this.renderLogout.bind(this)();
+        }
     }
 
     /**
      * Залогинен
      */
-    login() {
+    renderLogin() {
         this.eventBus.on(NAVBAR.RENDER_LOGGED, (data) => {
             document.getElementsByClassName('m-navbar-avatar')[0].src = data.image;
             document.getElementsByClassName('m-navbar-name')[0].innerHTML = data.login;
@@ -67,8 +89,7 @@ export default class NavbarView extends BaseView {
     /**
      * не залогинен
      */
-    logout() {
-        this.eventBus.emit(NAVBAR.RENDER_NOT_LOGGED, {});
+    renderLogout() {
         document.getElementById('login-link').classList.remove('is-hidden');
         document.getElementById('login-link').classList.add('is-visible');
         document.getElementById('signup-link').classList.remove('is-hidden');
@@ -77,6 +98,5 @@ export default class NavbarView extends BaseView {
         document.getElementById('logout-link').classList.add('is-hidden');
         document.getElementById('profile-link').classList.remove('is-visible');
         document.getElementById('profile-link').classList.add('is-hidden');
-        this.globalEventBus.emit(NAVBAR.LOGOUT_REDIRECT, URL.MAIN);
     }
 }

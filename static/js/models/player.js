@@ -38,7 +38,6 @@ export default class PlayerModel {
      * Получение треков плейлиста
      */
     getPlaylistTracks(index) {
-    console.log(index);
         Api.playlistTracksFetch(index.index)
             .then((response) => response.json())
             .then((list) => {

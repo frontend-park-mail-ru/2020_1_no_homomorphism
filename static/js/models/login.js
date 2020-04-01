@@ -22,6 +22,7 @@ export default class LoginModel {
      * @param {Object} values
      */
     submit(values) {
+        console.log('--------SUBMIT LOGIN');
         const resLogin = Validation.login(values.login);
         const resPassword = Validation.password(values.password, values.passwordConfirm);
         const errors = {};

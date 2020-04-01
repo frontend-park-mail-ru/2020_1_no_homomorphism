@@ -14,7 +14,7 @@ export default class Api {
      */
     static loginFetch(login, password) {
         console.log('loginFetch');
-        return postFetch('/login', {
+        return postFetch(API + '/users/login', {
             'login': login,
             'password': password,
         }).catch((error) => console.error(error));
@@ -26,7 +26,17 @@ export default class Api {
      */
     static logoutFetch() {
         console.log('logoutFetch');
-        return deleteFetch('/logout').catch((error) => console.error(error));
+        return deleteFetch(API + '/users/logout').catch((error) => console.error(error));
+    }
+
+    /**
+     * Проверка куки
+     * @return {Promise<Response>}
+     */
+    static cookieFetch() {
+        console.log('cookieFetch');
+        return getFetch(API + '/users')
+            .catch((error) => console.error(error));
     }
 
     /**
@@ -40,7 +50,7 @@ export default class Api {
      */
     static signupFetch(name = '', login, sex = '', email = '', password) {
         console.log('signupFetch');
-        return postFetch('/signup', {
+        return postFetch(API + '/users/signup', {
             'name': name,
             'login': login,
             'sex': 'yes',
@@ -55,7 +65,7 @@ export default class Api {
      */
     static profileFetch() {
         console.log('profileFetch');
-        return getFetch('/profile/me').catch((error) => console.error(error));
+        return getFetch(API + '/users/me').catch((error) => console.error(error));
     }
 
     /**
@@ -68,7 +78,7 @@ export default class Api {
      */
     static profileEditFetch(name, email, password, newPassword) {
         console.log('profileEditFetch');
-        return putFetch('/profile/settings', {
+        return putFetch(API + '/users/settings', {
             name,
             email,
             password,
@@ -83,7 +93,7 @@ export default class Api {
      */
     static profilePhotoFetch(image) {
         console.log('profilePhotoFetch');
-        return postImageFetch('/image', image)
+        return postImageFetch(API + '/users/images', image)
             .catch((error) => console.error(error));
     }
 
@@ -93,28 +103,7 @@ export default class Api {
      */
     static profilePlaylistsFetch() {
         console.log('profilePlaylistsFetch');
-        return getFetch('/profile/playlists')
-            .catch((error) => console.error(error));
-    }
-
-    /**
-     * Получение треков альбома
-     * @param {number} id
-     * @return {Promise<Response>}
-     */
-    static albumFetch(id) {
-        console.log('albumFetch');
-        return getFetch(`/albums/${id}`)
-            .catch((error) => console.error(error));
-    }
-
-    /**
-     * Получение альбомов пользователя
-     * @return {Promise<Response>}
-     */
-    static profileAlbumFetch() {
-        console.log('profileAlbumFetch');
-        return getFetch('/profile/albums')
+        return getFetch(API + '/users/playlists')
             .catch((error) => console.error(error));
     }
 
@@ -125,28 +114,28 @@ export default class Api {
      */
     static playlistTracksFetch(id) {
         console.log('playlistTracksFetch');
-        return getFetch(`/playlists/${id}`)
+        return getFetch(API + `/playlists/${id}`)
             .catch((error) => console.error(error));
     }
 
     /**
-     * Получение плейлиста
-     * @param {string} name
+     * Получение треков альбома
+     * @param {number} id
      * @return {Promise<Response>}
      */
-    static playerFetch(name) {
-        console.log('playerFetch');
-        return getFetch(`/player/${name}`)
+    static albumFetch(id) {
+        console.log('albumFetch');
+        return getFetch(API + `/albums/${id}`)
             .catch((error) => console.error(error));
     }
 
     /**
-     * Проверка куки
+     * Получение альбомов пользователя
      * @return {Promise<Response>}
      */
-    static cookieFetch() {
-        console.log('cookieFetch');
-        return getFetch('/user')
+    static profileAlbumsFetch() {
+        console.log('profileAlbumFetch');
+        return getFetch(API + '/users/albums')
             .catch((error) => console.error(error));
     }
 
@@ -157,7 +146,7 @@ export default class Api {
      */
     static trackFetch(id) {
         console.log('trackFetch');
-        return getFetch(`/track/${id}`)
+        return getFetch(API + `/tracks/${id}`)
             .catch((error) => console.error(error));
     }
 }
