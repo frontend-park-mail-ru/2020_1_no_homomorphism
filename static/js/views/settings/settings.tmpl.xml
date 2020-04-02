@@ -53,8 +53,8 @@
                 <label for="name">
                     <input type="text" class="profile-content m-settings-input" id="name" value="{data.name}"
                            autocomplete="off"/>
+                    <span class="error-message-small"></span>
                 </label>
-                <span class="error-message-small"></span>
             </div>
 
             <div class="col col-9 m-tag-settings">
@@ -62,8 +62,8 @@
                 <label for="email">
                     <input type="text" class="profile-content m-settings-input" id="email" value="{data.email} "
                            autocomplete="off"/>
+                    <div class="error-message-small"></div>
                 </label>
-                <div class="error-message-small"></div>
             </div>
             <div class="col col-3">
                 <button type="submit" id="submit-setting-changes-data">

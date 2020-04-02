@@ -118,9 +118,9 @@ export const SETTINGS = {
 };
 
 export const SIGN_UP = {
-    LOGIN_SUCCESS: 'sign-up-login-success',
-    SUBMIT: 'sign-up-submit',
-    INVALID: 'sign-up-invalid',
+    LOGIN_SUCCESS: 'login-success',
+    SUBMIT: 'submit',
+    INVALID: 'invalid',
 };
 
 export const PROFILE = {

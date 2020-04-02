@@ -77,10 +77,8 @@ export default class SettingsModel {
                         this.eventBus.emit(SETTINGS.INVALID, errors);
                         break;
                     case RESPONSE.UNAUTH:
-                        this.eventBus.emit(SETTINGS.INVALID, errors);
-                        break;
                     case RESPONSE.SERVER_ERROR:
-                        this.eventBus.emit(SETTINGS.INVALID, errors);
+                        this.eventBus.emit(SETTINGS.INVALID, {});
                         break;
                     default:
                         console.error('I am a teapot');
@@ -100,14 +98,16 @@ export default class SettingsModel {
             values.newPassword !== '',
         );
         const resEmail = Validation.email(values.email);
+
         const errors = {};
         if (values.newPassword !== '' && resPassword !== '') {
             errors['newPassword'] = resPassword;
         }
-        if (values.email === '') {
-            errors['email'] = 'Enter email';
-        } else if (resEmail !== '') {
+        if (resEmail !== '') {
             errors['email'] = resEmail;
+        }
+        if (values.name === '') {
+            errors['name'] = 'Enter name';
         }
         if (JSON.stringify(errors) !== '{}') {
             this.eventBus.emit(SETTINGS.INVALID, errors);
