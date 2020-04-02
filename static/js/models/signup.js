@@ -45,7 +45,7 @@ export default class SignupModel {
                 .then((res) => {
                     switch (res.status) {
                     case RESPONSE.OK_ADDED:
-                        this.globalEventBus.emit(SIGN_UP.LOGIN_SUCCESS, );
+                        this.globalEventBus.emit(SIGN_UP.LOGIN_SUCCESS);
                         this.eventBus.emit(SIGN_UP.REDIRECT, URL.MAIN);
                         break;
                     case RESPONSE.BAD_REQUEST:

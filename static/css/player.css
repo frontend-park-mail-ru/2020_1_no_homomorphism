@@ -4,7 +4,7 @@
     position: fixed;
     top: 55px;
     left: 150%;
-    z-index: 0;
+    z-index: 1;
     padding-left: 0;
     padding-top: 0;
     transition-property: left;
@@ -23,10 +23,14 @@
 .patch {
     height: 1em;
     background: white;
+    position: relative;
+    z-index: 1;
 }
 
 .music-bar {
     background: white;
+    position: relative;
+    z-index: 1;
 }
 
 .music-bar .col {
@@ -49,9 +53,9 @@
 .container-audio {
     height: auto;
     color: #444;
-    margin-bottom: 5px;
-    overflow: hidden;
     background: white;
+    position: relative;
+    z-index: 1;
 }
 
 .timeline .timeline-back {
@@ -116,13 +120,13 @@
     position: relative;
     top: 5px;
     left: 203px;
-    z-index: 1;
+    z-index: 2;
 }
 
 .volume-scale {
     height: 74px;
-    top: 48px;
-    left: 356px;
+    top: -53px;
+    left: 340px;
     background: white;
     border: 1px solid #ebeae7;
     border-radius: 2px;
@@ -183,7 +187,41 @@
 
 .track-list {
     position: relative;
-    z-index: -1;
+    z-index: 0;
+}
+
+.current-marker {
+    background: #00e676;
+    width: 5px;
+    position: absolute;
+    transition-property: height, top;
+    transition-duration: 0.25s;
+}
+
+.track-buttons {
+    position: absolute;
+    left: 341px;
+}
+
+.track-button {
+    opacity: 0;
+}
+
+.track-list > .row {
+    background: white;
+    cursor: pointer;
+    padding-bottom: 17px;
+    padding-top: 5px;
+    transition-property: margin;
+    transition-duration: 0.1s;
+}
+
+.track-list > .row:hover {
+    background: #00e67626;
+}
+
+.track-list .row {
+    cursor: pointer;
 }
 
 .track-list .track-group-names {
@@ -201,6 +239,7 @@
 
 .track-list .col {
     height: 38px;
+    margin-bottom: 0;
 }
 
 .track-photo {
@@ -232,22 +271,14 @@
     padding-top: 14px;
 }
 
-.track-list .add-button {
-    padding-top: 11px;
-}
-
 .track-list .share-button {
-    padding-top: 13.5px;
-}
-
-.track-list .delete-button {
-    margin-left: 10px;
     padding-top: 13.5px;
 }
 
 .share-button {
     padding-bottom: 46px;
 }
+
 
 .add-to-playlist-button {
     padding-left: 150px;

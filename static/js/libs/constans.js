@@ -94,9 +94,11 @@ export const PLAYER = {
     UNREPEAT: 'unrepeat',
     MUTE: 'mute',
     UNMUTE: 'unmute',
+    DELETE: 'delete',
     DRAW_PLAY: 'draw-play',
     DRAW_PAUSE: 'draw-pause',
     TRACK_UPDATE: 'track-update',
+    MOVE_MARKER: 'move-marker',
     DRAW_TRACKLIST: 'draw-tracklist',
     DRAW_TIMELINE: 'draw-timeline',
     DRAW_SHUFFLE: 'draw-shuffle',
@@ -139,4 +141,3 @@ export const PROFILE = {
     RENDER_ALBUMS: 'render-profile-albums',
     RENDER_ARTISTS: 'render-profile-artists',
 };
-
