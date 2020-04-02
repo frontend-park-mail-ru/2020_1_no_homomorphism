@@ -31,6 +31,7 @@ export default class SignupView extends BaseView {
         document.addEventListener('click', (event) => {
             if (event.target.getAttribute('id') === SIGN_UP.SUBMIT) {
                 event.preventDefault();
+                event.stopImmediatePropagation();
                 this.submit();
             }
         });

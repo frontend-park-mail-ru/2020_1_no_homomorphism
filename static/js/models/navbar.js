@@ -1,5 +1,6 @@
 import Api from '@libs/api.js';
 import {NAVBAR, URL} from '@libs/constans.js';
+import {LOGIN, RESPONSE} from '@libs/constans';
 
 /**
  * Модель для навбара
@@ -14,7 +15,6 @@ export default class NavbarModel {
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
         this.eventBus.on(NAVBAR.GET_USER_DATA, this.getUserData.bind(this));
-        // this.eventBus.on(NAVBAR.RENDER_NOT_LOGGED, this.logout.bind(this));
         this.eventBus.on(NAVBAR.LOGOUT_CLICKED, this.doLogout.bind(this));
         this.eventBus.on(NAVBAR.CHECK_COOKIE, this.cookieFetch.bind(this));
     }
@@ -31,8 +31,22 @@ export default class NavbarModel {
      * Разлогинивает пользователя
      */
     doLogout() {
-        console.log('WHY?');
-        Api.logoutFetch(); // TODO обработать ответ
+         Api.logoutFetch()
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    break;
+                case RESPONSE.BAD_REQUEST:
+                    // Не получилось распарсить
+                    break;
+                case RESPONSE.UNAUTH:
+                    // TODO Пользователь не залогинен
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
     }
 
     /**

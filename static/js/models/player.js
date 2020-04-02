@@ -1,5 +1,6 @@
 import Api from '@libs/api.js';
 import {PLAYER} from '@libs/constans.js';
+import {RESPONSE, SETTINGS, URL} from '@libs/constans';
 
 /**
  * Модель плеера
@@ -39,7 +40,29 @@ export default class PlayerModel {
      */
     getPlaylistTracks(index) {
         Api.playlistTracksFetch(index.index)
-            .then((response) => response.json())
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    this.generateData.bind(this)(res);
+                    break;
+                case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
+                    break;
+                case RESPONSE.UNAUTH: // TODO Пользователь не залогинен => дефолтный плейлист
+                case RESPONSE.NO_ACCESS_RIGHT: // TODO Нет прав к этому плейлисту
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
+    }
+
+    /**
+     * останавливает воспроизведение
+     * @param {Object} res
+     */
+    generateData (res) {
+        res.json()
             .then((list) => {
                 // eslint-disable-next-line guard-for-in
                 for (const song in list.tracks) {
@@ -63,7 +86,7 @@ export default class PlayerModel {
      * начинает воспроизведение
      */
     play() {
-        document.getElementsByTagName('audio')[0].play(); // TODO обработать promise
+        document.getElementsByTagName('audio')[0].play();
         this.data.playing = true;
         this.eventBus.emit(PLAYER.DRAW_PAUSE, {});
     }

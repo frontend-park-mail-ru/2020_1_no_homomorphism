@@ -2,6 +2,16 @@ export const SERVER_PATH = 'http://localhost:8081'; // 'http://89.208.199.170:80
 
 export const API = '/api/v1';
 
+export const RESPONSE = {
+    OK: 200,
+    OK_ADDED: 201,
+    BAD_REQUEST: 400,
+    UNAUTH: 401,
+    NO_ACCESS_RIGHT: 403,
+    EXISTS: 409,
+    SERVER_ERROR: 500,
+};
+
 export const DOM = {
     CONTENT: 'l-content',
     PLAYER: 'l-player',
@@ -99,17 +109,18 @@ export const PLAYER = {
 };
 
 export const SETTINGS = {
-    GET_USER_DATA: 'get-user-data',
+    GET_USER_DATA: 'settings-get-user-data',
     RENDER_LOGGED: 'logged-in',
     AVATAR_UPLOAD: 'avatar-upload',
     SUBMIT: 'submit',
     INVALID: 'invalid',
+    REDIRECT: 'settings-redirect',
 };
 
 export const SIGN_UP = {
-    LOGIN_SUCCESS: 'login-success',
-    SUBMIT: 'submit',
-    INVALID: 'invalid',
+    LOGIN_SUCCESS: 'sign-up-login-success',
+    SUBMIT: 'sign-up-submit',
+    INVALID: 'sign-up-invalid',
 };
 
 export const PROFILE = {

@@ -1,6 +1,7 @@
 import Validation from '@libs/validation.js';
 import Api from '@libs/api.js';
 import {SETTINGS, URL} from '@libs/constans.js';
+import {RESPONSE, SIGN_UP, NAVBAR} from '@libs/constans';
 
 /**
  * Модель настроек
@@ -9,8 +10,10 @@ export default class SettingsModel {
     /**
      * конструктор
      * @param {EventBus} eventBus
+     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus) {
+    constructor(eventBus, globalEventBus) {
+        this.globalEventBus = globalEventBus;
         this.eventBus = eventBus;
         this.eventBus.on(SETTINGS.AVATAR_UPLOAD, this.resetAvatar.bind(this));
         this.eventBus.on(SETTINGS.SUBMIT, this.submit.bind(this));
@@ -26,6 +29,7 @@ export default class SettingsModel {
                 if (res.ok) {
                     res.json()
                         .then((data) => {
+                            console.log(data);
                             this.eventBus.emit(SETTINGS.RENDER_LOGGED, data);
                         });
                 } else {
@@ -50,11 +54,33 @@ export default class SettingsModel {
             const fData = new FormData();
             fData.append('profile_image', fileAttach.files[0], 'kek.png');
             Api.profilePhotoFetch(fData)
-                .then((response) => {
-                    if (response.ok) {
-                        this.eventBus.emit(SETTINGS.GET_USER_DATA, {});
+                .then((res) => {
+                    switch (res.status) {
+                    case RESPONSE.OK:
+                        console.log('kek');
+                        this.getUserData.bind(this)();
+                        // this.globalEventBus.emit(NAVBAR.GET_USER_DATA, {});
+                        // this.eventBus.emit(SETTINGS.GET_USER_DATA, {});
+                        this.eventBus.emit(SETTINGS.REDIRECT, URL.SETTINGS);
+                        break;
+                    case RESPONSE.BAD_REQUEST: // TODO Обработать ошибку
+                        this.eventBus.emit(SETTINGS.INVALID, errors);
+                        break;
+                    case RESPONSE.UNAUTH:
+                        this.eventBus.emit(SETTINGS.INVALID, errors);
+                        break;
+                    case RESPONSE.SERVER_ERROR:
+                        this.eventBus.emit(SETTINGS.INVALID, errors);
+                        break;
+                    default:
+                        console.error('I am a teapot');
                     }
                 });
+                // .then((response) => {
+                //     if (response.ok) {
+                //         this.eventBus.emit(SETTINGS.GET_USER_DATA, {});
+                //     }
+                // });
         }
     }
 
@@ -77,7 +103,7 @@ export default class SettingsModel {
             errors['password'] = 'Enter your password to confirm changes';
         }
         if (values.email === '') {
-            errors['email'] = 'Удолять email низзя';
+            errors['email'] = 'Enter email';
         } else if (resEmail !== '') {
             errors['email'] = resEmail;
         }
@@ -86,11 +112,27 @@ export default class SettingsModel {
         } else {
             Api.profileEditFetch(values.name, values.email, values.password, values.newPassword)
                 .then((res) => {
-                    if (res === undefined) {
-                        return;
-                    }
-                    if (res.ok) {
-                        this.eventBus.emit(SETTINGS.REDIRECT, URL.PROFILE_TRACKS);
+                    switch (res.status) {
+                    case RESPONSE.OK:
+                        this.getUserData.bind(this)();
+                        this.globalEventBus.emit(NAVBAR.GET_USER_DATA, {});
+                        // this.eventBus.emit(SETTINGS.REDIRECT, URL.PROFILE_TRACKS);
+                        break;
+                    case RESPONSE.BAD_REQUEST: // TODO Обработать ошибку
+                        this.eventBus.emit(SETTINGS.INVALID, errors);
+                        break;
+                    case RESPONSE.UNAUTH:
+                        this.eventBus.emit(SETTINGS.INVALID, errors);
+                        break;
+                    case RESPONSE.EXISTS:
+                        errors['email'] = 'This email is taken';
+                        this.eventBus.emit(SETTINGS.INVALID, errors);
+                        break;
+                    case RESPONSE.SERVER_ERROR:
+                        this.eventBus.emit(SETTINGS.INVALID, errors);
+                        break;
+                    default:
+                        console.error('I am a teapot');
                     }
                 });
         }

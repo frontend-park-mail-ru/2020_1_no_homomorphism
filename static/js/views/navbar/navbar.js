@@ -34,14 +34,6 @@ export default class NavbarView extends BaseView {
      * Sets event listeners
      */
     setEventListeners() {
-        // this.eventBus.on(NAVBAR.DRAW_COOKIE_RESULT, (loggedIn) => {
-        //     if (loggedIn) {
-        //         this.login();
-        //     } else {
-        //         this.logout();
-        //     }
-        // });
-        // document.getElementById('logout-link').addEventListener('click', this.renderLogout.bind(this));
         document.getElementById('logout-link').addEventListener('click', this.logoutClicked.bind(this));
         this.firstRender = false;
     }
@@ -61,7 +53,6 @@ export default class NavbarView extends BaseView {
     analyzeCookie(loggedIn) {
         if (loggedIn) {
             this.renderLogin.bind(this)();
-            // this.eventBus.emit(NAVBAR.GET_USER_DATA, {});
         } else {
             this.renderLogout.bind(this)();
         }

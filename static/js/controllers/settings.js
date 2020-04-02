@@ -13,7 +13,7 @@ export class SettingsController {
      */
     constructor(router, globalEventBus) {
         this.eventBus = new EventBus();
-        this.model = new SettingsModel(this.eventBus);
+        this.model = new SettingsModel(this.eventBus, globalEventBus);
         this.view = new SettingsView(this.eventBus);
         this.eventBus.on(SETTINGS.REDIRECT, router.redirect.bind(router));
     }

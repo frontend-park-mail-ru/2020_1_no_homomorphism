@@ -1,4 +1,5 @@
 import {SERVER_PATH} from '@libs/constans.js';
+import {API} from '@libs/constans';
 
 /* *
  * POST
@@ -74,7 +75,7 @@ export const putFetch = (path = '/', body = {}) => {
  * @param {Object} body
  * return {Promise<Response>}
  */
-export const postImageFetch = (path = '/image', body = {}) => {
+export const postImageFetch = (path = API + '/users/images', body = {}) => {
     return fetch(SERVER_PATH + path, {
         method: 'POST',
         mode: 'cors',

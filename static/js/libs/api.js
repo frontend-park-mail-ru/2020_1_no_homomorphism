@@ -13,7 +13,6 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static loginFetch(login, password) {
-        console.log('loginFetch');
         return postFetch(API + '/users/login', {
             'login': login,
             'password': password,
@@ -25,7 +24,6 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static logoutFetch() {
-        console.log('logoutFetch');
         return deleteFetch(API + '/users/logout').catch((error) => console.error(error));
     }
 
@@ -34,7 +32,6 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static cookieFetch() {
-        console.log('cookieFetch');
         return getFetch(API + '/users')
             .catch((error) => console.error(error));
     }
@@ -49,7 +46,6 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static signupFetch(name = '', login, sex = '', email = '', password) {
-        console.log('signupFetch');
         return postFetch(API + '/users/signup', {
             'name': name,
             'login': login,
@@ -64,7 +60,6 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static profileFetch() {
-        console.log('profileFetch');
         return getFetch(API + '/users/me').catch((error) => console.error(error));
     }
 
@@ -77,7 +72,6 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static profileEditFetch(name, email, password, newPassword) {
-        console.log('profileEditFetch');
         return putFetch(API + '/users/settings', {
             name,
             email,
@@ -91,8 +85,7 @@ export default class Api {
      * @param {Object} image
      * @return {Promise<Response>}
      */
-    static profilePhotoFetch(image) {
-        console.log('profilePhotoFetch');
+    static profilePhotoFetch(image) { // TODO узнать у бэка, что не так
         return postImageFetch(API + '/users/images', image)
             .catch((error) => console.error(error));
     }
@@ -102,7 +95,6 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static profilePlaylistsFetch() {
-        console.log('profilePlaylistsFetch');
         return getFetch(API + '/users/playlists')
             .catch((error) => console.error(error));
     }
@@ -113,7 +105,6 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static playlistTracksFetch(id) {
-        console.log('playlistTracksFetch');
         return getFetch(API + `/playlists/${id}`)
             .catch((error) => console.error(error));
     }
@@ -124,7 +115,6 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static albumFetch(id) {
-        console.log('albumFetch');
         return getFetch(API + `/albums/${id}`)
             .catch((error) => console.error(error));
     }
@@ -134,7 +124,6 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static profileAlbumsFetch() {
-        console.log('profileAlbumFetch');
         return getFetch(API + '/users/albums')
             .catch((error) => console.error(error));
     }
@@ -145,7 +134,6 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static trackFetch(id) {
-        console.log('trackFetch');
         return getFetch(API + `/tracks/${id}`)
             .catch((error) => console.error(error));
     }

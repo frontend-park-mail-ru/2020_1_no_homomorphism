@@ -37,10 +37,13 @@ export default class SettingsView extends BaseView {
         const button = document.getElementById('submit-setting-changes-data');
         button.addEventListener('click', (event) => {
             event.preventDefault();
+            event.stopImmediatePropagation();
             this.submit();
         });
         const fileAttach = document.getElementById('avatar-upload');
-        fileAttach.addEventListener('change', () => {
+        fileAttach.addEventListener('change', (event) => {
+            event.preventDefault();
+            event.stopImmediatePropagation();
             this.eventBus.emit(SETTINGS.AVATAR_UPLOAD, {});
         });
     }
@@ -51,6 +54,7 @@ export default class SettingsView extends BaseView {
      */
     renderData(data) {
         this.userData = data;
+        console.log(data.image);
         document.getElementsByClassName('m-profile-avatar')[0].src = data.image;
         document.getElementsByClassName('m-profile-name')[0].innerHTML = data.name;
         document.getElementsByClassName('m-profile-login')[0].innerHTML = data.login;
@@ -64,6 +68,7 @@ export default class SettingsView extends BaseView {
      * @param {Object} errors
      */
     showErrors(errors) { //TODO починить вывод ошибок
+        console.log(errors);
         // eslint-disable-next-line guard-for-in
         for (const key in errors) {
             const message = document.getElementById(key).nextElementSibling;
