@@ -42,6 +42,7 @@ export default class LoginModel {
                         return;
                     }
                     if (res.ok) {
+                        localStorage.setItem('csrfToken', res.headers.get('Csrf-Token'));
                         this.globalEventBus.emit(LOGIN.LOGIN_SUCCESS, {});
                         this.eventBus.emit(LOGIN.REDIRECT, URL.PROFILE_TRACKS);
                     } else {

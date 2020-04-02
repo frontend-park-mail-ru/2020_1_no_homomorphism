@@ -44,6 +44,7 @@ export default class SignupModel {
             Api.signupFetch(values.name, values.login, 'yes', values.email, values.password)
                 .then((res) => {
                     if (res.ok) {
+                        localStorage.setItem('csrfToken', res.headers.get('Csrf-Token'));
                         this.globalEventBus.emit(SIGN_UP.LOGIN_SUCCESS, {});
                         this.eventBus.emit(SIGN_UP.REDIRECT, URL.MAIN);
                     } else {
