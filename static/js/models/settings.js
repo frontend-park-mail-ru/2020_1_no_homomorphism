@@ -26,14 +26,27 @@ export default class SettingsModel {
     getUserData() {
         Api.profileFetch()
             .then((res) => {
-                if (res.ok) {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    // this.getUserData.bind(this)();
+                    // this.globalEventBus.emit(NAVBAR.GET_USER_DATA, {});
+                    // this.eventBus.emit(SETTINGS.GET_USER_DATA, {});
+                    // this.eventBus.emit(SETTINGS.REDIRECT, URL.SETTINGS);
                     res.json()
                         .then((data) => {
-                            console.log(data);
+                            // console.log(data);
                             this.eventBus.emit(SETTINGS.RENDER_LOGGED, data);
                         });
-                } else {
+                    break;
+                case RESPONSE.UNAUTH:
+                    // this.eventBus.emit(SETTINGS.INVALID, errors);
                     this.eventBus.emit(SETTINGS.NO_ANSWER, URL.MAIN);
+                    break;
+                case RESPONSE.SERVER_ERROR:
+                    // this.eventBus.emit(SETTINGS.INVALID, errors);
+                    break;
+                default:
+                    console.error('I am a teapot');
                 }
             });
     }
@@ -57,11 +70,8 @@ export default class SettingsModel {
                 .then((res) => {
                     switch (res.status) {
                     case RESPONSE.OK:
-                        console.log('kek');
                         this.getUserData.bind(this)();
-                        // this.globalEventBus.emit(NAVBAR.GET_USER_DATA, {});
-                        // this.eventBus.emit(SETTINGS.GET_USER_DATA, {});
-                        this.eventBus.emit(SETTINGS.REDIRECT, URL.SETTINGS);
+                        this.globalEventBus.emit(NAVBAR.GET_USER_DATA, {});
                         break;
                     case RESPONSE.BAD_REQUEST: // TODO Обработать ошибку
                         this.eventBus.emit(SETTINGS.INVALID, errors);
@@ -76,11 +86,6 @@ export default class SettingsModel {
                         console.error('I am a teapot');
                     }
                 });
-                // .then((response) => {
-                //     if (response.ok) {
-                //         this.eventBus.emit(SETTINGS.GET_USER_DATA, {});
-                //     }
-                // });
         }
     }
 
@@ -99,9 +104,6 @@ export default class SettingsModel {
         if (values.newPassword !== '' && resPassword !== '') {
             errors['newPassword'] = resPassword;
         }
-        if (values.password === '') {
-            errors['password'] = 'Enter your password to confirm changes';
-        }
         if (values.email === '') {
             errors['email'] = 'Enter email';
         } else if (resEmail !== '') {
@@ -115,8 +117,6 @@ export default class SettingsModel {
                     switch (res.status) {
                     case RESPONSE.OK:
                         this.getUserData.bind(this)();
-                        this.globalEventBus.emit(NAVBAR.GET_USER_DATA, {});
-                        // this.eventBus.emit(SETTINGS.REDIRECT, URL.PROFILE_TRACKS);
                         break;
                     case RESPONSE.BAD_REQUEST: // TODO Обработать ошибку
                         this.eventBus.emit(SETTINGS.INVALID, errors);

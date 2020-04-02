@@ -15,6 +15,7 @@ export default class NavbarModel {
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
         this.eventBus.on(NAVBAR.GET_USER_DATA, this.getUserData.bind(this));
+        this.globalEventBus.on(NAVBAR.GET_USER_DATA, this.getUserData.bind(this));
         this.eventBus.on(NAVBAR.LOGOUT_CLICKED, this.doLogout.bind(this));
         this.eventBus.on(NAVBAR.CHECK_COOKIE, this.cookieFetch.bind(this));
     }
@@ -53,6 +54,7 @@ export default class NavbarModel {
      * Получает данные пользователя
      */
     getUserData() {
+        console.log('NAVBAR getUserData');
         Api.profileFetch()
             .then((res) => {
                 if (res === undefined) {
@@ -62,6 +64,7 @@ export default class NavbarModel {
                 if (res.ok) {
                     res.json()
                         .then((data) => {
+                            console.log(data);
                             this.eventBus.emit(NAVBAR.RENDER_LOGGED, data);
                         });
                 }

@@ -15,6 +15,8 @@ export default class SettingsView extends BaseView {
         this.userData = {};
         this.eventBus.on(SETTINGS.INVALID, this.showErrors.bind(this));
         this.eventBus.on(SETTINGS.RENDER_LOGGED, this.renderData.bind(this));
+        // this.eventBus.on(SETTINGS.AVATAR_UPLOAD, this.previewFile.bind(this));
+
     }
 
     /**
@@ -54,7 +56,6 @@ export default class SettingsView extends BaseView {
      */
     renderData(data) {
         this.userData = data;
-        console.log(data.image);
         document.getElementsByClassName('m-profile-avatar')[0].src = data.image;
         document.getElementsByClassName('m-profile-name')[0].innerHTML = data.name;
         document.getElementsByClassName('m-profile-login')[0].innerHTML = data.login;
@@ -99,5 +100,24 @@ export default class SettingsView extends BaseView {
             newPasswordConfirm: document.getElementById('newPasswordConfirm').value,
             password: document.getElementById('password').value,
         });
+    }
+
+    /**
+     * Предпросмотр фоточки
+     */
+    previewFile() {
+        let preview = document.querySelector('.m-profile-avatar');
+        let file    = document.querySelector('input[type=file]').files[0];
+        let reader  = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+        }
     }
 }
