@@ -46,7 +46,7 @@ export default class PlayerView extends BaseView {
         if (this.firstEntry) {
             this.eventBus.emit(PLAYER.GET_TRACKS, {index: 1}); // TODO получение плейлиста с индексом 1 - далее изменим
         }
-        this.eventBus.emit(PLAYER.RESIZE, {});
+        this.eventBus.emit(PLAYER.RESIZE);
     }
 
     /**
@@ -193,7 +193,7 @@ export default class PlayerView extends BaseView {
      * Слушает завершение воспроизвдения
      */
     audioEnded() {
-        this.eventBus.emit('next', 'self');
+        this.eventBus.emit(PLAYER.NEXT, 'self');
     }
 
     /**
@@ -238,9 +238,9 @@ export default class PlayerView extends BaseView {
      */
     playPauseButtonClick() {
         if (this.playing) {
-            this.eventBus.emit(PLAYER.PAUSE, {});
+            this.eventBus.emit(PLAYER.PAUSE);
         } else {
-            this.eventBus.emit(PLAYER.PLAY, {});
+            this.eventBus.emit(PLAYER.PLAY);
         }
     }
 
@@ -248,7 +248,7 @@ export default class PlayerView extends BaseView {
      * Слушает клик по кнопке включения предыдущего трека
      */
     prevButtonClick() {
-        this.eventBus.emit(PLAYER.PREVIOUS, {});
+        this.eventBus.emit(PLAYER.PREVIOUS);
     }
 
     /**
@@ -345,7 +345,7 @@ export default class PlayerView extends BaseView {
         if (!this.shuffled) {
             this.eventBus.emit(PLAYER.SHUFFLE, 'first');
         } else {
-            this.eventBus.emit(PLAYER.UNSHUFFLE, {});
+            this.eventBus.emit(PLAYER.UNSHUFFLE);
         }
     }
 
@@ -373,13 +373,13 @@ export default class PlayerView extends BaseView {
     repeatButtonClick() {
         switch (this.repeatState) {
         case 0:
-            this.eventBus.emit(PLAYER.REPEAT, {});
+            this.eventBus.emit(PLAYER.REPEAT);
             break;
         case 1:
-            this.eventBus.emit(PLAYER.REPEAT_ONE, {});
+            this.eventBus.emit(PLAYER.REPEAT_ONE);
             break;
         case 2:
-            this.eventBus.emit(PLAYER.UNREPEAT, {});
+            this.eventBus.emit(PLAYER.UNREPEAT);
             break;
         }
     }
@@ -470,9 +470,9 @@ export default class PlayerView extends BaseView {
      */
     volumeButtonClick() {
         if (this.muted) {
-            this.eventBus.emit(PLAYER.UNMUTE, {});
+            this.eventBus.emit(PLAYER.UNMUTE);
         } else {
-            this.eventBus.emit(PLAYER.MUTE, {});
+            this.eventBus.emit(PLAYER.MUTE);
         }
     }
 

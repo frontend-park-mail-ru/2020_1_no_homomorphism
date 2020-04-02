@@ -27,7 +27,7 @@ export default class NavbarView extends BaseView {
         if (this.firstRender) {
             this.setEventListeners.bind(this)();
         }
-        this.eventBus.emit(NAVBAR.CHECK_COOKIE, {});
+        this.eventBus.emit(NAVBAR.CHECK_COOKIE, );
     }
 
     /**
@@ -41,7 +41,7 @@ export default class NavbarView extends BaseView {
      * не залогинен
      */
     logoutClicked() {
-        this.eventBus.emit(NAVBAR.LOGOUT_CLICKED, {});
+        this.eventBus.emit(NAVBAR.LOGOUT_CLICKED, );
         this.renderLogout.bind(this)();
         this.globalEventBus.emit(NAVBAR.LOGOUT_REDIRECT, URL.MAIN);
     }
@@ -74,7 +74,7 @@ export default class NavbarView extends BaseView {
             document.getElementById('profile-link').classList.remove('is-hidden');
             document.getElementById('profile-link').classList.add('is-visible');
         });
-        this.eventBus.emit(NAVBAR.GET_USER_DATA, {});
+        this.eventBus.emit(NAVBAR.GET_USER_DATA, );
     }
 
     /**

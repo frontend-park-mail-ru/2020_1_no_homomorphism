@@ -25,7 +25,7 @@ export default class SettingsView extends BaseView {
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.CONTENT)[0]);
         if (JSON.stringify(this.userData) === '{}') {
-            this.eventBus.emit(SETTINGS.GET_USER_DATA, {});
+            this.eventBus.emit(SETTINGS.GET_USER_DATA, );
         } else {
             this.renderData(this.userData);
         }
@@ -46,7 +46,7 @@ export default class SettingsView extends BaseView {
         fileAttach.addEventListener('change', (event) => {
             event.preventDefault();
             event.stopImmediatePropagation();
-            this.eventBus.emit(SETTINGS.AVATAR_UPLOAD, {});
+            this.eventBus.emit(SETTINGS.AVATAR_UPLOAD, );
         });
     }
 

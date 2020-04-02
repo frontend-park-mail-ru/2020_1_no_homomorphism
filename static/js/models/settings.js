@@ -29,8 +29,8 @@ export default class SettingsModel {
                 switch (res.status) {
                 case RESPONSE.OK:
                     // this.getUserData.bind(this)();
-                    // this.globalEventBus.emit(NAVBAR.GET_USER_DATA, {});
-                    // this.eventBus.emit(SETTINGS.GET_USER_DATA, {});
+                    // this.globalEventBus.emit(NAVBAR.GET_USER_DATA, );
+                    // this.eventBus.emit(SETTINGS.GET_USER_DATA, );
                     // this.eventBus.emit(SETTINGS.REDIRECT, URL.SETTINGS);
                     res.json()
                         .then((data) => {
@@ -71,14 +71,14 @@ export default class SettingsModel {
                     switch (res.status) {
                     case RESPONSE.OK:
                         this.getUserData.bind(this)();
-                        this.globalEventBus.emit(NAVBAR.GET_USER_DATA, {});
+                        this.globalEventBus.emit(NAVBAR.GET_USER_DATA, );
                         break;
                     case RESPONSE.BAD_REQUEST: // TODO Обработать ошибку
                         this.eventBus.emit(SETTINGS.INVALID, errors);
                         break;
                     case RESPONSE.UNAUTH:
                     case RESPONSE.SERVER_ERROR:
-                        this.eventBus.emit(SETTINGS.INVALID, {});
+                        this.eventBus.emit(SETTINGS.INVALID, );
                         break;
                     default:
                         console.error('I am a teapot');

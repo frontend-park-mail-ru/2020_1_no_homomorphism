@@ -79,7 +79,7 @@ export default class PlayerModel {
     pause() {
         document.getElementsByTagName('audio')[0].pause();
         this.data.playing = false;
-        this.eventBus.emit(PLAYER.DRAW_PLAY, {});
+        this.eventBus.emit(PLAYER.DRAW_PLAY, );
     }
 
     /**
@@ -88,7 +88,7 @@ export default class PlayerModel {
     play() {
         document.getElementsByTagName('audio')[0].play();
         this.data.playing = true;
-        this.eventBus.emit(PLAYER.DRAW_PAUSE, {});
+        this.eventBus.emit(PLAYER.DRAW_PAUSE, );
     }
 
     /**
@@ -131,7 +131,7 @@ export default class PlayerModel {
                 this.data.current = -1;
             } else {
                 if (cause === 'self') {
-                    this.eventBus.emit(PLAYER.DRAW_PLAY, {});
+                    this.eventBus.emit(PLAYER.DRAW_PLAY, );
                     this.data.current = 0;
                     this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
                     this.eventBus.emit(PLAYER.TRACK_UPDATE, this.data.playlist[this.data.queue[0]]);
@@ -190,7 +190,7 @@ export default class PlayerModel {
         }
         this.data.current = 0;
         this.data.shuffle = true;
-        this.eventBus.emit(PLAYER.DRAW_SHUFFLE, {});
+        this.eventBus.emit(PLAYER.DRAW_SHUFFLE, );
     }
 
     /**
@@ -200,7 +200,7 @@ export default class PlayerModel {
         this.data.current = this.data.queue[this.data.current];
         this.data.queue.sort();
         this.data.shuffle = false;
-        this.eventBus.emit(PLAYER.DRAW_UNSHUFLE, {});
+        this.eventBus.emit(PLAYER.DRAW_UNSHUFLE, );
     }
 
     /**
@@ -208,7 +208,7 @@ export default class PlayerModel {
      */
     repeat() {
         this.data.repeat = true;
-        this.eventBus.emit(PLAYER.DRAW_REPEAT, {});
+        this.eventBus.emit(PLAYER.DRAW_REPEAT, );
     }
 
     /**
@@ -217,7 +217,7 @@ export default class PlayerModel {
     repeatOne() {
         this.data.repeat = false;
         document.getElementsByTagName('audio')[0].loop = true;
-        this.eventBus.emit(PLAYER.DRAW_REPEAT_ONE, {});
+        this.eventBus.emit(PLAYER.DRAW_REPEAT_ONE, );
     }
 
     /**
@@ -225,7 +225,7 @@ export default class PlayerModel {
      */
     unrepeat() {
         document.getElementsByTagName('audio')[0].loop = false;
-        this.eventBus.emit(PLAYER.DRAW_UNREPEAT, {});
+        this.eventBus.emit(PLAYER.DRAW_UNREPEAT, );
     }
 
     /**
@@ -233,7 +233,7 @@ export default class PlayerModel {
      */
     mute() {
         document.getElementsByTagName('audio')[0].muted = true;
-        this.eventBus.emit(PLAYER.DRAW_MUTE, {});
+        this.eventBus.emit(PLAYER.DRAW_MUTE, );
     }
 
     /**
@@ -241,6 +241,6 @@ export default class PlayerModel {
      */
     unmute() {
         document.getElementsByTagName('audio')[0].muted = false;
-        this.eventBus.emit(PLAYER.DRAW_UNMUTE, {});
+        this.eventBus.emit(PLAYER.DRAW_UNMUTE, );
     }
 }

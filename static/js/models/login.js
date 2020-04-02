@@ -39,7 +39,7 @@ export default class LoginModel {
                 .then((res) => {
                     switch (res.status) {
                     case RESPONSE.OK:
-                        this.globalEventBus.emit(LOGIN.LOGIN_SUCCESS, {});
+                        this.globalEventBus.emit(LOGIN.LOGIN_SUCCESS, );
                         this.eventBus.emit(LOGIN.REDIRECT, URL.PROFILE_TRACKS);
                         break;
                     case RESPONSE.BAD_REQUEST:
