@@ -1,5 +1,6 @@
 :root {
     --card-border: 16px;
+    --light-green: #00e67626;
 }
 hr {
     border: none;
@@ -116,7 +117,7 @@ img#avatar {
 }
 
 .m-profile-albums:hover, .m-profile-tracks:hover, .m-profile-playlists:hover, .m-profile-artists:hover {
-    background: #eee;
+    background: var(--light-green);
     border-radius: 5px;
     cursor: pointer;
     transition: 0.1s;
@@ -124,7 +125,7 @@ img#avatar {
 }
 
 .is-touched-profile-section {
-    background: #eee;
+    background: var(--light-green);
     border-radius: 5px;
     cursor: pointer;
     transition: 0.1s;
@@ -184,7 +185,7 @@ img#avatar {
 }
 
 .l-profile-track:hover {
-    background: #eee;
+    background: var(--light-green);
     cursor: pointer;
 }
 
