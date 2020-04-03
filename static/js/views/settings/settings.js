@@ -56,9 +56,9 @@ export default class SettingsView extends BaseView {
      */
     renderData(data) {
         this.userData = data;
-        document.getElementsByClassName('m-profile-avatar')[0].src = data.image;
-        document.getElementsByClassName('m-profile-name')[0].innerHTML = data.name;
-        document.getElementsByClassName('m-profile-login')[0].innerHTML = data.login;
+        document.getElementsByClassName(' m-round-image')[0].src = data.image;
+        document.getElementsByClassName('m-top-name')[0].innerHTML = data.name;
+        document.getElementsByClassName('m-top-login')[0].innerHTML = data.login;
 
         document.getElementsByClassName('m-settings-input')[0].value = data.name;
         document.getElementsByClassName('m-settings-input')[1].value = data.email;
@@ -106,7 +106,7 @@ export default class SettingsView extends BaseView {
      * Предпросмотр фоточки
      */
     previewFile() {
-        let preview = document.querySelector('.m-profile-avatar');
+        let preview = document.querySelector('. m-round-image');
         let file    = document.querySelector('input[type=file]').files[0];
         let reader  = new FileReader();
 

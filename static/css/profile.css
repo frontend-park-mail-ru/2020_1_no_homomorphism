@@ -1,3 +1,6 @@
+:root {
+    --card-border: 16px;
+}
 hr {
     border: none;
     background-color: #b39ddb;
@@ -14,39 +17,17 @@ p {
     margin: 6px;
 }
 
-.vl {
-    border-left: 1px solid #070025;
-    height: 200px;
-    width: 1px;
-}
-
 .l-main {
     margin-left: 3em;
 }
 
 .l-top-card {
     box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 32px;
-    padding: 32px;
+    border-radius: var(--card-border);
+    /*padding: 16px;*/
 }
 
-.l-medium-image {
-    background-clip: padding-box;
-    border-radius: 6px 6px 0 0;
-    height: 220px;
-    z-index: 2;
-}
-
-.l-profile-top-info {
-    margin-top: -240px;
-    border-left: #b39ddb;
-    border-right: #b39ddb;
-}
-
-.l-profile-avatar {
-}
-
-.m-profile-avatar {
+.m-round-image {
     z-index: 3;
     height: 150px;
     width: 150px;
@@ -54,14 +35,14 @@ p {
     float: right;
 }
 
-.m-profile-avatar:hover {
+.m-round-image:hover {
     transition: 0.3s;
     box-shadow: 0 0 30px #6b6b6b;
     -webkit-transform: scale(2);
     transform: scale(1.1);
 }
 
-.m-profile-avatar:not(:hover) {
+.m-round-image:not(:hover) {
     transition: 0.3s;
     box-shadow: 0 0 10px 4px rgba(129, 129, 129, 0.65);
 }
@@ -76,24 +57,24 @@ img#avatar {
     text-align: left;
 }
 
-.m-profile-login {
+.m-top-login {
     color: #070025;
     font-size: 30px;
     word-wrap: break-word;
 }
 
-.m-profile-name {
+.m-top-name {
     color: #5c4b6b;
     font-size: 15px;
     word-wrap: break-word;
 }
 
-.l-profile-titles .col {
+.l-top-titles .col {
     margin-top: 100px;
     padding-top: 8px;
 }
 
-.m-profile-tiny-ref {
+.m-tiny-ref {
     font-weight: lighter;
     color: #000000;
     text-decoration: none
