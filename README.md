@@ -14,6 +14,7 @@
 - [Владимир Северов](https://github.com/hackallcode)
 
 ## Ссылка на проект
+http://89.208.199.170:3000
 
 ## Репозиторий бекенда
 https://github.com/go-park-mail-ru/2020_1_no_homomorphism
