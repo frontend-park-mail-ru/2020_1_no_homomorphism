@@ -49,6 +49,10 @@ export const VALIDATION = {
     ALLOWABLE_EXTENSIONS: ['png', 'jpg', 'jpeg', 'gif'],
 };
 
+export const GLOBAL = {
+    PLAY_PLAYLIST: 'play playlist',
+};
+
 export const LOGIN = {
     REDIRECT: 'redirect',
     INVALID: 'invalid',

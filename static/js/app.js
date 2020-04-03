@@ -16,8 +16,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const indexController = new IndexController();
     const loginController = new LoginController(router, globalEventBus);
     const signupController = new SignupController(router, globalEventBus);
-    const playerController = new PlayerController(router);
-    const profileController = new ProfileController(router);
+    const playerController = new PlayerController(router, globalEventBus);
+    const profileController = new ProfileController(router, globalEventBus);
     const settingsController = new SettingsController(router, globalEventBus);
 
     // if ('serviceWorker' in navigator) {

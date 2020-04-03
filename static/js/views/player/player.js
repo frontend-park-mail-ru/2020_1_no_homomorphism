@@ -21,7 +21,6 @@ export default class PlayerView extends BaseView {
         this.repeatState = 0;
         this.muted = false;
         this.volume = 1;
-        this.firstEntry = true;
         this.eventBus.on(PLAYER.RESIZE, this.resize.bind(this)); // globalEventBus
         this.eventBus.on(PLAYER.DRAW_PLAY, this.drawPlay.bind(this));
         this.eventBus.on(PLAYER.DRAW_PAUSE, this.drawPause.bind(this));
@@ -45,10 +44,7 @@ export default class PlayerView extends BaseView {
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.PLAYER)[0]);
-        if (this.firstEntry) {
-            this.eventBus.emit(PLAYER.GET_TRACKS, {index: 1}); // TODO получение плейлиста с индексом 1 - далее изменим
-        }
-        this.eventBus.emit(PLAYER.RESIZE);
+        this.resize();
     }
 
     /**

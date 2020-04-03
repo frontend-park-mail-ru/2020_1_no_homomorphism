@@ -14,8 +14,9 @@ export class ProfileController {
     /**
      * Конструктор
      * @param {Router} router
+     * @param {EventBus} globalEventBus
      */
-    constructor(router) {
+    constructor(router, globalEventBus) {
         this.eventBus = new EventBus();
         this.model = new ProfileModel(this.eventBus);
         this.view = new ProfileView(this.eventBus);
@@ -24,7 +25,7 @@ export class ProfileController {
         // --------- Albums
         this.albumsController = new ProfileAlbumsController(router, this.eventBus);
         this.tracksController = new ProfileTracksController(router, this.eventBus);
-        this.playlistsController = new ProfilePlaylistsController(router, this.eventBus);
+        this.playlistsController = new ProfilePlaylistsController(router, this.eventBus, globalEventBus);
         this.artistsController = new ProfileArtistsController(router, this.eventBus);
     }
 }

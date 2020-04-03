@@ -9,10 +9,11 @@ export class ProfilePlaylistsController {
      * Конструктор
      * @param {Router} router
      * @param {EventBus} eventBus
+     * @param {EventBus} globalEventBus
      */
-    constructor(router, eventBus) {
+    constructor(router, eventBus, globalEventBus) {
         this.eventBus = eventBus;
         this.model = new ProfilePlaylistsModel(this.eventBus);
-        this.view = new ProfilePlaylistsView(this.eventBus);
+        this.view = new ProfilePlaylistsView(this.eventBus, globalEventBus);
     }
 }
