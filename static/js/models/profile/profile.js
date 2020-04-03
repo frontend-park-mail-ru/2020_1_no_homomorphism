@@ -1,5 +1,6 @@
 import Api from '@libs/api.js';
 import {PROFILE, URL} from '@libs/constans.js';
+import {NAVBAR, RESPONSE} from '@libs/constans';
 
 /**
  * Модель Профиля
@@ -8,9 +9,11 @@ export default class ProfileModel {
     /**
      * конструктор
      * @param {EventBus} eventBus
+     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus) {
+    constructor(eventBus, globalEventBus) {
         this.eventBus = eventBus;
+        this.globalEventBus = globalEventBus;
         this.eventBus.on(PROFILE.GET_DATA, this.getUserData.bind(this));
     }
 
@@ -18,19 +21,26 @@ export default class ProfileModel {
      * получает профиль юзера
      */
     getUserData() { // TODO обработать некорректные события
+        console.log('PROFILE getUserData');
         Api.profileFetch()
             .then((res) => {
-                if (res === undefined) {
-                    this.eventBus.emit(PROFILE.REDIRECT, URL.MAIN);
-                    return;
-                }
-                if (res.ok) {
+                switch (res.status) {
+                case RESPONSE.OK:
                     res.json()
                         .then((data) => {
                             this.eventBus.emit(PROFILE.RENDER_DATA, data);
                         });
-                } else {
-                    this.eventBus.emit(PROFILE.NO_ANSWER, URL.MAIN);
+                    break;
+                case RESPONSE.UNAUTH:
+                    this.globalEventBus.emit(NAVBAR.GET_USER_DATA, {});
+                    this.eventBus.emit(PROFILE.REDIRECT, URL.MAIN);
+                    break;
+                case RESPONSE.SERVER_ERROR:
+                    this.eventBus.emit(PROFILE.REDIRECT, URL.MAIN);
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
                 }
             });
     }

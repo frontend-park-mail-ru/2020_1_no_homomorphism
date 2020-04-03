@@ -1,7 +1,6 @@
 import Api from '@libs/api.js';
 import Validation from '@libs/validation.js';
-import {LOGIN, URL} from '@libs/constans.js';
-import {RESPONSE, SIGN_UP} from '@libs/constans';
+import {RESPONSE, LOGIN, URL, NAVBAR} from '@libs/constans';
 
 /**
  * Модель для страницы входа
@@ -39,7 +38,7 @@ export default class LoginModel {
                 .then((res) => {
                     switch (res.status) {
                     case RESPONSE.OK:
-                        this.globalEventBus.emit(LOGIN.LOGIN_SUCCESS, {});
+                        this.globalEventBus.emit(NAVBAR.GET_USER_DATA, {});
                         this.eventBus.emit(LOGIN.REDIRECT, URL.PROFILE_TRACKS);
                         break;
                     case RESPONSE.BAD_REQUEST:

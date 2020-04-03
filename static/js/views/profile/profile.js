@@ -1,4 +1,4 @@
-import {PROFILE, TEMPLATES, URL, DOM} from '@libs/constans.js';
+import {PROFILE , URL, DOM} from '@libs/constans.js';
 import profile from '@views/profile/profile.tmpl.xml';
 import BaseView from '@libs/base_view';
 
@@ -22,9 +22,9 @@ export default class ProfileView extends BaseView {
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.CONTENT)[0], url);
-        if (JSON.stringify(this.data) === '{}') {
+        // if (JSON.stringify(this.data) === '{}') {
             this.eventBus.emit(PROFILE.GET_DATA, {});
-        }
+        // }
         this.eventBus.emit(PROFILE.CHOOSE_SECTION, {});
         this.eventBus.emit(this.currentOpen, {});
     }
