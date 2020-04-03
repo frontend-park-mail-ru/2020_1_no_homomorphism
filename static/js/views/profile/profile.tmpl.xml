@@ -4,10 +4,10 @@
             <div class="l-top-card row">
 
                 <div class="l-top-info col col-5">
-                    <div class="l-round-image col col-4">
+                    <div class="l-round-image col">
                         <img alt="" src="{data.image}" class=" m-round-image" id="avatar"/>
                     </div>
-                    <div class="l-top-name col col-7" id="login-name">
+                    <div class="l-top-name col" id="login-name">
                         <div class="m-top-login" id="profile-login">
                             <fest:value>data.login</fest:value>
                         </div>

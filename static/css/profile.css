@@ -28,6 +28,18 @@ p {
     /*padding: 16px;*/
 }
 
+.l-round-image {
+    margin-left: 32px;
+}
+
+.m-round-image {
+    z-index: 3;
+    height: 150px;
+    width: 150px;
+    border-radius: 100px;
+    /*float: left;*/
+}
+
 .m-round-image {
     z-index: 3;
     height: 150px;
@@ -118,7 +130,7 @@ img#avatar {
 
 .m-profile-albums:hover, .m-profile-tracks:hover, .m-profile-playlists:hover, .m-profile-artists:hover {
     background: var(--light-green);
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     cursor: pointer;
     transition: 0.1s;
     transform: scale(1.1);
