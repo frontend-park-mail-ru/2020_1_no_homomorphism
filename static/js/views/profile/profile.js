@@ -1,4 +1,4 @@
-import {PROFILE, TEMPLATES, URL, DOM} from '@libs/constans.js';
+import {PROFILE, URL, DOM} from '@libs/constans.js';
 import profile from '@views/profile/profile.tmpl.xml';
 import BaseView from '@libs/base_view';
 
