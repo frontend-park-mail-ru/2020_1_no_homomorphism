@@ -27,26 +27,26 @@
     z-index: 1;
 }
 
-.music-bar {
+.l-music-bar {
     background: white;
     position: relative;
     z-index: 1;
 }
 
-.music-bar .col {
+.l-music-bar .col {
     height: 80px;
 }
 
-.music-bar .track-group-names {
+.l-music-bar .track-group-names {
     padding-left: 7px;
     padding-top: 0;
 }
 
-.music-bar .add-to-playlist-button {
+.l-music-bar .add-to-playlist-button {
     margin-left: 159px;
 }
 
-.music-bar .share-button {
+.l-music-bar .share-button {
     padding-top: 1.5px;
 }
 
