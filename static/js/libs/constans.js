@@ -80,6 +80,7 @@ export const NAVBAR = {
 
 export const PLAYER = {
     REDIRECT: 'redirect',
+    GET_TRACK: 'get-track',
     GET_TRACKS: 'get-tracks',
     RESIZE: 'resize',
     PAUSE: 'pause',
@@ -95,6 +96,8 @@ export const PLAYER = {
     MUTE: 'mute',
     UNMUTE: 'unmute',
     DELETE: 'delete',
+    LIKE: 'like',
+    ADD: 'add',
     DRAW_PLAY: 'draw-play',
     DRAW_PAUSE: 'draw-pause',
     TRACK_UPDATE: 'track-update',
