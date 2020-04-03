@@ -580,7 +580,7 @@ export default class PlayerView extends BaseView {
                 break;
             }
             if (current.getAttribute('id') !== null) {
-                this.eventBus.emit('get track', current.getAttribute('id'));
+                this.eventBus.emit(PLAYER.GET_TRACK, current.getAttribute('id'));
                 break;
             } else {
                 current = current.parentNode;
@@ -596,19 +596,19 @@ export default class PlayerView extends BaseView {
         while (target.getAttribute('id') === null) {
             target = target.parentNode;
         }
-        this.eventBus.emit('delete', target.getAttribute('id'));
+        this.eventBus.emit(PLAYER.DELETE, target.getAttribute('id'));
     }
     /**
      * Слушает клик мыши по кнопке лайка на треке в плейлисте
      * @param {Object} event
      */
     trackFavoriteButtonClick(event) {
-        if (event.target.src.indexOf('static/img/favorite_border.svg') !== -1) {
-            event.target.src = 'static/img/favorite.svg';
+        if (event.target.src.indexOf('/static/img/favorite_border.svg') !== -1) {
+            event.target.src = '/static/img/favorite.svg';
         } else {
-            event.target.src = 'static/img/favorite_border.svg';
+            event.target.src = '/static/img/favorite_border.svg';
         }
-        this.eventBus.emit('like', event.target.parentNode.parentNode.getAttribute('id'));
+        this.eventBus.emit(PLAYER.LIKE, event.target.parentNode.parentNode.getAttribute('id'));
     }
     /**
      * Слушает клик мыши по кнопке добавления на треке в плейлисте
@@ -619,7 +619,7 @@ export default class PlayerView extends BaseView {
         while (target.getAttribute('id') === null) {
             target = target.parentNode;
         }
-        this.eventBus.emit('add', target.getAttribute('id'));
+        this.eventBus.emit(PLAYER.ADD, target.getAttribute('id'));
     }
 
     /**

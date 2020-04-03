@@ -20,6 +20,7 @@ export default class PlayerModel {
             shuffle: false,
             repeat: false,
         };
+        this.eventBus.on(PLAYER.GET_TRACK, this.getTrack.bind(this));
         this.eventBus.on(PLAYER.GET_TRACKS, this.getPlaylistTracks.bind(this));
         this.eventBus.on(PLAYER.PAUSE, this.pause.bind(this));
         this.eventBus.on(PLAYER.PLAY, this.play.bind(this));
@@ -71,7 +72,30 @@ export default class PlayerModel {
                     this.queue.push(this.playlist.length - 1);
                 }
                 this.eventBus.emit(PLAYER.DRAW_TRACKLIST, this.playlist);
+                this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[0].id, this.playlist[0].id);
             });
+    }
+
+    /**
+     * достает трек
+     * @param {string} id
+     */
+    getTrack(id) {
+        const currentId = this.playlist[this.queue[this.current]].id;
+        this.current = this.queue.indexOf(this.playlist.indexOf(
+            this.playlist.find((track) => track.id === id)));
+        document.getElementsByTagName('audio')[0].children[0].src =
+            this.playlist[this.queue[this.current]].link;
+        if (this.playing) {
+            document.getElementsByTagName('audio')[0].pause();
+        }
+        document.getElementsByTagName('audio')[0].load();
+        if (this.playing) {
+            document.getElementsByTagName('audio')[0].play();
+        }
+        this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
+        this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[this.current]]);
+        this.eventBus.emit(PLAYER.MOVE_MARKER, currentId, this.playlist[this.queue[this.current]].id);
     }
 
     /**

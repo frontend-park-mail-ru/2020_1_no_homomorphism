@@ -14,7 +14,7 @@
                 <div class="l-login-input-password">
                     <label>
                         Password
-                        <input type="text" id="password" use="required"/>
+                        <input type="password" id="password" use="required"/>
                         <div class="error-message-small"></div>
                     </label>
                 </div>
