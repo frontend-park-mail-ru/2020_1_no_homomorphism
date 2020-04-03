@@ -1,5 +1,6 @@
 import Api from '@libs/api.js';
 import {PROFILE} from '@libs/constans.js';
+import {RESPONSE} from '@libs/constans';
 
 /**
  * Модель Профиля
@@ -32,15 +33,29 @@ export default class ProfileTracksModel {
         // eslint-disable-next-line guard-for-in
         for (const playlist in this.playlists) {
             Api.playlistTracksFetch(this.playlists[playlist].id)
-                .then((response) => response.json())
-                .then((list) => {
-                    length--;
-                    // eslint-disable-next-line guard-for-in
-                    for (const song in list.tracks) {
-                        this.tracks.push(list.tracks[song]);
-                    }
-                    if (length === 0) { // TODO временное решение
-                        this.renderTracks.bind(this)();
+                .then((res) => {
+                    switch (res.status) {
+                    case RESPONSE.OK:
+                        res.json()
+                            .then((list) => {
+                                length--;
+                                // eslint-disable-next-line guard-for-in
+                                for (const song in list.tracks) {
+                                    this.tracks.push(list.tracks[song]);
+                                }
+                                if (length === 0) { // TODO временное решение
+                                    this.renderTracks.bind(this)();
+                                }
+                            });
+                        break;
+                    case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
+                        break;
+                    case RESPONSE.UNAUTH: // TODO Пользователь не залогинен => дефолтный плейлист
+                    case RESPONSE.NO_ACCESS_RIGHT: // TODO Нет прав к этому плейлисту
+                        break;
+                    default:
+                        console.log(res);
+                        console.error('I am a teapot');
                     }
                 });
         }

@@ -1,0 +1,79 @@
+.m-name {
+    font-size: x-large;
+}
+
+.l-down-card {
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+    border-radius: var(--card-border);
+    margin-top: 16px;
+}
+
+.l-track-list {
+    margin-top: 16px;
+    border-radius: var(--card-border);
+}
+
+.m-rounded-image {
+    z-index: 3;
+    height: 150px;
+    width: 150px;
+    border-radius: 100px;
+    float: right;
+}
+
+.m-button-track-list-play {
+    height: 30px;
+    width: 30px;
+    background: url(../../static/img/play.svg) no-repeat;
+    border: yellow;
+    cursor: pointer;
+    opacity: 0.4;
+    /*padding-left: 230px;*/
+    margin-top: 130px;
+    padding: 20px;
+    position: relative;
+    margin-left: -70px;
+    margin-right: 20px;
+    transform: scale(3);
+}
+
+
+/*.l-round-image:hover .m-round-image {*/
+/*    opacity: 0.5;*/
+/*    transition: 0.3s;*/
+/*    box-shadow: 0 0 30px #6b6b6b;*/
+/*    -webkit-transform: scale(2);*/
+/*    transform: scale(1.1);*/
+/*}*/
+
+.m-button-track-list-play:hover {
+    opacity: 1;
+    -webkit-transform: scale(3.5);
+    transform: scale(3.5);
+    transition: 0.3s;
+}
+
+.m-button-track-list-play:not(:hover) {
+    opacity: 0.4;
+    transform: scale(3);
+    transition: 0.3s;
+}
+
+.l-profile-track:hover .m-like-button, .l-profile-track:hover .m-delete-button, .l-profile-track:hover .m-add-button {
+    transition: 0.3s;
+    -webkit-transform: scale(2);
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+.l-profile-track:not(:hover) .m-like-button, .l-profile-track:not(:hover) .m-delete-button, .l-profile-track:not(:hover) .m-add-button {
+    transition: 0.1s;
+}
+
+.l-big-track-button {
+    opacity: 1;
+}
+
+.m-like-button, .m-delete-button, .m-add-button {
+    opacity: 0;
+}

@@ -59,7 +59,7 @@ img#avatar {
 
 .l-top-name {
     margin-left: 32px;
-    padding-top: 128px;
+    padding-top: 100px;
     text-align: left;
 }
 
@@ -230,13 +230,13 @@ img#avatar {
     transition: 0.1s;
 }
 
-.l-profile-track:hover .m-profile-button-play {
+.l-profile-track:hover .m-button-track-play {
     opacity: 1;
     -webkit-transform: scale(2);
     transform: scale(2);
 }
 
-.m-profile-button-play {
+.m-button-track-play {
     height: 30px;
     width: 30px;
     background: url(../../static/img/play.svg) no-repeat;
@@ -298,7 +298,7 @@ img#avatar {
     list-style: none;
 }
 
-.l-profile-playlists:hover .m-profile-button-play-playlist {
+.l-profile-playlists:hover .m-button-track-play-playlist {
     opacity: 1;
     -webkit-transform: scale(6);
     transform: translateY(-100px) translateX(-16px) scale(6);
@@ -309,7 +309,7 @@ img#avatar {
     opacity: 0.5;
 }
 
-.m-profile-button-play-playlist {
+.m-button-track-play-playlist {
     height: 30px;
     width: 30px;
     object-fit: cover;

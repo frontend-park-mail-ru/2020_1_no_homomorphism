@@ -30,6 +30,9 @@ export const URL = {
     PROFILE_PLAYLISTS: '/profile/playlists',
     PROFILE_ARTISTS: '/profile/artists',
     SETTINGS: '/settings',
+    ARTIST: /(\/artist\/)[0-9]+/,
+    PLAYLIST: /(\/playlist\/)[0-9]+/,
+    ALBUM: /(\/album\/)[0-9]+/,
 };
 
 export const TEMPLATES = {
@@ -143,4 +146,10 @@ export const PROFILE = {
     RENDER_PLAYLISTS: 'render-profile-playlists',
     RENDER_ALBUMS: 'render-profile-albums',
     RENDER_ARTISTS: 'render-profile-artists',
+};
+
+export const PLAYLIST = {
+    REDIRECT: 'redirect',
+    GET_DATA: 'get-playlist',
+    RENDER_DATA: 'render-playlist',
 };
