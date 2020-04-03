@@ -30,6 +30,7 @@ export const URL = {
     PROFILE_PLAYLISTS: '/profile/playlists',
     PROFILE_ARTISTS: '/profile/artists',
     SETTINGS: '/settings',
+    ARTIST: /(\/artist\/)[0-9]{1,}/,
 };
 
 export const TEMPLATES = {
