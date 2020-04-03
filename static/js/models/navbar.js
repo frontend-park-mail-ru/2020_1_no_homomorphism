@@ -54,7 +54,6 @@ export default class NavbarModel {
      * Получает данные пользователя
      */
     getUserData() {
-        console.log('NAVBAR getUserData');
         Api.profileFetch()
             .then((res) => {
                 if (res === undefined) {
@@ -64,7 +63,6 @@ export default class NavbarModel {
                 if (res.ok) {
                     res.json()
                         .then((data) => {
-                            console.log(data);
                             this.eventBus.emit(NAVBAR.RENDER_LOGGED, data);
                         });
                 }

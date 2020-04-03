@@ -16,6 +16,5 @@ export class SettingsController {
         this.model = new SettingsModel(this.eventBus, globalEventBus);
         this.view = new SettingsView(this.eventBus);
         this.eventBus.on(SETTINGS.REDIRECT, router.redirect.bind(router));
-        // globalEventBus.on()
     }
 }

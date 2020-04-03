@@ -75,7 +75,6 @@ export default class SignupModel {
     checkBody(res) {
         res.json()
             .then((body) => {
-                console.log(body);
                 if (body.login_exists) {
                     if (body.email_exists) {
                         this.eventBus.emit(SIGN_UP.INVALID, {global: 'These login and email are taken'});
