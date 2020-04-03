@@ -38,14 +38,6 @@ p {
     height: 150px;
     width: 150px;
     border-radius: 100px;
-    /*float: left;*/
-}
-
-.m-round-image {
-    z-index: 3;
-    height: 150px;
-    width: 150px;
-    border-radius: 100px;
     float: right;
 }
 
