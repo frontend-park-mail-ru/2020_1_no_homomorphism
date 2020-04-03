@@ -2,6 +2,7 @@
     --card-border: 16px;
     --light-green: #00e67626;
 }
+
 hr {
     border: none;
     background-color: #b39ddb;
@@ -64,9 +65,9 @@ img#avatar {
     margin-top: 50px;
 }
 
-#login-name {
+.l-top-name {
+    margin-left: 32px;
     padding-top: 128px;
-    margin-left: 16px;
     text-align: left;
 }
 
@@ -78,7 +79,7 @@ img#avatar {
 
 .m-top-name {
     color: #5c4b6b;
-    font-size: 15px;
+    font-size: 16px;
     word-wrap: break-word;
 }
 
@@ -169,7 +170,7 @@ img#avatar {
     transition-duration: 0.5s;
 }
 
-.l-profile-playlist-list, .l-profile-album-playlist-list .l-profile-artist-list{
+.l-profile-playlist-list, .l-profile-album-playlist-list .l-profile-artist-list {
     display: block;
     padding: 0;
     list-style: none;
@@ -298,6 +299,7 @@ img#avatar {
     padding-right: 6px;
     text-decoration: none;
 }
+
 .card-list {
     display: block;
     padding: 0;
