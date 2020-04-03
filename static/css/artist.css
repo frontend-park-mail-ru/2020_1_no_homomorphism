@@ -36,3 +36,11 @@
 .m-artist-info {
     padding-top: 13px;
 }
+
+.m-artist-info:hover {
+    background: var(--light-green);
+    /*border-radius: 5px;*/
+    cursor: pointer;
+    transition: 0.1s;
+    transform: scale(1.1);
+}

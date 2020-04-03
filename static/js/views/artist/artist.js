@@ -1,17 +1,19 @@
 import artist from '@views/artist/artist.tmpl.xml';
 import BaseView from '@libs/base_view';
-import {DOM} from '@libs/constans';
+import {ARTIST, DOM} from '@libs/constans';
 import '@css/base.css';
 
 /**
  *  вью для страницы артиста
  */
-export default class ArtistView extends BaseView{
+export default class ArtistView extends BaseView {
     /**
      * Конструктор
+     * @param {EventBus} eventBus
      */
-    constructor() {
-        super(artist)
+    constructor(eventBus) {
+        super(artist);
+        this.eventBus = eventBus;
     }
 
     /**
@@ -22,8 +24,8 @@ export default class ArtistView extends BaseView{
         if (JSON.stringify(this.data) === '{}') {
             this.eventBus.emit(ARTIST.GET_DATA);
         }
-        this.eventBus.emit(PROFILE.CHOOSE_SECTION);
-        this.eventBus.emit(this.currentOpen);
+        /*this.eventBus.emit(PROFILE.CHOOSE_SECTION);
+        this.eventBus.emit(this.currentOpen);*/
     }
 
     /**
@@ -31,8 +33,11 @@ export default class ArtistView extends BaseView{
      */
     renderData(data) {
         this.setData(data);
-        document.getElementsByClassName('m-top-login')[0].innerHTML = data.login;
-        document.getElementsByClassName('m-top-name')[0].innerHTML = data.name;
-        document.getElementsByClassName(' m-round-image')[0].src = data.image;
+        document.getElementsByClassName('m-top-login')[0].innerHTML = data.name;
+        document.getElementsByClassName('m-round-image')[0].src = data.image;
+    }
+
+    setData(data) {
+        super.setData(data);
     }
 }

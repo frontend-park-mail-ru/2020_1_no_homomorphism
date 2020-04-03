@@ -145,3 +145,18 @@ export const PROFILE = {
     RENDER_ALBUMS: 'render-profile-albums',
     RENDER_ARTISTS: 'render-profile-artists',
 };
+
+export const ARTIST = {
+    SELECTED_CLASS: 'is-touched-profile-section',
+    ID_TRACKS_SECTION: 'artist-tracks-title',
+    ID_ALBUMS_SECTION: 'artist-albums-title',
+    ID_INFO_SECTION: 'artist-info-title',
+    NO_ANSWER: 'no-answer',
+    REDIRECT: 'redirect',
+    GET_DATA: 'get-artist-data',
+    RENDER_DATA: 'render-artist-data',
+    CHOOSE_SECTION: 'choose-section',
+    RENDER_TRACKS: 'render-artist-tracks',
+    RENDER_ALBUMS: 'render-artist-albums',
+    RENDER_INFO: 'render-artist-info',
+};

@@ -56,6 +56,14 @@ export default class Api {
     }
 
     /**
+     * Артист просмотр
+     * @return {Promise<Response>}
+     */
+    static artistFetch() {
+        return getFetch(API + '').catch((error) => console.error(error));
+    }
+
+    /**
      * Профиль просмотр
      * @return {Promise<Response>}
      */

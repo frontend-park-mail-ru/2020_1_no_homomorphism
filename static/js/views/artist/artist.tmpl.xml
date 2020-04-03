@@ -45,19 +45,19 @@
 
                 <div class="row">
                     <div class="m-profile-tracks col col-4" id="artist-tracks-title">
-                        <a class="m-tiny-ref" href="/profile/tracks">
+                        <a class="m-tiny-ref" href="/artist/{data.id}/tracks">
                             <h2>543</h2>
                             <p>Tracks</p>
                         </a>
                     </div>
                     <div class="m-profile-albums col col-4" id="artist-albums-title">
-                        <a class="m-tiny-ref" href="/profile/albums">
+                        <a class="m-tiny-ref" href="/artist/{data.id}/albums">
                             <h2>43</h2>
                             <p>Albums</p>
                         </a>
                     </div>
-                    <div class="m-artist-info col col-4" id="artist-albums-title">
-                        <a class="m-tiny-ref" href="/profile/albums">
+                    <div class="m-artist-info col col-4" id="artist-info-title">
+                        <a class="m-tiny-ref" href="/artist/{data.id}/info">
                             <h2>инфо</h2>
                         </a>
                     </div>
@@ -66,9 +66,11 @@
             </div>
 
             <div class="l-down-card">
-                <div class="l-profile-album-list" id="profile-album-playlist-list" style="top: 0;">
+                <div class="l-profile-album-list" id="artist-album-playlist-list" style="top: 0;">
                 </div>
-                <div class="l-profile-track-list" id="profile-track-list" style="top: 0;">
+                <div class="l-profile-track-list" id="artist-track-list" style="top: 0;">
+                </div>
+                <div class="l-profile-track-list" id="artist-info" style="top: 0;">
                 </div>
             </div>
         </div>

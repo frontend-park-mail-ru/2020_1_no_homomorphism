@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const playerController = new PlayerController(router);
     const profileController = new ProfileController(router);
     const settingsController = new SettingsController(router, globalEventBus);
-    const artistController = new ArtistController();
+    const artistController = new ArtistController(router);
 
     // if ('serviceWorker' in navigator) {
     //     navigator.serviceWorker
