@@ -38,6 +38,7 @@ export default class LoginModel {
                 .then((res) => {
                     switch (res.status) {
                     case RESPONSE.OK:
+                        localStorage.setItem('csrfToken', res.headers.get('Csrf-Token'));
                         this.globalEventBus.emit(NAVBAR.GET_USER_DATA, {});
                         this.eventBus.emit(LOGIN.REDIRECT, URL.PROFILE_TRACKS);
                         break;

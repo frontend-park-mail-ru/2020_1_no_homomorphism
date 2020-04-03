@@ -20,8 +20,7 @@ export default class ProfileModel {
     /**
      * получает профиль юзера
      */
-    getUserData() { // TODO обработать некорректные события
-        console.log('PROFILE getUserData');
+    getUserData() {
         Api.profileFetch()
             .then((res) => {
                 switch (res.status) {
