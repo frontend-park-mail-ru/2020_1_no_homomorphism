@@ -20,22 +20,17 @@ p {
     width: 1px;
 }
 
-.l-profile {
+.l-main {
     margin-left: 3em;
 }
 
-.l-profile .info {
-    font-size: 25px;
-    margin: 10px 10px 20px;
-}
-
-.l-profile-top {
+.l-top-card {
     box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
     border-radius: 32px;
     padding: 32px;
 }
 
-.l-profile-top-image {
+.l-medium-image {
     background-clip: padding-box;
     border-radius: 6px 6px 0 0;
     height: 220px;

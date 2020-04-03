@@ -1,8 +1,8 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
-    <div class="row">
-        <div class="l-profile col col-9">
-            <div class="l-profile-top">
-                <div class="l-profile-top-image"></div>
+    <div class="col col-9">
+        <div class="l-main">
+            <div class="l-top-card ">
+                <div class="l-medium-image"> </div>
                 <div class="l-profile-top-info row">
                     <div class="col col-5">
                         <div class="l-profile-avatar col col-4">
@@ -47,7 +47,8 @@
                 </div>
 
             </div>
-            <div class="l-profile-content">
+
+            <div class="l-down-card">
                 <div class="l-profile-album-list" id="profile-album-playlist-list" style="top: 0;">
                 </div>
                 <div class="l-profile-track-list" id="profile-track-list" style="top: 0;">
