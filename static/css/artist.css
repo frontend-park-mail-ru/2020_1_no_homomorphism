@@ -1,0 +1,38 @@
+.m-artist-likes {}
+
+.m-artist-like-button {
+    text-align: right;
+}
+
+.b-artist-like-button {
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+}
+
+.m-artist-like-number {}
+
+.m-artist-notifications {}
+
+.b-artist-notifications-button {
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+}
+
+.m-artist-notifications-number {}
+
+.m-artist-play {
+    cursor: pointer;
+}
+
+.b-artist-play-button {
+    height: 30px;
+    width: 30px;
+}
+
+.m-artist-play-word {}
+
+.m-artist-info {
+    padding-top: 13px;
+}

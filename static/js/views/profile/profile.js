@@ -36,7 +36,7 @@ export default class ProfileView extends BaseView {
         this.setData(data);
         document.getElementsByClassName('m-top-login')[0].innerHTML = data.login;
         document.getElementsByClassName('m-top-name')[0].innerHTML = data.name;
-        document.getElementsByClassName(' m-round-image')[0].src = data.image;
+        document.getElementsByClassName('m-round-image')[0].src = data.image;
     }
 
     /**
