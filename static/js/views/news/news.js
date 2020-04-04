@@ -1,23 +1,24 @@
 import news from '@views/news/news.tmpl.xml';
 import BaseView from '@libs/base_view';
-import {DOM} from '@libs/constans';
 import '@css/base.css';
 
 /**
  *  вью для главной
  */
-export default class NewsView extends BaseView{
+export default class NewsView extends BaseView {
     /**
      * Конструктор
      */
     constructor() {
-        super(news)
+        super(news);
     }
 
     /**
      * рендерит главную страничку
+     * @param {Object} root
+     * @param {srting} url
      */
-    render(root, url ) {
+    render(root, url) {
         super.render(root);
     }
 }

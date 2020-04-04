@@ -1,7 +1,6 @@
 import Validation from '@libs/validation.js';
 import Api from '@libs/api.js';
-import {SETTINGS, URL} from '@libs/constans.js';
-import {RESPONSE, SIGN_UP, NAVBAR} from '@libs/constans';
+import {SETTINGS, URL, RESPONSE, NAVBAR} from '@libs/constans';
 
 /**
  * Модель настроек
@@ -67,7 +66,7 @@ export default class SettingsModel {
                         this.globalEventBus.emit(NAVBAR.GET_USER_DATA);
                         break;
                     case RESPONSE.BAD_REQUEST: // TODO Обработать ошибку
-                        this.eventBus.emit(SETTINGS.INVALID, errors);
+                        this.eventBus.emit(SETTINGS.INVALID);
                         break;
                     case RESPONSE.UNAUTH:
                     case RESPONSE.SERVER_ERROR:

@@ -1,6 +1,5 @@
 import Api from '@libs/api.js';
-import {PLAYER} from '@libs/constans.js';
-import {RESPONSE, SETTINGS, URL} from '@libs/constans';
+import {RESPONSE, PLAYER} from '@libs/constans.js';
 
 /**
  * Модель плеера
@@ -39,6 +38,7 @@ export default class PlayerModel {
 
     /**
      * Получение треков плейлиста
+     * @param {string} index
      */
     getPlaylistTracks(index) {
         Api.playlistTracksFetch(index.index)
@@ -63,7 +63,7 @@ export default class PlayerModel {
      * останавливает воспроизведение
      * @param {Object} res
      */
-    generateData (res) {
+    generateData(res) {
         res.json()
             .then((list) => {
                 // eslint-disable-next-line guard-for-in
@@ -95,7 +95,8 @@ export default class PlayerModel {
         }
         this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
         this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[this.current]]);
-        this.eventBus.emit(PLAYER.MOVE_MARKER, currentId, this.playlist[this.queue[this.current]].id);
+        this.eventBus.emit(PLAYER.MOVE_MARKER, currentId,
+            this.playlist[this.queue[this.current]].id);
     }
 
     /**
@@ -164,7 +165,7 @@ export default class PlayerModel {
                     this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
                     this.eventBus.emit(PLAYER.TRACK_UPDATE,
                         this.playlist[this.queue[this.queue.length - 1]].id,
-                        this.playlist[this.queue[0]]
+                        this.playlist[this.queue[0]],
                     );
                 }
                 this.playing = false;

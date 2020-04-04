@@ -30,17 +30,12 @@ export const URL = {
     PROFILE_PLAYLISTS: '/profile/playlists',
     PROFILE_ARTISTS: '/profile/artists',
     SETTINGS: '/settings',
-    ARTIST: /(\/artist\/)[0-9]{1,}/,
+    ARTIST: /(\/artist\/)[0-9]+/,
 };
 
-export const TEMPLATES = {
-    PROFILE: '../../../views/profile/profile.njk',
-    PROFILE_TRACKS: '../../../views/profile/profile_tracks.njk',
-    PROFILE_PLAYLISTS: '../../../views/profile/profile_playlists.njk',
-    PROFILE_ALBUMS: '../../../views/profile/profile_albums.njk',
-    PROFILE_ARTISTS: '../../../views/profile/profile_artists.njk',
-    LOGIN: '../../../views/login.njk',
-    SIGN_UP: '../../../views/signup.njk',
+export const PAGINATION = {
+    ALBUMS: 20,
+    TRACKS: 50,
 };
 
 export const VALIDATION = {
@@ -147,16 +142,16 @@ export const PROFILE = {
 };
 
 export const ARTIST = {
-    SELECTED_CLASS: 'is-touched-profile-section',
-    ID_TRACKS_SECTION: 'artist-tracks-title',
-    ID_ALBUMS_SECTION: 'artist-albums-title',
-    ID_INFO_SECTION: 'artist-info-title',
+    // SELECTED_CLASS: 'is-touched-profile-section',
+    SET_ID: 'set id',
+    ID_TRACKS_SECTION: 'tracks',
+    ID_ALBUMS_SECTION: 'albums',
+    ID_INFO_SECTION: 'info',
     NO_ANSWER: 'no-answer',
     REDIRECT: 'redirect',
     GET_DATA: 'get-artist-data',
     RENDER_DATA: 'render-artist-data',
-    CHOOSE_SECTION: 'choose-section',
-    RENDER_TRACKS: 'render-artist-tracks',
-    RENDER_ALBUMS: 'render-artist-albums',
-    RENDER_INFO: 'render-artist-info',
+    RENDER_TRACKS: 'render tracks',
+    RENDER_ALBUMS: 'render albums',
+    RENDER_INFO: 'render info',
 };

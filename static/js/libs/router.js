@@ -71,7 +71,7 @@ export default class Router {
         }
         if (newPath.match(URL.ARTIST)) {
             this.views[URL.ARTIST].render(this.root,
-                newPath.slice(newPath.lastIndexOf('/') + 1, newPath.length));
+                newPath.slice(newPath.indexOf('artist') + 7, newPath.length));
         } else {
             this.views[newPath].render(this.root);
         }

@@ -42,6 +42,8 @@ export default class PlayerView extends BaseView {
 
     /**
      * Позиционирует плеер
+     * @param {Object} root
+     * @param {srting} url
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.PLAYER)[0]);
@@ -432,7 +434,7 @@ export default class PlayerView extends BaseView {
         this.volumeDrag = false;
         this.muted = false;
         const height = document.getElementsByClassName('volume-scale-back')[0]
-                .getBoundingClientRect().height -
+            .getBoundingClientRect().height -
             (event.clientY - document.getElementsByClassName('volume-scale-back')[0]
                 .getBoundingClientRect().y);
         this.volume = height / document.getElementsByClassName('volume-scale-back')[0]
@@ -448,7 +450,7 @@ export default class PlayerView extends BaseView {
     volumeMouseMove(event) {
         if (this.volumeDrag) {
             const height = document.getElementsByClassName('volume-scale-back')[0]
-                    .getBoundingClientRect().height -
+                .getBoundingClientRect().height -
                 (event.clientY - document.getElementsByClassName('volume-scale-back')[0]
                     .getBoundingClientRect().y);
             this.volume = height / document.getElementsByClassName('volume-scale-back')[0]
@@ -464,7 +466,7 @@ export default class PlayerView extends BaseView {
      */
     volumeScaleClick(event) {
         const height = document.getElementsByClassName('volume-scale-back')[0]
-                .getBoundingClientRect().height -
+            .getBoundingClientRect().height -
             (event.clientY - document.getElementsByClassName('volume-scale-back')[0]
                 .getBoundingClientRect().y);
         this.volume = height / document.getElementsByClassName('volume-scale-back')[0]

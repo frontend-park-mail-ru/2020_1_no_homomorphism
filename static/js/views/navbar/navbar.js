@@ -21,6 +21,8 @@ export default class NavbarView extends BaseView {
 
     /**
      * рендерит навбар
+     * @param {Object} root
+     * @param {srting} url
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.NAVBAR)[0]);
@@ -34,7 +36,8 @@ export default class NavbarView extends BaseView {
      * Sets event listeners
      */
     setEventListeners() {
-        document.getElementById('logout-link').addEventListener('click', this.logoutClicked.bind(this));
+        document.getElementById('logout-link').addEventListener('click',
+            this.logoutClicked.bind(this));
         this.firstRender = false;
     }
     /**

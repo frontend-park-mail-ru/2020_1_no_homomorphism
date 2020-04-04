@@ -1,4 +1,4 @@
-import {PROFILE, TEMPLATES, URL, DOM} from '@libs/constans.js';
+import {PROFILE, URL, DOM} from '@libs/constans.js';
 import profile from '@views/profile/profile.tmpl.xml';
 import BaseView from '@libs/base_view';
 
@@ -19,6 +19,8 @@ export default class ProfileView extends BaseView {
 
     /**
      * Рендер
+     * @param {Object} root
+     * @param {srting} url
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.CONTENT)[0], url);
@@ -31,6 +33,7 @@ export default class ProfileView extends BaseView {
 
     /**
      * Рендер
+     * @param {Object} data
      */
     renderData(data) {
         this.setData(data);
@@ -62,6 +65,9 @@ export default class ProfileView extends BaseView {
         curSection.classList.add(PROFILE.SELECTED_CLASS);
     }
 
+    /**
+     * @param {Object} data
+     */
     setData(data) {
         super.setData(data); // TODO очищение памяти при логауте !!!
     }

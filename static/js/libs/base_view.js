@@ -1,3 +1,5 @@
+/**
+ */
 export default class BaseView {
     /**
      * @param {function} template
@@ -19,12 +21,16 @@ export default class BaseView {
         this.root.innerHTML = this.template(this.data);
     }
 
+    /**
+     */
     get getData() {
-        return this.data
+        return this.data;
     }
 
+    /**
+     * @param {Object} data
+     */
     setData(data) {
         this.data = data;
     }
-
 }

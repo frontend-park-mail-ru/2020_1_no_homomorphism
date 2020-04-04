@@ -1,4 +1,4 @@
-import {PROFILE, TEMPLATES} from '@libs/constans.js';
+import {PROFILE} from '@libs/constans.js';
 import template from '@views/profile/profile_artist.tmpl.xml';
 
 

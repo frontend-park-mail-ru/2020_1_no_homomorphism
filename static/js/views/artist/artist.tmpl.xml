@@ -3,14 +3,17 @@
         <div class="l-main">
             <div class="l-top-card">
 
-                <div class="row">
-                    <div class="l-top-info col col-5">
+                <div class="row m-artist-background">
+                    <div class="l-top-info col">
                         <div class="l-round-image col">
                             <img alt="" src="{data.image}" class=" m-round-image" id="avatar"/>
                         </div>
                         <div class="l-top-name col" id="login-name">
                             <div class="m-top-login" id="profile-login">
                                 <fest:value>data.name</fest:value>
+                            </div>
+                            <div class="m-top-name" id="profile-name">
+                                <fest:value>data.genre</fest:value>
                             </div>
                         </div>
                     </div>
@@ -65,12 +68,12 @@
 
             </div>
 
-            <div class="l-down-card">
-                <div class="l-profile-album-list" id="artist-album-playlist-list" style="top: 0;">
+            <div class="l-down-card l-artist-base">
+                <div class="l-profile-album-list" id="albums" style="top: 0;">
                 </div>
-                <div class="l-profile-track-list" id="artist-track-list" style="top: 0;">
+                <div class="l-profile-track-list" id="tracks" style="top: 0;">
                 </div>
-                <div class="l-profile-track-list" id="artist-info" style="top: 0;">
+                <div class="l-profile-track-list" id="info" style="top: 0;">
                 </div>
             </div>
         </div>

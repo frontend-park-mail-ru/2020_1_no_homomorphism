@@ -1,4 +1,4 @@
-import {SIGN_UP, TEMPLATES, DOM} from '@libs/constans.js';
+import {SIGN_UP} from '@libs/constans.js';
 import signup from '@views/signup/signup.tmpl.xml';
 import BaseView from '@libs/base_view';
 
@@ -18,6 +18,8 @@ export default class SignupView extends BaseView {
 
     /**
      * рендерит страничку регистрации
+     * @param {Object} root
+     * @param {srting} url
      */
     render(root, url) {
         super.render(root, url);

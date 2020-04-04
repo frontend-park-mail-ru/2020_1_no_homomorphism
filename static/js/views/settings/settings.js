@@ -16,11 +16,12 @@ export default class SettingsView extends BaseView {
         this.eventBus.on(SETTINGS.INVALID, this.showErrors.bind(this));
         this.eventBus.on(SETTINGS.RENDER_LOGGED, this.renderData.bind(this));
         // this.eventBus.on(SETTINGS.AVATAR_UPLOAD, this.previewFile.bind(this));
-
     }
 
     /**
      * Рендер
+     * @param {Object} root
+     * @param {srting} url
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.CONTENT)[0]);
@@ -68,7 +69,7 @@ export default class SettingsView extends BaseView {
      * показывает, какие поля формы заполнены неправильно
      * @param {Object} errors
      */
-    showErrors(errors) { //TODO починить вывод ошибок
+    showErrors(errors) { // TODO починить вывод ошибок
         // eslint-disable-next-line guard-for-in
         for (const key in errors) {
             const message = document.getElementById(key).nextElementSibling;
@@ -105,18 +106,18 @@ export default class SettingsView extends BaseView {
      * Предпросмотр фоточки
      */
     previewFile() {
-        let preview = document.querySelector('. m-round-image');
-        let file    = document.querySelector('input[type=file]').files[0];
-        let reader  = new FileReader();
+        const preview = document.querySelector('. m-round-image');
+        const file = document.querySelector('input[type=file]').files[0];
+        const reader = new FileReader();
 
-        reader.onloadend = function () {
+        reader.onloadend = function() {
             preview.src = reader.result;
         };
 
         if (file) {
             reader.readAsDataURL(file);
         } else {
-            preview.src = "";
+            preview.src = '';
         }
     }
 }
