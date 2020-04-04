@@ -54,7 +54,6 @@ export default class Router {
             return;
         }
         if (!(newPath in this.views) && !(newPath.match(URL.PLAYLIST))) {
-            console.log('NOT IN VIEW');
             if (pushState) {
                 window.history.pushState('', {}, URL.MAIN);
             }

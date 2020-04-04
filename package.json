@@ -31,6 +31,7 @@
     "css-loader": "^3.4.2",
     "eslint": "^6.8.0",
     "eslint-config-google": "^0.14.0",
+    "eslint-loader": "^4.0.0",
     "fest-webpack-loader": "^2.0.0",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.0.3",

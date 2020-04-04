@@ -33,7 +33,6 @@ export default class PlaylistView extends BaseView {
      * @param {Object} playlist
      */
     setPlaylistData(playlist) {
-        console.log(playlist);
         this.data = playlist;
         this.renderPlaylist();
         this.renderTracks();
@@ -79,8 +78,7 @@ export default class PlaylistView extends BaseView {
     /**
      * Проигрование плейлиста
      */
-    playPlaylist () {
-        console.log(this.data.playlist.id);
+    playPlaylist() {
         this.globalEventBus.emit(GLOBAL.PLAY_PLAYLIST, {index: this.data.playlist.id});
     }
 
