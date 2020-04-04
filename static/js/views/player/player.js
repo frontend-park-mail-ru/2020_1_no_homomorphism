@@ -21,6 +21,7 @@ export default class PlayerView extends BaseView {
         this.repeatState = 0;
         this.muted = false;
         this.volume = 1;
+        this.locked = true;
         this.eventBus.on(PLAYER.RESIZE, this.resize.bind(this)); // globalEventBus
         this.eventBus.on(PLAYER.DRAW_PLAY, this.drawPlay.bind(this));
         this.eventBus.on(PLAYER.DRAW_PAUSE, this.drawPause.bind(this));
@@ -29,6 +30,7 @@ export default class PlayerView extends BaseView {
         this.eventBus.on(PLAYER.DRAW_TRACKLIST, this.drawTracklist.bind(this));
         this.eventBus.on(PLAYER.DRAW_TRACKLIST, this.setDynamicEventListeners.bind(this));
         this.eventBus.on(PLAYER.REMOVE_FROM_TRACKLIST, this.removeFromTracklist.bind(this));
+        this.eventBus.on(PLAYER.REMOVE_FROM_TRACKLIST_ALL, this.removeFromTracklistAll.bind(this));
         this.eventBus.on(PLAYER.DRAW_TIMELINE, this.drawTimeline.bind(this));
         this.eventBus.on(PLAYER.DRAW_SHUFFLE, this.drawShuffle.bind(this));
         this.eventBus.on(PLAYER.DRAW_UNSHUFLE, this.drawUnshuffle.bind(this));
@@ -44,6 +46,7 @@ export default class PlayerView extends BaseView {
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.PLAYER)[0]);
+        this.setStaticEventListeners();
         this.resize();
     }
 
@@ -160,13 +163,13 @@ export default class PlayerView extends BaseView {
             row.onmouseover = (event) => this.tracklistMouseOver(event);
             row.onmouseout = (event) => this.tracklistMouseOut(event);
         });
-        document.querySelectorAll('.track-buttons .delete-button').forEach((button) => {
+        document.querySelectorAll('img.delete-button').forEach((button) => {
             button.onclick = (event) => this.trackDeleteButtonClick(event);
         });
-        document.querySelectorAll('.track-buttons .favorite-button').forEach((button) => {
+        document.querySelectorAll('img.favorite-button').forEach((button) => {
             button.onclick = (event) => this.trackFavoriteButtonClick(event);
         });
-        document.querySelectorAll('.track-buttons .add-button').forEach((button) => {
+        document.querySelectorAll('img.add-button').forEach((button) => {
             button.onclick = (event) => this.trackAddButtonClick(event);
         });
     }
@@ -219,6 +222,9 @@ export default class PlayerView extends BaseView {
      * Слушает клик мышью по триггеру плеера
      */
     triggerClick() {
+        if (this.locked === true) {
+            return;
+        }
         if (this.expanded) {
             document.getElementsByClassName('player-trigger-arrow')[0]
                 .style.transform = 'rotate(180deg)';
@@ -509,6 +515,7 @@ export default class PlayerView extends BaseView {
             }
         }
     }
+
     /**
      * Слушает вход мыши в трек в плейлисте
      * @param {Object} event
@@ -530,6 +537,7 @@ export default class PlayerView extends BaseView {
             elem.style.opacity = '0.4';
         }
     }
+
     /**
      * Слушает выход мыши из трека в плейлисте
      * @param {Object} event
@@ -560,6 +568,7 @@ export default class PlayerView extends BaseView {
             }
         }
     }
+
     /**
      * Слушает клик по треку в плейлисте
      * @param {Object} event
@@ -583,6 +592,7 @@ export default class PlayerView extends BaseView {
             }
         }
     }
+
     /**
      * Слушает клик мыши по кнопке удаления на треке в плейлисте
      * @param {Object} event
@@ -594,6 +604,7 @@ export default class PlayerView extends BaseView {
         }
         this.eventBus.emit(PLAYER.DELETE, target.getAttribute('id'));
     }
+
     /**
      * Слушает клик мыши по кнопке лайка на треке в плейлисте
      * @param {Object} event
@@ -606,6 +617,7 @@ export default class PlayerView extends BaseView {
         }
         this.eventBus.emit(PLAYER.LIKE, event.target.parentNode.parentNode.getAttribute('id'));
     }
+
     /**
      * Слушает клик мыши по кнопке добавления на треке в плейлисте
      * @param {Object} event
@@ -654,6 +666,7 @@ export default class PlayerView extends BaseView {
             (seconds < 10 ? '0' : '') + seconds.toString();
         document.getElementsByClassName('current-time')[0].innerHTML = '0:00';
     }
+
     /**
      * Передвигает маркер между треками
      * @param {string} currentId
@@ -664,8 +677,8 @@ export default class PlayerView extends BaseView {
             return;
         }
         const marker = document.getElementsByClassName('current-marker')[0];
-        const track1 = document.getElementById(currentId);
-        const track2 = document.getElementById(newId);
+        const track1 = document./*getElementsByClassName('l-player')[0].*/getElementById(currentId);
+        const track2 = document./*getElementsByClassName('l-player')[0].*/getElementById(newId);
         const heightDifference = track1.getBoundingClientRect().y -
             track2.getBoundingClientRect().y;
         const base = document.getElementsByClassName('track-list')[0].children[1]
@@ -686,6 +699,7 @@ export default class PlayerView extends BaseView {
             }
         }, 250);
     }
+
     /**
      * Рисует треки в плейлисте
      * @param {Object} tracks
@@ -695,7 +709,7 @@ export default class PlayerView extends BaseView {
         for (let i = 0; i < tracks.length; i++) {
             document.getElementsByClassName('track-list')[0].innerHTML += track(tracks[i]);
         }
-        this.setStaticEventListeners();
+        this.locked = false;
     }
 
     /**
@@ -703,7 +717,13 @@ export default class PlayerView extends BaseView {
      * @param {string} id
      */
     removeFromTracklist(id) {
-        document.getElementById(id).remove();
+        document./*getElementsByClassName('l-player')[0].*/getElementById(id).remove();
+        if (document.getElementsByClassName('track-list')[0].children.length === 1) {
+            if (this.expanded) {
+                this.triggerClick();
+            }
+            this.locked = true;
+        }
     }
 
     /**

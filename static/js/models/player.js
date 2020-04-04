@@ -20,6 +20,8 @@ export default class PlayerModel {
             shuffle: false,
             repeat: false,
         };
+        globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.pause.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.deleteAll.bind(this));
         globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.getPlaylistTracks.bind(this));
         globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.play.bind(this));
         this.eventBus.on(PLAYER.GET_TRACK, this.getTrack.bind(this));
@@ -281,29 +283,50 @@ export default class PlayerModel {
         document.getElementsByTagName('audio')[0].muted = false;
         this.eventBus.emit(PLAYER.DRAW_UNMUTE);
     }
+
     /**
      * Удаляет трек из очереди
      * @param {string} id
      */
     delete(id) {
-        let decCurrent =
+        let decCurrent = this.playlist.length !== 1 &&
             this.queue.indexOf(this.playlist.indexOf(this.playlist.find((track) =>
             track.id === id))) < this.current;
+        if (this.playlist.length === 1) {
+
+        }
         if (this.playlist[this.queue[this.current]].id === id) {
-            this.next('delete');
-            decCurrent = true;
+            if (this.playlist.length === 1) {
+                this.pause();
+            } else {
+                this.next('delete');
+                decCurrent = true;
+            }
         }
         const track = this.playlist.find((track) => track.id === id);
-        if (track === undefined) {
-            return;
-        }
         if (decCurrent) {
             this.current--;
         }
         this.queue.splice(this.queue.indexOf(Math.max(this.queue)), 1);
         this.playlist.splice(this.playlist.indexOf(track), 1);
         this.eventBus.emit(PLAYER.REMOVE_FROM_TRACKLIST, id);
+        if (this.tracklist.length === 0) {
+            return;
+        }
         this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[this.queue[this.current]].id,
             this.playlist[this.queue[this.current]].id);
+    }
+
+    /**
+     * Удаляет все треки из очереди
+     */
+    deleteAll() {
+        if (this.playing) {
+            this.pause();
+        }
+        this.queue = [];
+        this.playlist = [];
+        this.current = 0;
+        this.eventBus.emit(PLAYER.REMOVE_FROM_TRACKLIST_ALL);
     }
 }

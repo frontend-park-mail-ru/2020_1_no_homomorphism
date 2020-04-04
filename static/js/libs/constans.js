@@ -100,6 +100,8 @@ export const PLAYER = {
     TRACK_UPDATE: 'track-update',
     MOVE_MARKER: 'move-marker',
     DRAW_TRACKLIST: 'draw-tracklist',
+    REMOVE_FROM_TRACKLIST: 'remove-from-tracklist',
+    REMOVE_FROM_TRACKLIST_ALL: 'remove-from-tracklist-all',
     DRAW_TIMELINE: 'draw-timeline',
     DRAW_SHUFFLE: 'draw-shuffle',
     DRAW_UNSHUFLE: 'draw-unshuffle',
