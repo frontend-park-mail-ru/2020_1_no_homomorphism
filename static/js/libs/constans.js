@@ -31,6 +31,8 @@ export const URL = {
     PROFILE_ARTISTS: '/profile/artists',
     SETTINGS: '/settings',
     ARTIST: /(\/artist\/)[0-9]+/,
+    PLAYLIST: /(\/playlist\/)[0-9]+/,
+    ALBUM: /(\/album\/)[0-9]+/,
 };
 
 export const PAGINATION = {
@@ -53,6 +55,11 @@ export const VALIDATION = {
     REGEX_LOGIN: '^[a-zA-Z0-9_.]{3,}$',
     REGEX_PASSWORD: '^[a-zA-Z0-9]{3,}$',
     ALLOWABLE_EXTENSIONS: ['png', 'jpg', 'jpeg', 'gif'],
+};
+
+export const GLOBAL = {
+    PLAY_PLAYLIST: 'play playlist',
+    CLEAR_AND_LOCK: 'clear and lock',
 };
 
 export const LOGIN = {
@@ -99,6 +106,8 @@ export const PLAYER = {
     TRACK_UPDATE: 'track-update',
     MOVE_MARKER: 'move-marker',
     DRAW_TRACKLIST: 'draw-tracklist',
+    REMOVE_FROM_TRACKLIST: 'remove-from-tracklist',
+    REMOVE_FROM_TRACKLIST_ALL: 'remove-from-tracklist-all',
     DRAW_TIMELINE: 'draw-timeline',
     DRAW_SHUFFLE: 'draw-shuffle',
     DRAW_UNSHUFLE: 'draw-unshuffle',
@@ -142,7 +151,6 @@ export const PROFILE = {
 };
 
 export const ARTIST = {
-    // SELECTED_CLASS: 'is-touched-profile-section',
     SET_ID: 'set id',
     ID_TRACKS_SECTION: 'tracks',
     ID_ALBUMS_SECTION: 'albums',
@@ -154,4 +162,10 @@ export const ARTIST = {
     RENDER_TRACKS: 'render tracks',
     RENDER_ALBUMS: 'render albums',
     RENDER_INFO: 'render info',
+};
+
+export const PLAYLIST = {
+    REDIRECT: 'redirect',
+    GET_DATA: 'get-playlist',
+    RENDER_DATA: 'render-playlist',
 };

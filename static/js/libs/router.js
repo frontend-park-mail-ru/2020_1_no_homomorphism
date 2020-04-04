@@ -53,7 +53,8 @@ export default class Router {
         if (newPath === this.curPath) {
             return;
         }
-        if (!(newPath in this.views) && !(newPath.match(URL.ARTIST))) {
+        if (!(newPath in this.views) && !(newPath.match(URL.ARTIST)) &&
+            !(newPath.match(URL.PLAYLIST))) {
             if (pushState) {
                 window.history.pushState('', {}, URL.MAIN);
             }
@@ -72,9 +73,14 @@ export default class Router {
         if (newPath.match(URL.ARTIST)) {
             this.views[URL.ARTIST].render(this.root,
                 newPath.slice(newPath.indexOf('artist') + 7, newPath.length));
-        } else {
-            this.views[newPath].render(this.root);
+            return;
         }
+        if (newPath.match(URL.PLAYLIST)) {
+            this.views[URL.PLAYLIST].render(this.root,
+                newPath.slice(newPath.lastIndexOf('/') + 1, newPath.length));
+            return;
+        }
+        this.views[newPath].render(this.root);
     }
 
     /**
@@ -97,6 +103,5 @@ export default class Router {
             }
         });
         this.check(window.location.pathname, false);
-        this.views[URL.PLAYER].render();
     }
 }

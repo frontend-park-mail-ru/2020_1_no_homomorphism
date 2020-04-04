@@ -18,6 +18,5 @@ export class NavbarController {
 
         globalEventBus.on(NAVBAR.LOGOUT_REDIRECT, router.logoutRedirect.bind(router));
         this.eventBus.on(NAVBAR.REDIRECT, router.redirect.bind(router));
-        this.eventBus.on(NAVBAR.NO_ANSWER, router.redirect.bind(router));
     }
 }

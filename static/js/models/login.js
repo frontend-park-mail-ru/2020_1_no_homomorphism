@@ -1,6 +1,6 @@
 import Api from '@libs/api.js';
 import Validation from '@libs/validation.js';
-import {RESPONSE, LOGIN, URL} from '@libs/constans.js';
+import {RESPONSE, LOGIN, NAVBAR, URL} from '@libs/constans.js';
 
 /**
  * Модель для страницы входа
@@ -38,7 +38,8 @@ export default class LoginModel {
                 .then((res) => {
                     switch (res.status) {
                     case RESPONSE.OK:
-                        this.globalEventBus.emit(LOGIN.LOGIN_SUCCESS);
+                        localStorage.setItem('csrfToken', res.headers.get('Csrf-Token'));
+                        this.globalEventBus.emit(NAVBAR.GET_USER_DATA);
                         this.eventBus.emit(LOGIN.REDIRECT, URL.PROFILE_TRACKS);
                         break;
                     case RESPONSE.BAD_REQUEST:

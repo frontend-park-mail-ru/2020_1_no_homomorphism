@@ -1,5 +1,6 @@
 import {postFetch, getFetch, deleteFetch, putFetch, postImageFetch} from '@libs/fetch.js';
 import {API} from '@libs/constans';
+
 /**
  * API object
  * @class
@@ -16,7 +17,9 @@ export default class Api {
         return postFetch(API + '/users/login', {
             'login': login,
             'password': password,
-        }).catch((error) => console.error(error));
+        }, (error) => {
+            console.log(error.toString());
+        });
     }
 
     /**
@@ -24,7 +27,9 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static logoutFetch() {
-        return deleteFetch(API + '/users/logout').catch((error) => console.error(error));
+        return deleteFetch(API + '/users/logout', (error) => {
+            console.log(error.toString());
+        });
     }
 
     /**
@@ -32,8 +37,9 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static cookieFetch() {
-        return getFetch(API + '/users')
-            .catch((error) => console.error(error));
+        return getFetch(API + '/users', (error) => {
+            console.log(error.toString());
+        });
     }
 
     /**
@@ -52,7 +58,9 @@ export default class Api {
             'sex': 'yes',
             'email': email,
             'password': password,
-        }).catch((error) => console.error(error));
+        }, (error) => {
+            console.log(error.toString());
+        });
     }
 
     /**
@@ -81,7 +89,10 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static profileFetch() {
-        return getFetch(API + '/users/me').catch((error) => console.error(error));
+        return getFetch(API + '/users/me', (error) => {
+            console.log(error.toString());
+            throw new Error(error);
+        });
     }
 
     /**
@@ -98,7 +109,9 @@ export default class Api {
             email,
             password,
             newPassword,
-        }).catch((error) => console.error(error));
+        }, (error) => {
+            console.log(error.toString());
+        });
     }
 
     /**
@@ -106,9 +119,10 @@ export default class Api {
      * @param {Object} image
      * @return {Promise<Response>}
      */
-    static profilePhotoFetch(image) { // TODO узнать у бэка, что не так
-        return postImageFetch(API + '/users/images', image)
-            .catch((error) => console.error(error));
+    static profilePhotoFetch(image) {
+        return postImageFetch(API + '/users/images', image, (error) => {
+            console.log(error.toString());
+        });
     }
 
     /**
@@ -116,8 +130,9 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static profilePlaylistsFetch() {
-        return getFetch(API + '/users/playlists')
-            .catch((error) => console.error(error));
+        return getFetch(API + '/users/playlists', (error) => {
+            console.log(error.toString());
+        });
     }
 
     /**
@@ -126,8 +141,9 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static playlistTracksFetch(id) {
-        return getFetch(API + `/playlists/${id}`)
-            .catch((error) => console.error(error));
+        return getFetch(API + `/playlists/${id}`, (error) => {
+            console.log(error.toString());
+        });
     }
 
     /**
@@ -136,8 +152,9 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static albumFetch(id) {
-        return getFetch(API + `/albums/${id}`)
-            .catch((error) => console.error(error));
+        return getFetch(API + `/albums/${id}`, (error) => {
+            console.log(error.toString());
+        });
     }
 
     /**
@@ -145,8 +162,9 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static profileAlbumsFetch() {
-        return getFetch(API + '/users/albums')
-            .catch((error) => console.error(error));
+        return getFetch(API + '/users/albums', (error) => {
+            console.log(error.toString());
+        });
     }
 
     /**
@@ -155,7 +173,8 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static trackFetch(id) {
-        return getFetch(API + `/tracks/${id}`)
-            .catch((error) => console.error(error));
+        return getFetch(API + `/tracks/${id}`, (error) => {
+            console.log(error.toString());
+        });
     }
 }

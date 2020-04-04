@@ -33,9 +33,10 @@ export default class SettingsModel {
                         });
                     break;
                 case RESPONSE.UNAUTH:
-                    this.eventBus.emit(SETTINGS.NO_ANSWER, URL.MAIN);
+                    this.eventBus.emit(SETTINGS.REDIRECT, URL.MAIN);
                     break;
                 case RESPONSE.SERVER_ERROR:
+                    this.eventBus.emit(SETTINGS.REDIRECT, URL.MAIN);
                     break;
                 default:
                     console.error('I am a teapot');
@@ -69,6 +70,9 @@ export default class SettingsModel {
                         this.eventBus.emit(SETTINGS.INVALID);
                         break;
                     case RESPONSE.UNAUTH:
+                        this.globalEventBus.emit(NAVBAR.GET_USER_DATA);
+                        this.eventBus.emit(SETTINGS.REDIRECT);
+                        break;
                     case RESPONSE.SERVER_ERROR:
                         this.eventBus.emit(SETTINGS.INVALID);
                         break;
@@ -114,10 +118,10 @@ export default class SettingsModel {
                         this.eventBus.emit(SETTINGS.INVALID, errors);
                         break;
                     case RESPONSE.UNAUTH:
-                        this.eventBus.emit(SETTINGS.INVALID, errors);
+                        this.eventBus.emit(SETTINGS.REDIRECT, URL.MAIN);
                         break;
                     case RESPONSE.EXISTS:
-                        errors['email'] = 'This email is taken';
+                        errors['email'] = 'This email is already taken';
                         this.eventBus.emit(SETTINGS.INVALID, errors);
                         break;
                     case RESPONSE.SERVER_ERROR:

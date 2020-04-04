@@ -1,5 +1,5 @@
 import Api from '@libs/api.js';
-import {RESPONSE, PLAYER} from '@libs/constans.js';
+import {RESPONSE, GLOBAL, PLAYER} from '@libs/constans.js';
 
 /**
  * Модель плеера
@@ -8,8 +8,9 @@ export default class PlayerModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus
+     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus) {
+    constructor(eventBus, globalEventBus) {
         this.eventBus = eventBus;
         this.queue = [];
         this.playlist = [];
@@ -19,6 +20,10 @@ export default class PlayerModel {
             shuffle: false,
             repeat: false,
         };
+        globalEventBus.on(GLOBAL.CLEAR_AND_LOCK, this.deleteAll.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.deleteAll.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.getPlaylistTracks.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.play.bind(this));
         this.eventBus.on(PLAYER.GET_TRACK, this.getTrack.bind(this));
         this.eventBus.on(PLAYER.GET_TRACKS, this.getPlaylistTracks.bind(this));
         this.eventBus.on(PLAYER.PAUSE, this.pause.bind(this));
@@ -73,6 +78,7 @@ export default class PlayerModel {
                 }
                 this.eventBus.emit(PLAYER.DRAW_TRACKLIST, this.playlist);
                 this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[0].id, this.playlist[0].id);
+                this.getTrack(this.playlist[0].id);
             });
     }
 
@@ -279,28 +285,47 @@ export default class PlayerModel {
         document.getElementsByTagName('audio')[0].muted = false;
         this.eventBus.emit(PLAYER.DRAW_UNMUTE);
     }
+
     /**
      * Удаляет трек из очереди
      * @param {string} id
      */
     delete(id) {
-        let decCurrent =
-            this.playlist.indexOf(this.playlist.find((track) => track.id === id)) < this.current;
+        let decCurrent = this.playlist.length !== 1 &&
+            this.queue.indexOf(this.playlist.indexOf(this.playlist.find((track) =>
+                track.id === id))) < this.current;
         if (this.playlist[this.queue[this.current]].id === id) {
-            this.next('delete');
-            decCurrent = true;
+            if (this.playlist.length === 1) {
+                this.pause();
+            } else {
+                this.next('delete');
+                decCurrent = true;
+            }
         }
         const track = this.playlist.find((track) => track.id === id);
-        if (track === undefined) {
-            return;
-        }
         if (decCurrent) {
             this.current--;
         }
-        this.queue.splice(this.queue.length - 1, 1);
+        this.queue.splice(this.queue.indexOf(Math.max(this.queue)), 1);
         this.playlist.splice(this.playlist.indexOf(track), 1);
         this.eventBus.emit(PLAYER.REMOVE_FROM_TRACKLIST, id);
+        if (this.tracklist.length === 0) {
+            return;
+        }
         this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[this.queue[this.current]].id,
             this.playlist[this.queue[this.current]].id);
+    }
+
+    /**
+     * Удаляет все треки из очереди
+     */
+    deleteAll() {
+        if (this.playing) {
+            this.pause();
+        }
+        this.queue = [];
+        this.playlist = [];
+        this.current = 0;
+        this.eventBus.emit(PLAYER.REMOVE_FROM_TRACKLIST_ALL);
     }
 }

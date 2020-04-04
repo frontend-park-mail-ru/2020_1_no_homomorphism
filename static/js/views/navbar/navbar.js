@@ -1,4 +1,4 @@
-import {NAVBAR, DOM} from '@libs/constans.js';
+import {NAVBAR, GLOBAL, DOM, URL} from '@libs/constans.js';
 import navbar from '@views/navbar/navbar.tmpl.xml';
 import BaseView from '@libs/base_view';
 
@@ -14,9 +14,9 @@ export default class NavbarView extends BaseView {
         super(navbar);
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
-        this.globalEventBus.on(NAVBAR.LOGIN_SUCCESS, this.renderLogin.bind(this));
         this.eventBus.on(NAVBAR.DRAW_COOKIE_RESULT, this.analyzeCookie.bind(this));
-        this.firstRender = true;
+        this.eventBus.on(NAVBAR.RENDER_LOGGED, this.renderLogged.bind(this));
+        this.eventBus.on(NAVBAR.RENDER_NOT_LOGGED, this.renderNotLogged.bind(this));
     }
 
     /**
@@ -26,9 +26,7 @@ export default class NavbarView extends BaseView {
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.NAVBAR)[0]);
-        if (this.firstRender) {
-            this.setEventListeners.bind(this)();
-        }
+        this.setEventListeners.bind(this)();
         this.eventBus.emit(NAVBAR.CHECK_COOKIE);
     }
 
@@ -36,17 +34,21 @@ export default class NavbarView extends BaseView {
      * Sets event listeners
      */
     setEventListeners() {
-        document.getElementById('logout-link').addEventListener('click',
-            this.logoutClicked.bind(this));
-        this.firstRender = false;
+        document.getElementById('logout-link').addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            this.logoutClicked.bind(this)();
+        });
     }
+
     /**
      * не залогинен
      */
     logoutClicked() {
         this.eventBus.emit(NAVBAR.LOGOUT_CLICKED);
-        this.renderLogout.bind(this)();
+        this.renderNotLogged.bind(this)();
         this.globalEventBus.emit(NAVBAR.LOGOUT_REDIRECT, URL.MAIN);
+        this.globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK, true);
     }
 
     /**
@@ -55,42 +57,40 @@ export default class NavbarView extends BaseView {
      */
     analyzeCookie(loggedIn) {
         if (loggedIn) {
-            this.renderLogin.bind(this)();
+            this.eventBus.emit(NAVBAR.GET_USER_DATA);
         } else {
-            this.renderLogout.bind(this)();
+            this.renderNotLogged.bind(this)();
         }
     }
 
     /**
      * Залогинен
+     * @param {Object} data
      */
-    renderLogin() {
-        this.eventBus.on(NAVBAR.RENDER_LOGGED, (data) => {
-            document.getElementsByClassName('m-navbar-avatar')[0].src = data.image;
-            document.getElementsByClassName('m-navbar-name')[0].innerHTML = data.login;
-            document.getElementById('login-link').classList.remove('display-block');
-            document.getElementById('login-link').classList.add('display-none');
-            document.getElementById('signup-link').classList.remove('display-block');
-            document.getElementById('signup-link').classList.add('display-none');
-            document.getElementById('logout-link').classList.remove('display-none');
-            document.getElementById('logout-link').classList.add('display-block');
-            document.getElementById('profile-link').classList.remove('display-none');
-            document.getElementById('profile-link').classList.add('display-block');
-        });
-        this.eventBus.emit(NAVBAR.GET_USER_DATA);
+    renderLogged(data) {
+        document.getElementsByClassName('m-navbar-avatar')[0].src = data.image;
+        document.getElementsByClassName('m-navbar-name')[0].innerHTML = data.login;
+        document.getElementById('login-link').classList.remove('is-visible');
+        document.getElementById('login-link').classList.add('is-hidden');
+        document.getElementById('signup-link').classList.remove('is-visible');
+        document.getElementById('signup-link').classList.add('is-hidden');
+        document.getElementById('logout-link').classList.remove('is-hidden');
+        document.getElementById('logout-link').classList.add('is-visible');
+        document.getElementById('profile-link').classList.remove('is-hidden');
+        document.getElementById('profile-link').classList.add('is-visible');
     }
 
     /**
      * не залогинен
      */
-    renderLogout() {
-        document.getElementById('login-link').classList.remove('display-none');
-        document.getElementById('login-link').classList.add('display-block');
-        document.getElementById('signup-link').classList.remove('display-none');
-        document.getElementById('signup-link').classList.add('display-block');
-        document.getElementById('logout-link').classList.remove('display-block');
-        document.getElementById('logout-link').classList.add('display-none');
-        document.getElementById('profile-link').classList.remove('display-block');
-        document.getElementById('profile-link').classList.add('display-none');
+    renderNotLogged() {
+        document.getElementById('login-link').classList.remove('is-hidden');
+        document.getElementById('login-link').classList.add('is-visible');
+        document.getElementById('signup-link').classList.remove('is-hidden');
+        document.getElementById('signup-link').classList.add('is-visible');
+        document.getElementById('logout-link').classList.remove('is-visible');
+        document.getElementById('logout-link').classList.add('is-hidden');
+        document.getElementById('profile-link').classList.remove('is-visible');
+        document.getElementById('profile-link').classList.add('is-hidden');
     }
 }
