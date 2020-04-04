@@ -21,8 +21,6 @@ export default class ProfilePlaylistsView {
     drawPlaylists(playlists) {
         const elem = document.getElementById('profile-album-playlist-list');
         elem.className += ' l-profile-base';
-        for (let i = 0; i < playlists.length; i++) {
-            elem.innerHTML += template(playlists[i]);
-        }
+        elem.innerHTML += template(playlists);
     }
 }

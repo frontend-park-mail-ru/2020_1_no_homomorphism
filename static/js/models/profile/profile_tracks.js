@@ -40,7 +40,6 @@ export default class ProfileTracksModel {
                         this.tracks.push(list.tracks[song]);
                     }
                     if (length === 0) { // TODO временное решение
-                        console.log(this.tracks);
                         this.renderTracks.bind(this)();
                     }
                 });

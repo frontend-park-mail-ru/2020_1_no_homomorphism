@@ -1,15 +1,17 @@
-import {PLAYER, NAVBAR} from '@libs/constans.js';
+import {PLAYER, NAVBAR, DOM} from '@libs/constans.js';
+import BaseView from '@libs/base_view';
 import track from '@views/player/track.tmpl.xml';
 import player from '@views/player/player.tmpl.xml';
 
 /**
  *  вью для плеера
  */
-export default class PlayerView {
+export default class PlayerView extends BaseView {
     /**
      * @param {EventBus} eventBus
      */
     constructor(eventBus) {
+        super(player);
         this.eventBus = eventBus;
         this.expanded = false;
         this.timelineDrag = false;
@@ -39,8 +41,8 @@ export default class PlayerView {
     /**
      * Позиционирует плеер
      */
-    render() {
-        document.getElementsByClassName('main-pos')[0].innerHTML = player();
+    render(root, url) {
+        super.render(document.getElementsByClassName(DOM.PLAYER)[0]);
         if (this.firstEntry) {
             this.eventBus.emit(PLAYER.GET_TRACKS, {index: 1}); // TODO получение плейлиста с индексом 1 - далее изменим
         }
@@ -51,20 +53,19 @@ export default class PlayerView {
      * Действия при изменении размера
      */
     resize() {
-        console.log(document);
         const body = document.getElementsByTagName('body')[0];
         const left = (
             this.expanded ?
-                body.clientWidth - document.getElementsByClassName('main-pos')[0].clientWidth :
+                body.clientWidth - this.root.clientWidth :
                 body.clientWidth - 13
         );
-        document.getElementsByClassName('main-pos')[0].style.left = left.toString() + 'px';
+        this.root.style.left = left.toString() + 'px';
         const top = NAVBAR.HEIGHT;
         const height = document.documentElement.clientHeight - top;
         document.getElementsByTagName('audio')[0].volume = this.volume;
         this.drawVolume(height);
-        document.getElementsByClassName('main-pos')[0].style.top = top.toString() + 'px';
-        document.getElementsByClassName('main-pos')[0].style.height = height.toString() + 'px';
+        this.root.style.top = top.toString() + 'px';
+        this.root.style.height = height.toString() + 'px';
         document.getElementsByClassName('player-trigger')[0]
             .style.height = height.toString() + 'px';
         this.drawVolume(document.getElementsByClassName('volume-scale-back')[0]
@@ -77,7 +78,7 @@ export default class PlayerView {
      */
     drawTracklist(tracks) {
         this.eventBus.emit(PLAYER.TRACK_UPDATE, tracks[0]);
-        document.getElementsByClassName('track-list')[0].innerHTML += track(tracks);
+        document.getElementsByClassName('track-list')[0].innerHTML = track(tracks);
         this.setEventListeners();
     }
 
@@ -226,9 +227,9 @@ export default class PlayerView {
         const left = (
             this.expanded ?
                 body.clientWidth - 13 :
-                body.clientWidth - document.getElementsByClassName('main-pos')[0].clientWidth
+                body.clientWidth - this.root.clientWidth
         );
-        document.getElementsByClassName('main-pos')[0].style.left = left + 'px';
+        this.root.style.left = left + 'px';
         this.expanded = !this.expanded;
     }
 
@@ -527,7 +528,6 @@ export default class PlayerView {
      * @param {Object} track
      */
     updateTrack(track) {
-        console.log(track);
         const temp = track.image;
         if (temp.split('/')[0] === 'static') {
             track.image = '/' + temp;

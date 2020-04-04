@@ -7,7 +7,6 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const isDev = process.env.NODE_ENV === 'development';
 
 const filename = (ext) => {
-    console.log('ISDEV' + isDev);
     !isDev ? `[name].[hash].${ext}` : `[name].${ext}`;
 };
 

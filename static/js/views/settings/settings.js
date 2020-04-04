@@ -1,16 +1,33 @@
-import {SETTINGS} from '@libs/constans.js';
-import template from '@views/settings/settings.tmpl.xml';
+import {SETTINGS, DOM} from '@libs/constans.js';
+import settings from '@views/settings/settings.tmpl.xml';
+import BaseView from '@libs/base_view';
 
 /**
  * вью для настроек
  */
-export default class SettingsView {
+export default class SettingsView extends BaseView {
     /**
      * @param {EventBus} eventBus
      */
     constructor(eventBus) {
+        super(settings);
         this.eventBus = eventBus;
-        this.eventBus.on(SETTINGS.INVALID, this.showErrors);
+        this.userData = {};
+        this.eventBus.on(SETTINGS.INVALID, this.showErrors.bind(this));
+        this.eventBus.on(SETTINGS.RENDER_LOGGED, this.renderData.bind(this));
+    }
+
+    /**
+     * Рендер
+     */
+    render(root, url) {
+        super.render(document.getElementsByClassName(DOM.CONTENT)[0]);
+        if (JSON.stringify(this.userData) === '{}') {
+            this.eventBus.emit(SETTINGS.GET_USER_DATA, {});
+        } else {
+            this.renderData(this.userData);
+        }
+        this.setEventListeners();
     }
 
     /**
@@ -29,16 +46,17 @@ export default class SettingsView {
     }
 
     /**
-     * Рендер
-     * @param {Object} root
+     * слушатель событий для аватарки
+     * @param {Object} data
      */
-    render(root) { // TODO lol
-        this.eventBus.on(SETTINGS.RENDER_LOGGED, (data) => {
-            console.log(data);
-            document.getElementsByClassName('container')[0].innerHTML = template(data);
-            this.setEventListeners();
-        });
-         this.eventBus.emit(SETTINGS.GET_USER_DATA, {});
+    renderData(data) {
+        this.userData = data;
+        document.getElementsByClassName('m-profile-avatar')[0].src = data.image;
+        document.getElementsByClassName('m-profile-name')[0].innerHTML = data.name;
+        document.getElementsByClassName('m-profile-login')[0].innerHTML = data.login;
+
+        document.getElementsByClassName('m-settings-input')[0].value = data.name;
+        document.getElementsByClassName('m-settings-input')[1].value = data.email;
     }
 
     /**
@@ -46,7 +64,6 @@ export default class SettingsView {
      * @param {Object} errors
      */
     showErrors(errors) { //TODO починить вывод ошибок
-        console.log(errors);
         // eslint-disable-next-line guard-for-in
         for (const key in errors) {
             const message = document.getElementById(key).nextElementSibling;

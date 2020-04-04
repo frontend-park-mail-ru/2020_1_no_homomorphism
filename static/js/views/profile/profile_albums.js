@@ -19,11 +19,8 @@ export default class ProfileAlbumsView {
      * @param {Object} albums
      */
     drawAlbums(albums) {
-        console.log(albums);
         const elem = document.getElementById('profile-album-playlist-list');
         elem.className += ' l-profile-base';
-        for (let i = 0; i < albums.length; i++) {
-            elem.innerHTML += template(albums[i]);
-        }
+        elem.innerHTML += template(albums);
     }
 }

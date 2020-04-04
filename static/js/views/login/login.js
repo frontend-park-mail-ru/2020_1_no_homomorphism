@@ -1,24 +1,32 @@
-import {LOGIN, TEMPLATES} from '@libs/constans.js';
+import {LOGIN, TEMPLATES, DOM} from '@libs/constans.js';
 import template from '@views/login/login.tmpl.xml'
+import BaseView from '@libs/base_view';
 
 /**
  *  вью для входа
  */
-export default class LoginView {
+export default class LoginView extends BaseView{
 	/**
 	 * @param {EventBus} eventBus
 	 */
 	constructor(eventBus) {
+		super(template);
 		this.eventBus = eventBus;
 		this.eventBus.on(LOGIN.INVALID, this.showErrors);
 	}
 
 	/**
 	 * рендерит страничку входа
-	 * @param {Object} root
 	 */
-	render(root) {
-		document.getElementsByClassName('container')[0].innerHTML = template();
+	render(root, url) {
+		super.render(root);
+		this.setEventListeners.bind(this)();
+	}
+
+	/**
+	 * setEventListeners
+	 */
+	setEventListeners(root) {
 		document.addEventListener('click', (event) => {
 			if (event.target.getAttribute('id') === 'submit-login') {
 				event.preventDefault();

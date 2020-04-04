@@ -1,21 +1,23 @@
-import template from '@views/news/news.tmpl.xml';
+import news from '@views/news/news.tmpl.xml';
+import BaseView from '@libs/base_view';
+import {DOM} from '@libs/constans';
 import '@css/base.css';
 
 /**
  *  вью для главной
  */
-export default class NewsView {
+export default class NewsView extends BaseView{
     /**
      * Конструктор
      */
     constructor() {
+        super(news)
     }
 
     /**
      * рендерит главную страничку
-     * @param {Object} root
      */
-    render(root) {
-        document.getElementsByClassName('container')[0].innerHTML = template();
+    render(root, url ) {
+        super.render(root);
     }
 }

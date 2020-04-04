@@ -1,15 +1,17 @@
-import {NAVBAR} from '@libs/constans.js';
+import {NAVBAR, DOM} from '@libs/constans.js';
 import navbar from '@views/navbar/navbar.tmpl.xml';
+import BaseView from '@libs/base_view';
 
 /**
  *  вью для навбара
  */
-export default class NavbarView {
+export default class NavbarView extends BaseView {
     /**
      * @param {EventBus} eventBus
      * @param {EventBus} globalEventBus
      */
     constructor(eventBus, globalEventBus) {
+        super(navbar);
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
         this.globalEventBus.on(NAVBAR.LOGIN_SUCCESS, this.login.bind(this));
@@ -19,8 +21,8 @@ export default class NavbarView {
     /**
      * рендерит навбар
      */
-    render() {
-        document.getElementsByClassName('l-navbar')[0].innerHTML = navbar();
+    render(root, url) {
+        super.render(document.getElementsByClassName(DOM.NAVBAR)[0]);
         if (this.firstRender) {
             this.setEventListeners.bind(this)();
         }

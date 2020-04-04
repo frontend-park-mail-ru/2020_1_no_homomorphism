@@ -1,4 +1,4 @@
-.main-pos {
+.l-player {
     height: 1000px;
     width: 400px;
     position: fixed;
@@ -12,11 +12,11 @@
     overflow: hidden;
 }
 
-.main-pos .col {
+.l-player .col {
     text-align: left;
 }
 
-.main-pos .main-col {
+.l-player .main-col {
     width: 361px;
 }
 
@@ -254,7 +254,7 @@
     padding-bottom: 46px;
 }
 
-.main-pos .player-trigger {
+.l-player .player-trigger {
     width: 13px;
     height: 1000px;
     margin-right: 5px;
@@ -262,11 +262,11 @@
     cursor: pointer;
 }
 
-.main-pos .player-trigger:hover {
+.l-player .player-trigger:hover {
     background: #ebeae7;
 }
 
-.main-pos .player-trigger-arrow {
+.l-player .player-trigger-arrow {
     margin-left: -3px;
     position: relative;
     top: 50%;

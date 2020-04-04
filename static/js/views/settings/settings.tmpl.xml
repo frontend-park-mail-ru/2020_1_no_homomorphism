@@ -7,7 +7,7 @@
                     <div class="l-profile-avatar-settings col col-4">
                         <label class="label">
                             <i class="material-icons"></i>
-                            <img alt="avatar" src="{data.image}" class="m-profile-avatar" id="avatar"
+                            <img alt="" src="{data.image}" class="m-profile-avatar" id="avatar"
                                  title="Add new image"/>
                             <input type="file" id="avatar-upload"/>
                             <span class="error-message-small"></span>

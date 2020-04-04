@@ -1,38 +1,42 @@
-import {PROFILE, TEMPLATES, URL} from '@libs/constans.js';
-import template from '@views/profile/profile.tmpl.xml';
+import {PROFILE, TEMPLATES, URL, DOM} from '@libs/constans.js';
+import profile from '@views/profile/profile.tmpl.xml';
+import BaseView from '@libs/base_view';
 
 /**
  * вью для профиля
  */
-export default class ProfileView {
+export default class ProfileView extends BaseView {
     /**
      * @param {EventBus} eventBus
      */
     constructor(eventBus) {
+        super(profile);
         this.eventBus = eventBus;
         this.currentOpen = '';
-        this.url = '';
-        this.timeRendered = 0;
         this.eventBus.on(PROFILE.CHOOSE_SECTION, this.chooseSection.bind(this));
+        this.eventBus.on(PROFILE.RENDER_DATA, this.renderData.bind(this));
     }
 
     /**
      * Рендер
-     * @param {Object} root
-     * @param {string} url
      */
     render(root, url) {
-        if (this.timeRendered === 0) {
-            this.eventBus.on(PROFILE.RENDER_DATA, (data) => {
-                document.getElementsByClassName('container')[0].innerHTML = template(data);
-
-                this.eventBus.emit(PROFILE.CHOOSE_SECTION, {});
-                this.eventBus.emit(this.currentOpen, {});
-            });
+        super.render(document.getElementsByClassName(DOM.CONTENT)[0], url);
+        if (JSON.stringify(this.data) === '{}') {
+            this.eventBus.emit(PROFILE.GET_DATA, {});
         }
-        this.url = url;
-        this.eventBus.emit(PROFILE.GET_DATA, {});
-        this.timeRendered++;
+        this.eventBus.emit(PROFILE.CHOOSE_SECTION, {});
+        this.eventBus.emit(this.currentOpen, {});
+    }
+
+    /**
+     * Рендер
+     */
+    renderData(data) {
+        this.setData(data);
+        document.getElementsByClassName('m-profile-login')[0].innerHTML = data.login;
+        document.getElementsByClassName('m-profile-name')[0].innerHTML = data.name;
+        document.getElementsByClassName('m-profile-avatar')[0].src = data.image;
     }
 
     /**
@@ -56,5 +60,9 @@ export default class ProfileView {
         }
         const curSection = document.getElementById(this.currentOpen);
         curSection.classList.add(PROFILE.SELECTED_CLASS);
+    }
+
+    setData(data) {
+        super.setData(data); // TODO очищение памяти при логауте !!!
     }
 }
