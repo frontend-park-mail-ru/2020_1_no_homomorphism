@@ -1,8 +1,6 @@
 const KEY = 'sw';
 const assets = [ // TODO Подумать
     '/',
-    '/views/templates/base.njk',
-    '/views/index.njk',
 ];
 
 self.addEventListener('install', (event) => {

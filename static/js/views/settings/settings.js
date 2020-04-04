@@ -69,7 +69,6 @@ export default class SettingsView extends BaseView {
      * @param {Object} errors
      */
     showErrors(errors) { //TODO починить вывод ошибок
-        console.log(errors);
         // eslint-disable-next-line guard-for-in
         for (const key in errors) {
             const message = document.getElementById(key).nextElementSibling;
