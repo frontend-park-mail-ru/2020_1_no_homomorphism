@@ -294,6 +294,16 @@ img#avatar {
     text-decoration: none;
 }
 
+.in-list-card-description {
+    display: block;
+    color: #515151;
+    margin-top: -20px;
+    padding-bottom: 32px;
+    padding-left: 6px;
+    padding-right: 6px;
+    text-decoration: none;
+}
+
 .card-list {
     display: block;
     padding: 0;

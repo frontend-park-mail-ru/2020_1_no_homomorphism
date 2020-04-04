@@ -7,10 +7,9 @@
             <div>
                 <button class="m-button-track-play-playlist"></button>
             </div>
-
-            <div class="l-list-card-description">
+            <a class="l-list-card-description" href="/album/{album.id}">
                 <fest:value>album.name</fest:value>
-            </div>
+            </a>
         </div>
     </fest:for>
 </fest:template>
