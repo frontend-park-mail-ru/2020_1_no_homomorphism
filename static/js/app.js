@@ -7,8 +7,9 @@ import {LoginController} from '@controllers/login';
 import {SignupController} from '@controllers/signup';
 import {PlayerController} from '@controllers/player';
 import {ProfileController} from '@controllers/profile/profile';
-import {SettingsController} from '@controllers/settings.js';
+import {SettingsController} from '@controllers/settings';
 import {PlaylistController} from '@controllers/playlist';
+import {AlbumController} from '@controllers/album';
 
 window.addEventListener('DOMContentLoaded', () => {
     const router = new Router();
@@ -21,6 +22,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const profileController = new ProfileController(router, globalEventBus);
     const settingsController = new SettingsController(router, globalEventBus);
     const playlistController = new PlaylistController(router, globalEventBus);
+    const albumController = new AlbumController(router, globalEventBus);
 
     // if ('serviceWorker' in navigator) {
     //     navigator.serviceWorker
@@ -45,6 +47,7 @@ window.addEventListener('DOMContentLoaded', () => {
     router.addView(URL.PROFILE_ARTISTS, profileController.view);
     router.addView(URL.SETTINGS, settingsController.view);
     router.addView(URL.PLAYLIST, playlistController.view);
+    router.addView(URL.ALBUM, albumController.view);
     router.start();
     navbarController.view.render();
 });

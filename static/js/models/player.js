@@ -1,5 +1,5 @@
 import Api from '@libs/api.js';
-import {PLAYER, RESPONSE, GLOBAL, SETTINGS, URL} from '@libs/constans';
+import {PLAYER, RESPONSE, GLOBAL, SETTINGS, URL, ALBUM} from '@libs/constans';
 
 /**
  * Модель плеера
@@ -24,6 +24,10 @@ export default class PlayerModel {
         globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.deleteAll.bind(this));
         globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.getPlaylistTracks.bind(this));
         globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.play.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_ALBUM, this.pause.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_ALBUM, this.deleteAll.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_ALBUM, this.getAlbumTracks.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_ALBUM, this.play.bind(this));
         this.eventBus.on(PLAYER.GET_TRACK, this.getTrack.bind(this));
         this.eventBus.on(PLAYER.GET_TRACKS, this.getPlaylistTracks.bind(this));
         this.eventBus.on(PLAYER.PAUSE, this.pause.bind(this));
@@ -64,10 +68,31 @@ export default class PlayerModel {
     }
 
     /**
+     * Получение списка треков
+     * @param {Object} album
+     */
+    getAlbumTracks(album) {
+        console.log(album.id);
+        Api.albumFetch(album.id)
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    this.generateData.bind(this)(res);
+                    break;
+                case RESPONSE.BAD_REQUEST: // TODO обработать ошибку
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
+    }
+
+    /**
      * останавливает воспроизведение
      * @param {Object} res
      */
-    generateData (res) {
+    generateData(res) {
         res.json()
             .then((list) => {
                 // eslint-disable-next-line guard-for-in
@@ -291,7 +316,7 @@ export default class PlayerModel {
     delete(id) {
         let decCurrent = this.playlist.length !== 1 &&
             this.queue.indexOf(this.playlist.indexOf(this.playlist.find((track) =>
-            track.id === id))) < this.current;
+                track.id === id))) < this.current;
         if (this.playlist.length === 1) {
 
         }
