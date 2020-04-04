@@ -65,7 +65,6 @@ export default class NavbarView extends BaseView {
      * @param {Object} data
      */
     renderLogged(data) {
-        // this.eventBus.on(NAVBAR.RENDER_LOGGED, (data) => {
         document.getElementsByClassName('m-navbar-avatar')[0].src = data.image;
         document.getElementsByClassName('m-navbar-name')[0].innerHTML = data.login;
         document.getElementById('login-link').classList.remove('is-visible');
@@ -76,7 +75,6 @@ export default class NavbarView extends BaseView {
         document.getElementById('logout-link').classList.add('is-visible');
         document.getElementById('profile-link').classList.remove('is-hidden');
         document.getElementById('profile-link').classList.add('is-visible');
-        // });
     }
 
     /**

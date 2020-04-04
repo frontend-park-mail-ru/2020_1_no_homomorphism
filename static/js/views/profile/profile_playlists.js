@@ -1,7 +1,6 @@
 import {PROFILE, GLOBAL} from '@libs/constans.js';
 import template from '@views/profile/profile_playlist.tmpl.xml';
 
-
 /**
  * вью для профиля
  */
@@ -52,8 +51,7 @@ export default class ProfilePlaylistsView {
                 break;
             }*/
             if (current.getAttribute('class') === 'l-profile-playlists' &&
-                current.getAttribute('id') !== null
-            ) {
+                current.getAttribute('id') !== null) {
                 this.globalEventBus.emit(GLOBAL.PLAY_PLAYLIST, {index: current.getAttribute('id')});
                 break;
             } else {

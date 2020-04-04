@@ -105,6 +105,7 @@ export const PLAYER = {
     DRAW_UNREPEAT: 'draw-unrepeat',
     DRAW_MUTE: 'draw-mute',
     DRAW_UNMUTE: 'draw-unmute',
+    REMOVE_FROM_TRACKLIST: 'remove-from-tracklist'
 };
 
 export const SETTINGS = {
