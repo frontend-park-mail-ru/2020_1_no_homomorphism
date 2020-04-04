@@ -54,6 +54,7 @@ export const VALIDATION = {
 
 export const GLOBAL = {
     PLAY_PLAYLIST: 'play playlist',
+    CLEAR_AND_LOCK: 'clear and lock',
 };
 
 export const LOGIN = {

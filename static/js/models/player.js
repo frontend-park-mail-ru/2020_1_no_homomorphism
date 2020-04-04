@@ -20,7 +20,7 @@ export default class PlayerModel {
             shuffle: false,
             repeat: false,
         };
-        globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.pause.bind(this));
+        globalEventBus.on(GLOBAL.CLEAR_AND_LOCK, this.deleteAll.bind(this));
         globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.deleteAll.bind(this));
         globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.getPlaylistTracks.bind(this));
         globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.play.bind(this));
@@ -67,7 +67,7 @@ export default class PlayerModel {
      * останавливает воспроизведение
      * @param {Object} res
      */
-    generateData (res) {
+    generateData(res) {
         res.json()
             .then((list) => {
                 // eslint-disable-next-line guard-for-in

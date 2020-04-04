@@ -22,7 +22,6 @@ export default class PlayerView extends BaseView {
         this.muted = false;
         this.volume = 1;
         this.locked = true;
-        this.eventBus.on(PLAYER.RESIZE, this.resize.bind(this)); // globalEventBus
         this.eventBus.on(PLAYER.DRAW_PLAY, this.drawPlay.bind(this));
         this.eventBus.on(PLAYER.DRAW_PAUSE, this.drawPause.bind(this));
         this.eventBus.on(PLAYER.TRACK_UPDATE, this.updateTrack.bind(this));
@@ -728,12 +727,17 @@ export default class PlayerView extends BaseView {
 
     /**
      * Очищает список воспроизвдения
+     * @param {boolean} lock
      */
-    removeFromTracklistAll() {
+    removeFromTracklistAll(lock) {
         while (document.getElementsByClassName('track-list')[0].children.length > 1) {
             document.getElementsByClassName('track-list')[0].children[document
                 .getElementsByClassName('track-list')[0].children.length - 1].remove();
         }
+        if (lock && this.expanded) {
+            this.triggerClick();
+        }
+        this.locked = lock;
     }
 
     /**

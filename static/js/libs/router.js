@@ -98,6 +98,5 @@ export default class Router {
             }
         });
         this.check(window.location.pathname, false);
-        this.views[URL.PLAYER].render();
     }
 }

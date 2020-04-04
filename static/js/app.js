@@ -47,4 +47,5 @@ window.addEventListener('DOMContentLoaded', () => {
     router.addView(URL.PLAYLIST, playlistController.view);
     router.start();
     navbarController.view.render();
+    playerController.view.render();
 });
