@@ -16,12 +16,11 @@ export default class PlaylistModel {
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
         this.eventBus.on(PLAYLIST.GET_PLAYLIST_DATA, this.getTracks.bind(this));
-        this.eventBus.on(PLAYLIST.GET_USER_DATA, this.getUserData.bind(this));
     }
 
     /**
      * Получение списка треков
-     * @param {number} id
+     * @param {Object} id
      */
     getTracks(id) {
         Api.playlistTracksFetch(id.id)
@@ -32,42 +31,17 @@ export default class PlaylistModel {
                         .then((list) => {
                             this.playlist = list;
                             this.eventBus.emit(PLAYLIST.RENDER_DATA, this.playlist);
-                            this.eventBus.emit(PLAYLIST.GET_USER_DATA);
                         });
                     break;
-                case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
+                case RESPONSE.BAD_REQUEST:
+                    this.eventBus.emit(PLAYLIST.ERROR, {text: 'Sorry, there isnt playlist with this id :('});
                     break;
-                case RESPONSE.UNAUTH: // TODO Пользователь не залогинен => дефолтный плейлист
-                case RESPONSE.NO_ACCESS_RIGHT: // TODO Нет прав к этому плейлисту
+                case RESPONSE.UNAUTH:
+                case RESPONSE.NO_ACCESS_RIGHT:
+                    this.eventBus.emit(PLAYLIST.ERROR, {text: 'Sorry, you cant get this playlist :('});
                     break;
                 default:
                     console.log(res);
-                    console.error('I am a teapot');
-                }
-            });
-    }
-
-    /**
-     * получает данные юзера
-     */
-    getUserData() {
-        console.log('kkkk');
-        Api.profileFetch()
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    res.json()
-                        .then((data) => {
-                            this.eventBus.emit(PLAYLIST.RENDER_USER_DATA, data);
-                        });
-                    break;
-                case RESPONSE.UNAUTH:
-                    this.eventBus.emit(SETTINGS.REDIRECT, URL.MAIN);
-                    break;
-                case RESPONSE.SERVER_ERROR:
-                    this.eventBus.emit(SETTINGS.REDIRECT, URL.MAIN);
-                    break;
-                default:
                     console.error('I am a teapot');
                 }
             });

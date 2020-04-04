@@ -18,14 +18,19 @@
                     </div>
 
                 </div>
+                <div class="m-tracks-amount col ">
+                    Amount of tracks: 0
+                </div>
 
 
             </div>
             <div class="l-down-card">
                 <div class="l-track-list" style="top: 0;">
+                    <div class="m-empty-list">
+                        Playlist is empty :(
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 </fest:template>

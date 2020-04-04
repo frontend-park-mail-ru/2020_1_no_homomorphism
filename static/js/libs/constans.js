@@ -110,7 +110,6 @@ export const PLAYER = {
     DRAW_UNREPEAT: 'draw-unrepeat',
     DRAW_MUTE: 'draw-mute',
     DRAW_UNMUTE: 'draw-unmute',
-    REMOVE_FROM_TRACKLIST: 'remove-from-tracklist'
 };
 
 export const SETTINGS = {
@@ -151,4 +150,5 @@ export const PLAYLIST = {
     GET_USER_DATA: 'get-user',
     RENDER_DATA: 'render-playlist',
     RENDER_USER_DATA: 'render-user',
+    ERROR: 'show-errors',
 };

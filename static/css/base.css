@@ -70,3 +70,11 @@ button:focus {
 .is-visible {
     display: block;
 }
+
+.is-error {
+    border: 1px solid red;
+    padding: 32px;
+    font-size: 32px;
+}
+
+

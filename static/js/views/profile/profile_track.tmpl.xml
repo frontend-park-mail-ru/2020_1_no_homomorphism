@@ -1,9 +1,11 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <div class="small_line"></div>
+
     <fest:for iterate="data" index="i" value="track">
-        <div class="l-profile-track">
+        <div class="l-track-big">
             <div class="m-profile-track row" style="text-align: left">
                 <div>
-                    <div class="l-profile-track-image">
+                    <div class="l-track-big-image">
                         <img class="m-profile-track-image" id="profile-track-image" src="{track.image}" alt=""/>
                     </div>
                     <div class="m-play-track">

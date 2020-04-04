@@ -1,9 +1,10 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <div class="small_line"></div>
     <fest:for iterate="data" index="i" value="track">
-        <div class="l-profile-track">
+        <div class="l-track-big">
             <div class="m-profile-track row" style="text-align: left">
                 <div>
-                    <div class="l-profile-track-image">
+                    <div class="l-track-big-image">
                         <img class="m-profile-track-image" id="profile-track-image" src="{track.image}" alt=""/>
                     </div>
                     <div class="m-play-track">
@@ -20,14 +21,14 @@
                     </div>
                 </div>
                 <div class="l-track-buttons row">
-                    <div class="col l-big-track-button delete-button">
-                        <img src="/static/img/clear-24px.svg" class="m-delete-button" height="15px" alt="..."/>
-                    </div>
-                    <div class="col l-big-track-button favorite-button">
+                    <div class="col l-big-track-button">
                         <img src="/static/img/favorite_border.svg" class="m-like-button" height="15px" alt="..."/>
                     </div>
-                    <div class="col l-big-track-button add-button">
+                    <div class="col l-big-track-button">
                         <img src="/static/img/add-24px.svg" class="m-add-button" height="15px" alt="..."/>
+                    </div>
+                    <div class="col l-big-track-button">
+                        <img src="/static/img/more_vert.svg" class="m-more-button" height="15px" alt="..."/>
                     </div>
                 </div>
             </div>
