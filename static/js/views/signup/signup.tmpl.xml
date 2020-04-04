@@ -29,14 +29,14 @@
                 <div class="l-signup-input">
                     <label>
                         Password
-                        <input class="input-regular" type="text" id="password" value="" use="required"/>
+                        <input class="input-regular" type="password" id="password" value="" use="required"/>
                         <div class="error-message-small"></div>
                     </label>
                 </div>
                 <div class="l-signup-input">
                     <label>
                         Password Confirmation
-                        <input class="input-regular" type="text" id="password-confirm" value="" use="required"/>
+                        <input class="input-regular" type="password" id="password-confirm" value="" use="required"/>
                         <div class="error-message-small"></div>
                     </label>
                 </div>

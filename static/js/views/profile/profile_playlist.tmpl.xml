@@ -1,6 +1,6 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <fest:for iterate="data" index="i" value="playlist">
-        <div class="l-profile-playlists">
+        <div class="l-profile-playlists" id="{playlist.id}">
             <div class="l-profile-playlist-image">
                 <img class="m-profile-playlist-image" id="profile-playlist-image" src="{playlist.image}" alt=""/>
             </div>

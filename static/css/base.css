@@ -52,10 +52,6 @@ img {
     object-fit: cover;
 }
 
-.l-music-bar {
-    margin-bottom: 16px;
-}
-
 .m-player-track {
     margin: 16px;
 }
@@ -67,10 +63,9 @@ button:focus {
 }
 
 .is-hidden {
-    visibility: hidden;
+    display: none;
 }
 
 .is-visible {
-    visibility: visible;
+    display: block;
 }
-

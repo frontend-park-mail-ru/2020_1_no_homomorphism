@@ -16,19 +16,21 @@
     color: black;
 }
 
-.navbar-row {
+.l-navbar-row {
     width: 100%;
 }
 
-.navbar .logo {
+.l-navbar .logo {
     height: 3%;
     width: 3%;
     margin: 5px 0;
 }
 
-.navbar .name {
+.l-navbar .name {
+    font-weight: bold;
     margin-left: 4px;
-    margin-bottom: -13px;
+    margin-bottom: 4px;
+    font-size: 23px;
 }
 
 .l-navbar .login {

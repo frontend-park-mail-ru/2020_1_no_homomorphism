@@ -16,17 +16,16 @@ export class ProfileController {
      * @param {Router} router
      * @param {EventBus} globalEventBus
      */
-    constructor(router,globalEventBus) {
+    constructor(router, globalEventBus) {
         this.eventBus = new EventBus();
         this.model = new ProfileModel(this.eventBus, globalEventBus);
         this.view = new ProfileView(this.eventBus);
         this.eventBus.on(PROFILE.REDIRECT, router.redirect.bind(router));
-        this.globalEventBus = globalEventBus;
-        // this.eventBus.on(PROFILE.NO_ANSWER, router.redirect.bind(router));
+        this.eventBus.on(PROFILE.NO_ANSWER, router.redirect.bind(router));
         // --------- Albums
         this.albumsController = new ProfileAlbumsController(router, this.eventBus);
         this.tracksController = new ProfileTracksController(router, this.eventBus);
-        this.playlistsController = new ProfilePlaylistsController(router, this.eventBus);
+        this.playlistsController = new ProfilePlaylistsController(router, this.eventBus, globalEventBus);
         this.artistsController = new ProfileArtistsController(router, this.eventBus);
     }
 }

@@ -49,6 +49,10 @@ export const VALIDATION = {
     ALLOWABLE_EXTENSIONS: ['png', 'jpg', 'jpeg', 'gif'],
 };
 
+export const GLOBAL = {
+    PLAY_PLAYLIST: 'play playlist',
+};
+
 export const LOGIN = {
     REDIRECT: 'redirect',
     INVALID: 'invalid',
@@ -70,6 +74,7 @@ export const NAVBAR = {
 
 export const PLAYER = {
     REDIRECT: 'redirect',
+    GET_TRACK: 'get-track',
     GET_TRACKS: 'get-tracks',
     RESIZE: 'resize',
     PAUSE: 'pause',
@@ -84,9 +89,13 @@ export const PLAYER = {
     UNREPEAT: 'unrepeat',
     MUTE: 'mute',
     UNMUTE: 'unmute',
+    DELETE: 'delete',
+    LIKE: 'like',
+    ADD: 'add',
     DRAW_PLAY: 'draw-play',
     DRAW_PAUSE: 'draw-pause',
     TRACK_UPDATE: 'track-update',
+    MOVE_MARKER: 'move-marker',
     DRAW_TRACKLIST: 'draw-tracklist',
     DRAW_TIMELINE: 'draw-timeline',
     DRAW_SHUFFLE: 'draw-shuffle',
@@ -96,6 +105,7 @@ export const PLAYER = {
     DRAW_UNREPEAT: 'draw-unrepeat',
     DRAW_MUTE: 'draw-mute',
     DRAW_UNMUTE: 'draw-unmute',
+    REMOVE_FROM_TRACKLIST: 'remove-from-tracklist'
 };
 
 export const SETTINGS = {
@@ -129,4 +139,3 @@ export const PROFILE = {
     RENDER_ALBUMS: 'render-profile-albums',
     RENDER_ARTISTS: 'render-profile-artists',
 };
-
