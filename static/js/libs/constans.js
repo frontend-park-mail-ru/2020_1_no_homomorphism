@@ -35,16 +35,6 @@ export const URL = {
     ALBUM: /(\/album\/)[0-9]+/,
 };
 
-export const TEMPLATES = {
-    PROFILE: '../../../views/profile/profile.njk',
-    PROFILE_TRACKS: '../../../views/profile/profile_tracks.njk',
-    PROFILE_PLAYLISTS: '../../../views/profile/profile_playlists.njk',
-    PROFILE_ALBUMS: '../../../views/profile/profile_albums.njk',
-    PROFILE_ARTISTS: '../../../views/profile/profile_artists.njk',
-    LOGIN: '../../../views/login.njk',
-    SIGN_UP: '../../../views/signup.njk',
-};
-
 export const VALIDATION = {
     EMAIL_EMPTY: 'Enter email',
     EMAIL_INCORRECT: 'Incorrect email syntax',

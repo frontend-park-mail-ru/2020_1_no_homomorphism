@@ -1,6 +1,5 @@
 import Api from '@libs/api.js';
-import {PROFILE} from '@libs/constans.js';
-import {RESPONSE} from '@libs/constans';
+import {PROFILE, RESPONSE} from '@libs/constans.js';
 
 /**
  * Модель Профиля
@@ -48,10 +47,9 @@ export default class ProfileTracksModel {
                                 }
                             });
                         break;
-                    case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
-                        break;
-                    case RESPONSE.UNAUTH: // TODO Пользователь не залогинен => дефолтный плейлист
-                    case RESPONSE.NO_ACCESS_RIGHT: // TODO Нет прав к этому плейлисту
+                    case RESPONSE.BAD_REQUEST:
+                    case RESPONSE.UNAUTH:
+                    case RESPONSE.NO_ACCESS_RIGHT:
                         break;
                     default:
                         console.log(res);
@@ -65,14 +63,29 @@ export default class ProfileTracksModel {
      * Получение плейлистов
      */
     getPlaylists() {
-        Api.profilePlaylistsFetch().then((response) => response.json())
-            .then((list) => {
-                if (!this.loaded) { // TODO временное решение
-                    this.loaded = true;
-                    this.playlists = list.playlists;
-                    this.getTracks.bind(this)();
-                } else {
-                    this.renderTracks.bind(this)();
+        Api.profilePlaylistsFetch()
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    res.json()
+                        .then((list) => {
+                            if (!this.loaded) { // TODO временное решение
+                                this.loaded = true;
+                                this.playlists = list.playlists;
+                                this.getTracks.bind(this)();
+                            } else {
+                                this.renderTracks.bind(this)();
+                            }
+                        });
+                    break;
+                case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
+                    break;
+                case RESPONSE.UNAUTH: // TODO Пользователь не залогинен => дефолтный плейлист
+                case RESPONSE.NO_ACCESS_RIGHT: // TODO Нет прав к этому плейлисту
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
                 }
             });
     }

@@ -15,6 +15,7 @@ export const postFetch = (path = '/', body = {}) => {
         credentials: 'include', // include, *same-origin, omit (относится к кукам)
         headers: {
             'Content-Type': 'application/json; charset=utf-8',
+            // 'Csrf-Token': localStorage.getItem('csrfToken'),
         },
         body: JSON.stringify(body),
     });
@@ -46,6 +47,9 @@ export const deleteFetch = (path = '/') => {
         method: 'DELETE',
         mode: 'cors',
         credentials: 'include',
+        // headers: {
+        //     'Csrf-Token': localStorage.getItem('csrfToken'),
+        // },
     });
 };
 
@@ -63,6 +67,7 @@ export const putFetch = (path = '/', body = {}) => {
         credentials: 'include',
         headers: {
             'Content-Type': 'application/json; charset=utf-8',
+            'Csrf-Token': localStorage.getItem('csrfToken'),
         },
         body: JSON.stringify(body),
     });
@@ -81,6 +86,9 @@ export const postImageFetch = (path = API + '/users/images', body = {}) => {
         mode: 'cors',
         credentials: 'include',
         body: body,
+        headers: {
+            'Csrf-Token': localStorage.getItem('csrfToken'),
+        },
     });
 };
 
