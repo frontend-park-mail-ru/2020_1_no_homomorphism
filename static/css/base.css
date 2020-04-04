@@ -63,10 +63,10 @@ button:focus {
     outline: none;
 }
 
-.display-none {
+.is-hidden {
     display: none;
 }
 
-.display-block {
+.is-visible {
     display: block;
 }

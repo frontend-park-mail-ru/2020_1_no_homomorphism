@@ -65,6 +65,7 @@ export default class NavbarView extends BaseView {
      * @param {Object} data
      */
     renderLogged(data) {
+        console.log(document.getElementsByClassName('m-navbar-avatar')[0]);
         document.getElementsByClassName('m-navbar-avatar')[0].src = data.image;
         document.getElementsByClassName('m-navbar-name')[0].innerHTML = data.login;
         document.getElementById('login-link').classList.remove('is-visible');
