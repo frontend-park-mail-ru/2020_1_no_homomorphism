@@ -26,6 +26,7 @@ p {
 .l-top-card {
     box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
     border-radius: var(--card-border);
+
     /*padding: 16px;*/
 }
 
@@ -76,7 +77,7 @@ img#avatar {
 }
 
 .l-top-titles .col {
-    margin-top: 100px;
+    margin-top: 80px;
     padding-top: 8px;
 }
 
@@ -89,7 +90,7 @@ img#avatar {
 .l-profile-base {
     z-index: 1;
     box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 32px;
+    border-radius: var(--card-border);
     padding: 32px;
     margin-top: 16px;
 }
@@ -162,7 +163,7 @@ img#avatar {
     transition-duration: 0.5s;
 }
 
-.l-profile-playlist-list, .l-profile-album-playlist-list .l-profile-artist-list {
+.l-playlist-list, .l-profile-album-playlist-list .l-profile-artist-list {
     display: block;
     padding: 0;
     list-style: none;
@@ -176,20 +177,20 @@ img#avatar {
 }
 
 .m-profile-track-name {
-    font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+    /*font: bold 20px/1.5 Helvetica, Verdana, sans-serif;*/
 }
 
-.l-profile-track img {
+.l-track-big img {
     float: left;
     margin: 0 15px 0 0;
 }
 
-.l-profile-track {
+.l-track-big {
     padding: 10px;
     overflow: hidden;
 }
 
-.l-profile-track:hover {
+.l-track-big:hover {
     background: var(--light-green);
     cursor: pointer;
 }
@@ -218,7 +219,7 @@ img#avatar {
     border-radius: 5px;
 }
 
-.l-profile-track:hover .m-profile-track-image {
+.l-track-big:hover .m-profile-track-image {
     transition: 0.3s;
     -webkit-transform: scale(2);
     transform: scale(1.2);
@@ -226,11 +227,11 @@ img#avatar {
     box-shadow: 0 0 10px 4px rgba(129, 129, 129, 0.65);
 }
 
-.l-profile-track:not(:hover) .m-profile-track-image {
+.l-track-big:not(:hover) .m-profile-track-image {
     transition: 0.1s;
 }
 
-.l-profile-track:hover .m-button-track-play {
+.l-track-big:hover .m-button-track-play {
     opacity: 1;
     -webkit-transform: scale(2);
     transform: scale(2);
@@ -253,14 +254,14 @@ img#avatar {
 
 /* STYLES FOR PLAYLISTS */
 
-.l-profile-playlists img {
+.l-list-card img {
     float: left;
     object-fit: cover;
     width: 200px;
     height: 200px;
 }
 
-.l-profile-playlists {
+.l-list-card {
     float: top;
     animation-duration: 1s;
     overflow: hidden;
@@ -275,14 +276,25 @@ img#avatar {
     transition: transform 0.1s ease-in-out, box-shadow 0.1s;
 }
 
-.l-profile-playlists:hover {
+.l-list-card:hover {
     background: #eee;
     cursor: pointer;
-    transform: translateY(-0.5rem) scale(1.0125);
+    transform: translateY(-0.1rem) scale(1.0125);
+    transition: 0.2s;
     box-shadow: 0 3px 10px -3px rgba(0, 0, 0, 0.5);
 }
 
-.l-profile-playlists-description {
+.l-list-card-description {
+    display: block;
+    color: #515151;
+    margin-top: -20px;
+    padding-bottom: 32px;
+    padding-left: 6px;
+    padding-right: 6px;
+    text-decoration: none;
+}
+
+.in-list-card-description {
     display: block;
     color: #515151;
     margin-top: -20px;
@@ -298,15 +310,15 @@ img#avatar {
     list-style: none;
 }
 
-.l-profile-playlists:hover .m-button-track-play-playlist {
+.l-list-card:hover .m-button-track-play-playlist {
     opacity: 1;
     -webkit-transform: scale(6);
     transform: translateY(-100px) translateX(-16px) scale(6);
 }
 
-.l-profile-playlists:hover .m-profile-playlist-image {
+.l-list-card:hover .m-list-image {
     transition: 0.3s;
-    opacity: 0.5;
+    opacity: 0.8;
 }
 
 .m-button-track-play-playlist {

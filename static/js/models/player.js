@@ -1,5 +1,5 @@
 import Api from '@libs/api.js';
-import {RESPONSE, GLOBAL, PLAYER} from '@libs/constans.js';
+import {PLAYER, RESPONSE, GLOBAL} from '@libs/constans';
 
 /**
  * Модель плеера
@@ -24,6 +24,10 @@ export default class PlayerModel {
         globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.deleteAll.bind(this));
         globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.getPlaylistTracks.bind(this));
         globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.play.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_ALBUM, this.pause.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_ALBUM, this.deleteAll.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_ALBUM, this.getAlbumTracks.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_ALBUM, this.play.bind(this));
         this.eventBus.on(PLAYER.GET_TRACK, this.getTrack.bind(this));
         this.eventBus.on(PLAYER.GET_TRACKS, this.getPlaylistTracks.bind(this));
         this.eventBus.on(PLAYER.PAUSE, this.pause.bind(this));
@@ -56,6 +60,26 @@ export default class PlayerModel {
                     break;
                 case RESPONSE.UNAUTH: // TODO Пользователь не залогинен => дефолтный плейлист
                 case RESPONSE.NO_ACCESS_RIGHT: // TODO Нет прав к этому плейлисту
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
+    }
+
+    /**
+     * Получение списка треков
+     * @param {Object} album
+     */
+    getAlbumTracks(album) {
+        Api.albumFetch(album.id)
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    this.generateData.bind(this)(res);
+                    break;
+                case RESPONSE.BAD_REQUEST: // TODO обработать ошибку
                     break;
                 default:
                     console.log(res);

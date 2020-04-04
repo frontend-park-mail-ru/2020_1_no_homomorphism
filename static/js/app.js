@@ -10,6 +10,7 @@ import {ProfileController} from '@controllers/profile/profile';
 import {SettingsController} from '@controllers/settings.js';
 import {ArtistController} from '@controllers/artist.js';
 import {PlaylistController} from '@controllers/playlist';
+import {AlbumController} from '@controllers/album';
 
 window.addEventListener('DOMContentLoaded', () => {
     const router = new Router();
@@ -23,6 +24,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const settingsController = new SettingsController(router, globalEventBus);
     const artistController = new ArtistController(router);
     const playlistController = new PlaylistController(router, globalEventBus);
+    const albumController = new AlbumController(router, globalEventBus);
 
     // if ('serviceWorker' in navigator) {
     //     navigator.serviceWorker
@@ -48,6 +50,7 @@ window.addEventListener('DOMContentLoaded', () => {
     router.addView(URL.SETTINGS, settingsController.view);
     router.addView(URL.ARTIST, artistController.view);
     router.addView(URL.PLAYLIST, playlistController.view);
+    router.addView(URL.ALBUM, albumController.view);
     router.start();
     navbarController.view.render();
     playerController.view.render();

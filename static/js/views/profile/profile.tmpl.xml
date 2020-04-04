@@ -49,9 +49,9 @@
             <div class="l-down-card">
                 <div class="l-profile-album-list" id="profile-album-playlist-list" style="top: 0;">
                 </div>
-                <div class="l-profile-track-list" id="profile-track-list" style="top: 0;">
+                <div class="l-track-big-list" id="profile-track-list" style="top: 0;">
                 </div>
-                <div class="l-profile-playlist-list" id="profile-playlist-list" style="top: 0;">
+                <div class="l-playlist-list" id="profile-playlist-list" style="top: 0;">
                 </div>
                 <div class="l-profile-artist-list" id="profile-artist-list" style="top: 0;">
                 </div>

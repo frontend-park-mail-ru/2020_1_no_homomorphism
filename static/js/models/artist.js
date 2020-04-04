@@ -92,7 +92,6 @@ export default class ArtistModel {
                                 }
                             })
                             .then(() => {
-                                console.log(this.tracks);
                                 this.eventBus.emit(ARTIST.RENDER_TRACKS, this.tracks);
                             });
                     }

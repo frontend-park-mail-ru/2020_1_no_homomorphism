@@ -11,6 +11,7 @@ export default class Router {
     constructor() {
         this.root = document.getElementsByClassName(DOM.CONTENT)[0];
         this.views = {};
+        this.regexUrl = [URL.ALBUM, URL.PLAYLIST, URL.ARTIST];
         this.profileUrl = [URL.PROFILE, URL.PROFILE_TRACKS, URL.PROFILE_PLAYLISTS,
             URL.PROFILE_ARTISTS, URL.PROFILE_ALBUMS];
         this.forbiddenForLogout = [URL.PROFILE, URL.PROFILE_TRACKS, URL.PROFILE_PLAYLISTS,
@@ -45,6 +46,22 @@ export default class Router {
     }
 
     /**
+     * Проверка регулярки
+     * @param {string} newPath
+     * @return {string}
+     */
+    checkReg(newPath) {
+        let res = '';
+        this.regexUrl.map(function(url) {
+            if (newPath.match(url)) {
+                res = url;
+            }
+        });
+        console.log(res);
+        return res === '' ? newPath : res;
+    }
+
+    /**
      * Запуск рендеринга
      * @param {string} newPath
      * @param {boolean} pushState
@@ -53,15 +70,17 @@ export default class Router {
         if (newPath === this.curPath) {
             return;
         }
-        if (!(newPath in this.views) && !(newPath.match(URL.ARTIST)) &&
-            !(newPath.match(URL.PLAYLIST))) {
+        const isRegUrl = this.checkReg(newPath);
+        if (!(newPath in this.views) && isRegUrl === newPath) {
             if (pushState) {
                 window.history.pushState('', {}, URL.MAIN);
             }
             this.redirect(URL.MAIN); // TODO добавить вывод пользователю
             return;
         }
-        newPath = newPath === URL.PROFILE ? URL.PROFILE_TRACKS : newPath;
+        if (newPath === URL.PROFILE) {
+            this.redirect(URL.PROFILE_TRACKS);
+        }
         this.curPath = newPath;
         if (pushState) {
             window.history.pushState('', {}, newPath);
@@ -70,15 +89,11 @@ export default class Router {
             this.views[newPath].render(this.root, newPath);
             return;
         }
-        if (newPath.match(URL.ARTIST)) {
-            this.views[URL.ARTIST].render(this.root,
-                newPath.slice(newPath.indexOf('artist') + 7, newPath.length));
-            return;
-        }
-        if (newPath.match(URL.PLAYLIST)) {
-            this.views[URL.PLAYLIST].render(this.root,
+        if (isRegUrl !== newPath) {
+            this.views[isRegUrl].render(this.root,
                 newPath.slice(newPath.lastIndexOf('/') + 1, newPath.length));
-            return;
+        } else {
+            this.views[isRegUrl].render(this.root);
         }
         this.views[newPath].render(this.root);
     }

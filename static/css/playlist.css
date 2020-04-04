@@ -19,6 +19,7 @@
     width: 150px;
     border-radius: 100px;
     float: right;
+        box-shadow: 0 0 30px #6b6b6b;
 }
 
 .m-button-track-list-play {
@@ -28,7 +29,6 @@
     border: yellow;
     cursor: pointer;
     opacity: 0.4;
-    /*padding-left: 230px;*/
     margin-top: 130px;
     padding: 20px;
     position: relative;
@@ -59,21 +59,49 @@
     transition: 0.3s;
 }
 
-.l-profile-track:hover .m-like-button, .l-profile-track:hover .m-delete-button, .l-profile-track:hover .m-add-button {
+.l-track-big:hover .m-like-button, .l-track-big:hover .m-delete-button, .l-track-big:hover .m-add-button, .l-track-big:hover .m-more-button {
     transition: 0.3s;
     -webkit-transform: scale(2);
     transform: scale(1.2);
     opacity: 1;
 }
 
-.l-profile-track:not(:hover) .m-like-button, .l-profile-track:not(:hover) .m-delete-button, .l-profile-track:not(:hover) .m-add-button {
+.l-track-big:not(:hover) .m-like-button, .l-track-big:not(:hover) .m-delete-button, .l-track-big:not(:hover) .m-add-button, .l-track-big:hover .m-more-button {
     transition: 0.1s;
 }
 
 .l-big-track-button {
-    opacity: 1;
+    opacity: 0.4;
+    transform: scale(1.5 );
+    margin-top: -20px;
+    padding-right: 8px;
 }
 
-.m-like-button, .m-delete-button, .m-add-button {
+.m-like-button, .m-delete-button, .m-add-button, .m-more-button {
     opacity: 0;
+}
+
+.m-empty-list {
+    padding: 32px;
+}
+
+.m-tracks-amount {
+    text-align: right;
+    padding: 8px;
+    border-radius: var(--card-border);
+    margin-right: 32px;
+    margin-top: 180px;
+    color: #155724;
+    background-color: var(--light-green);
+    float: right;
+}
+
+.l-track-buttons {
+    text-align: right;
+    float: right;
+    margin-top: -20px;
+}
+
+.l-big-track-button:hover {
+    opacity: 1;
 }

@@ -60,6 +60,7 @@ export const VALIDATION = {
 export const GLOBAL = {
     PLAY_PLAYLIST: 'play playlist',
     CLEAR_AND_LOCK: 'clear and lock',
+    PLAY_ALBUM: 'play-album',
 };
 
 export const LOGIN = {
@@ -166,6 +167,14 @@ export const ARTIST = {
 
 export const PLAYLIST = {
     REDIRECT: 'redirect',
-    GET_DATA: 'get-playlist',
+    GET_PLAYLIST_DATA: 'get-playlist',
     RENDER_DATA: 'render-playlist',
+    ERROR: 'show-errors',
+};
+
+export const ALBUM = {
+    REDIRECT: 'redirect',
+    GET_ALBUM_DATA: 'get-playlist',
+    RENDER_DATA: 'render-playlist',
+    ERROR: 'show-errors',
 };

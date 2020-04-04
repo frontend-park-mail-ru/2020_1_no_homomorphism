@@ -1,10 +1,10 @@
-import {PLAYLIST, RESPONSE} from '@libs/constans';
+import {ALBUM, RESPONSE} from '@libs/constans';
 import Api from '@libs/api';
 
 /**
  * Модель плейлиста
  **/
-export default class PlaylistModel {
+export default class AlbumModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus
@@ -14,32 +14,28 @@ export default class PlaylistModel {
         this.playlist = {};
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
-        this.eventBus.on(PLAYLIST.GET_PLAYLIST_DATA, this.getTracks.bind(this));
+        this.eventBus.on(ALBUM.GET_ALBUM_DATA, this.getAlbumTracks.bind(this));
     }
 
     /**
      * Получение списка треков
      * @param {Object} id
      */
-    getTracks(id) {
-        Api.playlistTracksFetch(id.id)
+    getAlbumTracks(id) {
+        Api.albumFetch(id.id)
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
                     res.json()
                         .then((list) => {
                             this.playlist = list;
-                            this.eventBus.emit(PLAYLIST.RENDER_DATA, this.playlist);
+                            this.eventBus.emit(ALBUM.RENDER_DATA, this.playlist);
                         });
                     break;
                 case RESPONSE.BAD_REQUEST:
-                    this.eventBus.emit(PLAYLIST.ERROR,
-                        {text: 'Sorry, there isn\'t playlist with this id :('});
-                    break;
-                case RESPONSE.UNAUTH:
-                case RESPONSE.NO_ACCESS_RIGHT:
-                    this.eventBus.emit(PLAYLIST.ERROR,
-                        {text: 'Sorry, you can\'t get this playlist :('});
+                    console.log(res);
+                    this.eventBus.emit(ALBUM.ERROR,
+                        {text: 'Sorry, there isn\'t album with this id :('});
                     break;
                 default:
                     console.log(res);

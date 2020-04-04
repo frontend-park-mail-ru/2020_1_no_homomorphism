@@ -1,6 +1,5 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="small_line"></div>
-
     <fest:for iterate="data" index="i" value="track">
         <div class="l-track-big">
             <div class="m-profile-track row" style="text-align: left">
@@ -11,28 +10,25 @@
                     <div class="m-play-track">
                         <button class="m-button-track-play" id="playlist-play"> </button>
                     </div>
-                    <div class="m-profile-track-name row">
-                        <div class="col col-3">
-                            <fest:value>track.artist</fest:value>
-                        </div>
-                        <div class="col col-3">
+                    <div class="m-profile-track-name ">
+                        <span>
                             <fest:value>track.name</fest:value>
-                        </div>
+                        </span>
                     </div>
                 </div>
                 <div class="l-track-buttons row">
-                    <div class="col l-big-track-button delete-button">
-                        <img src="/static/img/clear-24px.svg" class="m-big-delete-button" height="15px" alt="..."/>
+                    <div class="col l-big-track-button">
+                        <img src="/static/img/favorite_border.svg" class="m-like-button" height="15px" alt="..."/>
                     </div>
-                    <div class="col l-big-track-button favorite-button">
-                        <img src="/static/img/favorite_border.svg" class="m-big-like-button" height="15px" alt="..."/>
+                    <div class="col l-big-track-button">
+                        <img src="/static/img/add-24px.svg" class="m-add-button" height="15px" alt="..."/>
                     </div>
-                    <div class="col l-big-track-button add-button">
-                        <img src="/static/img/add-24px.svg" class="m-big-add-button" height="15px" alt="..."/>
+                    <div class="col l-big-track-button">
+                        <img src="/static/img/more_vert.svg" class="m-more-button" height="15px" alt="..."/>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="small_line"></div>
+        <div class="small_line"> </div>
     </fest:for>
 </fest:template>

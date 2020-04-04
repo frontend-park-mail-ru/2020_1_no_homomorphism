@@ -14,7 +14,7 @@ export class PlaylistController {
     constructor(router, globalEventBus) {
         this.eventBus = new EventBus();
         this.model = new PlaylistModel(this.eventBus, globalEventBus);
-        this.view = new PlaylistView(this.eventBus);
+        this.view = new PlaylistView(this.eventBus, globalEventBus);
         this.eventBus.on(PLAYLIST.REDIRECT, router.redirect.bind(router));
     }
 }
