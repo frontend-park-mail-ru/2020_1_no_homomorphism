@@ -1,36 +1,37 @@
-import Api from '@libs/api.js';
-import {PROFILE} from '@libs/constans.js';
-import {RESPONSE} from '@libs/constans';
+import {PLAYLIST, RESPONSE} from '@libs/constans';
+import Api from '@libs/api';
 
 /**
- * Модель альбомов профиля
- */
-export default class ProfileAlbumsModel {
+ * Модель плейлиста
+ **/
+
+export default class PlaylistModel {
     /**
-     * конструктор
+     * Конструктор
      * @param {EventBus} eventBus
+     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus) {
-        eventBus.on(PROFILE.ID_ALBUMS_SECTION, this.getAlbums.bind(this));
+    constructor(eventBus, globalEventBus) {
+        this.playlist = {};
         this.eventBus = eventBus;
-        this.playlist = [];
+        this.globalEventBus = globalEventBus;
+        this.eventBus.on(PLAYLIST.GET_DATA, this.getTracks.bind(this));
     }
 
     /**
-     * Получение списка альбомов
+     * Получение списка треков
+     * @param {number} id
      */
-    getAlbums() {
-        Api.profilePlaylistsFetch()
+    getTracks(id) {
+        Api.playlistTracksFetch(id.id)
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
                     res.json()
-                .then((list) => {
-                    this.playlists = list.playlists;
-                })
-                    .then(() => {
-                        this.eventBus.emit(PROFILE.RENDER_PLAYLISTS, this.playlists);
-                    });
+                        .then((list) => {
+                            this.playlist = list;
+                            this.eventBus.emit(PLAYLIST.RENDER_DATA, this.playlist);
+                        });
                     break;
                 case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
                     break;

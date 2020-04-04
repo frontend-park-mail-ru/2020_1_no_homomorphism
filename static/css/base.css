@@ -6,6 +6,7 @@
 @import "profile.css";
 @import "settings.css";
 @import "signup.css";
+@import "playlist.css";
 
 body {
     margin: 0 auto;
@@ -62,10 +63,10 @@ button:focus {
     outline: none;
 }
 
-.display-none {
+.is-hidden {
     display: none;
 }
 
-.display-block {
+.is-visible {
     display: block;
 }

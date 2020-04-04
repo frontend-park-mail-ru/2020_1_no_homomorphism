@@ -5,7 +5,7 @@
                 <img class="m-profile-playlist-image" id="profile-playlist-image" src="{album.image}" alt=""/>
             </div>
             <div>
-                <button class="m-profile-button-play-playlist"></button>
+                <button class="m-button-track-play-playlist"></button>
             </div>
 
             <div class="l-profile-playlists-description">

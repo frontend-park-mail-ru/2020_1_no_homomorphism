@@ -53,7 +53,8 @@ export default class Router {
         if (newPath === this.curPath) {
             return;
         }
-        if (!(newPath in this.views)) {
+        if (!(newPath in this.views) && !(newPath.match(URL.PLAYLIST))) {
+            console.log('NOT IN VIEW');
             if (pushState) {
                 window.history.pushState('', {}, URL.MAIN);
             }
@@ -65,8 +66,16 @@ export default class Router {
         if (pushState) {
             window.history.pushState('', {}, newPath);
         }
-        (this.profileUrl.indexOf(newPath) !== -1) ? this.views[newPath].render(this.root, newPath) :
+        if (this.profileUrl.indexOf(newPath) !== -1) {
+            this.views[newPath].render(this.root, newPath);
+            return;
+        }
+        if (newPath.match(URL.PLAYLIST)) {
+            this.views[URL.PLAYLIST].render(this.root,
+                newPath.slice(newPath.lastIndexOf('/') + 1, newPath.length));
+        } else {
             this.views[newPath].render(this.root);
+        }
     }
 
     /**
