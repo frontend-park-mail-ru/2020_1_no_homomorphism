@@ -22,7 +22,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const playerController = new PlayerController(router, globalEventBus);
     const profileController = new ProfileController(router, globalEventBus);
     const settingsController = new SettingsController(router, globalEventBus);
-    const artistController = new ArtistController(router);
+    const artistController = new ArtistController(router, globalEventBus);
     const playlistController = new PlaylistController(router, globalEventBus);
     const albumController = new AlbumController(router, globalEventBus);
 

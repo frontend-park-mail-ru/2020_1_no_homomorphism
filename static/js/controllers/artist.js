@@ -9,11 +9,12 @@ export class ArtistController {
     /**
      * Конструктор
      * @param {Router} router
+     * @param {EventBus} globalEventBus
      */
-    constructor(router) {
+    constructor(router, globalEventBus) {
         this.eventBus = new EventBus();
         this.model = new ArtistModel(this.eventBus);
-        this.view = new ArtistView(this.eventBus);
+        this.view = new ArtistView(this.eventBus, globalEventBus);
 
         this.eventBus.on(ARTIST.REDIRECT, router.redirect.bind(router));
         this.eventBus.on(ARTIST.NO_ANSWER, router.redirect.bind(router));

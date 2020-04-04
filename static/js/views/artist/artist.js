@@ -2,7 +2,7 @@ import artist from '@views/artist/artist.tmpl.xml';
 import albumsTemplate from '@views/artist/artist_albums.tmpl.xml';
 import tracksTemplate from '@views/artist/artist_tracks.tmpl.xml';
 import BaseView from '@libs/base_view';
-import {ARTIST, DOM, PAGINATION} from '@libs/constans';
+import {ARTIST, DOM, GLOBAL, PAGINATION} from '@libs/constans';
 import '@css/base.css';
 
 /**
@@ -12,10 +12,12 @@ export default class ArtistView extends BaseView {
     /**
      * Конструктор
      * @param {EventBus} eventBus
+     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus) {
+    constructor(eventBus, globalEventBus) {
         super(artist);
         this.eventBus = eventBus;
+        this.globalEventBus = globalEventBus;
         this.eventBus.on(ARTIST.RENDER_DATA, this.renderData.bind(this));
         this.eventBus.on(ARTIST.RENDER_ALBUMS, this.renderAlbums.bind(this));
         this.eventBus.on(ARTIST.RENDER_TRACKS, this.renderTracks.bind(this));
@@ -69,6 +71,33 @@ export default class ArtistView extends BaseView {
     renderAlbums(albums) {
         const elem = document.getElementById('albums');
         elem.innerHTML += albumsTemplate(albums);
+        this.setEventListeners();
+    }
+
+    /**
+     * Set EventListeners
+     */
+    setEventListeners() {
+        document.querySelectorAll('.l-list-card').forEach((playlist) => {
+            playlist.onclick = (event) => this.albumClick.bind(this)(event);
+        });
+    }
+
+    /**
+     * Слушает клик по альбому
+     * @param {Object} event
+     */
+    albumClick(event) {
+        let current = event.target;
+        while (current !== window && current !== document.body && current != null) {
+            if (current.getAttribute('class') === 'l-list-card' &&
+                current.getAttribute('id') !== null) {
+                this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, {id: current.getAttribute('id')});
+                break;
+            } else {
+                current = current.parentNode;
+            }
+        }
     }
 
     /**

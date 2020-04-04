@@ -57,7 +57,6 @@ export default class Router {
                 res = url;
             }
         });
-        console.log(res);
         return res === '' ? newPath : res;
     }
 
@@ -89,13 +88,17 @@ export default class Router {
             this.views[newPath].render(this.root, newPath);
             return;
         }
+        if (newPath.match(URL.ARTIST)) {
+            this.views[URL.ARTIST].render(this.root,
+                newPath.slice(newPath.indexOf('artist') + 7, newPath.length));
+            return;
+        }
         if (isRegUrl !== newPath) {
             this.views[isRegUrl].render(this.root,
                 newPath.slice(newPath.lastIndexOf('/') + 1, newPath.length));
         } else {
             this.views[isRegUrl].render(this.root);
         }
-        this.views[newPath].render(this.root);
     }
 
     /**
