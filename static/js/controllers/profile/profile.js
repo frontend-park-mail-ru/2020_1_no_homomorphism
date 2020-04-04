@@ -23,7 +23,7 @@ export class ProfileController {
         this.eventBus.on(PROFILE.REDIRECT, router.redirect.bind(router));
         this.eventBus.on(PROFILE.NO_ANSWER, router.redirect.bind(router));
         // --------- Albums
-        this.albumsController = new ProfileAlbumsController(router, this.eventBus);
+        this.albumsController = new ProfileAlbumsController(router, this.eventBus, globalEventBus);
         this.tracksController = new ProfileTracksController(router, this.eventBus);
         this.playlistsController = new ProfilePlaylistsController(router, this.eventBus, globalEventBus);
         this.artistsController = new ProfileArtistsController(router, this.eventBus);
