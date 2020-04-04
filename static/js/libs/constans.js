@@ -145,6 +145,8 @@ export const PROFILE = {
 
 export const PLAYLIST = {
     REDIRECT: 'redirect',
-    GET_DATA: 'get-playlist',
+    GET_PLAYLIST_DATA: 'get-playlist',
+    GET_USER_DATA: 'get-user',
     RENDER_DATA: 'render-playlist',
+    RENDER_USER_DATA: 'render-user',
 };

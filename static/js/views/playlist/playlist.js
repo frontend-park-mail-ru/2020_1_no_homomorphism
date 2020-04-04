@@ -1,5 +1,5 @@
 import {TEMPLATES, DOM, PLAYLIST} from '@libs/constans.js';
-import playlist from '@views/playlist/playlist.tmpl.xml'
+import playlist from '@views/playlist/playlist.tmpl.xml';
 import tracks from '@views/playlist/playlist_track.tmpl.xml';
 import BaseView from '@libs/base_view';
 
@@ -14,33 +14,49 @@ export default class PlaylistView extends BaseView {
         super(playlist);
         this.eventBus = eventBus;
         this.data = {};
-        this.eventBus.on(PLAYLIST.RENDER_DATA, this.setData.bind(this));
+        this.userData = {};
+        this.eventBus.on(PLAYLIST.RENDER_DATA, this.setPlaylistData.bind(this));
+        this.eventBus.on(PLAYLIST.RENDER_USER_DATA, this.setUserData.bind(this));
     }
+
     /**
      * рендерит страницу плейлиста
      */
     render(root, url) {
         super.render(root);
-        this.eventBus.emit(PLAYLIST.GET_DATA, {id: url});
+        this.eventBus.emit(PLAYLIST.GET_PLAYLIST_DATA, {id: url});
     }
 
     /**
-     * Вставляет необходимые данные
+     * Вставляет необходимые данные плейлиста
      * @param {Object} playlist
      */
-    setData(playlist) {
-        console.log(playlist);
+    setPlaylistData(playlist) {
         this.data = playlist;
-        this.setPlaylistData();
-        this.setTracks();
+        this.renderPlaylist();
+        this.renderTracks();
     }
 
-    setPlaylistData() {
+    renderPlaylist() {
         document.getElementsByClassName('m-name')[0].innerHTML = this.data.playlist.name;
         document.getElementsByClassName('m-rounded-image')[0].src = this.data.playlist.image;
+        // document.getElementsByClassName('m-list-image')[0].src = this.data.playlist.image;
     }
 
-    setTracks() { // TODO обработать пустой плейлист
+    renderTracks() { // TODO обработать пустой плейлист
         document.getElementsByClassName('l-track-list')[0].innerHTML = tracks(this.data.tracks);
+    }
+
+    /**
+     * Вставляет необходимые данные пользователя
+     * @param {Object} user
+     */
+    setUserData(user) {
+        this.userData = user;
+        this.renderUser();
+    }
+
+    renderUser() {
+        console.log(this.userData);
     }
 }
