@@ -163,13 +163,13 @@ export default class PlayerView extends BaseView {
             row.onmouseover = (event) => this.tracklistMouseOver(event);
             row.onmouseout = (event) => this.tracklistMouseOut(event);
         });
-        document.querySelectorAll('.track-buttons .delete-button').forEach((button) => {
+        document.querySelectorAll('img.delete-button').forEach((button) => {
             button.onclick = (event) => this.trackDeleteButtonClick(event);
         });
-        document.querySelectorAll('.track-buttons .favorite-button').forEach((button) => {
+        document.querySelectorAll('img.favorite-button').forEach((button) => {
             button.onclick = (event) => this.trackFavoriteButtonClick(event);
         });
-        document.querySelectorAll('.track-buttons .add-button').forEach((button) => {
+        document.querySelectorAll('img.add-button').forEach((button) => {
             button.onclick = (event) => this.trackAddButtonClick(event);
         });
     }
