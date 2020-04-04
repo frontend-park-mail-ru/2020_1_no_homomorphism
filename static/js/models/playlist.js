@@ -12,11 +12,6 @@ export default class PlaylistModel {
      * @param {EventBus} globalEventBus
      */
     constructor(eventBus, globalEventBus) {
-        // this.playlist = {
-        //     name: '',
-        //     image: '',
-        // };
-        // this.tracks = [];
         this.playlist = {};
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;

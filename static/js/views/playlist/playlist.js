@@ -13,7 +13,7 @@ export default class PlaylistView extends BaseView {
     constructor(eventBus) {
         super(playlist);
         this.eventBus = eventBus;
-        this.playlist = {};
+        this.data = {};
         this.eventBus.on(PLAYLIST.RENDER_DATA, this.setData.bind(this));
     }
     /**
@@ -30,22 +30,17 @@ export default class PlaylistView extends BaseView {
      */
     setData(playlist) {
         console.log(playlist);
-        this.playlist = playlist;
+        this.data = playlist;
         this.setPlaylistData();
         this.setTracks();
     }
 
     setPlaylistData() {
-        // console.log(this.playlist.playlist);
-        document.getElementsByClassName('m-name')[0].innerHTML = this.playlist.playlist.name;
-        document.getElementsByClassName('m-rounded-image')[0].src = this.playlist.playlist.image;
+        document.getElementsByClassName('m-name')[0].innerHTML = this.data.playlist.name;
+        document.getElementsByClassName('m-rounded-image')[0].src = this.data.playlist.image;
     }
 
-    setTracks() {
-        if (this.playlist.tracks.length) {
-            console.log(this.playlist.tracks.length);
-        }
-        console.log(this.playlist.tracks);
-        document.getElementsByClassName('l-track-list')[0].innerHTML = tracks(this.playlist.tracks);
+    setTracks() { // TODO обработать пустой плейлист
+        document.getElementsByClassName('l-track-list')[0].innerHTML = tracks(this.data.tracks);
     }
 }
