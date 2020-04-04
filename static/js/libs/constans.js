@@ -52,6 +52,10 @@ export const VALIDATION = {
     ALLOWABLE_EXTENSIONS: ['png', 'jpg', 'jpeg', 'gif'],
 };
 
+export const GLOBAL = {
+    PLAY_PLAYLIST: 'play playlist',
+};
+
 export const LOGIN = {
     REDIRECT: 'redirect',
     INVALID: 'invalid',
@@ -104,6 +108,7 @@ export const PLAYER = {
     DRAW_UNREPEAT: 'draw-unrepeat',
     DRAW_MUTE: 'draw-mute',
     DRAW_UNMUTE: 'draw-unmute',
+    REMOVE_FROM_TRACKLIST: 'remove-from-tracklist'
 };
 
 export const SETTINGS = {

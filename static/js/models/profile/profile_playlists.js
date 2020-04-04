@@ -11,9 +11,9 @@ export default class ProfilePlaylistsModel {
      * @param {EventBus} eventBus
      */
     constructor(eventBus) {
-        eventBus.on(PROFILE.ID_PLAYLISTS_SECTION, this.getPlaylists.bind(this));
         this.eventBus = eventBus;
         this.playlists = [];
+        this.eventBus.on(PROFILE.ID_PLAYLISTS_SECTION, this.getPlaylists.bind(this));
     }
 
     /**
