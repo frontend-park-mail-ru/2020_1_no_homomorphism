@@ -1,8 +1,7 @@
-import {DOM, PLAYLIST} from '@libs/constans.js';
+import {DOM, PLAYLIST, GLOBAL, PLAYER} from '@libs/constans.js';
 import playlist from '@views/playlist/playlist.tmpl.xml';
 import tracks from '@views/playlist/playlist_track.tmpl.xml';
 import BaseView from '@libs/base_view';
-import {PLAYER} from '@libs/constans';
 
 /**
  *  вью для входа
@@ -10,14 +9,14 @@ import {PLAYER} from '@libs/constans';
 export default class PlaylistView extends BaseView {
     /**
      * @param {EventBus} eventBus
+     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus) {
+    constructor(eventBus, globalEventBus) {
         super(playlist);
         this.eventBus = eventBus;
+        this.globalEventBus = globalEventBus;
         this.data = {};
-        this.userData = {};
         this.eventBus.on(PLAYLIST.RENDER_DATA, this.setPlaylistData.bind(this));
-        this.eventBus.on(PLAYLIST.RENDER_DATA, this.setDynamicEventListeners.bind(this));
         this.eventBus.on(PLAYLIST.ERROR, this.showErrors.bind(this));
     }
 
@@ -58,6 +57,31 @@ export default class PlaylistView extends BaseView {
         document.getElementsByClassName('l-track-list')[0].innerHTML = tracks(this.data.tracks);
         document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Amount of tracks: ' + this.data.tracks.length;
         document.getElementsByClassName('l-track-list')[0].className += ' l-profile-base';
+        this.seEventListeners();
+    }
+
+    /**
+     * Слушает события
+     */
+    seEventListeners() {
+        document.querySelectorAll('.l-track-big').forEach((row) => { // TODO Никитуля, отсылочка вам
+        });
+        document.querySelectorAll('img.m-more-button').forEach((button) => { // TODO Обработать
+        });
+        document.querySelectorAll('img.m-like-button').forEach((button) => {
+            button.onclick = (event) => this.likeClicked(event);
+        });
+        document.querySelectorAll('img.m-add-button').forEach((button) => { // TODO выбор, в какой плейлист добавить
+        });
+        document.getElementsByClassName('m-button-track-list-play')[0].addEventListener('click', this.playPlaylist.bind(this));
+    }
+
+    /**
+     * Проигрование плейлиста
+     */
+    playPlaylist () {
+        console.log(this.data.playlist.id);
+        this.globalEventBus.emit(GLOBAL.PLAY_PLAYLIST, {index: this.data.playlist.id});
     }
 
     /**
@@ -67,24 +91,6 @@ export default class PlaylistView extends BaseView {
         document.getElementsByClassName('l-top-card')[0].innerHTML = error.text;
         document.getElementsByClassName('l-top-card')[0].classList.add('is-error');
         document.getElementsByClassName('l-down-card')[0].innerHTML = '';
-    }
-
-    /**
-     * Sets dynamic EventListeners
-     */
-    setDynamicEventListeners() {
-        document.querySelectorAll('.l-track-big').forEach((row) => {
-            row.onclick = (event) => this.tracklistClick(event);
-            row.onmouseover = (event) => this.tracklistMouseOver(event);
-            row.onmouseout = (event) => this.tracklistMouseOut(event);
-        });
-        document.querySelectorAll('img.m-more-button').forEach((button) => { // TODO Обработать
-        });
-        document.querySelectorAll('img.m-like-button').forEach((button) => {
-            button.onclick = (event) => this.likeClicked(event);
-        });
-        document.querySelectorAll('img.m-add-button').forEach((button) => { // TODO выбор, в какой плейлист добавить
-        });
     }
 
     /**

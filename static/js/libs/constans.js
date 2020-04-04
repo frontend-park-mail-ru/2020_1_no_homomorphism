@@ -53,7 +53,7 @@ export const VALIDATION = {
 };
 
 export const GLOBAL = {
-    PLAY_PLAYLIST: 'play playlist',
+    PLAY_PLAYLIST: 'play-playlist',
 };
 
 export const LOGIN = {
