@@ -72,7 +72,6 @@ export default class PlayerModel {
      * @param {Object} album
      */
     getAlbumTracks(album) {
-        console.log(album.id);
         Api.albumFetch(album.id)
             .then((res) => {
                 switch (res.status) {

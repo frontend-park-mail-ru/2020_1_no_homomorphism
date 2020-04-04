@@ -25,12 +25,12 @@ export default class ProfileAlbumsModel {
                 switch (res.status) {
                 case RESPONSE.OK:
                     res.json()
-                .then((list) => {
-                    this.albums = list.albums;
-                })
-                    .then(() => {
-                        this.eventBus.emit(PROFILE.RENDER_ALBUMS, this.albums);
-                    });
+                        .then((list) => {
+                            this.albums = list.albums;
+                        })
+                        .then(() => {
+                            this.eventBus.emit(PROFILE.RENDER_ALBUMS, this.albums);
+                        });
                     break;
                 case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
                     break;

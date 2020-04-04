@@ -45,16 +45,6 @@ export default class ProfileAlbumsView {
     albumClick(event) {
         let current = event.target;
         while (current !== window && current !== document.body && current != null) {
-            /*if (current.getAttribute('class') === 'l-list-card'/* ||
-                (current.getAttribute('class') !== null &&
-                current.getAttribute('class').indexOf('button') !== -1 &&
-                current.getAttribute('class').indexOf('buttons') === -1 &&
-                current.getAttribute('class').indexOf('row') !== -1)
-            ) {
-                break;
-            }*/
-            console.log('LOL');
-            console.log(current);
             if (current.getAttribute('class') === 'l-list-card' &&
                 current.getAttribute('id') !== null) {
                 this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, {id: current.getAttribute('id')});

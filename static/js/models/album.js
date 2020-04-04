@@ -23,7 +23,6 @@ export default class AlbumModel {
      * @param {Object} id
      */
     getAlbumTracks(id) {
-        console.log(id.id);
         Api.albumFetch(id.id)
             .then((res) => {
                 switch (res.status) {

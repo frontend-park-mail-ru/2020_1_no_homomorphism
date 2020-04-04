@@ -72,6 +72,9 @@
 
 .l-big-track-button {
     opacity: 0.4;
+    transform: scale(1.5 );
+    margin-top: -20px;
+    padding-right: 8px;
 }
 
 .m-like-button, .m-delete-button, .m-add-button, .m-more-button {

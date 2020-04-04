@@ -79,8 +79,6 @@ export default class AlbumView extends BaseView {
      * Проигрование плейлиста
      */
     playAlbum() {
-        console.log('playAlbum');
-        console.log(this.data.album.id);
         this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, {id: this.data.album.id});
     }
 

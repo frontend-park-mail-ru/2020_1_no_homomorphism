@@ -12,10 +12,6 @@
                     </div>
                     <div class="m-profile-track-name ">
                         <span>
-                            <fest:value>track.artists</fest:value>
-                        </span>
-                        <span>•</span>
-                        <span>
                             <fest:value>track.name</fest:value>
                         </span>
                     </div>
