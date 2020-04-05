@@ -167,8 +167,11 @@ export const ARTIST = {
 
 export const PLAYLIST = {
     REDIRECT: 'redirect',
-    GET_PLAYLIST_DATA: 'get-playlist',
+    GET_PLAYLIST_DATA: 'get-playlist-data',
+    GET_TRACKS_DATA: 'get-tracks-data',
     RENDER_DATA: 'render-playlist',
+    RENDER_PLAYLIST_DATA: 'render-playlist-data',
+    RENDER_TRACKS_DATA: 'render-tracks-data',
     ERROR: 'show-errors',
 };
 

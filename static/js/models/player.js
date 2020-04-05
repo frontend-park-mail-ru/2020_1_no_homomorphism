@@ -1,5 +1,5 @@
 import Api from '@libs/api.js';
-import {PLAYER, RESPONSE, GLOBAL} from '@libs/constans';
+import {PLAYER, RESPONSE, GLOBAL, PAGINATION} from '@libs/constans';
 
 /**
  * Модель плеера
@@ -20,6 +20,7 @@ export default class PlayerModel {
             shuffle: false,
             repeat: false,
         };
+        this.curPagination = 0;
         globalEventBus.on(GLOBAL.CLEAR_AND_LOCK, this.deleteAll.bind(this));
         globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.deleteAll.bind(this));
         globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.getPlaylistTracks.bind(this));
@@ -47,10 +48,11 @@ export default class PlayerModel {
 
     /**
      * Получение треков плейлиста
-     * @param {string} index
+     * @param {object} index
      */
     getPlaylistTracks(index) {
-        Api.playlistTracksFetch(index.index)
+        Api.playlistTracksFetch(index.index,
+            this.curPagination.toString(), PAGINATION.TRACKS.toString())
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:

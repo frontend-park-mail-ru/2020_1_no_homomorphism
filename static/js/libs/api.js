@@ -140,8 +140,21 @@ export default class Api {
      * @param {number} id
      * @return {Promise<Response>}
      */
-    static playlistTracksFetch(id) {
+    static playlistAllTracksFetch(id) {
         return getFetch(API + `/playlists/${id}`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
+     * Получение треков плейлиста
+     * @param {number} id
+     * @param {string} start
+     * @param {string} end
+     * @return {Promise<Response>}
+     */
+    static playlistTracksFetch(id, start, end) {
+        return getFetch(API + `/playlists/${id}/tracks/${start}/${end}`, (error) => {
             console.log(error.toString());
         });
     }
