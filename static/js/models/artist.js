@@ -74,7 +74,7 @@ export default class ArtistModel {
                 .then(() => {
                     for (let i = 0; i < this.albums.length && this.tracks.length < parseInt(end);
                         i++) {
-                        Api.albumFetch(this.albums[i].id)
+                        Api.albumTracksFetch(this.albums[i].id)
                             .then((res) => {
                                 if (res === undefined) {
                                     this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);
@@ -98,7 +98,7 @@ export default class ArtistModel {
                 });
         } else {
             for (let i = 0; i < this.albums.length && this.tracks.length < parseInt(end); i++) {
-                Api.albumFetch(this.albums[i].id)
+                Api.albumTracksFetch(this.albums[i].id)
                     .then((res) => {
                         if (res === undefined) {
                             this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);

@@ -43,7 +43,7 @@ export default class PlayerView extends BaseView {
     /**
      * Позиционирует плеер
      * @param {Object} root
-     * @param {srting} url
+     * @param {string} url
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.PLAYER)[0]);

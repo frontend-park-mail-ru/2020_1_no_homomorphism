@@ -17,14 +17,14 @@
                     </div>
                 </div>
                 <div class="l-track-buttons row">
-                    <div class="col l-big-track-button">
-                        <img src="/static/img/favorite_border.svg" class="m-like-button" height="15px" alt="..."/>
+                    <div class="col l-big-track-button delete-button">
+                        <img src="/static/img/clear-24px.svg" class="m-big-delete-button" height="15px" alt="..."/>
                     </div>
-                    <div class="col l-big-track-button">
-                        <img src="/static/img/add-24px.svg" class="m-add-button" height="15px" alt="..."/>
+                    <div class="col l-big-track-button favorite-button">
+                        <img src="/static/img/favorite_border.svg" class="m-big-like-button" height="15px" alt="..."/>
                     </div>
-                    <div class="col l-big-track-button">
-                        <img src="/static/img/more_vert.svg" class="m-more-button" height="15px" alt="..."/>
+                    <div class="col l-big-track-button add-button">
+                        <img src="/static/img/add-24px.svg" class="m-big-add-button" height="15px" alt="..."/>
                     </div>
                 </div>
             </div>

@@ -164,8 +164,21 @@ export default class Api {
      * @param {number} id
      * @return {Promise<Response>}
      */
-    static albumFetch(id) {
+    static albumAllTracksFetch(id) {
         return getFetch(API + `/albums/${id}`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
+     * Получение треков плейлиста
+     * @param {number} id
+     * @param {string} start
+     * @param {string} end
+     * @return {Promise<Response>}
+     */
+    static albumTracksFetch(id, start, end) {
+        return getFetch(API + `/albums/${id}/tracks/${start}/${end}`, (error) => {
             console.log(error.toString());
         });
     }

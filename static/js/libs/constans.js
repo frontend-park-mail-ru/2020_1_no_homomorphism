@@ -177,7 +177,9 @@ export const PLAYLIST = {
 
 export const ALBUM = {
     REDIRECT: 'redirect',
-    GET_ALBUM_DATA: 'get-playlist',
-    RENDER_DATA: 'render-playlist',
+    GET_ALBUM_DATA: 'get-album-data',
+    GET_TRACKS_DATA: 'get-tracks-data',
+    RENDER_ALBUM_DATA: 'render-album',
+    RENDER_TRACKS_DATA: 'render-tracks',
     ERROR: 'show-errors',
 };

@@ -1,6 +1,5 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="small_line"></div>
-
     <fest:for iterate="data" index="i" value="track">
         <div class="l-track-big">
             <div class="m-profile-track row" style="text-align: left">
@@ -11,13 +10,10 @@
                     <div class="m-play-track">
                         <button class="m-button-track-play" id="playlist-play"> </button>
                     </div>
-                    <div class="m-profile-track-name row">
-                        <div class="col col-3">
-                            <fest:value>track.artist</fest:value>
-                        </div>
-                        <div class="col col-3">
+                    <div class="m-profile-track-name ">
+                        <span>
                             <fest:value>track.name</fest:value>
-                        </div>
+                        </span>
                     </div>
                 </div>
                 <div class="l-track-buttons row">
@@ -33,6 +29,6 @@
                 </div>
             </div>
         </div>
-        <div class="small_line"></div>
+        <div class="small_line"> </div>
     </fest:for>
 </fest:template>

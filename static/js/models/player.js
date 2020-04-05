@@ -75,10 +75,11 @@ export default class PlayerModel {
      * @param {Object} album
      */
     getAlbumTracks(album) {
-        Api.albumFetch(album.id)
+        Api.albumTracksFetch(album.id, this.curPagination.toString(), PAGINATION.TRACKS.toString())
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
+                    console.log(res);
                     this.generateData.bind(this)(res);
                     break;
                 case RESPONSE.BAD_REQUEST: // TODO обработать ошибку

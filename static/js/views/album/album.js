@@ -15,8 +15,10 @@ export default class AlbumView extends BaseView {
         super(playlist);
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
-        this.data = {};
-        this.eventBus.on(ALBUM.RENDER_DATA, this.setAlbumData.bind(this));
+        this.albumData = {};
+        this.tracksData = {};
+        this.eventBus.on(ALBUM.RENDER_ALBUM_DATA, this.setAlbumData.bind(this));
+        this.eventBus.on(ALBUM.RENDER_TRACKS_DATA, this.setTracksData.bind(this));
         this.eventBus.on(ALBUM.ERROR, this.showErrors.bind(this));
     }
 
@@ -28,6 +30,7 @@ export default class AlbumView extends BaseView {
     render(root, url) {
         super.render(root);
         this.eventBus.emit(ALBUM.GET_ALBUM_DATA, {id: url});
+        this.eventBus.emit(ALBUM.GET_TRACKS_DATA, {id: url});
     }
 
     /**
@@ -35,30 +38,39 @@ export default class AlbumView extends BaseView {
      * @param {Object} album
      */
     setAlbumData(album) {
-        this.data = album;
+        this.albumData = album;
         this.renderAlbum();
-        this.renderTracks();
+        // this.renderTracks();
     }
 
     /**
      * Выводит данные альбома
      */
     renderAlbum() {
-        console.log(this.data);
-        document.getElementsByClassName('m-name')[0].innerHTML = this.data.album.name;
-        document.getElementsByClassName('m-rounded-image')[0].src = this.data.album.image;
+        document.getElementsByClassName('m-name')[0].innerHTML = this.albumData.album.name;
+        document.getElementsByClassName('m-rounded-image')[0].src = this.albumData.album.image;
+    }
+
+    /**
+     * Вставляет необходимые данные треков
+     * @param {Object} tracks
+     */
+    setTracksData(tracks) {
+        this.tracksData = tracks;
+        this.renderTracks();
+        // this.renderTracks();
     }
 
     /**
      * Выводит данные трека
      */
     renderTracks() {
-        if (this.data.tracks.length === 0) {
+        if (this.tracksData.length === 0) {
             return;
         }
-        document.getElementsByClassName('l-track-list')[0].innerHTML = tracks(this.data.tracks);
+        document.getElementsByClassName('l-track-list')[0].innerHTML = tracks(this.tracksData);
         document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Amount of tracks: ' +
-            this.data.tracks.length;
+            this.tracksData.length;
         document.getElementsByClassName('l-track-list')[0].className += ' l-profile-base';
         this.seEventListeners();
     }
@@ -69,12 +81,12 @@ export default class AlbumView extends BaseView {
     seEventListeners() {
         document.querySelectorAll('.l-track-big').forEach((row) => { // TODO Никитуля, отсылочка вам
         });
-        document.querySelectorAll('img.m-more-button').forEach((button) => { // TODO Обработать
+        document.querySelectorAll('img.m-big-more-button').forEach((button) => { // TODO Обработать
         });
-        document.querySelectorAll('img.m-like-button').forEach((button) => {
+        document.querySelectorAll('img.m-big-like-button').forEach((button) => {
             button.onclick = (event) => this.likeClicked(event);
         });
-        document.querySelectorAll('img.m-add-button').forEach((button) => { // TODO выбор, в какой плейлист добавить
+        document.querySelectorAll('img.m-big-add-button').forEach((button) => { // TODO выбор, в какой плейлист добавить
         });
         document.getElementsByClassName('m-button-track-list-play')[0].addEventListener('click',
             this.playAlbum.bind(this));
@@ -84,7 +96,7 @@ export default class AlbumView extends BaseView {
      * Проигрование плейлиста
      */
     playAlbum() {
-        this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, {id: this.data.album.id});
+        this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, {id: this.albumData.album.id});
     }
 
     /**
