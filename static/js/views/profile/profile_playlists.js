@@ -44,7 +44,7 @@ export default class ProfilePlaylistsView {
         while (current !== window && current !== document.body && current != null) {
             if (current.getAttribute('class') === 'l-list-card' &&
                 current.getAttribute('id') !== null) {
-                this.globalEventBus.emit(GLOBAL.PLAY_PLAYLIST, {index: current.getAttribute('id')});
+                this.globalEventBus.emit(GLOBAL.PLAY_PLAYLIST, current.getAttribute('id'));
                 break;
             } else {
                 current = current.parentNode;

@@ -21,10 +21,11 @@ export default class PlayerModel {
             shuffle: false,
             repeat: false,
         };
-        this.curPagination = 0;
         this.globalEventBus.on(GLOBAL.CLEAR_AND_LOCK, this.deleteAll.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_ARTIST_TRACKS, this.deleteAll.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_ARTIST_TRACKS, this.getArtistTracks.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST_TRACKS, this.deleteAll.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST_TRACKS, this.getPlaylistTracks.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.deleteAll.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.getPlaylistTracks.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_ALBUM, this.deleteAll.bind(this));
@@ -70,15 +71,16 @@ export default class PlayerModel {
 
     /**
      * Получение треков плейлиста
-     * @param {object} index
+     * @param {string} id
+     * @param {string} trackId
+     * @param {number} number
      */
-    getPlaylistTracks(index) {
-        Api.playlistTracksFetch(index.index,
-            this.curPagination.toString(), PAGINATION.TRACKS.toString())
+    getPlaylistTracks(id, trackId, number = PAGINATION.TRACKS) {
+        Api.playlistTracksFetch(id, '0', number)
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
-                    this.generateData.bind(this)(res);
+                    this.generateData.bind(this)(res, trackId);
                     break;
                 case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
                     break;
