@@ -654,10 +654,6 @@ export default class PlayerView extends BaseView {
      * @param {Object} track
      */
     updateTrack(track) {
-        const temp = track.image;
-        if (temp.split('/')[0] === 'static') {
-            track.image = '/' + temp;
-        }
         document.getElementById('cover').src = track.link; // TODO ВЫНУЖДЕННО из-за текущей базы данных
         document.getElementById('artist').innerHTML = track.artist;
         document.getElementById('title').innerHTML = track.name;
