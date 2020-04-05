@@ -44,7 +44,7 @@
                          alt="repeat"/>
                     <img src="/static/img/volume_up.svg" class="volume" style="opacity: 0.4;" alt="volume"/>
                     <div class="volume-scale"
-                         style="opacity: 0; top: 58px; visibility: hidden; transition-property: opacity, visibility, top;">
+                         style="opacity: 0; top: -40px; visibility: hidden; transition-property: opacity, visibility, top;">
                         <div class="volume-scale-back"></div>
                         <div class="volume-scale-front"></div>
                     </div>

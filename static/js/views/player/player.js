@@ -404,7 +404,7 @@ export default class PlayerView extends BaseView {
             .style.transitionProperty = 'opacity, top';
         document.getElementsByClassName('volume-scale')[0].style.visibility = 'visible';
         document.getElementsByClassName('volume-scale')[0].style.opacity = '1';
-        document.getElementsByClassName('volume-scale')[0].style.top = '48px';
+        document.getElementsByClassName('volume-scale')[0].style.top = '-50px';
         document.getElementsByClassName('volume')[0].style.opacity = '1';
     }
 
@@ -416,7 +416,7 @@ export default class PlayerView extends BaseView {
             .style.transitionProperty = 'opacity, visibility, top';
         document.getElementsByClassName('volume-scale')[0].style.visibility = 'hidden';
         document.getElementsByClassName('volume-scale')[0].style.opacity = '0';
-        document.getElementsByClassName('volume-scale')[0].style.top = '58px';
+        document.getElementsByClassName('volume-scale')[0].style.top = '-40px';
         document.getElementsByClassName('volume')[0].style.opacity = '0.4';
     }
 
