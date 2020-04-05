@@ -44,6 +44,7 @@ export default class AlbumView extends BaseView {
      * Выводит данные альбома
      */
     renderAlbum() {
+        console.log(this.data);
         document.getElementsByClassName('m-name')[0].innerHTML = this.data.album.name;
         document.getElementsByClassName('m-rounded-image')[0].src = this.data.album.image;
     }

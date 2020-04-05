@@ -44,6 +44,7 @@ export default class PlaylistView extends BaseView {
      * Выводит данные плейлиста
      */
     renderPlaylist() {
+        console.log(this.data);
         document.getElementsByClassName('m-name')[0].innerHTML = this.data.playlist.name;
         document.getElementsByClassName('m-rounded-image')[0].src = this.data.playlist.image;
     }

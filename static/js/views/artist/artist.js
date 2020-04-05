@@ -18,6 +18,8 @@ export default class ArtistView extends BaseView {
         super(artist);
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
+        this.curPaginationAlbums = 0;
+        this.curPaginationTracks = 0;
         this.eventBus.on(ARTIST.RENDER_DATA, this.renderData.bind(this));
         this.eventBus.on(ARTIST.RENDER_ALBUMS, this.renderAlbums.bind(this));
         this.eventBus.on(ARTIST.RENDER_TRACKS, this.renderTracks.bind(this));
@@ -26,9 +28,11 @@ export default class ArtistView extends BaseView {
     /**
      * Рендер
      * @param {Object} root
-     * @param {srting} url
+     * @param {string} url
      */
     render(root, url) {
+        this.curPaginationAlbums = 0; // TODO временно
+        this.curPaginationTracks = 0;
         this.id = url.indexOf('/') === -1 ? url : url.slice(0, url.indexOf('/'));
         this.eventBus.emit(ARTIST.SET_ID, this.id);
         if (JSON.stringify(this.data) === '{}') {
@@ -40,10 +44,19 @@ export default class ArtistView extends BaseView {
             url.slice(url.indexOf('/') + 1, url.length);
         switch (this.currentOpen) {
         case ARTIST.ID_TRACKS_SECTION:
-            this.eventBus.emit(this.currentOpen, '0', PAGINATION.TRACKS.toString());
+            this.eventBus
+                .emit(this.currentOpen,
+                    this.curPaginationTracks.toString(),
+                    PAGINATION.TRACKS.toString());
+            this.curPaginationTracks += PAGINATION.TRACKS;
             break;
         case ARTIST.ID_ALBUMS_SECTION:
-            this.eventBus.emit(this.currentOpen, '0', PAGINATION.ALBUMS.toString());
+            // this.eventBus.emit(this.currentOpen, '0', PAGINATION.ALBUMS.toString());
+            this.eventBus
+                .emit(this.currentOpen,
+                    this.curPaginationAlbums.toString(),
+                    PAGINATION.ALBUMS.toString());
+            this.curPaginationAlbums += PAGINATION.TRACKS;
             break;
         case ARTIST.ID_INFO_SECTION:
             this.eventBus.emit(this.currentOpen);

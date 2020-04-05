@@ -1,9 +1,9 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="col col-9">
         <div class="l-main">
-            <div class="l-top-card row">
+            <div class="l-top-card">
 
-                <div class="l-top-info col col-5">
+                <div class="l-top-info col col-6">
                     <div class="l-round-image col">
                         <img alt="" src="{data.image}" class=" m-round-image" id="avatar"/>
                     </div>

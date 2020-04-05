@@ -3,7 +3,7 @@
         <div class="l-main">
             <div class="l-top-card">
 
-                <div class="row m-artist-background">
+                <div class="col col-7 m-artist-background">
                     <div class="l-top-info col">
                         <div class="l-round-image col">
                             <img alt="" src="{data.image}" class=" m-round-image" id="avatar"/>
@@ -19,49 +19,23 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="m-artist-likes col col-4">
-                        <div class="row">
-                            <div class="m-artist-like-button col col-6">
-                                <img class="b-artist-like-button" src="/static/img/favorite.svg"/>
-                            </div>
-                            <div class="m-artist-like-number col col-6">263476</div>
-                        </div>
-                    </div>
-                    <div class="m-artist-notifications col col-4">
-                        <div class="row">
-                            <div class="m-artist-notifications-button col col-6">
-                                <img class="b-artist-notifications-button" src="/static/img/notifications.svg"/>
-                            </div>
-                            <div class="m-artist-notifications-number col col-6">43665</div>
-                        </div>
-                    </div>
-                    <div class="m-artist-play col col-4">
-                        <div class="row">
-                            <div class="m-artist-play-button col col-6">
-                                <img class="b-artist-play-button" src="/static/img/play.svg"/>
-                            </div>
-                            <div class="m-artist-play-word col col-6">play</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="m-profile-tracks col col-4" id="artist-tracks-title">
+                <div class="l-top-titles col col-5">
+                    <div class="m-profile-tracks col col-4" id="profile-tracks-title">
                         <a class="m-tiny-ref" href="/artist/{data.id}/tracks">
-                            <h2><fest:value>data.link</fest:value></h2>
+                            <h2>543</h2>
                             <p>Tracks</p>
                         </a>
                     </div>
-                    <div class="m-profile-albums col col-4" id="artist-albums-title">
+                    <div class="m-profile-playlists col col-4" id="profile-playlists-title">
                         <a class="m-tiny-ref" href="/artist/{data.id}/albums">
-                            <h2>43</h2>
+                            <h2>53</h2>
                             <p>Albums</p>
                         </a>
                     </div>
-                    <div class="m-artist-info col col-4" id="artist-info-title">
+                    <div class="m-profile-albums col col-4" id="profile-albums-title">
                         <a class="m-tiny-ref" href="/artist/{data.id}/info">
-                            <h2>инфо</h2>
+                            <h2>INFO</h2>
+<!--                            <p>INFO</p>-->
                         </a>
                     </div>
                 </div>
