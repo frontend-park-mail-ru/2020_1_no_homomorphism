@@ -1,6 +1,6 @@
 import {ALBUM, GLOBAL} from '@libs/constans.js';
 import playlist from '@views/album/album.tmpl.xml';
-import tracks from '@views/album/album_track.tmpl.xml';
+import tracks from '@views/template/tracks.tmpl.xml';
 import BaseView from '@libs/base_view';
 
 /**

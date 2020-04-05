@@ -1,5 +1,5 @@
 import {PROFILE} from '@libs/constans.js';
-import template from '@views/profile/profile_track.tmpl.xml';
+import template from '@views/template/tracks.tmpl.xml';
 
 /**
  * вью для профиля

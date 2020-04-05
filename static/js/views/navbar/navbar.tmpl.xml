@@ -6,12 +6,13 @@
         Mystical Spiral
     </a>
     <input type="text" class="search"/>
-    <button type="button" class="search-button">
-        <img src="/static/img/search.svg" alt="lupa pupa" class="m-medium-icon"/>
-    </button>
-    <a href="/profile" class="l-navbar-info row is-hidden" id="profile-link">
-        <img class="m-navbar-avatar m-medium-icon" src="/static/img/avatar/default.png" alt="avatar"/>
-        <span class="m-navbar-name">    </span>
+        <a class="search-button">
+            <img src="/static/img/search.svg" class="m-medium-icon"/>
+        </a>
+    <a href="/profile" class="l-navbar-info is-hidden" id="profile-link">
+        <img class="m-navbar-avatar m-medium-icon col" src="/static/img/avatar/default.png" alt="avatar"/>
+
+        <div class="m-navbar-name col">    </div>
     </a>
     <a href="/settings" class="l-settings-icon is-hidden">
         <img src="/static/img/settings-24px.svg" class="m-small-icon"/>

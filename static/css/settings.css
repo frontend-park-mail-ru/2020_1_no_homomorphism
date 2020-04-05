@@ -113,15 +113,15 @@ input.placeholder {
     color: gray;
     text-align: left;
 }
-input:hover {
-    border-bottom-color: #673ab7;
-    color: #673ab7;
-}
+/*input:hover {*/
+/*    border-bottom-color: #673ab7;*/
+/*    color: #673ab7;*/
+/*}*/
 
-input:focus.m-settings-input {
-    outline: none;
-    border-bottom-color: #673ab7;
-}
+/*input:focus.m-settings-input {*/
+/*    outline: none;*/
+/*    border-bottom-color: #673ab7;*/
+/*}*/
 
 .m-settings-input{
     -webkit-box-shadow: inset 0 0 0 50px #ede7f6;
