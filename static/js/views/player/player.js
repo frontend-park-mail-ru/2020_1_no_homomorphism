@@ -656,7 +656,7 @@ export default class PlayerView extends BaseView {
      * @param {Object} track
      */
     updateTrack(track) {
-        document.getElementById('cover').src = track.link; // TODO ВЫНУЖДЕННО из-за текущей базы данных
+        document.getElementById('cover').src = track.image;
         document.getElementById('artist').innerHTML = track.artist;
         document.getElementById('title').innerHTML = track.name;
         document.getElementById('title').title = track.name;
