@@ -73,8 +73,6 @@ img#avatar {
 
 .l-top-titles .col {
     margin-top: 80px;
-    padding-top: 8px;
-    padding-right: 32px;
 }
 
 .m-tiny-ref {
@@ -116,6 +114,11 @@ img#avatar {
 
 .m-profile-data {
     padding-top: 32px;
+}
+
+.m-artist-info {
+    height: 70px;
+    padding-top: 16px;
 }
 
 .m-profile-albums:hover, .m-profile-tracks:hover, .m-profile-playlists:hover, .m-profile-artists:hover {

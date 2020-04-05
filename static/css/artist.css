@@ -33,8 +33,8 @@
 
 .m-artist-play-word {}
 
-.m-artist-info {
-    padding-top: 13px;
+.m-artist-info .col {
+    padding-top: 16px;
 }
 
 .m-artist-info:hover {
