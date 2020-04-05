@@ -131,3 +131,8 @@ input.placeholder {
 input.include.placeholder {
     color: transparent;
 }
+
+.m-hidden-input {
+    height: 1px;
+    width: 1px;
+}

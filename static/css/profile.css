@@ -34,6 +34,7 @@ p {
     height: 150px;
     width: 150px;
     border-radius: 100px;
+    /*padding: 8px;*/
     float: right;
 }
 
@@ -47,10 +48,6 @@ p {
 .m-round-image:not(:hover) {
     transition: 0.3s;
     box-shadow: 0 0 10px 4px rgba(129, 129, 129, 0.65);
-}
-
-img#avatar {
-    margin-top: 50px;
 }
 
 .l-top-name {
