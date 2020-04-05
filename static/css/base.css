@@ -9,6 +9,11 @@
 @import "signup.css";
 @import "playlist.css";
 
+:root {
+    --card-border: 16px;
+    --light-green: #00e67626;
+}
+
 body {
     margin: 0 auto;
     font-family: Helvetica, sans-serif;

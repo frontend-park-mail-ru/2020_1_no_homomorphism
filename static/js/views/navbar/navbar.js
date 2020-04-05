@@ -78,6 +78,8 @@ export default class NavbarView extends BaseView {
         document.getElementById('logout-link').classList.add('is-visible');
         document.getElementById('profile-link').classList.remove('is-hidden');
         document.getElementById('profile-link').classList.add('is-visible');
+        document.getElementsByClassName('l-settings-icon')[0].classList.remove('is-hidden');
+        document.getElementsByClassName('l-settings-icon')[0].classList.add('is-visible');
     }
 
     /**
@@ -92,5 +94,7 @@ export default class NavbarView extends BaseView {
         document.getElementById('logout-link').classList.add('is-hidden');
         document.getElementById('profile-link').classList.remove('is-visible');
         document.getElementById('profile-link').classList.add('is-hidden');
+        document.getElementsByClassName('l-settings-icon')[0].classList.remove('is-visible');
+        document.getElementsByClassName('l-settings-icon')[0].classList.add('is-hidden');
     }
 }

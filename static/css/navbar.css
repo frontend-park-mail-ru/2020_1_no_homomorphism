@@ -36,7 +36,7 @@
 .l-navbar .login {
     height: 55px;
     width: 6%;
-    padding-top: 19px;
+    padding-top: 16px;
     text-align: center;
     font-weight: bold;
 }
@@ -53,21 +53,30 @@
     background: white;
 }
 
-.l-navbar .signup {
-    margin-left: auto;
-    font-weight: bold;
+.l-navbar-info {
     height: 55px;
     width: 6%;
-    padding-top: 19px;
     text-align: center;
+    font-weight: bold;
+    margin-left: auto;
+}
+
+.l-navbar-info:hover {
+    background: #ebeae7;
+
+}
+
+.l-navbar .signup {
+    height: 55px;
+    width: 6%;
+    padding-top: 16px;
+    text-align: center;
+    font-weight: bold;
+    margin-left: auto;
 }
 
 .l-navbar .signup:hover {
     background: #ebeae7;
-}
-
-.l-navbar .signup img {
-    border-radius: 20px;
 }
 
 .l-navbar .search {
@@ -85,4 +94,36 @@
 
 .l-navbar .search-button:hover {
     opacity: 1;
+}
+
+.m-medium-icon {
+    height: 40px;
+    width: 40px;
+}
+
+.m-small-icon {
+    height: 20px;
+    width: 20px;
+}
+
+.m-navbar-avatar {
+    margin-top: 8px;
+    margin-right: 8px;
+    border-radius: 20px;
+}
+
+.m-navbar-name {
+    position: relative;
+    top: -8px;
+}
+
+.l-settings-icon {
+    opacity: 0.6;
+    padding: 20px 8px 2px 2px;
+    border-left-color:  #ebeae7;
+}
+
+.l-settings-icon:hover {
+    opacity: 1;
+    background: #ebeae7;
 }

@@ -1,7 +1,4 @@
-:root {
-    --card-border: 16px;
-    --light-green: #00e67626;
-}
+
 
 hr {
     border: none;
@@ -26,8 +23,6 @@ p {
 .l-top-card {
     box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
     border-radius: var(--card-border);
-
-    /*padding: 16px;*/
 }
 
 .l-round-image {

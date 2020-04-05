@@ -1,22 +1,24 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
-    <a href="/" class="logo">
-        <img src="/static/img/library_music.svg" alt="logo" height="40px" width="40px"/>
+    <a href="/" class="l-logo">
+        <img src="/static/img/library_music.svg" class="m-medium-icon" alt="logo"/>
     </a>
     <a href="/" class="name">
         Mystical Spiral
     </a>
     <input type="text" class="search"/>
     <button type="button" class="search-button">
-        <img src="/static/img/search.svg" alt="lupa pupa" height="20px" width="20px"/>
+        <img src="/static/img/search.svg" alt="lupa pupa" class="m-medium-icon"/>
     </button>
-    <a href="/profile" class="signup row is-hidden" id="profile-link">
-        <img class="m-navbar-avatar" src="/static/img/avatar/default.png" alt="avatar" height="40px" width="40px"/>
-        <span class="m-navbar-name">
-        </span>
+    <a href="/profile" class="l-navbar-info row is-hidden" id="profile-link">
+        <img class="m-navbar-avatar m-medium-icon" src="/static/img/avatar/default.png" alt="avatar"/>
+        <span class="m-navbar-name">    </span>
     </a>
-    <button type="button" class="login is-hidden" name="button" id="logout-link">
+    <a href="/settings" class="l-settings-icon is-hidden">
+        <img src="/static/img/settings-24px.svg" class="m-small-icon"/>
+    </a>
+    <a href="/" class="login is-hidden" id="logout-link">
         log out
-    </button>
+    </a>
     <a href="/signup" class="signup is-hidden" id="signup-link">
         sign up
     </a>
