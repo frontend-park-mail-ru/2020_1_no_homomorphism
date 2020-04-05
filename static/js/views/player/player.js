@@ -508,10 +508,10 @@ export default class PlayerView extends BaseView {
                 trackList.getClientRects()[0].height > document.documentElement.clientHeight ||
                 delta < 0 && top < 0
             ) {
-                if (delta > 0 && top - delta / 4 > 0) {
+                if (delta > 0 && top - delta / 2 > 0) {
                     trackList.style.top = '0';
                 } else {
-                    trackList.style.top = (top - delta / 4).toString() + 'px';
+                    trackList.style.top = (top - delta / 2).toString() + 'px';
                 }
             }
         }

@@ -16,10 +16,6 @@ export default class ArtistView extends BaseView {
      */
     constructor(eventBus, globalEventBus) {
         super(artist);
-        this.tracksRendered = 0;
-        this.allTracksRendered = true;
-        this.albumsRendered = 0;
-        this.allAlbumsRendered = true;
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
         this.eventBus.on(ARTIST.RENDER_DATA, this.renderData.bind(this));
@@ -82,6 +78,11 @@ export default class ArtistView extends BaseView {
      * @param {Object} albums
      */
     renderAlbums(albums) {
+        const elements = document.getElementsByClassName('l-list-card');
+        if (elements.length > 0 && elements[elements.length - 1].getAttribute('a-id') ===
+            albums[albums.length - 1].id) {
+            return;
+        }
         this.albumsRendered += albums.length;
         this.allAlbumsRendered = albums.length < PAGINATION.ALBUMS;
         const elem = document.getElementById('albums');
@@ -142,6 +143,11 @@ export default class ArtistView extends BaseView {
      * @param {Object} tracks
      */
     renderTracks(tracks) {
+        const elements = document.getElementsByClassName('l-track-big');
+        if (elements.length > 0 && elements[elements.length - 1].getAttribute('a-id') ===
+            tracks[tracks.length - 1].id) {
+            return;
+        }
         this.tracksRendered += tracks.length;
         this.allTracksRendered = tracks.length < PAGINATION.TRACKS;
         const elem = document.getElementById('tracks');
@@ -173,7 +179,7 @@ export default class ArtistView extends BaseView {
             if (current.getAttribute('class') === 'l-track-big' &&
                 current.getAttribute('a-id') !== null) {
                 this.globalEventBus.emit(GLOBAL.PLAY_ARTIST_TRACKS, this.id,
-                    current.getAttribute('a-id'));
+                    current.getAttribute('a-id'), this.tracksRendered);
                 break;
             } else {
                 current = current.parentNode;

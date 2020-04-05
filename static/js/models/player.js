@@ -1,5 +1,5 @@
 import Api from '@libs/api.js';
-import {PLAYER, RESPONSE, GLOBAL, PAGINATION} from '@libs/constans';
+import {PLAYER, RESPONSE, GLOBAL} from '@libs/constans';
 
 /**
  * Модель плеера
@@ -52,9 +52,10 @@ export default class PlayerModel {
      * Получение треков артиста
      * @param {string} artistId
      * @param {string} trackId
+     * @param {number} number
      */
-    getArtistTracks(artistId, trackId) {
-        Api.artistTracksFetch(artistId, '0', PAGINATION.TRACKS.toString())
+    getArtistTracks(artistId, trackId, number) {
+        Api.artistTracksFetch(artistId, '0', number.toString())
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
