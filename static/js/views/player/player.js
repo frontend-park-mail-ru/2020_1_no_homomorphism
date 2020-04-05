@@ -79,6 +79,8 @@ export default class PlayerView extends BaseView {
      */
     setStaticEventListeners() {
         window.addEventListener('resize', this.resize.bind(this));
+        document.getElementsByTagName('body')[0]
+            .addEventListener('DOMSubtreeModified', this.resize.bind(this));
         window.addEventListener('mouseup', this.windowMouseUp.bind(this));
         document.getElementsByTagName('audio')[0]
             .addEventListener('timeupdate', this.audioTimeUpdate.bind(this));
