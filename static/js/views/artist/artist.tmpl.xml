@@ -3,7 +3,7 @@
         <div class="l-main">
             <div class="l-top-card">
 
-                <div class="row m-artist-background">
+                <div class="row m-artist-background" style="background: url({data.image})">
                     <div class="l-top-info col">
                         <div class="l-round-image col">
                             <img alt="" src="{data.image}" class=" m-round-image" id="avatar"/>
@@ -19,7 +19,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <!--div class="row">
                     <div class="m-artist-likes col col-4">
                         <div class="row">
                             <div class="m-artist-like-button col col-6">
@@ -44,7 +44,7 @@
                             <div class="m-artist-play-word col col-6">play</div>
                         </div>
                     </div>
-                </div>
+                </div-->
 
                 <div class="row">
                     <div class="m-profile-tracks col col-4" id="artist-tracks-title">

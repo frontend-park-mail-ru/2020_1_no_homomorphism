@@ -508,10 +508,10 @@ export default class PlayerView extends BaseView {
                 trackList.getClientRects()[0].height > document.documentElement.clientHeight ||
                 delta < 0 && top < 0
             ) {
-                if (delta > 0 && top - delta / 8 > 0) {
+                if (delta > 0 && top - delta / 4 > 0) {
                     trackList.style.top = '0';
                 } else {
-                    trackList.style.top = (top - delta / 6).toString() + 'px';
+                    trackList.style.top = (top - delta / 4).toString() + 'px';
                 }
             }
         }
@@ -661,6 +661,7 @@ export default class PlayerView extends BaseView {
         document.getElementById('cover').src = track.link; // TODO ВЫНУЖДЕННО из-за текущей базы данных
         document.getElementById('artist').innerHTML = track.artist;
         document.getElementById('title').innerHTML = track.name;
+        document.getElementById('title').title = track.name;
         const minutes = Math.floor(track.duration / 60);
         const seconds = Math.floor(track.duration % 60);
         document.getElementsByClassName('duration')[0].innerHTML = minutes.toString() + ':' +
