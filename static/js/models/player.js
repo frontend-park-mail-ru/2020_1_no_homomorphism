@@ -365,7 +365,7 @@ export default class PlayerModel {
         this.queue.splice(this.queue.indexOf(Math.max(this.queue)), 1);
         this.playlist.splice(this.playlist.indexOf(track), 1);
         this.eventBus.emit(PLAYER.REMOVE_FROM_TRACKLIST, id);
-        if (this.tracklist.length === 0) {
+        if (this.playlist.length === 0) {
             return;
         }
         this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[this.queue[this.current]].id,
