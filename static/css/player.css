@@ -10,6 +10,7 @@
     transition-property: left;
     transition-duration: 0.75s;
     overflow: hidden;
+    background: white;
 }
 
 .l-player .col {
@@ -224,7 +225,7 @@
 }
 
 .track-list > .row:hover {
-    background: #00e67626;
+    background: var(--light-green);
 }
 
 .track-list .row {
