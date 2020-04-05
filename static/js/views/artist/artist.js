@@ -2,7 +2,7 @@ import artist from '@views/artist/artist.tmpl.xml';
 import albumsTemplate from '@views/artist/artist_albums.tmpl.xml';
 import tracksTemplate from '@views/artist/artist_tracks.tmpl.xml';
 import BaseView from '@libs/base_view';
-import {ARTIST, DOM, GLOBAL, PAGINATION} from '@libs/constans';
+import {ARTIST, DOM, URL, GLOBAL, PAGINATION} from '@libs/constans';
 import '@css/base.css';
 
 /**
@@ -135,7 +135,7 @@ export default class ArtistView extends BaseView {
      * Слушает скрол по списку альбомов
      */
     albumsListWheel() {
-        if (this.allAlbumsRendered) {
+        if (this.allAlbumsRendered || !window.location.pathname.match(URL.ARTIST)) {
             return;
         }
         const list = document.getElementsByClassName('l-profile-album-list')[0];
@@ -201,7 +201,7 @@ export default class ArtistView extends BaseView {
      * Слушает скрол по списку треков
      */
     tracksListWheel() {
-        if (this.allTracksRendered) {
+        if (this.allTracksRendered || !window.location.pathname.match(URL.ARTIST)) {
             return;
         }
         const list = document.getElementsByClassName('l-profile-track-list')[0];
