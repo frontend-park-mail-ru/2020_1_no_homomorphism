@@ -9,7 +9,7 @@
         <a class="search-button">
             <img src="/static/img/search.svg" class="m-medium-icon"/>
         </a>
-    <a href="/profile" class="l-navbar-info is-hidden" id="profile-link">
+    <a href="/profile/tracks" class="l-navbar-info is-hidden" id="profile-link">
         <img class="m-navbar-avatar m-medium-icon col" src="/static/img/avatar/default.png" alt="avatar"/>
 
         <div class="m-navbar-name col">    </div>

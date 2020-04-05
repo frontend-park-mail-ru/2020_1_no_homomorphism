@@ -2,7 +2,7 @@
     <div class="small_line"></div>
     <fest:for iterate="data" index="i" value="track">
         <div class="l-track-big" a-id="{track.id}">
-            <div class="m-profile-track" style="text-align: left">
+            <div class="m-profile-track row" style="text-align: left">
                 <div>
                     <div class="l-track-big-image">
                         <img class="m-profile-track-image" id="profile-track-image" src="{track.image}" alt=""/>
@@ -14,6 +14,17 @@
                         <span>
                             <fest:value>track.name</fest:value>
                         </span>
+                    </div>
+                </div>
+                <div class="l-track-buttons row">
+                    <div class="col l-big-track-button delete-button">
+                        <img src="/static/img/clear-24px.svg" class="m-big-delete-button" height="15px" alt="..."/>
+                    </div>
+                    <div class="col l-big-track-button favorite-button">
+                        <img src="/static/img/favorite_border.svg" class="m-big-like-button" height="15px" alt="..."/>
+                    </div>
+                    <div class="col l-big-track-button add-button">
+                        <img src="/static/img/add-24px.svg" class="m-big-add-button" height="15px" alt="..."/>
                     </div>
                 </div>
             </div>

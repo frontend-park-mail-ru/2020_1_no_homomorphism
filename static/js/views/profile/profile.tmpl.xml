@@ -37,10 +37,10 @@
                         </a>
                     </div>
                     <div class="m-profile-artists col col-3" id="profile-artists-title">
-                        <a class="m-tiny-ref" href="/profile/artists">
-                            <h2>53</h2>
-                            <p>Subscriptions</p>
-                        </a>
+<!--                        <a class="m-tiny-ref" href="/profile/artists">-->
+<!--                            <h2>53</h2>-->
+<!--                            <p>Subscriptions</p>-->
+<!--                        </a>-->
                     </div>
                 </div>
 

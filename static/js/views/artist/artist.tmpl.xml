@@ -65,7 +65,7 @@
                     </div>
                     <div class="m-artist-info col col-4" id="artist-info-title">
                         <a class="m-tiny-ref" href="/artist/{data.id}/info">
-                            <h2>инфо</h2>
+                            <h2>Info</h2>
                         </a>
                     </div>
                 </div>

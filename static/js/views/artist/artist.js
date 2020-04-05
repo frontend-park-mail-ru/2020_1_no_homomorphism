@@ -104,7 +104,7 @@ export default class ArtistView extends BaseView {
      * Set EventListeners
      */
     setAlbumsEventListeners() {
-        document.querySelectorAll('.l-list-card').forEach((playlist) => {
+        document.querySelectorAll('.m-button-track-play-playlist').forEach((playlist) => {
             playlist.onclick = (event) => this.albumClick.bind(this)(event);
         });
         window.removeEventListener('wheel', this.tracksListWheel.bind(this));
