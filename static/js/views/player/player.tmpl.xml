@@ -25,19 +25,13 @@
                 <div class="timeline row">
                     <div class="timeline-back"></div>
                     <div class="timeline-front" style="width: 0;"></div>
-                    <div class="current-time col col-6" style="font-size: 0px;">0:00</div>
-                    <div class="duration col col-6" style="font-size: 0px;">0:00</div>
+                    <div class="current-time col" style="font-size: 0px;">0:00</div>
+                    <div class="duration col" style="font-size: 0px;">0:00</div>
                 </div>
-                <div class="control-elements row m-player-track">
-                    <div class="col col-1">
-                        <img src="/static/img/previous.svg" class="player-control-button" id="prev" alt="prev"/>
-                    </div>
-                    <div class="col col-1">
-                        <img src="/static/img/play.svg" class="player-control-button play-pause" alt="play/pause"/>
-                    </div>
-                    <div class="col col-1">
-                        <img src="/static/img/next.svg" class="player-control-button" id="next" alt="next"/>
-                    </div>
+                <div class="control-elements row">
+                    <img src="/static/img/previous.svg" class="player-control-button prev" id="prev" alt="prev"/>
+                    <img src="/static/img/play.svg" class="player-control-button play-pause" alt="play/pause"/>
+                    <img src="/static/img/next.svg" class="player-control-button next" id="next" alt="next"/>
                     <img src="/static/img/shuffle.svg" class="playlist-control-button shuffle" style="opacity: 0.4;"
                          alt="shuffle"/>
                     <img src="/static/img/repeat.svg" class="playlist-control-button repeat" style="opacity: 0.4;"

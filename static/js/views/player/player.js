@@ -406,7 +406,7 @@ export default class PlayerView extends BaseView {
             .style.transitionProperty = 'opacity, top';
         document.getElementsByClassName('volume-scale')[0].style.visibility = 'visible';
         document.getElementsByClassName('volume-scale')[0].style.opacity = '1';
-        document.getElementsByClassName('volume-scale')[0].style.top = '-50px';
+        document.getElementsByClassName('volume-scale')[0].style.top = '-52px';
         document.getElementsByClassName('volume')[0].style.opacity = '1';
     }
 
@@ -418,7 +418,7 @@ export default class PlayerView extends BaseView {
             .style.transitionProperty = 'opacity, visibility, top';
         document.getElementsByClassName('volume-scale')[0].style.visibility = 'hidden';
         document.getElementsByClassName('volume-scale')[0].style.opacity = '0';
-        document.getElementsByClassName('volume-scale')[0].style.top = '-40px';
+        document.getElementsByClassName('volume-scale')[0].style.top = '-42px';
         document.getElementsByClassName('volume')[0].style.opacity = '0.4';
     }
 
@@ -506,12 +506,16 @@ export default class PlayerView extends BaseView {
         ) {
             event.preventDefault();
             const top = parseInt(trackList.style.top.slice(0, trackList.style.top.length - 2));
-            if (delta > 0 && trackList.getClientRects()[0].y +
-                trackList.getClientRects()[0].height > document.documentElement.clientHeight ||
-                delta < 0 && top < 0
+            if (delta < 0 && top < 0 ||
+                delta > 0 && trackList.getBoundingClientRect().bottom >
+                document.documentElement.clientHeight
             ) {
-                if (delta > 0 && top - delta / 2 > 0) {
+                if (delta < 0 && top - delta / 2 > 0) {
                     trackList.style.top = '0';
+                } else if (delta > 0 && trackList.getBoundingClientRect().bottom - delta / 2 <
+                           document.documentElement.clientHeight
+                ) {
+                    trackList.style.top = '-261px';
                 } else {
                     trackList.style.top = (top - delta / 2).toString() + 'px';
                 }
