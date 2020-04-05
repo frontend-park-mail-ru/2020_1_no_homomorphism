@@ -288,7 +288,7 @@ img#avatar {
 .l-list-card-description {
     display: block;
     color: #515151;
-    margin-top: -20px;
+    margin-top: 16px;
     padding-bottom: 32px;
     padding-left: 6px;
     padding-right: 6px;
@@ -309,6 +309,10 @@ img#avatar {
     display: block;
     padding: 0;
     list-style: none;
+}
+
+.l-button-play-track {
+    height: 200px;
 }
 
 .l-list-card:hover .m-button-track-play-playlist {

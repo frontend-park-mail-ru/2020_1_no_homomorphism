@@ -33,7 +33,7 @@ export default class ProfileAlbumsView {
      * Set EventListeners
      */
     setEventListeners() {
-        document.querySelectorAll('.l-list-card').forEach((playlist) => {
+        document.querySelectorAll('.m-button-track-play-playlist').forEach((playlist) => {
             playlist.onclick = (event) => this.albumClick.bind(this)(event);
         });
     }
