@@ -60,8 +60,10 @@ export default class ArtistView extends BaseView {
         document.getElementsByClassName('m-top-login')[0].innerHTML = data.name;
         document.getElementsByClassName('m-round-image')[0].src = data.image;
         document.getElementsByClassName('m-top-name')[0].innerHTML = data.genre;
-        // document.getElementsByClassName('m-artist-background')[0].src = data.image;
-        // document.getElementsByClassName('m-artist-background')[1].src = data.image;
+        document.getElementById('artist-tracks-title').children[0].children[0].innerText =
+            data.tracks;
+        document.getElementById('artist-albums-title').children[0].children[0].innerText =
+            data.albums;
     }
 
     /**

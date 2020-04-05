@@ -3,7 +3,7 @@
         <div class="l-main">
             <div class="l-top-card">
 
-                <div class="row m-artist-background" style="background: url({data.image})">
+                <div class="row">
                     <div class="l-top-info col">
                         <div class="l-round-image col">
                             <img alt="" src="{data.image}" class=" m-round-image" id="avatar"/>
@@ -49,13 +49,13 @@
                 <div class="row">
                     <div class="m-profile-tracks col col-4" id="artist-tracks-title">
                         <a class="m-tiny-ref" href="/artist/{data.id}/tracks">
-                            <h2><fest:value>data.link</fest:value></h2>
+                            <h2><fest:value>data.tracks</fest:value></h2>
                             <p>Tracks</p>
                         </a>
                     </div>
                     <div class="m-profile-albums col col-4" id="artist-albums-title">
                         <a class="m-tiny-ref" href="/artist/{data.id}/albums">
-                            <h2>43</h2>
+                            <h2><fest:value>data.albums</fest:value></h2>
                             <p>Albums</p>
                         </a>
                     </div>
