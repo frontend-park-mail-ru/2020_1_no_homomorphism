@@ -40,7 +40,6 @@ export default class AlbumView extends BaseView {
     setAlbumData(album) {
         this.albumData = album;
         this.renderAlbum();
-        // this.renderTracks();
     }
 
     /**
@@ -58,7 +57,6 @@ export default class AlbumView extends BaseView {
     setTracksData(tracks) {
         this.tracksData = tracks;
         this.renderTracks();
-        // this.renderTracks();
     }
 
     /**
@@ -79,7 +77,8 @@ export default class AlbumView extends BaseView {
      * Слушает события
      */
     seEventListeners() {
-        document.querySelectorAll('.l-track-big').forEach((row) => { // TODO Никитуля, отсылочка вам
+        document.querySelectorAll('.l-track-big').forEach((track) => {
+            track.onclick = (event) => this.trackClick.bind(this)(event);
         });
         document.querySelectorAll('img.m-big-more-button').forEach((button) => { // TODO Обработать
         });
@@ -93,10 +92,28 @@ export default class AlbumView extends BaseView {
     }
 
     /**
+     * Слушает клик по треку
+     * @param {Object} event
+     */
+    trackClick(event) {
+        let current = event.target;
+        while (current !== window && current !== document.body && current != null) {
+            if (current.getAttribute('class') === 'l-track-big' &&
+                current.getAttribute('a-id') !== null) {
+                this.globalEventBus.emit(GLOBAL.PLAY_ALBUM_TRACKS, this.albumData.id,
+                    current.getAttribute('a-id'));// , this.tracksRendered);
+                break;
+            } else {
+                current = current.parentNode;
+            }
+        }
+    }
+
+    /**
      * Проигрование плейлиста
      */
     playAlbum() {
-        this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, {id: this.albumData.album.id});
+        this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, this.albumData.id);
     }
 
     /**

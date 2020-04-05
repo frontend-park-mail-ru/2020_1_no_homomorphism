@@ -26,6 +26,8 @@ export default class PlayerModel {
         this.globalEventBus.on(GLOBAL.PLAY_ARTIST_TRACKS, this.getArtistTracks.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST_TRACKS, this.deleteAll.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST_TRACKS, this.getPlaylistTracks.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_ALBUM_TRACKS, this.deleteAll.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_ALBUM_TRACKS, this.getAlbumTracks.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.deleteAll.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.getPlaylistTracks.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_ALBUM, this.deleteAll.bind(this));
@@ -96,14 +98,16 @@ export default class PlayerModel {
 
     /**
      * Получение списка треков
-     * @param {Object} album
+     * @param {string} id
+     * @param {string} trackId
+     * @param {number} number
      */
-    getAlbumTracks(album) {
-        Api.albumTracksFetch(album.id, this.curPagination.toString(), PAGINATION.TRACKS.toString())
+    getAlbumTracks(id, trackId, number = PAGINATION.TRACKS) {
+        Api.albumTracksFetch(id, '0', number)
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
-                    this.generateData.bind(this)(res);
+                    this.generateData.bind(this)(res, trackId);
                     break;
                 case RESPONSE.BAD_REQUEST: // TODO обработать ошибку
                     break;

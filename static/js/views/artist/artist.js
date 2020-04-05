@@ -112,7 +112,7 @@ export default class ArtistView extends BaseView {
         while (current !== window && current !== document.body && current != null) {
             if (current.getAttribute('class') === 'l-list-card' &&
                 current.getAttribute('a-id') !== null) {
-                this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, {id: current.getAttribute('a-id')});
+                this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, current.getAttribute('a-id'));
                 break;
             } else {
                 current = current.parentNode;
