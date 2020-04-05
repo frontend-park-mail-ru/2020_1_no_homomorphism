@@ -58,6 +58,8 @@ export const VALIDATION = {
 };
 
 export const GLOBAL = {
+    GET_ARTIST_TRACKS: 'get artist tracks',
+    PLAY_ARTIST_TRACKS: 'play artist tracks',
     PLAY_PLAYLIST: 'play playlist',
     CLEAR_AND_LOCK: 'clear and lock',
     PLAY_ALBUM: 'play-album',

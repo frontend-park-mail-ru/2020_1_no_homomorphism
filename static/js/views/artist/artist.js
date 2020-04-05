@@ -40,7 +40,7 @@ export default class ArtistView extends BaseView {
             url.slice(url.indexOf('/') + 1, url.length);
         switch (this.currentOpen) {
         case ARTIST.ID_TRACKS_SECTION:
-            this.eventBus.emit(this.currentOpen, '0', PAGINATION.TRACKS.toString());
+            this.eventBus.emit(this.currentOpen, '0', PAGINATION.TRACKS.toString(), true);
             break;
         case ARTIST.ID_ALBUMS_SECTION:
             this.eventBus.emit(this.currentOpen, '0', PAGINATION.ALBUMS.toString());
@@ -60,10 +60,8 @@ export default class ArtistView extends BaseView {
         document.getElementsByClassName('m-top-login')[0].innerHTML = data.name;
         document.getElementsByClassName('m-round-image')[0].src = data.image;
         document.getElementsByClassName('m-top-name')[0].innerHTML = data.genre;
-        document.getElementById('artist-tracks-title').children[0].children[0].innerText =
-            data.tracks;
-        document.getElementById('artist-albums-title').children[0].children[0].innerText =
-            data.albums;
+        document.getElementById('artist-tracks-title').innerText = data.tracks;
+        document.getElementById('artist-albums-title').innerText = data.albums;
     }
 
     /**
@@ -73,13 +71,13 @@ export default class ArtistView extends BaseView {
     renderAlbums(albums) {
         const elem = document.getElementById('albums');
         elem.innerHTML += albumsTemplate(albums);
-        this.setEventListeners();
+        this.setAlbumsEventListeners();
     }
 
     /**
      * Set EventListeners
      */
-    setEventListeners() {
+    setAlbumsEventListeners() {
         document.querySelectorAll('.l-list-card').forEach((playlist) => {
             playlist.onclick = (event) => this.albumClick.bind(this)(event);
         });
@@ -93,8 +91,8 @@ export default class ArtistView extends BaseView {
         let current = event.target;
         while (current !== window && current !== document.body && current != null) {
             if (current.getAttribute('class') === 'l-list-card' &&
-                current.getAttribute('id') !== null) {
-                this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, {id: current.getAttribute('id')});
+                current.getAttribute('a-id') !== null) {
+                this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, {id: current.getAttribute('a-id')});
                 break;
             } else {
                 current = current.parentNode;
@@ -109,6 +107,34 @@ export default class ArtistView extends BaseView {
     renderTracks(tracks) {
         const elem = document.getElementById('tracks');
         elem.innerHTML += tracksTemplate(tracks);
+        this.setTracksEventListeners();
+    }
+
+    /**
+     * Set EventListeners
+     */
+    setTracksEventListeners() {
+        document.querySelectorAll('.l-track-big').forEach((track) => {
+            track.onclick = (event) => this.trackClick.bind(this)(event);
+        });
+    }
+
+    /**
+     * Слушает клик по треку
+     * @param {Object} event
+     */
+    trackClick(event) {
+        let current = event.target;
+        while (current !== window && current !== document.body && current != null) {
+            if (current.getAttribute('class') === 'l-track-big' &&
+                current.getAttribute('a-id') !== null) {
+                this.globalEventBus.emit(GLOBAL.PLAY_ARTIST_TRACKS, this.id,
+                    current.getAttribute('a-id'));
+                break;
+            } else {
+                current = current.parentNode;
+            }
+        }
     }
 
     /**

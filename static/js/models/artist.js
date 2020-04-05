@@ -1,5 +1,5 @@
 import Api from '@libs/api.js';
-import {ARTIST, URL} from '@libs/constans.js';
+import {ARTIST, URL, GLOBAL} from '@libs/constans.js';
 
 /**
  * Модель для страницы артиста
@@ -8,11 +8,14 @@ export default class ArtistModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus
+     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus) {
+    constructor(eventBus, globalEventBus) {
         this.albums = [];
         this.tracks = [];
         this.eventBus = eventBus;
+        this.globalEventBus = globalEventBus;
+        this.globalEventBus.on(GLOBAL.GET_ARTIST_TRACKS, this.getArtistTracks.bind(this));
         this.eventBus.on(ARTIST.SET_ID, this.setId.bind(this));
         this.eventBus.on(ARTIST.GET_DATA, this.getArtistData.bind(this));
         this.eventBus.on(ARTIST.ID_TRACKS_SECTION, this.getArtistTracks.bind(this));
@@ -67,11 +70,10 @@ export default class ArtistModel {
                 if (res.ok) {
                     res.json()
                         .then((data) => {
-                            this.tracks = data;
-                            this.eventBus.emit(ARTIST.RENDER_TRACKS, this.tracks);
+                            this.tracks += data.tracks;
+                            this.eventBus.emit(ARTIST.RENDER_TRACKS, data.tracks);
                         });
                 } else {
-                    this.eventBus.emit(ARTIST.RENDER_TRACKS, this.tracks);
                     this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
                 }
             });

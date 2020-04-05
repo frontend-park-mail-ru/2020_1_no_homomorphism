@@ -1,5 +1,5 @@
 import Api from '@libs/api.js';
-import {PLAYER, RESPONSE, GLOBAL} from '@libs/constans';
+import {PLAYER, RESPONSE, GLOBAL, PAGINATION} from '@libs/constans';
 
 /**
  * Модель плеера
@@ -12,6 +12,7 @@ export default class PlayerModel {
      */
     constructor(eventBus, globalEventBus) {
         this.eventBus = eventBus;
+        this.globalEventBus = globalEventBus;
         this.queue = [];
         this.playlist = [];
         this.current = 0;
@@ -20,14 +21,16 @@ export default class PlayerModel {
             shuffle: false,
             repeat: false,
         };
-        globalEventBus.on(GLOBAL.CLEAR_AND_LOCK, this.deleteAll.bind(this));
-        globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.deleteAll.bind(this));
-        globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.getPlaylistTracks.bind(this));
-        globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.play.bind(this));
-        globalEventBus.on(GLOBAL.PLAY_ALBUM, this.pause.bind(this));
-        globalEventBus.on(GLOBAL.PLAY_ALBUM, this.deleteAll.bind(this));
-        globalEventBus.on(GLOBAL.PLAY_ALBUM, this.getAlbumTracks.bind(this));
-        globalEventBus.on(GLOBAL.PLAY_ALBUM, this.play.bind(this));
+        this.globalEventBus.on(GLOBAL.CLEAR_AND_LOCK, this.deleteAll.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_ARTIST_TRACKS, this.deleteAll.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_ARTIST_TRACKS, this.getArtistTracks.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_ARTIST_TRACKS, this.play.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.deleteAll.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.getPlaylistTracks.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.play.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_ALBUM, this.deleteAll.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_ALBUM, this.getAlbumTracks.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_ALBUM, this.play.bind(this));
         this.eventBus.on(PLAYER.GET_TRACK, this.getTrack.bind(this));
         this.eventBus.on(PLAYER.GET_TRACKS, this.getPlaylistTracks.bind(this));
         this.eventBus.on(PLAYER.PAUSE, this.pause.bind(this));
@@ -43,6 +46,27 @@ export default class PlayerModel {
         this.eventBus.on(PLAYER.MUTE, this.mute.bind(this));
         this.eventBus.on(PLAYER.UNMUTE, this.unmute.bind(this));
         this.eventBus.on(PLAYER.DELETE, this.delete.bind(this));
+    }
+
+    /**
+     * Получение треков артиста
+     * @param {string} artistId
+     * @param {string} trackId
+     */
+    getArtistTracks(artistId, trackId) {
+        Api.artistTracksFetch(artistId, '0', PAGINATION.TRACKS.toString())
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    this.generateData.bind(this)(res, trackId);
+                    break;
+                case RESPONSE.BAD_REQUEST: // TODO
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
     }
 
     /**
@@ -91,8 +115,9 @@ export default class PlayerModel {
     /**
      * останавливает воспроизведение
      * @param {Object} res
+     * @param {number} trackId
      */
-    generateData(res) {
+    generateData(res, trackId = '') {
         res.json()
             .then((list) => {
                 // eslint-disable-next-line guard-for-in
@@ -100,9 +125,14 @@ export default class PlayerModel {
                     this.playlist.push(list.tracks[song]);
                     this.queue.push(this.playlist.length - 1);
                 }
+                if (trackId !== '') {
+                    this.current = this.playlist.indexOf(this.playlist.find((track) =>
+                        track.id === trackId));
+                }
                 this.eventBus.emit(PLAYER.DRAW_TRACKLIST, this.playlist);
-                this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[0].id, this.playlist[0].id);
-                this.getTrack(this.playlist[0].id);
+                this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[this.queue[this.current]].id,
+                    this.playlist[this.queue[this.current]].id);
+                this.getTrack(this.playlist[this.queue[this.current]].id);
             });
     }
 

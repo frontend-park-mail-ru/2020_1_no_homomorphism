@@ -47,15 +47,19 @@
                 </div-->
 
                 <div class="row">
-                    <div class="m-profile-tracks col col-4" id="artist-tracks-title">
+                    <div class="m-profile-tracks col col-4">
                         <a class="m-tiny-ref" href="/artist/{data.id}/tracks">
-                            <h2><fest:value>data.tracks</fest:value></h2>
+                            <h2 id="artist-tracks-title">
+                                <fest:value>data.tracks</fest:value>
+                            </h2>
                             <p>Tracks</p>
                         </a>
                     </div>
-                    <div class="m-profile-albums col col-4" id="artist-albums-title">
+                    <div class="m-profile-albums col col-4">
                         <a class="m-tiny-ref" href="/artist/{data.id}/albums">
-                            <h2><fest:value>data.albums</fest:value></h2>
+                            <h2 id="artist-albums-title">
+                                <fest:value>data.albums</fest:value>
+                            </h2>
                             <p>Albums</p>
                         </a>
                     </div>
