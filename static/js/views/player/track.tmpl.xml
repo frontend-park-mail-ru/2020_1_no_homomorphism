@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="col track-group-names">
-            <div class="track-name">
+            <div class="track-name" title="{track.name}">
                 <fest:value>track.name</fest:value>
             </div>
             <a class="group-name" href="/player">

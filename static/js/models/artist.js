@@ -1,5 +1,5 @@
 import Api from '@libs/api.js';
-import {ARTIST, URL} from '@libs/constans.js';
+import {ARTIST, URL, GLOBAL} from '@libs/constans.js';
 
 /**
  * Модель для страницы артиста
@@ -8,11 +8,14 @@ export default class ArtistModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus
+     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus) {
+    constructor(eventBus, globalEventBus) {
         this.albums = [];
         this.tracks = [];
         this.eventBus = eventBus;
+        this.globalEventBus = globalEventBus;
+        this.globalEventBus.on(GLOBAL.GET_ARTIST_TRACKS, this.getArtistTracks.bind(this));
         this.eventBus.on(ARTIST.SET_ID, this.setId.bind(this));
         this.eventBus.on(ARTIST.GET_DATA, this.getArtistData.bind(this));
         this.eventBus.on(ARTIST.ID_TRACKS_SECTION, this.getArtistTracks.bind(this));
@@ -32,17 +35,20 @@ export default class ArtistModel {
      * Получает артиста из БД
      */
     getArtistData() {
-        Api.artistFetch(this.id)
+        Promise.all([
+            Api.artistFetch(this.id),
+            Api.artistStatFetch(this.id),
+        ])
             .then((res) => {
                 if (res === undefined) {
                     this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);
                     return;
                 }
-                if (res.ok) {
-                    res.json()
-                        .then((data) => {
-                            this.eventBus.emit(ARTIST.RENDER_DATA, data);
-                        });
+                if (res.every((item) => item.ok)) {
+                    const data = {};
+                    Promise.all(res.map((item) => item.json()))
+                        .then((res) => res.forEach((item) => Object.assign(data, item)))
+                        .then(() => this.eventBus.emit(ARTIST.RENDER_DATA, data));
                 } else {
                     this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
                 }
@@ -55,69 +61,22 @@ export default class ArtistModel {
      * @param {string} end
      */
     getArtistTracks(start, end) {
-        if (this.albums.length === 0) {
-            Api.artistAlbumsFetch(this.id, '0', '100')
-                .then((res) => {
-                    if (res === undefined) {
-                        this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);
-                        return;
-                    }
-                    if (res.ok) {
-                        res.json()
-                            .then((data) => {
-                                this.albums = data.albums;
-                            });
-                    } else {
-                        this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
-                    }
-                })
-                .then(() => {
-                    for (let i = 0; i < this.albums.length && this.tracks.length < parseInt(end);
-                        i++) {
-                        Api.albumTracksFetch(this.albums[i].id)
-                            .then((res) => {
-                                if (res === undefined) {
-                                    this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);
-                                    return;
-                                }
-                                if (res.ok) {
-                                    res.json()
-                                        .then((data) => {
-                                            for (const track of data.tracks) {
-                                                this.tracks.push(track);
-                                            }
-                                        });
-                                } else {
-                                    this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
-                                }
-                            })
-                            .then(() => {
-                                this.eventBus.emit(ARTIST.RENDER_TRACKS, this.tracks);
-                            });
-                    }
-                });
-        } else {
-            for (let i = 0; i < this.albums.length && this.tracks.length < parseInt(end); i++) {
-                Api.albumTracksFetch(this.albums[i].id)
-                    .then((res) => {
-                        if (res === undefined) {
-                            this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);
-                            return;
-                        }
-                        if (res.ok) {
-                            res.json()
-                                .then((data) => {
-                                    for (const track of data.tracks) {
-                                        this.tracks.push(track);
-                                    }
-                                });
-                        } else {
-                            this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
-                        }
-                    });
-            }
-            this.eventBus.emit(ARTIST.RENDER_TRACKS, this.tracks);
-        }
+        Api.artistTracksFetch(this.id, start, end)
+            .then((res) => {
+                if (res === undefined) {
+                    this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);
+                    return;
+                }
+                if (res.ok) {
+                    res.json()
+                        .then((data) => {
+                            this.tracks += data.tracks;
+                            this.eventBus.emit(ARTIST.RENDER_TRACKS, data.tracks);
+                        });
+                } else {
+                    this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
+                }
+            });
     }
 
     /**
@@ -147,5 +106,7 @@ export default class ArtistModel {
     /**
      * Получает информацию артиста из БД
      */
-    getArtistInfo() {}
+    getArtistInfo() {
+        // this.eventBus.emit(ARTIST.RENDER_INFO);
+    }
 }

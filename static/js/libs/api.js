@@ -73,6 +73,15 @@ export default class Api {
     }
 
     /**
+     * Артист просмотр статистики
+     * @param {string} id
+     * @return {Promise<Response>}
+     */
+    static artistStatFetch(id) {
+        return getFetch(API + '/artists/' + id + '/stat').catch((error) => console.error(error));
+    }
+
+    /**
      * Артист просмотр альбомов
      * @param {string} id
      * @param {string} start
@@ -81,6 +90,18 @@ export default class Api {
      */
     static artistAlbumsFetch(id, start, end) {
         return getFetch(API + '/artists/' + id + '/albums/' + start + '/' + end)
+            .catch((error) => console.error(error));
+    }
+
+    /**
+     * Артист просмотр треков
+     * @param {string} id
+     * @param {string} start
+     * @param {string} end
+     * @return {Promise<Response>}
+     */
+    static artistTracksFetch(id, start, end) {
+        return getFetch(API + '/artists/' + id + '/tracks/' + start + '/' + end)
             .catch((error) => console.error(error));
     }
 

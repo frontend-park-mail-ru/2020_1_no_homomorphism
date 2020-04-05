@@ -177,8 +177,15 @@
     cursor: pointer;
 }
 
-.music-bar .track-name {
+.track-name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.l-music-bar .track-name {
     font-size: 19px;
+    width: 274px;
 }
 
 .group-name {
@@ -231,6 +238,7 @@
 
 .track-list .track-name {
     font-size: 18px;
+    width: 300px;
 }
 
 .track-list .group-name {

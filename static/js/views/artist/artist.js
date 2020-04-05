@@ -33,6 +33,10 @@ export default class ArtistView extends BaseView {
     render(root, url) {
         this.curPaginationAlbums = 0; // TODO временно
         this.curPaginationTracks = 0;
+        this.tracksRendered = 0;
+        this.allTracksRendered = true;
+        this.albumsRendered = 0;
+        this.allAlbumsRendered = true;
         this.id = url.indexOf('/') === -1 ? url : url.slice(0, url.indexOf('/'));
         this.eventBus.emit(ARTIST.SET_ID, this.id);
         if (JSON.stringify(this.data) === '{}') {
@@ -73,8 +77,10 @@ export default class ArtistView extends BaseView {
         document.getElementsByClassName('m-top-login')[0].innerHTML = data.name;
         document.getElementsByClassName('m-round-image')[0].src = data.image;
         document.getElementsByClassName('m-top-name')[0].innerHTML = data.genre;
-        // document.getElementsByClassName('m-artist-background')[0].src = data.image;
-        // document.getElementsByClassName('m-artist-background')[1].src = data.image;
+        document.getElementById('artist-tracks-title').innerText = data.tracks; // ?????
+        this.allTracksRendered = parseInt(data.tracks) < PAGINATION.TRACKS;
+        document.getElementById('artist-albums-title').innerText = data.albums;
+        this.allAlbumsRendered = parseInt(data.albums) < PAGINATION.ALBUMS;
     }
 
     /**
@@ -82,18 +88,30 @@ export default class ArtistView extends BaseView {
      * @param {Object} albums
      */
     renderAlbums(albums) {
+        const elements = document.getElementsByClassName('l-list-card');
+        if (elements.length > 0 && elements[elements.length - 1].getAttribute('a-id') ===
+            albums[albums.length - 1].id) {
+            return;
+        }
+        this.albumsRendered += albums.length;
+        this.allAlbumsRendered = albums.length < PAGINATION.ALBUMS;
         const elem = document.getElementById('albums');
         elem.innerHTML += albumsTemplate(albums);
-        this.setEventListeners();
+        this.setAlbumsEventListeners();
     }
 
     /**
      * Set EventListeners
      */
-    setEventListeners() {
+    setAlbumsEventListeners() {
         document.querySelectorAll('.l-list-card').forEach((playlist) => {
             playlist.onclick = (event) => this.albumClick.bind(this)(event);
         });
+        window.removeEventListener('wheel', this.tracksListWheel.bind(this));
+        if (this.allAlbumsRendered) {
+            return;
+        }
+        window.addEventListener('wheel', this.albumsListWheel.bind(this));
     }
 
     /**
@@ -104,8 +122,8 @@ export default class ArtistView extends BaseView {
         let current = event.target;
         while (current !== window && current !== document.body && current != null) {
             if (current.getAttribute('class') === 'l-list-card' &&
-                current.getAttribute('id') !== null) {
-                this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, {id: current.getAttribute('id')});
+                current.getAttribute('a-id') !== null) {
+                this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, {id: current.getAttribute('a-id')});
                 break;
             } else {
                 current = current.parentNode;
@@ -114,13 +132,92 @@ export default class ArtistView extends BaseView {
     }
 
     /**
+     * Слушает скрол по списку альбомов
+     */
+    albumsListWheel() {
+        if (this.allAlbumsRendered) {
+            return;
+        }
+        const list = document.getElementsByClassName('l-profile-album-list')[0];
+        const bottom = document.documentElement.clientHeight;
+        if (list.getBoundingClientRect().bottom > bottom &&
+            list.getBoundingClientRect().bottom < bottom + 320
+        ) {
+            this.eventBus.emit(this.currentOpen, this.albumsRendered.toString(),
+                (this.albumsRendered + PAGINATION.ALBUMS).toString());
+        }
+    }
+
+    /**
      * Рендер треков
      * @param {Object} tracks
      */
     renderTracks(tracks) {
+        const elements = document.getElementsByClassName('l-track-big');
+        if (elements.length > 0 && elements[elements.length - 1].getAttribute('a-id') ===
+            tracks[tracks.length - 1].id) {
+            return;
+        }
+        this.tracksRendered += tracks.length;
+        this.allTracksRendered = tracks.length < PAGINATION.TRACKS;
         const elem = document.getElementById('tracks');
         elem.innerHTML += tracksTemplate(tracks);
+        this.setTracksEventListeners();
     }
+
+    /**
+     * Set EventListeners
+     */
+    setTracksEventListeners() {
+        document.querySelectorAll('.l-track-big').forEach((track) => {
+            track.onclick = (event) => this.trackClick.bind(this)(event);
+        });
+        window.removeEventListener('wheel', this.albumsListWheel.bind(this));
+        if (this.allTracksRendered) {
+            return;
+        }
+        window.addEventListener('wheel', this.tracksListWheel.bind(this));
+    }
+
+    /**
+     * Слушает клик по треку
+     * @param {Object} event
+     */
+    trackClick(event) {
+        let current = event.target;
+        while (current !== window && current !== document.body && current != null) {
+            if (current.getAttribute('class') === 'l-track-big' &&
+                current.getAttribute('a-id') !== null) {
+                this.globalEventBus.emit(GLOBAL.PLAY_ARTIST_TRACKS, this.id,
+                    current.getAttribute('a-id'), this.tracksRendered);
+                break;
+            } else {
+                current = current.parentNode;
+            }
+        }
+    }
+
+    /**
+     * Слушает скрол по списку треков
+     */
+    tracksListWheel() {
+        if (this.allTracksRendered) {
+            return;
+        }
+        const list = document.getElementsByClassName('l-profile-track-list')[0];
+        const bottom = document.documentElement.clientHeight;
+        if (list.getBoundingClientRect().bottom > bottom &&
+            list.getBoundingClientRect().bottom < bottom + 320
+        ) {
+            this.eventBus.emit(this.currentOpen, this.tracksRendered.toString(),
+                (this.tracksRendered + PAGINATION.TRACKS).toString());
+        }
+    }
+
+    /**
+     * Рендер информации
+     */
+    // renderInfo(info) {}
 
     /**
      * @param {Object} data

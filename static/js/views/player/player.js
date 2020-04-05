@@ -508,10 +508,10 @@ export default class PlayerView extends BaseView {
                 trackList.getClientRects()[0].height > document.documentElement.clientHeight ||
                 delta < 0 && top < 0
             ) {
-                if (delta > 0 && top - delta / 8 > 0) {
+                if (delta > 0 && top - delta / 2 > 0) {
                     trackList.style.top = '0';
                 } else {
-                    trackList.style.top = (top - delta / 6).toString() + 'px';
+                    trackList.style.top = (top - delta / 2).toString() + 'px';
                 }
             }
         }
@@ -654,13 +654,10 @@ export default class PlayerView extends BaseView {
      * @param {Object} track
      */
     updateTrack(track) {
-        const temp = track.image;
-        if (temp.split('/')[0] === 'static') {
-            track.image = '/' + temp;
-        }
         document.getElementById('cover').src = track.link; // TODO ВЫНУЖДЕННО из-за текущей базы данных
         document.getElementById('artist').innerHTML = track.artist;
         document.getElementById('title').innerHTML = track.name;
+        document.getElementById('title').title = track.name;
         const minutes = Math.floor(track.duration / 60);
         const seconds = Math.floor(track.duration % 60);
         document.getElementsByClassName('duration')[0].innerHTML = minutes.toString() + ':' +
@@ -709,7 +706,6 @@ export default class PlayerView extends BaseView {
     drawTracklist(tracks) {
         this.eventBus.emit(PLAYER.TRACK_UPDATE, tracks[0]);
         for (let i = 0; i < tracks.length; i++) {
-            console.log(tracks[i]);
             document.getElementsByClassName('track-list')[0].innerHTML += track(tracks[i]);
         }
         this.locked = false;

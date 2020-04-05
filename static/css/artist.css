@@ -45,13 +45,12 @@
     transform: scale(1.1);
 }
 
-/* .m-artist-background {
-    background: url(/static/img/artist/m1000x1000.jpeg);
-    filter: blur(14px);
+ .m-artist-background {
+    /* filter: blur(14px); */
     position: relative;
     z-index: -1;
     box-shadow: inset 0 -105px white;
-} */
+}
 
 .l-top-card {
     overflow: hidden;
