@@ -117,6 +117,18 @@ export default class Api {
     }
 
     /**
+     * Профиль просмотр статистики
+     * @param {string} id
+     * @return {Promise<Response>}
+     */
+    static profileStatFetch(id) {
+        return getFetch(API + '/users/' + id + '/stat', (error) => {
+            console.log(error.toString());
+            throw new Error(error);
+        });
+    }
+
+    /**
      * Профиль настройка
      * @param {string} name
      * @param {string} email
@@ -210,17 +222,6 @@ export default class Api {
      */
     static profileAlbumsFetch() {
         return getFetch(API + '/users/albums', (error) => {
-            console.log(error.toString());
-        });
-    }
-
-    /**
-     * Получение трека
-     * @param {string} id
-     * @return {Promise<Response>}
-     */
-    static trackFetch(id) {
-        return getFetch(API + `/tracks/${id}`, (error) => {
             console.log(error.toString());
         });
     }
