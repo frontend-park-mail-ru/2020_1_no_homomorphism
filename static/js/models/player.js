@@ -25,13 +25,10 @@ export default class PlayerModel {
         this.globalEventBus.on(GLOBAL.CLEAR_AND_LOCK, this.deleteAll.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_ARTIST_TRACKS, this.deleteAll.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_ARTIST_TRACKS, this.getArtistTracks.bind(this));
-        this.globalEventBus.on(GLOBAL.PLAY_ARTIST_TRACKS, this.play.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.deleteAll.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.getPlaylistTracks.bind(this));
-        this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.play.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_ALBUM, this.deleteAll.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_ALBUM, this.getAlbumTracks.bind(this));
-        this.globalEventBus.on(GLOBAL.PLAY_ALBUM, this.play.bind(this));
         this.eventBus.on(PLAYER.GET_TRACK, this.getTrack.bind(this));
         this.eventBus.on(PLAYER.GET_TRACKS, this.getPlaylistTracks.bind(this));
         this.eventBus.on(PLAYER.PAUSE, this.pause.bind(this));
@@ -136,6 +133,7 @@ export default class PlayerModel {
                 this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[this.queue[this.current]].id,
                     this.playlist[this.queue[this.current]].id);
                 this.getTrack(this.playlist[this.queue[this.current]].id);
+                this.play();
             });
     }
 
