@@ -145,7 +145,7 @@ export default class ArtistModel {
     }
 
     /**
-     * Получает иноормацию артиста из БД
+     * Получает информацию артиста из БД
      */
     getArtistInfo() {}
 }

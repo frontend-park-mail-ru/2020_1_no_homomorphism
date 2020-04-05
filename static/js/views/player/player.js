@@ -709,9 +709,13 @@ export default class PlayerView extends BaseView {
     drawTracklist(tracks) {
         this.eventBus.emit(PLAYER.TRACK_UPDATE, tracks[0]);
         for (let i = 0; i < tracks.length; i++) {
+            console.log(tracks[i]);
             document.getElementsByClassName('track-list')[0].innerHTML += track(tracks[i]);
         }
         this.locked = false;
+        if (!this.expanded) {
+            this.triggerClick();
+        }
     }
 
     /**
