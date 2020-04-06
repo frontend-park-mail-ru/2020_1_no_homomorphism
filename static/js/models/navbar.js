@@ -1,6 +1,5 @@
 import Api from '@libs/api.js';
-import {NAVBAR, URL} from '@libs/constans.js';
-import {LOGIN, RESPONSE} from '@libs/constans';
+import {RESPONSE, NAVBAR, URL} from '@libs/constans.js';
 
 /**
  * Модель для навбара

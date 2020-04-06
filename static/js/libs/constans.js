@@ -35,6 +35,11 @@ export const URL = {
     ALBUM: /(\/album\/)[0-9]+/,
 };
 
+export const PAGINATION = {
+    ALBUMS: 20,
+    TRACKS: 50,
+};
+
 export const VALIDATION = {
     EMAIL_EMPTY: 'Enter email',
     EMAIL_INCORRECT: 'Incorrect email syntax',
@@ -53,7 +58,10 @@ export const VALIDATION = {
 };
 
 export const GLOBAL = {
-    PLAY_PLAYLIST: 'play-playlist',
+    GET_ARTIST_TRACKS: 'get artist tracks',
+    PLAY_ARTIST_TRACKS: 'play artist tracks',
+    PLAY_PLAYLIST: 'play playlist',
+    CLEAR_AND_LOCK: 'clear and lock',
     PLAY_ALBUM: 'play-album',
 };
 
@@ -143,6 +151,20 @@ export const PROFILE = {
     RENDER_PLAYLISTS: 'render-profile-playlists',
     RENDER_ALBUMS: 'render-profile-albums',
     RENDER_ARTISTS: 'render-profile-artists',
+};
+
+export const ARTIST = {
+    SET_ID: 'set id',
+    ID_TRACKS_SECTION: 'tracks',
+    ID_ALBUMS_SECTION: 'albums',
+    ID_INFO_SECTION: 'info',
+    NO_ANSWER: 'no-answer',
+    REDIRECT: 'redirect',
+    GET_DATA: 'get-artist-data',
+    RENDER_DATA: 'render-artist-data',
+    RENDER_TRACKS: 'render tracks',
+    RENDER_ALBUMS: 'render albums',
+    RENDER_INFO: 'render info',
 };
 
 export const PLAYLIST = {

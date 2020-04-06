@@ -1,0 +1,23 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <div class="small_line"></div>
+    <fest:for iterate="data" index="i" value="track">
+        <div class="l-track-big" a-id="{track.id}">
+            <div class="m-profile-track" style="text-align: left">
+                <div>
+                    <div class="l-track-big-image">
+                        <img class="m-profile-track-image" id="profile-track-image" src="{track.image}" alt=""/>
+                    </div>
+                    <div class="m-play-track">
+                        <button class="m-button-track-play" id="playlist-button"> </button>
+                    </div>
+                    <div class="m-profile-track-name">
+                        <span>
+                            <fest:value>track.name</fest:value>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="small_line"></div>
+    </fest:for>
+</fest:template>

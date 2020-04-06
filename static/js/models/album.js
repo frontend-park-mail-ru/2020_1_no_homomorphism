@@ -1,10 +1,9 @@
-import {ALBUM, RESPONSE, SETTINGS, URL} from '@libs/constans';
+import {ALBUM, RESPONSE} from '@libs/constans';
 import Api from '@libs/api';
 
 /**
  * Модель плейлиста
  **/
-
 export default class AlbumModel {
     /**
      * Конструктор
@@ -35,7 +34,8 @@ export default class AlbumModel {
                     break;
                 case RESPONSE.BAD_REQUEST:
                     console.log(res);
-                    this.eventBus.emit(ALBUM.ERROR, {text: 'Sorry, there isnt album with this id :('});
+                    this.eventBus.emit(ALBUM.ERROR,
+                        {text: 'Sorry, there isn\'t album with this id :('});
                     break;
                 default:
                     console.log(res);

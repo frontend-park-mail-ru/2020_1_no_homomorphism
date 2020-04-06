@@ -2,11 +2,11 @@
     <div class="row border-bottom" id="{track.id}">
         <div class="col">
             <div class="track-photo">
-                <img src="{track.link}" height="50px" width="50px" alt="..."/>
+                <img src="{track.image}" height="50px" width="50px" alt="..."/>
             </div>
         </div>
         <div class="col track-group-names">
-            <div class="track-name">
+            <div class="track-name" title="{track.name}">
                 <fest:value>track.name</fest:value>
             </div>
             <a class="group-name" href="/player">

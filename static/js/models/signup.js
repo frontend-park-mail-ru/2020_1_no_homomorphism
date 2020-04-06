@@ -59,7 +59,8 @@ export default class SignupModel {
                         this.checkBody.bind(this)(res);
                         break;
                     case RESPONSE.SERVER_ERROR:
-                        this.eventBus.emit(SIGN_UP.INVALID, {global: 'Errors in input data, try again'});
+                        this.eventBus.emit(SIGN_UP.INVALID,
+                            {global: 'Errors in input data, try again'});
                         break;
                     default:
                         console.log(res);
@@ -78,7 +79,8 @@ export default class SignupModel {
             .then((body) => {
                 if (body.login_exists) {
                     if (body.email_exists) {
-                        this.eventBus.emit(SIGN_UP.INVALID, {global: 'These login and email are taken'});
+                        this.eventBus.emit(SIGN_UP.INVALID,
+                            {global: 'These login and email are taken'});
                         return;
                     }
                     this.eventBus.emit(SIGN_UP.INVALID, {global: 'This login is taken'});

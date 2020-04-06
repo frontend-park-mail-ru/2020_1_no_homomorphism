@@ -1,6 +1,6 @@
 import Api from '@libs/api.js';
 import Validation from '@libs/validation.js';
-import {RESPONSE, LOGIN, URL, NAVBAR} from '@libs/constans';
+import {RESPONSE, LOGIN, NAVBAR, URL} from '@libs/constans.js';
 
 /**
  * Модель для страницы входа
@@ -49,7 +49,8 @@ export default class LoginModel {
                         this.eventBus.emit(LOGIN.INVALID, {global: 'You are already logged in'});
                         break;
                     case RESPONSE.SERVER_ERROR:
-                        this.eventBus.emit(LOGIN.INVALID, {global: 'Errors in input data, try again'});
+                        this.eventBus.emit(LOGIN.INVALID,
+                            {global: 'Errors in input data, try again'});
                         break;
                     default:
                         console.log(res);

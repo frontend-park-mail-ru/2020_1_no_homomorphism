@@ -13,7 +13,7 @@
                     </a>
                 </div>
                 <div class="col track-group-names">
-                    <div class="track-name" id="title">
+                    <div class="track-name" id="title" title="">
                         Kek
                     </div>
                     <a class="group-name" href="/player" id="artist">

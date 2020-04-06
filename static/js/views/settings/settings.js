@@ -20,6 +20,8 @@ export default class SettingsView extends BaseView {
 
     /**
      * Рендер
+     * @param {Object} root
+     * @param {srting} url
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.CONTENT)[0]);

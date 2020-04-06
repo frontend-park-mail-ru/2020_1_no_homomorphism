@@ -1,10 +1,9 @@
-import {PLAYLIST, RESPONSE, SETTINGS, URL} from '@libs/constans';
+import {PLAYLIST, RESPONSE} from '@libs/constans';
 import Api from '@libs/api';
 
 /**
  * Модель плейлиста
  **/
-
 export default class PlaylistModel {
     /**
      * Конструктор
@@ -34,11 +33,13 @@ export default class PlaylistModel {
                         });
                     break;
                 case RESPONSE.BAD_REQUEST:
-                    this.eventBus.emit(PLAYLIST.ERROR, {text: 'Sorry, there isnt playlist with this id :('});
+                    this.eventBus.emit(PLAYLIST.ERROR,
+                        {text: 'Sorry, there isn\'t playlist with this id :('});
                     break;
                 case RESPONSE.UNAUTH:
                 case RESPONSE.NO_ACCESS_RIGHT:
-                    this.eventBus.emit(PLAYLIST.ERROR, {text: 'Sorry, you cant get this playlist :('});
+                    this.eventBus.emit(PLAYLIST.ERROR,
+                        {text: 'Sorry, you can\'t get this playlist :('});
                     break;
                 default:
                     console.log(res);

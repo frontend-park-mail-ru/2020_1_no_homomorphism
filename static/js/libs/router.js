@@ -48,6 +48,7 @@ export default class Router {
     /**
      * Проверка регулярки
      * @param {string} newPath
+     * @return {string}
      */
     checkReg(newPath) {
         let res = '';
@@ -56,7 +57,6 @@ export default class Router {
                 res = url;
             }
         });
-        console.log(res);
         return res === '' ? newPath : res;
     }
 
@@ -88,6 +88,11 @@ export default class Router {
             this.views[newPath].render(this.root, newPath);
             return;
         }
+        if (newPath.match(URL.ARTIST)) {
+            this.views[URL.ARTIST].render(this.root,
+                newPath.slice(newPath.indexOf('artist') + 7, newPath.length));
+            return;
+        }
         if (isRegUrl !== newPath) {
             this.views[isRegUrl].render(this.root,
                 newPath.slice(newPath.lastIndexOf('/') + 1, newPath.length));
@@ -116,6 +121,5 @@ export default class Router {
             }
         });
         this.check(window.location.pathname, false);
-        this.views[URL.PLAYER].render();
     }
 }

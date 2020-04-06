@@ -25,7 +25,8 @@ export class ProfileController {
         // --------- Albums
         this.albumsController = new ProfileAlbumsController(router, this.eventBus, globalEventBus);
         this.tracksController = new ProfileTracksController(router, this.eventBus);
-        this.playlistsController = new ProfilePlaylistsController(router, this.eventBus, globalEventBus);
+        this.playlistsController = new ProfilePlaylistsController(router, this.eventBus,
+            globalEventBus);
         this.artistsController = new ProfileArtistsController(router, this.eventBus);
     }
 }

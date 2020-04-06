@@ -1,4 +1,4 @@
-import {NAVBAR, DOM} from '@libs/constans.js';
+import {NAVBAR, GLOBAL, DOM, URL} from '@libs/constans.js';
 import navbar from '@views/navbar/navbar.tmpl.xml';
 import BaseView from '@libs/base_view';
 
@@ -21,6 +21,8 @@ export default class NavbarView extends BaseView {
 
     /**
      * рендерит навбар
+     * @param {Object} root
+     * @param {srting} url
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.NAVBAR)[0]);
@@ -46,6 +48,7 @@ export default class NavbarView extends BaseView {
         this.eventBus.emit(NAVBAR.LOGOUT_CLICKED);
         this.renderNotLogged.bind(this)();
         this.globalEventBus.emit(NAVBAR.LOGOUT_REDIRECT, URL.MAIN);
+        this.globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK, true);
     }
 
     /**
@@ -54,7 +57,7 @@ export default class NavbarView extends BaseView {
      */
     analyzeCookie(loggedIn) {
         if (loggedIn) {
-            this.eventBus.emit(NAVBAR.GET_USER_DATA, {});
+            this.eventBus.emit(NAVBAR.GET_USER_DATA);
         } else {
             this.renderNotLogged.bind(this)();
         }

@@ -7,7 +7,8 @@ import {LoginController} from '@controllers/login';
 import {SignupController} from '@controllers/signup';
 import {PlayerController} from '@controllers/player';
 import {ProfileController} from '@controllers/profile/profile';
-import {SettingsController} from '@controllers/settings';
+import {SettingsController} from '@controllers/settings.js';
+import {ArtistController} from '@controllers/artist.js';
 import {PlaylistController} from '@controllers/playlist';
 import {AlbumController} from '@controllers/album';
 
@@ -21,6 +22,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const playerController = new PlayerController(router, globalEventBus);
     const profileController = new ProfileController(router, globalEventBus);
     const settingsController = new SettingsController(router, globalEventBus);
+    const artistController = new ArtistController(router, globalEventBus);
     const playlistController = new PlaylistController(router, globalEventBus);
     const albumController = new AlbumController(router, globalEventBus);
 
@@ -46,8 +48,10 @@ window.addEventListener('DOMContentLoaded', () => {
     router.addView(URL.PROFILE_ALBUMS, profileController.view);
     router.addView(URL.PROFILE_ARTISTS, profileController.view);
     router.addView(URL.SETTINGS, settingsController.view);
+    router.addView(URL.ARTIST, artistController.view);
     router.addView(URL.PLAYLIST, playlistController.view);
     router.addView(URL.ALBUM, albumController.view);
     router.start();
     navbarController.view.render();
+    playerController.view.render();
 });

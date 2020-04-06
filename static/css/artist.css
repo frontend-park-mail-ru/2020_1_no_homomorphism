@@ -1,0 +1,65 @@
+.m-artist-likes {}
+
+.m-artist-like-button {
+    text-align: right;
+}
+
+.b-artist-like-button {
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+}
+
+.m-artist-like-number {}
+
+.m-artist-notifications {}
+
+.b-artist-notifications-button {
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+}
+
+.m-artist-notifications-number {}
+
+.m-artist-play {
+    cursor: pointer;
+}
+
+.b-artist-play-button {
+    height: 30px;
+    width: 30px;
+}
+
+.m-artist-play-word {}
+
+.m-artist-info {
+    padding-top: 13px;
+}
+
+.m-artist-info:hover {
+    background: var(--light-green);
+    /*border-radius: 5px;*/
+    cursor: pointer;
+    transition: 0.1s;
+    transform: scale(1.1);
+}
+
+ .m-artist-background {
+    /* filter: blur(14px); */
+    position: relative;
+    z-index: -1;
+    box-shadow: inset 0 -105px white;
+}
+
+.l-top-card {
+    overflow: hidden;
+}
+
+.l-artist-base {
+    z-index: 1;
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 32px;
+    padding: 32px 0;
+    margin-top: 16px;
+}

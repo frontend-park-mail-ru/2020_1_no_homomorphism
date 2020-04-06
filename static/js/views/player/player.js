@@ -22,7 +22,6 @@ export default class PlayerView extends BaseView {
         this.muted = false;
         this.volume = 1;
         this.locked = true;
-        this.eventBus.on(PLAYER.RESIZE, this.resize.bind(this)); // globalEventBus
         this.eventBus.on(PLAYER.DRAW_PLAY, this.drawPlay.bind(this));
         this.eventBus.on(PLAYER.DRAW_PAUSE, this.drawPause.bind(this));
         this.eventBus.on(PLAYER.TRACK_UPDATE, this.updateTrack.bind(this));
@@ -43,6 +42,8 @@ export default class PlayerView extends BaseView {
 
     /**
      * Позиционирует плеер
+     * @param {Object} root
+     * @param {srting} url
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.PLAYER)[0]);
@@ -507,10 +508,10 @@ export default class PlayerView extends BaseView {
                 trackList.getClientRects()[0].height > document.documentElement.clientHeight ||
                 delta < 0 && top < 0
             ) {
-                if (delta > 0 && top - delta / 8 > 0) {
+                if (delta > 0 && top - delta / 2 > 0) {
                     trackList.style.top = '0';
                 } else {
-                    trackList.style.top = (top - delta / 6).toString() + 'px';
+                    trackList.style.top = (top - delta / 2).toString() + 'px';
                 }
             }
         }
@@ -653,13 +654,10 @@ export default class PlayerView extends BaseView {
      * @param {Object} track
      */
     updateTrack(track) {
-        const temp = track.image;
-        if (temp.split('/')[0] === 'static') {
-            track.image = '/' + temp;
-        }
         document.getElementById('cover').src = track.link; // TODO ВЫНУЖДЕННО из-за текущей базы данных
         document.getElementById('artist').innerHTML = track.artist;
         document.getElementById('title').innerHTML = track.name;
+        document.getElementById('title').title = track.name;
         const minutes = Math.floor(track.duration / 60);
         const seconds = Math.floor(track.duration % 60);
         document.getElementsByClassName('duration')[0].innerHTML = minutes.toString() + ':' +
@@ -677,7 +675,8 @@ export default class PlayerView extends BaseView {
             return;
         }
         const marker = document.getElementsByClassName('current-marker')[0];
-        const track1 = document./* getElementsByClassName('l-player')[0].*/getElementById(currentId);
+        const track1 = document./* getElementsByClassName('l-player')[0].*/getElementById(
+            currentId);
         const track2 = document./* getElementsByClassName('l-player')[0].*/getElementById(newId);
         const heightDifference = track1.getBoundingClientRect().y -
             track2.getBoundingClientRect().y;
@@ -710,6 +709,9 @@ export default class PlayerView extends BaseView {
             document.getElementsByClassName('track-list')[0].innerHTML += track(tracks[i]);
         }
         this.locked = false;
+        if (!this.expanded) {
+            this.triggerClick();
+        }
     }
 
     /**
@@ -728,12 +730,17 @@ export default class PlayerView extends BaseView {
 
     /**
      * Очищает список воспроизвдения
+     * @param {boolean} lock
      */
-    removeFromTracklistAll() {
+    removeFromTracklistAll(lock) {
         while (document.getElementsByClassName('track-list')[0].children.length > 1) {
             document.getElementsByClassName('track-list')[0].children[document
                 .getElementsByClassName('track-list')[0].children.length - 1].remove();
         }
+        if (lock && this.expanded) {
+            this.triggerClick();
+        }
+        this.locked = lock;
     }
 
     /**

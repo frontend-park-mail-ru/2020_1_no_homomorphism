@@ -1,4 +1,4 @@
-import {LOGIN, DOM} from '@libs/constans.js';
+import {LOGIN} from '@libs/constans.js';
 import template from '@views/login/login.tmpl.xml';
 import BaseView from '@libs/base_view';
 
@@ -7,8 +7,8 @@ import BaseView from '@libs/base_view';
  */
 export default class LoginView extends BaseView {
     /**
-	 * @param {EventBus} eventBus
-	 */
+     * @param {EventBus} eventBus
+     */
     constructor(eventBus) {
         super(template);
         this.eventBus = eventBus;
@@ -16,16 +16,18 @@ export default class LoginView extends BaseView {
     }
 
     /**
-	 * рендерит страничку входа
-	 */
+     * рендерит страничку входа
+     * @param {Object} root
+     * @param {srting} url
+     */
     render(root, url) {
         super.render(root);
         this.setEventListeners.bind(this)();
     }
 
     /**
-	 * setEventListeners
-	 */
+     * setEventListeners
+     */
     setEventListeners() {
         document.addEventListener('click', (event) => {
             if (event.target.getAttribute('id') === 'submit-login') {
@@ -37,9 +39,9 @@ export default class LoginView extends BaseView {
     }
 
     /**
-	 * показывает какие поля неверно заполнены
-	 * @param {Object} errors
-	 */
+     * показывает, какие поля неверно заполнены
+     * @param {Object} errors
+     */
     showErrors(errors) {
         document.getElementsByClassName('login-form')[0].style.borderColor = 'red';
         for (const key in errors) {
@@ -60,8 +62,8 @@ export default class LoginView extends BaseView {
     }
 
     /**
-	 * отправляет данные формы
-	 */
+     * отправляет данные формы
+     */
     submit() {
         document.querySelectorAll('.login-form label').forEach((label) => {
             label.children[0].style.borderColor = '#ccc';

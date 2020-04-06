@@ -1,6 +1,5 @@
 import news from '@views/news/news.tmpl.xml';
 import BaseView from '@libs/base_view';
-import {DOM} from '@libs/constans';
 import '@css/base.css';
 
 /**
@@ -16,8 +15,10 @@ export default class NewsView extends BaseView {
 
     /**
      * рендерит главную страничку
+     * @param {Object} root
+     * @param {srting} url
      */
-    render(root, url ) {
+    render(root, url) {
         super.render(root);
     }
 }

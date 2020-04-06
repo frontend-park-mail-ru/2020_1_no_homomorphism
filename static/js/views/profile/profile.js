@@ -19,6 +19,8 @@ export default class ProfileView extends BaseView {
 
     /**
      * Рендер
+     * @param {Object} root
+     * @param {srting} url
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.CONTENT)[0], url);
@@ -29,12 +31,13 @@ export default class ProfileView extends BaseView {
 
     /**
      * Рендер
+     * @param {Object} data
      */
     renderData(data) {
         this.setData(data);
         document.getElementsByClassName('m-top-login')[0].innerHTML = data.login;
         document.getElementsByClassName('m-top-name')[0].innerHTML = data.name;
-        document.getElementsByClassName(' m-round-image')[0].src = data.image;
+        document.getElementsByClassName('m-round-image')[0].src = data.image;
     }
 
     /**
@@ -60,6 +63,9 @@ export default class ProfileView extends BaseView {
         curSection.classList.add(PROFILE.SELECTED_CLASS);
     }
 
+    /**
+     * @param {Object} data
+     */
     setData(data) {
         super.setData(data); // TODO очищение памяти при логауте !!!
     }

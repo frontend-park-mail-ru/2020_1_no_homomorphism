@@ -7,7 +7,7 @@ const app = express();
 app.use(logger('dev'));
 const root = path.resolve(__dirname, 'static');
 
-app.use( express.static(root));
+app.use(express.static(root));
 
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, 'index.html'), function(err) {

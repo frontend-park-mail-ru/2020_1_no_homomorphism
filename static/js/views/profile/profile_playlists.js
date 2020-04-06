@@ -42,14 +42,6 @@ export default class ProfilePlaylistsView {
     playlistClick(event) {
         let current = event.target;
         while (current !== window && current !== document.body && current != null) {
-            /* if (current.getAttribute('class') === 'l-list-card'/* ||
-                (current.getAttribute('class') !== null &&
-                current.getAttribute('class').indexOf('button') !== -1 &&
-                current.getAttribute('class').indexOf('buttons') === -1 &&
-                current.getAttribute('class').indexOf('row') !== -1)
-            ) {
-                break;
-            }*/
             if (current.getAttribute('class') === 'l-list-card' &&
                 current.getAttribute('id') !== null) {
                 this.globalEventBus.emit(GLOBAL.PLAY_PLAYLIST, {index: current.getAttribute('id')});

@@ -1,4 +1,4 @@
-import {ALBUM, GLOBAL, PLAYER} from '@libs/constans.js';
+import {ALBUM, GLOBAL} from '@libs/constans.js';
 import playlist from '@views/album/album.tmpl.xml';
 import tracks from '@views/album/album_track.tmpl.xml';
 import BaseView from '@libs/base_view';
@@ -22,6 +22,8 @@ export default class AlbumView extends BaseView {
 
     /**
      * рендерит страницу плейлиста
+     *  @param {Object} root
+     *  @param {string} url
      */
     render(root, url) {
         super.render(root);
@@ -54,7 +56,8 @@ export default class AlbumView extends BaseView {
             return;
         }
         document.getElementsByClassName('l-track-list')[0].innerHTML = tracks(this.data.tracks);
-        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Amount of tracks: ' + this.data.tracks.length;
+        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Amount of tracks: ' +
+            this.data.tracks.length;
         document.getElementsByClassName('l-track-list')[0].className += ' l-profile-base';
         this.seEventListeners();
     }
@@ -72,7 +75,8 @@ export default class AlbumView extends BaseView {
         });
         document.querySelectorAll('img.m-add-button').forEach((button) => { // TODO выбор, в какой плейлист добавить
         });
-        document.getElementsByClassName('m-button-track-list-play')[0].addEventListener('click', this.playAlbum.bind(this));
+        document.getElementsByClassName('m-button-track-list-play')[0].addEventListener('click',
+            this.playAlbum.bind(this));
     }
 
     /**
@@ -84,6 +88,7 @@ export default class AlbumView extends BaseView {
 
     /**
      * Выводит ошибку
+     * @param {Object} error
      */
     showErrors(error) {
         document.getElementsByClassName('l-top-card')[0].innerHTML = error.text;
