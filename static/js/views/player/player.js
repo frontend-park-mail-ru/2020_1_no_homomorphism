@@ -434,7 +434,7 @@ export default class PlayerView extends BaseView {
         this.volumeDrag = false;
         this.muted = false;
         const height = document.getElementsByClassName('volume-scale-back')[0]
-                .getBoundingClientRect().height -
+            .getBoundingClientRect().height -
             (event.clientY - document.getElementsByClassName('volume-scale-back')[0]
                 .getBoundingClientRect().y);
         this.volume = height / document.getElementsByClassName('volume-scale-back')[0]
@@ -450,7 +450,7 @@ export default class PlayerView extends BaseView {
     volumeMouseMove(event) {
         if (this.volumeDrag) {
             const height = document.getElementsByClassName('volume-scale-back')[0]
-                    .getBoundingClientRect().height -
+                .getBoundingClientRect().height -
                 (event.clientY - document.getElementsByClassName('volume-scale-back')[0]
                     .getBoundingClientRect().y);
             this.volume = height / document.getElementsByClassName('volume-scale-back')[0]
@@ -466,7 +466,7 @@ export default class PlayerView extends BaseView {
      */
     volumeScaleClick(event) {
         const height = document.getElementsByClassName('volume-scale-back')[0]
-                .getBoundingClientRect().height -
+            .getBoundingClientRect().height -
             (event.clientY - document.getElementsByClassName('volume-scale-back')[0]
                 .getBoundingClientRect().y);
         this.volume = height / document.getElementsByClassName('volume-scale-back')[0]
@@ -677,8 +677,8 @@ export default class PlayerView extends BaseView {
             return;
         }
         const marker = document.getElementsByClassName('current-marker')[0];
-        const track1 = document./*getElementsByClassName('l-player')[0].*/getElementById(currentId);
-        const track2 = document./*getElementsByClassName('l-player')[0].*/getElementById(newId);
+        const track1 = document./* getElementsByClassName('l-player')[0].*/getElementById(currentId);
+        const track2 = document./* getElementsByClassName('l-player')[0].*/getElementById(newId);
         const heightDifference = track1.getBoundingClientRect().y -
             track2.getBoundingClientRect().y;
         const base = document.getElementsByClassName('track-list')[0].children[1]
@@ -717,7 +717,7 @@ export default class PlayerView extends BaseView {
      * @param {string} id
      */
     removeFromTracklist(id) {
-        document./*getElementsByClassName('l-player')[0].*/getElementById(id).remove();
+        document./* getElementsByClassName('l-player')[0].*/getElementById(id).remove();
         if (document.getElementsByClassName('track-list')[0].children.length === 1) {
             if (this.expanded) {
                 this.triggerClick();

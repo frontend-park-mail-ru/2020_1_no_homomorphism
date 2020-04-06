@@ -85,7 +85,6 @@ export default class SignupModel {
                 } else {
                     this.eventBus.emit(SIGN_UP.INVALID, {global: 'This email is taken'});
                 }
-
             });
     }
 }

@@ -1,4 +1,4 @@
-import {SIGN_UP , DOM} from '@libs/constans.js';
+import {SIGN_UP, DOM} from '@libs/constans.js';
 import signup from '@views/signup/signup.tmpl.xml';
 import BaseView from '@libs/base_view';
 

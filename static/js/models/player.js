@@ -193,7 +193,7 @@ export default class PlayerModel {
                     this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
                     this.eventBus.emit(PLAYER.TRACK_UPDATE,
                         this.playlist[this.queue[this.queue.length - 1]].id,
-                        this.playlist[this.queue[0]]
+                        this.playlist[this.queue[0]],
                     );
                 }
                 this.playing = false;

@@ -42,7 +42,7 @@ export default class NavbarModel {
      * Разлогинивает пользователя
      */
     doLogout() {
-         Api.logoutFetch()
+        Api.logoutFetch()
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:

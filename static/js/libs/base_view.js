@@ -20,11 +20,10 @@ export default class BaseView {
     }
 
     get getData() {
-        return this.data
+        return this.data;
     }
 
     setData(data) {
         this.data = data;
     }
-
 }

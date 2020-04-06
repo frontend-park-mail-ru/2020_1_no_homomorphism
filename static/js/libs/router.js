@@ -77,9 +77,9 @@ export default class Router {
             this.redirect(URL.MAIN); // TODO добавить вывод пользователю
             return;
         }
-       if (newPath === URL.PROFILE) {
-           this.redirect(URL.PROFILE_TRACKS);
-       }
+        if (newPath === URL.PROFILE) {
+            this.redirect(URL.PROFILE_TRACKS);
+        }
         this.curPath = newPath;
         if (pushState) {
             window.history.pushState('', {}, newPath);

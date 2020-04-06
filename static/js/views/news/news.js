@@ -6,12 +6,12 @@ import '@css/base.css';
 /**
  *  вью для главной
  */
-export default class NewsView extends BaseView{
+export default class NewsView extends BaseView {
     /**
      * Конструктор
      */
     constructor() {
-        super(news)
+        super(news);
     }
 
     /**

@@ -1,4 +1,4 @@
-import {PROFILE } from '@libs/constans.js';
+import {PROFILE} from '@libs/constans.js';
 import template from '@views/profile/profile_album.tmpl.xml';
 import {GLOBAL} from '@libs/constans';
 
@@ -12,7 +12,7 @@ export default class ProfileAlbumsView {
      * @param {EventBus} eventBus
      * @param {EventBus} globalEventBus
      */
-    constructor(eventBus,globalEventBus) {
+    constructor(eventBus, globalEventBus) {
         this.globalEventBus = globalEventBus;
         eventBus.on(PROFILE.RENDER_ALBUMS, this.drawAlbums.bind(this));
         this.eventBus = eventBus;
