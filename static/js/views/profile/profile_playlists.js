@@ -30,7 +30,7 @@ export default class ProfilePlaylistsView {
      * Set EventListeners
      */
     setEventListeners() {
-        document.querySelectorAll('.l-profile-playlists').forEach((playlist) => {
+        document.querySelectorAll('.l-list-card').forEach((playlist) => {
             playlist.onclick = (event) => this.playlistClick.bind(this)(event);
         });
     }
@@ -42,7 +42,7 @@ export default class ProfilePlaylistsView {
     playlistClick(event) {
         let current = event.target;
         while (current !== window && current !== document.body && current != null) {
-            /*if (current.getAttribute('class') === 'l-profile-playlists'/* ||
+            /*if (current.getAttribute('class') === 'l-list-card'/* ||
                 (current.getAttribute('class') !== null &&
                 current.getAttribute('class').indexOf('button') !== -1 &&
                 current.getAttribute('class').indexOf('buttons') === -1 &&
@@ -50,7 +50,7 @@ export default class ProfilePlaylistsView {
             ) {
                 break;
             }*/
-            if (current.getAttribute('class') === 'l-profile-playlists' &&
+            if (current.getAttribute('class') === 'l-list-card' &&
                 current.getAttribute('id') !== null) {
                 this.globalEventBus.emit(GLOBAL.PLAY_PLAYLIST, {index: current.getAttribute('id')});
                 break;

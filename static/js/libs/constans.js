@@ -30,6 +30,9 @@ export const URL = {
     PROFILE_PLAYLISTS: '/profile/playlists',
     PROFILE_ARTISTS: '/profile/artists',
     SETTINGS: '/settings',
+    ARTIST: /(\/artist\/)[0-9]+/,
+    PLAYLIST: /(\/playlist\/)[0-9]+/,
+    ALBUM: /(\/album\/)[0-9]+/,
 };
 
 export const VALIDATION = {
@@ -50,7 +53,8 @@ export const VALIDATION = {
 };
 
 export const GLOBAL = {
-    PLAY_PLAYLIST: 'play playlist',
+    PLAY_PLAYLIST: 'play-playlist',
+    PLAY_ALBUM: 'play-album',
 };
 
 export const LOGIN = {
@@ -97,6 +101,8 @@ export const PLAYER = {
     TRACK_UPDATE: 'track-update',
     MOVE_MARKER: 'move-marker',
     DRAW_TRACKLIST: 'draw-tracklist',
+    REMOVE_FROM_TRACKLIST: 'remove-from-tracklist',
+    REMOVE_FROM_TRACKLIST_ALL: 'remove-from-tracklist-all',
     DRAW_TIMELINE: 'draw-timeline',
     DRAW_SHUFFLE: 'draw-shuffle',
     DRAW_UNSHUFLE: 'draw-unshuffle',
@@ -105,7 +111,6 @@ export const PLAYER = {
     DRAW_UNREPEAT: 'draw-unrepeat',
     DRAW_MUTE: 'draw-mute',
     DRAW_UNMUTE: 'draw-unmute',
-    REMOVE_FROM_TRACKLIST: 'remove-from-tracklist'
 };
 
 export const SETTINGS = {
@@ -138,4 +143,18 @@ export const PROFILE = {
     RENDER_PLAYLISTS: 'render-profile-playlists',
     RENDER_ALBUMS: 'render-profile-albums',
     RENDER_ARTISTS: 'render-profile-artists',
+};
+
+export const PLAYLIST = {
+    REDIRECT: 'redirect',
+    GET_PLAYLIST_DATA: 'get-playlist',
+    RENDER_DATA: 'render-playlist',
+    ERROR: 'show-errors',
+};
+
+export const ALBUM = {
+    REDIRECT: 'redirect',
+    GET_ALBUM_DATA: 'get-playlist',
+    RENDER_DATA: 'render-playlist',
+    ERROR: 'show-errors',
 };

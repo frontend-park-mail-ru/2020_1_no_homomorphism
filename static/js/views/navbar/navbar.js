@@ -25,7 +25,7 @@ export default class NavbarView extends BaseView {
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.NAVBAR)[0]);
         this.setEventListeners.bind(this)();
-        this.eventBus.emit(NAVBAR.CHECK_COOKIE, {});
+        this.eventBus.emit(NAVBAR.CHECK_COOKIE);
     }
 
     /**
@@ -43,7 +43,7 @@ export default class NavbarView extends BaseView {
      * не залогинен
      */
     logoutClicked() {
-        this.eventBus.emit(NAVBAR.LOGOUT_CLICKED, {});
+        this.eventBus.emit(NAVBAR.LOGOUT_CLICKED);
         this.renderNotLogged.bind(this)();
         this.globalEventBus.emit(NAVBAR.LOGOUT_REDIRECT, URL.MAIN);
     }

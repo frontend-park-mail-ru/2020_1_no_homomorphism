@@ -45,7 +45,7 @@ export default class SignupModel {
                 .then((res) => {
                     switch (res.status) {
                     case RESPONSE.OK_ADDED:
-                        this.globalEventBus.emit(NAVBAR.GET_USER_DATA, {});
+                        this.globalEventBus.emit(NAVBAR.GET_USER_DATA);
                         localStorage.setItem('csrfToken', res.headers.get('Csrf-Token'));
                         this.eventBus.emit(SIGN_UP.REDIRECT, URL.MAIN);
                         break;

@@ -1,6 +1,5 @@
 import Api from '@libs/api.js';
-import {PROFILE} from '@libs/constans.js';
-import {RESPONSE} from '@libs/constans';
+import {PROFILE, RESPONSE} from '@libs/constans.js';
 
 /**
  * Модель Профиля

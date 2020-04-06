@@ -1,3 +1,8 @@
+:root {
+    --card-border: 16px;
+    --light-green: #00e67626;
+}
+
 hr {
     border: none;
     background-color: #b39ddb;
@@ -14,44 +19,22 @@ p {
     margin: 6px;
 }
 
-.vl {
-    border-left: 1px solid #070025;
-    height: 200px;
-    width: 1px;
-}
-
-.l-profile {
+.l-main {
     margin-left: 3em;
 }
 
-.l-profile .info {
-    font-size: 25px;
-    margin: 10px 10px 20px;
-}
-
-.l-profile-top {
+.l-top-card {
     box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 32px;
-    padding: 32px;
+    border-radius: var(--card-border);
+
+    /*padding: 16px;*/
 }
 
-.l-profile-top-image {
-    background-clip: padding-box;
-    border-radius: 6px 6px 0 0;
-    height: 220px;
-    z-index: 2;
+.l-round-image {
+    margin-left: 32px;
 }
 
-.l-profile-top-info {
-    margin-top: -240px;
-    border-left: #b39ddb;
-    border-right: #b39ddb;
-}
-
-.l-profile-avatar {
-}
-
-.m-profile-avatar {
+.m-round-image {
     z-index: 3;
     height: 150px;
     width: 150px;
@@ -59,14 +42,14 @@ p {
     float: right;
 }
 
-.m-profile-avatar:hover {
+.m-round-image:hover {
     transition: 0.3s;
     box-shadow: 0 0 30px #6b6b6b;
     -webkit-transform: scale(2);
     transform: scale(1.1);
 }
 
-.m-profile-avatar:not(:hover) {
+.m-round-image:not(:hover) {
     transition: 0.3s;
     box-shadow: 0 0 10px 4px rgba(129, 129, 129, 0.65);
 }
@@ -75,30 +58,30 @@ img#avatar {
     margin-top: 50px;
 }
 
-#login-name {
-    padding-top: 128px;
-    margin-left: 16px;
+.l-top-name {
+    margin-left: 32px;
+    padding-top: 100px;
     text-align: left;
 }
 
-.m-profile-login {
+.m-top-login {
     color: #070025;
     font-size: 30px;
     word-wrap: break-word;
 }
 
-.m-profile-name {
+.m-top-name {
     color: #5c4b6b;
-    font-size: 15px;
+    font-size: 16px;
     word-wrap: break-word;
 }
 
-.l-profile-titles .col {
-    margin-top: 100px;
+.l-top-titles .col {
+    margin-top: 80px;
     padding-top: 8px;
 }
 
-.m-profile-tiny-ref {
+.m-tiny-ref {
     font-weight: lighter;
     color: #000000;
     text-decoration: none
@@ -107,7 +90,7 @@ img#avatar {
 .l-profile-base {
     z-index: 1;
     box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 32px;
+    border-radius: var(--card-border);
     padding: 32px;
     margin-top: 16px;
 }
@@ -140,15 +123,15 @@ img#avatar {
 }
 
 .m-profile-albums:hover, .m-profile-tracks:hover, .m-profile-playlists:hover, .m-profile-artists:hover {
-    background: #eee;
-    border-radius: 5px;
+    background: var(--light-green);
+    /*border-radius: 5px;*/
     cursor: pointer;
     transition: 0.1s;
     transform: scale(1.1);
 }
 
 .is-touched-profile-section {
-    background: #eee;
+    background: var(--light-green);
     border-radius: 5px;
     cursor: pointer;
     transition: 0.1s;
@@ -180,7 +163,7 @@ img#avatar {
     transition-duration: 0.5s;
 }
 
-.l-profile-playlist-list, .l-profile-album-playlist-list .l-profile-artist-list{
+.l-playlist-list, .l-profile-album-playlist-list .l-profile-artist-list {
     display: block;
     padding: 0;
     list-style: none;
@@ -194,21 +177,21 @@ img#avatar {
 }
 
 .m-profile-track-name {
-    font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+    /*font: bold 20px/1.5 Helvetica, Verdana, sans-serif;*/
 }
 
-.l-profile-track img {
+.l-track-big img {
     float: left;
     margin: 0 15px 0 0;
 }
 
-.l-profile-track {
+.l-track-big {
     padding: 10px;
     overflow: hidden;
 }
 
-.l-profile-track:hover {
-    background: #eee;
+.l-track-big:hover {
+    background: var(--light-green);
     cursor: pointer;
 }
 
@@ -236,7 +219,7 @@ img#avatar {
     border-radius: 5px;
 }
 
-.l-profile-track:hover .m-profile-track-image {
+.l-track-big:hover .m-profile-track-image {
     transition: 0.3s;
     -webkit-transform: scale(2);
     transform: scale(1.2);
@@ -244,17 +227,17 @@ img#avatar {
     box-shadow: 0 0 10px 4px rgba(129, 129, 129, 0.65);
 }
 
-.l-profile-track:not(:hover) .m-profile-track-image {
+.l-track-big:not(:hover) .m-profile-track-image {
     transition: 0.1s;
 }
 
-.l-profile-track:hover .m-profile-button-play {
+.l-track-big:hover .m-button-track-play {
     opacity: 1;
     -webkit-transform: scale(2);
     transform: scale(2);
 }
 
-.m-profile-button-play {
+.m-button-track-play {
     height: 30px;
     width: 30px;
     background: url(../../static/img/play.svg) no-repeat;
@@ -271,14 +254,14 @@ img#avatar {
 
 /* STYLES FOR PLAYLISTS */
 
-.l-profile-playlists img {
+.l-list-card img {
     float: left;
     object-fit: cover;
     width: 200px;
     height: 200px;
 }
 
-.l-profile-playlists {
+.l-list-card {
     float: top;
     animation-duration: 1s;
     overflow: hidden;
@@ -293,14 +276,15 @@ img#avatar {
     transition: transform 0.1s ease-in-out, box-shadow 0.1s;
 }
 
-.l-profile-playlists:hover {
+.l-list-card:hover {
     background: #eee;
     cursor: pointer;
-    transform: translateY(-0.5rem) scale(1.0125);
+    transform: translateY(-0.1rem) scale(1.0125);
+    transition: 0.2s;
     box-shadow: 0 3px 10px -3px rgba(0, 0, 0, 0.5);
 }
 
-.l-profile-playlists-description {
+.l-list-card-description {
     display: block;
     color: #515151;
     margin-top: -20px;
@@ -309,24 +293,35 @@ img#avatar {
     padding-right: 6px;
     text-decoration: none;
 }
+
+.in-list-card-description {
+    display: block;
+    color: #515151;
+    margin-top: -20px;
+    padding-bottom: 32px;
+    padding-left: 6px;
+    padding-right: 6px;
+    text-decoration: none;
+}
+
 .card-list {
     display: block;
     padding: 0;
     list-style: none;
 }
 
-.l-profile-playlists:hover .m-profile-button-play-playlist {
+.l-list-card:hover .m-button-track-play-playlist {
     opacity: 1;
     -webkit-transform: scale(6);
     transform: translateY(-100px) translateX(-16px) scale(6);
 }
 
-.l-profile-playlists:hover .m-profile-playlist-image {
+.l-list-card:hover .m-list-image {
     transition: 0.3s;
-    opacity: 0.5;
+    opacity: 0.8;
 }
 
-.m-profile-button-play-playlist {
+.m-button-track-play-playlist {
     height: 30px;
     width: 30px;
     object-fit: cover;

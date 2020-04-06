@@ -20,17 +20,17 @@ export default class ProfileAlbumsModel {
      * Получение списка альбомов
      */
     getAlbums() {
-        Api.profilePlaylistsFetch()
+        Api.profileAlbumsFetch()
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
                     res.json()
-                .then((list) => {
-                    this.playlists = list.playlists;
-                })
-                    .then(() => {
-                        this.eventBus.emit(PROFILE.RENDER_PLAYLISTS, this.playlists);
-                    });
+                        .then((list) => {
+                            this.albums = list.albums;
+                        })
+                        .then(() => {
+                            this.eventBus.emit(PROFILE.RENDER_ALBUMS, this.albums);
+                        });
                     break;
                 case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
                     break;
