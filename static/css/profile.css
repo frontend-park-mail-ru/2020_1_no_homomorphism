@@ -27,6 +27,7 @@ p {
 
 .l-round-image {
     margin-left: 32px;
+    margin-top: 16px;
 }
 
 .m-round-image {
@@ -34,7 +35,7 @@ p {
     height: 150px;
     width: 150px;
     border-radius: 100px;
-    /*padding: 8px;*/
+    margin: 16px;
     float: right;
 }
 

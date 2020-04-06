@@ -126,6 +126,7 @@ export const SETTINGS = {
     RENDER_LOGGED: 'logged-in',
     AVATAR_UPLOAD: 'avatar-upload',
     SUBMIT: 'submit',
+    SUBMIT_PASSWORD: 'submit-password',
     INVALID: 'invalid',
     REDIRECT: 'settings-redirect',
 };

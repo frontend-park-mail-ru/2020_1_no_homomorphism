@@ -29,6 +29,7 @@ export default class SettingsModel {
                 case RESPONSE.OK:
                     res.json()
                         .then((data) => {
+                            console.log(data);
                             this.eventBus.emit(SETTINGS.RENDER_LOGGED, data);
                         });
                     break;
@@ -98,6 +99,9 @@ export default class SettingsModel {
         const errors = {};
         if (values.newPassword !== '' && resPassword !== '') {
             errors['newPassword'] = resPassword;
+            if (values.password === '') {
+                errors['password'] = 'Enter old password';
+            }
         }
         if (resEmail !== '') {
             errors['email'] = resEmail;
@@ -106,15 +110,21 @@ export default class SettingsModel {
             errors['name'] = 'Enter name';
         }
         if (JSON.stringify(errors) !== '{}') {
+            console.log(errors);
             this.eventBus.emit(SETTINGS.INVALID, errors);
         } else {
+            console.log(values.name, values.email, values.password, values.newPassword);
             Api.profileEditFetch(values.name, values.email, values.password, values.newPassword)
                 .then((res) => {
+                    console.log(res);
                     switch (res.status) {
                     case RESPONSE.OK:
+                        console.log('OK');
                         this.getUserData.bind(this)();
                         break;
                     case RESPONSE.BAD_REQUEST: // TODO Обработать ошибку
+                        console.log('BAD_REQUEST');
+                        errors['password'] = 'Wrong password';
                         this.eventBus.emit(SETTINGS.INVALID, errors);
                         break;
                     case RESPONSE.UNAUTH:

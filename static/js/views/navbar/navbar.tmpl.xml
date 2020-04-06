@@ -6,13 +6,13 @@
         Mystical Spiral
     </a>
     <input type="text" class="search"/>
-        <a class="search-button">
-            <img src="/static/img/search.svg" class="m-medium-icon"/>
-        </a>
+    <a class="search-button">
+        <img src="/static/img/search.svg" class="m-medium-icon"/>
+    </a>
     <a href="/profile/tracks" class="l-navbar-info is-hidden" id="profile-link">
         <img class="m-navbar-avatar m-medium-icon col" src="/static/img/avatar/default.png" alt="avatar"/>
 
-        <div class="m-navbar-name col">    </div>
+        <div class="m-navbar-name col"></div>
     </a>
     <a href="/settings" class="l-settings-icon is-hidden">
         <img src="/static/img/settings-24px.svg" class="m-small-icon"/>

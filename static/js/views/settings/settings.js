@@ -13,6 +13,7 @@ export default class SettingsView extends BaseView {
         super(settings);
         this.eventBus = eventBus;
         this.userData = {};
+        this.errors = {};
         this.eventBus.on(SETTINGS.INVALID, this.showErrors.bind(this));
         this.eventBus.on(SETTINGS.RENDER_LOGGED, this.renderData.bind(this));
         // this.eventBus.on(SETTINGS.AVATAR_UPLOAD, this.previewFile.bind(this));
@@ -41,7 +42,15 @@ export default class SettingsView extends BaseView {
         button.addEventListener('click', (event) => {
             event.preventDefault();
             event.stopImmediatePropagation();
-            this.submit();
+            this.hideErrors();
+            this.submitData();
+        });
+        const buttonPas = document.getElementById('submit-setting-changes-pass');
+        buttonPas.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            this.hideErrors();
+            this.submitPassword();
         });
         const fileAttach = document.getElementById('avatar-upload');
         fileAttach.addEventListener('change', (event) => {
@@ -60,7 +69,6 @@ export default class SettingsView extends BaseView {
         document.getElementsByClassName(' m-round-image')[0].src = data.image;
         document.getElementsByClassName('m-top-name')[0].innerHTML = data.name;
         document.getElementsByClassName('m-top-login')[0].innerHTML = data.login;
-
         document.getElementsByClassName('m-settings-input')[0].value = data.name;
         document.getElementsByClassName('m-settings-input')[1].value = data.email;
     }
@@ -70,11 +78,16 @@ export default class SettingsView extends BaseView {
      * @param {Object} errors
      */
     showErrors(errors) { // TODO починить вывод ошибок
+        this.errors = errors;
+        console.log('kek');
+        if (JSON.stringify(this.errors) === '{}') {
+            document.getElementById('newPassword').value = '';
+            document.getElementById('newPasswordConfirm').value = '';
+            document.getElementById('password').value = '';
+        }
         // eslint-disable-next-line guard-for-in
         for (const key in errors) {
             const message = document.getElementById(key).nextElementSibling;
-            message.previousElementSibling.style.borderColor =
-                (message.getAttribute('class').indexOf('warning') !== -1 ? '#ffae42' : 'red');
             message.innerText = errors[key];
             message.style.height = '15px';
             message.style.marginBottom = '10px';
@@ -83,19 +96,41 @@ export default class SettingsView extends BaseView {
     }
 
     /**
-     * отправляет данные формы
+     * показывает, какие поля формы заполнены неправильно
      */
-    submit() {
-        document.querySelectorAll('.info input').forEach((input) => {
-            input.style.borderColor = '#ccc';
-            input.nextElementSibling.innerText = '';
-            input.nextElementSibling.style.height = '0';
-            input.nextElementSibling.style.marginBottom = '0';
-            input.nextElementSibling.style.visibility = 'hidden';
-        });
+    hideErrors() {
+        console.log(this.errors);
+        // eslint-disable-next-line guard-for-in
+        for (const key in this.errors) {
+            const message = document.getElementById(key).nextElementSibling;
+            message.innerText = '';
+            message.style.height = '0';
+            message.style.marginBottom = '0';
+            message.style.visibility = 'hidden';
+        }
+    }
+
+    /**
+     * отправляет данные формы - почти или имя
+     */
+    submitData() {
         this.eventBus.emit(SETTINGS.SUBMIT, {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
+            newPassword: '',
+            newPasswordConfirm: '',
+            password: '',
+        });
+    }
+
+    /**
+     * отправляет данные формы - пароли
+     */
+    submitPassword() {
+        console.log(this.userData);
+        this.eventBus.emit(SETTINGS.SUBMIT, {
+            name: this.userData.name,
+            email: this.userData.email,
             newPassword: document.getElementById('newPassword').value,
             newPasswordConfirm: document.getElementById('newPasswordConfirm').value,
             password: document.getElementById('password').value,
