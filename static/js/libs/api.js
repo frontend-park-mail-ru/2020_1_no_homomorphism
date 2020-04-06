@@ -64,6 +64,16 @@ export default class Api {
     }
 
     /**
+     * Артист просмотр списка
+     * @param {string} start
+     * @param {string} end
+     * @return {Promise<Response>}
+     */
+    static artistListFetch(start, end) {
+        return getFetch(API + `/artists/${start}/${end}`).catch((error) => console.error(error));
+    }
+
+    /**
      * Артист просмотр
      * @param {string} id
      * @return {Promise<Response>}

@@ -16,6 +16,7 @@ export default class ArtistView extends BaseView {
      */
     constructor(eventBus, globalEventBus) {
         super(artist);
+        this.data = {};
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
         this.eventBus.on(ARTIST.RENDER_DATA, this.renderData.bind(this));
@@ -35,9 +36,8 @@ export default class ArtistView extends BaseView {
         this.allAlbumsRendered = true;
         this.id = url.indexOf('/') === -1 ? url : url.slice(0, url.indexOf('/'));
         this.eventBus.emit(ARTIST.SET_ID, this.id);
-        if (JSON.stringify(this.data) === '{}') {
+        if (JSON.stringify(this.data) === '{}' || this.id != this.data.id) {
             this.eventBus.emit(ARTIST.GET_DATA);
-            this.setData({id: this.id});
         }
         super.render(document.getElementsByClassName(DOM.CONTENT)[0], url);
         this.currentOpen = url.indexOf('/') === -1 ? 'tracks' :

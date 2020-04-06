@@ -2,7 +2,7 @@ import Router from '@libs/router';
 import EventBus from '@libs/eventBus';
 import {URL} from '@libs/constans';
 import {NavbarController} from '@controllers/navbar';
-import {IndexController} from '@controllers/news';
+import {NewsController} from '@controllers/news';
 import {LoginController} from '@controllers/login';
 import {SignupController} from '@controllers/signup';
 import {PlayerController} from '@controllers/player';
@@ -16,7 +16,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const router = new Router();
     const globalEventBus = new EventBus();
     const navbarController = new NavbarController(router, globalEventBus);
-    const indexController = new IndexController();
+    const newsController = new NewsController(router);
     const loginController = new LoginController(router, globalEventBus);
     const signupController = new SignupController(router, globalEventBus);
     const playerController = new PlayerController(router, globalEventBus);
@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     router.addView(URL.NAVBAR, navbarController.view);
     router.addView(URL.PLAYER, playerController.view);
-    router.addView(URL.MAIN, indexController.view);
+    router.addView(URL.MAIN, newsController.view);
     router.addView(URL.LOGIN, loginController.view);
     router.addView(URL.SIGN_UP, signupController.view);
     router.addView(URL.PROFILE, profileController.view);
