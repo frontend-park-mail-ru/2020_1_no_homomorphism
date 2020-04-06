@@ -515,7 +515,10 @@ export default class PlayerView extends BaseView {
                 } else if (delta > 0 && trackList.getBoundingClientRect().bottom - delta / 2 <
                            document.documentElement.clientHeight
                 ) {
-                    trackList.style.top = '-261px';
+                    const container = document.getElementsByClassName('container-audio')[0];
+                    trackList.style.top = (document.documentElement.clientHeight -
+                        trackList.getBoundingClientRect().height -
+                        container.getBoundingClientRect().bottom).toString() + 'px';
                 } else {
                     trackList.style.top = (top - delta / 2).toString() + 'px';
                 }
