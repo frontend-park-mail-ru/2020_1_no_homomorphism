@@ -1,8 +1,8 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
-    <a href="/artists" class="l-logo">
+    <a href="/" class="l-logo">
         <img src="/static/img/library_music.svg" class="m-medium-icon" alt="logo"/>
     </a>
-    <a href="/artists" class="name">
+    <a href="/" class="name">
         Mystical Spiral
     </a>
     <input type="text" class="search"/>

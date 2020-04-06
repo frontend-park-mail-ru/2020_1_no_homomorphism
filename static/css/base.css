@@ -83,3 +83,7 @@ button:focus {
     padding: 32px;
     font-size: 32px;
 }
+
+.background--chosen-icon {
+    background: var(--chosen-icon);
+}
