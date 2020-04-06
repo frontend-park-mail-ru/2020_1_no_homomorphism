@@ -22,7 +22,7 @@ export default class NewsView extends BaseView {
     /**
      * рендерит главную страничку
      * @param {Object} root
-     * @param {srting} url
+     * @param {string} url
      */
     render(root, url) {
         this.eventBus.emit(MAIN.GET_LIST_DATA);

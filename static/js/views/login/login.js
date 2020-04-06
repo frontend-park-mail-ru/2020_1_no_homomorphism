@@ -18,7 +18,7 @@ export default class LoginView extends BaseView {
     /**
      * рендерит страничку входа
      * @param {Object} root
-     * @param {srting} url
+     * @param {string} url
      */
     render(root, url) {
         super.render(root);

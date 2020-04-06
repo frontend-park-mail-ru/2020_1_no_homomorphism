@@ -148,10 +148,11 @@ export default class Api {
      */
     static profileEditFetch(name, email, password, newPassword) {
         return putFetch(API + '/users/settings', {
+            // user: [
             name,
             email,
             password,
-            newPassword,
+            new_password: newPassword,
         }, (error) => {
             console.log(error.toString());
         });

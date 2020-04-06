@@ -11,6 +11,7 @@ import {SettingsController} from '@controllers/settings.js';
 import {ArtistController} from '@controllers/artist.js';
 import {PlaylistController} from '@controllers/playlist';
 import {AlbumController} from '@controllers/album';
+import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 
 window.addEventListener('DOMContentLoaded', () => {
     const router = new Router();
@@ -26,20 +27,10 @@ window.addEventListener('DOMContentLoaded', () => {
     const playlistController = new PlaylistController(router, globalEventBus);
     const albumController = new AlbumController(router, globalEventBus);
 
-    // if ('serviceWorker' in navigator) {
-    //     navigator.serviceWorker
-    //         .register('sw.js')
-    //         .then((registration) => {
-    //             console.log('SW registration ', registration);
-    //         })
-    //         .catch((err) => {
-    //             console.log('SW Registration failed with ' + err);
-    //         });
-    // }
 
     router.addView(URL.NAVBAR, navbarController.view);
     router.addView(URL.PLAYER, playerController.view);
-    router.addView(URL.MAIN, newsController.view);
+    // router.addView(URL.MAIN, newsController.view);
     router.addView(URL.LOGIN, loginController.view);
     router.addView(URL.SIGN_UP, signupController.view);
     router.addView(URL.PROFILE, profileController.view);
@@ -48,10 +39,14 @@ window.addEventListener('DOMContentLoaded', () => {
     router.addView(URL.PROFILE_ALBUMS, profileController.view);
     router.addView(URL.PROFILE_ARTISTS, profileController.view);
     router.addView(URL.SETTINGS, settingsController.view);
+    router.addView((URL.ARTIST_LIST), newsController.view);
     router.addView(URL.ARTIST, artistController.view);
     router.addView(URL.PLAYLIST, playlistController.view);
     router.addView(URL.ALBUM, albumController.view);
     router.start();
     navbarController.view.render();
     playerController.view.render();
+    if ('serviceWorker' in navigator) {
+        runtime.register();
+    }
 });

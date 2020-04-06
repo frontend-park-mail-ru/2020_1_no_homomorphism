@@ -33,8 +33,8 @@
 
 .m-artist-play-word {}
 
-.m-artist-info {
-    padding-top: 13px;
+.m-artist-info .col {
+    padding-top: 16px;
 }
 
 .m-artist-info:hover {
@@ -45,7 +45,7 @@
     transform: scale(1.1);
 }
 
- .m-artist-background {
+.m-artist-background {
     /* filter: blur(14px); */
     position: relative;
     z-index: -1;
@@ -62,4 +62,8 @@
     border-radius: 32px;
     padding: 32px;
     margin-top: 16px;
+}
+
+.l-small-card {
+    margin: 32px;
 }

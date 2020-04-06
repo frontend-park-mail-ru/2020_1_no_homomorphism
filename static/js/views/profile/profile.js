@@ -21,7 +21,7 @@ export default class ProfileView extends BaseView {
     /**
      * Рендер
      * @param {Object} root
-     * @param {srting} url
+     * @param {string} url
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.CONTENT)[0], url);

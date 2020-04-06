@@ -1,5 +1,6 @@
 import Api from '@libs/api.js';
 import {ARTIST, URL, GLOBAL} from '@libs/constans.js';
+import {RESPONSE} from '@libs/constans';
 
 /**
  * Модель для страницы артиста
@@ -13,11 +14,13 @@ export default class ArtistModel {
     constructor(eventBus, globalEventBus) {
         this.albums = [];
         this.tracks = [];
+        this.artists = [];
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
         this.globalEventBus.on(GLOBAL.GET_ARTIST_TRACKS, this.getArtistTracks.bind(this));
         this.eventBus.on(ARTIST.SET_ID, this.setId.bind(this));
         this.eventBus.on(ARTIST.GET_DATA, this.getArtistData.bind(this));
+        this.eventBus.on(ARTIST.GET_LIST_DATA, this.getArtistListData.bind(this));
         this.eventBus.on(ARTIST.ID_TRACKS_SECTION, this.getArtistTracks.bind(this));
         this.eventBus.on(ARTIST.ID_ALBUMS_SECTION, this.getArtistAlbums.bind(this));
         this.eventBus.on(ARTIST.ID_INFO_SECTION, this.getArtistInfo.bind(this));
@@ -51,6 +54,33 @@ export default class ArtistModel {
                         .then(() => this.eventBus.emit(ARTIST.RENDER_DATA, data));
                 } else {
                     this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
+                }
+            });
+    }
+
+    /**
+     * Получает списка артистов
+     */
+    getArtistListData() {
+        Api.artistListFetch('0', '100')
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    res.json()
+                        .then((data) => {
+                            this.artists = data.artists;
+                            this.eventBus.emit(ARTIST.RENDER_ARTIST_LIST, this.artists);
+                        });
+                    break;
+                case RESPONSE.BAD_REQUEST:
+                    this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
+                    break;
+                case RESPONSE.SERVER_ERROR:
+                    this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
                 }
             });
     }

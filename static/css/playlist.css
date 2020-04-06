@@ -29,10 +29,10 @@
     border: yellow;
     cursor: pointer;
     opacity: 0.4;
-    margin-top: 130px;
+    margin-top: 100px;
     padding: 20px;
     position: relative;
-    margin-left: -70px;
+    margin-left: -75px;
     margin-right: 20px;
     transform: scale(3);
 }
@@ -105,7 +105,7 @@
     padding: 8px;
     border-radius: var(--card-border);
     margin-right: 32px;
-    margin-top: 180px;
+    margin-top: 140px;
     color: #155724;
     background-color: var(--light-green);
     float: right;

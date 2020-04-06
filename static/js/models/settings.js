@@ -29,6 +29,7 @@ export default class SettingsModel {
                 case RESPONSE.OK:
                     res.json()
                         .then((data) => {
+                            console.log(data);
                             this.eventBus.emit(SETTINGS.RENDER_LOGGED, data);
                         });
                     break;
@@ -49,6 +50,7 @@ export default class SettingsModel {
      */
     resetAvatar() {
         const fileAttach = document.getElementById(SETTINGS.AVATAR_UPLOAD);
+        console.log(fileAttach);
         const resImage = Validation
             .image(fileAttach.files[0].size, fileAttach.files[0].type
                 .split('/')
@@ -77,6 +79,7 @@ export default class SettingsModel {
                         this.eventBus.emit(SETTINGS.INVALID);
                         break;
                     default:
+                        console.log(res);
                         console.error('I am a teapot');
                     }
                 });
@@ -88,22 +91,29 @@ export default class SettingsModel {
      * @param {Object} values
      */
     submit(values) {
-        const resPassword = Validation.password(
-            values.newPassword,
-            values.newPasswordConfirm,
-            values.newPassword !== '',
-        );
-        const resEmail = Validation.email(values.email);
-
         const errors = {};
-        if (values.newPassword !== '' && resPassword !== '') {
-            errors['newPassword'] = resPassword;
-        }
-        if (resEmail !== '') {
-            errors['email'] = resEmail;
-        }
-        if (values.name === '') {
-            errors['name'] = 'Enter name';
+        if (values.newPassword !== '') {
+            const resPassword = Validation.password(
+                values.newPassword,
+                values.newPasswordConfirm,
+                values.newPassword !== '',
+            );
+            if (values.newPassword !== '' && resPassword !== '') {
+                errors['newPassword'] = resPassword;
+            }
+            if (values.password === '') {
+                errors['password'] = 'Enter old password';
+            }
+        } else {
+            values.password = '';
+            values.newPassword = '';
+            const resEmail = Validation.email(values.email);
+            if (resEmail !== '') {
+                errors['email'] = resEmail;
+            }
+            if (values.name === '') {
+                errors['name'] = 'Enter name';
+            }
         }
         if (JSON.stringify(errors) !== '{}') {
             this.eventBus.emit(SETTINGS.INVALID, errors);
@@ -114,7 +124,8 @@ export default class SettingsModel {
                     case RESPONSE.OK:
                         this.getUserData.bind(this)();
                         break;
-                    case RESPONSE.BAD_REQUEST: // TODO Обработать ошибку
+                    case RESPONSE.BAD_REQUEST:
+                        errors['password'] = 'Wrong password';
                         this.eventBus.emit(SETTINGS.INVALID, errors);
                         break;
                     case RESPONSE.UNAUTH:
@@ -128,6 +139,7 @@ export default class SettingsModel {
                         this.eventBus.emit(SETTINGS.INVALID, errors);
                         break;
                     default:
+                        console.log(res);
                         console.error('I am a teapot');
                     }
                 });

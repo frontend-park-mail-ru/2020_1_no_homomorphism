@@ -36,12 +36,10 @@ export default class AlbumModel {
                         });
                     break;
                 case RESPONSE.BAD_REQUEST:
-                    console.log(res);
                     this.eventBus.emit(ALBUM.ERROR,
                         {text: 'Sorry, there isn\'t album with this id :('});
                     break;
                 default:
-                    console.log(res);
                     console.error('I am a teapot');
                 }
             });
@@ -63,7 +61,6 @@ export default class AlbumModel {
                         });
                     break;
                 default:
-                    console.log(res);
                     console.error('I am a teapot');
                 }
             });
