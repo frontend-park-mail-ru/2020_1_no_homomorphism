@@ -15,6 +15,7 @@ export default class ProfileView extends BaseView {
         this.currentOpen = '';
         this.eventBus.on(PROFILE.CHOOSE_SECTION, this.chooseSection.bind(this));
         this.eventBus.on(PROFILE.RENDER_DATA, this.renderData.bind(this));
+        this.eventBus.on(PROFILE.RENDER_STAT, this.renderStat.bind(this));
     }
 
     /**
@@ -34,10 +35,22 @@ export default class ProfileView extends BaseView {
      * @param {Object} data
      */
     renderData(data) {
-        this.setData(data);
+        this.setData(Object.assign(this.data, data));
         document.getElementsByClassName('m-top-login')[0].innerHTML = data.login;
         document.getElementsByClassName('m-top-name')[0].innerHTML = data.name;
         document.getElementsByClassName('m-round-image')[0].src = data.image;
+    }
+
+    /**
+     * Рендер
+     * @param {Object} data
+     */
+    renderStat(data) {
+        this.setData(Object.assign(this.data, data));
+        document.getElementById('tracks').innerText = data.tracks;
+        document.getElementById('albums').innerText = data.albums;
+        document.getElementById('playlists').innerText = data.playlists;
+        document.getElementById('artists').innerText = data.artists;
     }
 
     /**

@@ -11,7 +11,7 @@
 
 :root {
     --card-border: 16px;
-    --light-green: #00e67626;
+    --light-green: #d6ffeb;
     --choosed-icon: #ebeae7;
     --box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
 }
@@ -60,10 +60,6 @@ img {
     object-fit: cover;
 }
 
-.m-player-track {
-    margin: 16px;
-}
-
 button,
 button:active,
 button:focus {
@@ -83,5 +79,3 @@ button:focus {
     padding: 32px;
     font-size: 32px;
 }
-
-

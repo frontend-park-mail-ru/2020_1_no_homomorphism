@@ -24,7 +24,6 @@ export default class PlaylistModel {
      * @param {Object} id
      */
     getPlaylist(id) {
-        console.log('kek');
         Api.playlistAllTracksFetch(id.id)
             .then((res) => {
                 switch (res.status) {
@@ -32,7 +31,6 @@ export default class PlaylistModel {
                     res.json()
                         .then((list) => {
                             this.playlist = list;
-                            console.log(list);
                             this.eventBus.emit(PLAYLIST.RENDER_PLAYLIST_DATA,
                                 this.playlist.playlist);
                         });
@@ -65,7 +63,6 @@ export default class PlaylistModel {
                     res.json()
                         .then((list) => {
                             this.playlist = list;
-                            console.log(list);
                             this.eventBus.emit(PLAYLIST.RENDER_TRACKS_DATA, list.tracks);
                         });
                     break;

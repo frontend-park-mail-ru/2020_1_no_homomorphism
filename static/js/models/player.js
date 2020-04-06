@@ -21,17 +21,17 @@ export default class PlayerModel {
             shuffle: false,
             repeat: false,
         };
-        this.curPagination = 0;
         this.globalEventBus.on(GLOBAL.CLEAR_AND_LOCK, this.deleteAll.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_ARTIST_TRACKS, this.deleteAll.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_ARTIST_TRACKS, this.getArtistTracks.bind(this));
-        this.globalEventBus.on(GLOBAL.PLAY_ARTIST_TRACKS, this.play.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST_TRACKS, this.deleteAll.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST_TRACKS, this.getPlaylistTracks.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_ALBUM_TRACKS, this.deleteAll.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_ALBUM_TRACKS, this.getAlbumTracks.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.deleteAll.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.getPlaylistTracks.bind(this));
-        this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.play.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_ALBUM, this.deleteAll.bind(this));
         this.globalEventBus.on(GLOBAL.PLAY_ALBUM, this.getAlbumTracks.bind(this));
-        this.globalEventBus.on(GLOBAL.PLAY_ALBUM, this.play.bind(this));
         this.eventBus.on(PLAYER.GET_TRACK, this.getTrack.bind(this));
         this.eventBus.on(PLAYER.GET_TRACKS, this.getPlaylistTracks.bind(this));
         this.eventBus.on(PLAYER.PAUSE, this.pause.bind(this));
@@ -73,15 +73,16 @@ export default class PlayerModel {
 
     /**
      * Получение треков плейлиста
-     * @param {object} index
+     * @param {string} id
+     * @param {string} trackId
+     * @param {number} number
      */
-    getPlaylistTracks(index) {
-        Api.playlistTracksFetch(index.index,
-            this.curPagination.toString(), PAGINATION.TRACKS.toString())
+    getPlaylistTracks(id, trackId, number = PAGINATION.TRACKS) {
+        Api.playlistTracksFetch(id, '0', number)
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
-                    this.generateData.bind(this)(res);
+                    this.generateData.bind(this)(res, trackId);
                     break;
                 case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
                     break;
@@ -97,14 +98,16 @@ export default class PlayerModel {
 
     /**
      * Получение списка треков
-     * @param {Object} album
+     * @param {string} id
+     * @param {string} trackId
+     * @param {number} number
      */
-    getAlbumTracks(album) {
-        Api.albumTracksFetch(album.id, this.curPagination.toString(), PAGINATION.TRACKS.toString())
+    getAlbumTracks(id, trackId, number = PAGINATION.TRACKS) {
+        Api.albumTracksFetch(id, '0', number)
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
-                    this.generateData.bind(this)(res);
+                    this.generateData.bind(this)(res, trackId);
                     break;
                 case RESPONSE.BAD_REQUEST: // TODO обработать ошибку
                     break;
@@ -136,6 +139,7 @@ export default class PlayerModel {
                 this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[this.queue[this.current]].id,
                     this.playlist[this.queue[this.current]].id);
                 this.getTrack(this.playlist[this.queue[this.current]].id);
+                this.play();
             });
     }
 
@@ -365,7 +369,7 @@ export default class PlayerModel {
         this.queue.splice(this.queue.indexOf(Math.max(this.queue)), 1);
         this.playlist.splice(this.playlist.indexOf(track), 1);
         this.eventBus.emit(PLAYER.REMOVE_FROM_TRACKLIST, id);
-        if (this.tracklist.length === 0) {
+        if (this.playlist.length === 0) {
             return;
         }
         this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[this.queue[this.current]].id,

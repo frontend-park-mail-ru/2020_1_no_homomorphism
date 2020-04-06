@@ -2,7 +2,7 @@ import artist from '@views/artist/artist.tmpl.xml';
 import albumsTemplate from '@views/artist/artist_albums.tmpl.xml';
 import tracksTemplate from '@views/artist/artist_tracks.tmpl.xml';
 import BaseView from '@libs/base_view';
-import {ARTIST, DOM, GLOBAL, PAGINATION} from '@libs/constans';
+import {ARTIST, DOM, URL, GLOBAL, PAGINATION} from '@libs/constans';
 import '@css/base.css';
 
 /**
@@ -18,8 +18,6 @@ export default class ArtistView extends BaseView {
         super(artist);
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
-        this.curPaginationAlbums = 0;
-        this.curPaginationTracks = 0;
         this.eventBus.on(ARTIST.RENDER_DATA, this.renderData.bind(this));
         this.eventBus.on(ARTIST.RENDER_ALBUMS, this.renderAlbums.bind(this));
         this.eventBus.on(ARTIST.RENDER_TRACKS, this.renderTracks.bind(this));
@@ -31,8 +29,6 @@ export default class ArtistView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
-        this.curPaginationAlbums = 0; // TODO временно
-        this.curPaginationTracks = 0;
         this.tracksRendered = 0;
         this.allTracksRendered = true;
         this.albumsRendered = 0;
@@ -48,19 +44,12 @@ export default class ArtistView extends BaseView {
             url.slice(url.indexOf('/') + 1, url.length);
         switch (this.currentOpen) {
         case ARTIST.ID_TRACKS_SECTION:
-            this.eventBus
-                .emit(this.currentOpen,
-                    this.curPaginationTracks.toString(),
-                    PAGINATION.TRACKS.toString());
-            this.curPaginationTracks += PAGINATION.TRACKS;
+            this.eventBus.emit(this.currentOpen, this.tracksRendered.toString(),
+                (this.tracksRendered + PAGINATION.TRACKS).toString());
             break;
         case ARTIST.ID_ALBUMS_SECTION:
-            // this.eventBus.emit(this.currentOpen, '0', PAGINATION.ALBUMS.toString());
-            this.eventBus
-                .emit(this.currentOpen,
-                    this.curPaginationAlbums.toString(),
-                    PAGINATION.ALBUMS.toString());
-            this.curPaginationAlbums += PAGINATION.TRACKS;
+            this.eventBus.emit(this.currentOpen, this.albumsRendered.toString(),
+                (this.albumsRendered + PAGINATION.ALBUMS).toString());
             break;
         case ARTIST.ID_INFO_SECTION:
             this.eventBus.emit(this.currentOpen);
@@ -77,7 +66,7 @@ export default class ArtistView extends BaseView {
         document.getElementsByClassName('m-top-login')[0].innerHTML = data.name;
         document.getElementsByClassName('m-round-image')[0].src = data.image;
         document.getElementsByClassName('m-top-name')[0].innerHTML = data.genre;
-        document.getElementById('artist-tracks-title').innerText = data.tracks; // ?????
+        document.getElementById('artist-tracks-title').innerText = data.tracks;
         this.allTracksRendered = parseInt(data.tracks) < PAGINATION.TRACKS;
         document.getElementById('artist-albums-title').innerText = data.albums;
         this.allAlbumsRendered = parseInt(data.albums) < PAGINATION.ALBUMS;
@@ -123,7 +112,7 @@ export default class ArtistView extends BaseView {
         while (current !== window && current !== document.body && current != null) {
             if (current.getAttribute('class') === 'l-list-card' &&
                 current.getAttribute('a-id') !== null) {
-                this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, {id: current.getAttribute('a-id')});
+                this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, current.getAttribute('a-id'));
                 break;
             } else {
                 current = current.parentNode;
@@ -135,7 +124,7 @@ export default class ArtistView extends BaseView {
      * Слушает скрол по списку альбомов
      */
     albumsListWheel() {
-        if (this.allAlbumsRendered) {
+        if (this.allAlbumsRendered || !window.location.pathname.match(URL.ARTIST)) {
             return;
         }
         const list = document.getElementsByClassName('l-profile-album-list')[0];
@@ -201,7 +190,7 @@ export default class ArtistView extends BaseView {
      * Слушает скрол по списку треков
      */
     tracksListWheel() {
-        if (this.allTracksRendered) {
+        if (this.allTracksRendered || !window.location.pathname.match(URL.ARTIST)) {
             return;
         }
         const list = document.getElementsByClassName('l-profile-track-list')[0];

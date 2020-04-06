@@ -47,8 +47,7 @@ export default class PlaylistView extends BaseView {
      */
     renderPlaylist() {
         document.getElementsByClassName('m-name')[0].innerHTML = this.playlistData.name;
-        document.getElementsByClassName('m-rounded-image')[0].src =
-            this.playlistData.image;
+        document.getElementsByClassName('m-rounded-image')[0].src = this.playlistData.image;
     }
 
     /**
@@ -79,7 +78,8 @@ export default class PlaylistView extends BaseView {
      * Слушает события
      */
     seEventListeners() {
-        document.querySelectorAll('.l-track-big').forEach((row) => { // TODO Никитуля, отсылочка вам
+        document.querySelectorAll('.l-track-big').forEach((track) => {
+            track.onclick = (event) => this.trackClick.bind(this)(event);
         });
         document.querySelectorAll('img.m-big-more-button').forEach((button) => { // TODO Обработать
         });
@@ -93,10 +93,28 @@ export default class PlaylistView extends BaseView {
     }
 
     /**
+     * Слушает клик по треку
+     * @param {Object} event
+     */
+    trackClick(event) {
+        let current = event.target;
+        while (current !== window && current !== document.body && current != null) {
+            if (current.getAttribute('class') === 'l-track-big' &&
+                current.getAttribute('a-id') !== null) {
+                this.globalEventBus.emit(GLOBAL.PLAY_PLAYLIST_TRACKS, this.playlistData.id,
+                    current.getAttribute('a-id'));// , this.tracksRendered);
+                break;
+            } else {
+                current = current.parentNode;
+            }
+        }
+    }
+
+    /**
      * Проигрование плейлиста
      */
     playPlaylist() {
-        this.globalEventBus.emit(GLOBAL.PLAY_PLAYLIST, {index: this.playlistData.id});
+        this.globalEventBus.emit(GLOBAL.PLAY_PLAYLIST, this.playlistData.id);
     }
 
     /**

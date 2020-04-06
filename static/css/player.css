@@ -10,6 +10,7 @@
     transition-property: left;
     transition-duration: 0.75s;
     overflow: hidden;
+    background: white;
 }
 
 .l-player .col {
@@ -77,6 +78,8 @@
     transition-property: font-size;
     transition-duration: 0.3s;
     font-size: 0;
+    position: absolute;
+    top: 11px;
 }
 
 .timeline .duration {
@@ -84,9 +87,17 @@
     transition-property: font-size;
     transition-duration: 0.3s;
     font-size: 0;
+    margin-left: 339px;
+    position: absolute;
+    top: 11px;
+}
+
+.control-elements {
+    margin: 10px 0 6px;
 }
 
 .player-control-button {
+    text-align: center;
     opacity: 0.4;
     height: 30px;
     width: 30px;
@@ -106,27 +117,27 @@
 
 .shuffle {
     position: relative;
-    top: 5px;
+    top: -3px;
     left: 207px;
 }
 
 .repeat {
     position: relative;
-    top: 5px;
+    top: -3px;
     left: 205px;
 }
 
 .volume {
     position: relative;
-    top: 5px;
+    top: -3px;
     left: 203px;
     z-index: 2;
 }
 
 .volume-scale {
     height: 74px;
-    top: -53px;
-    left: 340px;
+    top: -42px;
+    left: 330px;
     background: white;
     border: 1px solid #ebeae7;
     border-radius: 2px;
@@ -224,7 +235,7 @@
 }
 
 .track-list > .row:hover {
-    background: #00e67626;
+    background: var(--light-green);
 }
 
 .track-list .row {
@@ -238,7 +249,7 @@
 
 .track-list .track-name {
     font-size: 18px;
-    width: 300px;
+    width: 293px;
 }
 
 .track-list .group-name {
