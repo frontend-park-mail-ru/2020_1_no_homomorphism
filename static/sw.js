@@ -1,8 +1,6 @@
 const {assets} = global.serviceWorkerOption;
 const CACHE_NAME = 'No homo';
 
-const DEBUG = true;
-
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches
