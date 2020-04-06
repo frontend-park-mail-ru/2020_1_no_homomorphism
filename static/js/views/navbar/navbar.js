@@ -22,7 +22,7 @@ export default class NavbarView extends BaseView {
     /**
      * рендерит навбар
      * @param {Object} root
-     * @param {srting} url
+     * @param {string} url
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.NAVBAR)[0]);

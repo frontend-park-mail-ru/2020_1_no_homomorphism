@@ -19,7 +19,7 @@ export default class SignupView extends BaseView {
     /**
      * рендерит страничку регистрации
      * @param {Object} root
-     * @param {srting} url
+     * @param {string} url
      */
     render(root, url) {
         super.render(root, url);
