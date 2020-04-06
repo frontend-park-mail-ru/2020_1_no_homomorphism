@@ -126,6 +126,10 @@ export default class PlayerModel {
     generateData(res, trackId = '') {
         res.json()
             .then((list) => {
+                if (list.tracks.length === 0) {
+                    this.globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK);
+                    return;
+                }
                 // eslint-disable-next-line guard-for-in
                 for (const song in list.tracks) {
                     this.playlist.push(list.tracks[song]);
@@ -386,6 +390,6 @@ export default class PlayerModel {
         this.queue = [];
         this.playlist = [];
         this.current = 0;
-        this.eventBus.emit(PLAYER.REMOVE_FROM_TRACKLIST_ALL);
+        this.eventBus.emit(PLAYER.REMOVE_FROM_TRACKLIST_ALL, true);
     }
 }

@@ -53,7 +53,7 @@ h2 {
 .button {
     border-radius: 6px;
     margin-left: 213px;
-    background-color: #673ab7;
+    background-color: var(--button-color);
     border: none;
     color: #FFFFFF;
     text-align: center;

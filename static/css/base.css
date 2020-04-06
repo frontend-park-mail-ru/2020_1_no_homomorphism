@@ -9,12 +9,15 @@
 @import "signup.css";
 @import "playlist.css";
 @import "buttons.css";
+/*@import "variable.css";*/
 
 :root {
     --card-border: 16px;
     --light-green: #d6ffeb;
-    --choosed-icon: #ebeae7;
-    --box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+    --button-color: #499181;
+    --chosen-icon: #ebeae7;
+    --box-shadow: 0 1px 20px 0 #ebeae7;
+    --small-pad: 8px;
 }
 
 body {

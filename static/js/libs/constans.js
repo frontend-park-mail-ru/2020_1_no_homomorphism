@@ -68,6 +68,13 @@ export const GLOBAL = {
     PLAY_ALBUM: 'play-album',
 };
 
+export const MAIN = {
+    GET_LIST_DATA: 'get-all-artists-data',
+    RENDER_ARTIST_LIST: 'render-artist-list',
+    NO_ANSWER: 'no-answer',
+    REDIRECT: 'redirect',
+};
+
 export const LOGIN = {
     REDIRECT: 'redirect',
     INVALID: 'invalid',

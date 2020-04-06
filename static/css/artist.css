@@ -45,7 +45,7 @@
     transform: scale(1.1);
 }
 
- .m-artist-background {
+.m-artist-background {
     /* filter: blur(14px); */
     position: relative;
     z-index: -1;

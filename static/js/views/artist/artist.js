@@ -1,7 +1,6 @@
 import artist from '@views/artist/artist.tmpl.xml';
 import albumsTemplate from '@views/artist/artist_albums.tmpl.xml';
 import tracksTemplate from '@views/artist/artist_tracks.tmpl.xml';
-import artistList from '@views/artist/artist_list.tmpl.xml';
 import BaseView from '@libs/base_view';
 import {ARTIST, DOM, URL, GLOBAL, PAGINATION} from '@libs/constans';
 import '@css/base.css';
@@ -17,13 +16,12 @@ export default class ArtistView extends BaseView {
      */
     constructor(eventBus, globalEventBus) {
         super(artist);
-        this.artistList = {};
+        this.data = {};
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
         this.eventBus.on(ARTIST.RENDER_DATA, this.renderData.bind(this));
         this.eventBus.on(ARTIST.RENDER_ALBUMS, this.renderAlbums.bind(this));
         this.eventBus.on(ARTIST.RENDER_TRACKS, this.renderTracks.bind(this));
-        this.eventBus.on(ARTIST.RENDER_ARTIST_LIST, this.renderList.bind(this));
     }
 
     /**
@@ -32,19 +30,14 @@ export default class ArtistView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
-        if (url === '') {
-            this.eventBus.emit(ARTIST.GET_LIST_DATA);
-            return;
-        }
         this.tracksRendered = 0;
         this.allTracksRendered = true;
         this.albumsRendered = 0;
         this.allAlbumsRendered = true;
         this.id = url.indexOf('/') === -1 ? url : url.slice(0, url.indexOf('/'));
         this.eventBus.emit(ARTIST.SET_ID, this.id);
-        if (JSON.stringify(this.data) === '{}') {
+        if (JSON.stringify(this.data) === '{}' || this.id != this.data.id) {
             this.eventBus.emit(ARTIST.GET_DATA);
-            this.setData({id: this.id});
         }
         super.render(document.getElementsByClassName(DOM.CONTENT)[0], url);
         this.currentOpen = url.indexOf('/') === -1 ? 'tracks' :
@@ -63,28 +56,6 @@ export default class ArtistView extends BaseView {
             break;
         }
     }
-
-    /**
-     * Рендер
-     * @param {Object} data
-     */
-    renderList(data) {
-        document.getElementsByClassName(DOM.CONTENT)[0].innerHTML = artistList(data);
-        // this.setListListeners();
-    }
-
-    // /**
-    //  * Рендер
-    //  */
-    // setListListeners() {
-    //     document.querySelectorAll('.l-list-card').forEach((artist) => {
-    //         artist.onclick = (event) => {
-    //             console.log('kek');
-    //             this.albumClick.bind(this)(event);
-    //         };
-    //     });
-    // }
-
 
     /**
      * Рендер
@@ -231,13 +202,6 @@ export default class ArtistView extends BaseView {
                 (this.tracksRendered + PAGINATION.TRACKS).toString());
         }
     }
-
-    /**
-     * Рендер информации
-     */
-
-    // renderInfo(info) {}
-
     /**
      * @param {Object} data
      */
