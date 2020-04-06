@@ -80,9 +80,8 @@ export default class SettingsView extends BaseView {
      * показывает, какие поля формы заполнены неправильно
      * @param {Object} errors
      */
-    showErrors(errors) { // TODO починить вывод ошибок
+    showErrors(errors) {
         this.errors = errors;
-        console.log('kek');
         // eslint-disable-next-line guard-for-in
         for (const key in errors) {
             const message = document.getElementById(key).nextElementSibling;
@@ -97,7 +96,6 @@ export default class SettingsView extends BaseView {
      * показывает, какие поля формы заполнены неправильно
      */
     hideErrors() {
-        console.log(this.errors);
         // eslint-disable-next-line guard-for-in
         for (const key in this.errors) {
             const message = document.getElementById(key).nextElementSibling;
@@ -125,7 +123,6 @@ export default class SettingsView extends BaseView {
      * отправляет данные формы - пароли
      */
     submitPassword() {
-        console.log(this.userData);
         this.eventBus.emit(SETTINGS.SUBMIT, {
             name: this.userData.name,
             email: this.userData.email,

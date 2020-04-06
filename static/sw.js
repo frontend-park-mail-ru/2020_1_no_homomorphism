@@ -2,6 +2,7 @@ const {assets} = global.serviceWorkerOption;
 const CACHE_NAME = 'No homo';
 
 self.addEventListener('install', (event) => {
+    console.log('INSTALL');
     event.waitUntil(
         caches
             .open(CACHE_NAME)
@@ -16,6 +17,7 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
+    console.log('CLEAR');
     event.waitUntil(
         caches
             .keys()
@@ -25,7 +27,6 @@ self.addEventListener('activate', (event) => {
                         if (cacheName.indexOf(CACHE_NAME) === 0) {
                             return null;
                         }
-
                         return caches.delete(cacheName);
                     }),
                 );
@@ -36,9 +37,9 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
     const request = event.request;
 
-    if (request.method !== 'GET') { // TODO добавить отлженную отправку форм
-        return;
-    }
+    // if (request.method !== 'GET') { // TODO добавить отлженную отправку форм
+    //     return;
+    // }
 
     const resource = caches
         .match(request)

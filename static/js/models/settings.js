@@ -50,6 +50,7 @@ export default class SettingsModel {
      */
     resetAvatar() {
         const fileAttach = document.getElementById(SETTINGS.AVATAR_UPLOAD);
+        console.log(fileAttach);
         const resImage = Validation
             .image(fileAttach.files[0].size, fileAttach.files[0].type
                 .split('/')
@@ -78,6 +79,7 @@ export default class SettingsModel {
                         this.eventBus.emit(SETTINGS.INVALID);
                         break;
                     default:
+                        console.log(res);
                         console.error('I am a teapot');
                     }
                 });
@@ -91,7 +93,6 @@ export default class SettingsModel {
     submit(values) {
         const errors = {};
         if (values.newPassword !== '') {
-            console.log('pass' + values.newPassword + 'lol');
             const resPassword = Validation.password(
                 values.newPassword,
                 values.newPasswordConfirm,
@@ -119,14 +120,11 @@ export default class SettingsModel {
         } else {
             Api.profileEditFetch(values.name, values.email, values.password, values.newPassword)
                 .then((res) => {
-                    console.log(res);
                     switch (res.status) {
                     case RESPONSE.OK:
-                        console.log('OK');
                         this.getUserData.bind(this)();
                         break;
-                    case RESPONSE.BAD_REQUEST: // TODO Обработать ошибку
-                        console.log('BAD_REQUEST');
+                    case RESPONSE.BAD_REQUEST:
                         errors['password'] = 'Wrong password';
                         this.eventBus.emit(SETTINGS.INVALID, errors);
                         break;
@@ -141,6 +139,7 @@ export default class SettingsModel {
                         this.eventBus.emit(SETTINGS.INVALID, errors);
                         break;
                     default:
+                        console.log(res);
                         console.error('I am a teapot');
                     }
                 });
