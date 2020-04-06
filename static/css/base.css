@@ -8,6 +8,7 @@
 @import "settings.css";
 @import "signup.css";
 @import "playlist.css";
+@import "buttons.css";
 
 :root {
     --card-border: 16px;

@@ -71,6 +71,9 @@ export default class SettingsView extends BaseView {
         document.getElementsByClassName('m-top-login')[0].innerHTML = data.login;
         document.getElementsByClassName('m-settings-input')[0].value = data.name;
         document.getElementsByClassName('m-settings-input')[1].value = data.email;
+        document.getElementById('newPassword').value = '';
+        document.getElementById('newPasswordConfirm').value = '';
+        document.getElementById('password').value = '';
     }
 
     /**
@@ -80,11 +83,6 @@ export default class SettingsView extends BaseView {
     showErrors(errors) { // TODO починить вывод ошибок
         this.errors = errors;
         console.log('kek');
-        // if (JSON.stringify(this.errors) === '{}') {
-        //     document.getElementById('newPassword').value = '';
-        //     document.getElementById('newPasswordConfirm').value = '';
-        //     document.getElementById('password').value = '';
-        // }
         // eslint-disable-next-line guard-for-in
         for (const key in errors) {
             const message = document.getElementById(key).nextElementSibling;

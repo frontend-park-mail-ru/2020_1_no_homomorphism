@@ -1,7 +1,7 @@
 const {assets} = global.serviceWorkerOption;
 const CACHE_NAME = 'No homo';
 
-const DEBUG = false;
+const DEBUG = true;
 
 self.addEventListener('install', (event) => {
     event.waitUntil(
@@ -17,23 +17,35 @@ self.addEventListener('install', (event) => {
     );
 });
 
+self.addEventListener('activate', (event) => {
+    event.waitUntil(
+        caches
+            .keys()
+            .then((cacheNames) => {
+                return Promise.all(
+                    cacheNames.map((cacheName) => {
+                        if (cacheName.indexOf(CACHE_NAME) === 0) {
+                            return null;
+                        }
+
+                        return caches.delete(cacheName);
+                    }),
+                );
+            }),
+    );
+});
+
 self.addEventListener('fetch', (event) => {
     const request = event.request;
 
-    if (request.method !== 'GET') {
+    if (request.method !== 'GET') { // TODO добавить отлженную отправку форм
         return;
     }
-
-    const requestUrl = new URL(request.url);
 
     const resource = caches
         .match(request)
         .then((response) => {
             if (response) {
-                if (DEBUG) {
-                    console.log(`${requestUrl.href} cache`);
-                }
-
                 return response;
             }
 
@@ -42,26 +54,15 @@ self.addEventListener('fetch', (event) => {
                     if (!res || !res.ok) {
                         return res;
                     }
-
-                    if (DEBUG) {
-                        console.log(`[SW] URL ${requestUrl.href} fetched`);
-                    }
-
                     const responseCache = res.clone();
-
                     caches
                         .open(CACHE_NAME)
                         .then((cache) => {
                             return cache.put(request, responseCache);
                         });
-
                     return res;
                 })
                 .catch(() => {
-                    // User is landing on our page.
-                    if (event.request.mode === 'navigate') {
-                        return caches.match('./');
-                    }
                     return null;
                 });
         });

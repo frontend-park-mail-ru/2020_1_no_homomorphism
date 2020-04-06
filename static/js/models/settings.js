@@ -91,6 +91,7 @@ export default class SettingsModel {
     submit(values) {
         const errors = {};
         if (values.newPassword !== '') {
+            console.log('pass' + values.newPassword + 'lol');
             const resPassword = Validation.password(
                 values.newPassword,
                 values.newPasswordConfirm,
@@ -103,6 +104,8 @@ export default class SettingsModel {
                 errors['password'] = 'Enter old password';
             }
         } else {
+            values.password = '';
+            values.newPassword = '';
             const resEmail = Validation.email(values.email);
             if (resEmail !== '') {
                 errors['email'] = resEmail;
@@ -112,7 +115,6 @@ export default class SettingsModel {
             }
         }
         if (JSON.stringify(errors) !== '{}') {
-            console.log(errors);
             this.eventBus.emit(SETTINGS.INVALID, errors);
         } else {
             Api.profileEditFetch(values.name, values.email, values.password, values.newPassword)

@@ -30,7 +30,7 @@
 
             <div class="l-down-card l-profile-base col">
 
-                <div class="col col-6">
+                <div class="col col-6 l-input">
                     <div class="col col-9">
                         <span class="profile-info">Name</span>
                         <div class="l-input">
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="col col-3">
-                        <button type="submit" id="submit-setting-changes-data">
+                        <button class="m-small-button" type="submit" id="submit-setting-changes-data">
                             Save
                         </button>
                     </div>
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                     <div class="col col-3">
-                        <button type="submit" id="submit-setting-changes-pass">
+                        <button type="submit" class="m-small-button"id="submit-setting-changes-pass">
                             Change
                         </button>
                     </div>
