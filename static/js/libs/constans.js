@@ -1,5 +1,17 @@
 export const SERVER_PATH = 'http://localhost:8081'; // 'http://89.208.199.170:8081',
 
+export const API = '/api/v1';
+
+export const RESPONSE = {
+    OK: 200,
+    OK_ADDED: 201,
+    BAD_REQUEST: 400,
+    UNAUTH: 401,
+    NO_ACCESS_RIGHT: 403,
+    EXISTS: 409,
+    SERVER_ERROR: 500,
+};
+
 export const DOM = {
     CONTENT: 'l-content',
     PLAYER: 'l-player',
@@ -18,16 +30,9 @@ export const URL = {
     PROFILE_PLAYLISTS: '/profile/playlists',
     PROFILE_ARTISTS: '/profile/artists',
     SETTINGS: '/settings',
-};
-
-export const TEMPLATES = {
-    PROFILE: '../../../views/profile/profile.njk',
-    PROFILE_TRACKS: '../../../views/profile/profile_tracks.njk',
-    PROFILE_PLAYLISTS: '../../../views/profile/profile_playlists.njk',
-    PROFILE_ALBUMS: '../../../views/profile/profile_albums.njk',
-    PROFILE_ARTISTS: '../../../views/profile/profile_artists.njk',
-    LOGIN: '../../../views/login.njk',
-    SIGN_UP: '../../../views/signup.njk',
+    ARTIST: /(\/artist\/)[0-9]+/,
+    PLAYLIST: /(\/playlist\/)[0-9]+/,
+    ALBUM: /(\/album\/)[0-9]+/,
 };
 
 export const VALIDATION = {
@@ -47,6 +52,11 @@ export const VALIDATION = {
     ALLOWABLE_EXTENSIONS: ['png', 'jpg', 'jpeg', 'gif'],
 };
 
+export const GLOBAL = {
+    PLAY_PLAYLIST: 'play-playlist',
+    PLAY_ALBUM: 'play-album',
+};
+
 export const LOGIN = {
     REDIRECT: 'redirect',
     INVALID: 'invalid',
@@ -63,10 +73,12 @@ export const NAVBAR = {
     RENDER_NOT_LOGGED: 'guest',
     GET_USER_DATA: 'get-user-data',
     LOGOUT_REDIRECT: 'logout-redirect',
+    LOGOUT_CLICKED: 'logout-clicked',
 };
 
 export const PLAYER = {
     REDIRECT: 'redirect',
+    GET_TRACK: 'get-track',
     GET_TRACKS: 'get-tracks',
     RESIZE: 'resize',
     PAUSE: 'pause',
@@ -81,10 +93,16 @@ export const PLAYER = {
     UNREPEAT: 'unrepeat',
     MUTE: 'mute',
     UNMUTE: 'unmute',
+    DELETE: 'delete',
+    LIKE: 'like',
+    ADD: 'add',
     DRAW_PLAY: 'draw-play',
     DRAW_PAUSE: 'draw-pause',
     TRACK_UPDATE: 'track-update',
+    MOVE_MARKER: 'move-marker',
     DRAW_TRACKLIST: 'draw-tracklist',
+    REMOVE_FROM_TRACKLIST: 'remove-from-tracklist',
+    REMOVE_FROM_TRACKLIST_ALL: 'remove-from-tracklist-all',
     DRAW_TIMELINE: 'draw-timeline',
     DRAW_SHUFFLE: 'draw-shuffle',
     DRAW_UNSHUFLE: 'draw-unshuffle',
@@ -96,11 +114,12 @@ export const PLAYER = {
 };
 
 export const SETTINGS = {
-    GET_USER_DATA: 'get-user-data',
+    GET_USER_DATA: 'settings-get-user-data',
     RENDER_LOGGED: 'logged-in',
     AVATAR_UPLOAD: 'avatar-upload',
     SUBMIT: 'submit',
     INVALID: 'invalid',
+    REDIRECT: 'settings-redirect',
 };
 
 export const SIGN_UP = {
@@ -126,3 +145,16 @@ export const PROFILE = {
     RENDER_ARTISTS: 'render-profile-artists',
 };
 
+export const PLAYLIST = {
+    REDIRECT: 'redirect',
+    GET_PLAYLIST_DATA: 'get-playlist',
+    RENDER_DATA: 'render-playlist',
+    ERROR: 'show-errors',
+};
+
+export const ALBUM = {
+    REDIRECT: 'redirect',
+    GET_ALBUM_DATA: 'get-playlist',
+    RENDER_DATA: 'render-playlist',
+    ERROR: 'show-errors',
+};

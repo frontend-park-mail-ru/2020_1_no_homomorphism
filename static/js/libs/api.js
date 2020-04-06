@@ -1,4 +1,5 @@
 import {postFetch, getFetch, deleteFetch, putFetch, postImageFetch} from '@libs/fetch.js';
+import {API} from '@libs/constans';
 
 /**
  * API object
@@ -13,10 +14,12 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static loginFetch(login, password) {
-        return postFetch('/login', {
+        return postFetch(API + '/users/login', {
             'login': login,
             'password': password,
-        }).catch((error) => console.error(error));
+        }, (error) => {
+            console.log(error.toString());
+        });
     }
 
     /**
@@ -24,7 +27,19 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static logoutFetch() {
-        return deleteFetch('/logout').catch((error) => console.error(error));
+        return deleteFetch(API + '/users/logout', (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
+     * Проверка куки
+     * @return {Promise<Response>}
+     */
+    static cookieFetch() {
+        return getFetch(API + '/users', (error) => {
+            console.log(error.toString());
+        });
     }
 
     /**
@@ -37,13 +52,15 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static signupFetch(name = '', login, sex = '', email = '', password) {
-        return postFetch('/signup', {
+        return postFetch(API + '/users/signup', {
             'name': name,
             'login': login,
             'sex': 'yes',
             'email': email,
             'password': password,
-        }).catch((error) => console.error(error));
+        }, (error) => {
+            console.log(error.toString());
+        });
     }
 
     /**
@@ -51,7 +68,10 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static profileFetch() {
-        return getFetch('/profile/me').catch((error) => console.error(error));
+        return getFetch(API + '/users/me', (error) => {
+            console.log(error.toString());
+            throw new Error(error);
+        });
     }
 
     /**
@@ -63,12 +83,14 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static profileEditFetch(name, email, password, newPassword) {
-        return putFetch('/profile/settings', {
+        return putFetch(API + '/users/settings', {
             name,
             email,
             password,
             newPassword,
-        }).catch((error) => console.error(error));
+        }, (error) => {
+            console.log(error.toString());
+        });
     }
 
     /**
@@ -77,8 +99,9 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static profilePhotoFetch(image) {
-        return postImageFetch('/image', image)
-            .catch((error) => console.error(error));
+        return postImageFetch(API + '/users/images', image, (error) => {
+            console.log(error.toString());
+        });
     }
 
     /**
@@ -86,27 +109,9 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static profilePlaylistsFetch() {
-        return getFetch('/profile/playlists')
-            .catch((error) => console.error(error));
-    }
-
-    /**
-     * Получение треков альбома
-     * @param {number} id
-     * @return {Promise<Response>}
-     */
-    static albumFetch(id) {
-        return getFetch(`/albums/${id}`)
-            .catch((error) => console.error(error));
-    }
-
-    /**
-     * Получение альбомов пользователя
-     * @return {Promise<Response>}
-     */
-    static profileAlbumFetch() {
-        return getFetch('/profile/albums')
-            .catch((error) => console.error(error));
+        return getFetch(API + '/users/playlists', (error) => {
+            console.log(error.toString());
+        });
     }
 
     /**
@@ -115,27 +120,30 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static playlistTracksFetch(id) {
-        return getFetch(`/playlists/${id}`)
-            .catch((error) => console.error(error));
+        return getFetch(API + `/playlists/${id}`, (error) => {
+            console.log(error.toString());
+        });
     }
 
     /**
-     * Получение плейлиста
-     * @param {string} name
+     * Получение треков альбома
+     * @param {number} id
      * @return {Promise<Response>}
      */
-    static playerFetch(name) {
-        return getFetch(`/player/${name}`)
-            .catch((error) => console.error(error));
+    static albumFetch(id) {
+        return getFetch(API + `/albums/${id}`, (error) => {
+            console.log(error.toString());
+        });
     }
 
     /**
-     * Проверка куки
+     * Получение альбомов пользователя
      * @return {Promise<Response>}
      */
-    static cookieFetch() {
-        return getFetch('/user')
-            .catch((error) => console.error(error));
+    static profileAlbumsFetch() {
+        return getFetch(API + '/users/albums', (error) => {
+            console.log(error.toString());
+        });
     }
 
     /**
@@ -144,7 +152,8 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static trackFetch(id) {
-        return getFetch(`/track/${id}`)
-            .catch((error) => console.error(error));
+        return getFetch(API + `/tracks/${id}`, (error) => {
+            console.log(error.toString());
+        });
     }
 }

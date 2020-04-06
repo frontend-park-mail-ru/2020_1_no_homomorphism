@@ -1,4 +1,4 @@
-import {LOGIN, TEMPLATES, DOM} from '@libs/constans.js';
+import {LOGIN , DOM} from '@libs/constans.js';
 import template from '@views/login/login.tmpl.xml'
 import BaseView from '@libs/base_view';
 
@@ -26,10 +26,11 @@ export default class LoginView extends BaseView{
 	/**
 	 * setEventListeners
 	 */
-	setEventListeners(root) {
+	setEventListeners() {
 		document.addEventListener('click', (event) => {
 			if (event.target.getAttribute('id') === 'submit-login') {
 				event.preventDefault();
+				event.stopImmediatePropagation();
 				this.submit();
 			}
 		});

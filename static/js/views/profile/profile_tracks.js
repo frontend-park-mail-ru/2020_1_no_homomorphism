@@ -1,4 +1,4 @@
-import {PROFILE, TEMPLATES} from '@libs/constans.js';
+import {PROFILE } from '@libs/constans.js';
 import template from '@views/profile/profile_track.tmpl.xml';
 
 /**
@@ -18,6 +18,7 @@ export default class ProfileTracksView {
      * @param {Object} tracks
      */
     renderTracks(tracks) {
+        console.log(tracks);
         const elem = document.getElementById('profile-track-list');
         elem.className += ' l-profile-base';
         for (let i = 0; i < tracks.length; i++) {

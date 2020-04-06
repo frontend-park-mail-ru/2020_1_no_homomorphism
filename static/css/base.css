@@ -6,6 +6,7 @@
 @import "profile.css";
 @import "settings.css";
 @import "signup.css";
+@import "playlist.css";
 
 body {
     margin: 0 auto;
@@ -52,10 +53,6 @@ img {
     object-fit: cover;
 }
 
-.l-music-bar {
-    margin-bottom: 16px;
-}
-
 .m-player-track {
     margin: 16px;
 }
@@ -67,10 +64,17 @@ button:focus {
 }
 
 .is-hidden {
-    visibility: hidden;
+    display: none;
 }
 
 .is-visible {
-    visibility: visible;
+    display: block;
 }
+
+.is-error {
+    border: 1px solid red;
+    padding: 32px;
+    font-size: 32px;
+}
+
 

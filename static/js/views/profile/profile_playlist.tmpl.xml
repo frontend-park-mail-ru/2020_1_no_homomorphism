@@ -1,16 +1,16 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <fest:for iterate="data" index="i" value="playlist">
-        <div class="l-profile-playlists">
-            <div class="l-profile-playlist-image">
-                <img class="m-profile-playlist-image" id="profile-playlist-image" src="{playlist.image}" alt=""/>
+        <div class="l-list-card" id="{playlist.id}">
+            <div class="l-list-image">
+                <img class="m-list-image" id="profile-playlist-image" src="{playlist.image}" alt=""/>
             </div>
             <div>
-                <button class="m-profile-button-play-playlist"></button>
+                <button class="m-button-track-play-playlist"> </button>
             </div>
 
-            <div class="l-profile-playlists-description">
+            <a class="l-list-card-description" href="/playlist/{playlist.id}">
                 <fest:value>playlist.name</fest:value>
-            </div>
+            </a>
         </div>
     </fest:for>
 </fest:template>

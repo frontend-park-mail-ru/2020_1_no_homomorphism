@@ -3,7 +3,6 @@ export default class BaseView {
      * @param {function} template
      */
     constructor(template) {
-        console.log('CONSTR');
         this.template = template;
         this.data = {};
         this.root = '';

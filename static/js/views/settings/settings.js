@@ -15,6 +15,8 @@ export default class SettingsView extends BaseView {
         this.userData = {};
         this.eventBus.on(SETTINGS.INVALID, this.showErrors.bind(this));
         this.eventBus.on(SETTINGS.RENDER_LOGGED, this.renderData.bind(this));
+        // this.eventBus.on(SETTINGS.AVATAR_UPLOAD, this.previewFile.bind(this));
+
     }
 
     /**
@@ -23,7 +25,7 @@ export default class SettingsView extends BaseView {
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.CONTENT)[0]);
         if (JSON.stringify(this.userData) === '{}') {
-            this.eventBus.emit(SETTINGS.GET_USER_DATA, {});
+            this.eventBus.emit(SETTINGS.GET_USER_DATA);
         } else {
             this.renderData(this.userData);
         }
@@ -37,11 +39,14 @@ export default class SettingsView extends BaseView {
         const button = document.getElementById('submit-setting-changes-data');
         button.addEventListener('click', (event) => {
             event.preventDefault();
+            event.stopImmediatePropagation();
             this.submit();
         });
         const fileAttach = document.getElementById('avatar-upload');
-        fileAttach.addEventListener('change', () => {
-            this.eventBus.emit(SETTINGS.AVATAR_UPLOAD, {});
+        fileAttach.addEventListener('change', (event) => {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            this.eventBus.emit(SETTINGS.AVATAR_UPLOAD);
         });
     }
 
@@ -51,9 +56,9 @@ export default class SettingsView extends BaseView {
      */
     renderData(data) {
         this.userData = data;
-        document.getElementsByClassName('m-profile-avatar')[0].src = data.image;
-        document.getElementsByClassName('m-profile-name')[0].innerHTML = data.name;
-        document.getElementsByClassName('m-profile-login')[0].innerHTML = data.login;
+        document.getElementsByClassName(' m-round-image')[0].src = data.image;
+        document.getElementsByClassName('m-top-name')[0].innerHTML = data.name;
+        document.getElementsByClassName('m-top-login')[0].innerHTML = data.login;
 
         document.getElementsByClassName('m-settings-input')[0].value = data.name;
         document.getElementsByClassName('m-settings-input')[1].value = data.email;
@@ -94,5 +99,24 @@ export default class SettingsView extends BaseView {
             newPasswordConfirm: document.getElementById('newPasswordConfirm').value,
             password: document.getElementById('password').value,
         });
+    }
+
+    /**
+     * Предпросмотр фоточки
+     */
+    previewFile() {
+        let preview = document.querySelector('. m-round-image');
+        let file    = document.querySelector('input[type=file]').files[0];
+        let reader  = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+        }
     }
 }

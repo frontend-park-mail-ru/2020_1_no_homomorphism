@@ -1,4 +1,4 @@
-import {SIGN_UP, TEMPLATES, DOM} from '@libs/constans.js';
+import {SIGN_UP , DOM} from '@libs/constans.js';
 import signup from '@views/signup/signup.tmpl.xml';
 import BaseView from '@libs/base_view';
 
@@ -31,6 +31,7 @@ export default class SignupView extends BaseView {
         document.addEventListener('click', (event) => {
             if (event.target.getAttribute('id') === SIGN_UP.SUBMIT) {
                 event.preventDefault();
+                event.stopImmediatePropagation();
                 this.submit();
             }
         });

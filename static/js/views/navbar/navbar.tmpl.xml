@@ -1,6 +1,9 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <a href="/" class="logo">
-        <img src="/static/img/headphones.png" alt="logo" height="40px" width="40px"/>
+        <img src="/static/img/library_music.svg" alt="logo" height="40px" width="40px"/>
+    </a>
+    <a href="/" class="name">
+        Mystical Spiral
     </a>
     <input type="text" class="search"/>
     <button type="button" class="search-button">

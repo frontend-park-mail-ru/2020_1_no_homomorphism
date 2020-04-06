@@ -1,6 +1,6 @@
 import Api from '@libs/api.js';
 import Validation from '@libs/validation.js';
-import {LOGIN, URL} from '@libs/constans.js';
+import {RESPONSE, LOGIN, URL, NAVBAR} from '@libs/constans';
 
 /**
  * Модель для страницы входа
@@ -36,15 +36,24 @@ export default class LoginModel {
         } else {
             Api.loginFetch(values.login, values.password)
                 .then((res) => {
-                    if (res === undefined) {
-                        this.eventBus.emit(LOGIN.REDIRECT, URL.MAIN);
-                        return;
-                    }
-                    if (res.ok) {
-                        this.globalEventBus.emit(LOGIN.LOGIN_SUCCESS, {});
+                    switch (res.status) {
+                    case RESPONSE.OK:
+                        localStorage.setItem('csrfToken', res.headers.get('Csrf-Token'));
+                        this.globalEventBus.emit(NAVBAR.GET_USER_DATA);
                         this.eventBus.emit(LOGIN.REDIRECT, URL.PROFILE_TRACKS);
-                    } else {
-                        this.eventBus.emit(LOGIN.INVALID, {global: 'Login error'}); // TODO ошибка может быть не только такой
+                        break;
+                    case RESPONSE.BAD_REQUEST:
+                        this.eventBus.emit(LOGIN.INVALID, {global: 'Wrong login or password'});
+                        break;
+                    case RESPONSE.NO_ACCESS_RIGHT:
+                        this.eventBus.emit(LOGIN.INVALID, {global: 'You are already logged in'});
+                        break;
+                    case RESPONSE.SERVER_ERROR:
+                        this.eventBus.emit(LOGIN.INVALID, {global: 'Errors in input data, try again'});
+                        break;
+                    default:
+                        console.log(res);
+                        console.error('I am a teapot');
                     }
                 });
         }

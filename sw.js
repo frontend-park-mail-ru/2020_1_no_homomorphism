@@ -1,8 +1,6 @@
 const KEY = 'sw';
 const assets = [ // TODO Подумать
     '/',
-    '/views/templates/base.njk',
-    '/views/index.njk',
 ];
 
 self.addEventListener('install', (event) => {
@@ -13,8 +11,6 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-    console.log('FETCHED');
-    console.log(event);
     event.respondWith(
         caches
             .match(event.request)

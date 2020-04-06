@@ -21,12 +21,16 @@ export default class PlayerView extends BaseView {
         this.repeatState = 0;
         this.muted = false;
         this.volume = 1;
-        this.firstEntry = true;
+        this.locked = true;
+        this.eventBus.on(PLAYER.RESIZE, this.resize.bind(this)); // globalEventBus
         this.eventBus.on(PLAYER.DRAW_PLAY, this.drawPlay.bind(this));
-        this.eventBus.on(PLAYER.RESIZE, this.resize.bind(this));
         this.eventBus.on(PLAYER.DRAW_PAUSE, this.drawPause.bind(this));
         this.eventBus.on(PLAYER.TRACK_UPDATE, this.updateTrack.bind(this));
+        this.eventBus.on(PLAYER.MOVE_MARKER, this.moveMarker.bind(this));
         this.eventBus.on(PLAYER.DRAW_TRACKLIST, this.drawTracklist.bind(this));
+        this.eventBus.on(PLAYER.DRAW_TRACKLIST, this.setDynamicEventListeners.bind(this));
+        this.eventBus.on(PLAYER.REMOVE_FROM_TRACKLIST, this.removeFromTracklist.bind(this));
+        this.eventBus.on(PLAYER.REMOVE_FROM_TRACKLIST_ALL, this.removeFromTracklistAll.bind(this));
         this.eventBus.on(PLAYER.DRAW_TIMELINE, this.drawTimeline.bind(this));
         this.eventBus.on(PLAYER.DRAW_SHUFFLE, this.drawShuffle.bind(this));
         this.eventBus.on(PLAYER.DRAW_UNSHUFLE, this.drawUnshuffle.bind(this));
@@ -35,7 +39,6 @@ export default class PlayerView extends BaseView {
         this.eventBus.on(PLAYER.DRAW_UNREPEAT, this.drawUnrepeat.bind(this));
         this.eventBus.on(PLAYER.DRAW_MUTE, this.drawMute.bind(this));
         this.eventBus.on(PLAYER.DRAW_UNMUTE, this.drawUnmute.bind(this));
-
     }
 
     /**
@@ -43,10 +46,8 @@ export default class PlayerView extends BaseView {
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.PLAYER)[0]);
-        if (this.firstEntry) {
-            this.eventBus.emit(PLAYER.GET_TRACKS, {index: 1}); // TODO получение плейлиста с индексом 1 - далее изменим
-        }
-        this.eventBus.emit(PLAYER.RESIZE, {});
+        this.setStaticEventListeners();
+        this.resize();
     }
 
     /**
@@ -73,19 +74,9 @@ export default class PlayerView extends BaseView {
     }
 
     /**
-     * Рисует треки в плейлисте
-     * @param {Object} tracks
+     * Sets static EventListeners
      */
-    drawTracklist(tracks) {
-        this.eventBus.emit(PLAYER.TRACK_UPDATE, tracks[0]);
-        document.getElementsByClassName('track-list')[0].innerHTML = track(tracks);
-        this.setEventListeners();
-    }
-
-    /**
-     * Sets EventListeners
-     */
-    setEventListeners() {
+    setStaticEventListeners() {
         window.addEventListener('resize', this.resize.bind(this));
         window.addEventListener('mouseup', this.windowMouseUp.bind(this));
         document.getElementsByTagName('audio')[0]
@@ -161,8 +152,25 @@ export default class PlayerView extends BaseView {
         document.getElementsByClassName('volume-scale-front')[0]
             .onmousemove = (event) => this.volumeMouseMove(event);
         window.onwheel = (event) => this.trackListWheel(event);
+    }
+
+    /**
+     * Sets dynamic EventListeners
+     */
+    setDynamicEventListeners() {
         document.querySelectorAll('.track-list .row').forEach((row) => {
-            row.onmouseover = (event) => console.log(event);
+            row.onclick = (event) => this.tracklistClick(event);
+            row.onmouseover = (event) => this.tracklistMouseOver(event);
+            row.onmouseout = (event) => this.tracklistMouseOut(event);
+        });
+        document.querySelectorAll('img.delete-button').forEach((button) => {
+            button.onclick = (event) => this.trackDeleteButtonClick(event);
+        });
+        document.querySelectorAll('img.favorite-button').forEach((button) => {
+            button.onclick = (event) => this.trackFavoriteButtonClick(event);
+        });
+        document.querySelectorAll('img.add-button').forEach((button) => {
+            button.onclick = (event) => this.trackAddButtonClick(event);
         });
     }
 
@@ -193,7 +201,7 @@ export default class PlayerView extends BaseView {
      * Слушает завершение воспроизвдения
      */
     audioEnded() {
-        this.eventBus.emit('next', 'self');
+        this.eventBus.emit(PLAYER.NEXT, 'self');
     }
 
     /**
@@ -214,6 +222,9 @@ export default class PlayerView extends BaseView {
      * Слушает клик мышью по триггеру плеера
      */
     triggerClick() {
+        if (this.locked === true) {
+            return;
+        }
         if (this.expanded) {
             document.getElementsByClassName('player-trigger-arrow')[0]
                 .style.transform = 'rotate(180deg)';
@@ -238,9 +249,9 @@ export default class PlayerView extends BaseView {
      */
     playPauseButtonClick() {
         if (this.playing) {
-            this.eventBus.emit(PLAYER.PAUSE, {});
+            this.eventBus.emit(PLAYER.PAUSE);
         } else {
-            this.eventBus.emit(PLAYER.PLAY, {});
+            this.eventBus.emit(PLAYER.PLAY);
         }
     }
 
@@ -248,7 +259,7 @@ export default class PlayerView extends BaseView {
      * Слушает клик по кнопке включения предыдущего трека
      */
     prevButtonClick() {
-        this.eventBus.emit(PLAYER.PREVIOUS, {});
+        this.eventBus.emit(PLAYER.PREVIOUS);
     }
 
     /**
@@ -345,7 +356,7 @@ export default class PlayerView extends BaseView {
         if (!this.shuffled) {
             this.eventBus.emit(PLAYER.SHUFFLE, 'first');
         } else {
-            this.eventBus.emit(PLAYER.UNSHUFFLE, {});
+            this.eventBus.emit(PLAYER.UNSHUFFLE);
         }
     }
 
@@ -373,13 +384,13 @@ export default class PlayerView extends BaseView {
     repeatButtonClick() {
         switch (this.repeatState) {
         case 0:
-            this.eventBus.emit(PLAYER.REPEAT, {});
+            this.eventBus.emit(PLAYER.REPEAT);
             break;
         case 1:
-            this.eventBus.emit(PLAYER.REPEAT_ONE, {});
+            this.eventBus.emit(PLAYER.REPEAT_ONE);
             break;
         case 2:
-            this.eventBus.emit(PLAYER.UNREPEAT, {});
+            this.eventBus.emit(PLAYER.UNREPEAT);
             break;
         }
     }
@@ -470,9 +481,9 @@ export default class PlayerView extends BaseView {
      */
     volumeButtonClick() {
         if (this.muted) {
-            this.eventBus.emit(PLAYER.UNMUTE, {});
+            this.eventBus.emit(PLAYER.UNMUTE);
         } else {
-            this.eventBus.emit(PLAYER.MUTE, {});
+            this.eventBus.emit(PLAYER.MUTE);
         }
     }
 
@@ -503,6 +514,120 @@ export default class PlayerView extends BaseView {
                 }
             }
         }
+    }
+
+    /**
+     * Слушает вход мыши в трек в плейлисте
+     * @param {Object} event
+     */
+    tracklistMouseOver(event) {
+        let target = event.target;
+        while (target.getAttribute('class') !== 'row border-bottom') {
+            if (target.getAttribute('class') !== null &&
+                target.getAttribute('class').indexOf('button') !== -1 &&
+                target.getAttribute('class').indexOf('buttons') === -1 &&
+                target.getAttribute('class').indexOf('row') !== -1
+            ) {
+                target.style.opacity = '1';
+                return;
+            }
+            target = target.parentNode;
+        }
+        for (const elem of target.getElementsByClassName('col track-buttons')[0].children) {
+            elem.style.opacity = '0.4';
+        }
+    }
+
+    /**
+     * Слушает выход мыши из трека в плейлисте
+     * @param {Object} event
+     */
+    tracklistMouseOut(event) {
+        let target = event.target;
+        while (target.getAttribute('class') !== 'row border-bottom') {
+            if (target.getAttribute('class') !== null &&
+                target.getAttribute('class').indexOf('button') !== -1 &&
+                target.getAttribute('class').indexOf('buttons') === -1 &&
+                target.getAttribute('class').indexOf('row') !== -1
+            ) {
+                target.style.opacity = '0.4';
+                return;
+            }
+            target = target.parentNode;
+        }
+        target = target.getElementsByClassName('col track-buttons')[0];
+        if (event.clientX < target.getBoundingClientRect().x ||
+            event.clientX > target.getBoundingClientRect().x +
+                target.getBoundingClientRect().width ||
+            event.clientY < target.getBoundingClientRect().y ||
+            event.clientY > target.getBoundingClientRect().y +
+                target.getBoundingClientRect().height
+        ) {
+            for (const elem of target.children) {
+                elem.style.opacity = '0';
+            }
+        }
+    }
+
+    /**
+     * Слушает клик по треку в плейлисте
+     * @param {Object} event
+     */
+    tracklistClick(event) {
+        let current = event.target;
+        while (current !== window && current !== document.body && current != null) {
+            if (current.getAttribute('class') === 'track-list' ||
+                (current.getAttribute('class') !== null &&
+                current.getAttribute('class').indexOf('button') !== -1 &&
+                current.getAttribute('class').indexOf('buttons') === -1 &&
+                current.getAttribute('class').indexOf('row') !== -1)
+            ) {
+                break;
+            }
+            if (current.getAttribute('id') !== null) {
+                this.eventBus.emit(PLAYER.GET_TRACK, current.getAttribute('id'));
+                break;
+            } else {
+                current = current.parentNode;
+            }
+        }
+    }
+
+    /**
+     * Слушает клик мыши по кнопке удаления на треке в плейлисте
+     * @param {Object} event
+     */
+    trackDeleteButtonClick(event) {
+        let target = event.target;
+        while (target.getAttribute('id') === null) {
+            target = target.parentNode;
+        }
+        this.eventBus.emit(PLAYER.DELETE, target.getAttribute('id'));
+    }
+
+    /**
+     * Слушает клик мыши по кнопке лайка на треке в плейлисте
+     * @param {Object} event
+     */
+    trackFavoriteButtonClick(event) {
+        if (event.target.src.indexOf('/static/img/favorite_border.svg') !== -1) {
+            event.target.src = '/static/img/favorite.svg';
+        } else {
+            event.target.src = '/static/img/favorite_border.svg';
+        }
+        this.eventBus.emit(PLAYER.LIKE, event.target.parentNode.parentNode.getAttribute('id'));
+    }
+
+    /**
+     * Слушает клик мыши по кнопке добавления на треке в плейлисте
+     * @param {Object} event
+     */
+    trackAddButtonClick(event) {
+        let target = event.target;
+        while (target.getAttribute('id') === null) {
+            target = target.parentNode;
+        }
+        this.eventBus.emit(PLAYER.ADD, target.getAttribute('id'));
     }
 
     /**
@@ -540,6 +665,75 @@ export default class PlayerView extends BaseView {
         document.getElementsByClassName('duration')[0].innerHTML = minutes.toString() + ':' +
             (seconds < 10 ? '0' : '') + seconds.toString();
         document.getElementsByClassName('current-time')[0].innerHTML = '0:00';
+    }
+
+    /**
+     * Передвигает маркер между треками
+     * @param {string} currentId
+     * @param {string} newId
+     */
+    moveMarker(currentId, newId) {
+        if (document.querySelectorAll('.track-list .row').length === 0) {
+            return;
+        }
+        const marker = document.getElementsByClassName('current-marker')[0];
+        const track1 = document./*getElementsByClassName('l-player')[0].*/getElementById(currentId);
+        const track2 = document./*getElementsByClassName('l-player')[0].*/getElementById(newId);
+        const heightDifference = track1.getBoundingClientRect().y -
+            track2.getBoundingClientRect().y;
+        const base = document.getElementsByClassName('track-list')[0].children[1]
+            .getBoundingClientRect().y;
+        track2.style.marginLeft = '5px';
+        marker.style.height = (50 + Math.abs(heightDifference)).toString() + 'px';
+        if (heightDifference < 0) {
+            setTimeout(() => {
+                marker.style.top = (track2.getBoundingClientRect().y - base + 5).toString() + 'px';
+            }, 250);
+        } else {
+            marker.style.top = (track2.getBoundingClientRect().y - base + 5).toString() + 'px';
+        }
+        setTimeout(() => {
+            marker.style.height = '50px';
+            if (heightDifference !== 0) {
+                track1.style.marginLeft = '0';
+            }
+        }, 250);
+    }
+
+    /**
+     * Рисует треки в плейлисте
+     * @param {Object} tracks
+     */
+    drawTracklist(tracks) {
+        this.eventBus.emit(PLAYER.TRACK_UPDATE, tracks[0]);
+        for (let i = 0; i < tracks.length; i++) {
+            document.getElementsByClassName('track-list')[0].innerHTML += track(tracks[i]);
+        }
+        this.locked = false;
+    }
+
+    /**
+     * Удаляет трек из списка воспроизвдения
+     * @param {string} id
+     */
+    removeFromTracklist(id) {
+        document./*getElementsByClassName('l-player')[0].*/getElementById(id).remove();
+        if (document.getElementsByClassName('track-list')[0].children.length === 1) {
+            if (this.expanded) {
+                this.triggerClick();
+            }
+            this.locked = true;
+        }
+    }
+
+    /**
+     * Очищает список воспроизвдения
+     */
+    removeFromTracklistAll() {
+        while (document.getElementsByClassName('track-list')[0].children.length > 1) {
+            document.getElementsByClassName('track-list')[0].children[document
+                .getElementsByClassName('track-list')[0].children.length - 1].remove();
+        }
     }
 
     /**
