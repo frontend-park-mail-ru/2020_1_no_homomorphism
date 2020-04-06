@@ -16,7 +16,6 @@ export default class SettingsView extends BaseView {
         this.errors = {};
         this.eventBus.on(SETTINGS.INVALID, this.showErrors.bind(this));
         this.eventBus.on(SETTINGS.RENDER_LOGGED, this.renderData.bind(this));
-        // this.eventBus.on(SETTINGS.AVATAR_UPLOAD, this.previewFile.bind(this));
     }
 
     /**
@@ -56,6 +55,7 @@ export default class SettingsView extends BaseView {
         fileAttach.addEventListener('change', (event) => {
             event.preventDefault();
             event.stopImmediatePropagation();
+            this.hideErrors();
             this.eventBus.emit(SETTINGS.AVATAR_UPLOAD);
         });
     }
@@ -80,11 +80,11 @@ export default class SettingsView extends BaseView {
     showErrors(errors) { // TODO починить вывод ошибок
         this.errors = errors;
         console.log('kek');
-        if (JSON.stringify(this.errors) === '{}') {
-            document.getElementById('newPassword').value = '';
-            document.getElementById('newPasswordConfirm').value = '';
-            document.getElementById('password').value = '';
-        }
+        // if (JSON.stringify(this.errors) === '{}') {
+        //     document.getElementById('newPassword').value = '';
+        //     document.getElementById('newPasswordConfirm').value = '';
+        //     document.getElementById('password').value = '';
+        // }
         // eslint-disable-next-line guard-for-in
         for (const key in errors) {
             const message = document.getElementById(key).nextElementSibling;
@@ -135,24 +135,5 @@ export default class SettingsView extends BaseView {
             newPasswordConfirm: document.getElementById('newPasswordConfirm').value,
             password: document.getElementById('password').value,
         });
-    }
-
-    /**
-     * Предпросмотр фоточки
-     */
-    previewFile() {
-        const preview = document.querySelector('. m-round-image');
-        const file = document.querySelector('input[type=file]').files[0];
-        const reader = new FileReader();
-
-        reader.onloadend = function() {
-            preview.src = reader.result;
-        };
-
-        if (file) {
-            reader.readAsDataURL(file);
-        } else {
-            preview.src = '';
-        }
     }
 }

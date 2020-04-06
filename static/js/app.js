@@ -27,16 +27,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const playlistController = new PlaylistController(router, globalEventBus);
     const albumController = new AlbumController(router, globalEventBus);
 
-    // if ('serviceWorker' in navigator) {
-    //     navigator.serviceWorker
-    //         .register('sw.js')
-    //         .then((registration) => {
-    //             console.log('SW registration ', registration);
-    //         })
-    //         .catch((err) => {
-    //             console.log('SW Registration failed with ' + err);
-    //         });
-    // }
 
     router.addView(URL.NAVBAR, navbarController.view);
     router.addView(URL.PLAYER, playerController.view);
@@ -55,7 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
     router.start();
     navbarController.view.render();
     playerController.view.render();
-    if ('serviceWorker' in navigator) {
-        runtime.register();
-    }
+    // if ('serviceWorker' in navigator) {
+    //     runtime.register();
+    // }
 });

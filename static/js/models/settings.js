@@ -89,31 +89,32 @@ export default class SettingsModel {
      * @param {Object} values
      */
     submit(values) {
-        const resPassword = Validation.password(
-            values.newPassword,
-            values.newPasswordConfirm,
-            values.newPassword !== '',
-        );
-        const resEmail = Validation.email(values.email);
-
         const errors = {};
-        if (values.newPassword !== '' && resPassword !== '') {
-            errors['newPassword'] = resPassword;
+        if (values.newPassword !== '') {
+            const resPassword = Validation.password(
+                values.newPassword,
+                values.newPasswordConfirm,
+                values.newPassword !== '',
+            );
+            if (values.newPassword !== '' && resPassword !== '') {
+                errors['newPassword'] = resPassword;
+            }
             if (values.password === '') {
                 errors['password'] = 'Enter old password';
             }
-        }
-        if (resEmail !== '') {
-            errors['email'] = resEmail;
-        }
-        if (values.name === '') {
-            errors['name'] = 'Enter name';
+        } else {
+            const resEmail = Validation.email(values.email);
+            if (resEmail !== '') {
+                errors['email'] = resEmail;
+            }
+            if (values.name === '') {
+                errors['name'] = 'Enter name';
+            }
         }
         if (JSON.stringify(errors) !== '{}') {
             console.log(errors);
             this.eventBus.emit(SETTINGS.INVALID, errors);
         } else {
-            console.log(values.name, values.email, values.password, values.newPassword);
             Api.profileEditFetch(values.name, values.email, values.password, values.newPassword)
                 .then((res) => {
                     console.log(res);
