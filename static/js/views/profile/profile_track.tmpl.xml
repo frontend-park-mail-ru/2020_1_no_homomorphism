@@ -6,30 +6,29 @@
             <div class="m-profile-track row" style="text-align: left">
                 <div>
                     <div class="l-track-big-image">
-                        <img class="m-profile-track-image" id="profile-track-image" src="{track.image}" alt=""/>
+                        <img class="m-profile-track-image" id="profile-track-image" src="{track.link}" alt=""/>
                     </div>
                     <div class="m-play-track">
                         <button class="m-button-track-play" id="playlist-play"> </button>
                     </div>
-                    <div class="m-profile-track-name ">
-                        <span>
-                            <fest:value>track.artists</fest:value>
-                        </span>
-                        <span>•</span>
-                        <span>
+                    <div class="m-profile-track-name row">
+                        <div class="col col-3">
+                            <fest:value>track.artist</fest:value>
+                        </div>
+                        <div class="col col-3">
                             <fest:value>track.name</fest:value>
-                        </span>
+                        </div>
                     </div>
                 </div>
                 <div class="l-track-buttons row">
                     <div class="col l-big-track-button delete-button">
-                        <img src="/static/img/clear-24px.svg" class="m-delete-button" height="15px" alt="..."/>
+                        <img src="/static/img/clear-24px.svg" class="m-big-delete-button" height="15px" alt="..."/>
                     </div>
                     <div class="col l-big-track-button favorite-button">
-                        <img src="/static/img/favorite_border.svg" class="m-like-button" height="15px" alt="..."/>
+                        <img src="/static/img/favorite_border.svg" class="m-big-like-button" height="15px" alt="..."/>
                     </div>
                     <div class="col l-big-track-button add-button">
-                        <img src="/static/img/add-24px.svg" class="m-add-button" height="15px" alt="..."/>
+                        <img src="/static/img/add-24px.svg" class="m-big-add-button" height="15px" alt="..."/>
                     </div>
                 </div>
             </div>

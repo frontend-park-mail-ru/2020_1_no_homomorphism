@@ -177,7 +177,7 @@ img#avatar {
 }
 
 .m-profile-track-name {
-    font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+    /*font: bold 20px/1.5 Helvetica, Verdana, sans-serif;*/
 }
 
 .l-track-big img {
@@ -285,6 +285,16 @@ img#avatar {
 }
 
 .l-list-card-description {
+    display: block;
+    color: #515151;
+    margin-top: -20px;
+    padding-bottom: 32px;
+    padding-left: 6px;
+    padding-right: 6px;
+    text-decoration: none;
+}
+
+.in-list-card-description {
     display: block;
     color: #515151;
     margin-top: -20px;
