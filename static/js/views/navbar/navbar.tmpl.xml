@@ -1,0 +1,29 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <a href="/artists" class="l-logo">
+        <img src="/static/img/library_music.svg" class="m-medium-icon" alt="logo"/>
+    </a>
+    <a href="/artists" class="name">
+        Mystical Spiral
+    </a>
+    <input type="text" class="search"/>
+    <a class="search-button">
+        <img src="/static/img/search.svg" class="m-medium-icon"/>
+    </a>
+    <a href="/profile/tracks" class="l-navbar-info is-hidden" id="profile-link">
+        <img class="m-navbar-avatar m-medium-icon col" src="/static/img/avatar/default.png" alt="avatar"/>
+
+        <div class="m-navbar-name col"></div>
+    </a>
+    <a href="/settings" class="l-settings-icon is-hidden">
+        <img src="/static/img/settings-24px.svg" class="m-small-icon"/>
+    </a>
+    <a href="/" class="login is-hidden" id="logout-link">
+        log out
+    </a>
+    <a href="/signup" class="signup is-hidden" id="signup-link">
+        sign up
+    </a>
+    <a href="/login" class="login is-hidden" id="login-link">
+        log in
+    </a>
+</fest:template>

@@ -1,87 +1,182 @@
-import {Api} from "../modules/api.js";
+import Api from '@libs/api.js';
+import {PLAYER, RESPONSE, GLOBAL, PAGINATION} from '@libs/constans';
 
 /**
  * Модель плеера
  */
-export class PlayerModel {
+export default class PlayerModel {
     /**
      * Конструктор
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
+     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus) {
+    constructor(eventBus, globalEventBus) {
         this.eventBus = eventBus;
-        this.data = {
-            queue    : [],
-            playlist : [],
-            current  : 0,
-            playing  : false,
-            shuffle  : false,
-            repeat   : false,
+        this.globalEventBus = globalEventBus;
+        this.queue = [];
+        this.playlist = [];
+        this.current = 0;
+        this.playing = false;
+        this.state = {
+            shuffle: false,
+            repeat: false,
         };
-
-        this.eventBus.on('init', this.getFirst.bind(this));
-        this.eventBus.on('pause', this.pause.bind(this));
-        this.eventBus.on('play', this.play.bind(this));
-        this.eventBus.on('prev', this.prev.bind(this));
-        this.eventBus.on('next', this.next.bind(this));
-        this.eventBus.on('rewind', this.rewind.bind(this));
-        this.eventBus.on('shuffle', this.shuffle.bind(this));
-        this.eventBus.on('unshuffle', this.unshuffle.bind(this));
-        this.eventBus.on('repeat', this.repeat.bind(this));
-        this.eventBus.on('repeat one', this.repeatOne.bind(this));
-        this.eventBus.on('unrepeat', this.unrepeat.bind(this));
-        this.eventBus.on('mute', this.mute.bind(this));
-        this.eventBus.on('unmute', this.unmute.bind(this));
-        //this.eventBus.on('volume up', this.volumeUp);
-        //this.eventBus.on('volume down', this.volumeDown);
+        this.globalEventBus.on(GLOBAL.CLEAR_AND_LOCK, this.deleteAll.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_ARTIST_TRACKS, this.deleteAll.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_ARTIST_TRACKS, this.getArtistTracks.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST_TRACKS, this.deleteAll.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST_TRACKS, this.getPlaylistTracks.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_ALBUM_TRACKS, this.deleteAll.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_ALBUM_TRACKS, this.getAlbumTracks.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.deleteAll.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.getPlaylistTracks.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_ALBUM, this.deleteAll.bind(this));
+        this.globalEventBus.on(GLOBAL.PLAY_ALBUM, this.getAlbumTracks.bind(this));
+        this.eventBus.on(PLAYER.GET_TRACK, this.getTrack.bind(this));
+        this.eventBus.on(PLAYER.GET_TRACKS, this.getPlaylistTracks.bind(this));
+        this.eventBus.on(PLAYER.PAUSE, this.pause.bind(this));
+        this.eventBus.on(PLAYER.PLAY, this.play.bind(this));
+        this.eventBus.on(PLAYER.PREVIOUS, this.prev.bind(this));
+        this.eventBus.on(PLAYER.NEXT, this.next.bind(this));
+        this.eventBus.on(PLAYER.REWIND, this.rewind.bind(this));
+        this.eventBus.on(PLAYER.SHUFFLE, this.shuffle.bind(this));
+        this.eventBus.on(PLAYER.UNSHUFFLE, this.unshuffle.bind(this));
+        this.eventBus.on(PLAYER.REPEAT, this.repeat.bind(this));
+        this.eventBus.on(PLAYER.REPEAT_ONE, this.repeatOne.bind(this));
+        this.eventBus.on(PLAYER.UNREPEAT, this.unrepeat.bind(this));
+        this.eventBus.on(PLAYER.MUTE, this.mute.bind(this));
+        this.eventBus.on(PLAYER.UNMUTE, this.unmute.bind(this));
+        this.eventBus.on(PLAYER.DELETE, this.delete.bind(this));
     }
 
     /**
-     * рисует кнопочку логаута
+     * Получение треков артиста
+     * @param {string} artistId
+     * @param {string} trackId
+     * @param {number} number
      */
-    logout() {
-        Api.logoutFetch();
-        document.getElementById('login-link').style.visibility = 'visible';
-        document.getElementById('signup-link').style.visibility = 'visible';
-        document.getElementById('logout-button').style.visibility = 'hidden';
-    }
-
-    /**
-     * достает первый трек в листе
-     */
-    getFirst() {
-        Api.trackFetch('12344')
-            .then(response => response.text())
-            .then(data => {
-                const track = JSON.parse(data);
-                document.getElementsByTagName('audio')[0].children[0].src = track.link;
-                document.getElementsByTagName('audio')[0].load();
-                this.data.playlist.push(track);
-                this.data.queue.push(this.data.playlist.length - 1);
-                this.eventBus.emit('track update', track);
+    getArtistTracks(artistId, trackId, number) {
+        Api.artistTracksFetch(artistId, '0', number.toString())
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    this.generateData.bind(this)(res, trackId);
+                    break;
+                case RESPONSE.BAD_REQUEST: // TODO
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
             });
-        for (let i = 12345; i < 12350; i++) {
-            Api.trackFetch(i.toString())
-                .then(response => response.text())
-                .then(data => {
-                    const track = JSON.parse(data);
-                    this.data.playlist.push(track);
-                    this.data.queue.push(this.data.playlist.length - 1);
-                })
-                .then(() => {
-                    if (this.data.playlist.length === 6) {
-                        this.eventBus.emit('draw tracklist', this.data.playlist);
-                    }
-                });
-        }
     }
+
+    /**
+     * Получение треков плейлиста
+     * @param {string} id
+     * @param {string} trackId
+     * @param {number} number
+     */
+    getPlaylistTracks(id, trackId, number = PAGINATION.TRACKS) {
+        Api.playlistTracksFetch(id, '0', number)
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    this.generateData.bind(this)(res, trackId);
+                    break;
+                case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
+                    break;
+                case RESPONSE.UNAUTH: // TODO Пользователь не залогинен => дефолтный плейлист
+                case RESPONSE.NO_ACCESS_RIGHT: // TODO Нет прав к этому плейлисту
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
+    }
+
+    /**
+     * Получение списка треков
+     * @param {string} id
+     * @param {string} trackId
+     * @param {number} number
+     */
+    getAlbumTracks(id, trackId, number = PAGINATION.TRACKS) {
+        Api.albumTracksFetch(id, '0', number)
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    this.generateData.bind(this)(res, trackId);
+                    break;
+                case RESPONSE.BAD_REQUEST: // TODO обработать ошибку
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
+    }
+
+    /**
+     * останавливает воспроизведение
+     * @param {Object} res
+     * @param {number} trackId
+     */
+    generateData(res, trackId = '') {
+        res.json()
+            .then((list) => {
+                if (list.tracks.length === 0) {
+                    this.globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK);
+                    return;
+                }
+                // eslint-disable-next-line guard-for-in
+                for (const song in list.tracks) {
+                    this.playlist.push(list.tracks[song]);
+                    this.queue.push(this.playlist.length - 1);
+                }
+                if (trackId !== '') {
+                    this.current = this.playlist.indexOf(this.playlist.find((track) =>
+                        track.id === trackId));
+                }
+                this.eventBus.emit(PLAYER.DRAW_TRACKLIST, this.playlist);
+                this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[this.queue[this.current]].id,
+                    this.playlist[this.queue[this.current]].id);
+                this.getTrack(this.playlist[this.queue[this.current]].id);
+                this.play();
+            });
+    }
+
+    /**
+     * достает трек
+     * @param {string} id
+     */
+    getTrack(id) {
+        const currentId = this.playlist[this.queue[this.current]].id;
+        this.current = this.queue.indexOf(this.playlist.indexOf(
+            this.playlist.find((track) => track.id === id)));
+        document.getElementsByTagName('audio')[0].children[0].src =
+            this.playlist[this.queue[this.current]].link;
+        if (this.playing) {
+            document.getElementsByTagName('audio')[0].pause();
+        }
+        document.getElementsByTagName('audio')[0].load();
+        if (this.playing) {
+            document.getElementsByTagName('audio')[0].play();
+        }
+        this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
+        this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[this.current]]);
+        this.eventBus.emit(PLAYER.MOVE_MARKER, currentId,
+            this.playlist[this.queue[this.current]].id);
+    }
+
     /**
      * останавливает воспроизведение
      */
     pause() {
         document.getElementsByTagName('audio')[0].pause();
-        this.data.playing = false;
-        this.eventBus.emit('draw play', {});
+        this.playing = false;
+        this.eventBus.emit(PLAYER.DRAW_PLAY);
     }
 
     /**
@@ -89,126 +184,146 @@ export class PlayerModel {
      */
     play() {
         document.getElementsByTagName('audio')[0].play();
-        this.data.playing = true;
-        this.eventBus.emit('draw pause', {});
+        this.playing = true;
+        this.eventBus.emit(PLAYER.DRAW_PAUSE);
     }
 
     /**
      * переключает трек на предыдущий
      */
     prev() {
-        if (this.data.current === 0) {
-            if (this.data.repeat) {
-                this.data.current = this.data.queue.length;
+        const currentId = this.playlist[this.queue[this.current]].id;
+        if (this.current === 0) {
+            if (this.state.repeat) {
+                this.current = this.queue.length;
             } else {
-                this.data.playing = false;
+                this.playing = false;
                 return;
             }
         }
-        this.data.current--;
-        document.getElementsByTagName('audio')[0].children[0].src = this.data.playlist[this.data.queue[this.data.current]].link;
-        if (this.data.playing) {
+        this.current--;
+        document.getElementsByTagName('audio')[0].children[0].src =
+            this.playlist[this.queue[this.current]].link;
+        if (this.playing) {
             document.getElementsByTagName('audio')[0].pause();
         }
         document.getElementsByTagName('audio')[0].load();
-        if (this.data.playing) {
+        if (this.playing) {
             document.getElementsByTagName('audio')[0].play();
         }
-        this.eventBus.emit('draw timeline', 0);
-        this.eventBus.emit('track update', this.data.playlist[this.data.queue[this.data.current]]);
+        this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
+        this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[this.current]]);
+        this.eventBus.emit(PLAYER.MOVE_MARKER, currentId,
+            this.playlist[this.queue[this.current]].id);
     }
 
     /**
      * переключает трек на следующий
-     * @param cause {string}
+     * @param {string} cause
      */
     next(cause) {
-        if (this.data.current === this.data.queue.length - 1) {
-            if (this.data.repeat) {
-                if (this.data.shuffle) {
+        const currentId = this.playlist[this.queue[this.current]].id;
+        if (this.current === this.queue.length - 1) {
+            if (this.state.repeat) {
+                if (this.state.shuffle) {
                     this.shuffle('random');
                 }
-                this.data.current = -1;
+                this.current = -1;
             } else {
                 if (cause === 'self') {
-                    this.eventBus.emit('draw play', {});
-                    this.data.current = 0;
-                    this.eventBus.emit('draw timeline', 0);
-                    this.eventBus.emit('track update', this.data.playlist[this.data.queue[0]]);
+                    this.eventBus.emit(PLAYER.DRAW_PLAY);
+                    this.current = 0;
+                    this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
+                    this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[0]]);
+                    this.eventBus.emit(PLAYER.MOVE_MARKER, currentId,
+                        this.playlist[this.queue[0]].id);
                 }
-                this.data.playing = false;
+                this.playing = false;
                 return;
             }
         }
-        this.data.current++;
-        document.getElementsByTagName('audio')[0].children[0].src = this.data.playlist[this.data.queue[this.data.current]].link;
-        if (this.data.playing) {
+        this.current++;
+        document.getElementsByTagName('audio')[0].children[0].src =
+            this.playlist[this.queue[this.current]].link;
+        if (this.playing) {
             document.getElementsByTagName('audio')[0].pause();
         }
         document.getElementsByTagName('audio')[0].load();
-        if (this.data.playing) {
+        if (this.playing) {
             document.getElementsByTagName('audio')[0].play();
         }
-        this.eventBus.emit('draw timeline', 0);
-        this.eventBus.emit('track update', this.data.playlist[this.data.queue[this.data.current]]);
+        this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
+        this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[this.current]]);
+        if (cause === 'delete') {
+            return;
+        }
+        this.eventBus.emit(PLAYER.MOVE_MARKER, currentId,
+            this.playlist[this.queue[this.current]].id);
     }
 
     /**
      * перематывает  композицию
-     * @param ratio
+     * @param {number} ratio
      */
     rewind(ratio) {
-        document.getElementsByTagName('audio')[0].currentTime = document.getElementsByTagName('audio')[0].duration * ratio;
-        this.eventBus.emit('draw timeline', ratio);
+        document.getElementsByTagName('audio')[0].currentTime =
+            document.getElementsByTagName('audio')[0].duration * ratio;
+        this.eventBus.emit(PLAYER.DRAW_TIMELINE, ratio);
     }
+
+    /**
+     * перемешать
+     * @param {string} positionOfCurrent
+     */
     shuffle(positionOfCurrent) {
-        let j, tmp;
-        for (let i = this.data.queue.length - 1; i > 0; i--) {
+        let j;
+        let tmp;
+        for (let i = this.queue.length - 1; i > 0; i--) {
             j = Math.floor(Math.random() * (i + 1));
-            if (j === this.data.current) {
-                this.data.current = i;
-            } else if (i === this.data.current) {
-                this.data.current = j;
+            if (j === this.current) {
+                this.current = i;
+            } else if (i === this.current) {
+                this.current = j;
             }
-            tmp = this.data.queue[j];
-            this.data.queue[j] = this.data.queue[i];
-            this.data.queue[i] = tmp;
+            tmp = this.queue[j];
+            this.queue[j] = this.queue[i];
+            this.queue[i] = tmp;
         }
         if (positionOfCurrent === 'first') {
-            tmp = this.data.queue[0];
-            this.data.queue[0] = this.data.queue[this.data.current];
-            this.data.queue[this.data.current] = tmp;
+            tmp = this.queue[0];
+            this.queue[0] = this.queue[this.current];
+            this.queue[this.current] = tmp;
         }
-        this.data.current = 0;
-        this.data.shuffle = true;
-        this.eventBus.emit('draw shuffle', {});
+        this.current = 0;
+        this.state.shuffle = true;
+        this.eventBus.emit(PLAYER.DRAW_SHUFFLE);
     }
 
     /**
      * шаффл выключен
      */
     unshuffle() {
-        this.data.current = this.data.queue[this.data.current];
-        this.data.queue.sort();
-        this.data.shuffle = false;
-        this.eventBus.emit('draw unshuffle', {});
+        this.current = this.queue[this.current];
+        this.queue.sort();
+        this.state.shuffle = false;
+        this.eventBus.emit(PLAYER.DRAW_UNSHUFLE);
     }
 
     /**
      * повторение листа
      */
     repeat() {
-        this.data.repeat = true;
-        this.eventBus.emit('draw repeat', {});
+        this.state.repeat = true;
+        this.eventBus.emit(PLAYER.DRAW_REPEAT);
     }
 
     /**
      * повторение текущего трека
      */
     repeatOne() {
-        this.data.repeat = false;
+        this.state.repeat = false;
         document.getElementsByTagName('audio')[0].loop = true;
-        this.eventBus.emit('draw repeat one', {});
+        this.eventBus.emit(PLAYER.DRAW_REPEAT_ONE);
     }
 
     /**
@@ -216,7 +331,7 @@ export class PlayerModel {
      */
     unrepeat() {
         document.getElementsByTagName('audio')[0].loop = false;
-        this.eventBus.emit('draw unrepeat', {});
+        this.eventBus.emit(PLAYER.DRAW_UNREPEAT);
     }
 
     /**
@@ -224,7 +339,7 @@ export class PlayerModel {
      */
     mute() {
         document.getElementsByTagName('audio')[0].muted = true;
-        this.eventBus.emit('draw mute', {});
+        this.eventBus.emit(PLAYER.DRAW_MUTE);
     }
 
     /**
@@ -232,6 +347,49 @@ export class PlayerModel {
      */
     unmute() {
         document.getElementsByTagName('audio')[0].muted = false;
-        this.eventBus.emit('draw unmute', {});
+        this.eventBus.emit(PLAYER.DRAW_UNMUTE);
+    }
+
+    /**
+     * Удаляет трек из очереди
+     * @param {string} id
+     */
+    delete(id) {
+        let decCurrent = this.playlist.length !== 1 &&
+            this.queue.indexOf(this.playlist.indexOf(this.playlist.find((track) =>
+                track.id === id))) < this.current;
+        if (this.playlist[this.queue[this.current]].id === id) {
+            if (this.playlist.length === 1) {
+                this.pause();
+            } else {
+                this.next('delete');
+                decCurrent = true;
+            }
+        }
+        const track = this.playlist.find((track) => track.id === id);
+        if (decCurrent) {
+            this.current--;
+        }
+        this.queue.splice(this.queue.indexOf(Math.max(this.queue)), 1);
+        this.playlist.splice(this.playlist.indexOf(track), 1);
+        this.eventBus.emit(PLAYER.REMOVE_FROM_TRACKLIST, id);
+        if (this.playlist.length === 0) {
+            return;
+        }
+        this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[this.queue[this.current]].id,
+            this.playlist[this.queue[this.current]].id);
+    }
+
+    /**
+     * Удаляет все треки из очереди
+     */
+    deleteAll() {
+        if (this.playing) {
+            this.pause();
+        }
+        this.queue = [];
+        this.playlist = [];
+        this.current = 0;
+        this.eventBus.emit(PLAYER.REMOVE_FROM_TRACKLIST_ALL, true);
     }
 }

@@ -1,26 +1,52 @@
-import {Router} from './modules/router.js'
-import {IndexController} from './controllers/index.js'
-import {LoginController} from './controllers/login.js'
-import {SignupController} from './controllers/signup.js'
-import {PlayerController} from './controllers/player.js'
-import {ProfileController} from './controllers/profile.js'
-import {SettingsController} from './controllers/settings.js'
+import Router from '@libs/router';
+import EventBus from '@libs/eventBus';
+import {URL} from '@libs/constans';
+import {NavbarController} from '@controllers/navbar';
+import {NewsController} from '@controllers/news';
+import {LoginController} from '@controllers/login';
+import {SignupController} from '@controllers/signup';
+import {PlayerController} from '@controllers/player';
+import {ProfileController} from '@controllers/profile/profile';
+import {SettingsController} from '@controllers/settings.js';
+import {ArtistController} from '@controllers/artist.js';
+import {PlaylistController} from '@controllers/playlist';
+import {AlbumController} from '@controllers/album';
+import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 
 window.addEventListener('DOMContentLoaded', () => {
     const router = new Router();
-    const indexController = new IndexController(router);
-    const loginController = new LoginController(router);
-    const signupController = new SignupController(router);
-    const playerController = new PlayerController(router);
-    const profileController = new ProfileController(router);
-    const settingsController = new SettingsController(router);
+    const globalEventBus = new EventBus();
+    const navbarController = new NavbarController(router, globalEventBus);
+    const newsController = new NewsController(router);
+    const loginController = new LoginController(router, globalEventBus);
+    const signupController = new SignupController(router, globalEventBus);
+    const playerController = new PlayerController(router, globalEventBus);
+    const profileController = new ProfileController(router, globalEventBus);
+    const settingsController = new SettingsController(router, globalEventBus);
+    const artistController = new ArtistController(router, globalEventBus);
+    const playlistController = new PlaylistController(router, globalEventBus);
+    const albumController = new AlbumController(router, globalEventBus);
 
-    router.addView('/', indexController.view);
-    router.addView('/login', loginController.view);
-    router.addView('/signup', signupController.view);
-    router.addView('/player', playerController.view);
-    router.addView('/profile', profileController.view);
-    router.addView('/settings', settingsController.view);
+
+    router.addView(URL.NAVBAR, navbarController.view);
+    router.addView(URL.PLAYER, playerController.view);
+    // router.addView(URL.MAIN, newsController.view);
+    router.addView(URL.LOGIN, loginController.view);
+    router.addView(URL.SIGN_UP, signupController.view);
+    router.addView(URL.PROFILE, profileController.view);
+    router.addView(URL.PROFILE_TRACKS, profileController.view);
+    router.addView(URL.PROFILE_PLAYLISTS, profileController.view);
+    router.addView(URL.PROFILE_ALBUMS, profileController.view);
+    router.addView(URL.PROFILE_ARTISTS, profileController.view);
+    router.addView(URL.SETTINGS, settingsController.view);
+    router.addView((URL.ARTIST_LIST), newsController.view);
+    router.addView(URL.ARTIST, artistController.view);
+    router.addView(URL.PLAYLIST, playlistController.view);
+    router.addView(URL.ALBUM, albumController.view);
     router.start();
-    playerController.view.load()
+    navbarController.view.render();
+    playerController.view.render();
+    if ('serviceWorker' in navigator) {
+        runtime.register();
+    }
 });

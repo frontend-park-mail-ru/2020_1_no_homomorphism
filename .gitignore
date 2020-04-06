@@ -110,3 +110,5 @@ temp/
 # End of https://www.gitignore.io/api/node
 
 .idea/
+package-lock.json
+static/music

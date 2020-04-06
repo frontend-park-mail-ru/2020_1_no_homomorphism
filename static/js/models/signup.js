@@ -1,51 +1,92 @@
-import {Validation} from '../modules/validation.js';
-import {Api} from "../modules/api.js";
+import Validation from '@libs/validation.js';
+import Api from '@libs/api.js';
+import {SIGN_UP, URL, RESPONSE, NAVBAR} from '@libs/constans.js';
 
 /**
  * модель странички регистрации
  */
-export class SignupModel {
+export default class SignupModel {
     /**
      * конструктор
-     * @param eventBus {EventBus}
+     * @param {EventBus} eventBus
+     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus) {
+    constructor(eventBus, globalEventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on('submit', this.submit.bind(this));
+        this.globalEventBus = globalEventBus;
+        this.eventBus.on(SIGN_UP.SUBMIT, this.submit.bind(this));
     }
 
     /**
      * отправляет форму с данными нового юзера
-     * @param values
+     * @param {Object} values
      */
     submit(values) {
-        const validation = new Validation;
-
-        const resLogin = validation.validationLogin(values.login);
-        const resPassword = validation.validationPassword(values.password, values.passwordConfirm);
-        const resEmail = validation.validationEmail(values.email);
-
-        if (values.name.empty) {
-            this.eventBus.emit('invalid', {name: 'Введите имя'})
-        } else if (resLogin !== '') {
-            this.eventBus.emit('invalid', {login: resLogin});
-        } else if (resEmail !== '') {
-            this.eventBus.emit('invalid', {email: resEmail});
-        } else if (resPassword !== '') {
-            console.log('Введите корреткный пароль');
-            this.eventBus.emit('invalid', {password: resPassword});
+        const resLogin = Validation.login(values.login);
+        const resPassword = Validation.password(values.password, values.passwordConfirm, true);
+        const resEmail = Validation.email(values.email);
+        const errors = {};
+        if (values.name === '') {
+            errors.name = 'Enter your name';
+        }
+        if (resLogin !== '') {
+            errors.login = resLogin;
+        }
+        if (resEmail !== '') {
+            errors.email = resEmail;
+        }
+        if (resPassword !== '') {
+            errors.password = resPassword;
+        }
+        if (JSON.stringify(errors) !== '{}') {
+            this.eventBus.emit(SIGN_UP.INVALID, errors);
         } else {
-            Api.signupFetch(values.name, values.login, '' , values.email, values.password)
-            .then((res) => {
-                if (res === undefined) {
-                    console.log('NO ANSWER FROM BACKEND');
-                } else if (res.ok) {
-                    this.eventBus.emit('hide login, show logout', {});
-                    this.eventBus.emit('redirect to main', {})
+            Api.signupFetch(values.name, values.login, 'yes', values.email, values.password)
+                .then((res) => {
+                    switch (res.status) {
+                    case RESPONSE.OK_ADDED:
+                        this.globalEventBus.emit(NAVBAR.GET_USER_DATA);
+                        localStorage.setItem('csrfToken', res.headers.get('Csrf-Token'));
+                        this.eventBus.emit(SIGN_UP.REDIRECT, URL.MAIN);
+                        break;
+                    case RESPONSE.BAD_REQUEST:
+                        this.eventBus.emit(SIGN_UP.INVALID, {global: 'Bad request'});
+                        break;
+                    case RESPONSE.NO_ACCESS_RIGHT:
+                        this.eventBus.emit(SIGN_UP.INVALID, {global: 'You are already logged in'});
+                        break;
+                    case RESPONSE.EXISTS:
+                        this.checkBody.bind(this)(res);
+                        break;
+                    case RESPONSE.SERVER_ERROR:
+                        this.eventBus.emit(SIGN_UP.INVALID,
+                            {global: 'Errors in input data, try again'});
+                        break;
+                    default:
+                        console.log(res);
+                        console.error('I am a teapot'); // В случае, если бэк - кек
+                    }
+                });
+        }
+    }
+
+    /**
+     * Определяет, каое поле занято
+     * @param {Object} res
+     */
+    checkBody(res) {
+        res.json()
+            .then((body) => {
+                if (body.login_exists) {
+                    if (body.email_exists) {
+                        this.eventBus.emit(SIGN_UP.INVALID,
+                            {global: 'These login and email are taken'});
+                        return;
+                    }
+                    this.eventBus.emit(SIGN_UP.INVALID, {global: 'This login is taken'});
                 } else {
-                    this.eventBus.emit('invalid', {name: 'Проблемы с регистарцией'})
+                    this.eventBus.emit(SIGN_UP.INVALID, {global: 'This email is taken'});
                 }
             });
-        }
     }
 }

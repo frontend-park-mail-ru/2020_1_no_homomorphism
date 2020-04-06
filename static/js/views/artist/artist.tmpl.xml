@@ -1,0 +1,57 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <div class="col col-9">
+        <div class="l-main">
+            <div class="l-top-card">
+
+                <div class="row">
+                    <div class="l-top-info col">
+                        <div class="l-round-image col">
+                            <img alt="" src="{data.image}" class=" m-round-image" id="avatar"/>
+                        </div>
+                        <div class="l-top-name col" id="login-name">
+                            <div class="m-top-login" id="profile-login">
+                                <fest:value>data.name</fest:value>
+                            </div>
+                            <div class="m-top-name" id="profile-name">
+                                <fest:value>data.genre</fest:value>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="m-profile-tracks col col-4">
+                        <a class="m-tiny-ref" href="/artist/{data.id}/tracks">
+                            <h2 id="artist-tracks-title">
+                                <fest:value>data.tracks</fest:value>
+                            </h2>
+                            <p>Tracks</p>
+                        </a>
+                    </div>
+                    <div class="m-profile-albums col col-4">
+                        <a class="m-tiny-ref" href="/artist/{data.id}/albums">
+                            <h2 id="artist-albums-title">
+                                <fest:value>data.albums</fest:value>
+                            </h2>
+                            <p>Albums</p>
+                        </a>
+                    </div>
+                    <div class="m-artist-info col col-4" id="artist-info-title">
+                        <a class="m-tiny-ref" href="/artist/{data.id}/info">
+                            <h2>Info</h2>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="l-down-card l-artist-base">
+                <div class="l-profile-album-list" id="albums" style="top: 0;">
+                </div>
+                <div class="l-profile-track-list" id="tracks" style="top: 0;">
+                </div>
+                <div class="l-profile-track-list" id="info" style="top: 0;">
+                </div>
+            </div>
+        </div>
+    </div>
+</fest:template>

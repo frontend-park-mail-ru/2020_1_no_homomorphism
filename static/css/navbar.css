@@ -1,39 +1,132 @@
-.navbar {
+.l-navbar {
     width: 100%;
     position: sticky;
     top: 0;
     padding: 0 5%;
     margin-bottom: 2%;
     background: white;
-    box-shadow: 0 3px 6px silver;
+    box-shadow: 0 3px 6px var(--chosen-icon);
     display: flex;
     align-items: center;
-    z-index: 2;
+    z-index: 3;
 }
 
-.navbar .logo {
+.l-navbar a {
+    text-decoration: none;
+    color: black;
+}
+
+.l-navbar-row {
+    width: 100%;
+}
+
+.l-navbar .logo {
     height: 3%;
     width: 3%;
     margin: 5px 0;
 }
 
-.navbar .login {
-    margin-left: 0.5%;
+.l-navbar .name {
+    font-weight: bold;
+    margin-left: 4px;
+    margin-bottom: 4px;
+    font-size: 23px;
 }
 
-.navbar .signup {
+.l-navbar .login {
+    height: 60px;
+    width: 6%;
+    padding-top: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.l-navbar .login:hover {
+    background: var(--chosen-icon);
+}
+
+.l-navbar .logout {
+    padding-top: 0;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    background: white;
+}
+
+.l-navbar-info {
+    height: 60px;
+    text-align: center;
+    font-weight: bold;
+    margin-left: auto;
+    padding-right: 8px;
+    padding-left: 8px;
+    padding-top: 3px;
+}
+
+.l-navbar-info:hover {
+    background: var(--chosen-icon);
+}
+
+.l-navbar .signup {
+    height: 55px;
+    width: 6%;
+    padding-top: 16px;
+    text-align: center;
+    font-weight: bold;
     margin-left: auto;
 }
 
-.navbar .search {
-    margin-left: 2%;
-    margin-right: 0.5%;
-    height: 2em;
+.l-navbar .signup:hover {
+    background: var(--chosen-icon);
 }
 
-.navbar .search-button {
-    border-radius: 0.33em;
-    background: white;
-    outline: none;
-    height: 2em;
+.l-navbar .search {
+    box-shadow: var(--box-shadow);
+    margin-left: 2%;
+    height: 2.3em;
+    width: 20em;
+    border: 1px solid var(--chosen-icon);
+}
+
+.l-navbar .search-button {
+    position: relative;
+    box-shadow: var(--box-shadow);
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+.l-navbar .search-button:hover {
+    opacity: 1;
+}
+
+.m-medium-icon {
+    height: 40px;
+    width: 40px;
+}
+
+.m-small-icon {
+    height: 20px;
+    width: 20px;
+}
+
+.m-navbar-avatar {
+    margin-top: 8px;
+    margin-right: 8px;
+    border-radius: 20px;
+}
+
+.m-navbar-name {
+    padding: 8px;
+    position: relative;
+    top: 8px;
+}
+
+.l-settings-icon {
+    opacity: 0.6;
+    padding: 20px 8px 16px 8px;
+}
+
+.l-settings-icon:hover {
+    opacity: 1;
+    background: var(--chosen-icon);
 }
