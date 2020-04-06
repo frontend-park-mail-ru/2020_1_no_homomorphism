@@ -2,7 +2,6 @@ const {assets} = global.serviceWorkerOption;
 const CACHE_NAME = 'No homo';
 
 self.addEventListener('install', (event) => {
-    console.log('INSTALL');
     event.waitUntil(
         caches
             .open(CACHE_NAME)
@@ -17,7 +16,6 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-    console.log('CLEAR');
     event.waitUntil(
         caches
             .keys()
@@ -45,8 +43,11 @@ self.addEventListener('fetch', (event) => {
         .match(request)
         .then((response) => {
             if (response) {
+                console.log('CACHE');
+
                 return response;
             }
+            console.log('BACK');
 
             return fetch(request)
                 .then((res) => {
