@@ -92,6 +92,12 @@ export default class PlayerView extends BaseView {
             .addEventListener('mouseout', this.triggerMouseOut.bind(this));
         document.getElementsByClassName('player-trigger')[0]
             .addEventListener('click', this.triggerClick.bind(this));
+        document.getElementsByClassName('trigger-button')[0]
+            .addEventListener('mouseover', this.triggerMouseOver.bind(this));
+        document.getElementsByClassName('trigger-button')[0]
+            .addEventListener('mouseout', this.triggerMouseOut.bind(this));
+        document.getElementsByClassName('trigger-button')[0]
+            .addEventListener('click', this.triggerClick.bind(this));
         document.getElementsByClassName('play-pause')[0]
             .addEventListener('click', this.playPauseButtonClick.bind(this));
         document.getElementById('prev').addEventListener('click', this.prevButtonClick.bind(this));
@@ -211,6 +217,10 @@ export default class PlayerView extends BaseView {
      * Слушает вход курсора на триггер плеера
      */
     triggerMouseOver() {
+        document.getElementsByClassName('trigger-button')[0].classList
+            .add('background--chosen-icon');
+        document.getElementsByClassName('player-trigger')[0].classList
+            .add('background--chosen-icon');
         document.getElementsByClassName('player-trigger-arrow')[0].style.visibility = 'visible';
     }
 
@@ -218,6 +228,10 @@ export default class PlayerView extends BaseView {
      * Слушает выход курсора с триггера плеера
      */
     triggerMouseOut() {
+        document.getElementsByClassName('trigger-button')[0].classList
+            .remove('background--chosen-icon');
+        document.getElementsByClassName('player-trigger')[0].classList
+            .remove('background--chosen-icon');
         document.getElementsByClassName('player-trigger-arrow')[0].style.visibility = 'hidden';
     }
 
@@ -231,11 +245,11 @@ export default class PlayerView extends BaseView {
         if (this.expanded) {
             document.getElementsByClassName('player-trigger-arrow')[0]
                 .style.transform = 'rotate(180deg)';
-            document.getElementsByClassName('player-trigger-arrow')[0].style.marginLeft = '-1px';
+            // document.getElementsByClassName('player-trigger-arrow')[0].style.marginLeft = '-1px';
         } else {
             document.getElementsByClassName('player-trigger-arrow')[0]
                 .style.transform = 'rotate(0)';
-            document.getElementsByClassName('player-trigger-arrow')[0].style.marginLeft = '-3px';
+            // document.getElementsByClassName('player-trigger-arrow')[0].style.marginLeft = '-3px';
         }
         const body = document.getElementsByTagName('body')[0];
         const left = (

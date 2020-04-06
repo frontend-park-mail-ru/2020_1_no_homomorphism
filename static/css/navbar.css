@@ -5,7 +5,7 @@
     padding: 0 5%;
     margin-bottom: 2%;
     background: white;
-    box-shadow: 0 3px 6px #ebeae7;
+    box-shadow: 0 3px 6px var(--chosen-icon);
     display: flex;
     align-items: center;
     z-index: 3;
@@ -42,7 +42,7 @@
 }
 
 .l-navbar .login:hover {
-    background: #ebeae7;
+    background: var(--chosen-icon);
 }
 
 .l-navbar .logout {
@@ -64,7 +64,7 @@
 }
 
 .l-navbar-info:hover {
-    background: #ebeae7;
+    background: var(--chosen-icon);
 
 }
 
@@ -78,7 +78,7 @@
 }
 
 .l-navbar .signup:hover {
-    background: #ebeae7;
+    background: var(--chosen-icon);
 }
 
 .l-navbar .search {
@@ -129,5 +129,5 @@
 
 .l-settings-icon:hover {
     opacity: 1;
-    background: #ebeae7;
+    background: var(--chosen-icon);
 }
