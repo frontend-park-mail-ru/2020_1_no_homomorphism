@@ -1,6 +1,6 @@
 import Api from '@libs/api.js';
 import {ARTIST, URL, GLOBAL} from '@libs/constans.js';
-import {LOGIN, NAVBAR, RESPONSE} from '@libs/constans';
+import {RESPONSE} from '@libs/constans';
 
 /**
  * Модель для страницы артиста

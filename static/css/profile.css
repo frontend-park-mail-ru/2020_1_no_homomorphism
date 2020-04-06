@@ -266,7 +266,7 @@ p {
     display: inline-block;
     width: 90%;
     max-width: 200px;
-    max-height: 270px;
+    max-height: 260px;
     text-decoration: none;
     border-radius: 5px;
     box-shadow: 0 0 10px -3px rgba(0, 0, 0, 0.5);
@@ -309,6 +309,7 @@ p {
 
 .l-button-play-track {
     height: 200px;
+    margin-top: -200px;
 }
 
 .l-list-card:hover .m-button-track-play-playlist {
@@ -331,4 +332,8 @@ p {
     cursor: pointer;
     opacity: 0;
     margin-left: 56px !important;
+}
+
+.l-list-image {
+    height: 200px
 }
