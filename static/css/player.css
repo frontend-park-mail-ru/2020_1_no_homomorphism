@@ -341,6 +341,6 @@
     cursor: pointer;
 }
 
-/* .trigger-button:hover {
+.trigger-button:hover {
     background: var(--chosen-icon);
-} */
+}
