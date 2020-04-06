@@ -1,14 +1,21 @@
+import {URL, DOM} from '@libs/constans.js';
+
 /**
  * Переход по страничкам
  * @class Router
  */
-export class Router {
+export default class Router {
     /**
      * Конструктор
      * */
     constructor() {
-        this.root = document.getElementsByClassName('container')[0].children[0];
+        this.root = document.getElementsByClassName(DOM.CONTENT)[0];
         this.views = {};
+        this.regexUrl = [URL.ALBUM, URL.PLAYLIST, URL.ARTIST];
+        this.profileUrl = [URL.PROFILE, URL.PROFILE_TRACKS, URL.PROFILE_PLAYLISTS,
+            URL.PROFILE_ARTISTS, URL.PROFILE_ALBUMS];
+        this.forbiddenForLogout = [URL.PROFILE, URL.PROFILE_TRACKS, URL.PROFILE_PLAYLISTS,
+            URL.PROFILE_ARTISTS, URL.PROFILE_ALBUMS, URL.SETTINGS];
     }
 
     /**
@@ -25,11 +32,11 @@ export class Router {
      * @param {string} to
      */
     logoutRedirect(to) {
-        console.log('logout redirect');
-        if (['/profile', '/settings'].includes(window.location.pathname)) {
+        if (this.forbiddenForLogout.includes(window.location.pathname)) {
             this.check(to, true);
         }
     }
+
     /**
      * Редирект
      * @param {string} to
@@ -39,29 +46,54 @@ export class Router {
     }
 
     /**
+     * Проверка регулярки
+     * @param {string} newPath
+     */
+    checkReg(newPath) {
+        let res = '';
+        this.regexUrl.map(function(url) {
+            if (newPath.match(url)) {
+                res = url;
+            }
+        });
+        console.log(res);
+        return res === '' ? newPath : res;
+    }
+
+    /**
      * Запуск рендеринга
      * @param {string} newPath
      * @param {boolean} pushState
      * */
     check(newPath, pushState) {
         if (newPath === this.curPath) {
-            // Уже на этой страничке
             return;
         }
-        if (!(newPath in this.views)) {
+        const isRegUrl = this.checkReg(newPath);
+        if (!(newPath in this.views) && isRegUrl === newPath) {
             if (pushState) {
-                window.history.pushState('', {}, '/');
+                window.history.pushState('', {}, URL.MAIN);
             }
-            this.views['/'].render(this.root);
-            this.views['player'].render();
+            this.redirect(URL.MAIN); // TODO добавить вывод пользователю
             return;
+        }
+        if (newPath === URL.PROFILE) {
+            this.redirect(URL.PROFILE_TRACKS);
         }
         this.curPath = newPath;
         if (pushState) {
             window.history.pushState('', {}, newPath);
         }
-        this.views[newPath].render(this.root);
-        this.views['player'].render();
+        if (this.profileUrl.indexOf(newPath) !== -1) {
+            this.views[newPath].render(this.root, newPath);
+            return;
+        }
+        if (isRegUrl !== newPath) {
+            this.views[isRegUrl].render(this.root,
+                newPath.slice(newPath.lastIndexOf('/') + 1, newPath.length));
+        } else {
+            this.views[isRegUrl].render(this.root);
+        }
     }
 
     /**
@@ -83,8 +115,7 @@ export class Router {
                 }
             }
         });
-        this.check(window.location.pathname, true);
-        this.views['player'].setEventListeners();
-        this.views['navbar'].setEventListeners();
+        this.check(window.location.pathname, false);
+        this.views[URL.PLAYER].render();
     }
 }

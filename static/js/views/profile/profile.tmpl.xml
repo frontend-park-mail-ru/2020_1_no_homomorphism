@@ -1,0 +1,61 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <div class="col col-9">
+        <div class="l-main">
+            <div class="l-top-card row">
+
+                <div class="l-top-info col col-5">
+                    <div class="l-round-image col">
+                        <img alt="" src="{data.image}" class=" m-round-image" id="avatar"/>
+                    </div>
+                    <div class="l-top-name col" id="login-name">
+                        <div class="m-top-login" id="profile-login">
+                            <fest:value>data.login</fest:value>
+                        </div>
+                        <div class="m-top-name" id="profile-name">
+                            <fest:value>data.name</fest:value>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="l-top-titles col col-6">
+                    <div class="m-profile-tracks col col-3" id="profile-tracks-title">
+                        <a class="m-tiny-ref" href="/profile/tracks">
+                            <h2>543</h2>
+                            <p>Tracks</p>
+                        </a>
+                    </div>
+                    <div class="m-profile-playlists col col-3" id="profile-playlists-title">
+                        <a class="m-tiny-ref" href="/profile/playlists">
+                            <h2>53</h2>
+                            <p>Playlists</p>
+                        </a>
+                    </div>
+                    <div class="m-profile-albums col col-3" id="profile-albums-title">
+                        <a class="m-tiny-ref" href="/profile/albums">
+                            <h2>43</h2>
+                            <p>Albums</p>
+                        </a>
+                    </div>
+                    <div class="m-profile-artists col col-3" id="profile-artists-title">
+                        <a class="m-tiny-ref" href="/profile/artists">
+                            <h2>53</h2>
+                            <p>Subscriptions</p>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="l-down-card">
+                <div class="l-profile-album-list" id="profile-album-playlist-list" style="top: 0;">
+                </div>
+                <div class="l-track-big-list" id="profile-track-list" style="top: 0;">
+                </div>
+                <div class="l-playlist-list" id="profile-playlist-list" style="top: 0;">
+                </div>
+                <div class="l-profile-artist-list" id="profile-artist-list" style="top: 0;">
+                </div>
+            </div>
+        </div>
+    </div>
+</fest:template>

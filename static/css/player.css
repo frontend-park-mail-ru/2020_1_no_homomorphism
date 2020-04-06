@@ -1,4 +1,4 @@
-.main-pos {
+.l-player {
     height: 1000px;
     width: 400px;
     position: fixed;
@@ -12,11 +12,11 @@
     overflow: hidden;
 }
 
-.main-pos .col {
+.l-player .col {
     text-align: left;
 }
 
-.main-pos .main-col {
+.l-player .main-col {
     width: 361px;
 }
 
@@ -27,33 +27,32 @@
     z-index: 1;
 }
 
-.music-bar {
+.l-music-bar {
     background: white;
     position: relative;
     z-index: 1;
 }
 
-.music-bar .col {
+.l-music-bar .col {
     height: 80px;
 }
 
-.music-bar .track-group-names {
+.l-music-bar .track-group-names {
     padding-left: 7px;
     padding-top: 0;
 }
 
-.music-bar .add-to-playlist-button {
+.l-music-bar .add-to-playlist-button {
     margin-left: 159px;
 }
 
-.music-bar .share-button {
+.l-music-bar .share-button {
     padding-top: 1.5px;
 }
 
 .container-audio {
     height: auto;
     color: #444;
-    overflow: hidden;
     background: white;
     position: relative;
     z-index: 1;
@@ -126,8 +125,8 @@
 
 .volume-scale {
     height: 74px;
-    top: 48px;
-    left: 356px;
+    top: -53px;
+    left: 340px;
     background: white;
     border: 1px solid #ebeae7;
     border-radius: 2px;
@@ -191,6 +190,40 @@
     z-index: 0;
 }
 
+.current-marker {
+    background: #00e676;
+    width: 5px;
+    position: absolute;
+    transition-property: height, top;
+    transition-duration: 0.25s;
+}
+
+.track-buttons {
+    position: absolute;
+    left: 341px;
+}
+
+.track-button {
+    opacity: 0;
+}
+
+.track-list > .row {
+    background: white;
+    cursor: pointer;
+    padding-bottom: 17px;
+    padding-top: 5px;
+    transition-property: margin;
+    transition-duration: 0.1s;
+}
+
+.track-list > .row:hover {
+    background: #00e67626;
+}
+
+.track-list .row {
+    cursor: pointer;
+}
+
 .track-list .track-group-names {
     padding-left: 8px;
     height: 54px;
@@ -206,6 +239,7 @@
 
 .track-list .col {
     height: 38px;
+    margin-bottom: 0;
 }
 
 .track-photo {
@@ -232,7 +266,26 @@
     font-size: 15px;
 }
 
-.main-pos .player-trigger {
+.track-list .buttons-in-playlist {
+    margin-left: 172px;
+    padding-top: 14px;
+}
+
+.track-list .share-button {
+    padding-top: 13.5px;
+}
+
+.share-button {
+    padding-bottom: 46px;
+}
+
+
+.add-to-playlist-button {
+    padding-left: 150px;
+    padding-bottom: 46px;
+}
+
+.l-player .player-trigger {
     width: 13px;
     height: 1000px;
     margin-right: 5px;
@@ -240,12 +293,16 @@
     cursor: pointer;
 }
 
-.main-pos .player-trigger:hover {
+.l-player .player-trigger:hover {
     background: #ebeae7;
 }
 
-.main-pos .player-trigger-arrow {
+.l-player .player-trigger-arrow {
     margin-left: -3px;
     position: relative;
     top: 50%;
+}
+
+.small_line {
+    border-top: 1px solid #ebeae7;
 }

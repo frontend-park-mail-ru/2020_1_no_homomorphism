@@ -1,38 +1,37 @@
+import {VALIDATION} from '@libs/constans.js';
 /**
  * Валидация данных
  * @class Validation
  */
-export class Validation {
+export default class Validation {
     /**
      * @param {String} email
      * @return {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
      */
     static email(email = '') {
         if (email === '') {
-            return 'Enter email';
+            return VALIDATION.EMAIL_EMPTY;
         }
-        const regExpr = new RegExp('(.)+@(.)+');
+        const regExpr = new RegExp(VALIDATION.REGEX_EMAIL);
         if (!email.match(regExpr)) {
-            return 'Incorrect email syntax';
+            return VALIDATION.EMAIL_INCORRECT;
         }
         return '';
     }
-
     /**
      * @param {String} login
      * @return {String} error Пустая строчка в случае корректных данных, иначе - текст ошибки
      */
     static login(login = '') {
-        const regExpr = new RegExp('^[a-zA-Z0-9_.]{3,}$');
+        const regExpr = new RegExp(VALIDATION.REGEX_LOGIN);
         if (login === '') {
-            return 'Enter login';
+            return VALIDATION.LOGIN_EMPTY;
         }
         if (!login.match(regExpr)) {
-            return 'Login must contain at least 3 letters';
+            return VALIDATION.LOGIN_INCORRECT;
         }
         return '';
     }
-
     /**
      * @param {String} pass1 Пароль
      * @param {String} pass2 Повтор пароля
@@ -41,21 +40,20 @@ export class Validation {
      */
     static password(pass1 = '', pass2 = '', passConfirm = false) {
         if (pass1 === '') {
-            return 'Enter password';
+            return VALIDATION.PASS_EMPTY;
         }
         if (pass2 === '' && passConfirm) {
-            return 'Repeat the password';
+            return VALIDATION.REPEAT_PASS_EMPTY;
         }
         if (pass1 !== pass2 && passConfirm) {
-            return 'Passwords must match';
+            return VALIDATION.PASSES_DIFF;
         }
-        const regExpr = new RegExp('^[a-zA-Z0-9]{3,}$');
+        const regExpr = new RegExp(VALIDATION.REGEX_PASSWORD);
         if (!pass1.match(regExpr)) {
-            return 'Password must contain at least 3 letters or numbers';
+            return VALIDATION.PASS_INCORRECT;
         }
         return '';
     }
-
     /**
      * @param {number} size Размер файла
      * @param {String} extension Расширение
@@ -63,13 +61,10 @@ export class Validation {
      */
     static image(size, extension) {
         if (size > 1048576) {
-            console.log('Too big');
-            return 'Max allowable size - 1Mb';
+            return VALIDATION.IMG_TOO_BIG;
         }
-        const allowableExtension = ['png', 'jpg', 'gif'];
-        if (allowableExtension.indexOf(extension) === -1) {
-            console.log('Wrong extension');
-            return 'Allowable extensions - png, jpg, gif';
+        if (VALIDATION.ALLOWABLE_EXTENSIONS.indexOf(extension) === -1) {
+            return VALIDATION.IMG_WRONG_EXT;
         }
         return '';
     }

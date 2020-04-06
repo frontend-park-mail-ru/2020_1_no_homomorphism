@@ -1,11 +1,15 @@
 .login-form input {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+}
+
+input {
+    margin-left: 2%;
+    margin-right: 0.5%;
+    outline: none;
+    height: 2em;
+    padding: 0 1%;
 }
 
 input[type="checkbox"] {
@@ -18,7 +22,14 @@ input[type="checkbox"] {
 }
 
 .error-message {
-    height: 0;
     visibility: hidden;
     color: red;
+}
+.l-login-input-login{
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.l-login-input-password {
+    padding-top: 32px;
 }

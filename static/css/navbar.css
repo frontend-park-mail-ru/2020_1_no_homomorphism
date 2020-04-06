@@ -1,4 +1,4 @@
-.navbar {
+.l-navbar {
     width: 100%;
     position: sticky;
     top: 0;
@@ -11,27 +11,29 @@
     z-index: 3;
 }
 
-.navbar a {
+.l-navbar a {
     text-decoration: none;
     color: black;
 }
 
-.navbar-row {
+.l-navbar-row {
     width: 100%;
 }
 
-.navbar .logo {
+.l-navbar .logo {
     height: 3%;
     width: 3%;
     margin: 5px 0;
 }
 
-.navbar .name {
+.l-navbar .name {
+    font-weight: bold;
     margin-left: 4px;
-    margin-bottom: -13px;
+    margin-bottom: 4px;
+    font-size: 23px;
 }
 
-.navbar .login {
+.l-navbar .login {
     height: 55px;
     width: 6%;
     padding-top: 19px;
@@ -39,11 +41,11 @@
     font-weight: bold;
 }
 
-.navbar .login:hover {
+.l-navbar .login:hover {
     background: #ebeae7;
 }
 
-.navbar .logout {
+.l-navbar .logout {
     padding-top: 0;
     border: none;
     cursor: pointer;
@@ -51,7 +53,7 @@
     background: white;
 }
 
-.navbar .signup {
+.l-navbar .signup {
     margin-left: auto;
     font-weight: bold;
     height: 55px;
@@ -60,27 +62,27 @@
     text-align: center;
 }
 
-.navbar .signup:hover {
+.l-navbar .signup:hover {
     background: #ebeae7;
 }
 
-.navbar .signup img {
+.l-navbar .signup img {
     border-radius: 20px;
 }
 
-.navbar .search {
+.l-navbar .search {
     box-shadow: inset 0px 0px 4px black;
     margin-left: 2%;
     height: 2.3em;
 }
 
-.navbar .search-button {
+.l-navbar .search-button {
     position: relative;
     left: -33px;
     opacity: 0.4;
     cursor: pointer;
 }
 
-.navbar .search-button:hover {
+.l-navbar .search-button:hover {
     opacity: 1;
 }

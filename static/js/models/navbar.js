@@ -1,9 +1,11 @@
-import {Api} from '../libs/api.js';
+import Api from '@libs/api.js';
+import {NAVBAR, URL} from '@libs/constans.js';
+import {LOGIN, RESPONSE} from '@libs/constans';
 
 /**
  * Модель для навбара
  */
-export class NavbarModel {
+export default class NavbarModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus
@@ -12,9 +14,10 @@ export class NavbarModel {
     constructor(eventBus, globalEventBus) {
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
-        this.eventBus.on('get user data', this.getUserData.bind(this));
-        this.eventBus.on('logout', this.logout.bind(this));
-        this.eventBus.on('cookie fetch', this.cookieFetch.bind(this));
+        this.globalEventBus.on(NAVBAR.GET_USER_DATA, this.getUserData.bind(this));
+        this.eventBus.on(NAVBAR.GET_USER_DATA, this.getUserData.bind(this));
+        this.eventBus.on(NAVBAR.LOGOUT_CLICKED, this.doLogout.bind(this));
+        this.eventBus.on(NAVBAR.CHECK_COOKIE, this.cookieFetch.bind(this));
     }
 
     /**
@@ -22,14 +25,37 @@ export class NavbarModel {
      */
     cookieFetch() {
         Api.cookieFetch()
-            .then((res) => this.eventBus.emit('cookie', res.ok));
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                case RESPONSE.UNAUTH:
+                    this.eventBus.emit(NAVBAR.DRAW_COOKIE_RESULT, res.ok);
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
     }
 
     /**
      * Разлогинивает пользователя
      */
-    logout() {
-        Api.logoutFetch();
+    doLogout() {
+        Api.logoutFetch()
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    break;
+                case RESPONSE.BAD_REQUEST:
+                case RESPONSE.UNAUTH:
+                    this.cookieFetch.bind(this)();
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
     }
 
     /**
@@ -38,16 +64,22 @@ export class NavbarModel {
     getUserData() {
         Api.profileFetch()
             .then((res) => {
-                if (res === undefined) {
-                    console.log('NO ANSWER FROM BACKEND');
-                    this.eventBus.emit('redirect', '/');
-                    return;
-                }
-                if (res.ok) {
+                switch (res.status) {
+                case RESPONSE.OK:
                     res.json()
                         .then((data) => {
-                            this.eventBus.emit('user data', data);
+                            this.eventBus.emit(NAVBAR.RENDER_LOGGED, data);
                         });
+                    break;
+                case RESPONSE.UNAUTH:
+                    this.eventBus.emit(NAVBAR.RENDER_NOT_LOGGED, {});
+                    break;
+                case RESPONSE.SERVER_ERROR:
+                    this.eventBus.emit(NAVBAR.REDIRECT, URL.MAIN);
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
                 }
             });
     }

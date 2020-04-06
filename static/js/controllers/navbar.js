@@ -1,7 +1,7 @@
-import {EventBus} from '../libs/eventBus.js';
-import {NavbarModel} from '../models/navbar.js';
-import {NavbarView} from '../views/navbar.js';
-
+import EventBus from '@libs/eventBus.js';
+import NavbarModel from '@models/navbar.js';
+import NavbarView from '@views/navbar/navbar.js';
+import {NAVBAR} from '@libs/constans.js';
 /**
  * Контроллер для навбара
  */
@@ -16,8 +16,7 @@ export class NavbarController {
         this.model = new NavbarModel(this.eventBus, globalEventBus);
         this.view = new NavbarView(this.eventBus, globalEventBus);
 
-        globalEventBus.on('logout redirect', router.logoutRedirect.bind(router));
-        this.eventBus.on('redirect', router.redirect.bind(router));
-        this.eventBus.on('no answer', router.redirect.bind(router));
+        globalEventBus.on(NAVBAR.LOGOUT_REDIRECT, router.logoutRedirect.bind(router));
+        this.eventBus.on(NAVBAR.REDIRECT, router.redirect.bind(router));
     }
 }

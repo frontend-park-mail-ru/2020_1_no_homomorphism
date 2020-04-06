@@ -1,0 +1,26 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <a href="/" class="logo">
+        <img src="/static/img/library_music.svg" alt="logo" height="40px" width="40px"/>
+    </a>
+    <a href="/" class="name">
+        Mystical Spiral
+    </a>
+    <input type="text" class="search"/>
+    <button type="button" class="search-button">
+        <img src="/static/img/search.svg" alt="lupa pupa" height="20px" width="20px"/>
+    </button>
+    <a href="/profile" class="signup row is-hidden" id="profile-link">
+        <img class="m-navbar-avatar" src="/static/img/avatar/default.png" alt="avatar" height="40px" width="40px"/>
+        <span class="m-navbar-name">
+        </span>
+    </a>
+    <button type="button" class="login is-hidden" name="button" id="logout-link">
+        log out
+    </button>
+    <a href="/signup" class="signup is-hidden" id="signup-link">
+        sign up
+    </a>
+    <a href="/login" class="login is-hidden" id="login-link">
+        log in
+    </a>
+</fest:template>

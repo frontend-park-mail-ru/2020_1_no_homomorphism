@@ -1,7 +1,7 @@
 /**
  * EventBus
  */
-export class EventBus {
+export default class EventBus {
     /**
      * Конструктор
      */
