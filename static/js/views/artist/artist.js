@@ -202,6 +202,12 @@ export default class ArtistView extends BaseView {
                 (this.tracksRendered + PAGINATION.TRACKS).toString());
         }
     }
+
+    /**
+     * Рендер информации
+     */
+    // renderInfo(info) {}
+
     /**
      * @param {Object} data
      */

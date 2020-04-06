@@ -97,7 +97,7 @@ export default class Router {
             this.views[isRegUrl].render(this.root,
                 newPath.slice(newPath.lastIndexOf('/') + 1, newPath.length));
         } else {
-            this.views[isRegUrl].render(this.root, '');
+            this.views[isRegUrl].render(this.root);
         }
     }
 

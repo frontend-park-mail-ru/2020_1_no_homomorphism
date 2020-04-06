@@ -30,7 +30,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     router.addView(URL.NAVBAR, navbarController.view);
     router.addView(URL.PLAYER, playerController.view);
-    // router.addView(URL.MAIN, newsController.view);
+    router.addView(URL.MAIN, newsController.view);
     router.addView(URL.LOGIN, loginController.view);
     router.addView(URL.SIGN_UP, signupController.view);
     router.addView(URL.PROFILE, profileController.view);
@@ -39,7 +39,6 @@ window.addEventListener('DOMContentLoaded', () => {
     router.addView(URL.PROFILE_ALBUMS, profileController.view);
     router.addView(URL.PROFILE_ARTISTS, profileController.view);
     router.addView(URL.SETTINGS, settingsController.view);
-    router.addView((URL.ARTIST_LIST), newsController.view);
     router.addView(URL.ARTIST, artistController.view);
     router.addView(URL.PLAYLIST, playlistController.view);
     router.addView(URL.ALBUM, albumController.view);

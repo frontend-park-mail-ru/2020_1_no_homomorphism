@@ -19,7 +19,7 @@ export const DOM = {
 };
 
 export const URL = {
-    MAIN: '/artists',
+    MAIN: '/',
     NAVBAR: 'navbar',
     PLAYER: 'player',
     LOGIN: '/login',
@@ -31,7 +31,6 @@ export const URL = {
     PROFILE_ARTISTS: '/profile/artists',
     SETTINGS: '/settings',
     ARTIST: /(\/artist\/)[0-9]+/,
-    ARTIST_LIST: '/artists',
     PLAYLIST: /(\/playlist\/)[0-9]+/,
     ALBUM: /(\/album\/)[0-9]+/,
 };
@@ -174,12 +173,10 @@ export const ARTIST = {
     NO_ANSWER: 'no-answer',
     REDIRECT: 'redirect',
     GET_DATA: 'get-artist-data',
-    GET_LIST_DATA: 'get-all-artists-data',
     RENDER_DATA: 'render-artist-data',
     RENDER_TRACKS: 'render tracks',
     RENDER_ALBUMS: 'render albums',
     RENDER_INFO: 'render info',
-    RENDER_ARTIST_LIST: 'render-artist-list',
 };
 
 export const PLAYLIST = {
