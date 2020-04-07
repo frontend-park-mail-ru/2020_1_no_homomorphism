@@ -79,7 +79,7 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static artistFetch(id) {
-        return getFetch(API + '/artists/' + id).catch((error) => console.error(error));
+        return getFetch(API + `/artists/${id}`).catch((error) => console.error(error));
     }
 
     /**
@@ -88,7 +88,7 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static artistStatFetch(id) {
-        return getFetch(API + '/artists/' + id + '/stat').catch((error) => console.error(error));
+        return getFetch(API + `/artists/${id}/stat`).catch((error) => console.error(error));
     }
 
     /**
@@ -99,7 +99,7 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static artistAlbumsFetch(id, start, end) {
-        return getFetch(API + '/artists/' + id + '/albums/' + start + '/' + end)
+        return getFetch(API + `/artists/${id}/albums/${start}/${end}`)
             .catch((error) => console.error(error));
     }
 
@@ -111,7 +111,7 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static artistTracksFetch(id, start, end) {
-        return getFetch(API + '/artists/' + id + '/tracks/' + start + '/' + end)
+        return getFetch(API + `/artists/${id}/tracks/${start}/${end}`)
             .catch((error) => console.error(error));
     }
 
@@ -204,7 +204,7 @@ export default class Api {
     }
 
     /**
-     * Получение треков альбома
+     * Получение альбома
      * @param {number} id
      * @return {Promise<Response>}
      */
@@ -215,7 +215,7 @@ export default class Api {
     }
 
     /**
-     * Получение треков плейлиста
+     * Получение треков альбома
      * @param {number} id
      * @param {string} start
      * @param {string} end

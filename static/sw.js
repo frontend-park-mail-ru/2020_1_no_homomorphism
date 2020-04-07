@@ -43,12 +43,8 @@ self.addEventListener('fetch', (event) => {
         .match(request)
         .then((response) => {
             if (response) {
-                console.log('CACHE');
-
                 return response;
             }
-            console.log('BACK');
-
             return fetch(request)
                 .then((res) => {
                     if (!res || !res.ok) {
