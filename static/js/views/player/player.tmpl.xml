@@ -11,7 +11,7 @@
             <div class="row l-music-bar">
                 <div class="col">
                     <a href="/player">
-                        <img src="/static/img/album-24px.svg" height="80px" width="80px" alt="..." id="cover"/>
+                        <img src="" height="80px" width="80px" alt="..." id="cover"/>
                     </a>
                 </div>
                 <div class="col track-group-names">

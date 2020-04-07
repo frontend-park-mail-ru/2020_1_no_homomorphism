@@ -15,7 +15,7 @@
         <div class="m-navbar-name col"></div>
     </a>
     <a href="/settings" class="l-settings-icon is-hidden">
-        <img src="/static/img/settings-24px.svg" class="m-small-icon"/>
+        <img src="/static/img/settings.svg" class="m-small-icon"/>
     </a>
     <a href="/" class="login is-hidden" id="logout-link">
         log out
