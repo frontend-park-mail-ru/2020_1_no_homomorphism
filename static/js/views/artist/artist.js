@@ -30,6 +30,7 @@ export default class ArtistView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
+        console.log(url);
         this.tracksRendered = 0;
         this.allTracksRendered = true;
         this.albumsRendered = 0;

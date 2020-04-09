@@ -30,7 +30,7 @@ export const URL = {
     PROFILE_PLAYLISTS: '/profile/playlists',
     PROFILE_ARTISTS: '/profile/artists',
     SETTINGS: '/settings',
-    ARTIST: /(\/artist\/)[0-9]+/,
+    ARTIST: /(\/artist\/)[0-9]+(\/albums|\/tracks|\/info)*/,
     PLAYLIST: /(\/playlist\/)[0-9]+/,
     ALBUM: /(\/album\/)[0-9]+/,
 };
