@@ -11,7 +11,7 @@ import {SettingsController} from '@controllers/settings.js';
 import {ArtistController} from '@controllers/artist.js';
 import {PlaylistController} from '@controllers/playlist';
 import {AlbumController} from '@controllers/album';
-import runtime from 'serviceworker-webpack-plugin/lib/runtime';
+// import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 
 window.addEventListener('DOMContentLoaded', () => {
     const router = new Router();
@@ -45,7 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
     router.start();
     navbarController.view.render();
     playerController.view.render();
-    if ('serviceWorker' in navigator) {
-        runtime.register();
-    }
+    // if ('serviceWorker' in navigator) {
+    //     runtime.register();
+    // }
 });

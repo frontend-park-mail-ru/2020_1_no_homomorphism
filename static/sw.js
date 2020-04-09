@@ -18,7 +18,6 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-    console.log('kek');
     event.waitUntil(
         caches
             .keys()
@@ -26,8 +25,10 @@ self.addEventListener('activate', (event) => {
                 return Promise.all(
                     cacheNames.map((cacheName) => {
                         if (cacheName.indexOf(CACHE_NAME) === 0) {
+                            console.log('NOT');
                             return null;
                         }
+                        console.log('DELETED');
                         return caches.delete(cacheName);
                     }),
                 );
