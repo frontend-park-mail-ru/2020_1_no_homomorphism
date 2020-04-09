@@ -1,16 +1,10 @@
 const symbols = {
-    // '&amp': '&',
-    // '&quot': '"',
-    // '&apos': '\'',
-    // '&lt': '<',
-    // '&gt': '>',
-    '&': ' &amp ',
-    // eslint-disable-next-line no-useless-escape
-    '/\"/g': ' &quot ',
-    '\'': ' &apos ',
-    '/\'/g': ' &apos ',
-    '<': ' &lt ',
-    '>': ' &gt ',
+    '&amp': /&/g,
+    '&quot': /"/g,
+    '&apos': /'/g,
+    '&lt': /</g,
+    '&gt': />/g,
+    ' ': /(\w+\s*)=(\s*".*?")/g,
 };
 
 // eslint-disable-next-line valid-jsdoc
@@ -21,7 +15,7 @@ const symbols = {
 export const inputSanitize = (input) => {
     let resString = input;
     Object.keys(symbols).map((key) => {
-        resString = resString.replace(key, symbols[key]);
+        resString = resString.replace(symbols[key], key);
     });
     return resString;
 };

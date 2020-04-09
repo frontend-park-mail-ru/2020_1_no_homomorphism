@@ -1,4 +1,6 @@
+// eslint-disable-next-line no-unused-vars
 import Api from '@libs/api';
+// eslint-disable-next-line no-unused-vars
 import {PROFILE, RESPONSE, PAGINATION} from '@libs/constans';
 
 /**

@@ -1,6 +1,7 @@
 import {LOGIN} from '@libs/constans';
 import template from '@views/login/login.tmpl.xml';
 import BaseView from '@libs/base_view';
+import {inputSanitize} from '@libs/input_sanitize';
 
 /**
  *  вью для входа
@@ -65,6 +66,7 @@ export default class LoginView extends BaseView {
      * отправляет данные формы
      */
     submit() {
+        console.log(inputSanitize());
         document.querySelectorAll('.login-form label').forEach((label) => {
             label.children[0].style.borderColor = '#ccc';
             label.children[1].innerText = '';

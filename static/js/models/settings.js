@@ -64,10 +64,10 @@ export default class SettingsModel {
             fData.append('profile_image', fileAttach.files[0], 'kek.png');
             Api.profilePhotoFetch(fData)
                 .then((res) => {
+                    this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
                     switch (res.status) {
                     case RESPONSE.OK:
                         this.getUserData.bind(this)();
-                        this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
                         this.globalEventBus.emit(NAVBAR.GET_USER_DATA);
                         break;
                     case RESPONSE.BAD_REQUEST: // TODO Обработать ошибку
@@ -122,10 +122,10 @@ export default class SettingsModel {
         } else {
             Api.profileEditFetch(values.name, values.email, values.password, values.newPassword)
                 .then((res) => {
+                    this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
                     switch (res.status) {
                     case RESPONSE.OK:
                         this.getUserData.bind(this)();
-                        this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
                         break;
                     case RESPONSE.BAD_REQUEST:
                         errors['password'] = 'Wrong password';

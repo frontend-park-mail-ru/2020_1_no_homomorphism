@@ -46,7 +46,9 @@ export default class ArtistModel {
                 }
                 if (res.every((item) => item.ok)) {
                     const data = {};
-                    Promise.all(res.map((item) => item.json()))
+                    Promise
+                        .all(res
+                            .map((item) => item.json()))
                         .then((res) => res.forEach((item) => Object.assign(data, item)))
                         .then(() => this.eventBus.emit(ARTIST.RENDER_DATA, data));
                 } else {

@@ -1,5 +1,6 @@
 import {postFetch, getFetch, deleteFetch, putFetch, postImageFetch} from '@libs/fetch';
-import {API} from '@libs/constans';
+import {API, RESPONSE} from '@libs/constans';
+import {inputSanitize} from '@libs/input_sanitize';
 
 /**
  * API object
@@ -15,8 +16,8 @@ export default class Api {
      */
     static loginFetch(login, password) {
         return postFetch(API + '/users/login', {
-            'login': login,
-            'password': password,
+            'login': inputSanitize(login),
+            'password': inputSanitize(password),
         }, (error) => {
             console.log(error.toString());
         });
@@ -63,11 +64,11 @@ export default class Api {
      */
     static signupFetch(name = '', login, sex = '', email = '', password) {
         return postFetch(API + '/users/signup', {
-            'name': name,
-            'login': login,
+            'name': inputSanitize(name),
+            'login': inputSanitize(login),
             'sex': 'yes',
-            'email': email,
-            'password': password,
+            'email': inputSanitize(email),
+            'password': inputSanitize(password),
         }, (error) => {
             console.log(error.toString());
         });
@@ -158,10 +159,10 @@ export default class Api {
      */
     static profileEditFetch(name, email, password, newPassword) {
         return putFetch(API + '/users/settings', {
-            name,
-            email,
-            password,
-            new_password: newPassword,
+            name: inputSanitize(name),
+            email: inputSanitize(email),
+            password: inputSanitize(password),
+            new_password: inputSanitize(newPassword),
         }, (error) => {
             console.log(error.toString());
         });
@@ -193,10 +194,26 @@ export default class Api {
      * @param {number} id
      * @return {Promise<Response>}
      */
-    static playlistAllTracksFetch(id) {
-        return getFetch(API + `/playlists/${id}`, (error) => {
+    static playlistFetch(id) {
+        const res = getFetch(API + `/playlists/${id}`, (error) => {
             console.log(error.toString());
         });
+
+        return res.then((elem) => {
+            console.log(elem);
+            if (elem.status !== RESPONSE.OK) {
+                return {status: elem.status};
+            }
+            try {
+                return elem.json();
+            } catch (error) {
+                console.log(error.toString());
+            }
+        });
+
+        // return getFetch(API + `/playlists/${id}`, (error) => {
+        //     console.log(error.toString());
+        // });
     }
 
     /**
@@ -217,7 +234,7 @@ export default class Api {
      * @param {number} id
      * @return {Promise<Response>}
      */
-    static albumAllTracksFetch(id) {
+    static albumFetch(id) {
         return getFetch(API + `/albums/${id}`, (error) => {
             console.log(error.toString());
         });

@@ -24,16 +24,14 @@ export default class PlaylistModel {
      * @param {Object} id
      */
     getPlaylist(id) {
-        Api.playlistAllTracksFetch(id.id)
+        Api.playlistFetch(id.id)
             .then((res) => {
+                console.log(res);
                 switch (res.status) {
-                case RESPONSE.OK:
-                    res.json()
-                        .then((list) => {
-                            this.playlist = list;
-                            this.eventBus.emit(PLAYLIST.RENDER_PLAYLIST_DATA,
-                                this.playlist.playlist);
-                        });
+                case undefined: // TODO Временно
+                    this.playlist = res;
+                    this.eventBus.emit(PLAYLIST.RENDER_PLAYLIST_DATA,
+                        this.playlist);
                     break;
                 case RESPONSE.BAD_REQUEST:
                     this.eventBus.emit(PLAYLIST.ERROR,

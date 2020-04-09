@@ -27,11 +27,7 @@ export default class SettingsView extends BaseView {
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.CONTENT)[0]);
-        if (JSON.stringify(this.userData) === '{}') { // TODO синглтон
-            this.eventBus.emit(SETTINGS.GET_USER_DATA);
-        } else {
-            this.renderData(this.userData);
-        }
+        this.eventBus.emit(SETTINGS.GET_USER_DATA); // TODO синглтон
         if (CSRF_TOKEN === '') {
             this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
         }

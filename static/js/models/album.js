@@ -25,7 +25,7 @@ export default class AlbumModel {
      * @param {Object} id
      */
     getAlbum(id) {
-        Api.albumAllTracksFetch(id.id)
+        Api.albumFetch(id.id)
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
