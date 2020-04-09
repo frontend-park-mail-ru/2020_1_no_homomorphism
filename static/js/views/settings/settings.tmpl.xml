@@ -35,7 +35,7 @@
                         <span class="profile-info">Name</span>
                         <div class="l-input">
                             <label for="login">
-                                <input type="text" class="m-settings-input" id="name"/>
+                                <input type="text" class="m-settings-input" id="name" />
                                 <div class="error-message-small"></div>
                             </label>
                         </div>
@@ -63,7 +63,8 @@
                         <div class="l-input">
                             <span class="profile-info">New password</span>
                             <label for="newPassword">
-                                <input type="password"  class="profile-content m-settings-input" id="newPassword" value=""
+                                <input type="password" class="profile-content m-settings-input" id="newPassword"
+                                       value=""
                                        autocomplete="off"/>
                                 <div class="error-message-small"></div>
                             </label>
@@ -73,7 +74,7 @@
                         <div class="l-input">
                             <span class="profile-info">Repeat password</span>
                             <label for="newPasswordConfirm">
-                                <input type="password"  class="profile-content m-settings-input" id="newPasswordConfirm"
+                                <input type="password" class="profile-content m-settings-input" id="newPasswordConfirm"
                                        autocomplete="off"/>
                                 <div class="error-message-small"></div>
                             </label>
@@ -84,14 +85,15 @@
                         <div class="l-input">
                             <span class="profile-info">Old password</span>
                             <label for="password">
-                                <input type="password"  class="profile-content m-settings-input" id="password" placeholder=""
+                                <input type="password" class="profile-content m-settings-input" id="password"
+                                       placeholder=""
                                        autocomplete="off"/>
                                 <div class="error-message-small"></div>
                             </label>
                         </div>
                     </div>
                     <div class="col col-3">
-                        <button type="submit" class="m-small-button"id="submit-setting-changes-pass">
+                        <button type="submit" class="m-small-button" id="submit-setting-changes-pass">
                             Change
                         </button>
                     </div>
