@@ -51,7 +51,6 @@ export default class SettingsModel {
      */
     resetAvatar() {
         const fileAttach = document.getElementById(SETTINGS.AVATAR_UPLOAD);
-        console.log(fileAttach);
         const resImage = Validation
             .image(fileAttach.files[0].size, fileAttach.files[0].type
                 .split('/')

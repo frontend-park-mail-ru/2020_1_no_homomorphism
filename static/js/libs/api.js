@@ -200,7 +200,6 @@ export default class Api {
         });
 
         return res.then((elem) => {
-            console.log(elem);
             if (elem.status !== RESPONSE.OK) {
                 return {status: elem.status};
             }

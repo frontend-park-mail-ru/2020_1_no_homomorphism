@@ -30,7 +30,6 @@ export default class ArtistView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
-        console.log(url);
         this.tracksRendered = 0;
         this.allTracksRendered = true;
         this.albumsRendered = 0;
@@ -63,7 +62,6 @@ export default class ArtistView extends BaseView {
      * @param {Object} data
      */
     renderData(data) {
-        console.log(data);
         this.setData(data);
         document.getElementsByClassName('m-top-login')[0].innerHTML = data.name;
         document.getElementsByClassName('m-round-image')[0].src = data.image;

@@ -2,7 +2,6 @@ const {assets} = global.serviceWorkerOption;
 const CACHE_NAME = 'No homo';
 
 self.addEventListener('install', (event) => {
-    console.log('lol');
 
     event.waitUntil(
         caches
@@ -25,10 +24,8 @@ self.addEventListener('activate', (event) => {
                 return Promise.all(
                     cacheNames.map((cacheName) => {
                         if (cacheName.indexOf(CACHE_NAME) === 0) {
-                            console.log('NOT');
                             return null;
                         }
-                        console.log('DELETED');
                         return caches.delete(cacheName);
                     }),
                 );

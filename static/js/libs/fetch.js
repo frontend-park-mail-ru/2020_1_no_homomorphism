@@ -82,7 +82,6 @@ export const putFetch = (path = '/', body = {}) => {
  * return {Promise<Response>}
  */
 export const postImageFetch = (path = API + '/users/images', body = {}) => {
-    console.log(body);
     return fetch(SERVER_PATH + path, {
         method: 'POST',
         mode: 'cors',
