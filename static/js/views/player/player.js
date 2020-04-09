@@ -1,4 +1,4 @@
-import {PLAYER, NAVBAR, DOM} from '@libs/constans.js';
+import {PLAYER, NAVBAR, DOM} from '@libs/constans';
 import BaseView from '@libs/base_view';
 import track from '@views/player/track.tmpl.xml';
 import player from '@views/player/player.tmpl.xml';

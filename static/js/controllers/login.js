@@ -1,7 +1,7 @@
-import EventBus from '@libs/eventBus.js';
-import LoginModel from '@models/login.js';
-import LoginView from '@views/login/login.js';
-import {LOGIN} from '@libs/constans.js';
+import EventBus from '@libs/eventBus';
+import LoginModel from '@models/login';
+import LoginView from '@views/login/login';
+import {LOGIN} from '@libs/constans';
 /**
  * Контроллер для страницы со входом
  */

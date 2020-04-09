@@ -1,4 +1,4 @@
-import {PROFILE} from '@libs/constans.js';
+import {PROFILE} from '@libs/constans';
 import template from '@views/profile/profile_album.tmpl.xml';
 import {GLOBAL} from '@libs/constans';
 

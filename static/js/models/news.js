@@ -1,5 +1,5 @@
-import Api from '@libs/api.js';
-import {MAIN, URL, RESPONSE} from '@libs/constans.js';
+import Api from '@libs/api';
+import {MAIN, URL, RESPONSE} from '@libs/constans';
 
 /**
  * Модель для главной страницы

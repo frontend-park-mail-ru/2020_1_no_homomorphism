@@ -1,5 +1,5 @@
-import Api from '@libs/api.js';
-import {ARTIST, URL, GLOBAL} from '@libs/constans.js';
+import Api from '@libs/api';
+import {ARTIST, URL, GLOBAL} from '@libs/constans';
 
 /**
  * Модель для страницы артиста

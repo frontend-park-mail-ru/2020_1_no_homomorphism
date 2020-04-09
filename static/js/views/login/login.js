@@ -1,4 +1,4 @@
-import {LOGIN} from '@libs/constans.js';
+import {LOGIN} from '@libs/constans';
 import template from '@views/login/login.tmpl.xml';
 import BaseView from '@libs/base_view';
 

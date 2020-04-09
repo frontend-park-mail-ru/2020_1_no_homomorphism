@@ -1,6 +1,7 @@
-import Validation from '@libs/validation.js';
-import Api from '@libs/api.js';
+import Validation from '@libs/validation';
+import Api from '@libs/api';
 import {SETTINGS, URL, RESPONSE, NAVBAR} from '@libs/constans';
+import {setToken} from '@libs/user';
 
 /**
  * Модель настроек
@@ -17,6 +18,7 @@ export default class SettingsModel {
         this.eventBus.on(SETTINGS.AVATAR_UPLOAD, this.resetAvatar.bind(this));
         this.eventBus.on(SETTINGS.SUBMIT, this.submit.bind(this));
         this.eventBus.on(SETTINGS.GET_USER_DATA, this.getUserData.bind(this));
+        this.eventBus.on(SETTINGS.GET_CSRF_TOKEN, this.getCsrfToken.bind(this));
     }
 
     /**
@@ -29,7 +31,6 @@ export default class SettingsModel {
                 case RESPONSE.OK:
                     res.json()
                         .then((data) => {
-                            console.log(data);
                             this.eventBus.emit(SETTINGS.RENDER_LOGGED, data);
                         });
                     break;
@@ -66,6 +67,7 @@ export default class SettingsModel {
                     switch (res.status) {
                     case RESPONSE.OK:
                         this.getUserData.bind(this)();
+                        this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
                         this.globalEventBus.emit(NAVBAR.GET_USER_DATA);
                         break;
                     case RESPONSE.BAD_REQUEST: // TODO Обработать ошибку
@@ -123,6 +125,7 @@ export default class SettingsModel {
                     switch (res.status) {
                     case RESPONSE.OK:
                         this.getUserData.bind(this)();
+                        this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
                         break;
                     case RESPONSE.BAD_REQUEST:
                         errors['password'] = 'Wrong password';
@@ -144,5 +147,15 @@ export default class SettingsModel {
                     }
                 });
         }
+    }
+
+    /**
+     * Получение токена
+     */
+    getCsrfToken() {
+        Api.csrfTokenFetch()
+            .then((res) => {
+                setToken(res.headers.get('Csrf-Token'));
+            });
     }
 }

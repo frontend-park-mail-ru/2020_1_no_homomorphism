@@ -1,5 +1,5 @@
-import Api from '@libs/api.js';
-import {PROFILE, URL} from '@libs/constans.js';
+import Api from '@libs/api';
+import {PROFILE, URL} from '@libs/constans';
 import {NAVBAR, RESPONSE} from '@libs/constans';
 
 /**
@@ -61,7 +61,6 @@ export default class ProfileModel {
                         });
                     break;
                 case RESPONSE.UNAUTH:
-                    // this.globalEventBus.emit(NAVBAR.GET_USER_DATA);
                     this.eventBus.emit(PROFILE.REDIRECT, URL.MAIN);
                     break;
                 case RESPONSE.SERVER_ERROR:

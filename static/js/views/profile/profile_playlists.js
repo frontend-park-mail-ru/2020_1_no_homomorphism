@@ -1,4 +1,4 @@
-import {PROFILE, GLOBAL} from '@libs/constans.js';
+import {PROFILE, GLOBAL} from '@libs/constans';
 import template from '@views/profile/profile_playlist.tmpl.xml';
 
 /**

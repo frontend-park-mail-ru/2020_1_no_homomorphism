@@ -1,5 +1,5 @@
-import Api from '@libs/api.js';
-import {PROFILE, RESPONSE, PAGINATION} from '@libs/constans.js';
+import Api from '@libs/api';
+import {PROFILE, RESPONSE, PAGINATION} from '@libs/constans';
 
 /**
  * Модель Профиля
@@ -22,28 +22,25 @@ export default class ProfileTracksModel {
      * Получение списка треков
      */
     getTracks() {
-        Api.playlistTracksFetch(1, this.curPagination.toString(), PAGINATION.TRACKS.toString())
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    res.json()
-                        .then((list) => {
-                            // for (const song in list.tracks) {
-                            //     this.tracks.push(list.tracks[song]);
-                            // }
-                            this.tracks = list.tracks;
-                            this.eventBus.emit(PROFILE.RENDER_TRACKS, this.tracks);
-                        });
-                    break;
-                case RESPONSE.BAD_REQUEST:
-                case RESPONSE.UNAUTH:
-                case RESPONSE.NO_ACCESS_RIGHT:
-                    break;
-                default:
-                    console.log(res);
-                    console.error('I am a teapot');
-                }
-            });
+        // Api.playlistTracksFetch(1, this.curPagination.toString(), PAGINATION.TRACKS.toString())
+        //     .then((res) => {
+        //         switch (res.status) {
+        //         case RESPONSE.OK:
+        //             res.json()
+        //                 .then((list) => {
+        //                     this.tracks = list.tracks;
+        //                     this.eventBus.emit(PROFILE.RENDER_TRACKS, this.tracks);
+        //                 });
+        //             break;
+        //         case RESPONSE.BAD_REQUEST:
+        //         case RESPONSE.UNAUTH:
+        //         case RESPONSE.NO_ACCESS_RIGHT:
+        //             break;
+        //         default:
+        //             console.log(res);
+        //             console.error('I am a teapot');
+        //         }
+        //     });
     }
 
     // /**

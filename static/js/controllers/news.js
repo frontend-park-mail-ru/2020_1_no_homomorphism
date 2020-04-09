@@ -1,6 +1,6 @@
 import NewsModel from '@models/news';
 import NewsView from '@views/news/news';
-import EventBus from '@libs/eventBus.js';
+import EventBus from '@libs/eventBus';
 import {MAIN} from '@libs/constans';
 
 /**

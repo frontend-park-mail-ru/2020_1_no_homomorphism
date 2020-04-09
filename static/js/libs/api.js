@@ -1,4 +1,4 @@
-import {postFetch, getFetch, deleteFetch, putFetch, postImageFetch} from '@libs/fetch.js';
+import {postFetch, getFetch, deleteFetch, putFetch, postImageFetch} from '@libs/fetch';
 import {API} from '@libs/constans';
 
 /**
@@ -38,6 +38,16 @@ export default class Api {
      */
     static cookieFetch() {
         return getFetch(API + '/users', (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
+     * Получение csrf-токена
+     * @return {Promise<Response>}
+     */
+    static csrfTokenFetch() {
+        return getFetch(API + '/users/token', (error) => {
             console.log(error.toString());
         });
     }
@@ -148,7 +158,6 @@ export default class Api {
      */
     static profileEditFetch(name, email, password, newPassword) {
         return putFetch(API + '/users/settings', {
-            // user: [
             name,
             email,
             password,

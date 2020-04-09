@@ -1,6 +1,8 @@
-import {SETTINGS, DOM} from '@libs/constans.js';
+import {SETTINGS, DOM} from '@libs/constans';
+import {CSRF_TOKEN} from '@libs/user';
 import settings from '@views/settings/settings.tmpl.xml';
 import BaseView from '@libs/base_view';
+// import {inputSanitize} from '@libs/input_sanitize';
 
 /**
  * вью для настроек
@@ -29,6 +31,9 @@ export default class SettingsView extends BaseView {
             this.eventBus.emit(SETTINGS.GET_USER_DATA);
         } else {
             this.renderData(this.userData);
+        }
+        if (CSRF_TOKEN === '') {
+            this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
         }
         this.setEventListeners();
     }

@@ -1,4 +1,4 @@
-import Api from '@libs/api.js';
+import Api from '@libs/api';
 import {PLAYER, RESPONSE, GLOBAL, PAGINATION} from '@libs/constans';
 
 /**
@@ -62,7 +62,7 @@ export default class PlayerModel {
                 case RESPONSE.OK:
                     this.generateData.bind(this)(res, trackId);
                     break;
-                case RESPONSE.BAD_REQUEST: // TODO
+                case RESPONSE.BAD_REQUEST:
                     break;
                 default:
                     console.log(res);

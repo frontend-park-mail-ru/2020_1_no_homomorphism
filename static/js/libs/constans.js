@@ -132,6 +132,7 @@ export const PLAYER = {
 
 export const SETTINGS = {
     GET_USER_DATA: 'settings-get-user-data',
+    GET_CSRF_TOKEN: 'get-csrf-token',
     RENDER_LOGGED: 'logged-in',
     AVATAR_UPLOAD: 'avatar-upload',
     SUBMIT: 'submit',

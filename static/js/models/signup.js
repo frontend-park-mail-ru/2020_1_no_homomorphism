@@ -1,6 +1,7 @@
-import Validation from '@libs/validation.js';
-import Api from '@libs/api.js';
-import {SIGN_UP, URL, RESPONSE, NAVBAR} from '@libs/constans.js';
+import Validation from '@libs/validation';
+import Api from '@libs/api';
+import {SIGN_UP, URL, RESPONSE, NAVBAR} from '@libs/constans';
+import {setToken} from '@libs/user';
 
 /**
  * модель странички регистрации
@@ -46,7 +47,7 @@ export default class SignupModel {
                     switch (res.status) {
                     case RESPONSE.OK_ADDED:
                         this.globalEventBus.emit(NAVBAR.GET_USER_DATA);
-                        localStorage.setItem('csrfToken', res.headers.get('Csrf-Token'));
+                        this.getCsrfToken();
                         this.eventBus.emit(SIGN_UP.REDIRECT, URL.MAIN);
                         break;
                     case RESPONSE.BAD_REQUEST:
@@ -87,6 +88,16 @@ export default class SignupModel {
                 } else {
                     this.eventBus.emit(SIGN_UP.INVALID, {global: 'This email is taken'});
                 }
+            });
+    }
+
+    /**
+     * Получение токена
+     */
+    getCsrfToken() {
+        Api.csrfTokenFetch()
+            .then((res) => {
+                setToken(res.headers.get('Csrf-Token'));
             });
     }
 }
