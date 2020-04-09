@@ -14,6 +14,9 @@ const symbols = {
  */
 export const inputSanitize = (input) => {
     let resString = input;
+    if (input === '') {
+        return input;
+    }
     Object.keys(symbols).map((key) => {
         resString = resString.replace(symbols[key], key);
     });

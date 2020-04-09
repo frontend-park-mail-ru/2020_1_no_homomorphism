@@ -20,7 +20,7 @@
                 </div>
                 <div class="row">
                     <div class="m-profile-tracks col col-4">
-                        <a class="m-tiny-ref" href="/artist/{data.id}/tracks">
+                        <a class="m-tiny-ref m-artist-tracks-ref" href="/artist/{data.id}/tracks">
                             <h2 id="artist-tracks-title">
                                 <fest:value>data.tracks</fest:value>
                             </h2>
@@ -28,7 +28,7 @@
                         </a>
                     </div>
                     <div class="m-profile-albums col col-4">
-                        <a class="m-tiny-ref" href="/artist/{data.id}/albums">
+                        <a class="m-tiny-ref m-artist-albums-ref" href="/artist/{data.id}/albums">
                             <h2 id="artist-albums-title">
                                 <fest:value>data.albums</fest:value>
                             </h2>
@@ -36,7 +36,7 @@
                         </a>
                     </div>
                     <div class="m-artist-info col col-4" id="artist-info-title">
-                        <a class="m-tiny-ref" href="/artist/{data.id}/info">
+                        <a class="m-tiny-ref m-artist-info-ref" href="/artist/{data.id}/info">
                             <h2>Info</h2>
                         </a>
                     </div>

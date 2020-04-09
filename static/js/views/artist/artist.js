@@ -63,10 +63,16 @@ export default class ArtistView extends BaseView {
      * @param {Object} data
      */
     renderData(data) {
+        console.log(data);
         this.setData(data);
         document.getElementsByClassName('m-top-login')[0].innerHTML = data.name;
         document.getElementsByClassName('m-round-image')[0].src = data.image;
         document.getElementsByClassName('m-top-name')[0].innerHTML = data.genre;
+        // eslint-disable-next-line max-len
+        document.getElementsByClassName('m-artist-tracks-ref')[0].href = `/artist/${data.id}/tracks`;
+        // eslint-disable-next-line max-len
+        document.getElementsByClassName('m-artist-albums-ref')[0].href = `/artist/${data.id}/albums`;
+        document.getElementsByClassName('m-artist-info-ref')[0].href = `/artist/${data.id}/info`;
         document.getElementById('artist-tracks-title').innerText = data.tracks;
         this.allTracksRendered = parseInt(data.tracks) < PAGINATION.TRACKS;
         document.getElementById('artist-albums-title').innerText = data.albums;
@@ -207,6 +213,7 @@ export default class ArtistView extends BaseView {
     /**
      * Рендер информации
      */
+
     // renderInfo(info) {}
 
     /**

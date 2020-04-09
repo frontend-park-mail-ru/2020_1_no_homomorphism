@@ -1,4 +1,4 @@
-export const SERVER_PATH = 'http://89.208.199.170:8081'; // 'http://localhost:8081'
+export const SERVER_PATH = 'http://localhost:8081'; // 'http://89.208.199.170:8081'
 
 export const API = '/api/v1';
 

@@ -66,7 +66,6 @@ export default class LoginView extends BaseView {
      * отправляет данные формы
      */
     submit() {
-        console.log(inputSanitize());
         document.querySelectorAll('.login-form label').forEach((label) => {
             label.children[0].style.borderColor = '#ccc';
             label.children[1].innerText = '';
