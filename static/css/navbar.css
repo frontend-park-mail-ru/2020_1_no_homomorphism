@@ -5,7 +5,7 @@
     padding: 0 5%;
     margin-bottom: 2%;
     background: white;
-    box-shadow: 0 3px 6px #ebeae7;
+    box-shadow: 0 3px 6px var(--chosen-icon);
     display: flex;
     align-items: center;
     z-index: 3;
@@ -34,15 +34,15 @@
 }
 
 .l-navbar .login {
-    height: 55px;
+    height: 60px;
     width: 6%;
-    padding-top: 19px;
+    padding-top: 20px;
     text-align: center;
     font-weight: bold;
 }
 
 .l-navbar .login:hover {
-    background: #ebeae7;
+    background: var(--chosen-icon);
 }
 
 .l-navbar .logout {
@@ -53,36 +53,80 @@
     background: white;
 }
 
-.l-navbar .signup {
-    margin-left: auto;
+.l-navbar-info {
+    height: 60px;
+    text-align: center;
     font-weight: bold;
+    margin-left: auto;
+    padding-right: 8px;
+    padding-left: 8px;
+    padding-top: 3px;
+}
+
+.l-navbar-info:hover {
+    background: var(--chosen-icon);
+}
+
+.l-navbar .signup {
     height: 55px;
     width: 6%;
-    padding-top: 19px;
+    padding-top: 16px;
     text-align: center;
+    font-weight: bold;
+    margin-left: auto;
 }
 
 .l-navbar .signup:hover {
-    background: #ebeae7;
-}
-
-.l-navbar .signup img {
-    border-radius: 20px;
+    background: var(--chosen-icon);
 }
 
 .l-navbar .search {
-    box-shadow: inset 0px 0px 4px black;
+    box-shadow: var(--box-shadow);
     margin-left: 2%;
     height: 2.3em;
+    width: 20em;
+    border: 1px solid var(--chosen-icon);
 }
 
 .l-navbar .search-button {
     position: relative;
-    left: -33px;
+    box-shadow: var(--box-shadow);
     opacity: 0.4;
     cursor: pointer;
 }
 
 .l-navbar .search-button:hover {
     opacity: 1;
+}
+
+.m-medium-icon {
+    height: 40px;
+    width: 40px;
+}
+
+.m-small-icon {
+    height: 20px;
+    width: 20px;
+}
+
+.m-navbar-avatar {
+    margin-top: 8px;
+    margin-right: 8px;
+    border-radius: 20px;
+}
+
+.m-navbar-name {
+    padding: 8px;
+    position: relative;
+    top: 8px;
+}
+
+.l-settings-icon {
+    opacity: 0.6;
+    padding: 20px 8px 16px 8px;
+}
+
+.l-settings-icon:hover {
+    opacity: 1;
+    background: var(--chosen-icon);
 }

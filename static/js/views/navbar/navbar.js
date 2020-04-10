@@ -1,4 +1,4 @@
-import {NAVBAR, GLOBAL, DOM, URL} from '@libs/constans.js';
+import {NAVBAR, GLOBAL, DOM, URL} from '@libs/constans';
 import navbar from '@views/navbar/navbar.tmpl.xml';
 import BaseView from '@libs/base_view';
 
@@ -22,7 +22,7 @@ export default class NavbarView extends BaseView {
     /**
      * рендерит навбар
      * @param {Object} root
-     * @param {srting} url
+     * @param {string} url
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.NAVBAR)[0]);
@@ -48,7 +48,7 @@ export default class NavbarView extends BaseView {
         this.eventBus.emit(NAVBAR.LOGOUT_CLICKED);
         this.renderNotLogged.bind(this)();
         this.globalEventBus.emit(NAVBAR.LOGOUT_REDIRECT, URL.MAIN);
-        this.globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK, true);
+        this.globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK);
     }
 
     /**
@@ -78,6 +78,8 @@ export default class NavbarView extends BaseView {
         document.getElementById('logout-link').classList.add('is-visible');
         document.getElementById('profile-link').classList.remove('is-hidden');
         document.getElementById('profile-link').classList.add('is-visible');
+        document.getElementsByClassName('l-settings-icon')[0].classList.remove('is-hidden');
+        document.getElementsByClassName('l-settings-icon')[0].classList.add('is-visible');
     }
 
     /**
@@ -92,5 +94,7 @@ export default class NavbarView extends BaseView {
         document.getElementById('logout-link').classList.add('is-hidden');
         document.getElementById('profile-link').classList.remove('is-visible');
         document.getElementById('profile-link').classList.add('is-hidden');
+        document.getElementsByClassName('l-settings-icon')[0].classList.remove('is-visible');
+        document.getElementsByClassName('l-settings-icon')[0].classList.add('is-hidden');
     }
 }

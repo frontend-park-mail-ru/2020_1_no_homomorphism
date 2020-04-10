@@ -1,5 +1,5 @@
-import ProfileAlbumsModel from '@models/profile/profile_albums.js';
-import ProfileAlbumsView from '@views/profile/profile_albums.js';
+import ProfileAlbumsModel from '@models/profile/profile_albums';
+import ProfileAlbumsView from '@views/profile/profile_albums';
 
 /**
  * Контроллер для альбомов профиля

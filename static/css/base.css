@@ -8,6 +8,17 @@
 @import "settings.css";
 @import "signup.css";
 @import "playlist.css";
+@import "buttons.css";
+/*@import "variable.css";*/
+
+:root {
+    --card-border: 16px;
+    --light-green: #d6ffeb;
+    --button-color: #499181;
+    --chosen-icon: #ebeae7;
+    --box-shadow: 0 1px 20px 0 #ebeae7;
+    --small-pad: 8px;
+}
 
 body {
     margin: 0 auto;
@@ -19,7 +30,6 @@ body {
     box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     padding: 1em;
-    background-image: url("../img/new_empire_vol1.jpg");
 }
 
 .card {
@@ -42,20 +52,15 @@ input[type="url"], input[type="password"] {
     border-radius: 3px 3px 0 0;
     border-bottom: 1px solid gray;
     background-color: white;
-
 }
 
 input[type="text"], input[type="email"],
 input[type="password"] {
-    width: 20em;
+    /*width: 20em;*/
 }
 
 img {
     object-fit: cover;
-}
-
-.m-player-track {
-    margin: 16px;
 }
 
 button,
@@ -78,4 +83,6 @@ button:focus {
     font-size: 32px;
 }
 
-
+.background--chosen-icon {
+    background: var(--chosen-icon);
+}

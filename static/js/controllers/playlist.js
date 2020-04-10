@@ -1,7 +1,7 @@
-import EventBus from '@libs/eventBus.js';
+import EventBus from '@libs/eventBus';
 import PlaylistModel from '@models/playlist';
 import PlaylistView from '@views/playlist/playlist';
-import {PLAYLIST} from '@libs/constans.js';
+import {PLAYLIST} from '@libs/constans';
 /**
  * Контроллер для страницы плейлиста
  */

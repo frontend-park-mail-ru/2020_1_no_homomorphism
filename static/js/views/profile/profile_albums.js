@@ -1,4 +1,4 @@
-import {PROFILE} from '@libs/constans.js';
+import {PROFILE} from '@libs/constans';
 import template from '@views/profile/profile_album.tmpl.xml';
 import {GLOBAL} from '@libs/constans';
 
@@ -33,7 +33,7 @@ export default class ProfileAlbumsView {
      * Set EventListeners
      */
     setEventListeners() {
-        document.querySelectorAll('.l-list-card').forEach((playlist) => {
+        document.querySelectorAll('.m-button-track-play-playlist').forEach((playlist) => {
             playlist.onclick = (event) => this.albumClick.bind(this)(event);
         });
     }
@@ -47,7 +47,7 @@ export default class ProfileAlbumsView {
         while (current !== window && current !== document.body && current != null) {
             if (current.getAttribute('class') === 'l-list-card' &&
                 current.getAttribute('id') !== null) {
-                this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, {id: current.getAttribute('id')});
+                this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, current.getAttribute('id'));
                 break;
             } else {
                 current = current.parentNode;

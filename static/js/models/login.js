@@ -1,6 +1,7 @@
-import Api from '@libs/api.js';
-import Validation from '@libs/validation.js';
-import {RESPONSE, LOGIN, NAVBAR, URL} from '@libs/constans.js';
+import Api from '@libs/api';
+import Validation from '@libs/validation';
+import {RESPONSE, LOGIN, NAVBAR, URL} from '@libs/constans';
+import {setToken} from '@libs/user';
 
 /**
  * Модель для страницы входа
@@ -38,7 +39,7 @@ export default class LoginModel {
                 .then((res) => {
                     switch (res.status) {
                     case RESPONSE.OK:
-                        localStorage.setItem('csrfToken', res.headers.get('Csrf-Token'));
+                        this.getCsrfToken();
                         this.globalEventBus.emit(NAVBAR.GET_USER_DATA);
                         this.eventBus.emit(LOGIN.REDIRECT, URL.PROFILE_TRACKS);
                         break;
@@ -58,5 +59,15 @@ export default class LoginModel {
                     }
                 });
         }
+    }
+
+    /**
+     * Получение токена
+     */
+    getCsrfToken() {
+        Api.csrfTokenFetch()
+            .then((res) => {
+                setToken(res.headers.get('Csrf-Token'));
+            });
     }
 }

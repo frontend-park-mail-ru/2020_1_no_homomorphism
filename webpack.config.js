@@ -18,6 +18,8 @@ module.exports = {
     },
     devServer: {
         port: 3000,
+        host: '0.0.0.0',
+        disableHostCheck: true,
         historyApiFallback: true,
     },
     output: {
@@ -48,7 +50,7 @@ module.exports = {
             filename: '[name].css',
         }),
         new ServiceWorkerWebpackPlugin({
-            entry: path.join(__dirname, 'sw.js'),
+            entry: path.join(__dirname, 'static/sw.js'),
         }),
     ],
     module: {
@@ -86,12 +88,12 @@ module.exports = {
                     },
                 ],
             },
-            {
-                enforce: 'pre',
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'eslint-loader',
-            },
+            // {
+            //     enforce: 'pre',
+            //     test: /\.js$/,
+            //     exclude: /node_modules/,
+            //     loader: 'eslint-loader',
+            // },
             {
                 test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,

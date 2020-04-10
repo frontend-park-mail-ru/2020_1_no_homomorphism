@@ -1,4 +1,4 @@
-import {LOGIN} from '@libs/constans.js';
+import {LOGIN} from '@libs/constans';
 import template from '@views/login/login.tmpl.xml';
 import BaseView from '@libs/base_view';
 
@@ -18,7 +18,7 @@ export default class LoginView extends BaseView {
     /**
      * рендерит страничку входа
      * @param {Object} root
-     * @param {srting} url
+     * @param {string} url
      */
     render(root, url) {
         super.render(root);

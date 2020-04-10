@@ -1,5 +1,6 @@
-import Api from '@libs/api.js';
-import {RESPONSE, NAVBAR, URL} from '@libs/constans.js';
+import Api from '@libs/api';
+import {RESPONSE, NAVBAR, URL} from '@libs/constans';
+import {setToken} from '@libs/user';
 
 /**
  * Модель для навбара
@@ -45,6 +46,7 @@ export default class NavbarModel {
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
+                    setToken('');
                     break;
                 case RESPONSE.BAD_REQUEST:
                 case RESPONSE.UNAUTH:

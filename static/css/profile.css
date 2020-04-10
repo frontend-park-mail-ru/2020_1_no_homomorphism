@@ -1,8 +1,3 @@
-:root {
-    --card-border: 16px;
-    --light-green: #00e67626;
-}
-
 hr {
     border: none;
     background-color: #b39ddb;
@@ -26,12 +21,11 @@ p {
 .l-top-card {
     box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
     border-radius: var(--card-border);
-
-    /*padding: 16px;*/
 }
 
 .l-round-image {
     margin-left: 32px;
+    margin-top: 16px;
 }
 
 .m-round-image {
@@ -39,6 +33,7 @@ p {
     height: 150px;
     width: 150px;
     border-radius: 100px;
+    margin: 16px;
     float: right;
 }
 
@@ -52,10 +47,6 @@ p {
 .m-round-image:not(:hover) {
     transition: 0.3s;
     box-shadow: 0 0 10px 4px rgba(129, 129, 129, 0.65);
-}
-
-img#avatar {
-    margin-top: 50px;
 }
 
 .l-top-name {
@@ -78,7 +69,6 @@ img#avatar {
 
 .l-top-titles .col {
     margin-top: 80px;
-    padding-top: 8px;
 }
 
 .m-tiny-ref {
@@ -91,7 +81,7 @@ img#avatar {
     z-index: 1;
     box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
     border-radius: var(--card-border);
-    padding: 32px;
+    padding: 16px;
     margin-top: 16px;
 }
 
@@ -120,6 +110,11 @@ img#avatar {
 
 .m-profile-data {
     padding-top: 32px;
+}
+
+.m-artist-info {
+    height: 70px;
+    padding-top: 16px;
 }
 
 .m-profile-albums:hover, .m-profile-tracks:hover, .m-profile-playlists:hover, .m-profile-artists:hover {
@@ -269,7 +264,7 @@ img#avatar {
     display: inline-block;
     width: 90%;
     max-width: 200px;
-    max-height: 270px;
+    max-height: 260px;
     text-decoration: none;
     border-radius: 5px;
     box-shadow: 0 0 10px -3px rgba(0, 0, 0, 0.5);
@@ -287,7 +282,7 @@ img#avatar {
 .l-list-card-description {
     display: block;
     color: #515151;
-    margin-top: -20px;
+    margin-top: 16px;
     padding-bottom: 32px;
     padding-left: 6px;
     padding-right: 6px;
@@ -310,6 +305,11 @@ img#avatar {
     list-style: none;
 }
 
+.l-button-play-track {
+    height: 200px;
+    margin-top: -200px;
+}
+
 .l-list-card:hover .m-button-track-play-playlist {
     opacity: 1;
     -webkit-transform: scale(6);
@@ -330,4 +330,8 @@ img#avatar {
     cursor: pointer;
     opacity: 0;
     margin-left: 56px !important;
+}
+
+.l-list-image {
+    height: 200px
 }

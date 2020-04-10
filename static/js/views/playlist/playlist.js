@@ -1,6 +1,6 @@
-import {PLAYLIST, GLOBAL} from '@libs/constans.js';
+import {PLAYLIST, GLOBAL} from '@libs/constans';
 import playlist from '@views/playlist/playlist.tmpl.xml';
-import tracks from '@views/playlist/playlist_track.tmpl.xml';
+import tracks from '@views/template/tracks.tmpl.xml';
 import BaseView from '@libs/base_view';
 
 /**
@@ -15,19 +15,22 @@ export default class PlaylistView extends BaseView {
         super(playlist);
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
-        this.data = {};
-        this.eventBus.on(PLAYLIST.RENDER_DATA, this.setPlaylistData.bind(this));
+        this.playlistData = {};
+        this.tracksData = {};
+        this.eventBus.on(PLAYLIST.RENDER_PLAYLIST_DATA, this.setPlaylistData.bind(this));
+        this.eventBus.on(PLAYLIST.RENDER_TRACKS_DATA, this.setTracksData.bind(this));
         this.eventBus.on(PLAYLIST.ERROR, this.showErrors.bind(this));
     }
 
     /**
      * рендерит страницу плейлиста
      * @param {Object} root
-     * @param {srting} url
+     * @param {string} url
      */
     render(root, url) {
         super.render(root);
         this.eventBus.emit(PLAYLIST.GET_PLAYLIST_DATA, {id: url});
+        this.eventBus.emit(PLAYLIST.GET_TRACKS_DATA, {id: url});
     }
 
     /**
@@ -35,29 +38,38 @@ export default class PlaylistView extends BaseView {
      * @param {Object} playlist
      */
     setPlaylistData(playlist) {
-        this.data = playlist;
+        this.playlistData = playlist;
         this.renderPlaylist();
-        this.renderTracks();
     }
 
     /**
      * Выводит данные плейлиста
      */
     renderPlaylist() {
-        document.getElementsByClassName('m-name')[0].innerHTML = this.data.playlist.name;
-        document.getElementsByClassName('m-rounded-image')[0].src = this.data.playlist.image;
+        document.getElementsByClassName('m-name')[0].innerHTML = this.playlistData.name;
+        document.getElementsByClassName('m-rounded-image')[0].src = this.playlistData.image;
+    }
+
+    /**
+     * Вставляет необходимые данные треков
+     * @param {Object} tracks
+     */
+    setTracksData(tracks) {
+        this.tracksData = tracks;
+        this.renderTracks();
     }
 
     /**
      * Выводит данные трека
      */
     renderTracks() {
-        if (this.data.tracks.length === 0) {
+        if (this.tracksData.length === 0) {
             return;
         }
-        document.getElementsByClassName('l-track-list')[0].innerHTML = tracks(this.data.tracks);
+        document.getElementsByClassName('l-track-list')[0].innerHTML =
+            tracks(this.tracksData);
         document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Amount of tracks: ' +
-            this.data.tracks.length;
+            this.tracksData.length;
         document.getElementsByClassName('l-track-list')[0].className += ' l-profile-base';
         this.seEventListeners();
     }
@@ -66,24 +78,43 @@ export default class PlaylistView extends BaseView {
      * Слушает события
      */
     seEventListeners() {
-        document.querySelectorAll('.l-track-big').forEach((row) => { // TODO Никитуля, отсылочка вам
+        document.querySelectorAll('.l-track-big').forEach((track) => {
+            track.onclick = (event) => this.trackClick.bind(this)(event);
         });
-        document.querySelectorAll('img.m-more-button').forEach((button) => { // TODO Обработать
+        document.querySelectorAll('img.m-big-more-button').forEach((button) => { // TODO Обработать
         });
-        document.querySelectorAll('img.m-like-button').forEach((button) => {
+        document.querySelectorAll('img.m-big-like-button').forEach((button) => {
             button.onclick = (event) => this.likeClicked(event);
         });
-        document.querySelectorAll('img.m-add-button').forEach((button) => { // TODO выбор, в какой плейлист добавить
+        document.querySelectorAll('img.m-big-add-button').forEach((button) => { // TODO выбор, в какой плейлист добавить
         });
         document.getElementsByClassName('m-button-track-list-play')[0].addEventListener('click',
             this.playPlaylist.bind(this));
     }
 
     /**
+     * Слушает клик по треку
+     * @param {Object} event
+     */
+    trackClick(event) {
+        let current = event.target;
+        while (current !== window && current !== document.body && current != null) {
+            if (current.getAttribute('class') === 'l-track-big' &&
+                current.getAttribute('a-id') !== null) {
+                this.globalEventBus.emit(GLOBAL.PLAY_PLAYLIST_TRACKS, this.playlistData.id,
+                    current.getAttribute('a-id'));// , this.tracksRendered);
+                break;
+            } else {
+                current = current.parentNode;
+            }
+        }
+    }
+
+    /**
      * Проигрование плейлиста
      */
     playPlaylist() {
-        this.globalEventBus.emit(GLOBAL.PLAY_PLAYLIST, {index: this.data.playlist.id});
+        this.globalEventBus.emit(GLOBAL.PLAY_PLAYLIST, this.playlistData.id);
     }
 
     /**

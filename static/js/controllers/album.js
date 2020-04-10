@@ -1,7 +1,7 @@
-import EventBus from '@libs/eventBus.js';
+import EventBus from '@libs/eventBus';
 import AlbumModel from '@models/album';
 import AlbumView from '@views/album/album';
-import {ALBUM} from '@libs/constans.js';
+import {ALBUM} from '@libs/constans';
 
 /**
  * Контроллер для страницы плейлиста

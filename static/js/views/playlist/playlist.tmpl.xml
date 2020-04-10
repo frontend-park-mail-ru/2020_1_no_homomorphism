@@ -5,7 +5,7 @@
                 <!--                <div class="col col-2">-->
 
                 <!--                </div>-->
-                <div class="l-top-info col col-5">
+                <div class="l-top-info col">
                     <div class="l-round-image col">
                         <img alt="" src="{data.image}" class="m-rounded-image" id="avatar"/>
                     </div>

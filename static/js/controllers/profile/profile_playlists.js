@@ -1,5 +1,5 @@
-import ProfilePlaylistsModel from '@models/profile/profile_playlists.js';
-import ProfilePlaylistsView from '@views/profile/profile_playlists.js';
+import ProfilePlaylistsModel from '@models/profile/profile_playlists';
+import ProfilePlaylistsView from '@views/profile/profile_playlists';
 
 /**
  * Контроллер для треков профиля

@@ -4,7 +4,7 @@
             <div class="l-list-image">
                 <img class="m-list-image" id="profile-playlist-image" src="{playlist.image}" alt=""/>
             </div>
-            <div>
+            <div class="l-button-play-track">
                 <button class="m-button-track-play-playlist"> </button>
             </div>
 

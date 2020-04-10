@@ -1,7 +1,8 @@
 import ArtistModel from '@models/artist';
 import ArtistView from '@views/artist/artist';
-import EventBus from '@libs/eventBus.js';
+import EventBus from '@libs/eventBus';
 import {ARTIST} from '@libs/constans';
+
 /**
  * Контроллер для страницы артиста
  */

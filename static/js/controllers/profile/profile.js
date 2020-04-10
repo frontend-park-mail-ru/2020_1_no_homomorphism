@@ -1,10 +1,10 @@
-import EventBus from '@libs/eventBus.js';
-import ProfileModel from '@models/profile/profile.js';
-import ProfileView from '@views/profile/profile.js';
-import {ProfileTracksController} from '@controllers/profile/profile_tracks.js';
-import {ProfileAlbumsController} from '@controllers/profile/profile_albums.js';
-import {ProfilePlaylistsController} from '@controllers/profile/profile_playlists.js';
-import {ProfileArtistsController} from '@controllers/profile/profile_artists.js';
+import EventBus from '@libs/eventBus';
+import ProfileModel from '@models/profile/profile';
+import ProfileView from '@views/profile/profile';
+import {ProfileTracksController} from '@controllers/profile/profile_tracks';
+import {ProfileAlbumsController} from '@controllers/profile/profile_albums';
+import {ProfilePlaylistsController} from '@controllers/profile/profile_playlists';
+import {ProfileArtistsController} from '@controllers/profile/profile_artists';
 import {PROFILE} from '@libs/constans';
 
 /**

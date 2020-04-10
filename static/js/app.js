@@ -2,21 +2,22 @@ import Router from '@libs/router';
 import EventBus from '@libs/eventBus';
 import {URL} from '@libs/constans';
 import {NavbarController} from '@controllers/navbar';
-import {IndexController} from '@controllers/news';
+import {NewsController} from '@controllers/news';
 import {LoginController} from '@controllers/login';
 import {SignupController} from '@controllers/signup';
 import {PlayerController} from '@controllers/player';
 import {ProfileController} from '@controllers/profile/profile';
-import {SettingsController} from '@controllers/settings.js';
-import {ArtistController} from '@controllers/artist.js';
+import {SettingsController} from '@controllers/settings';
+import {ArtistController} from '@controllers/artist';
 import {PlaylistController} from '@controllers/playlist';
 import {AlbumController} from '@controllers/album';
+// import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 
 window.addEventListener('DOMContentLoaded', () => {
     const router = new Router();
     const globalEventBus = new EventBus();
     const navbarController = new NavbarController(router, globalEventBus);
-    const indexController = new IndexController();
+    const newsController = new NewsController(router);
     const loginController = new LoginController(router, globalEventBus);
     const signupController = new SignupController(router, globalEventBus);
     const playerController = new PlayerController(router, globalEventBus);
@@ -26,20 +27,10 @@ window.addEventListener('DOMContentLoaded', () => {
     const playlistController = new PlaylistController(router, globalEventBus);
     const albumController = new AlbumController(router, globalEventBus);
 
-    // if ('serviceWorker' in navigator) {
-    //     navigator.serviceWorker
-    //         .register('sw.js')
-    //         .then((registration) => {
-    //             console.log('SW registration ', registration);
-    //         })
-    //         .catch((err) => {
-    //             console.log('SW Registration failed with ' + err);
-    //         });
-    // }
 
     router.addView(URL.NAVBAR, navbarController.view);
     router.addView(URL.PLAYER, playerController.view);
-    router.addView(URL.MAIN, indexController.view);
+    router.addView(URL.MAIN, newsController.view);
     router.addView(URL.LOGIN, loginController.view);
     router.addView(URL.SIGN_UP, signupController.view);
     router.addView(URL.PROFILE, profileController.view);
@@ -54,4 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
     router.start();
     navbarController.view.render();
     playerController.view.render();
+    // if ('serviceWorker' in navigator) {
+    //     runtime.register();
+    // }
 });

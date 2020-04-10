@@ -1,4 +1,4 @@
-import {ALBUM, RESPONSE} from '@libs/constans';
+import {ALBUM, RESPONSE, PAGINATION} from '@libs/constans';
 import Api from '@libs/api';
 
 /**
@@ -11,34 +11,56 @@ export default class AlbumModel {
      * @param {EventBus} globalEventBus
      */
     constructor(eventBus, globalEventBus) {
-        this.playlist = {};
+        this.album = {};
+        this.tracks = {};
+        this.curPagination = 0;
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
-        this.eventBus.on(ALBUM.GET_ALBUM_DATA, this.getAlbumTracks.bind(this));
+        this.eventBus.on(ALBUM.GET_ALBUM_DATA, this.getAlbum.bind(this));
+        this.eventBus.on(ALBUM.GET_TRACKS_DATA, this.getTracks.bind(this));
     }
 
     /**
      * Получение списка треков
      * @param {Object} id
      */
-    getAlbumTracks(id) {
+    getAlbum(id) {
         Api.albumFetch(id.id)
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
                     res.json()
                         .then((list) => {
-                            this.playlist = list;
-                            this.eventBus.emit(ALBUM.RENDER_DATA, this.playlist);
+                            this.album = list;
+                            this.eventBus.emit(ALBUM.RENDER_ALBUM_DATA, this.album);
                         });
                     break;
                 case RESPONSE.BAD_REQUEST:
-                    console.log(res);
                     this.eventBus.emit(ALBUM.ERROR,
                         {text: 'Sorry, there isn\'t album with this id :('});
                     break;
                 default:
-                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
+    }
+
+    /**
+     * Получение данных альбома
+     * @param {Object} id
+     */
+    getTracks(id) {
+        Api.albumTracksFetch(id.id, this.curPagination.toString(), PAGINATION.TRACKS.toString())
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    res.json()
+                        .then((list) => {
+                            this.tracks = list.tracks;
+                            this.eventBus.emit(ALBUM.RENDER_TRACKS_DATA, this.tracks);
+                        });
+                    break;
+                default:
                     console.error('I am a teapot');
                 }
             });

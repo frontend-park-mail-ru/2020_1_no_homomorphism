@@ -1,4 +1,4 @@
-import {PROFILE, GLOBAL} from '@libs/constans.js';
+import {PROFILE, GLOBAL} from '@libs/constans';
 import template from '@views/profile/profile_playlist.tmpl.xml';
 
 /**
@@ -30,7 +30,7 @@ export default class ProfilePlaylistsView {
      * Set EventListeners
      */
     setEventListeners() {
-        document.querySelectorAll('.l-list-card').forEach((playlist) => {
+        document.querySelectorAll('.m-button-track-play-playlist').forEach((playlist) => {
             playlist.onclick = (event) => this.playlistClick.bind(this)(event);
         });
     }
@@ -44,7 +44,7 @@ export default class ProfilePlaylistsView {
         while (current !== window && current !== document.body && current != null) {
             if (current.getAttribute('class') === 'l-list-card' &&
                 current.getAttribute('id') !== null) {
-                this.globalEventBus.emit(GLOBAL.PLAY_PLAYLIST, {index: current.getAttribute('id')});
+                this.globalEventBus.emit(GLOBAL.PLAY_PLAYLIST, current.getAttribute('id'));
                 break;
             } else {
                 current = current.parentNode;

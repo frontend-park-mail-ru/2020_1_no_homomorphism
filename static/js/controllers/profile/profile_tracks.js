@@ -1,5 +1,5 @@
-import ProfileTracksModel from '@models/profile/profile_tracks.js';
-import ProfileTracksView from '@views/profile/profile_tracks.js';
+import ProfileTracksModel from '@models/profile/profile_tracks';
+import ProfileTracksView from '@views/profile/profile_tracks';
 
 /**
  * Контроллер для треков профиля

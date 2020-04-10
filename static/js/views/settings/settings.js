@@ -1,6 +1,8 @@
-import {SETTINGS, DOM} from '@libs/constans.js';
+import {SETTINGS, DOM} from '@libs/constans';
+import {CSRF_TOKEN} from '@libs/user';
 import settings from '@views/settings/settings.tmpl.xml';
 import BaseView from '@libs/base_view';
+// import {inputSanitize} from '@libs/input_sanitize';
 
 /**
  * вью для настроек
@@ -13,22 +15,21 @@ export default class SettingsView extends BaseView {
         super(settings);
         this.eventBus = eventBus;
         this.userData = {};
+        this.errors = {};
         this.eventBus.on(SETTINGS.INVALID, this.showErrors.bind(this));
         this.eventBus.on(SETTINGS.RENDER_LOGGED, this.renderData.bind(this));
-        // this.eventBus.on(SETTINGS.AVATAR_UPLOAD, this.previewFile.bind(this));
     }
 
     /**
      * Рендер
      * @param {Object} root
-     * @param {srting} url
+     * @param {string} url
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.CONTENT)[0]);
-        if (JSON.stringify(this.userData) === '{}') {
-            this.eventBus.emit(SETTINGS.GET_USER_DATA);
-        } else {
-            this.renderData(this.userData);
+        this.eventBus.emit(SETTINGS.GET_USER_DATA); // TODO синглтон
+        if (CSRF_TOKEN === '') {
+            this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
         }
         this.setEventListeners();
     }
@@ -41,12 +42,21 @@ export default class SettingsView extends BaseView {
         button.addEventListener('click', (event) => {
             event.preventDefault();
             event.stopImmediatePropagation();
-            this.submit();
+            this.hideErrors();
+            this.submitData();
+        });
+        const buttonPas = document.getElementById('submit-setting-changes-pass');
+        buttonPas.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            this.hideErrors();
+            this.submitPassword();
         });
         const fileAttach = document.getElementById('avatar-upload');
         fileAttach.addEventListener('change', (event) => {
             event.preventDefault();
             event.stopImmediatePropagation();
+            this.hideErrors();
             this.eventBus.emit(SETTINGS.AVATAR_UPLOAD);
         });
     }
@@ -60,21 +70,23 @@ export default class SettingsView extends BaseView {
         document.getElementsByClassName(' m-round-image')[0].src = data.image;
         document.getElementsByClassName('m-top-name')[0].innerHTML = data.name;
         document.getElementsByClassName('m-top-login')[0].innerHTML = data.login;
-
+        // document.getElementsByClassName('m-settings-input')[0].value = "<script>alert('test');<\/script>";
         document.getElementsByClassName('m-settings-input')[0].value = data.name;
         document.getElementsByClassName('m-settings-input')[1].value = data.email;
+        document.getElementById('newPassword').value = '';
+        document.getElementById('newPasswordConfirm').value = '';
+        document.getElementById('password').value = '';
     }
 
     /**
      * показывает, какие поля формы заполнены неправильно
      * @param {Object} errors
      */
-    showErrors(errors) { // TODO починить вывод ошибок
+    showErrors(errors) {
+        this.errors = errors;
         // eslint-disable-next-line guard-for-in
         for (const key in errors) {
             const message = document.getElementById(key).nextElementSibling;
-            message.previousElementSibling.style.borderColor =
-                (message.getAttribute('class').indexOf('warning') !== -1 ? '#ffae42' : 'red');
             message.innerText = errors[key];
             message.style.height = '15px';
             message.style.marginBottom = '10px';
@@ -83,41 +95,42 @@ export default class SettingsView extends BaseView {
     }
 
     /**
-     * отправляет данные формы
+     * показывает, какие поля формы заполнены неправильно
      */
-    submit() {
-        document.querySelectorAll('.info input').forEach((input) => {
-            input.style.borderColor = '#ccc';
-            input.nextElementSibling.innerText = '';
-            input.nextElementSibling.style.height = '0';
-            input.nextElementSibling.style.marginBottom = '0';
-            input.nextElementSibling.style.visibility = 'hidden';
-        });
+    hideErrors() {
+        // eslint-disable-next-line guard-for-in
+        for (const key in this.errors) {
+            const message = document.getElementById(key).nextElementSibling;
+            message.innerText = '';
+            message.style.height = '0';
+            message.style.marginBottom = '0';
+            message.style.visibility = 'hidden';
+        }
+    }
+
+    /**
+     * отправляет данные формы - почти или имя
+     */
+    submitData() {
         this.eventBus.emit(SETTINGS.SUBMIT, {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
-            newPassword: document.getElementById('newPassword').value,
-            newPasswordConfirm: document.getElementById('newPasswordConfirm').value,
-            password: document.getElementById('password').value,
+            newPassword: '',
+            newPasswordConfirm: '',
+            password: '',
         });
     }
 
     /**
-     * Предпросмотр фоточки
+     * отправляет данные формы - пароли
      */
-    previewFile() {
-        const preview = document.querySelector('. m-round-image');
-        const file = document.querySelector('input[type=file]').files[0];
-        const reader = new FileReader();
-
-        reader.onloadend = function() {
-            preview.src = reader.result;
-        };
-
-        if (file) {
-            reader.readAsDataURL(file);
-        } else {
-            preview.src = '';
-        }
+    submitPassword() {
+        this.eventBus.emit(SETTINGS.SUBMIT, {
+            name: this.userData.name,
+            email: this.userData.email,
+            newPassword: document.getElementById('newPassword').value,
+            newPasswordConfirm: document.getElementById('newPasswordConfirm').value,
+            password: document.getElementById('password').value,
+        });
     }
 }

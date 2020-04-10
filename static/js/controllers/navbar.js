@@ -1,7 +1,7 @@
-import EventBus from '@libs/eventBus.js';
-import NavbarModel from '@models/navbar.js';
-import NavbarView from '@views/navbar/navbar.js';
-import {NAVBAR} from '@libs/constans.js';
+import EventBus from '@libs/eventBus';
+import NavbarModel from '@models/navbar';
+import NavbarView from '@views/navbar/navbar';
+import {NAVBAR} from '@libs/constans';
 /**
  * Контроллер для навбара
  */

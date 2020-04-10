@@ -2,7 +2,7 @@ import artist from '@views/artist/artist.tmpl.xml';
 import albumsTemplate from '@views/artist/artist_albums.tmpl.xml';
 import tracksTemplate from '@views/artist/artist_tracks.tmpl.xml';
 import BaseView from '@libs/base_view';
-import {ARTIST, DOM, GLOBAL, PAGINATION} from '@libs/constans';
+import {ARTIST, DOM, URL, GLOBAL, PAGINATION} from '@libs/constans';
 import '@css/base.css';
 
 /**
@@ -16,18 +16,18 @@ export default class ArtistView extends BaseView {
      */
     constructor(eventBus, globalEventBus) {
         super(artist);
+        this.data = {};
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
         this.eventBus.on(ARTIST.RENDER_DATA, this.renderData.bind(this));
         this.eventBus.on(ARTIST.RENDER_ALBUMS, this.renderAlbums.bind(this));
         this.eventBus.on(ARTIST.RENDER_TRACKS, this.renderTracks.bind(this));
-        // this.eventBus.on(ARTIST.RENDER_INFO, this.renderInfo.bind(this));
     }
 
     /**
      * Рендер
      * @param {Object} root
-     * @param {srting} url
+     * @param {string} url
      */
     render(root, url) {
         this.tracksRendered = 0;
@@ -36,9 +36,8 @@ export default class ArtistView extends BaseView {
         this.allAlbumsRendered = true;
         this.id = url.indexOf('/') === -1 ? url : url.slice(0, url.indexOf('/'));
         this.eventBus.emit(ARTIST.SET_ID, this.id);
-        if (JSON.stringify(this.data) === '{}') {
+        if (JSON.stringify(this.data) === '{}' || this.id != this.data.id) {
             this.eventBus.emit(ARTIST.GET_DATA);
-            this.setData({id: this.id});
         }
         super.render(document.getElementsByClassName(DOM.CONTENT)[0], url);
         this.currentOpen = url.indexOf('/') === -1 ? 'tracks' :
@@ -67,6 +66,11 @@ export default class ArtistView extends BaseView {
         document.getElementsByClassName('m-top-login')[0].innerHTML = data.name;
         document.getElementsByClassName('m-round-image')[0].src = data.image;
         document.getElementsByClassName('m-top-name')[0].innerHTML = data.genre;
+        // eslint-disable-next-line max-len
+        document.getElementsByClassName('m-artist-tracks-ref')[0].href = `/artist/${data.id}/tracks`;
+        // eslint-disable-next-line max-len
+        document.getElementsByClassName('m-artist-albums-ref')[0].href = `/artist/${data.id}/albums`;
+        document.getElementsByClassName('m-artist-info-ref')[0].href = `/artist/${data.id}/info`;
         document.getElementById('artist-tracks-title').innerText = data.tracks;
         this.allTracksRendered = parseInt(data.tracks) < PAGINATION.TRACKS;
         document.getElementById('artist-albums-title').innerText = data.albums;
@@ -94,7 +98,7 @@ export default class ArtistView extends BaseView {
      * Set EventListeners
      */
     setAlbumsEventListeners() {
-        document.querySelectorAll('.l-list-card').forEach((playlist) => {
+        document.querySelectorAll('.m-button-track-play-playlist').forEach((playlist) => {
             playlist.onclick = (event) => this.albumClick.bind(this)(event);
         });
         window.removeEventListener('wheel', this.tracksListWheel.bind(this));
@@ -113,7 +117,7 @@ export default class ArtistView extends BaseView {
         while (current !== window && current !== document.body && current != null) {
             if (current.getAttribute('class') === 'l-list-card' &&
                 current.getAttribute('a-id') !== null) {
-                this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, {id: current.getAttribute('a-id')});
+                this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, current.getAttribute('a-id'));
                 break;
             } else {
                 current = current.parentNode;
@@ -125,7 +129,7 @@ export default class ArtistView extends BaseView {
      * Слушает скрол по списку альбомов
      */
     albumsListWheel() {
-        if (this.allAlbumsRendered) {
+        if (this.allAlbumsRendered || !window.location.pathname.match(URL.ARTIST)) {
             return;
         }
         const list = document.getElementsByClassName('l-profile-album-list')[0];
@@ -191,7 +195,7 @@ export default class ArtistView extends BaseView {
      * Слушает скрол по списку треков
      */
     tracksListWheel() {
-        if (this.allTracksRendered) {
+        if (this.allTracksRendered || !window.location.pathname.match(URL.ARTIST)) {
             return;
         }
         const list = document.getElementsByClassName('l-profile-track-list')[0];
@@ -207,6 +211,7 @@ export default class ArtistView extends BaseView {
     /**
      * Рендер информации
      */
+
     // renderInfo(info) {}
 
     /**

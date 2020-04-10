@@ -1,4 +1,4 @@
-export const SERVER_PATH = 'http://localhost:8081'; // 'http://89.208.199.170:8081',
+export const SERVER_PATH = 'http://89.208.199.170:8081';
 
 export const API = '/api/v1';
 
@@ -30,7 +30,7 @@ export const URL = {
     PROFILE_PLAYLISTS: '/profile/playlists',
     PROFILE_ARTISTS: '/profile/artists',
     SETTINGS: '/settings',
-    ARTIST: /(\/artist\/)[0-9]+/,
+    ARTIST: /(\/artist\/)[0-9]+(\/albums|\/tracks|\/info)*/,
     PLAYLIST: /(\/playlist\/)[0-9]+/,
     ALBUM: /(\/album\/)[0-9]+/,
 };
@@ -60,9 +60,18 @@ export const VALIDATION = {
 export const GLOBAL = {
     GET_ARTIST_TRACKS: 'get artist tracks',
     PLAY_ARTIST_TRACKS: 'play artist tracks',
+    PLAY_PLAYLIST_TRACKS: 'play playlist tracks',
+    PLAY_ALBUM_TRACKS: 'play album tracks',
     PLAY_PLAYLIST: 'play playlist',
     CLEAR_AND_LOCK: 'clear and lock',
     PLAY_ALBUM: 'play-album',
+};
+
+export const MAIN = {
+    GET_LIST_DATA: 'get-all-artists-data',
+    RENDER_ARTIST_LIST: 'render-artist-list',
+    NO_ANSWER: 'no-answer',
+    REDIRECT: 'redirect',
 };
 
 export const LOGIN = {
@@ -123,9 +132,11 @@ export const PLAYER = {
 
 export const SETTINGS = {
     GET_USER_DATA: 'settings-get-user-data',
+    GET_CSRF_TOKEN: 'get-csrf-token',
     RENDER_LOGGED: 'logged-in',
     AVATAR_UPLOAD: 'avatar-upload',
     SUBMIT: 'submit',
+    SUBMIT_PASSWORD: 'submit-password',
     INVALID: 'invalid',
     REDIRECT: 'settings-redirect',
 };
@@ -145,7 +156,9 @@ export const PROFILE = {
     NO_ANSWER: 'no-answer',
     REDIRECT: 'redirect',
     GET_DATA: 'get-profile-data',
+    GET_STAT: 'get-profile-stat',
     RENDER_DATA: 'render-profile-data',
+    RENDER_STAT: 'render-profile-stat',
     CHOOSE_SECTION: 'choose-section',
     RENDER_TRACKS: 'render-profile-tracks',
     RENDER_PLAYLISTS: 'render-profile-playlists',
@@ -169,14 +182,19 @@ export const ARTIST = {
 
 export const PLAYLIST = {
     REDIRECT: 'redirect',
-    GET_PLAYLIST_DATA: 'get-playlist',
+    GET_PLAYLIST_DATA: 'get-playlist-data',
+    GET_TRACKS_DATA: 'get-tracks-data',
     RENDER_DATA: 'render-playlist',
+    RENDER_PLAYLIST_DATA: 'render-playlist-data',
+    RENDER_TRACKS_DATA: 'render-tracks-data',
     ERROR: 'show-errors',
 };
 
 export const ALBUM = {
     REDIRECT: 'redirect',
-    GET_ALBUM_DATA: 'get-playlist',
-    RENDER_DATA: 'render-playlist',
+    GET_ALBUM_DATA: 'get-album-data',
+    GET_TRACKS_DATA: 'get-tracks-data',
+    RENDER_ALBUM_DATA: 'render-album',
+    RENDER_TRACKS_DATA: 'render-tracks',
     ERROR: 'show-errors',
 };

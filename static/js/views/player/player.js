@@ -1,4 +1,4 @@
-import {PLAYER, NAVBAR, DOM} from '@libs/constans.js';
+import {PLAYER, NAVBAR, DOM} from '@libs/constans';
 import BaseView from '@libs/base_view';
 import track from '@views/player/track.tmpl.xml';
 import player from '@views/player/player.tmpl.xml';
@@ -43,7 +43,7 @@ export default class PlayerView extends BaseView {
     /**
      * Позиционирует плеер
      * @param {Object} root
-     * @param {srting} url
+     * @param {string} url
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.PLAYER)[0]);
@@ -79,6 +79,8 @@ export default class PlayerView extends BaseView {
      */
     setStaticEventListeners() {
         window.addEventListener('resize', this.resize.bind(this));
+        document.getElementsByTagName('body')[0]
+            .addEventListener('DOMSubtreeModified', this.resize.bind(this));
         window.addEventListener('mouseup', this.windowMouseUp.bind(this));
         document.getElementsByTagName('audio')[0]
             .addEventListener('timeupdate', this.audioTimeUpdate.bind(this));
@@ -89,6 +91,12 @@ export default class PlayerView extends BaseView {
         document.getElementsByClassName('player-trigger')[0]
             .addEventListener('mouseout', this.triggerMouseOut.bind(this));
         document.getElementsByClassName('player-trigger')[0]
+            .addEventListener('click', this.triggerClick.bind(this));
+        document.getElementsByClassName('trigger-button')[0]
+            .addEventListener('mouseover', this.triggerMouseOver.bind(this));
+        document.getElementsByClassName('trigger-button')[0]
+            .addEventListener('mouseout', this.triggerMouseOut.bind(this));
+        document.getElementsByClassName('trigger-button')[0]
             .addEventListener('click', this.triggerClick.bind(this));
         document.getElementsByClassName('play-pause')[0]
             .addEventListener('click', this.playPauseButtonClick.bind(this));
@@ -209,6 +217,10 @@ export default class PlayerView extends BaseView {
      * Слушает вход курсора на триггер плеера
      */
     triggerMouseOver() {
+        document.getElementsByClassName('trigger-button')[0].classList
+            .add('background--chosen-icon');
+        document.getElementsByClassName('player-trigger')[0].classList
+            .add('background--chosen-icon');
         document.getElementsByClassName('player-trigger-arrow')[0].style.visibility = 'visible';
     }
 
@@ -216,6 +228,10 @@ export default class PlayerView extends BaseView {
      * Слушает выход курсора с триггера плеера
      */
     triggerMouseOut() {
+        document.getElementsByClassName('trigger-button')[0].classList
+            .remove('background--chosen-icon');
+        document.getElementsByClassName('player-trigger')[0].classList
+            .remove('background--chosen-icon');
         document.getElementsByClassName('player-trigger-arrow')[0].style.visibility = 'hidden';
     }
 
@@ -229,11 +245,11 @@ export default class PlayerView extends BaseView {
         if (this.expanded) {
             document.getElementsByClassName('player-trigger-arrow')[0]
                 .style.transform = 'rotate(180deg)';
-            document.getElementsByClassName('player-trigger-arrow')[0].style.marginLeft = '-1px';
+            // document.getElementsByClassName('player-trigger-arrow')[0].style.marginLeft = '-1px';
         } else {
             document.getElementsByClassName('player-trigger-arrow')[0]
                 .style.transform = 'rotate(0)';
-            document.getElementsByClassName('player-trigger-arrow')[0].style.marginLeft = '-3px';
+            // document.getElementsByClassName('player-trigger-arrow')[0].style.marginLeft = '-3px';
         }
         const body = document.getElementsByTagName('body')[0];
         const left = (
@@ -404,7 +420,7 @@ export default class PlayerView extends BaseView {
             .style.transitionProperty = 'opacity, top';
         document.getElementsByClassName('volume-scale')[0].style.visibility = 'visible';
         document.getElementsByClassName('volume-scale')[0].style.opacity = '1';
-        document.getElementsByClassName('volume-scale')[0].style.top = '48px';
+        document.getElementsByClassName('volume-scale')[0].style.top = '-52px';
         document.getElementsByClassName('volume')[0].style.opacity = '1';
     }
 
@@ -416,7 +432,7 @@ export default class PlayerView extends BaseView {
             .style.transitionProperty = 'opacity, visibility, top';
         document.getElementsByClassName('volume-scale')[0].style.visibility = 'hidden';
         document.getElementsByClassName('volume-scale')[0].style.opacity = '0';
-        document.getElementsByClassName('volume-scale')[0].style.top = '58px';
+        document.getElementsByClassName('volume-scale')[0].style.top = '-42px';
         document.getElementsByClassName('volume')[0].style.opacity = '0.4';
     }
 
@@ -504,12 +520,19 @@ export default class PlayerView extends BaseView {
         ) {
             event.preventDefault();
             const top = parseInt(trackList.style.top.slice(0, trackList.style.top.length - 2));
-            if (delta > 0 && trackList.getClientRects()[0].y +
-                trackList.getClientRects()[0].height > document.documentElement.clientHeight ||
-                delta < 0 && top < 0
+            if (delta < 0 && top < 0 ||
+                delta > 0 && trackList.getBoundingClientRect().bottom >
+                document.documentElement.clientHeight
             ) {
-                if (delta > 0 && top - delta / 2 > 0) {
+                if (delta < 0 && top - delta / 2 > 0) {
                     trackList.style.top = '0';
+                } else if (delta > 0 && trackList.getBoundingClientRect().bottom - delta / 2 <
+                           document.documentElement.clientHeight
+                ) {
+                    const container = document.getElementsByClassName('container-audio')[0];
+                    trackList.style.top = (document.documentElement.clientHeight -
+                        trackList.getBoundingClientRect().height -
+                        container.getBoundingClientRect().bottom).toString() + 'px';
                 } else {
                     trackList.style.top = (top - delta / 2).toString() + 'px';
                 }
@@ -654,7 +677,7 @@ export default class PlayerView extends BaseView {
      * @param {Object} track
      */
     updateTrack(track) {
-        document.getElementById('cover').src = track.link; // TODO ВЫНУЖДЕННО из-за текущей базы данных
+        document.getElementById('cover').src = track.image;
         document.getElementById('artist').innerHTML = track.artist;
         document.getElementById('title').innerHTML = track.name;
         document.getElementById('title').title = track.name;

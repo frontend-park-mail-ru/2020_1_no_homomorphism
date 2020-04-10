@@ -4,9 +4,10 @@
             <div class="l-list-image">
                 <img class="m-list-image" id="profile-playlist-image" src="{album.image}" alt=""/>
             </div>
-            <div>
-                <button class="m-button-track-play-playlist"></button>
+            <div class="l-button-play-track">
+                <button class="m-button-track-play-playlist"> </button>
             </div>
+
             <a class="l-list-card-description" href="/album/{album.id}">
                 <fest:value>album.name</fest:value>
             </a>

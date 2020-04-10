@@ -1,5 +1,6 @@
-import {SERVER_PATH} from '@libs/constans.js';
+import {SERVER_PATH} from '@libs/constans';
 import {API} from '@libs/constans';
+import {CSRF_TOKEN} from '@libs/user';
 
 /* *
  * POST
@@ -15,7 +16,7 @@ export const postFetch = (path = '/', body = {}) => {
         credentials: 'include', // include, *same-origin, omit (относится к кукам)
         headers: {
             'Content-Type': 'application/json; charset=utf-8',
-            // 'Csrf-Token': localStorage.getItem('csrfToken'),
+            'Csrf-Token': CSRF_TOKEN,
         },
         body: JSON.stringify(body),
     });
@@ -47,9 +48,9 @@ export const deleteFetch = (path = '/') => {
         method: 'DELETE',
         mode: 'cors',
         credentials: 'include',
-        // headers: {
-        //     'Csrf-Token': localStorage.getItem('csrfToken'),
-        // },
+        headers: {
+            'Csrf-Token': CSRF_TOKEN,
+        },
     });
 };
 
@@ -67,7 +68,7 @@ export const putFetch = (path = '/', body = {}) => {
         credentials: 'include',
         headers: {
             'Content-Type': 'application/json; charset=utf-8',
-            'Csrf-Token': localStorage.getItem('csrfToken'),
+            'Csrf-Token': CSRF_TOKEN,
         },
         body: JSON.stringify(body),
     });
@@ -87,7 +88,7 @@ export const postImageFetch = (path = API + '/users/images', body = {}) => {
         credentials: 'include',
         body: body,
         headers: {
-            'Csrf-Token': localStorage.getItem('csrfToken'),
+            'Csrf-Token': CSRF_TOKEN,
         },
     });
 };
