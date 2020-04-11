@@ -21,7 +21,22 @@ export default class LoginView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
-        super.render(root);
+        // super.render(root);
+        if (root.children.length > 0) {
+            if (root.firstChild.classList.contains('l-emphasized')) {
+                root.removeChild(root.firstChild);
+            }
+            if (root.children.length === 2) {
+                root.removeChild(root.lastChild);
+            }
+            if (root.children.length !== 0) {
+                root.firstChild.classList.add('l-un-emphasized');
+            }
+            root.innerHTML += template();
+            this.setEventListeners.bind(this)();
+            return;
+        }
+        root.innerHTML = template();
         this.setEventListeners.bind(this)();
     }
 

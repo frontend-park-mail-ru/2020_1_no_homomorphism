@@ -1,3 +1,16 @@
+.l-emphasized{
+    position: fixed;
+    left: 40%;
+    box-shadow: black;
+}
+
+.l-un-emphasized {
+    transition: .6s filter;
+    filter: blur(3px) contrast(.8)
+    brightness(0.8);
+    pointer-events: none;
+}
+
 .login-form input {
     margin-top: 0.5em;
     margin-bottom: 0.5em;

@@ -1,8 +1,8 @@
 const {assets} = global.serviceWorkerOption;
 const CACHE_NAME = 'No homo';
 
-self.addEventListener('install', (event) => {
 
+self.addEventListener('install', (event) => {
     event.waitUntil(
         caches
             .open(CACHE_NAME)
@@ -66,3 +66,33 @@ self.addEventListener('fetch', (event) => {
 
     event.respondWith(resource);
 });
+
+
+// self.addEventListener('install', (event) => {
+//     event.waitUntil(
+//         caches.open(CACHE_NAME)
+//             .then((cache) => cache.addAll(assets)),
+//     );
+// });
+//
+// self.addEventListener('fetch', (event) => {
+//     event.respondWith(
+//         caches
+//             .match(event.request)
+//             .then((cachedResponse) => {
+//                 if (!navigator.onLine && cachedResponse) {
+//                     return cachedResponse;
+//                 }
+//
+//                 return fetch(event.request)
+//                     .then((response) => caches
+//                         .open(CACHE_NAME)
+//                         .then((cache) => {
+//                             if (event.request.method === 'GET') {
+//                                 cache.put(event.request, response.clone());
+//                             }
+//                             return response;
+//                         }));
+//             }),
+//     );
+// });
