@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd /home/ubuntu/frontend/2020_1_no_homomorphism
+npm install
+npm run daemon
