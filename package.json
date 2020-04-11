@@ -5,6 +5,7 @@
     "start": "node server.js",
     "prestart": "webpack --mode development",
     "go": "cross-env NODE_ENV=development webpack-dev-server --mode development --watch",
+    "daemon": "cross-env webpack-dev-server --mode development --watch",
     "dev": "cross-env NODE_ENV=development webpack --mode development",
     "tmpl": "cross-env NODE_ENV=development fest-build --dir=./static/js/views",
     "devstart": "cross-env NODE_ENV=development nodemon server.js"
