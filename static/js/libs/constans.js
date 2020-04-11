@@ -65,6 +65,7 @@ export const GLOBAL = {
     PLAY_PLAYLIST: 'play playlist',
     CLEAR_AND_LOCK: 'clear and lock',
     PLAY_ALBUM: 'play-album',
+    COLLAPSE: 'collapse',
 };
 
 export const MAIN = {

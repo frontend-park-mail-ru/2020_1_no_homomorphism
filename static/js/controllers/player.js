@@ -14,7 +14,7 @@ export class PlayerController {
     constructor(router, globalEventBus) {
         this.eventBus = new EventBus();
         this.model = new PlayerModel(this.eventBus, globalEventBus);
-        this.view = new PlayerView(this.eventBus);
+        this.view = new PlayerView(this.eventBus, globalEventBus);
         this.eventBus.on(PLAYER.REDIRECT, router.redirect.bind(router));
     }
 }
