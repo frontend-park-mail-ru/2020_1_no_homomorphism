@@ -11,6 +11,7 @@ import {SettingsController} from '@controllers/settings';
 import {ArtistController} from '@controllers/artist';
 import {PlaylistController} from '@controllers/playlist';
 import {AlbumController} from '@controllers/album';
+import {user} from '@libs/user';
 // import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 
 window.addEventListener('DOMContentLoaded', () => {

@@ -2,6 +2,7 @@ import Validation from '@libs/validation';
 import Api from '@libs/api';
 import {SETTINGS, URL, RESPONSE, NAVBAR} from '@libs/constans';
 import {setToken} from '@libs/user';
+import User from '@libs/user';
 
 /**
  * Модель настроек
@@ -15,6 +16,7 @@ export default class SettingsModel {
     constructor(eventBus, globalEventBus) {
         this.globalEventBus = globalEventBus;
         this.eventBus = eventBus;
+        this.user = new User();
         this.eventBus.on(SETTINGS.AVATAR_UPLOAD, this.resetAvatar.bind(this));
         this.eventBus.on(SETTINGS.SUBMIT, this.submit.bind(this));
         this.eventBus.on(SETTINGS.GET_USER_DATA, this.getUserData.bind(this));
@@ -25,12 +27,19 @@ export default class SettingsModel {
      * получает данные юзера
      */
     getUserData() {
+        console.log('IF  ' + this.user.exists);
+        if (this.user.exists) {
+            console.log(this.user.userData);
+            this.eventBus.emit(SETTINGS.RENDER_LOGGED, this.user.userData);
+            return;
+        }
         Api.profileFetch()
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
                     res.json()
                         .then((data) => {
+                            this.user.userData = data;
                             this.eventBus.emit(SETTINGS.RENDER_LOGGED, data);
                         });
                     break;

@@ -2,6 +2,7 @@ import Api from '@libs/api';
 import Validation from '@libs/validation';
 import {RESPONSE, LOGIN, NAVBAR, URL} from '@libs/constans';
 import {setToken} from '@libs/user';
+import User from '@libs/user';
 
 /**
  * Модель для страницы входа
@@ -15,6 +16,7 @@ export default class LoginModel {
     constructor(eventBus, globalEventBus) {
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
+        this.user = new User();
         this.eventBus.on(LOGIN.SUBMIT, this.submit.bind(this));
     }
 
@@ -67,6 +69,7 @@ export default class LoginModel {
     getCsrfToken() {
         Api.csrfTokenFetch()
             .then((res) => {
+                this.user.token = res.headers.get('Csrf-Token');
                 setToken(res.headers.get('Csrf-Token'));
             });
     }

@@ -1,6 +1,7 @@
 import Api from '@libs/api';
 import {RESPONSE, NAVBAR, URL} from '@libs/constans';
 import {setToken} from '@libs/user';
+import User from '@libs/user';
 
 /**
  * Модель для навбара
@@ -14,6 +15,7 @@ export default class NavbarModel {
     constructor(eventBus, globalEventBus) {
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
+        this.user = new User();
         this.globalEventBus.on(NAVBAR.GET_USER_DATA, this.getUserData.bind(this));
         this.eventBus.on(NAVBAR.GET_USER_DATA, this.getUserData.bind(this));
         this.eventBus.on(NAVBAR.LOGOUT_CLICKED, this.doLogout.bind(this));
@@ -46,6 +48,7 @@ export default class NavbarModel {
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
+                    this.user.clean();
                     setToken('');
                     break;
                 case RESPONSE.BAD_REQUEST:

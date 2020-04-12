@@ -1,6 +1,7 @@
 import {SIGN_UP, GLOBAL} from '@libs/constans';
 import template from '@views/signup/signup.tmpl.xml';
 import BaseView from '@libs/base_view';
+import User from '@libs/user';
 
 /**
  * Вью для страницы регистрации
