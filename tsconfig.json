@@ -4,6 +4,7 @@
     "target": "ES6",
     "noImplicitAny": true,
     "removeComments": true,
+    "experimentalDecorators": true,
     "preserveConstEnums": true,
     "sourceMap": true,
     "outDir": "./dist/",

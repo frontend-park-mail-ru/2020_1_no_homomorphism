@@ -1,7 +1,7 @@
 import Validation from '@libs/validation';
 import Api from '@libs/api';
 import {SIGN_UP, URL, RESPONSE, NAVBAR} from '@libs/constans';
-import User from '@libs/user';
+import {User} from '@libs/user';
 
 /**
  * модель странички регистрации
@@ -15,7 +15,6 @@ export default class SignupModel {
     constructor(eventBus, globalEventBus) {
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
-        this.user = new User();
         this.eventBus.on(SIGN_UP.SUBMIT, this.submit.bind(this));
     }
 

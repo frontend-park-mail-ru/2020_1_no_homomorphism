@@ -1,7 +1,7 @@
 import Validation from '@libs/validation';
 import Api from '@libs/api';
 import {SETTINGS, URL, RESPONSE, NAVBAR} from '@libs/constans';
-import User from '@libs/user';
+import {User} from '@libs/user';
 
 /**
  * Модель настроек
@@ -26,8 +26,8 @@ export default class SettingsModel {
      * @param {boolean} changeEvent были ли изменены данные
      */
     getUserData(changeEvent = false) {
-        if (User.exists && !changeEvent) {
-            this.eventBus.emit(SETTINGS.RENDER_LOGGED, User.userData);
+        if (User.exists() && !changeEvent) {
+            this.eventBus.emit(SETTINGS.RENDER_LOGGED, User.getUserData());
             return;
         }
         Api.profileFetch()
@@ -36,8 +36,9 @@ export default class SettingsModel {
                 case RESPONSE.OK:
                     res.json()
                         .then((data) => {
-                            User.userData = data;
-                            this.eventBus.emit(SETTINGS.RENDER_LOGGED, data);
+                            User.setUserData(data);
+                            this.getCsrfToken();
+                            this.eventBus.emit(SETTINGS.RENDER_LOGGED, User.getUserData());
                         });
                     break;
                 case RESPONSE.UNAUTH:

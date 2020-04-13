@@ -1,35 +1,43 @@
-/** Юзер-синглтон
- */
-export default class User {
+type dataKeys = 'id' | 'login' | 'email' | 'image';
+
+interface IUser {
+    CsrfToken: string;
+    user: { [index: string]: any };
+
+    setUserData(input: { [index in dataKeys]: any }): void;
+
+    getUserData(): object;
+
+    clean(): void;
+
+    exists(): boolean
+}
+
+export let User: IUser;
+User = class User {
     private static instance: User;
-    private static user: { [index: string]: any } = {};
-    private static CsrfToken: string;
+    static user: { [index: string]: any } = {};
+    static CsrfToken: string;
 
-    /** Конструктор синглтона
-     */
-    private constructor() {
-        User.CsrfToken = '';
-    }
-
-    /** Вылогинивает пользователя
-     */
-    public static clean() {
-        this.user = {};
-        this.CsrfToken = '';
+    static clean(): void {
+        delete this.user;
+        delete this.CsrfToken;
     }
 
     /** Проверяет, существует ли пользователь
      */
-    public static get exists(): boolean {
+    public static exists(): boolean {
         if (!User.instance) {
             User.instance = new User();
-            User.user = {};
         }
-        return (JSON.stringify(this.user) !== '{}');
+        if (this.user === undefined) {
+            User.user = {email: undefined, id: undefined, login: undefined, image: undefined};
+            return false
+        }
+        return this.user.id !== undefined;
     }
 
     /** Запись CSRF токена
-     *  @param {Object} input
      */
     public static set token(input: string) {
         this.CsrfToken = input;
@@ -43,17 +51,17 @@ export default class User {
 
     /** Запись данных пользователя
      */
-    public static set userData(input: object) {
+    public static setUserData(input: { [index in dataKeys]: any }) {
+        User.user = {email: undefined, id: undefined, login: undefined, image: undefined};
         Object.keys(input)
             .forEach((key: Extract<keyof typeof input, string>) => {
-                this.user.key = input[key]
+                this.user[key] = input[key]
             })
-        this.user = input;
     }
 
     /** Получение данных пользователя
      */
-    public static get userData(): object {
+    public static getUserData(): object {
         return this.user;
     }
 }

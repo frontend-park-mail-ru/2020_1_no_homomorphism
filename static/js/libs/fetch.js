@@ -1,6 +1,6 @@
 import {SERVER_PATH} from '@libs/constans';
 import {API} from '@libs/constans';
-import User from '@libs/user';
+import {User} from '@libs/user';
 
 /* *
  * POST
