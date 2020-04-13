@@ -2,11 +2,11 @@ type dataKeys = 'id' | 'login' | 'email' | 'image';
 
 interface IUser {
     CsrfToken: string;
-    user: { [index: string]: any };
+    user: { [index: string]: string };
 
-    setUserData(input: { [index in dataKeys]: any }): void;
+    setUserData(input: { [index in dataKeys]: string }): void;
 
-    getUserData(): object;
+    getUserData(): { [index: string]: string };
 
     clean(): void;
 
@@ -61,7 +61,7 @@ User = class User {
 
     /** Получение данных пользователя
      */
-    public static getUserData(): object {
+    public static getUserData(): { [index: string]: string } {
         return this.user;
     }
 }
