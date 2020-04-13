@@ -26,7 +26,6 @@ export default class PlaylistModel {
     getPlaylist(id) {
         Api.playlistFetch(id.id)
             .then((res) => {
-                console.log(res);
                 switch (res.status) {
                 case undefined: // TODO Временно
                     this.playlist = res;

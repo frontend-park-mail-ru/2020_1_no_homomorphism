@@ -28,7 +28,7 @@ module.exports = {
         publicPath: '/',
     },
     resolve: {
-        extensions: ['.js', '.json'],
+        extensions: ['.tsx', '.ts', '.js', '.json'],
         alias: {
             '@': path.resolve(__dirname, 'static'),
             '@models': path.resolve(__dirname, 'static/js/models'),
@@ -95,14 +95,9 @@ module.exports = {
             //     loader: 'eslint-loader',
             // },
             {
-                test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env'],
-                    },
-                },
+                test: /\.(j|t)s$/,
+                exclude: /node_modules/,
+                loader: ['babel-loader', 'ts-loader'],
             },
         ],
     },

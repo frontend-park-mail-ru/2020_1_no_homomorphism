@@ -1,7 +1,6 @@
 import Validation from '@libs/validation';
 import Api from '@libs/api';
 import {SETTINGS, URL, RESPONSE, NAVBAR} from '@libs/constans';
-import {setToken} from '@libs/user';
 import User from '@libs/user';
 
 /**
@@ -16,7 +15,6 @@ export default class SettingsModel {
     constructor(eventBus, globalEventBus) {
         this.globalEventBus = globalEventBus;
         this.eventBus = eventBus;
-        this.user = new User();
         this.eventBus.on(SETTINGS.AVATAR_UPLOAD, this.resetAvatar.bind(this));
         this.eventBus.on(SETTINGS.SUBMIT, this.submit.bind(this));
         this.eventBus.on(SETTINGS.GET_USER_DATA, this.getUserData.bind(this));
@@ -25,12 +23,11 @@ export default class SettingsModel {
 
     /**
      * получает данные юзера
+     * @param {boolean} changeEvent были ли изменены данные
      */
-    getUserData() {
-        console.log('IF  ' + this.user.exists);
-        if (this.user.exists) {
-            console.log(this.user.userData);
-            this.eventBus.emit(SETTINGS.RENDER_LOGGED, this.user.userData);
+    getUserData(changeEvent = false) {
+        if (User.exists && !changeEvent) {
+            this.eventBus.emit(SETTINGS.RENDER_LOGGED, User.userData);
             return;
         }
         Api.profileFetch()
@@ -39,7 +36,7 @@ export default class SettingsModel {
                 case RESPONSE.OK:
                     res.json()
                         .then((data) => {
-                            this.user.userData = data;
+                            User.userData = data;
                             this.eventBus.emit(SETTINGS.RENDER_LOGGED, data);
                         });
                     break;
@@ -75,7 +72,7 @@ export default class SettingsModel {
                     this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
                     switch (res.status) {
                     case RESPONSE.OK:
-                        this.getUserData.bind(this)();
+                        this.getUserData.bind(this)(true);
                         this.globalEventBus.emit(NAVBAR.GET_USER_DATA);
                         break;
                     case RESPONSE.BAD_REQUEST: // TODO Обработать ошибку
@@ -133,7 +130,7 @@ export default class SettingsModel {
                     this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
                     switch (res.status) {
                     case RESPONSE.OK:
-                        this.getUserData.bind(this)();
+                        this.getUserData.bind(this)(true);
                         break;
                     case RESPONSE.BAD_REQUEST:
                         errors['password'] = 'Wrong password';
@@ -163,7 +160,7 @@ export default class SettingsModel {
     getCsrfToken() {
         Api.csrfTokenFetch()
             .then((res) => {
-                setToken(res.headers.get('Csrf-Token'));
+                User.token = res.headers.get('Csrf-Token');
             });
     }
 }

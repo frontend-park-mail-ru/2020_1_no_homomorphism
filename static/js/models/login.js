@@ -1,7 +1,7 @@
 import Api from '@libs/api';
 import Validation from '@libs/validation';
 import {RESPONSE, LOGIN, NAVBAR, URL} from '@libs/constans';
-import {setToken} from '@libs/user';
+// import {setToken} from '@libs/user';
 import User from '@libs/user';
 
 /**
@@ -39,6 +39,7 @@ export default class LoginModel {
         } else {
             Api.loginFetch(values.login, values.password)
                 .then((res) => {
+                    console.log(res);
                     switch (res.status) {
                     case RESPONSE.OK:
                         this.getCsrfToken();
@@ -69,8 +70,7 @@ export default class LoginModel {
     getCsrfToken() {
         Api.csrfTokenFetch()
             .then((res) => {
-                this.user.token = res.headers.get('Csrf-Token');
-                setToken(res.headers.get('Csrf-Token'));
+                User.token = res.headers.get('Csrf-Token');
             });
     }
 }
