@@ -28,7 +28,6 @@ function staticImplements<T>() {
 }
 
 @staticImplements<IUserStatic>()
-
 export default class User implements IUser {
 
     static instance: IUser;
@@ -52,7 +51,12 @@ export default class User implements IUser {
             }();
         }
         if (this.user === undefined) {
-            User.user = {email: undefined, id: undefined, login: undefined, image: undefined};
+            User.user = {
+                email: undefined,
+                id: undefined,
+                login: undefined,
+                image: undefined
+            };
             return false
         }
         return this.user.id !== undefined;
@@ -73,7 +77,12 @@ export default class User implements IUser {
     /** Запись данных пользователя
      */
     public static setUserData(input: { [index in dataKeys]: string }) {
-        User.user = {email: undefined, id: undefined, login: undefined, image: undefined};
+        User.user = {
+            email: undefined,
+            id: undefined,
+            login: undefined,
+            image: undefined
+        };
         Object.keys(input)
             .forEach((key: Extract<keyof typeof input, string>) => {
                 this.user[key] = input[key]
