@@ -1,8 +1,16 @@
 type dataKeys = 'id' | 'login' | 'email' | 'image';
 
 interface IUser {
+    instanceMethod(): void;
+}
+
+interface IUserStatic {
+    instance: IUser;
     CsrfToken: string;
     user: { [index: string]: string };
+    token: string;
+
+    new(): IUser;
 
     setUserData(input: { [index in dataKeys]: string }): void;
 
@@ -13,12 +21,22 @@ interface IUser {
     exists(): boolean
 }
 
-export let User: IUser;
-User = class User {
-    private static instance: User;
-    static user: { [index: string]: any } = {};
+function staticImplements<T>() {
+    return <U extends T>(constructor: U) => {
+        constructor
+    };
+}
+
+@staticImplements<IUserStatic>()
+
+export default class User implements IUser {
+
+    static instance: IUser;
+    static user: { [index: string]: string } = {};
     static CsrfToken: string;
 
+    /** Вылогинивает
+     */
     static clean(): void {
         delete this.user;
         delete this.CsrfToken;
@@ -27,8 +45,11 @@ User = class User {
     /** Проверяет, существует ли пользователь
      */
     public static exists(): boolean {
-        if (!User.instance) {
-            User.instance = new User();
+        if (User.instance) {
+            User.instance = new class implements IUser {
+                instanceMethod(): void {
+                }
+            }();
         }
         if (this.user === undefined) {
             User.user = {email: undefined, id: undefined, login: undefined, image: undefined};
@@ -51,7 +72,7 @@ User = class User {
 
     /** Запись данных пользователя
      */
-    public static setUserData(input: { [index in dataKeys]: any }) {
+    public static setUserData(input: { [index in dataKeys]: string }) {
         User.user = {email: undefined, id: undefined, login: undefined, image: undefined};
         Object.keys(input)
             .forEach((key: Extract<keyof typeof input, string>) => {
@@ -63,5 +84,8 @@ User = class User {
      */
     public static getUserData(): { [index: string]: string } {
         return this.user;
+    }
+
+    instanceMethod(): void {
     }
 }

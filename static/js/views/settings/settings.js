@@ -1,7 +1,7 @@
 import {SETTINGS, DOM} from '@libs/constans';
 import settings from '@views/settings/settings.tmpl.xml';
 import BaseView from '@libs/base_view';
-import {User} from '@libs/user';
+import User from '@libs/user';
 // import {inputSanitize} from '@libs/input_sanitize';
 
 /**

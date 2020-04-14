@@ -1,7 +1,7 @@
 import Api from '@libs/api';
 import {RESPONSE, NAVBAR, URL} from '@libs/constans';
 // import {setToken} from '@libs/user';
-import {User} from '@libs/user';
+import User from '@libs/user';
 
 /**
  * Модель для навбара

@@ -1,6 +1,6 @@
 import Api from '@libs/api';
 import {PROFILE, URL, NAVBAR, RESPONSE} from '@libs/constans';
-import {User} from '@libs/user';
+import User from '@libs/user';
 
 /**
  * Модель Профиля

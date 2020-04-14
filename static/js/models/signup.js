@@ -1,7 +1,7 @@
 import Validation from '@libs/validation';
 import Api from '@libs/api';
 import {SIGN_UP, URL, RESPONSE, NAVBAR} from '@libs/constans';
-import {User} from '@libs/user';
+import User from '@libs/user';
 
 /**
  * модель странички регистрации
