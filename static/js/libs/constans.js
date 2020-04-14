@@ -1,4 +1,4 @@
-export const SERVER_PATH = 'http://89.208.199.170:8081';
+export const SERVER_PATH = 'http://localhost:8081'; // 'http://89.208.199.170:8081'
 
 export const API = '/api/v1';
 
@@ -65,6 +65,7 @@ export const GLOBAL = {
     PLAY_PLAYLIST: 'play playlist',
     CLEAR_AND_LOCK: 'clear and lock',
     PLAY_ALBUM: 'play-album',
+    COLLAPSE: 'collapse',
 };
 
 export const MAIN = {

@@ -14,7 +14,7 @@ export class LoginController {
     constructor(router, globalEventBus) {
         this.eventBus = new EventBus();
         this.model = new LoginModel(this.eventBus, globalEventBus);
-        this.view = new LoginView(this.eventBus);
+        this.view = new LoginView(this.eventBus, globalEventBus);
         this.eventBus.on(LOGIN.REDIRECT, router.redirect.bind(router));
     }
 }

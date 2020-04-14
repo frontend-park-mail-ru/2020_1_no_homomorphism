@@ -1,7 +1,7 @@
 import {SETTINGS, DOM} from '@libs/constans';
-import {CSRF_TOKEN} from '@libs/user';
 import settings from '@views/settings/settings.tmpl.xml';
 import BaseView from '@libs/base_view';
+import User from '@libs/user';
 // import {inputSanitize} from '@libs/input_sanitize';
 
 /**
@@ -27,8 +27,8 @@ export default class SettingsView extends BaseView {
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.CONTENT)[0]);
-        this.eventBus.emit(SETTINGS.GET_USER_DATA); // TODO синглтон
-        if (CSRF_TOKEN === '') {
+        this.eventBus.emit(SETTINGS.GET_USER_DATA);
+        if (User.token === undefined) {
             this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
         }
         this.setEventListeners();

@@ -1,6 +1,7 @@
 import Api from '@libs/api';
 import {RESPONSE, NAVBAR, URL} from '@libs/constans';
-import {setToken} from '@libs/user';
+// import {setToken} from '@libs/user';
+import User from '@libs/user';
 
 /**
  * Модель для навбара
@@ -46,7 +47,7 @@ export default class NavbarModel {
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
-                    setToken('');
+                    User.clean();
                     break;
                 case RESPONSE.BAD_REQUEST:
                 case RESPONSE.UNAUTH:

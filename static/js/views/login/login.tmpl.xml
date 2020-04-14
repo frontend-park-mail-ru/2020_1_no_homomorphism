@@ -1,6 +1,5 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
-    <div class="row">
-        <div class="col col-4"></div>
+    <div class="l-emphasized row">
         <div class="col col-4">
             <form class="login-form card" method="post" autocomplete="none">
                 <h2>LOG IN</h2>
@@ -30,13 +29,13 @@
                 <div class="error-message" id="global">
                     Login failed
                 </div>
+                <div class="div-center">
+                    <a class="tiny-ref" href="/signup">
+                        No account? Sign up.
+                    </a>
+                </div>
             </form>
-            <div class="div-center">
-                <a class="tiny-ref" href="/signup">
-                    No account? Sign up.
-                </a>
-            </div>
+
         </div>
-        <div class="col col-4"></div>
     </div>
 </fest:template>

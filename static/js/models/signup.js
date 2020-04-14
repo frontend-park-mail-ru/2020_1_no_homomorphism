@@ -1,7 +1,7 @@
 import Validation from '@libs/validation';
 import Api from '@libs/api';
 import {SIGN_UP, URL, RESPONSE, NAVBAR} from '@libs/constans';
-import {setToken} from '@libs/user';
+import User from '@libs/user';
 
 /**
  * модель странички регистрации
@@ -97,7 +97,7 @@ export default class SignupModel {
     getCsrfToken() {
         Api.csrfTokenFetch()
             .then((res) => {
-                setToken(res.headers.get('Csrf-Token'));
+                User.token = res.headers.get('Csrf-Token');
             });
     }
 }

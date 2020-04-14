@@ -1,4 +1,4 @@
-import {PLAYER, NAVBAR, DOM} from '@libs/constans';
+import {PLAYER, NAVBAR, DOM, GLOBAL} from '@libs/constans';
 import BaseView from '@libs/base_view';
 import track from '@views/player/track.tmpl.xml';
 import player from '@views/player/player.tmpl.xml';
@@ -9,10 +9,12 @@ import player from '@views/player/player.tmpl.xml';
 export default class PlayerView extends BaseView {
     /**
      * @param {EventBus} eventBus
+     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus) {
+    constructor(eventBus, globalEventBus) {
         super(player);
         this.eventBus = eventBus;
+        this.globalEventBus = globalEventBus;
         this.expanded = false;
         this.timelineDrag = false;
         this.volumeDrag = false;
@@ -38,6 +40,7 @@ export default class PlayerView extends BaseView {
         this.eventBus.on(PLAYER.DRAW_UNREPEAT, this.drawUnrepeat.bind(this));
         this.eventBus.on(PLAYER.DRAW_MUTE, this.drawMute.bind(this));
         this.eventBus.on(PLAYER.DRAW_UNMUTE, this.drawUnmute.bind(this));
+        this.globalEventBus.on(GLOBAL.COLLAPSE, this.collapse.bind(this));
     }
 
     /**
@@ -652,6 +655,15 @@ export default class PlayerView extends BaseView {
             target = target.parentNode;
         }
         this.eventBus.emit(PLAYER.ADD, target.getAttribute('id'));
+    }
+
+    /**
+     * Сворачивает плеер, если он развёрнут
+     */
+    collapse() {
+        if (this.expanded) {
+            this.triggerClick();
+        }
     }
 
     /**

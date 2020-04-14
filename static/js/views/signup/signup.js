@@ -1,5 +1,5 @@
-import {SIGN_UP} from '@libs/constans';
-import signup from '@views/signup/signup.tmpl.xml';
+import {SIGN_UP, GLOBAL} from '@libs/constans';
+import template from '@views/signup/signup.tmpl.xml';
 import BaseView from '@libs/base_view';
 
 /**
@@ -8,12 +8,14 @@ import BaseView from '@libs/base_view';
 export default class SignupView extends BaseView {
     /**
      * @param {EventBus} eventBus
+     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus) {
-        super(signup);
+    constructor(eventBus, globalEventBus) {
+        super(template);
         this.eventBus = eventBus;
         this.submit.bind(this);
         this.eventBus.on(SIGN_UP.INVALID, this.showErrors);
+        this.globalEventBus = globalEventBus;
     }
 
     /**
@@ -22,8 +24,25 @@ export default class SignupView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
-        super.render(root, url);
-        this.setEventListeners();
+        // super.render(root, url);
+        // this.setEventListeners();
+        this.globalEventBus.emit(GLOBAL.COLLAPSE);
+        if (root.children.length > 0) {
+            if (root.firstChild.classList.contains('l-emphasized')) {
+                root.removeChild(root.firstChild);
+            }
+            if (root.children.length === 2) {
+                root.removeChild(root.lastChild);
+            }
+            if (root.children.length !== 0) {
+                root.firstChild.classList.add('l-un-emphasized');
+            }
+            root.innerHTML += template();
+            this.setEventListeners.bind(this)();
+            return;
+        }
+        root.innerHTML = template();
+        this.setEventListeners.bind(this)();
     }
 
     /**

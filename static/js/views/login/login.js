@@ -1,4 +1,4 @@
-import {LOGIN} from '@libs/constans';
+import {LOGIN, GLOBAL} from '@libs/constans';
 import template from '@views/login/login.tmpl.xml';
 import BaseView from '@libs/base_view';
 
@@ -8,11 +8,13 @@ import BaseView from '@libs/base_view';
 export default class LoginView extends BaseView {
     /**
      * @param {EventBus} eventBus
+     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus) {
+    constructor(eventBus, globalEventBus) {
         super(template);
         this.eventBus = eventBus;
         this.eventBus.on(LOGIN.INVALID, this.showErrors);
+        this.globalEventBus = globalEventBus;
     }
 
     /**
@@ -21,7 +23,23 @@ export default class LoginView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
-        super.render(root);
+        // super.render(root);
+        this.globalEventBus.emit(GLOBAL.COLLAPSE);
+        if (root.children.length > 0) {
+            if (root.firstChild.classList.contains('l-emphasized')) {
+                root.removeChild(root.firstChild);
+            }
+            if (root.children.length === 2) {
+                root.removeChild(root.lastChild);
+            }
+            if (root.children.length !== 0) {
+                root.firstChild.classList.add('l-un-emphasized');
+            }
+            root.innerHTML += template();
+            this.setEventListeners.bind(this)();
+            return;
+        }
+        root.innerHTML = template();
         this.setEventListeners.bind(this)();
     }
 
