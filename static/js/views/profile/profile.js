@@ -1,7 +1,9 @@
 import {PROFILE, URL, DOM} from '@libs/constans';
 import profile from '@views/profile/profile.tmpl.xml';
 import BaseView from '@libs/base_view';
-import TopProfile from '@views/profile/TopProfile';
+import User from '@libs/user';
+import TrackListComponent from '@components/downTrackListComponent/trackListComponent';
+import PlaylistsComponent from '@components/downPlaylistComponent/playlistListComponent';
 
 /**
  * вью для профиля
@@ -14,7 +16,8 @@ export default class ProfileView extends BaseView {
         super(profile);
         this.eventBus = eventBus;
         this.currentOpen = '';
-        this.topProfile = new TopProfile();
+        this.trackListComponent = new TrackListComponent(eventBus, PROFILE.RENDER_TRACKS);
+        this.playlistsComponent = new PlaylistsComponent(eventBus, PROFILE.RENDER_PLAYLISTS);
         this.eventBus.on(PROFILE.CHOOSE_SECTION, this.chooseSection.bind(this));
         this.eventBus.on(PROFILE.RENDER_DATA, this.renderData.bind(this));
         this.eventBus.on(PROFILE.RENDER_STAT, this.renderStat.bind(this));
@@ -27,6 +30,9 @@ export default class ProfileView extends BaseView {
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.CONTENT)[0], url);
+        if (User.exists()) {
+            this.eventBus.emit(PROFILE.GET_STAT);
+        }
         this.eventBus.emit(PROFILE.GET_DATA);
         this.eventBus.emit(PROFILE.CHOOSE_SECTION);
         this.eventBus.emit(this.currentOpen);
@@ -61,6 +67,8 @@ export default class ProfileView extends BaseView {
     chooseSection() {
         switch (this.url) {
         case URL.PROFILE:
+            this.eventBus.emit(PROFILE.REDIRECT, URL.PROFILE_TRACKS);
+            break;
         case URL.PROFILE_TRACKS:
             this.currentOpen = PROFILE.ID_TRACKS_SECTION;
             break;
@@ -82,6 +90,13 @@ export default class ProfileView extends BaseView {
      * @param {Object} data
      */
     setData(data) {
-        super.setData(data); // TODO очищение памяти при логауте !!!
+        super.setData(data);
+    }
+
+    /**
+     * Определение секции нажатия
+     */
+    renderTracks() {
+
     }
 }

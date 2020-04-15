@@ -32,6 +32,7 @@ module.exports = {
         alias: {
             '@': path.resolve(__dirname, 'static'),
             '@models': path.resolve(__dirname, 'static/js/models'),
+            '@components': path.resolve(__dirname, 'static/js/components'),
             '@views': path.resolve(__dirname, 'static/js/views'),
             '@controllers': path.resolve(__dirname, 'static/js/controllers'),
             '@libs': path.resolve(__dirname, 'static/js/libs'),
@@ -88,12 +89,6 @@ module.exports = {
                     },
                 ],
             },
-            // {
-            //     enforce: 'pre',
-            //     test: /\.js$/,
-            //     exclude: /node_modules/,
-            //     loader: 'eslint-loader',
-            // },
             {
                 test: /\.(j|t)s$/,
                 exclude: /node_modules/,

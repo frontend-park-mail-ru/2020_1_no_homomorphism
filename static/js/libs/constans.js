@@ -63,8 +63,8 @@ export const GLOBAL = {
     PLAY_PLAYLIST_TRACKS: 'global-play-playlist-tracks',
     PLAY_ALBUM_TRACKS: 'global-play-album-tracks',
     PLAY_PLAYLIST: 'global-play-playlist',
-    CLEAR_AND_LOCK: 'global-clear-and-lock',
     PLAY_ALBUM: 'global-play-album',
+    CLEAR_AND_LOCK: 'global-clear-and-lock',
     COLLAPSE: 'global-collapse',
     REDIRECT: 'global-redirect',
 };
@@ -150,18 +150,22 @@ export const SIGN_UP = {
 };
 
 export const PROFILE = {
-    SELECTED_CLASS: 'profile-is-touched-profile-section',
+    SELECTED_CLASS: 'is-touched-profile-section',
+    // --
     ID_TRACKS_SECTION: 'profile-tracks-title',
     ID_PLAYLISTS_SECTION: 'profile-playlists-title',
     ID_ALBUMS_SECTION: 'profile-albums-title',
     ID_ARTISTS_SECTION: 'profile-artists-title',
+    // --
     NO_ANSWER: 'profile-no-answer',
     REDIRECT: 'profile-redirect',
     GET_DATA: 'profile-get-profile-data',
     GET_STAT: 'profile-get-profile-stat',
+    GET_TRACKS: 'profile-get-profile-tracks',
     RENDER_DATA: 'profile-render-profile-data',
     RENDER_STAT: 'profile-render-profile-stat',
     CHOOSE_SECTION: 'profile-choose-section',
+    // --
     RENDER_TRACKS: 'profile-render-profile-tracks',
     RENDER_PLAYLISTS: 'profile-render-profile-playlists',
     RENDER_ALBUMS: 'profile-render-profile-albums',
@@ -169,10 +173,11 @@ export const PROFILE = {
 };
 
 export const ARTIST = {
+    SELECTED_CLASS: 'is-touched-profile-section',
     SET_ID: 'artist-set-id',
-    ID_TRACKS_SECTION: 'tracks',
-    ID_ALBUMS_SECTION: 'albums',
-    ID_INFO_SECTION: 'info',
+    ID_TRACKS_SECTION: 'artist-tracks',
+    ID_ALBUMS_SECTION: 'artist-albums',
+    ID_INFO_SECTION: 'artist-info',
     NO_ANSWER: 'artist-no-answer',
     REDIRECT: 'artist-redirect',
     GET_DATA: 'artist-get-artist-data',

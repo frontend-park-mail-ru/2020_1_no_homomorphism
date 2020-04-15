@@ -2,7 +2,6 @@
     <div class="col col-9">
         <div class="l-main">
             <div class="l-top-card">
-
                 <div class="row">
                     <div class="l-top-info col">
                         <div class="l-round-image col">
@@ -19,7 +18,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="m-profile-tracks col col-4">
+                    <div class="m-profile-tracks col col-4" id="profile-tracks-title">
                         <a class="m-tiny-ref m-artist-tracks-ref" href="/artist/{data.id}/tracks">
                             <h2 id="artist-tracks-title">
                                 <fest:value>data.tracks</fest:value>
@@ -27,7 +26,7 @@
                             <p>Tracks</p>
                         </a>
                     </div>
-                    <div class="m-profile-albums col col-4">
+                    <div class="m-profile-albums col col-4" id="profile-albums-title">
                         <a class="m-tiny-ref m-artist-albums-ref" href="/artist/{data.id}/albums">
                             <h2 id="artist-albums-title">
                                 <fest:value>data.albums</fest:value>
@@ -35,21 +34,19 @@
                             <p>Albums</p>
                         </a>
                     </div>
-                    <div class="m-artist-info col col-4" id="artist-info-title">
+                    <div class="m-artist-info col col-4" id="profile-info-title">
                         <a class="m-tiny-ref m-artist-info-ref" href="/artist/{data.id}/info">
                             <h2>Info</h2>
                         </a>
                     </div>
                 </div>
-
             </div>
-
-            <div class="l-down-card l-artist-base">
-                <div class="l-profile-album-list" id="albums" style="top: 0;">
+            <div class="l-down-card">
+                <div class="l-profile-album-list" id="artist-albums" style="top: 0;">
                 </div>
-                <div class="l-profile-track-list" id="tracks" style="top: 0;">
+                <div class="l-profile-track-list" id="artist-tracks" style="top: 0;">
                 </div>
-                <div class="l-profile-track-list" id="info" style="top: 0;">
+                <div class="l-profile-info-list" id="artist-info" style="top: 0;">
                 </div>
             </div>
         </div>
