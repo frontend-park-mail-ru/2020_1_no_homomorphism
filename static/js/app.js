@@ -1,5 +1,4 @@
 import Router from '@libs/router';
-// import EventBus from '@libs/eventBus';
 import {URL} from '@libs/constans';
 import {NavbarController} from '@controllers/navbar';
 import {NewsController} from '@controllers/news';

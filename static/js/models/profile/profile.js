@@ -121,9 +121,6 @@ export default class ProfileModel {
                 switch (res.status) {
                 case RESPONSE.OK:
                     res.json()
-                        // .then((list) => {
-                        //     this.playlists = list.playlists;
-                        // })
                         .then((list) => {
                             this.eventBus.emit(
                                 PROFILE.RENDER_PLAYLISTS,

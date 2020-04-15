@@ -24,8 +24,6 @@ export default class SignupView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
-        // super.render(root, url);
-        // this.setEventListeners();
         this.globalEventBus.emit(GLOBAL.COLLAPSE);
         if (root.children.length > 0) {
             if (root.firstChild.classList.contains('l-emphasized')) {

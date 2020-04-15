@@ -209,10 +209,6 @@ export default class Api {
                 console.log(error.toString());
             }
         });
-
-        // return getFetch(API + `/playlists/${id}`, (error) => {
-        //     console.log(error.toString());
-        // });
     }
 
     /**
