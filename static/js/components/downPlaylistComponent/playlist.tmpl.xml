@@ -1,0 +1,15 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <fest:for iterate="data" index="i" value="elem">
+        <div class="l-list-card" a-id="{elem.id}">
+            <div class="l-list-image">
+                <img class="m-list-image" id="profile-playlist-image" src="{elem.image}" alt=""/>
+            </div>
+            <div class="l-button-play-track">
+                <button class="m-button-track-play-playlist"> </button>
+            </div>
+            <a class="l-list-card-description" href="{data.href}{elem.id}">
+                <fest:value>elem.name</fest:value>
+            </a>
+        </div>
+    </fest:for>
+</fest:template>

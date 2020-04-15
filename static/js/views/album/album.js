@@ -101,7 +101,7 @@ export default class AlbumView extends BaseView {
             if (current.getAttribute('class') === 'l-track-big' &&
                 current.getAttribute('a-id') !== null) {
                 this.globalEventBus.emit(GLOBAL.PLAY_ALBUM_TRACKS, this.albumData.id,
-                    current.getAttribute('a-id'));// , this.tracksRendered);
+                    current.getAttribute('a-id'));
                 break;
             } else {
                 current = current.parentNode;

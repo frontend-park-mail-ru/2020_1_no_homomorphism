@@ -8,9 +8,9 @@
                         <img class="m-profile-track-image" id="profile-track-image" src="{track.image}" alt=""/>
                     </div>
                     <div class="m-play-track">
-                        <button class="m-button-track-play" id="playlist-button"> </button>
+                        <button class="m-button-track-play" id="playlist-play"> </button>
                     </div>
-                    <div class="m-profile-track-name">
+                    <div class="m-profile-track-name ">
                         <span>
                             <fest:value>track.name</fest:value>
                         </span>
@@ -29,6 +29,6 @@
                 </div>
             </div>
         </div>
-        <div class="small_line"></div>
+        <div class="small_line"> </div>
     </fest:for>
 </fest:template>

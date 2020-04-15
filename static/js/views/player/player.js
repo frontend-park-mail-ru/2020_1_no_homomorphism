@@ -248,11 +248,9 @@ export default class PlayerView extends BaseView {
         if (this.expanded) {
             document.getElementsByClassName('player-trigger-arrow')[0]
                 .style.transform = 'rotate(180deg)';
-            // document.getElementsByClassName('player-trigger-arrow')[0].style.marginLeft = '-1px';
         } else {
             document.getElementsByClassName('player-trigger-arrow')[0]
                 .style.transform = 'rotate(0)';
-            // document.getElementsByClassName('player-trigger-arrow')[0].style.marginLeft = '-3px';
         }
         const body = document.getElementsByTagName('body')[0];
         const left = (

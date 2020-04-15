@@ -26,7 +26,6 @@ export default class NewsView extends BaseView {
      */
     render(root, url) {
         this.eventBus.emit(MAIN.GET_LIST_DATA);
-        // super.render(root);
     }
 
     /**

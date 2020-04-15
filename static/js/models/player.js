@@ -56,7 +56,7 @@ export default class PlayerModel {
      * @param {number} number
      */
     getArtistTracks(artistId, trackId, number) {
-        Api.artistTracksFetch(artistId, '0', number.toString())
+        Api.artistTracksFetch(artistId.toString(), '0', number.toString())
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
