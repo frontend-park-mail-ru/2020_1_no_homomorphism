@@ -1,4 +1,5 @@
 import EventBus from '@libs/eventBus';
+import {globalEventBus} from '@libs/eventBus';
 import ProfileModel from '@models/profile/profile';
 import ProfileView from '@views/profile/profile';
 import {ProfileTracksController} from '@controllers/profile/profile_tracks';
@@ -14,9 +15,8 @@ export class ProfileController {
     /**
      * Конструктор
      * @param {Router} router
-     * @param {EventBus} globalEventBus
      */
-    constructor(router, globalEventBus) {
+    constructor(router) {
         this.eventBus = new EventBus();
         this.model = new ProfileModel(this.eventBus, globalEventBus);
         this.view = new ProfileView(this.eventBus);

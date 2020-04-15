@@ -28,3 +28,6 @@ export default class EventBus {
         (this.events[event] || []).slice().forEach((listener) => listener(...arg));
     }
 }
+
+export const globalEventBus = new EventBus();
+

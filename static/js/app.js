@@ -15,17 +15,16 @@ import {AlbumController} from '@controllers/album';
 
 window.addEventListener('DOMContentLoaded', () => {
     const router = new Router();
-    const globalEventBus = new EventBus();
-    const navbarController = new NavbarController(router, globalEventBus);
+    const navbarController = new NavbarController(router);
     const newsController = new NewsController(router);
-    const loginController = new LoginController(router, globalEventBus);
-    const signupController = new SignupController(router, globalEventBus);
-    const playerController = new PlayerController(router, globalEventBus);
-    const profileController = new ProfileController(router, globalEventBus);
-    const settingsController = new SettingsController(router, globalEventBus);
-    const artistController = new ArtistController(router, globalEventBus);
-    const playlistController = new PlaylistController(router, globalEventBus);
-    const albumController = new AlbumController(router, globalEventBus);
+    const loginController = new LoginController(router);
+    const signupController = new SignupController(router);
+    const playerController = new PlayerController(router);
+    const profileController = new ProfileController(router);
+    const settingsController = new SettingsController(router);
+    const artistController = new ArtistController(router);
+    const playlistController = new PlaylistController(router);
+    const albumController = new AlbumController(router);
 
 
     router.addView(URL.NAVBAR, navbarController.view);

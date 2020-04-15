@@ -57,7 +57,7 @@ export default class SettingsModel {
      * обновляет аватар юзера
      */
     resetAvatar() {
-        const fileAttach = document.getElementById(SETTINGS.AVATAR_UPLOAD);
+        const fileAttach = document.getElementById('avatar-upload');
         const resImage = Validation
             .image(fileAttach.files[0].size, fileAttach.files[0].type
                 .split('/')

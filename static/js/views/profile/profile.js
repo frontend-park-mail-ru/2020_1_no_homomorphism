@@ -1,6 +1,7 @@
 import {PROFILE, URL, DOM} from '@libs/constans';
 import profile from '@views/profile/profile.tmpl.xml';
 import BaseView from '@libs/base_view';
+import TopProfile from '@views/profile/TopProfile';
 
 /**
  * вью для профиля
@@ -13,6 +14,7 @@ export default class ProfileView extends BaseView {
         super(profile);
         this.eventBus = eventBus;
         this.currentOpen = '';
+        this.topProfile = new TopProfile();
         this.eventBus.on(PROFILE.CHOOSE_SECTION, this.chooseSection.bind(this));
         this.eventBus.on(PROFILE.RENDER_DATA, this.renderData.bind(this));
         this.eventBus.on(PROFILE.RENDER_STAT, this.renderStat.bind(this));
