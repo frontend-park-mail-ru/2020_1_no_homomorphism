@@ -1,0 +1,300 @@
+// Стили всех разделов
+@import "_variables";
+
+.small_line {
+  border-top: 1px solid $chosen-icon;
+}
+
+.m-project-name {
+  font-weight: bold;
+  margin-left: 4px;
+  margin-bottom: 4px;
+  font-size: 23px;
+}
+
+.l-navbar .m-search-input {
+  box-shadow: $box-shadow;
+  margin-left: 2%;
+  height: 2.3em;
+  width: 20em;
+  border: 1px solid $chosen-icon;
+}
+
+.m-login-input{
+  margin-top: 32px;
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+}
+.m-signup-input{
+
+}
+
+.m-error-message-small {
+  font-size: 13px;
+  text-align: left;
+  color: red;
+  padding-left: 8px;
+  height: 0;
+}
+
+.m-form-description {
+  width: 380px;
+  margin: 32px auto 8px;
+  text-align: center;
+}
+
+.m-tiny-ref {
+  font-weight: lighter;
+  color: #000000;
+  text-decoration: none
+}
+
+.l-top-section-albums:hover, .l-top-section-tracks:hover, .m-profile-playlists:hover, .l-top-section-artists:hover {
+  background: $selected-elem;
+  cursor: pointer;
+  transition: 0.1s;
+  transform: scale(1.1);
+}
+
+.l-top-section-info {
+  height: 70px;
+  padding-top: 16px;
+}
+
+.m-top-name {
+  color: #5c4b6b;
+  font-size: 16px;
+  word-wrap: break-word;
+}
+
+.m-big-name {
+  font-size: x-large;
+}
+
+.m-tracks-amount{
+  padding: 8px;
+  border-radius: $card-border;
+  margin-right: 32px;
+  margin-top: 130px;
+  color: #155724;
+  background-color: $selected-elem;
+  float: right !important;
+}
+
+.m-empty-list {
+  padding: 32px;
+}
+
+.l-navbar-info {
+  height: 60px;
+  text-align: center;
+  font-weight: bold;
+  margin-left: auto;
+  padding-right: 8px;
+  padding-left: 8px;
+  padding-top: 3px;
+}
+
+.l-navbar-info:hover {
+  background: $chosen-icon;
+}
+
+.m-navbar-avatar {
+  margin-top: 8px;
+  margin-right: 8px;
+  border-radius: 20px;
+}
+
+.m-navbar-name {
+  padding: 8px;
+  position: relative;
+  top: 8px;
+}
+
+.l-small-card {
+  margin: 32px;
+}
+
+.m-hidden-input {
+  height: 1px;
+  width: 1px;
+}
+
+.m-hidden-input input[type=file] {
+  outline: 0;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none
+}
+
+.m-settings-title{
+}
+
+.m-settings-input {
+  background-color: #ede7f6;
+  width: 25em;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+.l-signup-input  {
+  margin-top: 32px;
+  padding-bottom: 32px;
+}
+
+.l-track-big:hover .m-like-button, .l-track-big:hover .m-delete-button, .l-track-big:hover .m-add-button, .l-track-big:hover .m-more-button {
+  transition: 0.3s;
+  -webkit-transform: scale(2);
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+.l-track-big:not(:hover) .m-like-button, .l-track-big:not(:hover) .m-delete-button, .l-track-big:not(:hover) .m-add-button, .l-track-big:hover .m-more-button {
+  transition: 0.1s;
+}
+
+.l-track-big:hover .m-big-like-button, .l-track-big:hover .m-big-delete-button, .l-track-big:hover .m-big-add-button, .l-track-big:hover .m-big-more-button {
+  transition: 0.3s;
+  -webkit-transform: scale(2);
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+.l-track-big:not(:hover) .m-big-like-button, .l-track-big:not(:hover) .m-big-delete-button, .l-track-big:not(:hover) .m-big-add-button, .l-track-big:hover .m-big-more-button {
+  transition: 0.1s;
+}
+
+.l-big-track-button {
+  opacity: 0.4;
+  transform: scale(1.5 );
+  /*margin-top: -20px;*/
+  padding-right: 8px;
+}
+
+/**/
+.m-like-button, .m-delete-button, .m-add-button, .m-more-button {
+  opacity: 0;
+}
+/**/
+.m-big-like-button, .m-big-delete-button, .m-big-add-button, .m-big-more-button {
+  opacity: 0;
+}
+
+.l-track-big img {
+  float: left;
+  margin: 0 15px 0 0;
+}
+
+.l-track-big {
+  padding: 10px;
+  overflow: hidden;
+}
+
+.l-track-big:hover {
+  background: $selected-elem;
+  cursor: pointer;
+}
+
+.m-track {
+  animation-duration: 1s;
+  animation-name: slidein;
+}
+.l-track-big:hover .m-track-image {
+  transition: 0.3s;
+  -webkit-transform: scale(2);
+  transform: scale(1.2);
+  opacity: 0.5;
+  box-shadow: 0 0 10px 4px rgba(129, 129, 129, 0.65);
+}
+
+.l-track-big:not(:hover) .m-track-image {
+  transition: 0.1s;
+}
+
+.l-track-big:hover .m-button-track-play {
+  opacity: 1;
+  -webkit-transform: scale(2);
+  transform: scale(2);
+}
+
+.m-button-track-play {
+  height: 30px;
+  width: 30px;
+  background: url(../../static/img/play.svg) no-repeat;
+  border: yellow;
+  cursor: pointer;
+  opacity: 0;
+  margin-left: -56px;
+  margin-top: 20px;
+}
+
+.m-track-name {
+  margin-top: -40px;
+}
+
+.l-list-card img {
+  float: left;
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+}
+
+.l-list-card {
+  float: top;
+  animation-duration: 1s;
+  overflow: hidden;
+  margin: 16px;
+  display: inline-block;
+  width: 90%;
+  max-width: 200px;
+  max-height: 260px;
+  text-decoration: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px -3px rgba(0, 0, 0, 0.5);
+  transition: transform 0.1s ease-in-out, box-shadow 0.1s;
+}
+
+.l-list-card:hover {
+  background: #eee;
+  cursor: pointer;
+  transform: translateY(-0.1rem) scale(1.0125);
+  transition: 0.2s;
+  box-shadow: 0 3px 10px -3px rgba(0, 0, 0, 0.5);
+}
+.l-button-play-track {
+  height: 200px;
+  margin-top: -200px;
+}
+.l-list-card:hover .m-button-track-play-playlist {
+  opacity: 1;
+  -webkit-transform: scale(6);
+  transform: translateY(-100px) translateX(-16px) scale(6);
+}
+
+.l-list-card:hover .m-list-image {
+  transition: 0.3s;
+  opacity: 0.8;
+}
+
+.m-button-track-play-playlist {
+  height: 30px;
+  width: 30px;
+  object-fit: cover;
+  background: url(../../static/img/play.svg) no-repeat;
+  border: yellow;
+  cursor: pointer;
+  opacity: 0;
+  margin-left: 56px !important;
+}
+
+.l-list-image {
+  height: 200px
+}
+
+.m-error-message-small {
+  font-size: 13px;
+  text-align: left;
+  color: red;
+  padding-left: 8px;
+  height: 0;
+}

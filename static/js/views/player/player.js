@@ -221,9 +221,9 @@ export default class PlayerView extends BaseView {
      */
     triggerMouseOver() {
         document.getElementsByClassName('trigger-button')[0].classList
-            .add('background--chosen-icon');
+            .add('is-mouse-on');
         document.getElementsByClassName('player-trigger')[0].classList
-            .add('background--chosen-icon');
+            .add('is-mouse-on');
         document.getElementsByClassName('player-trigger-arrow')[0].style.visibility = 'visible';
     }
 
@@ -232,9 +232,9 @@ export default class PlayerView extends BaseView {
      */
     triggerMouseOut() {
         document.getElementsByClassName('trigger-button')[0].classList
-            .remove('background--chosen-icon');
+            .remove('is-mouse-on');
         document.getElementsByClassName('player-trigger')[0].classList
-            .remove('background--chosen-icon');
+            .remove('is-mouse-on');
         document.getElementsByClassName('player-trigger-arrow')[0].style.visibility = 'hidden';
     }
 

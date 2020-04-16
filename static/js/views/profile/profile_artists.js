@@ -20,7 +20,6 @@ export default class ProfileArtistsView {
      */
     drawArtists(artists) {
         const elem = document.getElementById('profile-album-playlist-list');
-        elem.className += ' l-profile-base';
         elem.innerHTML +=template(artists);
     }
 }

@@ -2,7 +2,7 @@
     <fest:for iterate="data" index="i" value="artist">
         <div class="l-list-card">
             <div class="l-list-image">
-                <img class="m-list-image" id="profile-playlist-image" src="{artist.image}" alt=""/>
+                <img class="m-list-image" src="{artist.image}" alt=""/>
             </div>
             <div>
                 <button class="m-button-track-play-playlist"></button>

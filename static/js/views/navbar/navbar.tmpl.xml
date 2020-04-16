@@ -2,11 +2,11 @@
     <a href="/" class="l-logo">
         <img src="/static/img/library_music.svg" class="m-medium-icon" alt="logo"/>
     </a>
-    <a href="/" class="name">
-        Mystical Spiral
+    <a href="/" class="m-project-name">
+        VirusMusic
     </a>
-    <input type="text" class="search"/>
-    <a class="search-button">
+    <input type="text" class="m-search-input"/>
+    <a class="m-search-button">
         <img src="/static/img/search.svg" class="m-medium-icon"/>
     </a>
     <a href="/profile/tracks" class="l-navbar-info is-hidden" id="profile-link">
@@ -17,13 +17,13 @@
     <a href="/settings" class="l-settings-icon is-hidden">
         <img src="/static/img/settings.svg" class="m-small-icon"/>
     </a>
-    <a href="/" class="login is-hidden" id="logout-link">
+    <a href="/" class="m-login-button is-hidden" id="logout-link">
         log out
     </a>
-    <a href="/signup" class="signup is-hidden" id="signup-link">
+    <a href="/signup" class="m-signup-button is-hidden" id="signup-link">
         sign up
     </a>
-    <a href="/login" class="login is-hidden" id="login-link">
+    <a href="/login" class="m-login-button is-hidden" id="login-link">
         log in
     </a>
 </fest:template>

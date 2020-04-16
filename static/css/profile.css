@@ -1,3 +1,4 @@
+/**/
 hr {
     border: none;
     background-color: #b39ddb;
@@ -5,29 +6,31 @@ hr {
     height: 1px;
     margin: 0;
 }
-
+/**/
 h2 {
     margin: 0;
 }
-
+/**/
 p {
     margin: 6px;
 }
-
+/*ok*/
 .l-main {
     margin-left: 3em;
 }
 
+/*ok*/
 .l-top-card {
+    overflow: hidden;
     box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
     border-radius: var(--card-border);
 }
-
+/*ok*/
 .l-round-image {
     margin-left: 32px;
     margin-top: 16px;
 }
-
+/*ok*/
 .m-round-image {
     z-index: 3;
     height: 150px;
@@ -36,165 +39,95 @@ p {
     margin: 16px;
     float: right;
 }
-
+/*ok*/
 .m-round-image:hover {
     transition: 0.3s;
     box-shadow: 0 0 30px #6b6b6b;
     -webkit-transform: scale(2);
     transform: scale(1.1);
 }
-
+/*ok*/
 .m-round-image:not(:hover) {
     transition: 0.3s;
     box-shadow: 0 0 10px 4px rgba(129, 129, 129, 0.65);
 }
-
+/*ok*/
 .l-top-name {
     margin-left: 32px;
     padding-top: 100px;
     text-align: left;
 }
-
+/*ok*/
 .m-top-login {
     color: #070025;
     font-size: 30px;
     word-wrap: break-word;
 }
-
+/*ok*/
 .m-top-name {
     color: #5c4b6b;
     font-size: 16px;
     word-wrap: break-word;
 }
-
-.l-top-titles .col {
+/*ok*/
+.l-top-titles {
     margin-top: 80px;
 }
-
+/*ok*/
 .m-tiny-ref {
     font-weight: lighter;
     color: #000000;
     text-decoration: none
 }
-
-.l-profile-base {
-    z-index: 1;
-    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
-    border-radius: var(--card-border);
-    padding: 16px;
-    margin-top: 16px;
-}
-
-.m-profile-settings {
-    pointer-events: none;
-    cursor: default;
-    color: #000 !important;
-    text-decoration: none
-}
-
-.m-profile-settings img {
-    padding-bottom: 5px;
-    vertical-align: middle;
-    pointer-events: all;
-    cursor: pointer;
-}
-
-.m-my-music .m-info .m-settings {
-    margin-bottom: 10px;
-}
-
-.l-profile-field .col {
-    text-align: right;
-    color: red;
-}
-
-.m-profile-data {
-    padding-top: 32px;
-}
-
-.m-artist-info {
+/*ok*/
+.l-top-section-info {
     height: 70px;
     padding-top: 16px;
 }
-
-.m-profile-albums:hover, .m-profile-tracks:hover, .m-profile-playlists:hover, .m-profile-artists:hover {
-    background: var(--light-green);
-    /*border-radius: 5px;*/
+/*ok*/
+.l-top-section-albums:hover, .l-top-section-tracks:hover, .m-profile-playlists:hover, .l-top-section-artists:hover {
+    background: var(--selected-elem);
     cursor: pointer;
     transition: 0.1s;
     transform: scale(1.1);
 }
-
-.is-touched-profile-section {
-    background: var(--light-green);
+/*ok*/
+.is-touched-section {
+    background: var(--selected-elem);
     border-radius: 5px;
     cursor: pointer;
     transition: 0.1s;
     transform: scale(1.1);
 }
-
-.accounts .add-outer {
-    height: 20px;
-    width: 20px;
-    border-radius: 100px;
-    object-fit: cover;
-    margin: 15px 10px;
-    opacity: 0.4;
-}
-
-.accounts .add-outer:hover {
-    opacity: 1;
-}
-
-.deeping {
-    position: relative;
-    top: 15px;
-    left: 0;
-    width: 100%;
-    height: 0;
-    background: silver;
-    box-shadow: inset 0 2px 20px -5px black;
-    transition-property: height;
-    transition-duration: 0.5s;
-}
-
-.l-playlist-list, .l-profile-album-playlist-list .l-profile-artist-list {
+/*ok*/
+.l-playlist-list, .l-artist-list {
     display: block;
     padding: 0;
     list-style: none;
 }
 
 /* STYLES FOR TRACKS */
-
-.list-of-tracks {
-    list-style-type: none;
-    width: inherit;
-}
-
-.m-profile-track-name {
-    /*font: bold 20px/1.5 Helvetica, Verdana, sans-serif;*/
-}
-
+/**/
 .l-track-big img {
     float: left;
     margin: 0 15px 0 0;
 }
-
+/**/
 .l-track-big {
     padding: 10px;
     overflow: hidden;
 }
-
+/**/
 .l-track-big:hover {
-    background: var(--light-green);
+    background: var(--selected-elem);
     cursor: pointer;
 }
-
-.m-profile-track {
+/**/
+.m-track {
     animation-duration: 1s;
     animation-name: slidein;
 }
-
+/**/
 @keyframes slidein {
     from {
         margin-left: 100%;
@@ -206,32 +139,32 @@ p {
         /*width: 100%;*/
     }
 }
-
-.m-profile-track-image {
+/**/
+.m-track-image {
     height: 60px;
     width: 60px;
     z-index: 2;
     border-radius: 5px;
 }
-
-.l-track-big:hover .m-profile-track-image {
+/**/
+.l-track-big:hover .m-track-image {
     transition: 0.3s;
     -webkit-transform: scale(2);
     transform: scale(1.2);
     opacity: 0.5;
     box-shadow: 0 0 10px 4px rgba(129, 129, 129, 0.65);
 }
-
-.l-track-big:not(:hover) .m-profile-track-image {
+/**/
+.l-track-big:not(:hover) .m-track-image {
     transition: 0.1s;
 }
-
+/**/
 .l-track-big:hover .m-button-track-play {
     opacity: 1;
     -webkit-transform: scale(2);
     transform: scale(2);
 }
-
+/**/
 .m-button-track-play {
     height: 30px;
     width: 30px;
@@ -242,20 +175,20 @@ p {
     margin-left: -56px;
     margin-top: 20px;
 }
-
-.m-profile-track-name {
+/**/
+.m-track-name {
     margin-top: -40px;
 }
 
 /* STYLES FOR PLAYLISTS */
-
+/**/
 .l-list-card img {
     float: left;
     object-fit: cover;
     width: 200px;
     height: 200px;
 }
-
+/**/
 .l-list-card {
     float: top;
     animation-duration: 1s;
@@ -270,7 +203,7 @@ p {
     box-shadow: 0 0 10px -3px rgba(0, 0, 0, 0.5);
     transition: transform 0.1s ease-in-out, box-shadow 0.1s;
 }
-
+/**/
 .l-list-card:hover {
     background: #eee;
     cursor: pointer;
@@ -278,7 +211,7 @@ p {
     transition: 0.2s;
     box-shadow: 0 3px 10px -3px rgba(0, 0, 0, 0.5);
 }
-
+/**/
 .l-list-card-description {
     display: block;
     color: #515151;
@@ -288,39 +221,23 @@ p {
     padding-right: 6px;
     text-decoration: none;
 }
-
-.in-list-card-description {
-    display: block;
-    color: #515151;
-    margin-top: -20px;
-    padding-bottom: 32px;
-    padding-left: 6px;
-    padding-right: 6px;
-    text-decoration: none;
-}
-
-.card-list {
-    display: block;
-    padding: 0;
-    list-style: none;
-}
-
+/**/
 .l-button-play-track {
     height: 200px;
     margin-top: -200px;
 }
-
+/**/
 .l-list-card:hover .m-button-track-play-playlist {
     opacity: 1;
     -webkit-transform: scale(6);
     transform: translateY(-100px) translateX(-16px) scale(6);
 }
-
+/**/
 .l-list-card:hover .m-list-image {
     transition: 0.3s;
     opacity: 0.8;
 }
-
+/**/
 .m-button-track-play-playlist {
     height: 30px;
     width: 30px;
@@ -331,7 +248,7 @@ p {
     opacity: 0;
     margin-left: 56px !important;
 }
-
+/**/
 .l-list-image {
     height: 200px
 }

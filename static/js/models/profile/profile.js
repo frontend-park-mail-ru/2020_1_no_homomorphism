@@ -101,7 +101,7 @@ export default class ProfileModel {
                             this.eventBus.emit(
                                 PROFILE.RENDER_TRACKS,
                                 list.tracks,
-                                'l-profile-track-list',
+                                'l-track-list',
                                 'playlist');
                         });
                     break;
@@ -129,7 +129,7 @@ export default class ProfileModel {
                             this.eventBus.emit(
                                 PROFILE.RENDER_PLAYLISTS,
                                 list.playlists,
-                                'l-profile-playlist-list',
+                                'l-playlist-list',
                                 'playlist');
                         });
                     break;
@@ -161,7 +161,7 @@ export default class ProfileModel {
                             this.eventBus.emit(
                                 PROFILE.RENDER_PLAYLISTS,
                                 this.albums,
-                                'l-profile-album-list',
+                                'l-album-list',
                                 'album');
                         });
                     break;

@@ -150,7 +150,7 @@ export const SIGN_UP = {
 };
 
 export const PROFILE = {
-    SELECTED_CLASS: 'is-touched-profile-section',
+    SELECTED_CLASS: 'is-touched-section',
     // --
     ID_TRACKS_SECTION: 'profile-tracks-title',
     ID_PLAYLISTS_SECTION: 'profile-playlists-title',
@@ -173,10 +173,11 @@ export const PROFILE = {
     // --
     SET_PLAYLIST_ID: 'profile-set-playlist-id',
     SET_ALBUM_ID: 'profile-set-album-id',
+    DROPDOWN: 'profile-dropdown',
 };
 
 export const ARTIST = {
-    SELECTED_CLASS: 'is-touched-profile-section',
+    SELECTED_CLASS: 'is-touched-section',
     SET_ID: 'artist-set-id',
     ID_TRACKS_SECTION: 'artist-tracks',
     ID_ALBUMS_SECTION: 'artist-albums',
@@ -190,6 +191,7 @@ export const ARTIST = {
     RENDER_INFO: 'artist-render-info',
     // --
     SET_ARTIST_ID: 'artist-set-artist-id',
+    DROPDOWN: 'artist-dropdown',
 };
 
 export const PLAYLIST = {

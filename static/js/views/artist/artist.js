@@ -2,7 +2,6 @@ import artist from '@views/artist/artist.tmpl.xml';
 import BaseView from '@libs/base_view';
 import TrackListComponent from '@components/downTrackListComponent/trackListComponent';
 import {ARTIST, DOM} from '@libs/constans';
-import '@css/base.css';
 import PlaylistsComponent from '@components/downPlaylistComponent/playlistListComponent';
 
 /**
@@ -77,11 +76,12 @@ export default class ArtistView extends BaseView {
         document.getElementsByClassName('m-top-login')[0].innerHTML = data.name;
         document.getElementsByClassName('m-round-image')[0].src = data.image;
         document.getElementsByClassName('m-top-name')[0].innerHTML = data.genre;
-        document.getElementsByClassName('m-artist-tracks-ref')[0].href =
+        document.getElementsByClassName('m-top-section-tracks-ref')[0].href =
             `/artist/${data.id}/tracks`;
-        document.getElementsByClassName('m-artist-albums-ref')[0].href =
+        document.getElementsByClassName('m-top-section-albums-ref')[0].href =
             `/artist/${data.id}/albums`;
-        document.getElementsByClassName('m-artist-info-ref')[0].href = `/artist/${data.id}/info`;
+        document.getElementsByClassName('l-top-section-info-ref')[0]
+            .href = `/artist/${data.id}/info`;
         document.getElementById('artist-tracks-title').innerText = data.tracks;
         document.getElementById('artist-albums-title').innerText = data.albums;
     }

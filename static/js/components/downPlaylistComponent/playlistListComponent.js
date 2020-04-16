@@ -25,7 +25,6 @@ export default class PlaylistsComponent {
     drawList(list, domItem, type) {
         const elem = document.getElementsByClassName(domItem)[0];
         this.type = type;
-        elem.className += ' l-profile-base';
         elem.innerHTML += template(this.generateHref(list));
         this.setEventListeners();
     }

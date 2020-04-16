@@ -1,14 +1,4 @@
-.l-profile-settings {
-    background-color: #ede7f6;
-    border-radius: 30px;
-    margin-left: 3em;
-}
-
-.l-settings-top {
-    background-color: #ede7f6;
-    border-radius: 30px 30px 0 0;
-}
-
+/**/
 .m-hidden-input input[type=file] {
     outline: 0;
     opacity: 0;
@@ -16,96 +6,12 @@
     user-select: none
 }
 
-input[class="profile-content"] {
-    height: 2em;
-}
-
-input[class="accounts-info"] {
-    height: 1.5em;
-}
-
-.profile {
-    margin: 40px;
-    height: 200px;
-    width: 200px;
-    border-radius: 100px;
-}
-
-.accounts .outer {
-    height: 30px;
-    width: 30px;
-    border-radius: 100px;
-    object-fit: cover;
-    margin: 10px;
-}
-
-.accounts .add-outer {
-    height: 20px;
-    width: 20px;
-    border-radius: 100px;
-    object-fit: cover;
-    margin: 15px 10px;
-    opacity: 0.4;
-}
-
-.accounts .add-outer:hover {
-    opacity: 1;
-}
-
-.accounts-edit .col .accounts-info {
-    margin-top: 10px;
-    text-align: center;
-}
-
-.accounts-edit .outer {
-    height: 50px;
-    width: 50px;
-    border-radius: 100px;
-    object-fit: cover;
-    margin: 10px;
-}
-
-.accounts-edit .row .col-9,
-.accounts-edit .row .col-7 {
-    padding-top: 1em;
-}
-
-.accounts-edit button {
-    margin-top: 9px;
-}
-
-.l-profile-top-image-settings {
-    background-color: #b39ddb;
-    background-clip: padding-box;
-    border-radius: 30px 30px 0 0;
-    height: 200px;
-    z-index: 2;
-    box-shadow: 0 0 10px #070025;
-}
-
-form {
-    font-family: 'Work Sans', sans-serif;
-}
-form.group {
-    display: block;
-    width: 100%;
-    float: left;
-    position: relative;
-    margin-bottom: 25px;
-}
-/*.m-tag-settings {*/
-/*    font-size: 12px;*/
-/*    float: left;*/
-/*    width: 100%;*/
-/*    display: block;*/
-/*    margin-bottom: 5px;*/
-/*    text-align: center;*/
-/*}*/
-input.m-settings-input {
+/**/
+.m-settings-input {
     background-color: #ede7f6;
     width: 25em;
 }
-
+/**/
 .l-input {
     margin-top: 16px;
 }
@@ -120,10 +26,10 @@ input.placeholder {
 }
 
 
-input.include.placeholder {
-    color: transparent;
-}
-
+/*input.include.placeholder {*/
+/*    color: transparent;*/
+/*}*/
+/**/
 .m-hidden-input {
     height: 1px;
     width: 1px;

@@ -43,14 +43,6 @@
     padding-top: 0;
 }
 
-.l-music-bar .add-to-playlist-button {
-    margin-left: 159px;
-}
-
-.l-music-bar .share-button {
-    padding-top: 1.5px;
-}
-
 .container-audio {
     height: auto;
     color: #444;
@@ -235,7 +227,7 @@
 }
 
 .track-list > .row:hover {
-    background: var(--light-green);
+    background: var(--selected-elem);
 }
 
 .track-list .row {
@@ -285,25 +277,6 @@
     font-size: 15px;
 }
 
-.track-list .buttons-in-playlist {
-    margin-left: 172px;
-    padding-top: 14px;
-}
-
-.track-list .share-button {
-    padding-top: 13.5px;
-}
-
-.share-button {
-    padding-bottom: 46px;
-}
-
-
-.add-to-playlist-button {
-    padding-left: 150px;
-    padding-bottom: 46px;
-}
-
 .player-trigger {
     width: 13px;
     height: 1000px;
@@ -312,20 +285,9 @@
     cursor: pointer;
 }
 
-/* .l-player .player-trigger:hover {
-    background: var(--chosen-icon);
-} */
-
 .player-trigger-arrow {
-    /* margin-left: -3px;
-    position: relative;
-    top: 50%; */
     margin-top: 6px;
     margin-left: 3px;
-}
-
-.small_line {
-    border-top: 1px solid var(--chosen-icon);
 }
 
 .trigger-button {

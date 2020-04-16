@@ -1,5 +1,6 @@
 import template from '@components/downTrackListComponent/tracks.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
+import DropdownPlaylist from '@components/dropdownPlaylistComponent/dropdownPlaylistComponent';
 
 /**
  * Компонент - список треков
@@ -8,14 +9,15 @@ export default class TrackListComponent {
     /**
      * Конструткор
      * @param {EventBus} eventBus
-     * @param {object} command
+     * @param {object} modelType
      */
-    constructor(eventBus, command) {
-        eventBus.on(command.RENDER_TRACKS, this.renderTracks.bind(this));
-        eventBus.on(command.SET_PLAYLIST_ID, this.setId.bind(this));
-        eventBus.on(command.SET_ALBUM_ID, this.setId.bind(this));
-        eventBus.on(command.SET_ARTIST_ID, this.setId.bind(this));
-        this.command = command;
+    constructor(eventBus, modelType) {
+        eventBus.on(modelType.RENDER_TRACKS, this.renderTracks.bind(this));
+        eventBus.on(modelType.SET_PLAYLIST_ID, this.setId.bind(this));
+        eventBus.on(modelType.SET_ALBUM_ID, this.setId.bind(this));
+        eventBus.on(modelType.SET_ARTIST_ID, this.setId.bind(this));
+        this.dropdownPlaylist = new DropdownPlaylist(eventBus, modelType);
+        this.modelType = modelType;
         this.eventBus = eventBus;
         this.tracklist = [];
         this.id = 0;
@@ -32,7 +34,6 @@ export default class TrackListComponent {
         this.tracklist = tracks;
         this.type = type;
         const elem = document.getElementsByClassName(domItem)[0];
-        elem.className += ' l-profile-base';
         elem.innerHTML += template(tracks);
         this.setTracksEventListeners();
     }
@@ -49,12 +50,15 @@ export default class TrackListComponent {
      * Set EventListeners
      */
     setTracksEventListeners() {
-        document.querySelectorAll('.l-track-big').forEach((track) => {
+        document.querySelectorAll('.m-track-image').forEach((track) => {
             track.onclick = (event) => this.trackClick.bind(this)(event);
         });
-        // document.querySelectorAll('.m-button-track-play').forEach((track) => {
-        //     track.onclick = (event) => this.trackClick.bind(this)(event);
-        // });
+        document.querySelectorAll('.m-big-add-button').forEach((track) => {
+            track.onclick = (event) => this.addToPlaylist.bind(this)(event);
+        });
+        document.querySelectorAll('.m-button-track-play').forEach((track) => {
+            track.onclick = (event) => this.trackClick.bind(this)(event);
+        });
     }
 
     /**
@@ -75,5 +79,14 @@ export default class TrackListComponent {
                 current = current.parentNode;
             }
         }
+    }
+
+    /**
+     * Слушает добавление в плейлист
+     * @param {Object} event
+     */
+    addToPlaylist(event) {
+        this.eventBus.emit(this.modelType.DROPDOWN, event);
+        // console.log('lol');
     }
 }

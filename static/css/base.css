@@ -1,6 +1,5 @@
 @import "artist.css";
 @import "grid.css";
-@import "index.css";
 @import "login.css";
 @import "navbar.css";
 @import "player.css";
@@ -8,37 +7,33 @@
 @import "settings.css";
 @import "signup.css";
 @import "playlist.css";
-@import "buttons.css";
-/*@import "variable.css";*/
+@import "emphasize.css";
 
 :root {
     --card-border: 16px;
-    --light-green: #d6ffeb;
+    --selected-elem: #d6ffeb;
     --button-color: #499181;
     --chosen-icon: #ebeae7;
     --box-shadow: 0 1px 20px 0 #ebeae7;
     --small-pad: 8px;
 }
-
+/**/
 body {
     margin: 0 auto;
     font-family: Helvetica, sans-serif;
 }
-
-.containerк {
+/**/
+.l-card {
     border-radius: 4px;
     box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     padding: 1em;
 }
-
-.card {
-    border-radius: 4px;
-    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    padding: 1em;
+/**/
+.small_line {
+    border-top: 1px solid var(--chosen-icon);
 }
-
+/**/
 input[type="text"], input[type="email"],
 input[type="url"], input[type="password"] {
     outline: none;
@@ -53,36 +48,31 @@ input[type="url"], input[type="password"] {
     border-bottom: 1px solid gray;
     background-color: white;
 }
-
-input[type="text"], input[type="email"],
-input[type="password"] {
-    /*width: 20em;*/
-}
-
+/**/
 img {
     object-fit: cover;
 }
-
+/**/
 button,
 button:active,
 button:focus {
     outline: none;
 }
-
+/**/
 .is-hidden {
     display: none;
 }
-
+/**/
 .is-visible {
     display: block;
 }
-
+/**/
 .is-error {
     border: 1px solid red;
     padding: 32px;
     font-size: 32px;
 }
-
-.background--chosen-icon {
+/**/
+.is-mouse-on {
     background: var(--chosen-icon);
 }

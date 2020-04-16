@@ -67,7 +67,7 @@ export default class ArtistModel {
                             this.tracks += data.tracks;
                             this.eventBus.emit(ARTIST.RENDER_TRACKS,
                                 data.tracks,
-                                'l-profile-track-list',
+                                'l-track-list',
                                 'artist');
                         });
                 } else {
@@ -94,7 +94,7 @@ export default class ArtistModel {
                             this.albums = data.albums;
                             this.eventBus.emit(ARTIST.RENDER_ALBUMS,
                                 data.albums,
-                                'l-profile-album-list',
+                                'l-album-list',
                                 'album');
                         });
                 } else {

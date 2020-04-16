@@ -1,56 +1,19 @@
-body {
-    font-family: Helvetica, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    margin: 0 auto;
-}
-
-h2 {
-    margin-top: 0;
-}
-
-.div-center {
+/*ok*/
+.m-form-description {
     width: 380px;
-    /*margin: 32px auto 48px;*/
+    margin: 32px auto 8px;
     text-align: center;
 }
-
-.tiny-ref {
-    font-weight: lighter;
-    color: #6b6b6b;
-    text-decoration: none
-}
-
-.sign-up-form, .login-form {
+/*ok*/
+.l-form {
     width: 380px;
     margin: 32px auto;
     padding: 48px 32px 32px 32px;
     background: #fafafa;
     border: 1px solid #ebebeb;
 }
-
-.sign-up-form .input-regular, select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-}
-
-.sign-up-form .input-regular[type=submit] {
-    width: 100%;
-    background-color: #3e8daf;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.sign-up-form .input-regular[type=submit]:hover {
-    background-color: #387f9c;
-}
-
-.button {
+/*ok*/
+.m-submit-button {
     border-radius: 6px;
     margin-left: 213px;
     background-color: var(--button-color);
@@ -64,48 +27,23 @@ h2 {
     cursor: pointer;
     margin-top: 8px;
 }
-
-.button span {
+/*ok*/
+.m-submit-button span {
     cursor: pointer;
     display: inline-block;
     position: relative;
     transition: 0.5s;
 }
 
-.button span:after {
-    content: '\00bb';
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 0.5s;
-}
-
-.button:hover span {
-    padding-right: 25px;
-}
-
-.button:hover span:after {
-    opacity: 1;
-    right: 0;
-}
-
-.error-message-small {
+/**/
+.m-error-message-small {
     font-size: 13px;
     text-align: left;
     color: red;
     padding-left: 8px;
     height: 0;
 }
-
-.warning-message-small {
-    font-size: 13px;
-    text-align: left;
-    color: #ffae42;
-    padding-left: 8px;
-    height: 0;
-}
-
+/**/
 .l-signup-input  {
     margin-top: 32px;
     padding-bottom: 32px;

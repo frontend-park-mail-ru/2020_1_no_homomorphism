@@ -28,7 +28,7 @@ module.exports = {
         publicPath: '/',
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js', '.json'],
+        extensions: ['.tsx', '.ts', '.js', '.json', '.scss', '.css'],
         alias: {
             '@': path.resolve(__dirname, 'static'),
             '@models': path.resolve(__dirname, 'static/js/models'),
@@ -57,14 +57,17 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
+                test: /\.(css|scss)$/,
                 use: [
                     isDev ?
                         'vue-style-loader' :
                         MiniCssExtractPlugin.loader,
                     'css-loader',
+                    'sass-loader',
                 ],
             },
+
+
             {
                 test: /\.xml$/,
                 use: [

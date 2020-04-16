@@ -1,22 +1,4 @@
-.l-emphasized{
-    position: fixed;
-    left: 40%;
-    box-shadow: black;
-}
-
-.l-un-emphasized {
-    transition: .6s filter;
-    filter: blur(3px) contrast(.8)
-    brightness(0.8);
-    pointer-events: none;
-}
-
-.login-form input {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    width: 100%;
-}
-
+/**/
 input {
     margin-left: 2%;
     margin-right: 0.5%;
@@ -24,25 +6,15 @@ input {
     height: 2em;
     padding: 0 1%;
 }
-
+/**/
 input[type="checkbox"] {
     margin: 0;
     height: 13px;
 }
 
-.login-input {
-    text-align: right;
-}
-
-.error-message {
-    visibility: hidden;
-    color: red;
-}
-.l-login-input-login{
+/*ok*/
+.m-login-input{
     margin-top: 32px;
+    padding-bottom: 32px;
     margin-bottom: 32px;
-}
-
-.l-login-input-password {
-    padding-top: 32px;
 }
