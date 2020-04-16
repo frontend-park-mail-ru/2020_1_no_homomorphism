@@ -23,8 +23,8 @@ export default class ArtistView extends BaseView {
         this.allAlbumsRendered = true;
         this.id = 0;
         this.currentOpen = '';
-        this.trackListComponent = new TrackListComponent(eventBus, ARTIST.RENDER_TRACKS);
-        this.playlistsComponent = new PlaylistsComponent(eventBus, ARTIST.RENDER_ALBUMS);
+        this.trackListComponent = new TrackListComponent(eventBus, ARTIST);
+        this.playlistsComponent = new PlaylistsComponent(eventBus, ARTIST);
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
         this.eventBus.on(ARTIST.RENDER_DATA, this.renderData.bind(this));
@@ -72,7 +72,8 @@ export default class ArtistView extends BaseView {
      */
     renderData(data) {
         this.setData(data);
-        this.trackListComponent.setId(data.id);
+        this.eventBus.emit(ARTIST.SET_ARTIST_ID, data.id);
+        // this.trackListComponent.setId(data.id);
         document.getElementsByClassName('m-top-login')[0].innerHTML = data.name;
         document.getElementsByClassName('m-round-image')[0].src = data.image;
         document.getElementsByClassName('m-top-name')[0].innerHTML = data.genre;

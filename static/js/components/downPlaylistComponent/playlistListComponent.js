@@ -7,12 +7,13 @@ import {globalEventBus} from '@libs/eventBus';
 export default class PlaylistsComponent {
     /**
      * @param {EventBus} eventBus
-     * @param {string} command
+     * @param {Object} command
      */
     constructor(eventBus, command) {
         this.type = '';
         this.eventBus = eventBus;
-        this.eventBus.on(command, this.drawList.bind(this));
+        this.eventBus.on(command.RENDER_ALBUMS, this.drawList.bind(this));
+        this.eventBus.on(command.RENDER_PLAYLISTS, this.drawList.bind(this));
     }
 
     /**

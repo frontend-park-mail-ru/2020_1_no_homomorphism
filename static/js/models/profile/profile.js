@@ -87,8 +87,9 @@ export default class ProfileModel {
      * Получение списка любимых треков
      */
     getLikedTracks() {
+        const playlistID = 8; // СУПЕР ВРЕМЕННО!!!
         Api.playlistTracksFetch(
-            8,
+            playlistID.toString(),
             this.curPaginationTracks.toString(),
             PAGINATION.TRACKS.toString())
             .then((res) => {
@@ -96,9 +97,12 @@ export default class ProfileModel {
                 case RESPONSE.OK:
                     res.json()
                         .then((list) => {
+                            this.eventBus.emit(PROFILE.SET_PLAYLIST_ID, playlistID);
                             this.eventBus.emit(
                                 PROFILE.RENDER_TRACKS,
-                                list.tracks, 'l-profile-track-list');
+                                list.tracks,
+                                'l-profile-track-list',
+                                'playlist');
                         });
                     break;
                 case RESPONSE.BAD_REQUEST:
