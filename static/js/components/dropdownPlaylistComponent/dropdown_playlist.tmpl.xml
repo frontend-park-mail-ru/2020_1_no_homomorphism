@@ -12,12 +12,63 @@
     <!--&lt;!&ndash;            </ul>&ndash;&gt;-->
     <!--&lt;!&ndash;        </li>&ndash;&gt;-->
     <!--    </ul>-->
-    <div class="is-emphasized row">
-        <div class="col col-8">
-            <form class="l-card" >
-                nfsnkfjfsdjfndkjsfbsdkjbfksdjbfkjsbfsdnfjbfsdkjbfskjdbfskjdbfsjkdjjjjj
-            </form>
-
+    <div class="row">
+        <div class="box tinted">
+            <div class="azaza">
+                <div class="best-ul">
+                    <div class="best-li-ever-done">
+                        <span class="yandex-svg"></span>
+                        <span class="kek222" title="Мне нравится">Мне нравится</span>
+                    </div>
+                    <div class="best-li-ever-done">
+                        <span class="yandex-svg-plus"></span>
+                        <span class="kek222" title="Новый плейлист">Новый плейлист</span>
+                    </div>
+                    <div class="best-li-ever-done">
+                        <span class="yandex-svg-plus"></span>
+                        <span class="kek222" title="Новый плейлист">Гавно музон</span>
+                    </div>
+                    <div class="best-li-ever-done">
+                        <span class="yandex-svg-plus"></span>
+                        <span class="kek222" title="Новый плейлист">Тест очень длинного названия</span>
+                    </div>
+                    <div class="best-li-ever-done">
+                        <span class="yandex-svg"></span>
+                        <span class="kek222" title="Мне нравится">Мне нравится</span>
+                    </div>
+                    <div class="best-li-ever-done">
+                        <span class="yandex-svg-plus"></span>
+                        <span class="kek222" title="Новый плейлист">Новый плейлист</span>
+                    </div>
+                    <div class="best-li-ever-done">
+                        <span class="yandex-svg-plus"></span>
+                        <span class="kek222" title="Новый плейлист">Гавно музон</span>
+                    </div>
+                    <div class="best-li-ever-done">
+                        <span class="yandex-svg-plus"></span>
+                        <span class="kek222" title="Новый плейлист">Тест очень длинного названия</span>
+                    </div>
+                    <div class="best-li-ever-done">
+                        <span class="yandex-svg"></span>
+                        <span class="kek222" title="Мне нравится">Мне нравится</span>
+                    </div>
+                    <div class="best-li-ever-done">
+                        <span class="yandex-svg-plus"></span>
+                        <span class="kek222" title="Новый плейлист">Новый плейлист</span>
+                    </div>
+                    <div class="best-li-ever-done">
+                        <span class="yandex-svg-plus"></span>
+                        <span class="kek222" title="Новый плейлист">Гавно музон</span>
+                    </div>
+                    <div class="best-li-ever-done">
+                        <span class="yandex-svg-plus"></span>
+                        <span class="kek222" title="Новый плейлист">Тест очень длинного названия</span>
+                    </div>
+                </div>
+            </div>
+            <div class="input_НОВЫЙ_ПЛЕЙЛИСТ_ЕПТ">
+                <input type="text" placeholder="Создать или найти плейлист" class="лулдщд"></input>
+            </div>
         </div>
     </div>
 </fest:template>
