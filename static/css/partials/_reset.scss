@@ -28,25 +28,18 @@ input {
   outline: none;
   height: 2em;
   padding: 0 1%;
-}
-
-input[type="checkbox"] {
-  margin: 0;
-  height: 13px;
-}
-
-input[type="text"], input[type="email"],
-input[type="url"], input[type="password"] {
-  outline: none;
-  float: left;
-  width: 100%;
-  height: 30px;
-  font-size: 18px;
-  border: 0;
-  color: black;
-  border-radius: 3px 3px 0 0;
-  border-bottom: 1px solid gray;
-  background-color: white;
+  &[type="text"], &[type="email"], &[type="password"],&[type="url"]{
+    outline: none;
+    float: left;
+    width: 100%;
+    height: 30px;
+    font-size: 18px;
+    border: 0;
+    color: black;
+    border-radius: 3px 3px 0 0;
+    border-bottom: 1px solid gray;
+    background-color: white;
+  }
 }
 
 img {
