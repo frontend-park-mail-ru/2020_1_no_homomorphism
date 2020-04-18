@@ -100,9 +100,11 @@ export default class ProfileModel {
                             this.eventBus.emit(PROFILE.SET_PLAYLIST_ID, playlistID);
                             this.eventBus.emit(
                                 PROFILE.RENDER_TRACKS,
-                                list.tracks,
-                                'l-track-list',
-                                'playlist');
+                                {
+                                    'tracks': list.tracks,
+                                    'domItem': 'l-track-list',
+                                    'type': 'playlist',
+                                });
                         });
                     break;
                 case RESPONSE.BAD_REQUEST:
@@ -128,9 +130,11 @@ export default class ProfileModel {
                         .then((list) => {
                             this.eventBus.emit(
                                 PROFILE.RENDER_PLAYLISTS,
-                                list.playlists,
-                                'l-playlist-list',
-                                'playlist');
+                                {
+                                    'list': list.playlists,
+                                    'domItem': 'l-playlist-list',
+                                    'type': 'playlist',
+                                });
                         });
                     break;
                 case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
@@ -160,9 +164,11 @@ export default class ProfileModel {
                         .then(() => {
                             this.eventBus.emit(
                                 PROFILE.RENDER_PLAYLISTS,
-                                this.albums,
-                                'l-album-list',
-                                'album');
+                                {
+                                    'list': this.albums,
+                                    'domItem': 'l-album-list',
+                                    'type': 'album',
+                                });
                         });
                     break;
                 case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует

@@ -63,9 +63,11 @@ export default class PlaylistModel {
                         .then((list) => {
                             this.playlist = list;
                             this.eventBus.emit(PLAYLIST.RENDER_TRACKS,
-                                this.playlist.tracks,
-                                'l-track-list',
-                                'playlist');
+                                {
+                                    'tracks': this.playlist.tracks,
+                                    'domItem': 'l-track-list',
+                                    'type': 'playlist',
+                                });
                             this.eventBus.emit(PLAYLIST.SET_TRACKS_AMOUNT, this.playlist.tracks);
                         });
                     break;

@@ -6,14 +6,14 @@
                 <div class="m-login-input">
                     <label>
                         Login
-                        <input type="text" id="login" use = "required"/>
+                        <input class="m-big-input" type="text" id="login" use = "required"/>
                         <div class="m-error-message-small"></div>
                     </label>
                 </div>
                 <div class="m-login-input">
                     <label>
                         Password
-                        <input type="password" id="password" use="required"/>
+                        <input class="m-big-input" type="password" id="password" use="required"/>
                         <div class="m-error-message-small"></div>
                     </label>
                 </div>

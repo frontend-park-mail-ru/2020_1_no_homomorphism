@@ -18,14 +18,12 @@ export default class PlaylistsComponent {
 
     /**
      * Отрисовка списка плейлистов или альбомомв
-     * @param {Array} list
-     * @param {string} domItem
-     * @param {string} type
+     * @param {Object} data
      */
-    drawList(list, domItem, type) {
-        const elem = document.getElementsByClassName(domItem)[0];
-        this.type = type;
-        elem.innerHTML += template(this.generateHref(list));
+    drawList(data) {
+        const elem = document.getElementsByClassName(data.domItem)[0];
+        this.type = data.type;
+        elem.innerHTML += template(this.generateHref(data.list));
         this.setEventListeners();
     }
 

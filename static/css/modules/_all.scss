@@ -143,16 +143,6 @@
   padding-bottom: 32px;
 }
 
-.l-track-big:hover .m-like-button, .l-track-big:hover .m-delete-button, .l-track-big:hover .m-add-button, .l-track-big:hover .m-more-button {
-  transition: 0.3s;
-  -webkit-transform: scale(2);
-  transform: scale(1.2);
-  opacity: 1;
-}
-
-.l-track-big:not(:hover) .m-like-button, .l-track-big:not(:hover) .m-delete-button, .l-track-big:not(:hover) .m-add-button, .l-track-big:hover .m-more-button {
-  transition: 0.1s;
-}
 
 .l-track-big:hover .m-big-like-button, .l-track-big:hover .m-big-delete-button, .l-track-big:hover .m-big-add-button, .l-track-big:hover .m-big-more-button {
   transition: 0.3s;
@@ -170,11 +160,6 @@
   transform: scale(1.5);
   /*margin-top: -20px;*/
   padding-right: 8px;
-}
-
-/**/
-.m-like-button, .m-delete-button, .m-add-button, .m-more-button {
-  opacity: 0;
 }
 
 /**/
@@ -312,7 +297,7 @@
 
 }
 
-.box {
+.m-choose-menu {
   width: 300px;
   left: -webkit-calc(50% - 250px);
   top: 20%;
@@ -331,7 +316,7 @@
   }
 }
 
-.azaza {
+.l-small-list {
   height: 250px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -340,7 +325,7 @@
 }
 
 
-.best-ul {
+.m-small-ul {
   position: relative;
   height: 250px;
   overflow-y: auto;
@@ -349,7 +334,7 @@
   font: 13px YSTextRegular, Arial, Helvetica, sans-serif;
 }
 
-.best-li-ever-done {
+.m-small-li {
   border-bottom: 1px solid #ebeae7;
   position: relative;
   height: 40px;
@@ -358,22 +343,27 @@
   cursor: pointer;
 }
 
-.best-li-ever-done:hover {
+.m-small-li:hover {
   background: $selected-elem;
   cursor: pointer;
   transition: 0.1s;
   display: block;
 }
 
-.best-li-ever-done .yandex-svg-plus {
+.m-small-li .m-small-add-button {
   display: none;
 }
 
-.best-li-ever-done:hover .yandex-svg-plus {
+.m-small-li:hover .m-small-add-button {
   display: inline-block;
 }
 
-.kek222 {
+.m-small-li:hover .m-small-ticked {
+  background-image: url("/static/img/clear.svg");
+  display: inline-block;
+}
+
+.m-small-title {
   display: block;
   white-space: nowrap;
   overflow: hidden;
@@ -384,11 +374,9 @@
   vertical-align: middle;
 }
 
-.yandex-svg {
+.m-small-ticked {
   background-image: url("/static/img/spizdil_is_yandexa_black.svg");
   display: inline-block;
-  //background: 50% no-repeat;
-  //opacity: .2;
   background-size: 100%;
   width: 24px;
   height: 24px;
@@ -397,8 +385,8 @@
   vertical-align: middle;
 }
 
-.yandex-svg-plus {
-  background-image: url("/static/img/spizdil_is_yandexa_plus.svg");
+.m-small-add-button {
+  background-image: url("/static/img/add.svg");
   opacity: .2;
   background-size: 100%;
   width: 24px;
@@ -408,18 +396,17 @@
   vertical-align: middle;
 }
 
-.input_НОВЫЙ_ПЛЕЙЛИСТ_ЕПТ {
+.l-small-input {
   width: 100%;
   height: 40px;
   font-size: 14px;
-  font-family: YSTextRegular,Arial,Helvetica,sans-serif;
+  font-family: YSTextRegular, Arial, Helvetica, sans-serif;
   border-top: 1px solid #d9d6d0;
   border-radius: 0;
   line-height: 20px;
   padding: 0 13px;
 }
-
-.лулдщд {
+.m-small-input{
   border: none;
   border-radius: 0;
   font-size: 14px;
@@ -428,4 +415,14 @@
   width: 100%;
   height: 100%;
   outline: none;
+}
+
+.m-big-input {
+  outline: none;
+  float: left;
+  width: 100%;
+  height: 30px;
+  font-size: 18px;
+  border: 0;
+  border-bottom: 1px solid gray;
 }

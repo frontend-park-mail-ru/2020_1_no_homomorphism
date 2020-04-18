@@ -1,0 +1,61 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <div class="row">
+        <div class="m-choose-menu ">
+            <div class="l-small-list">
+                <div class="m-small-ul">
+                    <div class="m-small-li">
+                        <span class="m-small-ticked"></span>
+                        <span class="m-small-title" title="Мне нравится">Мне нравится</span>
+                    </div>
+                    <div class="m-small-li">
+                        <span class="m-small-add-button"></span>
+                        <span class="m-small-title" title="Новый плейлист">Новый плейлист</span>
+                    </div>
+                    <div class="m-small-li">
+                        <span class="m-small-add-button"></span>
+                        <span class="m-small-title" title="Новый плейлист">Гавно музон</span>
+                    </div>
+                    <div class="m-small-li">
+                        <span class="m-small-add-button"></span>
+                        <span class="m-small-title" title="Новый плейлист">Тест очень длинного названия</span>
+                    </div>
+                    <div class="m-small-li">
+                        <span class="m-small-ticked"></span>
+                        <span class="m-small-title" title="Мне нравится">Мне нравится</span>
+                    </div>
+                    <div class="m-small-li">
+                        <span class="m-small-add-button"></span>
+                        <span class="m-small-title" title="Новый плейлист">Новый плейлист</span>
+                    </div>
+                    <div class="m-small-li">
+                        <span class="m-small-add-button"></span>
+                        <span class="m-small-title" title="Новый плейлист">Гавно музон</span>
+                    </div>
+                    <div class="m-small-li">
+                        <span class="m-small-add-button"></span>
+                        <span class="m-small-title" title="Новый плейлист">Тест очень длинного названия</span>
+                    </div>
+                    <div class="m-small-li">
+                        <span class="m-small-ticked"></span>
+                        <span class="m-small-title" title="Мне нравится">Мне нравится</span>
+                    </div>
+                    <div class="m-small-li">
+                        <span class="m-small-add-button"></span>
+                        <span class="m-small-title" title="Новый плейлист">Новый плейлист</span>
+                    </div>
+                    <div class="m-small-li">
+                        <span class="m-small-add-button"></span>
+                        <span class="m-small-title" title="Новый плейлист">Гавно музон</span>
+                    </div>
+                    <div class="m-small-li">
+                        <span class="m-small-add-button"></span>
+                        <span class="m-small-title" title="Новый плейлист">Тест очень длинного названия</span>
+                    </div>
+                </div>
+            </div>
+            <div class="l-small-input">
+                <input type="text" placeholder="Create playlist" class="m-small-input"></input>
+            </div>
+        </div>
+    </div>
+</fest:template>

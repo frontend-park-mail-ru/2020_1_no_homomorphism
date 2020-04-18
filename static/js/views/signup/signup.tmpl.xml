@@ -6,21 +6,21 @@
                 <div class="l-signup-input">
                     <label>
                         Name
-                        <input class="m-signup-input" id="name" type="text" value="" placeholder="John Smith" use="required"/>
+                        <input class="m-big-input" id="name" type="text" value="" placeholder="John Smith" use="required"/>
                         <div class="m-error-message-small"></div>
                     </label>
                 </div>
                 <div class="l-signup-input">
                     <label>
                         Login
-                        <input class="m-signup-input" id="login" type="text" value="" placeholder="john99" use="required"/>
+                        <input class="m-big-input" id="login" type="text" value="" placeholder="john99" use="required"/>
                         <div class="m-error-message-small"></div>
                     </label>
                 </div>
                 <div class="l-signup-input">
                     <label>
                         Email
-                        <input class="m-signup-input" type="text" id="email" value="" placeholder="johnSmith@mail.ru"
+                        <input class="m-big-input" type="text" id="email" value="" placeholder="johnSmith@mail.ru"
                                use="required"/>
                         <div class="m-error-message-small"></div>
                     </label>
@@ -28,14 +28,14 @@
                 <div class="l-signup-input">
                     <label>
                         Password
-                        <input class="m-signup-input" type="password" id="password" value="" use="required"/>
+                        <input class="m-big-input" type="password" id="password" value="" use="required"/>
                         <div class="m-error-message-small"></div>
                     </label>
                 </div>
                 <div class="l-signup-input">
                     <label>
                         Password Confirmation
-                        <input class="m-signup-input" type="password" id="password-confirm" value="" use="required"/>
+                        <input class="m-big-input" type="password" id="password-confirm" value="" use="required"/>
                         <div class="m-error-message-small"></div>
                     </label>
                 </div>

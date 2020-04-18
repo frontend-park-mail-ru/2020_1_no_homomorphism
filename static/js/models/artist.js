@@ -66,9 +66,11 @@ export default class ArtistModel {
                         .then((data) => {
                             this.tracks += data.tracks;
                             this.eventBus.emit(ARTIST.RENDER_TRACKS,
-                                data.tracks,
-                                'l-track-list',
-                                'artist');
+                                {
+                                    'tracks': data.tracks,
+                                    'domItem': 'l-track-list',
+                                    'type': 'artist',
+                                });
                         });
                 } else {
                     this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
@@ -93,9 +95,11 @@ export default class ArtistModel {
                         .then((data) => {
                             this.albums = data.albums;
                             this.eventBus.emit(ARTIST.RENDER_ALBUMS,
-                                data.albums,
-                                'l-album-list',
-                                'album');
+                                {
+                                    'list': data.albums,
+                                    'domItem': 'l-album-list',
+                                    'type': 'album',
+                                });
                         });
                 } else {
                     this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);

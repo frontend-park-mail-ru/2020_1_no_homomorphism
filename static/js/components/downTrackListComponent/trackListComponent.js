@@ -1,7 +1,6 @@
 import template from '@components/downTrackListComponent/tracks.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
-import DropdownPlaylist from '@components/dropdownPlaylistComponent/dropdownPlaylistComponent';
-import {GLOBAL} from '@libs/constans';
+import ChoosePlaylist from '@components/choosePlaylistComponent/choosePlaylistComponent';
 
 /**
  * Компонент - список треков
@@ -17,7 +16,7 @@ export default class TrackListComponent {
         eventBus.on(constType.SET_PLAYLIST_ID, this.setId.bind(this));
         eventBus.on(constType.SET_ALBUM_ID, this.setId.bind(this));
         eventBus.on(constType.SET_ARTIST_ID, this.setId.bind(this));
-        this.dropdownPlaylist = new DropdownPlaylist(eventBus, constType);
+        this.choosePlaylist = new ChoosePlaylist(eventBus, constType);
         this.constType = constType;
         this.eventBus = eventBus;
         this.tracklist = [];
@@ -27,15 +26,13 @@ export default class TrackListComponent {
 
     /**
      * Отрисовка списка треков
-     * @param {Object} tracks
-     * @param {string} domItem
-     * @param {string} type
+     * @param {Object} data
      */
-    renderTracks(tracks, domItem, type) {
-        this.tracklist = tracks;
-        this.type = type;
-        const elem = document.getElementsByClassName(domItem)[0];
-        elem.innerHTML = template(tracks);
+    renderTracks(data) {
+        this.tracklist = data.tracks;
+        this.type = data.type;
+        const elem = document.getElementsByClassName(data.domItem)[0];
+        elem.innerHTML = template(data.tracks);
         this.setTracksEventListeners();
     }
 
@@ -65,29 +62,20 @@ export default class TrackListComponent {
         document.querySelectorAll('img.m-big-like-button').forEach((button) => {
             button.onclick = (event) => this.likeClicked(event);
         });
-        document.querySelectorAll('img.m-big-add-button').forEach((button) => { // TODO выбор, в какой плейлист добавить
-        });
-
+        // document.querySelectorAll('img.m-big-add-button').forEach((button) => {
+        // });
     }
 
     /**
-     * Слушает клик по треку
+     * Слушает нажатие на play
      * @param {Object} event
      */
     trackClick(event) {
-        let current = event.target;
-        while (current !== window && current !== document.body && current != null) {
-            if (current.getAttribute('class') === 'l-track-big' &&
-                current.getAttribute('a-id') !== null) {
-                globalEventBus.emit(`global-play-${this.type}-tracks`,
-                    this.id,
-                    current.getAttribute('a-id'),
-                    this.tracklist.length);
-                break;
-            } else {
-                current = current.parentNode;
-            }
-        }
+        const trackID = this.getIdByClick(event);
+        globalEventBus.emit(`global-play-${this.type}-tracks`,
+            this.id,
+            trackID,
+            this.tracklist.length);
     }
 
     /**
@@ -95,25 +83,32 @@ export default class TrackListComponent {
      * @param {Object} event
      */
     addToPlaylist(event) {
-        this.eventBus.emit(this.constType.DROPDOWN, event);
-        // console.log('lol');
+        this.choosePlaylist.trackID = this.getIdByClick(event);
+        this.choosePlaylist.render(this.setTracksEventListeners.bind(this));
     }
 
     /**
-     * Выводит ошибку
-     * @param {Object} error
+     * Получение id из dom-елемента по нажатию
+     * @param {Object} event
+     * @return {string}
      */
-    showErrors(error) {
-        document.getElementsByClassName('l-top-card')[0].innerHTML = error.text;
-        document.getElementsByClassName('l-top-card')[0].classList.add('is-error');
-        document.getElementsByClassName('l-down-card')[0].innerHTML = '';
+    getIdByClick(event) {
+        let current = event.target;
+        while (current !== window && current !== document.body && current != null) {
+            if (current.getAttribute('class') === 'l-track-big' &&
+                current.getAttribute('a-id') !== null) {
+                return current.getAttribute('a-id');
+            } else {
+                current = current.parentNode;
+            }
+        }
     }
 
     /**
      * Слушает клик мыши по кнопке лайка на треке в плейлисте
      * @param {Object} event
      */
-    likeClicked(event) {
+    likeClicked(event) { // TODO отправить наверх
         if (event.target.src.indexOf('/static/img/favorite_border.svg') !== -1) {
             event.target.src = '/static/img/favorite.svg';
         } else {
