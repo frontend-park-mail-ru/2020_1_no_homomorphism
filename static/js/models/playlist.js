@@ -29,8 +29,10 @@ export default class PlaylistModel {
                 switch (res.status) {
                 case undefined: // TODO Временно
                     this.playlist = res;
+                    this.eventBus.emit(PLAYLIST.SET_PLAYLIST_ID, this.playlist.id);
                     this.eventBus.emit(PLAYLIST.RENDER_PLAYLIST_DATA,
                         this.playlist);
+                    this.eventBus.emit(PLAYLIST.GET_TRACKS_DATA, {id: this.playlist.id});
                     break;
                 case RESPONSE.BAD_REQUEST:
                     this.eventBus.emit(PLAYLIST.ERROR,
@@ -60,7 +62,11 @@ export default class PlaylistModel {
                     res.json()
                         .then((list) => {
                             this.playlist = list;
-                            this.eventBus.emit(PLAYLIST.RENDER_TRACKS_DATA, list.tracks);
+                            this.eventBus.emit(PLAYLIST.RENDER_TRACKS,
+                                this.playlist.tracks,
+                                'l-track-list',
+                                'playlist');
+                            this.eventBus.emit(PLAYLIST.SET_TRACKS_AMOUNT, this.playlist.tracks);
                         });
                     break;
                 default:

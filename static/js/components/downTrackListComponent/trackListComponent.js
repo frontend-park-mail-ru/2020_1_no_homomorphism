@@ -1,6 +1,7 @@
 import template from '@components/downTrackListComponent/tracks.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
 import DropdownPlaylist from '@components/dropdownPlaylistComponent/dropdownPlaylistComponent';
+import {GLOBAL} from '@libs/constans';
 
 /**
  * Компонент - список треков
@@ -9,15 +10,15 @@ export default class TrackListComponent {
     /**
      * Конструткор
      * @param {EventBus} eventBus
-     * @param {object} modelType
+     * @param {object} constType
      */
-    constructor(eventBus, modelType) {
-        eventBus.on(modelType.RENDER_TRACKS, this.renderTracks.bind(this));
-        eventBus.on(modelType.SET_PLAYLIST_ID, this.setId.bind(this));
-        eventBus.on(modelType.SET_ALBUM_ID, this.setId.bind(this));
-        eventBus.on(modelType.SET_ARTIST_ID, this.setId.bind(this));
-        this.dropdownPlaylist = new DropdownPlaylist(eventBus, modelType);
-        this.modelType = modelType;
+    constructor(eventBus, constType) {
+        eventBus.on(constType.RENDER_TRACKS, this.renderTracks.bind(this));
+        eventBus.on(constType.SET_PLAYLIST_ID, this.setId.bind(this));
+        eventBus.on(constType.SET_ALBUM_ID, this.setId.bind(this));
+        eventBus.on(constType.SET_ARTIST_ID, this.setId.bind(this));
+        this.dropdownPlaylist = new DropdownPlaylist(eventBus, constType);
+        this.constType = constType;
         this.eventBus = eventBus;
         this.tracklist = [];
         this.id = 0;
@@ -34,7 +35,7 @@ export default class TrackListComponent {
         this.tracklist = tracks;
         this.type = type;
         const elem = document.getElementsByClassName(domItem)[0];
-        elem.innerHTML += template(tracks);
+        elem.innerHTML = template(tracks);
         this.setTracksEventListeners();
     }
 
@@ -59,6 +60,14 @@ export default class TrackListComponent {
         document.querySelectorAll('.m-button-track-play').forEach((track) => {
             track.onclick = (event) => this.trackClick.bind(this)(event);
         });
+        document.querySelectorAll('img.m-big-more-button').forEach((button) => { // TODO Обработать
+        });
+        document.querySelectorAll('img.m-big-like-button').forEach((button) => {
+            button.onclick = (event) => this.likeClicked(event);
+        });
+        document.querySelectorAll('img.m-big-add-button').forEach((button) => { // TODO выбор, в какой плейлист добавить
+        });
+
     }
 
     /**
@@ -86,7 +95,29 @@ export default class TrackListComponent {
      * @param {Object} event
      */
     addToPlaylist(event) {
-        this.eventBus.emit(this.modelType.DROPDOWN, event);
+        this.eventBus.emit(this.constType.DROPDOWN, event);
         // console.log('lol');
+    }
+
+    /**
+     * Выводит ошибку
+     * @param {Object} error
+     */
+    showErrors(error) {
+        document.getElementsByClassName('l-top-card')[0].innerHTML = error.text;
+        document.getElementsByClassName('l-top-card')[0].classList.add('is-error');
+        document.getElementsByClassName('l-down-card')[0].innerHTML = '';
+    }
+
+    /**
+     * Слушает клик мыши по кнопке лайка на треке в плейлисте
+     * @param {Object} event
+     */
+    likeClicked(event) {
+        if (event.target.src.indexOf('/static/img/favorite_border.svg') !== -1) {
+            event.target.src = '/static/img/favorite.svg';
+        } else {
+            event.target.src = '/static/img/favorite_border.svg';
+        }
     }
 }
