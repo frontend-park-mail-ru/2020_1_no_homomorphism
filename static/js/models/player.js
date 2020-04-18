@@ -56,7 +56,7 @@ export default class PlayerModel {
      * @param {number} number
      */
     getArtistTracks(artistId, trackId, number) {
-        Api.artistTracksFetch(artistId.toString(), '0', number.toString())
+        Api.artistTracksGet(artistId.toString(), '0', number.toString())
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
@@ -78,7 +78,7 @@ export default class PlayerModel {
      * @param {number} number
      */
     getPlaylistTracks(id, trackId, number = PAGINATION.TRACKS) {
-        Api.playlistTracksFetch(id, '0', number)
+        Api.playlistTracksGet(id, '0', number)
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
@@ -103,7 +103,7 @@ export default class PlayerModel {
      * @param {number} number
      */
     getAlbumTracks(id, trackId, number = PAGINATION.TRACKS) {
-        Api.albumTracksFetch(id, '0', number)
+        Api.albumTracksGet(id, '0', number)
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:

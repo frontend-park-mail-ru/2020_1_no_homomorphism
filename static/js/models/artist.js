@@ -30,7 +30,7 @@ export default class ArtistModel {
     getArtistData(id) {
         this.id = id.toString();
         Promise.all([
-            Api.artistFetch(this.id),
+            Api.artistGet(this.id),
             Api.artistStatFetch(this.id),
         ])
             .then((res) => {
@@ -55,7 +55,7 @@ export default class ArtistModel {
      * @param {string} end
      */
     getArtistTracks(start, end) {
-        Api.artistTracksFetch(this.id, start, end)
+        Api.artistTracksGet(this.id, start, end)
             .then((res) => {
                 if (res === undefined) {
                     this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);
@@ -84,7 +84,7 @@ export default class ArtistModel {
      * @param {string} end
      */
     getArtistAlbums(start, end) {
-        Api.artistAlbumsFetch(this.id, start, end)
+        Api.artistAlbumsGet(this.id, start, end)
             .then((res) => {
                 if (res === undefined) {
                     this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);

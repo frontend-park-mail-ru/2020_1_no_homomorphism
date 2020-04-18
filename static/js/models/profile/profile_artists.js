@@ -20,7 +20,7 @@ export default class ProfileArtistsModel {
      * Получение списка альбомов
      */
     getArtists() {
-        Api.profilePlaylistsFetch()
+        Api.profilePlaylistsGet()
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:

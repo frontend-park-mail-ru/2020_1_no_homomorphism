@@ -15,7 +15,7 @@
 
 .is-touched-section {
   background: $selected-elem;
-  border-radius: 5px;
+  border-radius: $card-border-small;
   cursor: pointer;
   transition: 0.1s;
   transform: scale(1.1);

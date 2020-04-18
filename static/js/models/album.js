@@ -25,7 +25,7 @@ export default class AlbumModel {
      * @param {Object} id
      */
     getAlbum(id) {
-        Api.albumFetch(id.id)
+        Api.albumGet(id.id)
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
@@ -50,7 +50,7 @@ export default class AlbumModel {
      * @param {Object} id
      */
     getTracks(id) {
-        Api.albumTracksFetch(id.id, this.curPagination.toString(), PAGINATION.TRACKS.toString())
+        Api.albumTracksGet(id.id, this.curPagination.toString(), PAGINATION.TRACKS.toString())
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:

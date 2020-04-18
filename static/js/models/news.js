@@ -19,7 +19,7 @@ export default class NewsModel {
      * Получает списка артистов
      */
     getArtistListData() {
-        Api.artistListFetch('0', '100')
+        Api.artistListGet('0', '100')
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:

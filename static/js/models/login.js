@@ -35,7 +35,7 @@ export default class LoginModel {
         if (JSON.stringify(errors) !== '{}') {
             this.eventBus.emit(LOGIN.INVALID, errors);
         } else {
-            Api.loginFetch(values.login, values.password)
+            Api.loginPost(values.login, values.password)
                 .then((res) => {
                     switch (res.status) {
                     case RESPONSE.OK:
@@ -65,7 +65,7 @@ export default class LoginModel {
      * Получение токена
      */
     getCsrfToken() {
-        Api.csrfTokenFetch()
+        Api.csrfTokenGet()
             .then((res) => {
                 User.token = res.headers.get('Csrf-Token');
             });

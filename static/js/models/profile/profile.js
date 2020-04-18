@@ -31,7 +31,7 @@ export default class ProfileModel {
             this.eventBus.emit(PROFILE.RENDER_DATA, User.getUserData());
             return;
         }
-        Api.profileFetch()
+        Api.profileGet()
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
@@ -60,7 +60,7 @@ export default class ProfileModel {
      * получает статистику юзера
      */
     getUserStat() {
-        Api.profileStatFetch(User.getUserData().id)
+        Api.profileStatGet(User.getUserData().id)
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
@@ -88,7 +88,7 @@ export default class ProfileModel {
      */
     getLikedTracks() {
         const playlistID = 8; // СУПЕР ВРЕМЕННО!!!
-        Api.playlistTracksFetch(
+        Api.playlistTracksGet(
             playlistID.toString(),
             this.curPaginationTracks.toString(),
             PAGINATION.TRACKS.toString())
@@ -122,7 +122,7 @@ export default class ProfileModel {
      * Получение списка плейлистов
      */
     getPlaylists() {
-        Api.profilePlaylistsFetch()
+        Api.profilePlaylistsGet()
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
@@ -153,7 +153,7 @@ export default class ProfileModel {
      * Получение списка альбомов
      */
     getAlbums() {
-        Api.profileAlbumsFetch()
+        Api.profileAlbumsGet()
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:

@@ -103,7 +103,7 @@
 .m-navbar-avatar {
   margin-top: 8px;
   margin-right: 8px;
-  border-radius: 20px;
+  border-radius: $card-border-big;
 }
 
 .m-navbar-name {
@@ -237,7 +237,7 @@
   max-width: 200px;
   max-height: 260px;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: $card-border-small;
   box-shadow: 0 0 10px -3px rgba(0, 0, 0, 0.5);
   transition: transform 0.1s ease-in-out, box-shadow 0.1s;
 }
@@ -302,13 +302,14 @@
   left: -webkit-calc(50% - 250px);
   top: 20%;
   position: absolute;
-  border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: $card-border;
+  padding-left: 8px;
+  padding-bottom: 8px;
+  padding-top: 8px;
   box-sizing: border-box;
   background-color: #ffffff;
   transition: box-shadow .3s ease;
-
-  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, .4);
+  box-shadow: $box-shadow-hard;
   z-index: 102;
 
   .content {

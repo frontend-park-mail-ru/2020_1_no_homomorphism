@@ -42,7 +42,7 @@ export default class SignupModel {
         if (JSON.stringify(errors) !== '{}') {
             this.eventBus.emit(SIGN_UP.INVALID, errors);
         } else {
-            Api.signupFetch(values.name, values.login, 'yes', values.email, values.password)
+            Api.signupPost(values.name, values.login, 'yes', values.email, values.password)
                 .then((res) => {
                     switch (res.status) {
                     case RESPONSE.OK_ADDED:
@@ -95,7 +95,7 @@ export default class SignupModel {
      * Получение токена
      */
     getCsrfToken() {
-        Api.csrfTokenFetch()
+        Api.csrfTokenGet()
             .then((res) => {
                 User.token = res.headers.get('Csrf-Token');
             });

@@ -24,7 +24,7 @@ export default class PlaylistModel {
      * @param {Object} id
      */
     getPlaylist(id) {
-        Api.playlistFetch(id.id)
+        Api.playlistGet(id.id)
             .then((res) => {
                 switch (res.status) {
                 case undefined: // TODO Временно
@@ -55,7 +55,7 @@ export default class PlaylistModel {
      * @param {Object} id
      */
     getTracks(id) {
-        Api.playlistTracksFetch(id.id, this.curPagination.toString(), PAGINATION.TRACKS.toString())
+        Api.playlistTracksGet(id.id, this.curPagination.toString(), PAGINATION.TRACKS.toString())
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
