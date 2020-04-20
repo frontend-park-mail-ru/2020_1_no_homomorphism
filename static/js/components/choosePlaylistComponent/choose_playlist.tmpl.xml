@@ -1,6 +1,5 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="row">
-
         <div class="m-choose-menu ">
             <div class="l-small-list">
                 <div class="m-small-ul">
@@ -14,8 +13,6 @@
                                 </fest:if>
                             <span class="m-small-title" title="Мне нравится">
                                 <fest:value>playlist.name</fest:value>
-                                <fest:value>playlist.include</fest:value>
-                                <fest:value>playlist.notInclude</fest:value>
                             </span>
                         </div>
                     </fest:for>
