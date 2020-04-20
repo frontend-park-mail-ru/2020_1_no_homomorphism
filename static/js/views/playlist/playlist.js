@@ -56,12 +56,13 @@ export default class PlaylistView extends BaseView {
      */
     setTracksAmount(tracks) {
         this.tracksData = tracks;
+        this.setEventListeners();
         if (this.tracksData.length === 0) {
             return;
         }
         document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Amount of tracks: ' +
             this.tracksData.length;
-        this.setEventListeners();
+        // this.setEventListeners();
     }
 
     /**
@@ -70,12 +71,24 @@ export default class PlaylistView extends BaseView {
     setEventListeners() {
         document.getElementsByClassName('m-button-track-list-play')[0].addEventListener('click',
             this.playPlaylist.bind(this));
+        document.getElementsByClassName('m-delete-playlist-button')[0].addEventListener('click',
+            this.deletePlaylist.bind(this));
+    }
+
+    /**
+     * Удаление плейлиста плейлиста
+     */
+    deletePlaylist() {
+        this.eventBus.emit(PLAYLIST.DELETE_PLAYLIST, this.playlistData.id);
     }
 
     /**
      * Проигрование плейлиста
      */
     playPlaylist() {
+        if (this.tracksData.length === 0) {
+            return;
+        }
         this.globalEventBus.emit(GLOBAL.PLAY_PLAYLIST, this.playlistData.id);
     }
 

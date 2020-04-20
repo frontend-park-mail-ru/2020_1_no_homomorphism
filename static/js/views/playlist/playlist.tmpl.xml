@@ -13,11 +13,17 @@
                         <div class="m-big-name">
                         </div>
                     </div>
+                </div>
 
+                <div class="m-right-col">
+                    <div class="l-delete-playlist-button">
+                        <div class="m-delete-playlist-button"> </div>
+                    </div>
+                    <div class="m-tracks-amount ">
+                        <div>Amount of tracks: 0 </div>
+                    </div>
                 </div>
-                <div class="m-tracks-amount col ">
-                    Amount of tracks: 0
-                </div>
+
 
 
             </div>

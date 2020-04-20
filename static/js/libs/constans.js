@@ -204,6 +204,7 @@ export const PLAYLIST = {
     RENDER_DATA: 'playlist-render-playlist',
     RENDER_PLAYLIST_DATA: 'playlist-render-playlist-data',
     RENDER_TRACKS: 'playlist-render-tracks-data',
+    DELETE_PLAYLIST: 'playlist-delete',
     ERROR: 'playlist-show-errors',
 };
 

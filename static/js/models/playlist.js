@@ -1,4 +1,4 @@
-import {PLAYLIST, RESPONSE, PAGINATION} from '@libs/constans';
+import {PLAYLIST, RESPONSE, PAGINATION, URL} from '@libs/constans';
 import Api from '@libs/api';
 
 /**
@@ -17,6 +17,7 @@ export default class PlaylistModel {
         this.globalEventBus = globalEventBus;
         this.eventBus.on(PLAYLIST.GET_PLAYLIST_DATA, this.getPlaylist.bind(this));
         this.eventBus.on(PLAYLIST.GET_TRACKS_DATA, this.getTracks.bind(this));
+        this.eventBus.on(PLAYLIST.DELETE_PLAYLIST, this.deletePlaylist.bind(this));
     }
 
     /**
@@ -70,6 +71,26 @@ export default class PlaylistModel {
                                 });
                             this.eventBus.emit(PLAYLIST.SET_TRACKS_AMOUNT, this.playlist.tracks);
                         });
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
+    }
+
+    /**
+     * Удаление плейлиста плейлиста
+     * @param {string} playlistID
+     */
+    deletePlaylist(playlistID) {
+        Api.playlistDelete(playlistID)
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK: // TODO обработать удаление
+                    this.eventBus.emit(PLAYLIST.REDIRECT, URL.MAIN);
+                    break;
+                case RESPONSE.BAD_REQUEST:
                     break;
                 default:
                     console.log(res);

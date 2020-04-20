@@ -32,7 +32,7 @@
   border: yellow;
   cursor: pointer;
   opacity: 0.4;
-  margin-top: 110px;
+  margin-top: 96px;
   padding: 20px;
   position: relative;
   margin-left: -140px;
@@ -96,4 +96,35 @@
 
 .l-big-track-button:hover {
   opacity: 1;
+}
+
+.m-delete-playlist-button {
+  background-image: url("/static/img/icons/delete_outline-24px.svg");
+  display: inline-block;
+  background-size: 100%;
+  width: 40px;
+  height: 40px;
+  float: left;
+  margin-right: 10px;
+  vertical-align: middle;
+  opacity: 0.8;
+}
+
+.m-delete-playlist-button:hover {
+  background-image: url("/static/img/icons/delete-24px.svg");
+  -webkit-transform: scale(1.5);
+  transform: scale(1.5);
+  transition: 0.3s;
+  opacity: 0.8;
+}
+
+.m-delete-playlist-button:not(:hover) {
+  transition: 0.3s;
+}
+
+.l-delete-playlist-button {
+  margin-left: -64px;
+  margin-top: 16px;
+  margin-right: 16px;
+  float: right !important;
 }

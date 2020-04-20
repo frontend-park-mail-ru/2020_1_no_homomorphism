@@ -291,14 +291,24 @@ export default class Api {
     }
 
     /**
-     * Логаут
+     * Удаление трека из плейлиста
      * @param {string} playlistID
      * @param {string} trackID
      * @return {Promise<Response>}
      */
-    static playlistTrackDelete(playlistID, trackID) { // TODO переименовать, когда бэк придумает
-        // playlists/{playlist:[0-9]+}/tracks/{track:[0-9]+}
+    static playlistTrackDelete(playlistID, trackID) {
         return deleteFetch(API + `/playlists/${playlistID}/tracks/${trackID}`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
+     * Удаление плейлиста
+     * @param {string} playlistID
+     * @return {Promise<Response>}
+     */
+    static playlistDelete(playlistID) {
+        return deleteFetch(API + `/playlists/${playlistID}`, (error) => {
             console.log(error.toString());
         });
     }

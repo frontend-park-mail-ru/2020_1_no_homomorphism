@@ -68,6 +68,7 @@ export default class ChoosePlaylist {
                     this._playlistComponent.createPlaylist(event.target.value);
                     // console.log();
                 }
+                // this.setEventListeners.bind(this)();
             });
     }
 

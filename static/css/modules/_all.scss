@@ -75,10 +75,19 @@
 .m-tracks-amount {
   padding: 8px;
   border-radius: $card-border;
-  margin-right: 32px;
+  // margin-right: 32px;
   margin-top: 130px;
+  margin-right: 16px;
   color: #155724;
   background-color: $selected-elem;
+  float: right !important;
+}
+
+.m-right-col {
+  // padding: 8px;
+  border-radius: $card-border;
+  // margin-right: 32px;
+  // margin-top: 130px;
   float: right !important;
 }
 
