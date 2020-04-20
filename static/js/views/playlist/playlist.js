@@ -46,7 +46,7 @@ export default class PlaylistView extends BaseView {
      * Выводит данные плейлиста
      */
     renderPlaylist() {
-        document.getElementsByClassName('m-name')[0].innerHTML = this.playlistData.name;
+        document.getElementsByClassName('m-big-name')[0].innerHTML = this.playlistData.name;
         document.getElementsByClassName('m-rounded-image')[0].src = this.playlistData.image;
     }
 
@@ -70,7 +70,6 @@ export default class PlaylistView extends BaseView {
             tracks(this.tracksData);
         document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Amount of tracks: ' +
             this.tracksData.length;
-        document.getElementsByClassName('l-track-list')[0].className += ' l-profile-base';
         this.seEventListeners();
     }
 

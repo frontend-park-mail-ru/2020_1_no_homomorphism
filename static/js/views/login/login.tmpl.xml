@@ -1,41 +1,33 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
-    <div class="l-emphasized row">
+    <div class="is-emphasized l-center-pos row">
         <div class="col col-4">
-            <form class="login-form card" method="post" autocomplete="none">
+            <form class="l-form l-card" method="post" autocomplete="none">
                 <h2>LOG IN</h2>
-                <div class="l-login-input-login">
+                <div class="m-login-input">
                     <label>
                         Login
                         <input type="text" id="login" use = "required"/>
-                        <div class="error-message-small"></div>
+                        <div class="m-error-message-small"></div>
                     </label>
                 </div>
-                <div class="l-login-input-password">
+                <div class="m-login-input">
                     <label>
                         Password
                         <input type="password" id="password" use="required"/>
-                        <div class="error-message-small"></div>
+                        <div class="m-error-message-small"></div>
                     </label>
                 </div>
-                <div class="col col-6">
-                    <!--label>
-                        <input type="checkbox" id="remember">
-                        Remember
-                    </label-->
-                </div>
-                <button class="button" type="submit" id="submit-login">
+                <button class="m-submit-button" type="submit" id="submit-login">
                     Go
                 </button>
-                <div class="error-message" id="global">
-                    Login failed
+                <div class="m-error-message-small" id="global">
                 </div>
-                <div class="div-center">
-                    <a class="tiny-ref" href="/signup">
+                <div class="m-form-description">
+                    <a class="m-tiny-ref" href="/signup">
                         No account? Sign up.
                     </a>
                 </div>
             </form>
-
         </div>
     </div>
 </fest:template>

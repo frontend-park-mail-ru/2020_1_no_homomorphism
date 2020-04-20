@@ -10,7 +10,7 @@
                     <a href="/artist/{artist.id}/tracks">
                         <div class="l-list-card" a-id="{artist.id}">
                             <div class="l-list-image">
-                                <img class="m-list-image" id="profile-playlist-image" src="{artist.image}" alt=""/>
+                                <img class="m-list-image" src="{artist.image}" alt=""/>
                             </div>
                             <div class="l-list-card-description">
                                 <fest:value>artist.name</fest:value>

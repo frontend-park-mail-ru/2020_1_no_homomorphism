@@ -2,7 +2,6 @@ import artist from '@views/artist/artist.tmpl.xml';
 import BaseView from '@libs/base_view';
 import TrackListComponent from '@components/downTrackListComponent/trackListComponent';
 import {ARTIST, DOM} from '@libs/constans';
-import '@css/base.css';
 import PlaylistsComponent from '@components/downPlaylistComponent/playlistListComponent';
 
 /**
@@ -23,8 +22,8 @@ export default class ArtistView extends BaseView {
         this.allAlbumsRendered = true;
         this.id = 0;
         this.currentOpen = '';
-        this.trackListComponent = new TrackListComponent(eventBus, ARTIST.RENDER_TRACKS);
-        this.playlistsComponent = new PlaylistsComponent(eventBus, ARTIST.RENDER_ALBUMS);
+        this.trackListComponent = new TrackListComponent(eventBus, ARTIST);
+        this.playlistsComponent = new PlaylistsComponent(eventBus, ARTIST);
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
         this.eventBus.on(ARTIST.RENDER_DATA, this.renderData.bind(this));
@@ -72,15 +71,17 @@ export default class ArtistView extends BaseView {
      */
     renderData(data) {
         this.setData(data);
-        this.trackListComponent.setId(data.id);
+        this.eventBus.emit(ARTIST.SET_ARTIST_ID, data.id);
+        // this.trackListComponent.setId(data.id);
         document.getElementsByClassName('m-top-login')[0].innerHTML = data.name;
         document.getElementsByClassName('m-round-image')[0].src = data.image;
         document.getElementsByClassName('m-top-name')[0].innerHTML = data.genre;
-        document.getElementsByClassName('m-artist-tracks-ref')[0].href =
+        document.getElementsByClassName('m-top-section-tracks-ref')[0].href =
             `/artist/${data.id}/tracks`;
-        document.getElementsByClassName('m-artist-albums-ref')[0].href =
+        document.getElementsByClassName('m-top-section-albums-ref')[0].href =
             `/artist/${data.id}/albums`;
-        document.getElementsByClassName('m-artist-info-ref')[0].href = `/artist/${data.id}/info`;
+        document.getElementsByClassName('l-top-section-info-ref')[0]
+            .href = `/artist/${data.id}/info`;
         document.getElementById('artist-tracks-title').innerText = data.tracks;
         document.getElementById('artist-albums-title').innerText = data.albums;
     }

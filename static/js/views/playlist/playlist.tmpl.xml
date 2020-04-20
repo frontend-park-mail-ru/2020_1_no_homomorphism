@@ -2,9 +2,6 @@
     <div class="col col-9">
         <div class="l-main">
             <div class="l-top-card row">
-                <!--                <div class="col col-2">-->
-
-                <!--                </div>-->
                 <div class="l-top-info col">
                     <div class="l-round-image col">
                         <img alt="" src="{data.image}" class="m-rounded-image" id="avatar"/>
@@ -12,8 +9,8 @@
                     <div class="col">
                         <button class="m-button-track-list-play"> </button>
                     </div>
-                    <div class="l-top-name col" id="login-name">
-                        <div class="m-name">
+                    <div class="l-top-name col">
+                        <div class="m-big-name">
                         </div>
                     </div>
 

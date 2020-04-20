@@ -46,7 +46,7 @@ export default class AlbumView extends BaseView {
      * Выводит данные альбома
      */
     renderAlbum() {
-        document.getElementsByClassName('m-name')[0].innerHTML = this.albumData.name;
+        document.getElementsByClassName('m-big-name')[0].innerHTML = this.albumData.name;
         document.getElementsByClassName('m-rounded-image')[0].src = this.albumData.image;
     }
 
@@ -69,7 +69,6 @@ export default class AlbumView extends BaseView {
         document.getElementsByClassName('l-track-list')[0].innerHTML = tracks(this.tracksData);
         document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Amount of tracks: ' +
             this.tracksData.length;
-        document.getElementsByClassName('l-track-list')[0].className += ' l-profile-base';
         this.seEventListeners();
     }
 

@@ -1,0 +1,40 @@
+// Состояния
+@import "../modules/_variables";
+
+.is-emphasized{
+  position: fixed;
+  box-shadow: black;
+}
+
+.is-un-emphasized {
+  transition: .6s filter;
+  filter: blur(3px) contrast(.8)
+  brightness(0.8);
+  pointer-events: none;
+}
+
+.is-touched-section {
+  background: $selected-elem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.1s;
+  transform: scale(1.1);
+}
+
+.is-hidden {
+  display: none;
+}
+
+.is-visible {
+  display: block;
+}
+
+.is-error {
+  border: 1px solid red;
+  padding: 32px;
+  font-size: 32px;
+}
+
+.is-mouse-on {
+  background: $chosen-icon;
+}

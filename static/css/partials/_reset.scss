@@ -1,0 +1,53 @@
+// ресет стандратрных стилей
+@import "../modules/_variables";
+
+body {
+  margin: 0 auto;
+  font-family: Helvetica, sans-serif;
+}
+
+hr {
+  border: none;
+  background-color: #b39ddb;
+  color: #b39ddb;
+  height: 1px;
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
+}
+
+p {
+  margin: 6px;
+}
+
+input {
+  margin-left: 2%;
+  margin-right: 0.5%;
+  outline: none;
+  height: 2em;
+  padding: 0 1%;
+  &[type="text"], &[type="email"], &[type="password"],&[type="url"]{
+    outline: none;
+    float: left;
+    width: 100%;
+    height: 30px;
+    font-size: 18px;
+    border: 0;
+    color: black;
+    border-radius: 3px 3px 0 0;
+    border-bottom: 1px solid gray;
+    background-color: white;
+  }
+}
+
+img {
+  object-fit: cover;
+}
+
+button,
+button:active,
+button:focus {
+  outline: none;
+}

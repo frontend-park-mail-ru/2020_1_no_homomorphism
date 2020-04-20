@@ -150,7 +150,7 @@ export const SIGN_UP = {
 };
 
 export const PROFILE = {
-    SELECTED_CLASS: 'is-touched-profile-section',
+    SELECTED_CLASS: 'is-touched-section',
     // --
     ID_TRACKS_SECTION: 'profile-tracks-title',
     ID_PLAYLISTS_SECTION: 'profile-playlists-title',
@@ -166,14 +166,18 @@ export const PROFILE = {
     RENDER_STAT: 'profile-render-profile-stat',
     CHOOSE_SECTION: 'profile-choose-section',
     // --
-    RENDER_TRACKS: 'profile-render-profile-tracks',
-    RENDER_PLAYLISTS: 'profile-render-profile-playlists',
-    RENDER_ALBUMS: 'profile-render-profile-albums',
-    RENDER_ARTISTS: 'profile-render-profile-artists',
+    RENDER_TRACKS: 'profile-render-profile-track',
+    RENDER_PLAYLISTS: 'profile-render-profile-playlist',
+    RENDER_ALBUMS: 'profile-render-profile-album',
+    RENDER_ARTISTS: 'profile-render-profile-artist',
+    // --
+    SET_PLAYLIST_ID: 'profile-set-playlist-id',
+    SET_ALBUM_ID: 'profile-set-album-id',
+    DROPDOWN: 'profile-dropdown',
 };
 
 export const ARTIST = {
-    SELECTED_CLASS: 'is-touched-profile-section',
+    SELECTED_CLASS: 'is-touched-section',
     SET_ID: 'artist-set-id',
     ID_TRACKS_SECTION: 'artist-tracks',
     ID_ALBUMS_SECTION: 'artist-albums',
@@ -182,9 +186,12 @@ export const ARTIST = {
     REDIRECT: 'artist-redirect',
     GET_DATA: 'artist-get-artist-data',
     RENDER_DATA: 'artist-render-artist-data',
-    RENDER_TRACKS: 'artist-render-tracks',
-    RENDER_ALBUMS: 'artist-render-albums',
+    RENDER_TRACKS: 'artist-render-track',
+    RENDER_ALBUMS: 'artist-render-album',
     RENDER_INFO: 'artist-render-info',
+    // --
+    SET_ARTIST_ID: 'artist-set-artist-id',
+    DROPDOWN: 'artist-dropdown',
 };
 
 export const PLAYLIST = {

@@ -213,7 +213,7 @@ export default class Api {
 
     /**
      * Получение треков плейлиста
-     * @param {number} id
+     * @param {string} id
      * @param {string} start
      * @param {string} end
      * @return {Promise<Response>}

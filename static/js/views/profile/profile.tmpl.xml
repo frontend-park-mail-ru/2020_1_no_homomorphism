@@ -1,13 +1,15 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="col col-9">
         <div class="l-main">
+
+
             <div class="l-top-card">
 
                 <div class="l-top-info col col-6">
                     <div class="l-round-image col">
                         <img alt="" src="{data.image}" class=" m-round-image" id="avatar"/>
                     </div>
-                    <div class="l-top-name col" id="login-name">
+                    <div class="l-top-name col">
                         <div class="m-top-login" id="profile-login">
                             <fest:value>data.login</fest:value>
                         </div>
@@ -18,7 +20,7 @@
                 </div>
 
                 <div class="l-top-titles col col-6">
-                    <div class="m-profile-tracks col col-3" id="profile-tracks-title">
+                    <div class="l-top-section-tracks col col-3" id="profile-tracks-title">
                         <a class="m-tiny-ref" href="/profile/tracks">
                             <h2 id="tracks">
                                 <fest:value>data.tracks</fest:value>
@@ -34,7 +36,7 @@
                             <p>Playlists</p>
                         </a>
                     </div>
-                    <div class="m-profile-albums col col-3" id="profile-albums-title">
+                    <div class="l-top-section-albums col col-3" id="profile-albums-title">
                         <a class="m-tiny-ref" href="/profile/albums">
                             <h2 id="albums">
                                 <fest:value>data.albums</fest:value>
@@ -42,7 +44,7 @@
                             <p>Albums</p>
                         </a>
                     </div>
-                    <div class="m-profile-artists col col-3" id="profile-artists-title">
+                    <div class="l-top-section-artists col col-3" id="profile-artists-title">
                         <a class="m-tiny-ref" href="/profile/artists">
                             <h2 id="artists">
                                 <fest:value>data.artists</fest:value>
@@ -55,13 +57,13 @@
             </div>
 
             <div class="l-down-card">
-                <div class="l-profile-album-list" style="top: 0;">
+                <div class="l-album-list" style="top: 0;">
                 </div>
-                <div class="l-profile-track-list" style="top: 0;">
+                <div class="l-track-list" style="top: 0;">
                 </div>
-                <div class="l-profile-playlist-list" style="top: 0;">
+                <div class="l-playlist-list" style="top: 0;">
                 </div>
-                <div class="l-profile-artist-list" style="top: 0;">
+                <div class="l-artist-list" style="top: 0;">
                 </div>
             </div>
         </div>
