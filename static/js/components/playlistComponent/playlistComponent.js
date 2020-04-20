@@ -49,14 +49,22 @@ export default class PlaylistComponent {
 
     /**
      * Создание плейлиста
+     * @param {function} callback
      * @param {string} playlistName
      */
-    createPlaylist(playlistName) {
+    createPlaylist(callback, playlistName) {
         Api.playlistPost(playlistName)
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK_ADDED:
-                    console.log(res);
+                    res.json()
+                        .then((res) => {
+                            // console.log(res.playlist_id);
+                            callback({
+                                'name': playlistName,
+                                'id': res.playlist_id,
+                            });
+                        });
                     break;
                 case RESPONSE.BAD_REQUEST:
                     console.log('ALREADY ADDED');

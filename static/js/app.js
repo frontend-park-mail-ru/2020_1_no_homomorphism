@@ -11,8 +11,6 @@ import {ArtistController} from '@controllers/artist';
 import {PlaylistController} from '@controllers/playlist';
 import {AlbumController} from '@controllers/album';
 import '@css/_main.scss';
-// import '@css/base.css';
-// import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 
 window.addEventListener('DOMContentLoaded', () => {
     const router = new Router();

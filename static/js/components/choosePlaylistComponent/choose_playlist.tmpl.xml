@@ -4,7 +4,7 @@
             <div class="l-small-list">
                 <div class="m-small-ul">
                     <fest:for iterate="data" index="i" value="playlist">
-                        <div class="m-small-li" p-id="{playlist.id}">
+                        <div class="m-small-li" p-id="{playlist.id}" is-include="{playlist.include}">
                                 <fest:if test="playlist.include === true">
                                     <span class="m-small-ticked-button"></span>
                                 </fest:if>

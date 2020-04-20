@@ -98,30 +98,6 @@ export default class TrackListComponent {
      */
     getProfilePlaylists() {
         this.playlistComponent.getProfilePlaylistsApi(this.kek.bind(this));
-        // const res = this.playlistComponent.playlists;
-        // console.log(res);
-        // this.choosePlaylist
-        //     .render(this.setTracksEventListeners.bind(this), res);
-        // Api.profilePlaylistsGet()
-        //     .then((res) => {
-        //         switch (res.status) {
-        //         case RESPONSE.OK:
-        //             res.json()
-        //                 .then((list) => {
-        //                     this.choosePlaylist
-        //                         .render(this.setTracksEventListeners.bind(this), list.playlists);
-        //                 });
-        //             break;
-        //         case RESPONSE.UNAUTH:
-        //         case RESPONSE.NO_ACCESS_RIGHT:
-        //             globalEventBus.emit(GLOBAL.REDIRECT, URL.SIGN_UP);
-        //             break;
-        //         case RESPONSE.BAD_REQUEST:
-        //         default:
-        //             console.log(res);
-        //             console.error('I am a teapot');
-        //         }
-        //     });
     }
 
     /**

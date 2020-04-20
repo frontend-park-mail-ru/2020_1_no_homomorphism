@@ -62,7 +62,6 @@ export default class PlaylistView extends BaseView {
         }
         document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Amount of tracks: ' +
             this.tracksData.length;
-        // this.setEventListeners();
     }
 
     /**

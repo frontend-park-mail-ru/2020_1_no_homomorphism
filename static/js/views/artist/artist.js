@@ -70,7 +70,6 @@ export default class ArtistView extends BaseView {
     renderData(data) {
         this.setData(data);
         this.eventBus.emit(ARTIST.SET_ARTIST_ID, data.id);
-        // this.trackListComponent.setId(data.id);
         document.getElementsByClassName('m-top-login')[0].innerHTML = data.name;
         document.getElementsByClassName('m-round-image')[0].src = data.image;
         document.getElementsByClassName('m-top-name')[0].innerHTML = data.genre;

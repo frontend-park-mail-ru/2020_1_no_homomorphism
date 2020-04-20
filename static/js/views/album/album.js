@@ -19,7 +19,6 @@ export default class AlbumView extends BaseView {
         this.tracksData = {};
         this.trackListComponent = new TrackListComponent(eventBus, ALBUM);
         this.eventBus.on(ALBUM.RENDER_ALBUM, this.setAlbumData.bind(this));
-        // this.eventBus.on(ALBUM.RENDER_TRACKS_DATA, this.setTracksData.bind(this));
         this.eventBus.on(ALBUM.ERROR, this.showErrors.bind(this));
     }
 
