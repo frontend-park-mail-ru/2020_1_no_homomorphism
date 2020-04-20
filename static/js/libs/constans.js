@@ -211,7 +211,8 @@ export const ALBUM = {
     REDIRECT: 'album-redirect',
     GET_ALBUM_DATA: 'album-get-album-data',
     GET_TRACKS_DATA: 'album-get-tracks-data',
-    RENDER_ALBUM_DATA: 'album-render-album',
-    RENDER_TRACKS_DATA: 'album-render-tracks',
+    RENDER_ALBUM: 'album-render-album',
+    RENDER_TRACKS: 'album-render-tracks',
+    SET_ALBUM_ID: 'set-album-id',
     ERROR: 'album-show-errors',
 };

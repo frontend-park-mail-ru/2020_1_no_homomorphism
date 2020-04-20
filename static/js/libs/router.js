@@ -1,4 +1,5 @@
-import {URL, DOM} from '@libs/constans';
+import {URL, DOM, GLOBAL} from '@libs/constans';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * Переход по страничкам
@@ -16,6 +17,7 @@ export default class Router {
             URL.PROFILE_ARTISTS, URL.PROFILE_ALBUMS];
         this.forbiddenForLogout = [URL.PROFILE, URL.PROFILE_TRACKS, URL.PROFILE_PLAYLISTS,
             URL.PROFILE_ARTISTS, URL.PROFILE_ALBUMS, URL.SETTINGS];
+        globalEventBus.on(GLOBAL.REDIRECT, this.redirect.bind(this));
     }
 
     /**

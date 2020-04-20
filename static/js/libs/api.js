@@ -289,4 +289,17 @@ export default class Api {
             console.log(error.toString());
         });
     }
+
+    /**
+     * Логаут
+     * @param {string} playlistID
+     * @param {string} trackID
+     * @return {Promise<Response>}
+     */
+    static playlistTrackDelete(playlistID, trackID) { // TODO переименовать, когда бэк придумает
+        // playlists/{playlist:[0-9]+}/tracks/{track:[0-9]+}
+        return deleteFetch(API + `/playlists/${playlistID}/tracks/${trackID}`, (error) => {
+            console.log(error.toString());
+        });
+    }
 }

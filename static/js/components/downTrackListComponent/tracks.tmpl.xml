@@ -1,7 +1,7 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="small_line"></div>
     <fest:for iterate="data" index="i" value="track">
-        <div class="l-track-big" a-id="{track.id}">
+        <div class="l-track-big" t-id="{track.id}" t-image ="{track.image}">
             <div class="m-track row" style="text-align: left">
                 <div>
                     <div class="l-track-big-image">
@@ -17,9 +17,13 @@
                     </div>
                 </div>
                 <div class="l-track-buttons row">
-                    <div class="col l-big-track-button delete-button">
-                        <img src="/static/img/clear.svg" class="m-big-delete-button" height="15px" alt="..."/>
-                    </div>
+
+                    <fest:if test="data.type">
+                        <div class="col l-big-track-button delete-button">
+                            <img src="/static/img/clear.svg" class="m-big-delete-button" height="15px" alt="..."/>
+                        </div>
+                    </fest:if>
+
                     <div class="col l-big-track-button favorite-button">
                         <img src="/static/img/favorite_border.svg" class="m-big-like-button" height="15px" alt="..."/>
                     </div>

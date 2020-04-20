@@ -144,14 +144,14 @@
 }
 
 
-.l-track-big:hover .m-big-like-button, .l-track-big:hover .m-big-delete-button, .l-track-big:hover .m-big-add-button, .l-track-big:hover .m-big-more-button {
+.l-track-big:hover .m-big-like-button, .l-track-big:hover .m-big-delete-button, .l-track-big:hover .m-big-add-button{
   transition: 0.3s;
   -webkit-transform: scale(2);
   transform: scale(1.2);
   opacity: 1;
 }
 
-.l-track-big:not(:hover) .m-big-like-button, .l-track-big:not(:hover) .m-big-delete-button, .l-track-big:not(:hover) .m-big-add-button, .l-track-big:hover .m-big-more-button {
+.l-track-big:not(:hover) .m-big-like-button, .l-track-big:not(:hover) .m-big-delete-button, .l-track-big:not(:hover) .m-big-add-button{
   transition: 0.1s;
 }
 
@@ -163,7 +163,7 @@
 }
 
 /**/
-.m-big-like-button, .m-big-delete-button, .m-big-add-button, .m-big-more-button {
+.m-big-like-button, .m-big-delete-button, .m-big-add-button{
   opacity: 0;
 }
 
@@ -303,9 +303,7 @@
   top: 20%;
   position: absolute;
   border-radius: $card-border;
-  padding-left: 8px;
-  padding-bottom: 8px;
-  padding-top: 8px;
+  padding: 4px;
   box-sizing: border-box;
   background-color: #ffffff;
   transition: box-shadow .3s ease;

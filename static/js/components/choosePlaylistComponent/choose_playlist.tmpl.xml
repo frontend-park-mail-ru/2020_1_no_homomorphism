@@ -3,54 +3,21 @@
         <div class="m-choose-menu ">
             <div class="l-small-list">
                 <div class="m-small-ul">
-                    <div class="m-small-li">
-                        <span class="m-small-ticked"></span>
-                        <span class="m-small-title" title="Мне нравится">Мне ОЧЕНЬОЧЕНЬОЧЕНЬОЧЕНЬОЧЕНЬОЧЕНЬОЧЕНЬ нравится</span>
-                    </div>
-                    <div class="m-small-li">
-                        <span class="m-small-add-button"></span>
-                        <span class="m-small-title" title="Новый плейлист">Новый плейлист</span>
-                    </div>
-                    <div class="m-small-li">
-                        <span class="m-small-add-button"></span>
-                        <span class="m-small-title" title="Новый плейлист">Гавно музон</span>
-                    </div>
-                    <div class="m-small-li">
-                        <span class="m-small-add-button"></span>
-                        <span class="m-small-title" title="Новый плейлист">Тест очень длинного названия</span>
-                    </div>
-                    <div class="m-small-li">
-                        <span class="m-small-ticked"></span>
-                        <span class="m-small-title" title="Мне нравится">Мне нравится</span>
-                    </div>
-                    <div class="m-small-li">
-                        <span class="m-small-add-button"></span>
-                        <span class="m-small-title" title="Новый плейлист">Новый плейлист</span>
-                    </div>
-                    <div class="m-small-li">
-                        <span class="m-small-add-button"></span>
-                        <span class="m-small-title" title="Новый плейлист">Гавно музон</span>
-                    </div>
-                    <div class="m-small-li">
-                        <span class="m-small-add-button"></span>
-                        <span class="m-small-title" title="Новый плейлист">Тест очень длинного названия</span>
-                    </div>
-                    <div class="m-small-li">
-                        <span class="m-small-ticked"></span>
-                        <span class="m-small-title" title="Мне нравится">Мне нравится</span>
-                    </div>
-                    <div class="m-small-li">
-                        <span class="m-small-add-button"></span>
-                        <span class="m-small-title" title="Новый плейлист">Новый плейлист</span>
-                    </div>
-                    <div class="m-small-li">
-                        <span class="m-small-add-button"></span>
-                        <span class="m-small-title" title="Новый плейлист">Гавно музон</span>
-                    </div>
-                    <div class="m-small-li">
-                        <span class="m-small-add-button"></span>
-                        <span class="m-small-title" title="Новый плейлист">Тест очень длинного названия</span>
-                    </div>
+                    <fest:for iterate="data" index="i" value="playlist">
+                        <div class="m-small-li" p-id="{playlist.id}">
+                            <fest:choose>
+                                <fest:when test="playlist.include">
+                                    <span class="m-small-ticked"></span>
+                                </fest:when>
+                                <fest:otherwise>
+                                    <span class="m-small-add-button"></span>
+                                </fest:otherwise>
+                            </fest:choose>
+                            <span class="m-small-title" title="Мне нравится">
+                                <fest:value>playlist.name</fest:value>
+                            </span>
+                        </div>
+                    </fest:for>
                 </div>
             </div>
             <div class="l-small-input">

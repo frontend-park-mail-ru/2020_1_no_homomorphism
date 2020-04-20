@@ -1,5 +1,7 @@
 import dropdown from '@components/choosePlaylistComponent/choose_playlist.tmpl.xml';
 import {DOM} from '@libs/constans';
+import TrackComponent from '@components/trackComponent/trackComponent';
+import PlaylistComponent from '@components/playlistComponent/playlistComponent';
 
 /**
  * Компонент - выпадающее меню при добавлении трека в плейлист
@@ -13,32 +15,45 @@ export default class ChoosePlaylist {
     constructor(eventBus, modelType) {
         this.eventBus = eventBus;
         this._modelType = modelType;
-        this._state = false; // закрыт
-        this._trackID = -1;
-        // this.eventBus.on(modelType.DROPDOWN, this.render.bind(this));
+        this._trackComponent = new TrackComponent();
+        this._playlistComponent = new PlaylistComponent();
+        this._trackData = {};
+        this._playlists = [];
     }
 
     /**
      * Установка текущего айди трека
-     * @param {string} id
+     * @param {string} trackData
      */
-    set trackID(id) {
-        this._trackID = id;
+    set trackData(trackData) {
+        this._trackData = trackData;
+        this._trackComponent.trackData = trackData;
     }
 
     /**
      * Конструткор
-     * @param {function} callback
+     * @param {function} callbackEventListener
+     * @param {Array} playlists
      */
-    render(callback) {
-        this.callback = callback;
-        document.getElementsByClassName(DOM.CONTENT)[0].innerHTML += dropdown();
+    render(callbackEventListener, playlists) {
+        this._playlists = playlists;
+        this.callbackEventListener = callbackEventListener;
+        this.setTrackPlaylists();
+        document.getElementsByClassName(DOM.CONTENT)[0].innerHTML += dropdown(this._playlists);
         document.getElementsByClassName(DOM.CONTENT)[0]
             .firstChild
             .classList
             .add('is-un-emphasized');
-        this._state = true;
         this.setEventListeners();
+    }
+
+    /**
+     * Определение, в каких плейлистах есть трек
+     */
+    setTrackPlaylists() {
+        for (const elem of this._playlists) {
+            elem.include = false;
+        }
     }
 
     /**
@@ -46,6 +61,14 @@ export default class ChoosePlaylist {
      */
     setEventListeners() {
         document.addEventListener('click', this.closeMenu.bind(this), {once: true});
+        document.getElementsByClassName('m-small-input')[0]
+            .addEventListener('keyup', (event) => {
+                // Number 13 is the "Enter" key on the keyboard
+                if (event.keyCode === 13) {
+                    this._playlistComponent.createPlaylist(event.target.value);
+                    // console.log();
+                }
+            });
     }
 
     /**
@@ -53,25 +76,58 @@ export default class ChoosePlaylist {
      * @param {Object} event
      */
     closeMenu(event) {
-        if (this._state) {
-            this._state = false;
-            this.setEventListeners.bind(this)();
-            return;
-        }
         const choosePlaylist = document.getElementsByClassName('m-choose-menu')[0];
         const isClickInside = choosePlaylist.contains(event.target);
 
         if (!isClickInside) {
-            this._state = false;
             document.getElementsByClassName(DOM.CONTENT)[0]
                 .removeChild(document.getElementsByClassName(DOM.CONTENT)[0].lastChild);
             document.getElementsByClassName(DOM.CONTENT)[0]
                 .firstChild
                 .classList
                 .remove('is-un-emphasized');
-            this.callback();
+            this.callbackEventListener();
         } else {
+            this.addToPlaylist(this.getIdByClick(event));
             this.setEventListeners.bind(this)();
+        }
+    }
+
+    /**
+     * Добавление трека в плейлист
+     * @param {string} playlistID
+     */
+    addToPlaylist(playlistID) {
+        this._trackComponent.addToPlaylist(playlistID, this.addedToPlaylist.bind(this));
+    }
+
+    /**
+     * Трек добавлен в плейлист
+     * @param {string} playlistID
+     */
+    addedToPlaylist(playlistID) {
+        this._curPlaylist.firstChild.classList.remove('m-small-add-button');
+        this._curPlaylist.firstChild.classList.add('m-small-ticked');
+        const playlist = this._playlists.find((item) => item.id === playlistID);
+        playlist.include = true;
+    }
+
+
+    /**
+     * Получение id из dom-елемента по нажатию
+     * @param {Object} event
+     * @return {string}
+     */
+    getIdByClick(event) {
+        let current = event.target;
+        while (current != null) {
+            if (current.getAttribute('class') === 'm-small-li' &&
+                current.getAttribute('p-id') !== null) {
+                this._curPlaylist = current;
+                return current.getAttribute('p-id');
+            } else {
+                current = current.parentNode;
+            }
         }
     }
 }
