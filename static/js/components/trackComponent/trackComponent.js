@@ -22,9 +22,27 @@ export default class TrackComponent {
 
     /**
      * Получение плейлистов трека
-     * @param {number} trackID
+     * @param {string} trackID
+     * @param {function} callback
      */
-    getTrackPlaylists(trackID) {
+    getTrackPlaylists(trackID, callback) {
+        Api.trackPlaylistsGet(trackID)
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    res.json()
+                        .then((elem) => {
+                            callback(elem.playlists);
+                        });
+                    break;
+                case RESPONSE.BAD_REQUEST:
+                    console.log('ALREADY ADDED');
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
     }
 
     /**

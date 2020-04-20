@@ -19,6 +19,7 @@ export default class ChoosePlaylist {
         this._playlistComponent = new PlaylistComponent();
         this._trackData = {};
         this._playlists = [];
+        this._playlistIncludes = [];
     }
 
     /**
@@ -38,7 +39,23 @@ export default class ChoosePlaylist {
     render(callbackEventListener, playlists) {
         this._playlists = playlists;
         this.callbackEventListener = callbackEventListener;
-        this.setTrackPlaylists();
+        this._trackComponent
+            .getTrackPlaylists(this._trackData.id, this.setTrackPlaylists.bind(this));
+        // console.log(this._playlists);
+    }
+
+    /**
+     * Определение, в каких плейлистах есть трек
+     * @param {Array} playlistIncludes
+     */
+    setTrackPlaylists(playlistIncludes) {
+        // console.log(playlistIncludes);
+        for (const elem of this._playlists) {
+            // playlistIncludes.forEach((elem) => );
+            elem.include = playlistIncludes.includes(elem.id);
+            // elem.notInclude = !elem.include;
+            // elem.include = false;
+        }
         document.getElementsByClassName(DOM.CONTENT)[0].innerHTML += dropdown(this._playlists);
         document.getElementsByClassName(DOM.CONTENT)[0]
             .firstChild
@@ -48,25 +65,14 @@ export default class ChoosePlaylist {
     }
 
     /**
-     * Определение, в каких плейлистах есть трек
-     */
-    setTrackPlaylists() {
-        for (const elem of this._playlists) {
-            elem.include = false;
-        }
-    }
-
-    /**
      * Set EventListeners
      */
     setEventListeners() {
         document.addEventListener('click', this.closeMenu.bind(this), {once: true});
         document.getElementsByClassName('m-small-input')[0]
             .addEventListener('keyup', (event) => {
-                // Number 13 is the "Enter" key on the keyboard
                 if (event.keyCode === 13) {
                     this._playlistComponent.createPlaylist(event.target.value);
-                    // console.log();
                 }
                 // this.setEventListeners.bind(this)();
             });
@@ -99,7 +105,9 @@ export default class ChoosePlaylist {
      * @param {string} playlistID
      */
     addToPlaylist(playlistID) {
-        this._trackComponent.addToPlaylist(playlistID, this.addedToPlaylist.bind(this));
+        if (playlistID !== '') {
+            this._trackComponent.addToPlaylist(playlistID, this.addedToPlaylist.bind(this));
+        }
     }
 
     /**
@@ -108,7 +116,7 @@ export default class ChoosePlaylist {
      */
     addedToPlaylist(playlistID) {
         this._curPlaylist.firstChild.classList.remove('m-small-add-button');
-        this._curPlaylist.firstChild.classList.add('m-small-ticked');
+        this._curPlaylist.firstChild.classList.add('m-small-ticked-button');
         const playlist = this._playlists.find((item) => item.id === playlistID);
         playlist.include = true;
     }
@@ -125,10 +133,12 @@ export default class ChoosePlaylist {
             if (current.getAttribute('class') === 'm-small-li' &&
                 current.getAttribute('p-id') !== null) {
                 this._curPlaylist = current;
+                if (this._playlistIncludes.includes(current.getAttribute('p-id'))) {
+                    return '';
+                }
                 return current.getAttribute('p-id');
-            } else {
-                current = current.parentNode;
             }
+            current = current.parentNode;
         }
     }
 }

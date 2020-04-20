@@ -1,20 +1,21 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="row">
+
         <div class="m-choose-menu ">
             <div class="l-small-list">
                 <div class="m-small-ul">
                     <fest:for iterate="data" index="i" value="playlist">
                         <div class="m-small-li" p-id="{playlist.id}">
-                            <fest:choose>
-                                <fest:when test="playlist.include">
-                                    <span class="m-small-ticked"></span>
-                                </fest:when>
-                                <fest:otherwise>
+                                <fest:if test="playlist.include === true">
+                                    <span class="m-small-ticked-button"></span>
+                                </fest:if>
+                                <fest:if test="playlist.include !== true">
                                     <span class="m-small-add-button"></span>
-                                </fest:otherwise>
-                            </fest:choose>
+                                </fest:if>
                             <span class="m-small-title" title="Мне нравится">
                                 <fest:value>playlist.name</fest:value>
+                                <fest:value>playlist.include</fest:value>
+                                <fest:value>playlist.notInclude</fest:value>
                             </span>
                         </div>
                     </fest:for>

@@ -366,8 +366,8 @@
   display: inline-block;
 }
 
-.m-small-li:hover .m-small-ticked {
-  background-image: url("/static/img/clear.svg");
+.m-small-li:hover .m-small-ticked-button {
+  // background-image: url("/static/img/clear.svg");
   display: inline-block;
 }
 
@@ -379,28 +379,6 @@
   margin-left: 34px;
   padding-right: 10px;
   line-height: 24px;
-  vertical-align: middle;
-}
-
-.m-small-ticked {
-  background-image: url("/static/img/spizdil_is_yandexa_black.svg");
-  display: inline-block;
-  background-size: 100%;
-  width: 24px;
-  height: 24px;
-  float: left;
-  margin-right: 10px;
-  vertical-align: middle;
-}
-
-.m-small-add-button {
-  background-image: url("/static/img/add.svg");
-  opacity: .2;
-  background-size: 100%;
-  width: 24px;
-  height: 24px;
-  float: left;
-  margin-right: 10px;
   vertical-align: middle;
 }
 

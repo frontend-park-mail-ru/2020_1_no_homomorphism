@@ -147,9 +147,8 @@ export default class TrackListComponent {
                     'id': current.getAttribute('t-id'),
                     'image': current.getAttribute('t-image'),
                 };
-            } else {
-                current = current.parentNode;
             }
+            current = current.parentNode;
         }
     }
 

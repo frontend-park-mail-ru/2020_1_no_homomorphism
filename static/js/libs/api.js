@@ -291,6 +291,17 @@ export default class Api {
     }
 
     /**
+     * Удаление плейлиста
+     * @param {string} playlistID
+     * @return {Promise<Response>}
+     */
+    static playlistDelete(playlistID) {
+        return deleteFetch(API + `/playlists/${playlistID}`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
      * Удаление трека из плейлиста
      * @param {string} playlistID
      * @param {string} trackID
@@ -302,13 +313,15 @@ export default class Api {
         });
     }
 
+    // ------------- TRACK  ---------------
+
     /**
-     * Удаление плейлиста
-     * @param {string} playlistID
+     * Получение списка плейлистов
+     * @param {string} trackID
      * @return {Promise<Response>}
      */
-    static playlistDelete(playlistID) {
-        return deleteFetch(API + `/playlists/${playlistID}`, (error) => {
+    static trackPlaylistsGet(trackID) {
+        return getFetch(API + `/playlists/tracks/${trackID}`, (error) => {
             console.log(error.toString());
         });
     }
