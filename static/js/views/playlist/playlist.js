@@ -21,6 +21,7 @@ export default class PlaylistView extends BaseView {
         this.eventBus.on(PLAYLIST.RENDER_PLAYLIST_DATA, this.setPlaylistData.bind(this));
         this.eventBus.on(PLAYLIST.SET_TRACKS_AMOUNT, this.setTracksAmount.bind(this));
         this.eventBus.on(PLAYLIST.ERROR, this.showErrors.bind(this));
+        this.eventBus.on(PLAYLIST.RENDER_DELETED, this.renderDeleted.bind(this));
     }
 
     /**
@@ -79,6 +80,13 @@ export default class PlaylistView extends BaseView {
      */
     deletePlaylist() {
         this.eventBus.emit(PLAYLIST.DELETE_PLAYLIST, this.playlistData.id);
+    }
+
+    /**
+     * Отрисовка удаления
+     */
+    renderDeleted() {
+        console.log(this.playlistData);
     }
 
     /**

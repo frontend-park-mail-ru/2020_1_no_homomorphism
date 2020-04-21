@@ -53,15 +53,15 @@
   transition: 0.3s;
 }
 
-.m-search-button {
+.m-button-without-size {
   position: relative;
   box-shadow: $box-shadow;
-  opacity: 0.4;
+  opacity: 0.3;
   cursor: pointer;
 }
 
-.m-search-button:hover {
-  opacity: 1;
+.m-button-without-size:hover {
+  opacity: 0.7;
 }
 .m-signup-button {
   height: 55px;
@@ -149,4 +149,20 @@
   float: left;
   margin-right: 10px;
   vertical-align: middle;
+}
+
+.m-button-track-play-playlist {
+  height: 30px;
+  width: 30px;
+  object-fit: cover;
+  background: url(../../static/img/play.svg) no-repeat;
+  border: yellow;
+  cursor: pointer;
+  opacity: 0;
+  margin-left: 56px !important;
+}
+
+.l-button-play-track {
+  height: 200px;
+  margin-top: -200px;
 }

@@ -255,9 +255,9 @@
   box-shadow: 0 3px 10px -3px rgba(0, 0, 0, 0.5);
 }
 
-.l-button-play-track {
-  height: 200px;
-  margin-top: -200px;
+.l-list-card:hover .m-small-input {
+  transition: 0.3s;
+  background-color: #eeeeee;
 }
 
 .l-list-card:hover .m-button-track-play-playlist {
@@ -271,15 +271,9 @@
   opacity: 0.8;
 }
 
-.m-button-track-play-playlist {
-  height: 30px;
-  width: 30px;
-  object-fit: cover;
-  background: url(../../static/img/play.svg) no-repeat;
-  border: yellow;
-  cursor: pointer;
-  opacity: 0;
-  margin-left: 56px !important;
+.l-list-card:hover .m-list-image {
+  transition: 0.3s;
+  opacity: 0.8;
 }
 
 .l-list-image {

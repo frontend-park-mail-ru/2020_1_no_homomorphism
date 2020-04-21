@@ -6,7 +6,7 @@
         VirusMusic
     </a>
     <input type="text" class="m-search-input"/>
-    <a class="m-search-button">
+    <a class="m-button-without-size">
         <img src="/static/img/search.svg" class="m-medium-icon"/>
     </a>
     <a href="/profile/tracks" class="l-navbar-info is-hidden" id="profile-link">

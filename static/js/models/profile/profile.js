@@ -87,7 +87,7 @@ export default class ProfileModel {
      * Получение списка любимых треков
      */
     getLikedTracks() {
-        const playlistID = 1; // СУПЕР ВРЕМЕННО!!!
+        const playlistID = 94; // СУПЕР ВРЕМЕННО!!!
         Api.playlistTracksGet(
             playlistID.toString(),
             this.curPaginationTracks.toString(),

@@ -16,7 +16,7 @@ export default class ChoosePlaylist {
     constructor(eventBus, modelType) {
         this.eventBus = eventBus;
         this._trackComponent = new TrackComponent();
-        this._playlistComponent = new PlaylistComponent();
+        this._playlistComponent = new PlaylistComponent(this.setEventListeners.bind(this));
         this._trackData = {};
         this._playlists = [];
     }
@@ -93,7 +93,6 @@ export default class ChoosePlaylist {
         this._playlists.push(playlist);
         this._curPlaylist = document.getElementsByClassName('m-small-ul')[0].lastChild;
         this.addToPlaylist(playlist.id);
-        this.setEventListeners();
     }
 
     /**
@@ -103,6 +102,7 @@ export default class ChoosePlaylist {
     addedToPlaylist(playlistID) {
         this._curPlaylist.firstChild.classList.remove('m-small-add-button');
         this._curPlaylist.firstChild.classList.add('m-small-ticked-button');
+        this._curPlaylist.setAttribute('is-include', 'true');
         const playlist = this._playlists.find((item) => item.id === playlistID);
         playlist.include = true;
     }
@@ -118,7 +118,6 @@ export default class ChoosePlaylist {
             return;
         }
         const isClickInside = choosePlaylist.contains(event.target);
-
         if (!isClickInside) {
             document.getElementsByClassName(DOM.CONTENT)[0]
                 .removeChild(document.getElementsByClassName(DOM.CONTENT)[0].lastChild);
@@ -148,9 +147,10 @@ export default class ChoosePlaylist {
             if (current.getAttribute('class') === 'm-small-li' &&
                 current.getAttribute('p-id') !== null) {
                 this._curPlaylist = current;
-                if (current.getAttribute('is-include')) {
+                if (current.getAttribute('is-include') === 'true') {
                     return '';
                 }
+                // current.setAttribute('is-include', 'true');
                 return current.getAttribute('p-id');
             }
             current = current.parentNode;

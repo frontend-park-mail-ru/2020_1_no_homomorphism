@@ -63,12 +63,14 @@ export default class PlaylistModel {
                     res.json()
                         .then((list) => {
                             this.playlist = list;
-                            this.eventBus.emit(PLAYLIST.RENDER_TRACKS,
-                                {
-                                    'tracks': this.playlist.tracks,
-                                    'domItem': 'l-track-list',
-                                    'type': 'playlist',
-                                });
+                            if (this.playlist.tracks.length > 0) {
+                                this.eventBus.emit(PLAYLIST.RENDER_TRACKS,
+                                    {
+                                        'tracks': this.playlist.tracks,
+                                        'domItem': 'l-track-list',
+                                        'type': 'playlist',
+                                    });
+                            }
                             this.eventBus.emit(PLAYLIST.SET_TRACKS_AMOUNT, this.playlist.tracks);
                         });
                     break;
@@ -88,6 +90,7 @@ export default class PlaylistModel {
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK: // TODO обработать удаление
+                    this.eventBus.emit(PLAYLIST.RENDER_DELETED);
                     this.eventBus.emit(PLAYLIST.REDIRECT, URL.MAIN);
                     break;
                 case RESPONSE.BAD_REQUEST:

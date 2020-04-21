@@ -8,19 +8,11 @@ import {globalEventBus} from '@libs/eventBus';
 export default class PlaylistComponent {
     /**
      * конструктор
+     * @param {function} _setEventListeners
      */
-    constructor() {
-        this._trackData = {};
+    constructor(_setEventListeners) {
+        this._setEventListeners = _setEventListeners;
     }
-
-    /**
-     * Запись данных о треке
-     * @param {Object} data
-     */
-    set trackData(data) {
-        this._trackData = data;
-    }
-
     /**
      * Получение плейлистов трека
      * @param {function} callback
@@ -59,11 +51,11 @@ export default class PlaylistComponent {
                 case RESPONSE.OK_ADDED:
                     res.json()
                         .then((res) => {
-                            // console.log(res.playlist_id);
                             callback({
                                 'name': playlistName,
                                 'id': res.playlist_id,
                             });
+                            this._setEventListeners();
                         });
                     break;
                 case RESPONSE.BAD_REQUEST:
