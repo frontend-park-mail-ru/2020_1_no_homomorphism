@@ -31,7 +31,7 @@ export default class ProfileModel {
             this.eventBus.emit(PROFILE.RENDER_DATA, User.getUserData());
             return;
         }
-        Api.profileFetch()
+        Api.profileGet()
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
@@ -60,7 +60,7 @@ export default class ProfileModel {
      * получает статистику юзера
      */
     getUserStat() {
-        Api.profileStatFetch(User.getUserData().id)
+        Api.profileStatGet(User.getUserData().id)
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
@@ -87,8 +87,8 @@ export default class ProfileModel {
      * Получение списка любимых треков
      */
     getLikedTracks() {
-        const playlistID = 8; // СУПЕР ВРЕМЕННО!!!
-        Api.playlistTracksFetch(
+        const playlistID = 94; // СУПЕР ВРЕМЕННО!!!
+        Api.playlistTracksGet(
             playlistID.toString(),
             this.curPaginationTracks.toString(),
             PAGINATION.TRACKS.toString())
@@ -100,9 +100,11 @@ export default class ProfileModel {
                             this.eventBus.emit(PROFILE.SET_PLAYLIST_ID, playlistID);
                             this.eventBus.emit(
                                 PROFILE.RENDER_TRACKS,
-                                list.tracks,
-                                'l-track-list',
-                                'playlist');
+                                {
+                                    'tracks': list.tracks,
+                                    'domItem': 'l-track-list',
+                                    'type': 'playlist',
+                                });
                         });
                     break;
                 case RESPONSE.BAD_REQUEST:
@@ -120,7 +122,7 @@ export default class ProfileModel {
      * Получение списка плейлистов
      */
     getPlaylists() {
-        Api.profilePlaylistsFetch()
+        Api.profilePlaylistsGet()
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
@@ -128,9 +130,11 @@ export default class ProfileModel {
                         .then((list) => {
                             this.eventBus.emit(
                                 PROFILE.RENDER_PLAYLISTS,
-                                list.playlists,
-                                'l-playlist-list',
-                                'playlist');
+                                {
+                                    'list': list.playlists,
+                                    'domItem': 'l-playlist-list',
+                                    'type': 'playlist',
+                                });
                         });
                     break;
                 case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
@@ -149,7 +153,7 @@ export default class ProfileModel {
      * Получение списка альбомов
      */
     getAlbums() {
-        Api.profileAlbumsFetch()
+        Api.profileAlbumsGet()
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
@@ -160,9 +164,11 @@ export default class ProfileModel {
                         .then(() => {
                             this.eventBus.emit(
                                 PROFILE.RENDER_PLAYLISTS,
-                                this.albums,
-                                'l-album-list',
-                                'album');
+                                {
+                                    'list': this.albums,
+                                    'domItem': 'l-album-list',
+                                    'type': 'album',
+                                });
                         });
                     break;
                 case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует

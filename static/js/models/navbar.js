@@ -24,7 +24,7 @@ export default class NavbarModel {
      * Узнаёт, залогинен ли пользователь
      */
     cookieFetch() {
-        Api.cookieFetch()
+        Api.cookieGet()
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
@@ -63,7 +63,7 @@ export default class NavbarModel {
      * Получает данные пользователя
      */
     getUserData() {
-        Api.profileFetch()
+        Api.profileGet()
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:

@@ -30,7 +30,7 @@ export default class SettingsModel {
             this.eventBus.emit(SETTINGS.RENDER_LOGGED, User.getUserData());
             return;
         }
-        Api.profileFetch()
+        Api.profileGet()
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
@@ -68,7 +68,7 @@ export default class SettingsModel {
         } else {
             const fData = new FormData();
             fData.append('profile_image', fileAttach.files[0], 'kek.png');
-            Api.profilePhotoFetch(fData)
+            Api.profileAvatarPost(fData)
                 .then((res) => {
                     this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
                     switch (res.status) {
@@ -126,7 +126,7 @@ export default class SettingsModel {
         if (JSON.stringify(errors) !== '{}') {
             this.eventBus.emit(SETTINGS.INVALID, errors);
         } else {
-            Api.profileEditFetch(values.name, values.email, values.password, values.newPassword)
+            Api.profilePut(values.name, values.email, values.password, values.newPassword)
                 .then((res) => {
                     this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
                     switch (res.status) {
@@ -159,7 +159,7 @@ export default class SettingsModel {
      * Получение токена
      */
     getCsrfToken() {
-        Api.csrfTokenFetch()
+        Api.csrfTokenGet()
             .then((res) => {
                 User.token = res.headers.get('Csrf-Token');
             });

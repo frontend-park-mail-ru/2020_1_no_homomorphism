@@ -23,7 +23,6 @@ export default class LoginView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
-        // super.render(root);
         this.globalEventBus.emit(GLOBAL.COLLAPSE);
         if (root.children.length > 0) {
             if (root.firstChild.classList.contains('is-emphasized')) {

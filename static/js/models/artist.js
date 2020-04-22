@@ -30,7 +30,7 @@ export default class ArtistModel {
     getArtistData(id) {
         this.id = id.toString();
         Promise.all([
-            Api.artistFetch(this.id),
+            Api.artistGet(this.id),
             Api.artistStatFetch(this.id),
         ])
             .then((res) => {
@@ -55,7 +55,7 @@ export default class ArtistModel {
      * @param {string} end
      */
     getArtistTracks(start, end) {
-        Api.artistTracksFetch(this.id, start, end)
+        Api.artistTracksGet(this.id, start, end)
             .then((res) => {
                 if (res === undefined) {
                     this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);
@@ -66,9 +66,11 @@ export default class ArtistModel {
                         .then((data) => {
                             this.tracks += data.tracks;
                             this.eventBus.emit(ARTIST.RENDER_TRACKS,
-                                data.tracks,
-                                'l-track-list',
-                                'artist');
+                                {
+                                    'tracks': data.tracks,
+                                    'domItem': 'l-track-list',
+                                    'type': 'artist',
+                                });
                         });
                 } else {
                     this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
@@ -82,7 +84,7 @@ export default class ArtistModel {
      * @param {string} end
      */
     getArtistAlbums(start, end) {
-        Api.artistAlbumsFetch(this.id, start, end)
+        Api.artistAlbumsGet(this.id, start, end)
             .then((res) => {
                 if (res === undefined) {
                     this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);
@@ -93,9 +95,11 @@ export default class ArtistModel {
                         .then((data) => {
                             this.albums = data.albums;
                             this.eventBus.emit(ARTIST.RENDER_ALBUMS,
-                                data.albums,
-                                'l-album-list',
-                                'album');
+                                {
+                                    'list': data.albums,
+                                    'domItem': 'l-album-list',
+                                    'type': 'album',
+                                });
                         });
                 } else {
                     this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);

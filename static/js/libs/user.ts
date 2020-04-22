@@ -115,7 +115,6 @@ export default class User implements IUser {
             });
     }
 
-
     /** Получение статистики пользователя
      */
     public static getStatistics(): { [index: string]: string } {

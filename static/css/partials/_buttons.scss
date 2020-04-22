@@ -32,7 +32,7 @@
   border: yellow;
   cursor: pointer;
   opacity: 0.4;
-  margin-top: 110px;
+  margin-top: 96px;
   padding: 20px;
   position: relative;
   margin-left: -140px;
@@ -53,15 +53,15 @@
   transition: 0.3s;
 }
 
-.m-search-button {
+.m-button-without-size {
   position: relative;
   box-shadow: $box-shadow;
-  opacity: 0.4;
+  opacity: 0.3;
   cursor: pointer;
 }
 
-.m-search-button:hover {
-  opacity: 1;
+.m-button-without-size:hover {
+  opacity: 0.7;
 }
 .m-signup-button {
   height: 55px;
@@ -96,4 +96,73 @@
 
 .l-big-track-button:hover {
   opacity: 1;
+}
+
+.m-delete-playlist-button {
+  background-image: url("/static/img/icons/delete_outline-24px.svg");
+  display: inline-block;
+  background-size: 100%;
+  width: 40px;
+  height: 40px;
+  float: left;
+  margin-right: 10px;
+  vertical-align: middle;
+  opacity: 0.8;
+}
+
+.m-delete-playlist-button:hover {
+  background-image: url("/static/img/icons/delete-24px.svg");
+  -webkit-transform: scale(1.5);
+  transform: scale(1.5);
+  transition: 0.3s;
+  opacity: 0.8;
+}
+
+.m-delete-playlist-button:not(:hover) {
+  transition: 0.3s;
+}
+
+.l-delete-playlist-button {
+  margin-left: -64px;
+  margin-top: 16px;
+  margin-right: 16px;
+  float: right !important;
+}
+
+.m-small-ticked-button {
+  background-image: url("/static/img/spizdil_is_yandexa_black.svg");
+  display: inline-block;
+  background-size: 100%;
+  width: 24px;
+  height: 24px;
+  float: left;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.m-small-add-button {
+  background-image: url("/static/img/add.svg");
+  opacity: .2;
+  background-size: 100%;
+  width: 24px;
+  height: 24px;
+  float: left;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.m-button-track-play-playlist {
+  height: 30px;
+  width: 30px;
+  object-fit: cover;
+  background: url(../../static/img/play.svg) no-repeat;
+  border: yellow;
+  cursor: pointer;
+  opacity: 0;
+  margin-left: 56px !important;
+}
+
+.l-button-play-track {
+  height: 200px;
+  margin-top: -200px;
 }
