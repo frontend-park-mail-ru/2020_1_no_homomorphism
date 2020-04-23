@@ -173,6 +173,7 @@ export const PROFILE = {
     // --
     SET_PLAYLIST_ID: 'profile-set-playlist-id',
     SET_ALBUM_ID: 'profile-set-album-id',
+    CHANGE_PLAYLIST_AMOUNT: 'profile-change-playlist-amount',
     DROPDOWN: 'profile-dropdown',
 };
 
@@ -207,6 +208,7 @@ export const PLAYLIST = {
     DELETE_PLAYLIST: 'playlist-delete',
     ERROR: 'playlist-show-errors',
     RENDER_DELETED: 'playlist-render-deleted',
+    CHANGE_TRACK_AMOUNT: 'playlist-change-track-amount',
 };
 
 export const ALBUM = {
@@ -215,6 +217,7 @@ export const ALBUM = {
     GET_TRACKS_DATA: 'album-get-tracks-data',
     RENDER_ALBUM: 'album-render-album',
     RENDER_TRACKS: 'album-render-tracks',
+    SET_TRACKS_AMOUNT: 'album-set-tracks-amount',
     SET_ALBUM_ID: 'set-album-id',
     ERROR: 'album-show-errors',
 };

@@ -20,6 +20,7 @@ export default class AlbumView extends BaseView {
         this.trackListComponent = new TrackListComponent(eventBus, ALBUM);
         this.eventBus.on(ALBUM.RENDER_ALBUM, this.setAlbumData.bind(this));
         this.eventBus.on(ALBUM.ERROR, this.showErrors.bind(this));
+        this.eventBus.on(ALBUM.SET_TRACKS_AMOUNT, this.setTracksAmount.bind(this));
     }
 
     /**
@@ -51,15 +52,6 @@ export default class AlbumView extends BaseView {
     }
 
     /**
-     * Вставляет необходимые данные треков
-     * @param {Object} tracks
-     */
-    setTracksData(tracks) {
-        this.tracksData = tracks;
-        this.renderTracks();
-    }
-
-    /**
      * Слушает события
      */
     setEventListeners() {
@@ -68,7 +60,21 @@ export default class AlbumView extends BaseView {
     }
 
     /**
-     * Проигрование плейлиста
+     * Вставляет необходимые данные треков
+     * @param {Object} tracks
+     */
+    setTracksAmount(tracks) {
+        this.tracksData = tracks;
+        this.setEventListeners();
+        if (this.tracksData.length === 0) {
+            return;
+        }
+        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Amount of tracks: ' +
+            this.tracksData.length;
+    }
+
+    /**
+     * Проигрование альбома
      */
     playAlbum() {
         this.globalEventBus.emit(GLOBAL.PLAY_ALBUM, this.albumData.id);
@@ -82,17 +88,5 @@ export default class AlbumView extends BaseView {
         document.getElementsByClassName('l-top-card')[0].innerHTML = error.text;
         document.getElementsByClassName('l-top-card')[0].classList.add('is-error');
         document.getElementsByClassName('l-down-card')[0].classList.add('is-hidden');
-    }
-
-    /**
-     * Слушает клик мыши по кнопке лайка на треке в плейлисте
-     * @param {Object} event
-     */
-    likeClicked(event) {
-        if (event.target.src.indexOf('/static/img/favorite_border.svg') !== -1) {
-            event.target.src = '/static/img/favorite.svg';
-        } else {
-            event.target.src = '/static/img/favorite_border.svg';
-        }
     }
 }

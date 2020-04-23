@@ -71,7 +71,8 @@ export default class PlaylistModel {
                                         'type': 'playlist',
                                     });
                             }
-                            this.eventBus.emit(PLAYLIST.SET_TRACKS_AMOUNT, this.playlist.tracks);
+                            this.eventBus.emit(PLAYLIST.SET_TRACKS_AMOUNT,
+                                this.playlist.tracks.length);
                         });
                     break;
                 default:
