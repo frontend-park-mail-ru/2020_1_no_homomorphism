@@ -5,7 +5,7 @@
                 <h2 class="l-small-card">
                     Artists
                 </h2>
-                <div class="small_line"></div>
+                <div class="small-line"></div>
                 <fest:for iterate="data" index="i" value="artist">
                     <a href="/artist/{artist.id}/tracks">
                         <div class="l-list-card" a-id="{artist.id}">

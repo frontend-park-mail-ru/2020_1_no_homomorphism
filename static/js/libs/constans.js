@@ -221,3 +221,11 @@ export const ALBUM = {
     SET_ALBUM_ID: 'set-album-id',
     ERROR: 'album-show-errors',
 };
+
+export const SEARCH = {
+    AMOUNT: '3',
+    INTERVAL: 1000,
+    REDIRECT: 'search-redirect',
+    GET_DATA: 'search-get-data',
+    RENDER_DATA: 'search-render-data',
+};

@@ -1,6 +1,7 @@
 import {NAVBAR, GLOBAL, DOM, URL} from '@libs/constans';
 import navbar from '@views/navbar/navbar.tmpl.xml';
 import BaseView from '@libs/base_view';
+import SearchComponent from '@components/search_component/search_component';
 
 /**
  *  вью для навбара
@@ -14,6 +15,7 @@ export default class NavbarView extends BaseView {
         super(navbar);
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
+        this.searchComponent = new SearchComponent();
         this.eventBus.on(NAVBAR.DRAW_COOKIE_RESULT, this.analyzeCookie.bind(this));
         this.eventBus.on(NAVBAR.RENDER_LOGGED, this.renderLogged.bind(this));
         this.eventBus.on(NAVBAR.RENDER_NOT_LOGGED, this.renderNotLogged.bind(this));
@@ -39,10 +41,15 @@ export default class NavbarView extends BaseView {
             event.stopImmediatePropagation();
             this.logoutClicked.bind(this)();
         });
+        document.getElementsByClassName('m-search-input')[0]
+            .addEventListener('keyup', (event) => {
+                const value = event.target.value;
+                this.searchComponent.render(value);
+            });
     }
 
     /**
-     * не залогинен
+     * Нажатия на логаут
      */
     logoutClicked() {
         this.eventBus.emit(NAVBAR.LOGOUT_CLICKED);
@@ -52,7 +59,7 @@ export default class NavbarView extends BaseView {
     }
 
     /**
-     * Залогинен
+     * Проверка куки
      * @param {boolean} loggedIn
      */
     analyzeCookie(loggedIn) {

@@ -1,5 +1,5 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
-    <div class="small_line"></div>
+    <div class="small-line"></div>
     <fest:for iterate="data" index="i" value="track">
         <div class="l-track-big" t-id="{track.id}" t-image ="{track.image}">
             <div class="m-track row" style="text-align: left">
@@ -34,6 +34,6 @@
                 </div>
             </div>
         </div>
-        <div class="small_line"></div>
+        <div class="small-line"></div>
     </fest:for>
 </fest:template>
