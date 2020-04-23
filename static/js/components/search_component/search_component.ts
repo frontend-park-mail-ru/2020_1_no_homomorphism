@@ -34,6 +34,7 @@ export default class SearchComponent {
                     case RESPONSE.OK:
                         res.json()
                             .then((elem) => {
+                                elem.input = this.input;
                                 this.dummySearch.render(elem);
                             });
                         break;
