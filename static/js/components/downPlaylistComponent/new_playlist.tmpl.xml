@@ -6,7 +6,7 @@
         <div class="l-button-play-track">
             <button class="m-button-track-play-playlist"> </button>
         </div>
-        <a class="l-list-card-description" href="/playlists/{playlist.id}">
+        <a class="l-list-card-description" href="/playlist/{playlist.id}">
             <fest:value>playlist.name</fest:value>
         </a>
     </div>

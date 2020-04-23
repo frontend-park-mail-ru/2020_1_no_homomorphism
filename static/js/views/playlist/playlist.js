@@ -16,12 +16,13 @@ export default class PlaylistView extends BaseView {
         this.eventBus = eventBus;
         this.globalEventBus = globalEventBus;
         this.playlistData = {};
-        this.tracksData = {};
+        this.tracksAmount = 0;
         this.trackListComponent = new TrackListComponent(eventBus, PLAYLIST);
         this.eventBus.on(PLAYLIST.RENDER_PLAYLIST_DATA, this.setPlaylistData.bind(this));
         this.eventBus.on(PLAYLIST.SET_TRACKS_AMOUNT, this.setTracksAmount.bind(this));
         this.eventBus.on(PLAYLIST.ERROR, this.showErrors.bind(this));
         this.eventBus.on(PLAYLIST.RENDER_DELETED, this.renderDeleted.bind(this));
+        this.eventBus.on(PLAYLIST.CHANGE_TRACK_AMOUNT, this.changeTrackAmount.bind(this));
     }
 
     /**
@@ -53,16 +54,16 @@ export default class PlaylistView extends BaseView {
 
     /**
      * Вставляет необходимые данные треков, подписка на события
-     * @param {Object} tracks
+     * @param {number} amount
      */
-    setTracksAmount(tracks) {
-        this.tracksData = tracks;
+    setTracksAmount(amount) {
+        this.tracksAmount= amount;
         this.setEventListeners();
-        if (this.tracksData.length === 0) {
+        if (this.tracksAmount === 0) {
             return;
         }
         document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Amount of tracks: ' +
-            this.tracksData.length;
+            this.tracksAmount;
     }
 
     /**
@@ -85,18 +86,28 @@ export default class PlaylistView extends BaseView {
     /**
      * Отрисовка удаления
      */
-    renderDeleted() {
-        console.log(this.playlistData);
+    renderDeleted() { // TODO Отрисовка удаленного плейлиста
+        // console.log(this.playlistData);
     }
 
     /**
      * Проигрование плейлиста
      */
     playPlaylist() {
-        if (this.tracksData.length === 0) {
+        if (this.tracksAmount === 0) {
             return;
         }
         this.globalEventBus.emit(GLOBAL.PLAY_PLAYLIST, this.playlistData.id);
+    }
+
+    /**
+     * Изменение количества треков
+     * @param {number} dif
+     */
+    changeTrackAmount(dif) {
+        this.tracksAmount += dif;
+        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Amount of tracks: ' +
+            this.tracksAmount;
     }
 
     /**

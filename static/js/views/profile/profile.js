@@ -21,6 +21,7 @@ export default class ProfileView extends BaseView {
         this.eventBus.on(PROFILE.CHOOSE_SECTION, this.chooseSection.bind(this));
         this.eventBus.on(PROFILE.RENDER_DATA, this.renderData.bind(this));
         this.eventBus.on(PROFILE.RENDER_STAT, this.renderStat.bind(this));
+        this.eventBus.on(PROFILE.CHANGE_PLAYLIST_AMOUNT, this.changePlaylistAmount.bind(this));
     }
 
     /**
@@ -44,9 +45,9 @@ export default class ProfileView extends BaseView {
      */
     renderData(data) {
         this.setData(Object.assign(this.data, data));
-        document.getElementsByClassName('m-top-login')[0].innerHTML = data.login;
-        document.getElementsByClassName('m-top-name')[0].innerHTML = data.name;
-        document.getElementsByClassName('m-round-image')[0].src = data.image;
+        document.getElementsByClassName('m-top-login')[0].innerHTML = this.data.login;
+        document.getElementsByClassName('m-top-name')[0].innerHTML = this.data.name;
+        document.getElementsByClassName('m-round-image')[0].src = this.data.image;
     }
 
     /**
@@ -59,6 +60,15 @@ export default class ProfileView extends BaseView {
         document.getElementById('albums').innerText = data.albums;
         document.getElementById('playlists').innerText = data.playlists;
         document.getElementById('artists').innerText = data.artists;
+    }
+
+    /**
+     * Изменение количества плейлистов
+     * @param {number} dif
+     */
+    changePlaylistAmount(dif) {
+        this.data.playlists += dif;
+        document.getElementById('playlists').innerText = this.data.playlists;
     }
 
     /**
@@ -91,12 +101,5 @@ export default class ProfileView extends BaseView {
      */
     setData(data) {
         super.setData(data);
-    }
-
-    /**
-     * Определение секции нажатия
-     */
-    renderTracks() {
-
     }
 }

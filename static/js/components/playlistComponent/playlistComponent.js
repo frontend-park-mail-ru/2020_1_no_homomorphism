@@ -14,7 +14,7 @@ export default class PlaylistComponent {
         this._setEventListeners = _setEventListeners;
     }
     /**
-     * Получение плейлистов трека
+     * Получение плейлистов пользователя
      * @param {function} callback
      */
     getProfilePlaylistsApi(callback) {

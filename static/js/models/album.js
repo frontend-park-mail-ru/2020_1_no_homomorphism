@@ -64,6 +64,7 @@ export default class AlbumModel {
                                 'domItem': 'l-track-list',
                                 'type': 'album',
                             });
+                            this.eventBus.emit(ALBUM.SET_TRACKS_AMOUNT, this.tracks);
                         });
                     break;
                 default:

@@ -3,6 +3,7 @@ import {globalEventBus} from '@libs/eventBus';
 import ChoosePlaylist from '@components/choosePlaylistComponent/choosePlaylistComponent';
 import TrackComponent from '@components/trackComponent/trackComponent';
 import PlaylistComponent from '@components/playlistComponent/playlistComponent';
+import {PLAYLIST} from '@libs/constans';
 
 /**
  * Компонент - список треков
@@ -14,39 +15,38 @@ export default class TrackListComponent {
      * @param {object} constType
      */
     constructor(eventBus, constType) {
-        eventBus.on(constType.RENDER_TRACKS, this.renderTracks.bind(this));
+        eventBus.on(constType.RENDER_TRACKS, this.render.bind(this));
         eventBus.on(constType.SET_PLAYLIST_ID, this.setId.bind(this));
         eventBus.on(constType.SET_ALBUM_ID, this.setId.bind(this));
         eventBus.on(constType.SET_ARTIST_ID, this.setId.bind(this));
-        this.choosePlaylist = new ChoosePlaylist(eventBus, constType);
-        this.trackComponent = new TrackComponent();
-        this.playlistComponent = new PlaylistComponent();
-        this.constType = constType;
+        this._choosePlaylist = new ChoosePlaylist(eventBus, constType);
+        this._trackComponent = new TrackComponent();
+        this._playlistComponent = new PlaylistComponent(this.setTracksEventListeners.bind(this));
         this.eventBus = eventBus;
-        this.tracklist = [];
-        this.id = 0;
-        this.type = '';
+        this._tracklist = [];
+        this._id = 0;
+        this._type = '';
+    }
+
+    /**
+     * Установка айди (альбома или плейлиста)
+     * @param {number} id
+     */
+    setId(id) {
+        this._id = id;
     }
 
     /**
      * Отрисовка списка треков
      * @param {Object} data
      */
-    renderTracks(data) {
-        this.tracklist = data.tracks;
-        this.type = data.type;
+    render(data) {
+        this._tracklist = data.tracks;
+        this._type = data.type;
+        this._tracklist.type = this._type === 'playlist';
         const elem = document.getElementsByClassName(data.domItem)[0];
-        this.tracklist.type = this.type === 'playlist';
-        elem.innerHTML = template(this.tracklist);
+        elem.innerHTML = template(this._tracklist);
         this.setTracksEventListeners();
-    }
-
-    /**
-     * Set EventListeners
-     * @param {number} id
-     */
-    setId(id) {
-        this.id = id;
     }
 
     /**
@@ -65,7 +65,7 @@ export default class TrackListComponent {
         document.querySelectorAll('img.m-big-like-button').forEach((button) => {
             button.onclick = (event) => this.likeClicked(event);
         });
-        if (this.tracklist.type) {
+        if (this._tracklist.type) {
             document.querySelectorAll('img.m-big-delete-button').forEach((button) => {
                 button.onclick = (event) => this.deleteClicked(event);
             });
@@ -78,10 +78,10 @@ export default class TrackListComponent {
      */
     playTrack(event) {
         const trackData = this.getIdByClick(event);
-        globalEventBus.emit(`global-play-${this.type}-tracks`,
-            this.id,
+        globalEventBus.emit(`global-play-${this._type}-tracks`,
+            this._id,
             trackData.id,
-            this.tracklist.length);
+            this._tracklist.length);
     }
 
     /**
@@ -89,7 +89,7 @@ export default class TrackListComponent {
      * @param {Object} event
      */
     addToPlaylist(event) {
-        this.choosePlaylist.trackData = this.getIdByClick(event);
+        this._choosePlaylist.trackData = this.getIdByClick(event);
         this.getProfilePlaylists();
     }
 
@@ -97,15 +97,16 @@ export default class TrackListComponent {
      * Получение плейлистов пользователя
      */
     getProfilePlaylists() {
-        this.playlistComponent.getProfilePlaylistsApi(this.kek.bind(this));
+        this._playlistComponent.getProfilePlaylistsApi(this.callChoosePlaylist.bind(this));
     }
 
     /**
-     * @param {Array} kek
+     * Вызов компоненты choosePlaylist
+     * @param {Array} playlistList
      */
-    kek(kek) {
-        this.choosePlaylist
-            .render(this.setTracksEventListeners.bind(this), kek);
+    callChoosePlaylist(playlistList) {
+        this._choosePlaylist
+            .render(this.setTracksEventListeners.bind(this), playlistList);
     }
 
     /**
@@ -115,8 +116,8 @@ export default class TrackListComponent {
      */
     getIdByClick(event) {
         let current = event.target;
-        while (current !== window && current !== document.body && current != null) {
-            if (current.getAttribute('class') === 'l-track-big' &&
+        while (!current.classList.contains('l-down-card')) {
+            if (current.classList.contains('l-track-big') &&
                 current.getAttribute('t-id') !== null) {
                 this.trackToDelete = current;
                 return {
@@ -128,14 +129,14 @@ export default class TrackListComponent {
         }
     }
 
-    /** Для хранения
-     * Удаление из плейлиста
+    /**
+     * Удаление трека из плейлиста
      * @param {Object} event
      */
     deleteClicked(event) {
         const trackData = this.getIdByClick(event);
-        this.trackComponent.trackData = trackData;
-        this.trackComponent.delFromPlaylist(this.id);
+        this._trackComponent.trackData = trackData;
+        this._trackComponent.delFromPlaylist(this._id);
         this.deleteFromDOM(trackData.id);
     }
 
@@ -144,10 +145,11 @@ export default class TrackListComponent {
      * @param {string} trackID
      */
     deleteFromDOM(trackID) {
-        for (let i = this.tracklist.length - 1; i >= 0; i--) {
-            if (this.tracklist[i].id === trackID) {
+        this.eventBus.emit(PLAYLIST.CHANGE_TRACK_AMOUNT, -1);
+        for (let i = this._tracklist.length - 1; i >= 0; i--) {
+            if (this._tracklist[i].id === trackID) {
                 this.trackToDelete.remove();
-                this.tracklist.splice(i, 1);
+                this._tracklist.splice(i, 1);
                 break;
             }
         }

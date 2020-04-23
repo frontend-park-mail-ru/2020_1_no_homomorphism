@@ -83,8 +83,6 @@ export default class TrackComponent {
                 case RESPONSE.OK:
                     break;
                 case RESPONSE.BAD_REQUEST:
-                    console.log('ALREADY ADDED');
-                    break;
                 default:
                     console.log(res);
                     console.error('I am a teapot');
