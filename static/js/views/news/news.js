@@ -15,7 +15,7 @@ export default class NewsView extends BaseView {
         super(news);
         this.eventBus = eventBus;
         this.artistList = [];
-        this.eventBus.on(MAIN.RENDER_ARTIST_LIST, this.renderList.bind(this));
+        this.eventBus.on(MAIN.RENDER_ARTIST, this.renderList.bind(this));
     }
 
     /**

@@ -21,6 +21,7 @@
   },
   "files": [
     "./static/js/libs/user.ts",
-    "./static/js/components/search_component/search_component.ts"
+    "./static/js/components/search_component/search_component.ts",
+    "./static/js/components/artist_list_component/artist_list_component.ts"
   ]
 }

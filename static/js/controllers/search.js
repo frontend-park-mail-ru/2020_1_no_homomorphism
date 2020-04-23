@@ -1,6 +1,7 @@
 import SearchView from '@views/search/search';
 import SearchModel from '@models/search';
 import EventBus from '@libs/eventBus';
+import {SEARCH} from '@libs/constans';
 
 /**
  * Контроллер страницы поиска
@@ -8,10 +9,12 @@ import EventBus from '@libs/eventBus';
 export class SearchController {
     /**
      * Конструктор
+     * @param {Router} router
      */
-    constructor() {
+    constructor(router) {
         this.eventBus = new EventBus();
-        this.searchView = new SearchView();
-        this.searchModel = new SearchModel();
+        this.view = new SearchView(this.eventBus);
+        this.model = new SearchModel(this.eventBus);
+        this.eventBus.on(SEARCH.REDIRECT, router.redirect.bind(router));
     }
 }

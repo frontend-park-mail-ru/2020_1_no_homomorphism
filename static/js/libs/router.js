@@ -12,7 +12,7 @@ export default class Router {
     constructor() {
         this.root = document.getElementsByClassName(DOM.CONTENT)[0];
         this.views = {};
-        this.regexUrl = [URL.ALBUM, URL.PLAYLIST, URL.ARTIST];
+        this.regexUrl = [URL.ALBUM, URL.PLAYLIST, URL.ARTIST, URL.SEARCH];
         this.profileUrl = [URL.PROFILE, URL.PROFILE_TRACKS, URL.PROFILE_PLAYLISTS,
             URL.PROFILE_ARTISTS, URL.PROFILE_ALBUMS];
         this.forbiddenForLogout = [URL.PROFILE, URL.PROFILE_TRACKS, URL.PROFILE_PLAYLISTS,
@@ -54,7 +54,7 @@ export default class Router {
      */
     checkReg(newPath) {
         let res = '';
-        this.regexUrl.map(function(url) {
+        this.regexUrl.map((url) => {
             if (newPath.match(url)) {
                 res = url;
             }

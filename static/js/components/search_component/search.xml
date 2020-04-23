@@ -2,9 +2,7 @@
     <div class="l-search">
         <div class="l-search-artist">
             <div class="m-obscure-title">
-                <a href="/search/{data.input}">All results:
-                </a>
-
+                <a href="/search/{data.input}">All results:</a>
             </div>
             <div class="small-line"></div>
             <div class="m-obscure-title">
