@@ -225,7 +225,7 @@ export const ALBUM = {
 export const SEARCH = {
     AMOUNT_TOP: '3',
     AMOUNT: '10',
-    INTERVAL: 1000,
+    INTERVAL: 0,
     REDIRECT: 'search-redirect',
     GET_DATA: 'search-get-data',
     RENDER_DATA: 'search-render-data',

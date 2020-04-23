@@ -1,63 +1,74 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="l-search">
-        <div class="l-search-artist">
-            <div class="m-obscure-title">
-                <a href="/search/{data.input}">All results:
-                </a>
+        <fest:if test="data.artists.length + data.tracks.length + data.tracks.length === 0">
+            <div class="no-found">
+                No results found 🧐
+            </div>
+        </fest:if>
+        <fest:if test="data.artists.length + data.tracks.length + data.tracks.length > 0">
+            <a class="m-tiny-ref" href="/search/{data.input}">
+                <div class="m-obscure-title onhover-gray">
+                    All results ➤
+                </div>
+            </a>
+        </fest:if>
+        <fest:if test="data.artists.length > 0">
+            <div class="l-search-artists">
+                <div class="m-obscure-title">
+                    Artists
+                </div>
+                <div class="small-line"></div>
+                <fest:for iterate="data.artists" index="i" value="artist">
+                    <div class="row onhover">
+                        <div class="col keklol">
+                            <img class="m-medium-icon m-icon-border" src="{artist.image}" alt=""/>
+                        </div>
+                        <div class="azaza">
+                            <fest:value>artist.name</fest:value>
+                        </div>
+                    </div>
+                    <div class="small-line"></div>
+                </fest:for>
 
             </div>
-            <div class="small-line"></div>
-            <div class="m-obscure-title">
-                Artists:
-            </div>
-            <div class="small-line"></div>
-            <fest:for iterate="data.artists" index="i" value="artist">
-                <div class="row">
-                    <div class="col">
-                        <img class="m-medium-icon" src="{artist.image}" alt=""/>
-                    </div>
-                    <div class="">
-                        <fest:value>artist.name</fest:value>
-                    </div>
+        </fest:if>
+        <fest:if test="data.tracks.length > 0">
+            <div class="l-search-tracks">
+                <div class="m-obscure-title">
+                    Tracks
                 </div>
-
-
-            </fest:for>
-        </div>
-        <div class="l-search-tracks">
-            <div class="m-obscure-title">
-                Tracks:
+                <div class="small-line"></div>
+                <fest:for iterate="data.tracks" index="i" value="track">
+                    <div class="row onhover">
+                        <div class="col keklol">
+                            <img class="m-medium-icon m-icon-border" src="{track.image}" alt=""/>
+                        </div>
+                        <div class="azaza">
+                            <fest:value>track.track_name</fest:value>
+                        </div>
+                    </div>
+                    <div class="small-line"></div>
+                </fest:for>
             </div>
-            <div class="small-line"></div>
-            <fest:for iterate="data.tracks" index="i" value="track">
-                <div class="row">
-                    <div class="col">
-                        <img class="m-medium-icon" src="{track.image}" alt=""/>
-                    </div>
-                    <div class="">
-                        <fest:value>track.track_name</fest:value>
-                    </div>
+        </fest:if>
+        <fest:if test="data.albums.length > 0">
+            <div class="l-search-albums">
+                <div class="m-obscure-title">
+                    Albums
                 </div>
-            </fest:for>
-        </div>
-        <div class="l-search-album">
-            <div class="m-obscure-title">
-                Albums:
-            </div>
-            <div>
-                <img class="m-medium-icon" src="static/img/icons/arrow-24px.svg" alt=""/>
-            </div>
-            <div class="small-line"></div>
-            <fest:for iterate="data.albums" index="i" value="album">
-                <div class="row">
-                    <div class="col">
-                        <img class="m-medium-icon" src="{album.image}" alt=""/>
+                <div class="small-line"></div>
+                <fest:for iterate="data.albums" index="i" value="album">
+                    <div class="row onhover">
+                        <div class="col keklol">
+                            <img class="m-medium-icon m-icon-border" src="{album.image}" alt=""/>
+                        </div>
+                        <div class="azaza">
+                            <fest:value>album.album_name</fest:value>
+                        </div>
                     </div>
-                    <div class="">
-                        <fest:value>album.album_name</fest:value>
-                    </div>
-                </div>
-            </fest:for>
-        </div>
+                    <div class="small-line"></div>
+                </fest:for>
+            </div>
+        </fest:if>
     </div>
 </fest:template>

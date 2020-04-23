@@ -16,9 +16,12 @@
 .l-navbar .m-search-input {
   box-shadow: $box-shadow;
   height: 32px;
-  width: 15%;
+  width: 25%;
   border: 1px solid $chosen-icon;
   padding: 8px;
+  //border: none;
+  //outline: none;
+  //background: transparent;
 }
 
 .m-login-input {
@@ -406,18 +409,62 @@
 }
 
 .l-search {
+  height: max-content;
+  max-height: -webkit-calc(70%);
+  overflow-y: scroll;
   padding: 16px;
   position: fixed;
-  left: -webkit-calc(5% + 178px);
-  width: 15%;
+  left: -webkit-calc(5% + 183px);
+  width: 25%;
   box-shadow: $box-shadow;
-  top: 61px;
+  top: 47px;
   z-index: 4;
   background-color: #ffffff;
 }
 
+.l-search-artists {
+  margin-bottom: 10px;
+}
+
+.l-search-tracks {
+  margin-bottom: 10px;
+}
+
 .m-obscure-title {
-  font-size: smaller;
-  font-style: italic;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 15px;
+  font-weight: bold;
   color: $obscure;
+}
+
+.keklol {
+  height: 40px;
+  margin-top: 5px;
+  margin-right: 5px;
+  padding-left: 8px;
+}
+
+.azaza {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.onhover:hover {
+  background: #d6ffeb;
+  cursor: pointer;
+  transition: 0.1s;
+  display: block;
+}
+.onhover-gray:hover {
+  background: #f4f4f4;
+  width: inherit;
+  cursor: pointer;
+  transition: 0.1s;
+  display: block;
+}
+
+.no-found {
+  margin: 20px;
+  text-align: center;
 }

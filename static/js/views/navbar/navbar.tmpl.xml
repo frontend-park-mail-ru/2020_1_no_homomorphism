@@ -5,7 +5,7 @@
     <a href="/" class="m-project-name">
         VirusMusic
     </a>
-    <input type="text" class="m-search-input"/>
+    <input type="text" class="m-search-input" placeholder="Find artist, track or album"/>
     <a class="m-button-without-size">
         <img src="/static/img/search.svg" class="m-medium-icon"/>
     </a>
