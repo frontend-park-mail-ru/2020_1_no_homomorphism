@@ -2,40 +2,10 @@ import SearchDummyComponent from '@components/search_component/search_dummy_comp
 import Api from '@libs/api';
 import {RESPONSE, SEARCH} from "@libs/constans";
 
-type track = {
-    id: number,
-    name: string,
-    artist: string,
-    duration: number,
-    artist_id: number,
-    image: string,
-    link: string,
-}
-
-type artist = {
-    id: number,
-    name: string,
-    image: string,
-    genre: string,
-}
-
-type album = {
-    id: number,
-    name: string,
-    image: string,
-    release: Date,
-    artist_name: string,
-    artist_id: number,
-}
-
 export default class SearchComponent {
     private input: string;
     private waitingAnswer: boolean;
-    private waitingAnswerInterval: NodeJS.Timeout;
     private requestInterval: NodeJS.Timeout;
-    private tracks: Array<track>;
-    private albums: Array<album>;
-    private artists: Array<artist>;
     private dummySearch: SearchDummyComponent;
 
     constructor() {
@@ -58,7 +28,7 @@ export default class SearchComponent {
 
     getData() {
         this.waitingAnswer = false;
-        Api.searchGet(this.input, SEARCH.AMOUNT)
+        Api.searchGet(this.input, SEARCH.AMOUNT_TOP)
             .then((res) => {
                 switch (res.status) {
                     case RESPONSE.OK:
@@ -73,6 +43,4 @@ export default class SearchComponent {
                 }
             });
     }
-
-
 }

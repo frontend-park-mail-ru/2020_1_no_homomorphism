@@ -57,17 +57,5 @@
                 </div>
             </fest:for>
         </div>
-        <fest:value>data.input</fest:value>
     </div>
-    <!--    <div class="l-list-card" a-id="{playlist.id}">-->
-    <!--        <div class="l-list-image">-->
-    <!--            <img class="m-list-image" src="{playlist.image}" alt=""/>-->
-    <!--        </div>-->
-    <!--        <div class="l-button-play-track">-->
-    <!--            <button class="m-button-track-play-playlist"> </button>-->
-    <!--        </div>-->
-    <!--        <a class="l-list-card-description" href="/playlist/{playlist.id}">-->
-    <!--            <fest:value>playlist.name</fest:value>-->
-    <!--        </a>-->
-    <!--    </div>-->
 </fest:template>
