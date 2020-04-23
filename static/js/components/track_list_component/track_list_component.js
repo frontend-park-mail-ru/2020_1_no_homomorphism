@@ -1,8 +1,8 @@
-import template from '@components/downTrackListComponent/tracks.tmpl.xml';
+import template from '@components/track_list_component/tracks.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
-import ChoosePlaylist from '@components/choosePlaylistComponent/choosePlaylistComponent';
-import TrackComponent from '@components/trackComponent/trackComponent';
-import PlaylistComponent from '@components/playlistComponent/playlistComponent';
+import ChoosePlaylist from '@components/choose_playlist_component/choose_playlist_component';
+import TrackComponent from '@components/track_component/track_component';
+import PlaylistComponent from '@components/playlist_component/playlist_component';
 import {PLAYLIST} from '@libs/constans';
 
 /**

@@ -1,8 +1,8 @@
 import artist from '@views/artist/artist.tmpl.xml';
 import BaseView from '@libs/base_view';
-import TrackListComponent from '@components/downTrackListComponent/trackListComponent';
+import TrackListComponent from '@components/track_list_component/track_list_component';
+import PlaylistsComponent from '@components/playlist_list_component/playlist_list_component';
 import {ARTIST, DOM} from '@libs/constans';
-import PlaylistsComponent from '@components/downPlaylistComponent/playlistListComponent';
 
 /**
  *  вью для страницы артиста

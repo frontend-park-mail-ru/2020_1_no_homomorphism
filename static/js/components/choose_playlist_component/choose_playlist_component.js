@@ -1,8 +1,8 @@
-import dropdown from '@components/choosePlaylistComponent/choose_playlist.tmpl.xml';
-import createdPlaylist from '@components/choosePlaylistComponent/created_playlist.tmpl.xml';
+import dropdown from '@components/choose_playlist_component/choose_playlist.tmpl.xml';
+import createdPlaylist from '@components/choose_playlist_component/created_playlist.tmpl.xml';
 import {DOM} from '@libs/constans';
-import TrackComponent from '@components/trackComponent/trackComponent';
-import PlaylistComponent from '@components/playlistComponent/playlistComponent';
+import TrackComponent from '@components/track_component/track_component';
+import PlaylistComponent from '@components/playlist_component/playlist_component';
 
 /**
  * Компонент - выпадающее меню при добавлении трека в плейлист
