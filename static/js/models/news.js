@@ -26,7 +26,7 @@ export default class NewsModel {
                     res.json()
                         .then((data) => {
                             this.artists = data.artists;
-                            this.eventBus.emit(MAIN.RENDER_ARTIST_LIST, this.artists);
+                            this.eventBus.emit(MAIN.RENDER_ARTIST, this.artists);
                         });
                     break;
                 case RESPONSE.BAD_REQUEST:

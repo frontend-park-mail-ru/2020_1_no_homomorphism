@@ -33,6 +33,7 @@ export const URL = {
     ARTIST: /(\/artist\/)[0-9]+(\/albums|\/tracks|\/info)*/,
     PLAYLIST: /(\/playlist\/)[0-9]+/,
     ALBUM: /(\/album\/)[0-9]+/,
+    SEARCH: /(\/search\/)(.)+/,
 };
 
 export const PAGINATION = {
@@ -62,6 +63,7 @@ export const GLOBAL = {
     PLAY_ARTIST_TRACKS: 'global-play-artist-tracks',
     PLAY_PLAYLIST_TRACKS: 'global-play-playlist-tracks',
     PLAY_ALBUM_TRACKS: 'global-play-album-tracks',
+    PLAY_TRACKS: 'global-play-track-tracks',
     PLAY_PLAYLIST: 'global-play-playlist',
     PLAY_ALBUM: 'global-play-album',
     CLEAR_AND_LOCK: 'global-clear-and-lock',
@@ -71,7 +73,7 @@ export const GLOBAL = {
 
 export const MAIN = {
     GET_LIST_DATA: 'get-all-artists-data',
-    RENDER_ARTIST_LIST: 'render-artist-list',
+    RENDER_ARTIST: 'render-artist-list',
     NO_ANSWER: 'no-answer',
     REDIRECT: 'redirect',
 };
@@ -223,10 +225,14 @@ export const ALBUM = {
 };
 
 export const SEARCH = {
-    AMOUNT_TOP: '3',
-    AMOUNT: '10',
-    INTERVAL: 0,
-    REDIRECT: 'search-redirect',
-    GET_DATA: 'search-get-data',
-    RENDER_DATA: 'search-render-data',
+    'AMOUNT_TOP': '3',
+    'AMOUNT': '10',
+    'INTERVAL': 0,
+    'REDIRECT': 'search-redirect',
+    'GET_DATA': 'search-get-data',
+    'RENDER_DATA': 'search-render-data',
+    'RENDER_ALBUMS': 'search-render-albums',
+    'RENDER_ARTISTS': 'search-render-artists',
+    'RENDER_TRACKS': 'search-render-tracks',
+    'SET_LISTENERS': 'search-set-listeners',
 };

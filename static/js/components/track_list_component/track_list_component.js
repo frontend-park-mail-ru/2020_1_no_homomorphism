@@ -78,6 +78,13 @@ export default class TrackListComponent {
      */
     playTrack(event) {
         const trackData = this.getIdByClick(event);
+        if (this._type === 'track') {
+            const temp = this._tracklist;
+            delete temp.type;
+            globalEventBus.emit(`global-play-${this._type}-tracks`,
+                {'tracks': this._tracklist}, trackData.id);
+            return;
+        }
         globalEventBus.emit(`global-play-${this._type}-tracks`,
             this._id,
             trackData.id,
