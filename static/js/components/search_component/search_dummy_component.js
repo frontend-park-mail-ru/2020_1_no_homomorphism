@@ -14,6 +14,6 @@ export default class SearchDummyComponent {
      * @param {Object} data
      */
     render(data) {
-        document.getElementsByClassName(DOM.CONTENT)[0].innerHTML += search(data);
+        document.getElementsByClassName('l-top-content')[0].innerHTML += search(data);
     }
 }

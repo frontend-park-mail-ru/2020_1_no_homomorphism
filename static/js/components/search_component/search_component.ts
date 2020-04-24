@@ -1,6 +1,6 @@
 import SearchDummyComponent from '@components/search_component/search_dummy_component';
 import Api from '@libs/api';
-import {RESPONSE, SEARCH} from "@libs/constans";
+import {DOM, RESPONSE, SEARCH} from "@libs/constans";
 
 export default class SearchComponent {
     private input: string;
@@ -43,5 +43,39 @@ export default class SearchComponent {
                         console.error('I am a teapot');
                 }
             });
+    }
+
+    setEventListeners() {
+        document.addEventListener('click', this.analyzeTouch.bind(this), {once: true});
+    }
+
+    analyzeTouch(event: MouseEvent) {
+        const choosePlaylist = document.getElementsByClassName('l-search')[0];
+        if (choosePlaylist === undefined) {
+            return;
+        }
+        const isClickInside = choosePlaylist.contains(<HTMLInputElement>event.target);
+        if (isClickInside) {
+            console.log('inside');
+            return;
+        }
+        console.log('outside');
+        this.close();
+    }
+
+    /**
+     * Закрытие раздела
+     */
+    close() {
+        // document
+        //     .getElementsByClassName(DOM.CONTENT)[0]
+        //     .removeChild(
+        //         document.getElementsByClassName(DOM.CONTENT)[0].lastChild);
+        document
+            .getElementsByClassName(DOM.TOP_CONTENT)[0]
+            .removeChild(
+                document.getElementsByClassName(DOM.TOP_CONTENT)[0].lastChild);
+        // this.eventBus.emit(SEARCH.SET_LISTENERS);
+        // this._callbackEventListener();
     }
 }

@@ -16,6 +16,7 @@ export const DOM = {
     CONTENT: 'l-content',
     PLAYER: 'l-player',
     NAVBAR: 'l-navbar',
+    TOP_CONTENT: 'l-top-content',
 };
 
 export const URL = {

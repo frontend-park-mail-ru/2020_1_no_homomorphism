@@ -51,7 +51,7 @@ export default class ChoosePlaylist {
         for (const elem of this._playlists) {
             elem.include = playlistIncludes.includes(elem.id);
         }
-        document.getElementsByClassName(DOM.CONTENT)[0].innerHTML += dropdown(this._playlists);
+        document.getElementsByClassName(DOM.TOP_CONTENT)[0].innerHTML += dropdown(this._playlists);
         document.getElementsByClassName(DOM.CONTENT)[0]
             .firstChild
             .classList
@@ -131,10 +131,14 @@ export default class ChoosePlaylist {
      * Закрытие раздела
      */
     close() {
+        // document
+        //     .getElementsByClassName(DOM.CONTENT)[0]
+        //     .removeChild(
+        //         document.getElementsByClassName(DOM.CONTENT)[0].lastChild);
         document
-            .getElementsByClassName(DOM.CONTENT)[0]
+            .getElementsByClassName(DOM.TOP_CONTENT)[0]
             .removeChild(
-                document.getElementsByClassName(DOM.CONTENT)[0].lastChild);
+                document.getElementsByClassName(DOM.TOP_CONTENT)[0].lastChild);
         document
             .getElementsByClassName(DOM.CONTENT)[0]
             .firstChild
