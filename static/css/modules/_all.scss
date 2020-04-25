@@ -54,7 +54,7 @@
   text-decoration: none
 }
 
-.l-top-section-albums:hover, .l-top-section-tracks:hover, .m-profile-playlists:hover, .l-top-section-artists:hover {
+.l-top-section-albums:hover, .l-top-section-tracks:hover, .m-profile-playlists:hover, .l-top-section-artists:hover, .l-top-section-info:hover {
   background: $selected-elem;
   cursor: pointer;
   transition: 0.1s;
@@ -64,6 +64,7 @@
 .l-top-section-info {
   height: 70px;
   padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 .m-top-name {

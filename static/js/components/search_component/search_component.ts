@@ -11,7 +11,7 @@ export default class SearchComponent {
     private dummySearch: SearchDummyComponent;
 
     constructor() {
-        // globalEventBus.on(GLOBAL.REDIRECT, this.close.bind(this));
+        globalEventBus.on(GLOBAL.REDIRECT, this.close.bind(this));
         this.dummySearch = new SearchDummyComponent();
         this.waitingAnswer = false;
         this.isOpen = false;
@@ -26,7 +26,6 @@ export default class SearchComponent {
     }
 
     render(input: string) {
-        this.isOpen = true;
         if (input === '') {
             clearTimeout(this.requestInterval);
             return;
@@ -48,6 +47,7 @@ export default class SearchComponent {
                         res.json()
                             .then((elem) => {
                                 elem.input = this.input;
+                                this.isOpen = true;
                                 this.dummySearch.render(elem);
                             });
                         break;
@@ -62,7 +62,6 @@ export default class SearchComponent {
      * Закрытие раздела
      */
     close() {
-        console.log('kek');
         if (this.isOpen) {
             document.getElementsByClassName('l-top-content')[0].removeChild(document.getElementsByClassName('l-top-content')[0].firstChild);
             this.isOpen = false;

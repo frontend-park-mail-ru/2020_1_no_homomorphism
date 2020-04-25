@@ -35,9 +35,9 @@
                         </a>
                     </div>
                     <div class="l-top-section-info col col-4" id="profile-info-title">
-                        <span class="m-tiny-ref l-top-section-info-ref" >
+                        <a class="m-tiny-ref l-top-section-info-ref" href="/artist/{data.id}/info">
                             <h2>Info</h2>
-                        </span>
+                        </a>
                     </div>
                 </div>
             </div>

@@ -49,7 +49,6 @@ export default class NavbarView extends BaseView {
                     return;
                 }
                 this.searchComponent.render(value);
-                // globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
             });
         document.addEventListener('click', (event) => {
             if (event.target.classList.contains('m-medium-icon')) {
@@ -87,11 +86,7 @@ export default class NavbarView extends BaseView {
      * @param {Object} event
      */
     closeSearchComponent(event) {
-        const choosePlaylist = document.getElementsByClassName('l-top-search')[0];
-        const isClickInside = choosePlaylist.contains(event.target);
-        if (!isClickInside) {
-            this.searchComponent.close();
-        }
+        this.searchComponent.close();
     }
 
     /**
