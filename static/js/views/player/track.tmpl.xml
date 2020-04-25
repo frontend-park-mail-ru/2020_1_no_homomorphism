@@ -24,15 +24,15 @@
 <!--                <img src="/static/img/add.svg" class="add-button" height="15px" alt="..."/>-->
 <!--            </div>-->
 <!--        </div>-->
-        <div class="l-track-buttons row" >
-            <div class="col l-big-track-button delete-button" style="padding-top:10px">
+        <div class="l-track-buttons row">
+            <div class="col l-big-track-button delete-button" >
                 <img src="/static/img/clear.svg" class="m-big-delete-button" height="15px" alt="..."/>
             </div>
 
-            <div class="col l-big-track-button favorite-button" style="padding-top:10px">
+            <div class="col l-big-track-button favorite-button">
                 <img src="/static/img/favorite_border.svg" class="m-big-like-button" height="15px" alt="..."/>
             </div>
-            <div class="col l-big-track-button add-button" style="padding-top:10px">
+            <div class="col l-big-track-button add-button">
                 <img src="/static/img/add.svg" class="m-big-add-button" height="15px" alt="..."/>
             </div>
         </div>

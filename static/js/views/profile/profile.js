@@ -38,7 +38,6 @@ export default class ProfileView extends BaseView {
         }
         this.eventBus.emit(PROFILE.GET_DATA);
         this.eventBus.emit(PROFILE.CHOOSE_SECTION);
-        console.log(this.currentOpen);
         this.eventBus.emit(this.currentOpen);
     }
 

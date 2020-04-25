@@ -24,11 +24,18 @@ export default class ChoosePlaylist {
 
     /**
      * Установка текущего айди трека
-     * @param {string} trackData
+     * @param {Object} trackData
      */
     set trackData(trackData) {
         this._trackData = trackData;
         this._trackComponent.trackData = trackData;
+    }
+    /**
+     * Установка текущего айди трека
+     * @return {Object}
+     */
+    get trackData() {
+        return this._trackData;
     }
 
     /**

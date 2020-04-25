@@ -18,7 +18,6 @@ export default class SearchDummyComponent {
      */
     render(data) {
         this._data = data;
-        console.log(data);
         document.getElementsByClassName('l-top-content')[0].innerHTML = search(data);
         document.getElementsByClassName('m-search-input')[0].value = data.input;
         this.setEventListener.bind(this)();

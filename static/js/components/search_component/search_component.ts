@@ -68,14 +68,14 @@ export default class SearchComponent {
      * Получение id из dom-елемента по нажатию
      */
     getIdByClick(event: HTMLElementEvent<HTMLTextAreaElement>, tracks: [{ [index: string]: string }]) {
-        console.log('TOUCHED');
+
         let current = event.target;
         while (!current.classList.contains('l-search-tracks')) {
             if (current.classList.contains('m-small-track') &&
                 current.getAttribute('t-id') !== null) {
                 tracks.forEach((elem) => {
                     if (elem.id === current.getAttribute('t-id')) {
-                        console.log(elem);
+
                         globalEventBus.emit(GLOBAL.PLAY_TRACKS, {
                             tracks: [elem],
                         }, elem.id)
