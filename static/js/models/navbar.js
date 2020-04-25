@@ -1,6 +1,7 @@
 import Api from '@libs/api';
 import {RESPONSE, NAVBAR, URL} from '@libs/constans';
 import User from '@libs/user';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * Модель для навбара
@@ -9,12 +10,10 @@ export default class NavbarModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
-        this.globalEventBus.on(NAVBAR.GET_USER_DATA, this.getUserData.bind(this));
+        globalEventBus.on(NAVBAR.GET_USER_DATA, this.getUserData.bind(this));
         this.eventBus.on(NAVBAR.GET_USER_DATA, this.getUserData.bind(this));
         this.eventBus.on(NAVBAR.LOGOUT_CLICKED, this.doLogout.bind(this));
         this.eventBus.on(NAVBAR.CHECK_COOKIE, this.cookieFetch.bind(this));

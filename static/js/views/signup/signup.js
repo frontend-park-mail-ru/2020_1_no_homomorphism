@@ -1,6 +1,7 @@
 import {SIGN_UP, GLOBAL} from '@libs/constans';
 import template from '@views/signup/signup.tmpl.xml';
 import BaseView from '@libs/base_view';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * Вью для страницы регистрации
@@ -8,14 +9,12 @@ import BaseView from '@libs/base_view';
 export default class SignupView extends BaseView {
     /**
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         super(template);
         this.eventBus = eventBus;
         this.submit.bind(this);
         this.eventBus.on(SIGN_UP.INVALID, this.showErrors);
-        this.globalEventBus = globalEventBus;
     }
 
     /**
@@ -24,7 +23,7 @@ export default class SignupView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
-        this.globalEventBus.emit(GLOBAL.COLLAPSE);
+        globalEventBus.emit(GLOBAL.COLLAPSE);
         if (root.children.length > 0) {
             if (root.firstChild.classList.contains('is-emphasized')) {
                 root.removeChild(root.firstChild);

@@ -14,8 +14,8 @@ export class NavbarController {
      */
     constructor(router) {
         this.eventBus = new EventBus();
-        this.model = new NavbarModel(this.eventBus, globalEventBus);
-        this.view = new NavbarView(this.eventBus, globalEventBus);
+        this.model = new NavbarModel(this.eventBus);
+        this.view = new NavbarView(this.eventBus);
 
         globalEventBus.on(NAVBAR.LOGOUT_REDIRECT, router.logoutRedirect.bind(router));
         this.eventBus.on(NAVBAR.REDIRECT, router.redirect.bind(router));

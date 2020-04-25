@@ -11,9 +11,8 @@ export default class ArtistView extends BaseView {
     /**
      * Конструктор
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         super(artist);
         this.data = {};
         this.tracksRendered = 0;
@@ -25,7 +24,6 @@ export default class ArtistView extends BaseView {
         this.trackListComponent = new TrackListComponent(eventBus, ARTIST);
         this.playlistsComponent = new PlaylistsComponent(eventBus, ARTIST);
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
         this.eventBus.on(ARTIST.RENDER_DATA, this.renderData.bind(this));
     }
 

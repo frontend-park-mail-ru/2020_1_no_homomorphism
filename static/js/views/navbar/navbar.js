@@ -2,6 +2,7 @@ import {NAVBAR, GLOBAL, DOM, URL} from '@libs/constans';
 import navbar from '@views/navbar/navbar.tmpl.xml';
 import BaseView from '@libs/base_view';
 import SearchComponent from '@components/search_component/search_component';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  *  вью для навбара
@@ -9,12 +10,10 @@ import SearchComponent from '@components/search_component/search_component';
 export default class NavbarView extends BaseView {
     /**
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         super(navbar);
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
         this.searchComponent = new SearchComponent();
         this.eventBus.on(NAVBAR.DRAW_COOKIE_RESULT, this.analyzeCookie.bind(this));
         this.eventBus.on(NAVBAR.RENDER_LOGGED, this.renderLogged.bind(this));
@@ -62,8 +61,8 @@ export default class NavbarView extends BaseView {
     logoutClicked() {
         this.eventBus.emit(NAVBAR.LOGOUT_CLICKED);
         this.renderNotLogged.bind(this)();
-        this.globalEventBus.emit(NAVBAR.LOGOUT_REDIRECT, URL.MAIN);
-        this.globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK);
+        globalEventBus.emit(NAVBAR.LOGOUT_REDIRECT, URL.MAIN);
+        globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK);
     }
 
     /**

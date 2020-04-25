@@ -15,7 +15,7 @@ export default class SearchModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.playlistListComponent = new PlaylistsComponent(this.eventBus, SEARCH);
-        this.trackListCOmponent = new TrackListComponent(this.eventBus, SEARCH);
+        this.trackListComponent = new TrackListComponent(this.eventBus, SEARCH);
         this.artistListComponent = new ArtistListComponent(this.eventBus, SEARCH);
         this.eventBus.on(SEARCH.GET_DATA, this.getData.bind(this));
     }
@@ -50,12 +50,6 @@ export default class SearchModel {
                                     artists: elem.artists,
                                     type: 'search',
                                 });
-                            // const kek = {
-                            //     domItem: 'l-search-artists',
-                            //     tracks: elem.tracks,
-                            //     type: 'search',
-                            // };
-                            // console.log(kek);
                         });
                     break;
                 default:

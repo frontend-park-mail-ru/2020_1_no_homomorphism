@@ -8,13 +8,11 @@ export default class PlaylistModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         this.playlist = {};
         this.curPagination = 0;
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
         this.eventBus.on(PLAYLIST.GET_PLAYLIST_DATA, this.getPlaylist.bind(this));
         this.eventBus.on(PLAYLIST.GET_TRACKS_DATA, this.getTracks.bind(this));
         this.eventBus.on(PLAYLIST.DELETE_PLAYLIST, this.deletePlaylist.bind(this));
