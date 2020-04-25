@@ -54,6 +54,10 @@
   text-decoration: none
 }
 
+.m-tiny-ref:hover {
+  color: #070025;
+}
+
 .l-top-section-albums:hover, .l-top-section-tracks:hover, .m-profile-playlists:hover, .l-top-section-artists:hover, .l-top-section-info:hover {
   background: $selected-elem;
   cursor: pointer;
@@ -184,7 +188,8 @@
 }
 
 .l-track-big {
-  padding: 10px;
+  padding: 4px 10px 0;
+  // padding: 10px;
   overflow: hidden;
 }
 
@@ -200,8 +205,8 @@
 
 .l-track-big:hover .m-track-image {
   transition: 0.3s;
-  -webkit-transform: scale(2);
-  transform: scale(1.2);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
   opacity: 0.5;
   box-shadow: 0 0 10px 4px rgba(129, 129, 129, 0.65);
 }
@@ -228,7 +233,7 @@
 }
 
 .m-track-name {
-  margin-top: -40px;
+  margin-top: -48px;
 }
 
 .l-list-card img {
@@ -246,7 +251,7 @@
   display: inline-block;
   width: 90%;
   max-width: 200px;
-  max-height: 260px;
+  max-height: 255px;
   text-decoration: none;
   border-radius: $card-border-small;
   box-shadow: 0 0 10px -3px rgba(0, 0, 0, 0.5);
@@ -437,32 +442,52 @@
 }
 
 .m-obscure-title {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 5px;
+  //padding-top: 5px;
+  //padding-bottom: 5px;
   font-size: 15px;
   font-weight: bold;
   color: $obscure;
 }
 
-.keklol {
+.m-small-image {
   height: 40px;
-  margin-top: 5px;
+  // margin-top: 5px;
   margin-right: 5px;
   padding-left: 8px;
 }
 
-.azaza {
-  font-size: 14px;
-  margin-top: 5px;
+.m-small-text {
+  font-size: 16px;
 }
 
-.onhover:hover {
+.m-small-track {
+  padding-top: 5px;
+}
+
+.m-small-track:hover {
   background: #d6ffeb;
   cursor: pointer;
   transition: 0.1s;
   display: block;
 }
-.onhover-gray:hover {
+
+.m-small-artist {
+  padding-top: 5px;
+}
+
+.m-small-album {
+  padding-top: 5px;
+}
+
+.is-hover:hover {
+  background: #d6ffeb;
+  cursor: pointer;
+  transition: 0.1s;
+  display: block;
+}
+
+.is-hover-gray:hover {
   background: #f4f4f4;
   width: inherit;
   cursor: pointer;

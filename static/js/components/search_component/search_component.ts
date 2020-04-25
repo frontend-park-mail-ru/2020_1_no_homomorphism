@@ -3,6 +3,10 @@ import Api from '@libs/api';
 import {GLOBAL, RESPONSE, SEARCH} from "@libs/constans";
 import {globalEventBus} from "@libs/eventBus";
 
+type HTMLElementEvent<T extends HTMLElement> = Event & {
+    target: T;
+}
+
 export default class SearchComponent {
     private input: string;
     private waitingAnswer: boolean;
@@ -11,8 +15,10 @@ export default class SearchComponent {
     private dummySearch: SearchDummyComponent;
 
     constructor() {
+        GLOBAL.HREF = 'global-href-checked';
         globalEventBus.on(GLOBAL.REDIRECT, this.close.bind(this));
-        this.dummySearch = new SearchDummyComponent();
+        globalEventBus.on(GLOBAL.HREF, this.close.bind(this));
+        this.dummySearch = new SearchDummyComponent(this.getIdByClick.bind(this));
         this.waitingAnswer = false;
         this.isOpen = false;
     }
@@ -59,13 +65,37 @@ export default class SearchComponent {
     }
 
     /**
+     * Получение id из dom-елемента по нажатию
+     */
+    getIdByClick(event: HTMLElementEvent<HTMLTextAreaElement>, tracks: [{ [index: string]: string }]) {
+        console.log('TOUCHED');
+        let current = event.target;
+        while (!current.classList.contains('l-search-tracks')) {
+            if (current.classList.contains('m-small-track') &&
+                current.getAttribute('t-id') !== null) {
+                tracks.forEach((elem) => {
+                    if (elem.id === current.getAttribute('t-id')) {
+                        console.log(elem);
+                        globalEventBus.emit(GLOBAL.PLAY_TRACKS, {
+                            tracks: [elem],
+                        }, elem.id)
+                    }
+                })
+            }
+            // @ts-ignore
+            current = current.parentNode;
+        }
+    }
+
+    /**
      * Закрытие раздела
      */
     close() {
         if (this.isOpen) {
             document.getElementsByClassName('l-top-content')[0].removeChild(document.getElementsByClassName('l-top-content')[0].firstChild);
             this.isOpen = false;
+            (<HTMLInputElement>document.getElementsByClassName('m-search-input')[0]).value = '';
         }
-        (<HTMLInputElement>document.getElementsByClassName('m-search-input')[0]).value = '';
+
     }
 }

@@ -73,20 +73,15 @@ export default class NavbarView extends BaseView {
     }
 
     /**
-     * Обнуление
-     * @param {String} input
-     */
-    setEmpty(input) {
-        console.log('close');
-        document.getElementsByClassName('m-search-input')[0].value = '';
-    }
-
-    /**
      * Закрытие секции
      * @param {Object} event
      */
     closeSearchComponent(event) {
-        this.searchComponent.close();
+        const choosePlaylist = document.getElementsByClassName('l-top-content')[0];
+        const isClickInside = choosePlaylist.contains(event.target);
+        if (!isClickInside) {
+            this.searchComponent.close();
+        }
     }
 
     /**

@@ -63,11 +63,21 @@ export default class Router {
     }
 
     /**
+     * функция для отлова ссылок ивентбасом
+     */
+    forEventBus() {
+        if (GLOBAL.HREF !== 'global-href') {
+            globalEventBus.emit(GLOBAL.HREF);
+        }
+    }
+
+    /**
      * Запуск рендеринга
      * @param {string} newPath
      * @param {boolean} pushState
      * */
     check(newPath, pushState) {
+        this.forEventBus();
         if (newPath === this.curPath) {
             return;
         }

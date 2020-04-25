@@ -78,6 +78,9 @@ export default class TrackListComponent {
      */
     playTrack(event) {
         const trackData = this.getIdByClick(event);
+        console.log(this._type);
+        console.log(this._tracklist);
+        console.log(trackData);
         if (this._type === 'track') {
             const temp = this._tracklist;
             delete temp.type;

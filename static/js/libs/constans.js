@@ -70,6 +70,7 @@ export const GLOBAL = {
     CLEAR_AND_LOCK: 'global-clear-and-lock',
     COLLAPSE: 'global-collapse',
     REDIRECT: 'redirect',
+    HREF: 'global-href',
     LOGOUT_REDIRECT: 'global-logout-redirect',
     CLOSE_SEARCH: 'global-close-search',
 };

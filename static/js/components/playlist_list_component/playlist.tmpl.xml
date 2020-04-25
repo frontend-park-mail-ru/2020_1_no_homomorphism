@@ -10,18 +10,36 @@
                 </div>
             </div>
         </div>
+        <fest:for iterate="data" index="i" value="elem">
+            <div class="l-list-card" a-id="{elem.id}">
+                <div class="l-list-image">
+                    <img class="m-list-image" src="{elem.image}" alt=""/>
+                </div>
+                <div class="l-button-play-track">
+                    <button class="m-button-track-play-playlist"></button>
+                </div>
+                <a class="l-list-card-description  m-tiny-ref" href="{data.href}{elem.id}">
+                    <fest:value>elem.name</fest:value>
+                </a>
+            </div>
+        </fest:for>
     </fest:if>
-    <fest:for iterate="data" index="i" value="elem">
-        <div class="l-list-card" a-id="{elem.id}">
-            <div class="l-list-image">
-                <img class="m-list-image" src="{elem.image}" alt=""/>
+    <fest:if test="!data.type">
+        <fest:for iterate="data" index="i" value="elem">
+            <div class="l-list-card" a-id="{elem.id}" style="max-height: 310px">
+                <div class="l-list-image">
+                    <img class="m-list-image" src="{elem.image}" alt=""/>
+                </div>
+                <div class="l-button-play-track">
+                    <button class="m-button-track-play-playlist"></button>
+                </div>
+                <a class="l-list-card-description  m-tiny-ref" href="{data.href}{elem.id}" style="padding-bottom: 0">
+                    <fest:value>elem.name</fest:value>
+                </a>
+                <a class="m-obscure-title m-tiny-ref" href="/artist/{elem.artist_id}" style="margin-bottom: 10px">
+                    <fest:value>elem.artist_name</fest:value>
+                </a>
             </div>
-            <div class="l-button-play-track">
-                <button class="m-button-track-play-playlist"> </button>
-            </div>
-            <a class="l-list-card-description" href="{data.href}{elem.id}">
-                <fest:value>elem.name</fest:value>
-            </a>
-        </div>
-    </fest:for>
+        </fest:for>
+    </fest:if>
 </fest:template>
