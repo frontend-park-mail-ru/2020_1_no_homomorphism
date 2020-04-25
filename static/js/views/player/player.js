@@ -171,16 +171,16 @@ export default class PlayerView extends BaseView {
     setDynamicEventListeners() {
         document.querySelectorAll('.track-list .row').forEach((row) => {
             row.onclick = (event) => this.tracklistClick(event);
-            row.onmouseover = (event) => this.tracklistMouseOver(event);
-            row.onmouseout = (event) => this.tracklistMouseOut(event);
+            // row.onmouseover = (event) => this.tracklistMouseOver(event);
+            // row.onmouseout = (event) => this.tracklistMouseOut(event);
         });
-        document.querySelectorAll('img.delete-button').forEach((button) => {
+        document.querySelectorAll('.delete-button').forEach((button) => {
             button.onclick = (event) => this.trackDeleteButtonClick(event);
         });
-        document.querySelectorAll('img.favorite-button').forEach((button) => {
+        document.querySelectorAll('.favorite-button').forEach((button) => {
             button.onclick = (event) => this.trackFavoriteButtonClick(event);
         });
-        document.querySelectorAll('img.add-button').forEach((button) => {
+        document.querySelectorAll('.add-button').forEach((button) => {
             button.onclick = (event) => this.trackAddButtonClick(event);
         });
     }
@@ -527,7 +527,7 @@ export default class PlayerView extends BaseView {
                 if (delta < 0 && top - delta / 2 > 0) {
                     trackList.style.top = '0';
                 } else if (delta > 0 && trackList.getBoundingClientRect().bottom - delta / 2 <
-                           document.documentElement.clientHeight
+                    document.documentElement.clientHeight
                 ) {
                     const container = document.getElementsByClassName('container-audio')[0];
                     trackList.style.top = (document.documentElement.clientHeight -
@@ -582,10 +582,10 @@ export default class PlayerView extends BaseView {
         target = target.getElementsByClassName('col track-buttons')[0];
         if (event.clientX < target.getBoundingClientRect().x ||
             event.clientX > target.getBoundingClientRect().x +
-                target.getBoundingClientRect().width ||
+            target.getBoundingClientRect().width ||
             event.clientY < target.getBoundingClientRect().y ||
             event.clientY > target.getBoundingClientRect().y +
-                target.getBoundingClientRect().height
+            target.getBoundingClientRect().height
         ) {
             for (const elem of target.children) {
                 elem.style.opacity = '0';
@@ -599,12 +599,16 @@ export default class PlayerView extends BaseView {
      */
     tracklistClick(event) {
         let current = event.target;
+        if (current.classList.contains('m-obscure-title')) {
+            console.log('NO PAIN NO GAIN');
+            return;
+        }
         while (current !== window && current !== document.body && current != null) {
             if (current.getAttribute('class') === 'track-list' ||
                 (current.getAttribute('class') !== null &&
-                current.getAttribute('class').indexOf('button') !== -1 &&
-                current.getAttribute('class').indexOf('buttons') === -1 &&
-                current.getAttribute('class').indexOf('row') !== -1)
+                    current.getAttribute('class').indexOf('button') !== -1 &&
+                    current.getAttribute('class').indexOf('buttons') === -1 &&
+                    current.getAttribute('class').indexOf('row') !== -1)
             ) {
                 break;
             }
@@ -634,12 +638,13 @@ export default class PlayerView extends BaseView {
      * @param {Object} event
      */
     trackFavoriteButtonClick(event) {
-        if (event.target.src.indexOf('/static/img/favorite_border.svg') !== -1) {
-            event.target.src = '/static/img/favorite.svg';
-        } else {
-            event.target.src = '/static/img/favorite_border.svg';
-        }
-        this.eventBus.emit(PLAYER.LIKE, event.target.parentNode.parentNode.getAttribute('id'));
+        alert('This functionality is not accessible by now');
+        // if (event.target.src.indexOf('/static/img/favorite_border.svg') !== -1) {
+        //     event.target.src = '/static/img/favorite.svg';
+        // } else {
+        //     event.target.src = '/static/img/favorite_border.svg';
+        // }
+        // this.eventBus.emit(PLAYER.LIKE, event.target.parentNode.parentNode.getAttribute('id'));
     }
 
     /**
@@ -647,11 +652,12 @@ export default class PlayerView extends BaseView {
      * @param {Object} event
      */
     trackAddButtonClick(event) {
-        let target = event.target;
-        while (target.getAttribute('id') === null) {
-            target = target.parentNode;
-        }
-        this.eventBus.emit(PLAYER.ADD, target.getAttribute('id'));
+        alert('This functionality is not accessible by now');
+        // let target = event.target;
+        // while (target.getAttribute('id') === null) {
+        //     target = target.parentNode;
+        // }
+        // this.eventBus.emit(PLAYER.ADD, target.getAttribute('id'));
     }
 
     /**

@@ -1,5 +1,4 @@
 import search from '@components/search_component/search.xml';
-import {globalEventBus} from '@libs/eventBus';
 
 /**
  * Глупенький компонент поиска (без высшего образования)

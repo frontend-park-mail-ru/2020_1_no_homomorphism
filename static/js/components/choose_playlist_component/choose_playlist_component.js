@@ -131,10 +131,6 @@ export default class ChoosePlaylist {
      * Закрытие раздела
      */
     close() {
-        // document
-        //     .getElementsByClassName(DOM.CONTENT)[0]
-        //     .removeChild(
-        //         document.getElementsByClassName(DOM.CONTENT)[0].lastChild);
         document
             .getElementsByClassName(DOM.TOP_CONTENT)[0]
             .removeChild(

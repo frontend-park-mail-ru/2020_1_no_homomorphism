@@ -10,13 +10,13 @@
                     <div class="m-play-track">
                         <button class="m-button-track-play" id="playlist-play"></button>
                     </div>
-                    <div class="m-track-name ">
-                        <span>
+                    <div class="m-track-name">
+                        <div>
                             <fest:value>track.name</fest:value>
-                        </span>
-                        <div class="m-obscure-title">
-                            <fest:value>track.artist</fest:value>
                         </div>
+                        <a class="m-obscure-title m-tiny-ref" href="/artist/{track.artist_id}">
+                            <fest:value>track.artist</fest:value>
+                        </a>
                     </div>
                 </div>
                 <div class="l-track-buttons row">
