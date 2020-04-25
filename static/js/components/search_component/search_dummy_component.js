@@ -9,7 +9,7 @@ export default class SearchDummyComponent {
     /** Конструктор
      */
     constructor() {
-        this.data = {};
+        this._data = {};
     }
 
     /**
@@ -17,7 +17,7 @@ export default class SearchDummyComponent {
      * @param {Object} data
      */
     render(data) {
-        this.data = data;
+        this._data = data;
         document.getElementsByClassName('l-top-search')[0].innerHTML = search(data);
         document.getElementsByClassName('m-button-without-size')[0].href = `/search/${data.input}`;
         this.setEventListeners.bind(this)();
@@ -31,7 +31,7 @@ export default class SearchDummyComponent {
             .addEventListener('keyup', (event) => {
                 const value = event.target.value;
                 if (event.keyCode === 13 && value !== '') {
-                    globalEventBus.emit(GLOBAL.REDIRECT, `/search/${this.data.input}`);
+                    globalEventBus.emit(GLOBAL.REDIRECT, `/search/${this._data.input}`);
                 }
             });
     }
