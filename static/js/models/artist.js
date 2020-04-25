@@ -110,6 +110,7 @@ export default class ArtistModel {
      * Получает информацию артиста из БД
      */
     getArtistInfo() {
+        alert('We dont');
         // this.eventBus.emit(ARTIST.RENDER_INFO);
     }
 }

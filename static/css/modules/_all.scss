@@ -7,15 +7,15 @@
 
 .m-project-name {
   font-weight: bold;
-  margin-left: 4px;
-  margin-bottom: 4px;
   font-size: 23px;
-  margin-right: 16px;
+  margin: 8px 16px 4px 4px;
 }
 
 .l-navbar .m-search-input {
   box-shadow: $box-shadow;
-  height: 32px;
+  height: 40px;
+  // width: -webkit-calc(100% - 50px);
+
   width: 25%;
   border: 1px solid $chosen-icon;
   padding: 8px;
@@ -409,6 +409,10 @@
   border-bottom: 1px solid gray;
 }
 
+.l-search-form {
+  width: 25%;
+}
+
 .l-search {
   height: max-content;
   max-height: -webkit-calc(70%);
@@ -418,7 +422,7 @@
   left: -webkit-calc(5% + 183px);
   width: 25%;
   box-shadow: $box-shadow;
-  top: 47px;
+  top: 52px;
   z-index: 4;
   background-color: #ffffff;
 }

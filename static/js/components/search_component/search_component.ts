@@ -1,19 +1,32 @@
 import SearchDummyComponent from '@components/search_component/search_dummy_component';
 import Api from '@libs/api';
-import {DOM, RESPONSE, SEARCH} from "@libs/constans";
+import {GLOBAL, RESPONSE, SEARCH} from "@libs/constans";
+import {globalEventBus} from "@libs/eventBus";
 
 export default class SearchComponent {
     private input: string;
     private waitingAnswer: boolean;
+    private isOpen: boolean;
     private requestInterval: NodeJS.Timeout;
     private dummySearch: SearchDummyComponent;
 
     constructor() {
+        // globalEventBus.on(GLOBAL.REDIRECT, this.close.bind(this));
         this.dummySearch = new SearchDummyComponent();
         this.waitingAnswer = false;
+        this.isOpen = false;
+    }
+
+    setClosed() {
+        this.isOpen = false;
+    }
+
+    setOpened() {
+        this.isOpen = true;
     }
 
     render(input: string) {
+        this.isOpen = true;
         if (input === '') {
             clearTimeout(this.requestInterval);
             return;
@@ -45,37 +58,15 @@ export default class SearchComponent {
             });
     }
 
-    setEventListeners() {
-        document.addEventListener('click', this.analyzeTouch.bind(this), {once: true});
-    }
-
-    analyzeTouch(event: MouseEvent) {
-        const choosePlaylist = document.getElementsByClassName('l-search')[0];
-        if (choosePlaylist === undefined) {
-            return;
-        }
-        const isClickInside = choosePlaylist.contains(<HTMLInputElement>event.target);
-        if (isClickInside) {
-            console.log('inside');
-            return;
-        }
-        console.log('outside');
-        this.close();
-    }
-
     /**
      * Закрытие раздела
      */
     close() {
-        // document
-        //     .getElementsByClassName(DOM.CONTENT)[0]
-        //     .removeChild(
-        //         document.getElementsByClassName(DOM.CONTENT)[0].lastChild);
-        document
-            .getElementsByClassName(DOM.TOP_CONTENT)[0]
-            .removeChild(
-                document.getElementsByClassName(DOM.TOP_CONTENT)[0].lastChild);
-        // this.eventBus.emit(SEARCH.SET_LISTENERS);
-        // this._callbackEventListener();
+        console.log('kek');
+        if (this.isOpen) {
+            document.getElementsByClassName('l-top-content')[0].removeChild(document.getElementsByClassName('l-top-content')[0].firstChild);
+            this.isOpen = false;
+        }
+        (<HTMLInputElement>document.getElementsByClassName('m-search-input')[0]).value = '';
     }
 }

@@ -139,6 +139,8 @@ export default class ChoosePlaylist {
             .getElementsByClassName(DOM.TOP_CONTENT)[0]
             .removeChild(
                 document.getElementsByClassName(DOM.TOP_CONTENT)[0].lastChild);
+        console.log(document
+            .getElementsByClassName(DOM.CONTENT)[0]);
         document
             .getElementsByClassName(DOM.CONTENT)[0]
             .firstChild

@@ -23,6 +23,7 @@ export default class ProfileView extends BaseView {
         this.eventBus.on(PROFILE.RENDER_DATA, this.renderData.bind(this));
         this.eventBus.on(PROFILE.RENDER_STAT, this.renderStat.bind(this));
         this.eventBus.on(PROFILE.CHANGE_PLAYLIST_AMOUNT, this.changePlaylistAmount.bind(this));
+        this.eventBus.on(PROFILE.ID_ARTISTS_SECTION, this.artistSection.bind(this));
     }
 
     /**
@@ -37,6 +38,7 @@ export default class ProfileView extends BaseView {
         }
         this.eventBus.emit(PROFILE.GET_DATA);
         this.eventBus.emit(PROFILE.CHOOSE_SECTION);
+        console.log(this.currentOpen);
         this.eventBus.emit(this.currentOpen);
     }
 
@@ -95,6 +97,13 @@ export default class ProfileView extends BaseView {
         }
         const curSection = document.getElementById(this.currentOpen);
         curSection.classList.add(PROFILE.SELECTED_CLASS);
+    }
+
+    /**
+     * Секция артистов
+     */
+    artistSection() {
+        alert('This functionality is not accessible by now');
     }
 
     /**

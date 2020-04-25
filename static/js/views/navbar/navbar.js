@@ -15,6 +15,7 @@ export default class NavbarView extends BaseView {
         super(navbar);
         this.eventBus = eventBus;
         this.searchComponent = new SearchComponent();
+        // globalEventBus.on(GLOBAL.REDIRECT, this.setEmpty.bind(this));
         this.eventBus.on(NAVBAR.DRAW_COOKIE_RESULT, this.analyzeCookie.bind(this));
         this.eventBus.on(NAVBAR.RENDER_LOGGED, this.renderLogged.bind(this));
         this.eventBus.on(NAVBAR.RENDER_NOT_LOGGED, this.renderNotLogged.bind(this));
@@ -35,7 +36,6 @@ export default class NavbarView extends BaseView {
      * Sets event listeners
      */
     setEventListeners() {
-        document.addEventListener('click', this.closeSearchComponent.bind(this), {once: true});
         document.getElementById('logout-link').addEventListener('click', (event) => {
             event.preventDefault();
             event.stopImmediatePropagation();
@@ -44,15 +44,54 @@ export default class NavbarView extends BaseView {
         document.getElementsByClassName('m-search-input')[0]
             .addEventListener('keyup', (event) => {
                 const value = event.target.value;
+                if (event.keyCode === 13 && value !== '') {
+                    globalEventBus.emit(GLOBAL.REDIRECT, `/search/${value}`);
+                    return;
+                }
                 this.searchComponent.render(value);
+                // globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
             });
+        document.addEventListener('click', (event) => {
+            if (event.target.classList.contains('m-medium-icon')) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                this.submit(document.getElementsByClassName('m-search-input')[0].value);
+            }
+        });
+        document.addEventListener('click', this.closeSearchComponent.bind(this));
+    }
+
+    /**
+     * Подтверждение
+     * @param {String} input
+     */
+    submit(input) {
+        if (input !== '') {
+            document.getElementsByClassName('m-search-input')[0].value = '';
+            globalEventBus.emit(GLOBAL.REDIRECT, `/search/${input}`);
+        }
+        // alert(input);
+    }
+
+    /**
+     * Обнуление
+     * @param {String} input
+     */
+    setEmpty(input) {
+        console.log('close');
+        document.getElementsByClassName('m-search-input')[0].value = '';
     }
 
     /**
      * Закрытие секции
+     * @param {Object} event
      */
-    closeSearchComponent() {
-        console.log('CLOSE');
+    closeSearchComponent(event) {
+        const choosePlaylist = document.getElementsByClassName('l-top-search')[0];
+        const isClickInside = choosePlaylist.contains(event.target);
+        if (!isClickInside) {
+            this.searchComponent.close();
+        }
     }
 
     /**

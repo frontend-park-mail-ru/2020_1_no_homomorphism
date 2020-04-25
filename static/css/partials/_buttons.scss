@@ -54,10 +54,16 @@
 }
 
 .m-button-without-size {
-  position: relative;
+  // position: fixed;
   box-shadow: $box-shadow;
   opacity: 0.3;
   cursor: pointer;
+}
+
+.m-button-fixed {
+  position: fixed;
+  max-width: 40px;
+  max-height: 40px;
 }
 
 .m-button-without-size:hover {

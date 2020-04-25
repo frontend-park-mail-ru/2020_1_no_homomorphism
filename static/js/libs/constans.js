@@ -71,6 +71,7 @@ export const GLOBAL = {
     COLLAPSE: 'global-collapse',
     REDIRECT: 'redirect',
     LOGOUT_REDIRECT: 'global-logout-redirect',
+    CLOSE_SEARCH: 'global-close-search',
 };
 
 export const MAIN = {
