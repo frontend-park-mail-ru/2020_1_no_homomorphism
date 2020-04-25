@@ -1,5 +1,5 @@
 import Api from '@libs/api';
-import {PROFILE, URL, NAVBAR, RESPONSE, PAGINATION} from '@libs/constans';
+import {PROFILE, URL, NAVBAR, RESPONSE, PAGINATION, GLOBAL} from '@libs/constans';
 import User from '@libs/user';
 import {globalEventBus} from '@libs/eventBus';
 
@@ -43,10 +43,10 @@ export default class ProfileModel {
                     break;
                 case RESPONSE.UNAUTH:
                     globalEventBus.emit(NAVBAR.GET_USER_DATA, {});
-                    this.eventBus.emit(PROFILE.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     break;
                 case RESPONSE.SERVER_ERROR:
-                    this.eventBus.emit(PROFILE.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     break;
                 default:
                     console.log(res);
@@ -70,10 +70,10 @@ export default class ProfileModel {
                         });
                     break;
                 case RESPONSE.UNAUTH:
-                    this.eventBus.emit(PROFILE.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     break;
                 case RESPONSE.SERVER_ERROR:
-                    this.eventBus.emit(PROFILE.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     break;
                 default:
                     console.log(res);

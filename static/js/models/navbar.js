@@ -1,5 +1,5 @@
 import Api from '@libs/api';
-import {RESPONSE, NAVBAR, URL} from '@libs/constans';
+import {RESPONSE, NAVBAR, URL, GLOBAL} from '@libs/constans';
 import User from '@libs/user';
 import {globalEventBus} from '@libs/eventBus';
 
@@ -75,7 +75,7 @@ export default class NavbarModel {
                     this.eventBus.emit(NAVBAR.RENDER_NOT_LOGGED, {});
                     break;
                 case RESPONSE.SERVER_ERROR:
-                    this.eventBus.emit(NAVBAR.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     break;
                 default:
                     console.log(res);

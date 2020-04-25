@@ -1,9 +1,10 @@
-import {PROFILE, URL, DOM} from '@libs/constans';
+import {PROFILE, URL, DOM, GLOBAL} from '@libs/constans';
 import profile from '@views/profile/profile.tmpl.xml';
 import BaseView from '@libs/base_view';
 import User from '@libs/user';
 import TrackListComponent from '@components/track_list_component/track_list_component';
 import PlaylistsComponent from '@components/playlist_list_component/playlist_list_component';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * вью для профиля
@@ -77,7 +78,7 @@ export default class ProfileView extends BaseView {
     chooseSection() {
         switch (this.url) {
         case URL.PROFILE:
-            this.eventBus.emit(PROFILE.REDIRECT, URL.PROFILE_TRACKS);
+            globalEventBus.emit(GLOBAL.REDIRECT, URL.PROFILE_TRACKS);
             break;
         case URL.PROFILE_TRACKS:
             this.currentOpen = PROFILE.ID_TRACKS_SECTION;

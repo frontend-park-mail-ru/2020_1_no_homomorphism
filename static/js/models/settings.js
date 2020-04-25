@@ -1,6 +1,6 @@
 import Validation from '@libs/validation';
 import Api from '@libs/api';
-import {SETTINGS, URL, RESPONSE, NAVBAR} from '@libs/constans';
+import {SETTINGS, URL, RESPONSE, NAVBAR, GLOBAL} from '@libs/constans';
 import User from '@libs/user';
 import {globalEventBus} from '@libs/eventBus';
 
@@ -41,10 +41,10 @@ export default class SettingsModel {
                         });
                     break;
                 case RESPONSE.UNAUTH:
-                    this.eventBus.emit(SETTINGS.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     break;
                 case RESPONSE.SERVER_ERROR:
-                    this.eventBus.emit(SETTINGS.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     break;
                 default:
                     console.error('I am a teapot');
@@ -80,7 +80,7 @@ export default class SettingsModel {
                         break;
                     case RESPONSE.UNAUTH:
                         globalEventBus.emit(NAVBAR.GET_USER_DATA);
-                        this.eventBus.emit(SETTINGS.REDIRECT);
+                        globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                         break;
                     case RESPONSE.SERVER_ERROR:
                         this.eventBus.emit(SETTINGS.INVALID);
@@ -137,7 +137,7 @@ export default class SettingsModel {
                         this.eventBus.emit(SETTINGS.INVALID, errors);
                         break;
                     case RESPONSE.UNAUTH:
-                        this.eventBus.emit(SETTINGS.REDIRECT, URL.MAIN);
+                        globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                         break;
                     case RESPONSE.EXISTS:
                         errors['email'] = 'This email is already taken';

@@ -1,5 +1,6 @@
-import {PLAYLIST, RESPONSE, PAGINATION, URL} from '@libs/constans';
+import {PLAYLIST, RESPONSE, PAGINATION, URL, GLOBAL} from '@libs/constans';
 import Api from '@libs/api';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * Модель плейлиста
@@ -90,7 +91,7 @@ export default class PlaylistModel {
                 switch (res.status) {
                 case RESPONSE.OK: // TODO обработать удаление
                     this.eventBus.emit(PLAYLIST.RENDER_DELETED);
-                    this.eventBus.emit(PLAYLIST.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     break;
                 case RESPONSE.BAD_REQUEST:
                     break;

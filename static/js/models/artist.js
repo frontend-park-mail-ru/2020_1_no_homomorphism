@@ -34,7 +34,7 @@ export default class ArtistModel {
         ])
             .then((res) => {
                 if (res === undefined) {
-                    this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     return;
                 }
                 if (res.every((item) => item.ok)) { // TODO Сделать красиво!!!
@@ -57,7 +57,7 @@ export default class ArtistModel {
         Api.artistTracksGet(this.id, start, end)
             .then((res) => {
                 if (res === undefined) {
-                    this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     return;
                 }
                 if (res.ok) {
@@ -86,7 +86,7 @@ export default class ArtistModel {
         Api.artistAlbumsGet(this.id, start, end)
             .then((res) => {
                 if (res === undefined) {
-                    this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     return;
                 }
                 if (res.ok) {

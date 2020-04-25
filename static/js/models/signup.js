@@ -1,6 +1,6 @@
 import Validation from '@libs/validation';
 import Api from '@libs/api';
-import {SIGN_UP, URL, RESPONSE, NAVBAR} from '@libs/constans';
+import {SIGN_UP, URL, RESPONSE, NAVBAR, GLOBAL} from '@libs/constans';
 import User from '@libs/user';
 import {globalEventBus} from '@libs/eventBus';
 
@@ -47,7 +47,7 @@ export default class SignupModel {
                     case RESPONSE.OK_ADDED:
                         this.getCsrfToken();
                         globalEventBus.emit(NAVBAR.GET_USER_DATA);
-                        this.eventBus.emit(SIGN_UP.REDIRECT, URL.MAIN);
+                        globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                         break;
                     case RESPONSE.BAD_REQUEST:
                         this.eventBus.emit(SIGN_UP.INVALID, {global: 'Bad request'});
