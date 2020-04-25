@@ -26,4 +26,6 @@
     <a href="/login" class="m-login-button is-hidden" id="login-link">
         log in
     </a>
+    <div class="l-top-search">
+    </div>
 </fest:template>

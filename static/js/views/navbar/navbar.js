@@ -36,6 +36,7 @@ export default class NavbarView extends BaseView {
      * Sets event listeners
      */
     setEventListeners() {
+        document.addEventListener('click', this.closeSearchComponent.bind(this), {once: true});
         document.getElementById('logout-link').addEventListener('click', (event) => {
             event.preventDefault();
             event.stopImmediatePropagation();
@@ -46,6 +47,13 @@ export default class NavbarView extends BaseView {
                 const value = event.target.value;
                 this.searchComponent.render(value);
             });
+    }
+
+    /**
+     * Закрытие секции
+     */
+    closeSearchComponent() {
+        console.log('CLOSE');
     }
 
     /**
