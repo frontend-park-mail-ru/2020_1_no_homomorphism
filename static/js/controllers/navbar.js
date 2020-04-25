@@ -1,7 +1,7 @@
 import EventBus from '@libs/eventBus';
 import NavbarModel from '@models/navbar';
 import NavbarView from '@views/navbar/navbar';
-import {NAVBAR} from '@libs/constans';
+import {GLOBAL} from '@libs/constans';
 import {globalEventBus} from '@libs/eventBus';
 
 /**
@@ -17,6 +17,6 @@ export class NavbarController {
         this.model = new NavbarModel(this.eventBus);
         this.view = new NavbarView(this.eventBus);
 
-        globalEventBus.on(NAVBAR.LOGOUT_REDIRECT, router.logoutRedirect.bind(router));
+        globalEventBus.on(GLOBAL.LOGOUT_REDIRECT, router.logoutRedirect.bind(router));
     }
 }

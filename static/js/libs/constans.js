@@ -70,6 +70,7 @@ export const GLOBAL = {
     CLEAR_AND_LOCK: 'global-clear-and-lock',
     COLLAPSE: 'global-collapse',
     REDIRECT: 'redirect',
+    LOGOUT_REDIRECT: 'global-logout-redirect',
 };
 
 export const MAIN = {
@@ -94,7 +95,6 @@ export const NAVBAR = {
     RENDER_LOGGED: 'navbar-logged-in',
     RENDER_NOT_LOGGED: 'navbar-guest',
     GET_USER_DATA: 'navbar-get-user-data',
-    LOGOUT_REDIRECT: 'navbar-logout-redirect',
     LOGOUT_CLICKED: 'navbar-logout-clicked',
 };
 
