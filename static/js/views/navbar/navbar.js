@@ -91,7 +91,7 @@ export default class NavbarView extends BaseView {
         this.eventBus.emit(NAVBAR.LOGOUT_CLICKED);
         this.renderNotLogged.bind(this)();
         globalEventBus.emit(GLOBAL.LOGOUT_REDIRECT, URL.MAIN);
-        globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK);
+        globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK, true);
     }
 
     /**

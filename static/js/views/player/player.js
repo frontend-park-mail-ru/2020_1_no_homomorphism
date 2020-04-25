@@ -6,6 +6,7 @@ import {globalEventBus} from '@libs/eventBus';
 import ChoosePlaylist from '@components/choose_playlist_component/choose_playlist_component';
 import User from '@libs/user';
 import PlaylistComponent from '@components/playlist_component/playlist_component';
+import TopTrackComponent from '@components/top_track_component/top_track_component';
 
 /**
  *  вью для плеера
@@ -26,6 +27,7 @@ export default class PlayerView extends BaseView {
         this.muted = false;
         this.volume = 1;
         this.locked = true;
+        this.topTrackComponent = new TopTrackComponent(eventBus);
         this._choosePlaylist = new ChoosePlaylist(eventBus, PLAYER);
         this._playlistComponent = new PlaylistComponent(this.setDynamicEventListeners.bind(this));
         this.eventBus.on(PLAYER.DRAW_PLAY, this.drawPlay.bind(this));
@@ -54,6 +56,7 @@ export default class PlayerView extends BaseView {
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.PLAYER)[0]);
+        this.top_track_component.render();
         this.setStaticEventListeners();
         this.resize();
     }
@@ -674,10 +677,6 @@ export default class PlayerView extends BaseView {
      * @param {Object} track
      */
     updateTrack(track) {
-        document.getElementById('cover').src = track.image;
-        document.getElementById('artist').innerHTML = track.artist;
-        document.getElementById('title').innerHTML = track.name;
-        document.getElementById('title').title = track.name;
         const minutes = Math.floor(track.duration / 60);
         const seconds = Math.floor(track.duration % 60);
         document.getElementsByClassName('duration')[0].innerHTML = minutes.toString() + ':' +
@@ -695,9 +694,8 @@ export default class PlayerView extends BaseView {
             return;
         }
         const marker = document.getElementsByClassName('current-marker')[0];
-        const track1 = document./* getElementsByClassName('l-player')[0].*/getElementById(
-            currentId);
-        const track2 = document./* getElementsByClassName('l-player')[0].*/getElementById(newId);
+        const track1 = document.getElementById(currentId);
+        const track2 = document.getElementById(newId);
         const heightDifference = track1.getBoundingClientRect().y -
             track2.getBoundingClientRect().y;
         const base = document.getElementsByClassName('track-list')[0].children[1]
@@ -739,7 +737,7 @@ export default class PlayerView extends BaseView {
      * @param {string} id
      */
     removeFromTracklist(id) {
-        document./* getElementsByClassName('l-player')[0].*/getElementById(id).remove();
+        document.getElementById(id).remove();
         if (document.getElementsByClassName('track-list')[0].children.length === 1) {
             if (this.expanded) {
                 this.triggerClick();
@@ -752,7 +750,7 @@ export default class PlayerView extends BaseView {
      * Очищает список воспроизвдения
      * @param {boolean} lock
      */
-    removeFromTracklistAll(lock) {
+    removeFromTracklistAll(lock = false) {
         while (document.getElementsByClassName('track-list')[0].children.length > 1) {
             document.getElementsByClassName('track-list')[0].children[document
                 .getElementsByClassName('track-list')[0].children.length - 1].remove();

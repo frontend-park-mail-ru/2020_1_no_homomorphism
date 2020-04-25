@@ -9,19 +9,6 @@
         <div class="col main-col">
             <div class="row patch"></div>
             <div class="row l-music-bar">
-                <div class="col">
-<!--                    <a href="/player">-->
-                        <img src="" height="80px" width="80px" alt="..." id="cover"/>
-<!--                    </a>-->
-                </div>
-                <div class="col track-group-names">
-                    <div class="track-name" id="title" title="">
-                        Kek
-                    </div>
-                    <span class="group-name" id="artist">
-                        Lol
-                    </span>
-                </div>
             </div>
             <div class="container-audio border-bottom">
                 <div class="timeline row">

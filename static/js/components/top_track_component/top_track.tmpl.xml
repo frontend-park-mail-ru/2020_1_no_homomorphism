@@ -1,0 +1,13 @@
+<div class="col">
+<!--                    <a href="/player">-->
+    <img src="" height="80px" width="80px" alt="..." id="cover"/>
+<!--                    </a>-->
+</div>
+<div class="col track-group-names">
+    <div class="track-name" id="title" title="">
+        Kek
+    </div>
+    <span class="group-name" id="artist">
+        Lol
+    </span>
+</div>
