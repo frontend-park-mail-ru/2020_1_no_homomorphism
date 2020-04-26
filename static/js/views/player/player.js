@@ -97,19 +97,48 @@ export default class PlayerView extends BaseView {
      * Sets static EventListeners
      */
     setEventListeners() {
-        [
-            [window, 'resize', this.resize],
-            [document.getElementsByTagName('body')[0], 'DOMSubtreeModified', this.resize],
-            [document.getElementsByTagName('audio')[0], 'timeupdate', this.audioTimeUpdate],
-            [document.getElementsByTagName('audio')[0], 'ended', this.audioEnded],
-            [document.querySelector('.player-trigger'), 'mouseover', this.triggerMouseOver],
-            [document.querySelector('.player-trigger'), 'mouseout', this.triggerMouseOut],
-            [document.querySelector('.player-trigger'), 'click', this.triggerClick],
-            [document.querySelector('.trigger-button'), 'mouseover', this.triggerMouseOver],
-            [document.querySelector('.trigger-button'), 'mouseout', this.triggerMouseOut],
-            [document.querySelector('.trigger-button'), 'click', this.triggerClick],
-        ].forEach((el) => {
-            el[0].addEventListener(el[1], el[2].bind(this));
+        [{
+            element: window,
+            event: 'resize',
+            callback: this.resize,
+        }, {
+            element: document.getElementsByTagName('body')[0],
+            event: 'DOMSubtreeModified',
+            callback: this.resize,
+        }, {
+            element: document.getElementsByTagName('audio')[0],
+            event: 'timeupdate',
+            callback: this.audioTimeUpdate,
+        }, {
+            element: document.getElementsByTagName('audio')[0],
+            event: 'ended',
+            callback: this.audioEnded,
+        }, {
+            element: document.querySelector('.player-trigger'),
+            event: 'mouseover',
+            callback: this.triggerMouseOver,
+        }, {
+            element: document.querySelector('.player-trigger'),
+            event: 'mouseout',
+            callback: this.triggerMouseOut,
+        }, {
+            element: document.querySelector('.player-trigger'),
+            event: 'click',
+            callback: this.triggerClick,
+        }, {
+            element: document.querySelector('.trigger-button'),
+            event: 'mouseover',
+            callback: this.triggerMouseOver,
+        }, {
+            element: document.querySelector('.trigger-button'),
+            event: 'mouseout',
+            callback: this.triggerMouseOut,
+        }, {
+            element: document.querySelector('.trigger-button'),
+            event: 'click',
+            callback: this.triggerClick,
+        }].forEach((el) => {
+            el.element.addEventListener(el.event, el.callback.bind(this));
         });
         this.playerControlComponent.setEventListeners();
     }

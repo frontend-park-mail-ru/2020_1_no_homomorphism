@@ -18,20 +18,48 @@ export default class PlayerControlComponent {
         this.timelineDrag = false;
         this.volumeDrag = false;
         this.eventBus = eventBus;
-        [
-            [PLAYER.TRACK_UPDATE, this.updateTrack],
-            [PLAYER.DRAW_PLAY, this.drawPlay],
-            [PLAYER.DRAW_PAUSE, this.drawPause],
-            [PLAYER.DRAW_TIMELINE, this.drawTimeline],
-            [PLAYER.DRAW_SHUFFLE, this.drawShuffle],
-            [PLAYER.DRAW_UNSHUFLE, this.drawUnshuffle],
-            [PLAYER.DRAW_REPEAT, this.drawRepeat],
-            [PLAYER.DRAW_REPEAT_ONE, this.drawRepeatOne],
-            [PLAYER.DRAW_UNREPEAT, this.drawUnrepeat],
-            [PLAYER.DRAW_MUTE, this.drawMute],
-            [PLAYER.DRAW_UNMUTE, this.drawUnmute],
-        ].forEach((subscription) => {
-            this.eventBus.on(subscription[0], subscription[1].bind(this));
+        this.subscribe();
+    }
+
+    /**
+     * Подписка на события eventBus
+     */
+    subscribe() {
+        [{
+            event: PLAYER.TRACK_UPDATE,
+            callback: this.updateTrack,
+        }, {
+            event: PLAYER.DRAW_PLAY,
+            callback: this.drawPlay,
+        }, {
+            event: PLAYER.DRAW_PAUSE,
+            callback: this.drawPause,
+        }, {
+            event: PLAYER.DRAW_TIMELINE,
+            callback: this.drawTimeline,
+        }, {
+            event: PLAYER.DRAW_SHUFFLE,
+            callback: this.drawShuffle,
+        }, {
+            event: PLAYER.DRAW_UNSHUFLE,
+            callback: this.drawUnshuffle,
+        }, {
+            event: PLAYER.DRAW_REPEAT,
+            callback: this.drawRepeat,
+        }, {
+            event: PLAYER.DRAW_REPEAT_ONE,
+            callback: this.drawRepeatOne,
+        }, {
+            event: PLAYER.DRAW_UNREPEAT,
+            callback: this.drawUnrepeat,
+        }, {
+            event: PLAYER.DRAW_MUTE,
+            callback: this.drawMute,
+        }, {
+            event: PLAYER.DRAW_UNMUTE,
+            callback: this.drawUnmute,
+        }].forEach((subscription) => {
+            this.eventBus.on(subscription.event, subscription.callback.bind(this));
         });
     }
 
@@ -48,42 +76,140 @@ export default class PlayerControlComponent {
      * Sets EventListeners
      */
     setEventListeners() {
-        [
-            [window, 'mouseup', this.windowMouseUp],
-            [document.querySelector('.play-pause'), 'click', this.playPauseButtonClick],
-            [document.getElementById('prev'), 'click', this.prevButtonClick],
-            [document.getElementById('next'), 'click', this.nextButtonClick],
-            [document.querySelector('.timeline'), 'mouseover', this.timelineMouseOver],
-            [document.querySelector('.timeline'), 'mouseout', this.timelineMouseOut],
-            [document.querySelector('.timeline-back'), 'mousedown', this.timelineMouseDown],
-            [document.querySelector('.timeline-front'), 'mousedown', this.timelineMouseDown],
-            [document.querySelector('.timeline-back'), 'mouseup', this.timelineMouseUp],
-            [document.querySelector('.timeline-front'), 'mouseup', this.timelineMouseUp],
-            [document.querySelector('.timeline-back'), 'mousemove', this.timelineMouseMove],
-            [document.querySelector('.timeline-front'), 'mousemove', this.timelineMouseMove],
-            [document.querySelector('.timeline-back'), 'click', this.timelineClick],
-            [document.querySelector('.timeline-front'), 'click', this.timelineClick],
-            [document.querySelector('.shuffle'), 'mouseover', this.shuffleButtonMouseOver],
-            [document.querySelector('.shuffle'), 'mouseout', this.shuffleButtonMouseOut],
-            [document.querySelector('.shuffle'), 'click', this.shuffleButtonClick],
-            [document.querySelector('.repeat'), 'mouseover', this.repeatButtonMouseOver],
-            [document.querySelector('.repeat'), 'mouseout', this.repeatButtonMouseOut],
-            [document.querySelector('.repeat'), 'click', this.repeatButtonClick],
-            [document.querySelector('.volume'), 'mouseover', this.volumeButtonMouseOver],
-            [document.querySelector('.volume'), 'mouseout', this.volumeButtonMouseOut],
-            [document.querySelector('.volume'), 'click', this.volumeButtonClick],
-            [document.querySelector('.volume-scale'), 'mouseover', this.volumeButtonMouseOver],
-            [document.querySelector('.volume-scale'), 'mouseout', this.volumeButtonMouseOut],
-            [document.querySelector('.volume-scale-back'), 'mousedown', this.volumeMouseDown],
-            [document.querySelector('.volume-scale-back'), 'mouseup', this.volumeMouseUp],
-            [document.querySelector('.volume-scale-front'), 'mousedown', this.volumeMouseDown],
-            [document.querySelector('.volume-scale-front'), 'mouseup', this.volumeMouseUp],
-            [document.querySelector('.volume-scale-back'), 'click', this.volumeScaleClick],
-            [document.querySelector('.volume-scale-front'), 'click', this.volumeScaleClick],
-            [document.querySelector('.volume-scale-back'), 'mousemove', this.volumeMouseMove],
-            [document.querySelector('.volume-scale-front'), 'mousemove', this.volumeMouseMove],
-        ].forEach((el) => {
-            el[0].addEventListener(el[1], el[2].bind(this));
+        [{
+            element: window,
+            event: 'mouseup',
+            callback: this.windowMouseUp,
+        }, {
+            element: document.querySelector('.play-pause'),
+            event: 'click',
+            callback: this.playPauseButtonClick,
+        }, {
+            element: document.getElementById('prev'),
+            event: 'click',
+            callback: this.prevButtonClick,
+        }, {
+            element: document.getElementById('next'),
+            event: 'click',
+            callback: this.nextButtonClick,
+        }, {
+            element: document.querySelector('.timeline'),
+            event: 'mouseover',
+            callback: this.timelineMouseOver,
+        }, {
+            element: document.querySelector('.timeline'),
+            event: 'mouseout',
+            callback: this.timelineMouseOut,
+        }, {
+            element: document.querySelector('.timeline-back'),
+            event: 'mousedown',
+            callback: this.timelineMouseDown,
+        }, {
+            element: document.querySelector('.timeline-front'),
+            event: 'mousedown',
+            callback: this.timelineMouseDown,
+        }, {
+            element: document.querySelector('.timeline-back'),
+            event: 'mouseup',
+            callback: this.timelineMouseUp,
+        }, {
+            element: document.querySelector('.timeline-front'),
+            event: 'mouseup',
+            callback: this.timelineMouseUp,
+        }, {
+            element: document.querySelector('.timeline-back'),
+            event: 'mousemove',
+            callback: this.timelineMouseMove,
+        }, {
+            element: document.querySelector('.timeline-front'),
+            event: 'mousemove',
+            callback: this.timelineMouseMove,
+        }, {
+            element: document.querySelector('.timeline-back'),
+            event: 'click',
+            callback: this.timelineClick,
+        }, {
+            element: document.querySelector('.timeline-front'),
+            event: 'click',
+            callback: this.timelineClick,
+        }, {
+            element: document.querySelector('.shuffle'),
+            event: 'mouseover',
+            callback: this.shuffleButtonMouseOver,
+        }, {
+            element: document.querySelector('.shuffle'),
+            event: 'mouseout',
+            callback: this.shuffleButtonMouseOut,
+        }, {
+            element: document.querySelector('.shuffle'),
+            event: 'click',
+            callback: this.shuffleButtonClick,
+        }, {
+            element: document.querySelector('.repeat'),
+            event: 'mouseover',
+            callback: this.repeatButtonMouseOver,
+        }, {
+            element: document.querySelector('.repeat'),
+            event: 'mouseout',
+            callback: this.repeatButtonMouseOut,
+        }, {
+            element: document.querySelector('.repeat'),
+            event: 'click',
+            callback: this.repeatButtonClick,
+        }, {
+            element: document.querySelector('.volume'),
+            event: 'mouseover',
+            callback: this.volumeButtonMouseOver,
+        }, {
+            element: document.querySelector('.volume'),
+            event: 'mouseout',
+            callback: this.volumeButtonMouseOut,
+        }, {
+            element: document.querySelector('.volume'),
+            event: 'click',
+            callback: this.volumeButtonClick,
+        }, {
+            element: document.querySelector('.volume-scale'),
+            event: 'mouseover',
+            callback: this.volumeButtonMouseOver,
+        }, {
+            element: document.querySelector('.volume-scale'),
+            event: 'mouseout',
+            callback: this.volumeButtonMouseOut,
+        }, {
+            element: document.querySelector('.volume-scale-back'),
+            event: 'mousedown',
+            callback: this.volumeMouseDown,
+        }, {
+            element: document.querySelector('.volume-scale-back'),
+            event: 'mouseup',
+            callback: this.volumeMouseUp,
+        }, {
+            element: document.querySelector('.volume-scale-front'),
+            event: 'mousedown',
+            callback: this.volumeMouseDown,
+        }, {
+            element: document.querySelector('.volume-scale-front'),
+            event: 'mouseup',
+            callback: this.volumeMouseUp,
+        }, {
+            element: document.querySelector('.volume-scale-back'),
+            event: 'click',
+            callback: this.volumeScaleClick,
+        }, {
+            element: document.querySelector('.volume-scale-front'),
+            event: 'click',
+            callback: this.volumeScaleClick,
+        }, {
+            element: document.querySelector('.volume-scale-back'),
+            event: 'mousemove',
+            callback: this.volumeMouseMove,
+        }, {
+            element: document.querySelector('.volume-scale-front'),
+            event: 'mousemove',
+            callback: this.volumeMouseMove,
+        }].forEach((el) => {
+            el.element.addEventListener(el.event, el.callback.bind(this));
         });
     }
 
