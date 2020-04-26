@@ -1,7 +1,8 @@
 import Validation from '@libs/validation';
 import Api from '@libs/api';
-import {SIGN_UP, URL, RESPONSE, NAVBAR} from '@libs/constans';
+import {SIGN_UP, URL, RESPONSE, NAVBAR, GLOBAL} from '@libs/constans';
 import User from '@libs/user';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * модель странички регистрации
@@ -10,11 +11,9 @@ export default class SignupModel {
     /**
      * конструктор
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
         this.eventBus.on(SIGN_UP.SUBMIT, this.submit.bind(this));
     }
 
@@ -47,8 +46,8 @@ export default class SignupModel {
                     switch (res.status) {
                     case RESPONSE.OK_ADDED:
                         this.getCsrfToken();
-                        this.globalEventBus.emit(NAVBAR.GET_USER_DATA);
-                        this.eventBus.emit(SIGN_UP.REDIRECT, URL.MAIN);
+                        globalEventBus.emit(NAVBAR.GET_USER_DATA);
+                        globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                         break;
                     case RESPONSE.BAD_REQUEST:
                         this.eventBus.emit(SIGN_UP.INVALID, {global: 'Bad request'});

@@ -1,7 +1,8 @@
 import {PLAYLIST, GLOBAL} from '@libs/constans';
 import playlist from '@views/playlist/playlist.tmpl.xml';
 import BaseView from '@libs/base_view';
-import TrackListComponent from '@components/downTrackListComponent/trackListComponent';
+import TrackListComponent from '@components/track_list_component/track_list_component';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  *  вью для входа
@@ -9,12 +10,10 @@ import TrackListComponent from '@components/downTrackListComponent/trackListComp
 export default class PlaylistView extends BaseView {
     /**
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         super(playlist);
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
         this.playlistData = {};
         this.tracksAmount = 0;
         this.trackListComponent = new TrackListComponent(eventBus, PLAYLIST);
@@ -97,7 +96,7 @@ export default class PlaylistView extends BaseView {
         if (this.tracksAmount === 0) {
             return;
         }
-        this.globalEventBus.emit(GLOBAL.PLAY_PLAYLIST, this.playlistData.id);
+        globalEventBus.emit(GLOBAL.PLAY_PLAYLIST, this.playlistData.id);
     }
 
     /**

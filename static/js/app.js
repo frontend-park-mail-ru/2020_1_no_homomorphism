@@ -10,6 +10,7 @@ import {SettingsController} from '@controllers/settings';
 import {ArtistController} from '@controllers/artist';
 import {PlaylistController} from '@controllers/playlist';
 import {AlbumController} from '@controllers/album';
+import {SearchController} from '@controllers/search';
 import '@css/_main.scss';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -24,6 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const artistController = new ArtistController(router);
     const playlistController = new PlaylistController(router);
     const albumController = new AlbumController(router);
+    const searchController = new SearchController(router);
 
 
     router.addView(URL.NAVBAR, navbarController.view);
@@ -40,6 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
     router.addView(URL.ARTIST, artistController.view);
     router.addView(URL.PLAYLIST, playlistController.view);
     router.addView(URL.ALBUM, albumController.view);
+    router.addView(URL.SEARCH, searchController.view);
     router.start();
     navbarController.view.render();
     playerController.view.render();

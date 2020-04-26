@@ -1,14 +1,23 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <a href="/" class="l-logo">
-        <img src="/static/img/library_music.svg" class="m-medium-icon" alt="logo"/>
+        <img src="/static/img/library_music.svg" class="m-medium-icon col" alt="logo"/>
+<!--    </a>-->
+<!--    <a href="/" class="m-project-name">-->
+        <div class="m-project-name col">
+            VirusMusic
+        </div>
+
     </a>
-    <a href="/" class="m-project-name">
-        VirusMusic
-    </a>
-    <input type="text" class="m-search-input"/>
-    <a class="m-button-without-size">
+<!--    <span class="l-search-form">-->
+<!--        <input type="text" class="m-search-input" placeholder="Find artist, track or album"/>-->
+<!--        <span class="m-button-without-size">-->
+<!--            <img src="/static/img/search.svg" class="m-medium-icon"/>-->
+<!--        </span>-->
+<!--    </span>-->
+    <input type="text" class="m-search-input" placeholder="Find artist, track or album"/>
+    <span class="m-button-without-size">
         <img src="/static/img/search.svg" class="m-medium-icon"/>
-    </a>
+    </span>
     <a href="/profile/tracks" class="l-navbar-info is-hidden" id="profile-link">
         <img class="m-navbar-avatar m-medium-icon col" src="/static/img/avatar/default.png" alt="avatar"/>
 
@@ -26,4 +35,6 @@
     <a href="/login" class="m-login-button is-hidden" id="login-link">
         log in
     </a>
+    <div class="l-top-search">
+    </div>
 </fest:template>

@@ -1,7 +1,11 @@
-import {PLAYER, NAVBAR, DOM, GLOBAL} from '@libs/constans';
+import {PLAYER, NAVBAR, DOM, GLOBAL, URL} from '@libs/constans';
 import BaseView from '@libs/base_view';
 import track from '@views/player/track.tmpl.xml';
 import player from '@views/player/player.tmpl.xml';
+import {globalEventBus} from '@libs/eventBus';
+import ChoosePlaylist from '@components/choose_playlist_component/choose_playlist_component';
+import User from '@libs/user';
+import PlaylistComponent from '@components/playlist_component/playlist_component';
 
 /**
  *  вью для плеера
@@ -9,12 +13,10 @@ import player from '@views/player/player.tmpl.xml';
 export default class PlayerView extends BaseView {
     /**
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         super(player);
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
         this.expanded = false;
         this.timelineDrag = false;
         this.volumeDrag = false;
@@ -24,6 +26,8 @@ export default class PlayerView extends BaseView {
         this.muted = false;
         this.volume = 1;
         this.locked = true;
+        this._choosePlaylist = new ChoosePlaylist(eventBus, PLAYER);
+        this._playlistComponent = new PlaylistComponent(this.setDynamicEventListeners.bind(this));
         this.eventBus.on(PLAYER.DRAW_PLAY, this.drawPlay.bind(this));
         this.eventBus.on(PLAYER.DRAW_PAUSE, this.drawPause.bind(this));
         this.eventBus.on(PLAYER.TRACK_UPDATE, this.updateTrack.bind(this));
@@ -40,7 +44,7 @@ export default class PlayerView extends BaseView {
         this.eventBus.on(PLAYER.DRAW_UNREPEAT, this.drawUnrepeat.bind(this));
         this.eventBus.on(PLAYER.DRAW_MUTE, this.drawMute.bind(this));
         this.eventBus.on(PLAYER.DRAW_UNMUTE, this.drawUnmute.bind(this));
-        this.globalEventBus.on(GLOBAL.COLLAPSE, this.collapse.bind(this));
+        globalEventBus.on(GLOBAL.COLLAPSE, this.collapse.bind(this));
     }
 
     /**
@@ -170,18 +174,16 @@ export default class PlayerView extends BaseView {
      * Sets dynamic EventListeners
      */
     setDynamicEventListeners() {
-        document.querySelectorAll('.track-list .row').forEach((row) => {
+        document.querySelectorAll('.track-list').forEach((row) => {
             row.onclick = (event) => this.tracklistClick(event);
-            row.onmouseover = (event) => this.tracklistMouseOver(event);
-            row.onmouseout = (event) => this.tracklistMouseOut(event);
         });
-        document.querySelectorAll('img.delete-button').forEach((button) => {
+        document.querySelectorAll('.delete-button').forEach((button) => {
             button.onclick = (event) => this.trackDeleteButtonClick(event);
         });
-        document.querySelectorAll('img.favorite-button').forEach((button) => {
+        document.querySelectorAll('.favorite-button').forEach((button) => {
             button.onclick = (event) => this.trackFavoriteButtonClick(event);
         });
-        document.querySelectorAll('img.add-button').forEach((button) => {
+        document.querySelectorAll('.add-button').forEach((button) => {
             button.onclick = (event) => this.trackAddButtonClick(event);
         });
     }
@@ -528,7 +530,7 @@ export default class PlayerView extends BaseView {
                 if (delta < 0 && top - delta / 2 > 0) {
                     trackList.style.top = '0';
                 } else if (delta > 0 && trackList.getBoundingClientRect().bottom - delta / 2 <
-                           document.documentElement.clientHeight
+                    document.documentElement.clientHeight
                 ) {
                     const container = document.getElementsByClassName('container-audio')[0];
                     trackList.style.top = (document.documentElement.clientHeight -
@@ -542,70 +544,21 @@ export default class PlayerView extends BaseView {
     }
 
     /**
-     * Слушает вход мыши в трек в плейлисте
-     * @param {Object} event
-     */
-    tracklistMouseOver(event) {
-        let target = event.target;
-        while (target.getAttribute('class') !== 'row border-bottom') {
-            if (target.getAttribute('class') !== null &&
-                target.getAttribute('class').indexOf('button') !== -1 &&
-                target.getAttribute('class').indexOf('buttons') === -1 &&
-                target.getAttribute('class').indexOf('row') !== -1
-            ) {
-                target.style.opacity = '1';
-                return;
-            }
-            target = target.parentNode;
-        }
-        for (const elem of target.getElementsByClassName('col track-buttons')[0].children) {
-            elem.style.opacity = '0.4';
-        }
-    }
-
-    /**
-     * Слушает выход мыши из трека в плейлисте
-     * @param {Object} event
-     */
-    tracklistMouseOut(event) {
-        let target = event.target;
-        while (target.getAttribute('class') !== 'row border-bottom') {
-            if (target.getAttribute('class') !== null &&
-                target.getAttribute('class').indexOf('button') !== -1 &&
-                target.getAttribute('class').indexOf('buttons') === -1 &&
-                target.getAttribute('class').indexOf('row') !== -1
-            ) {
-                target.style.opacity = '0.4';
-                return;
-            }
-            target = target.parentNode;
-        }
-        target = target.getElementsByClassName('col track-buttons')[0];
-        if (event.clientX < target.getBoundingClientRect().x ||
-            event.clientX > target.getBoundingClientRect().x +
-                target.getBoundingClientRect().width ||
-            event.clientY < target.getBoundingClientRect().y ||
-            event.clientY > target.getBoundingClientRect().y +
-                target.getBoundingClientRect().height
-        ) {
-            for (const elem of target.children) {
-                elem.style.opacity = '0';
-            }
-        }
-    }
-
-    /**
      * Слушает клик по треку в плейлисте
      * @param {Object} event
      */
     tracklistClick(event) {
         let current = event.target;
-        while (current !== window && current !== document.body && current != null) {
+        if (current.classList.contains('m-obscure-title') ||
+            current.classList.contains('m-big-delete-button')) {
+            return;
+        }
+        while (current !== window && current !== document.body && current != null) { // TODO Сделать по-человечески :(
             if (current.getAttribute('class') === 'track-list' ||
                 (current.getAttribute('class') !== null &&
-                current.getAttribute('class').indexOf('button') !== -1 &&
-                current.getAttribute('class').indexOf('buttons') === -1 &&
-                current.getAttribute('class').indexOf('row') !== -1)
+                    current.getAttribute('class').indexOf('button') !== -1 &&
+                    current.getAttribute('class').indexOf('buttons') === -1 &&
+                    current.getAttribute('class').indexOf('row') !== -1)
             ) {
                 break;
             }
@@ -635,12 +588,11 @@ export default class PlayerView extends BaseView {
      * @param {Object} event
      */
     trackFavoriteButtonClick(event) {
-        if (event.target.src.indexOf('/static/img/favorite_border.svg') !== -1) {
-            event.target.src = '/static/img/favorite.svg';
-        } else {
-            event.target.src = '/static/img/favorite_border.svg';
+        if (!User.exists()) {
+            globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
+            return;
         }
-        this.eventBus.emit(PLAYER.LIKE, event.target.parentNode.parentNode.getAttribute('id'));
+        alert('This functionality is not accessible by now');
     }
 
     /**
@@ -648,11 +600,46 @@ export default class PlayerView extends BaseView {
      * @param {Object} event
      */
     trackAddButtonClick(event) {
-        let target = event.target;
-        while (target.getAttribute('id') === null) {
-            target = target.parentNode;
+        if (!User.exists()) {
+            globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
+            return;
         }
-        this.eventBus.emit(PLAYER.ADD, target.getAttribute('id'));
+        this._choosePlaylist.trackData = this.getIdByClick(event);
+        alert('NIKITA, I havent finished it yet');
+        this.getProfilePlaylists();
+    }
+
+    /**
+     * Получение id из dom-елемента по нажатию
+     * @param {Object} event
+     * @return {Object}
+     */
+    getIdByClick(event) {
+        let current = event.target;
+        while (current != null && !current.classList.contains('track-list')) {
+            if (current.classList.contains('border-bottom') &&
+                current.getAttribute('id') !== null) {
+                return {'id': current.getAttribute('id')};
+            }
+            current = current.parentNode;
+        }
+        return '';
+    }
+
+    /**
+     * Получение плейлистов пользователя
+     */
+    getProfilePlaylists() {
+        this._playlistComponent.getProfilePlaylistsApi(this.callChoosePlaylist.bind(this));
+    }
+
+    /**
+     * Вызов компоненты choosePlaylist
+     * @param {Array} playlistList
+     */
+    callChoosePlaylist(playlistList) {
+        this._choosePlaylist
+            .render(this.setTracksEventListeners.bind(this), playlistList);
     }
 
     /**

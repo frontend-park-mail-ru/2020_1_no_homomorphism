@@ -1,8 +1,8 @@
 import artist from '@views/artist/artist.tmpl.xml';
 import BaseView from '@libs/base_view';
-import TrackListComponent from '@components/downTrackListComponent/trackListComponent';
+import TrackListComponent from '@components/track_list_component/track_list_component';
+import PlaylistsComponent from '@components/playlist_list_component/playlist_list_component';
 import {ARTIST, DOM} from '@libs/constans';
-import PlaylistsComponent from '@components/downPlaylistComponent/playlistListComponent';
 
 /**
  *  вью для страницы артиста
@@ -11,9 +11,8 @@ export default class ArtistView extends BaseView {
     /**
      * Конструктор
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         super(artist);
         this.data = {};
         this.tracksRendered = 0;
@@ -25,7 +24,6 @@ export default class ArtistView extends BaseView {
         this.trackListComponent = new TrackListComponent(eventBus, ARTIST);
         this.playlistsComponent = new PlaylistsComponent(eventBus, ARTIST);
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
         this.eventBus.on(ARTIST.RENDER_DATA, this.renderData.bind(this));
     }
 

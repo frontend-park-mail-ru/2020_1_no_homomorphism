@@ -85,14 +85,6 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(ttf|woff|woff2|eot)$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                    },
-                ],
-            },
-            {
                 test: /\.(j|t)s$/,
                 exclude: /node_modules/,
                 loader: ['babel-loader', 'ts-loader'],

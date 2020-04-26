@@ -8,9 +8,20 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "outDir": "./dist/",
-    "allowJs": true
+    "allowJs": true,
+    "baseUrl": "static",
+    "paths": {
+      "@/*": ["/*"],
+      "@models/*": ["js/models/*"],
+      "@components/*": ["js/components/*"],
+      "@views/*": ["js/views/*"],
+      "@controllers/*": ["js/controllers/*"],
+      "@libs/*": ["js/libs/*"]
+    }
   },
   "files": [
-    "./static/js/libs/user.ts"
+    "./static/js/libs/user.ts",
+    "./static/js/components/search_component/search_component.ts",
+    "./static/js/components/artist_list_component/artist_list_component.ts"
   ]
 }

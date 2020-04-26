@@ -8,14 +8,12 @@ export default class AlbumModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         this.album = {};
         this.tracks = {};
         this.curPagination = 0;
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
         this.eventBus.on(ALBUM.GET_ALBUM_DATA, this.getAlbum.bind(this));
         this.eventBus.on(ALBUM.GET_TRACKS_DATA, this.getTracks.bind(this));
     }

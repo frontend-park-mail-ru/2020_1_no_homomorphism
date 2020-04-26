@@ -1,9 +1,10 @@
-import template from '@components/downTrackListComponent/tracks.tmpl.xml';
+import template from '@components/track_list_component/tracks.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
-import ChoosePlaylist from '@components/choosePlaylistComponent/choosePlaylistComponent';
-import TrackComponent from '@components/trackComponent/trackComponent';
-import PlaylistComponent from '@components/playlistComponent/playlistComponent';
-import {PLAYLIST} from '@libs/constans';
+import ChoosePlaylist from '@components/choose_playlist_component/choose_playlist_component';
+import TrackComponent from '@components/track_component/track_component';
+import PlaylistComponent from '@components/playlist_component/playlist_component';
+import {GLOBAL, PLAYLIST, URL} from '@libs/constans';
+import User from '@libs/user';
 
 /**
  * Компонент - список треков
@@ -78,6 +79,13 @@ export default class TrackListComponent {
      */
     playTrack(event) {
         const trackData = this.getIdByClick(event);
+        if (this._type === 'track') {
+            const temp = this._tracklist;
+            delete temp.type;
+            globalEventBus.emit(`global-play-${this._type}-tracks`,
+                {'tracks': this._tracklist}, trackData.id);
+            return;
+        }
         globalEventBus.emit(`global-play-${this._type}-tracks`,
             this._id,
             trackData.id,
@@ -89,6 +97,10 @@ export default class TrackListComponent {
      * @param {Object} event
      */
     addToPlaylist(event) {
+        if (!User.exists()) {
+            globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
+            return;
+        }
         this._choosePlaylist.trackData = this.getIdByClick(event);
         this.getProfilePlaylists();
     }
@@ -160,11 +172,10 @@ export default class TrackListComponent {
      * @param {Object} event
      */
     likeClicked(event) {
+        if (!User.exists()) {
+            globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
+            return;
+        }
         alert('This functionality is not accessible by now');
-        // if (event.target.src.indexOf('/static/img/favorite_border.svg') !== -1) {
-        //     event.target.src = '/static/img/favorite.svg';
-        // } else {
-        //     event.target.src = '/static/img/favorite_border.svg';
-        // }
     }
 }

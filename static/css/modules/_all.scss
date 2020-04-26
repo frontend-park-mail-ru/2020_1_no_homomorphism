@@ -1,23 +1,27 @@
 // Стили всех разделов
 @import "_variables";
 
-.small_line {
+.small-line {
   border-top: 1px solid $chosen-icon;
 }
 
 .m-project-name {
   font-weight: bold;
-  margin-left: 4px;
-  margin-bottom: 4px;
   font-size: 23px;
+  margin: 8px 16px 4px 4px;
 }
 
 .l-navbar .m-search-input {
   box-shadow: $box-shadow;
-  margin-left: 2%;
-  height: 2.3em;
-  width: 20em;
+  height: 40px;
+  // width: -webkit-calc(100% - 50px);
+
+  width: 25%;
   border: 1px solid $chosen-icon;
+  padding: 8px;
+  //border: none;
+  //outline: none;
+  //background: transparent;
 }
 
 .m-login-input {
@@ -50,7 +54,11 @@
   text-decoration: none
 }
 
-.l-top-section-albums:hover, .l-top-section-tracks:hover, .m-profile-playlists:hover, .l-top-section-artists:hover {
+.m-tiny-ref:hover {
+  color: #070025;
+}
+
+.l-top-section-albums:hover, .l-top-section-tracks:hover, .m-profile-playlists:hover, .l-top-section-artists:hover, .l-top-section-info:hover {
   background: $selected-elem;
   cursor: pointer;
   transition: 0.1s;
@@ -60,6 +68,7 @@
 .l-top-section-info {
   height: 70px;
   padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 .m-top-name {
@@ -119,6 +128,7 @@
 
 .l-small-card {
   margin: 32px;
+  // margin: 16px;
 }
 
 .m-hidden-input {
@@ -149,14 +159,21 @@
 }
 
 
-.l-track-big:hover .m-big-like-button, .l-track-big:hover .m-big-delete-button, .l-track-big:hover .m-big-add-button{
+.l-track-big:hover .m-big-like-button, .l-track-big:hover .m-big-delete-button, .l-track-big:hover .m-big-add-button {
   transition: 0.3s;
   -webkit-transform: scale(2);
   transform: scale(1.2);
   opacity: 1;
 }
 
-.l-track-big:not(:hover) .m-big-like-button, .l-track-big:not(:hover) .m-big-delete-button, .l-track-big:not(:hover) .m-big-add-button{
+.border-bottom:hover .m-big-like-button, .border-bottom:hover .m-big-delete-button, .border-bottom:hover .m-big-add-button {
+  transition: 0.3s;
+  -webkit-transform: scale(2);
+  transform: scale(0.8);
+  opacity: 1;
+}
+
+.l-track-big:not(:hover) .m-big-like-button, .l-track-big:not(:hover) .m-big-delete-button, .l-track-big:not(:hover) .m-big-add-button {
   transition: 0.1s;
 }
 
@@ -168,7 +185,7 @@
 }
 
 /**/
-.m-big-like-button, .m-big-delete-button, .m-big-add-button{
+.m-big-like-button, .m-big-delete-button, .m-big-add-button {
   opacity: 0;
 }
 
@@ -178,7 +195,8 @@
 }
 
 .l-track-big {
-  padding: 10px;
+  padding: 2px;
+  // padding: 10px;
   overflow: hidden;
 }
 
@@ -194,8 +212,8 @@
 
 .l-track-big:hover .m-track-image {
   transition: 0.3s;
-  -webkit-transform: scale(2);
-  transform: scale(1.2);
+  -webkit-transform: scale(1.02);
+  transform: scale(1.02);
   opacity: 0.5;
   box-shadow: 0 0 10px 4px rgba(129, 129, 129, 0.65);
 }
@@ -217,12 +235,12 @@
   border: yellow;
   cursor: pointer;
   opacity: 0;
-  margin-left: -56px;
-  margin-top: 20px;
+  margin-left: -50px;
+  margin-top: 15px;
 }
 
 .m-track-name {
-  margin-top: -40px;
+  margin-top: -48px;
 }
 
 .l-list-card img {
@@ -240,7 +258,7 @@
   display: inline-block;
   width: 90%;
   max-width: 200px;
-  max-height: 260px;
+  max-height: 255px;
   text-decoration: none;
   border-radius: $card-border-small;
   box-shadow: 0 0 10px -3px rgba(0, 0, 0, 0.5);
@@ -300,7 +318,7 @@
   width: 300px;
   left: -webkit-calc(50% - 250px);
   top: 20%;
-  position: absolute;
+  position: fixed;
   border-radius: $card-border;
   padding: 4px;
   box-sizing: border-box;
@@ -382,7 +400,8 @@
   line-height: 20px;
   padding: 0 13px;
 }
-.m-small-input{
+
+.m-small-input {
   border: none;
   border-radius: 0;
   font-size: 14px;
@@ -401,4 +420,108 @@
   font-size: 18px;
   border: 0;
   border-bottom: 1px solid gray;
+}
+
+.l-search-form {
+  width: 25%;
+}
+
+.l-search {
+  height: max-content;
+  max-height: -webkit-calc(70%);
+  overflow-y: scroll;
+  padding: 16px;
+  position: fixed;
+  left: -webkit-calc(5% + 183px);
+  width: 25%;
+  box-shadow: $box-shadow;
+  top: 52px;
+  z-index: 4;
+  background-color: #ffffff;
+}
+
+.l-search-artists {
+  margin-bottom: 10px;
+}
+
+.l-search-tracks {
+  margin-bottom: 10px;
+}
+
+.m-obscure-title {
+  // padding: 4px;
+  padding-bottom: 4px;
+  padding-top: 4px;
+  color: $obscure;
+}
+
+.text-small-size {
+  font-size: 12px;
+}
+
+.text-medium-size {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.m-small-image {
+  height: 40px;
+  // margin-top: 5px;
+  margin-right: 5px;
+  padding-left: 8px;
+}
+
+.m-small-text {
+  font-size: 16px;
+}
+
+.m-small-track {
+  padding-top: 5px;
+}
+
+.m-small-track:hover {
+  background: #d6ffeb;
+  cursor: pointer;
+  transition: 0.1s;
+  display: block;
+}
+
+.m-small-artist {
+  padding-top: 5px;
+}
+
+.m-small-album {
+  padding-top: 5px;
+}
+
+.is-hover:hover {
+  background: #d6ffeb;
+  cursor: pointer;
+  transition: 0.1s;
+  display: block;
+}
+
+.is-hover-gray:hover {
+  background: #f4f4f4;
+  width: inherit;
+  cursor: pointer;
+  transition: 0.1s;
+  display: block;
+}
+
+.no-found {
+  margin: 20px;
+  text-align: center;
+}
+
+.l-artist {
+
+}
+
+.l-playlists {
+
+}
+
+.l-playlists {
+
 }

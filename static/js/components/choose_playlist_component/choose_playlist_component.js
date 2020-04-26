@@ -1,8 +1,8 @@
-import dropdown from '@components/choosePlaylistComponent/choose_playlist.tmpl.xml';
-import createdPlaylist from '@components/choosePlaylistComponent/created_playlist.tmpl.xml';
-import {DOM} from '@libs/constans';
-import TrackComponent from '@components/trackComponent/trackComponent';
-import PlaylistComponent from '@components/playlistComponent/playlistComponent';
+import dropdown from '@components/choose_playlist_component/choose_playlist.tmpl.xml';
+import createdPlaylist from '@components/choose_playlist_component/created_playlist.tmpl.xml';
+import {DOM, SEARCH} from '@libs/constans';
+import TrackComponent from '@components/track_component/track_component';
+import PlaylistComponent from '@components/playlist_component/playlist_component';
 
 /**
  * Компонент - выпадающее меню при добавлении трека в плейлист
@@ -24,11 +24,18 @@ export default class ChoosePlaylist {
 
     /**
      * Установка текущего айди трека
-     * @param {string} trackData
+     * @param {Object} trackData
      */
     set trackData(trackData) {
         this._trackData = trackData;
         this._trackComponent.trackData = trackData;
+    }
+    /**
+     * Установка текущего айди трека
+     * @return {Object}
+     */
+    get trackData() {
+        return this._trackData;
     }
 
     /**
@@ -51,7 +58,7 @@ export default class ChoosePlaylist {
         for (const elem of this._playlists) {
             elem.include = playlistIncludes.includes(elem.id);
         }
-        document.getElementsByClassName(DOM.CONTENT)[0].innerHTML += dropdown(this._playlists);
+        document.getElementsByClassName(DOM.TOP_CONTENT)[0].innerHTML += dropdown(this._playlists);
         document.getElementsByClassName(DOM.CONTENT)[0]
             .firstChild
             .classList
@@ -132,14 +139,17 @@ export default class ChoosePlaylist {
      */
     close() {
         document
-            .getElementsByClassName(DOM.CONTENT)[0]
+            .getElementsByClassName(DOM.TOP_CONTENT)[0]
             .removeChild(
-                document.getElementsByClassName(DOM.CONTENT)[0].lastChild);
+                document.getElementsByClassName(DOM.TOP_CONTENT)[0].lastChild);
+        console.log(document
+            .getElementsByClassName(DOM.CONTENT)[0]);
         document
             .getElementsByClassName(DOM.CONTENT)[0]
             .firstChild
             .classList
             .remove('is-un-emphasized');
+        this.eventBus.emit(SEARCH.SET_LISTENERS);
         this._callbackEventListener();
     }
 

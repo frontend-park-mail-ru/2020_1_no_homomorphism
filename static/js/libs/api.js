@@ -325,4 +325,18 @@ export default class Api {
             console.log(error.toString());
         });
     }
+
+    // -------------- SEARCH ---------------
+
+    /**
+     * Поиск
+     * @param {string} input
+     * @param {string} amount
+     * @return {Promise<Response>}
+     */
+    static searchGet(input, amount) {
+        return getFetch(API + `/media/${input}/${amount}`, (error) => {
+            console.log(error.toString());
+        });
+    }
 }

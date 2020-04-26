@@ -1,5 +1,6 @@
-import {PLAYLIST, RESPONSE, PAGINATION, URL} from '@libs/constans';
+import {PLAYLIST, RESPONSE, PAGINATION, URL, GLOBAL} from '@libs/constans';
 import Api from '@libs/api';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * Модель плейлиста
@@ -8,13 +9,11 @@ export default class PlaylistModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         this.playlist = {};
         this.curPagination = 0;
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
         this.eventBus.on(PLAYLIST.GET_PLAYLIST_DATA, this.getPlaylist.bind(this));
         this.eventBus.on(PLAYLIST.GET_TRACKS_DATA, this.getTracks.bind(this));
         this.eventBus.on(PLAYLIST.DELETE_PLAYLIST, this.deletePlaylist.bind(this));
@@ -92,7 +91,7 @@ export default class PlaylistModel {
                 switch (res.status) {
                 case RESPONSE.OK: // TODO обработать удаление
                     this.eventBus.emit(PLAYLIST.RENDER_DELETED);
-                    this.eventBus.emit(PLAYLIST.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     break;
                 case RESPONSE.BAD_REQUEST:
                     break;

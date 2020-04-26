@@ -1,5 +1,6 @@
 import Api from '@libs/api';
 import {ARTIST, URL, GLOBAL} from '@libs/constans';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * Модель для страницы артиста
@@ -8,15 +9,13 @@ export default class ArtistModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         this.albums = [];
         this.tracks = [];
         this.id = '';
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
-        this.globalEventBus.on(GLOBAL.GET_ARTIST_TRACKS, this.getArtistTracks.bind(this));
+        globalEventBus.on(GLOBAL.GET_ARTIST_TRACKS, this.getArtistTracks.bind(this));
         this.eventBus.on(ARTIST.GET_DATA, this.getArtistData.bind(this));
         this.eventBus.on(ARTIST.ID_TRACKS_SECTION, this.getArtistTracks.bind(this));
         this.eventBus.on(ARTIST.ID_ALBUMS_SECTION, this.getArtistAlbums.bind(this));
@@ -35,7 +34,7 @@ export default class ArtistModel {
         ])
             .then((res) => {
                 if (res === undefined) {
-                    this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     return;
                 }
                 if (res.every((item) => item.ok)) { // TODO Сделать красиво!!!
@@ -58,7 +57,7 @@ export default class ArtistModel {
         Api.artistTracksGet(this.id, start, end)
             .then((res) => {
                 if (res === undefined) {
-                    this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     return;
                 }
                 if (res.ok) {
@@ -87,7 +86,7 @@ export default class ArtistModel {
         Api.artistAlbumsGet(this.id, start, end)
             .then((res) => {
                 if (res === undefined) {
-                    this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     return;
                 }
                 if (res.ok) {
@@ -111,6 +110,6 @@ export default class ArtistModel {
      * Получает информацию артиста из БД
      */
     getArtistInfo() {
-        // this.eventBus.emit(ARTIST.RENDER_INFO);
+        alert('This functionality is not accessible by now');
     }
 }

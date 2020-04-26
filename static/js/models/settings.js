@@ -1,7 +1,8 @@
 import Validation from '@libs/validation';
 import Api from '@libs/api';
-import {SETTINGS, URL, RESPONSE, NAVBAR} from '@libs/constans';
+import {SETTINGS, URL, RESPONSE, NAVBAR, GLOBAL} from '@libs/constans';
 import User from '@libs/user';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * Модель настроек
@@ -10,10 +11,8 @@ export default class SettingsModel {
     /**
      * конструктор
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
-        this.globalEventBus = globalEventBus;
+    constructor(eventBus) {
         this.eventBus = eventBus;
         this.eventBus.on(SETTINGS.AVATAR_UPLOAD, this.resetAvatar.bind(this));
         this.eventBus.on(SETTINGS.SUBMIT, this.submit.bind(this));
@@ -42,10 +41,10 @@ export default class SettingsModel {
                         });
                     break;
                 case RESPONSE.UNAUTH:
-                    this.eventBus.emit(SETTINGS.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     break;
                 case RESPONSE.SERVER_ERROR:
-                    this.eventBus.emit(SETTINGS.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     break;
                 default:
                     console.error('I am a teapot');
@@ -74,14 +73,14 @@ export default class SettingsModel {
                     switch (res.status) {
                     case RESPONSE.OK:
                         this.getUserData.bind(this)(true);
-                        this.globalEventBus.emit(NAVBAR.GET_USER_DATA);
+                        globalEventBus.emit(NAVBAR.GET_USER_DATA);
                         break;
                     case RESPONSE.BAD_REQUEST: // TODO Обработать ошибку
                         this.eventBus.emit(SETTINGS.INVALID);
                         break;
                     case RESPONSE.UNAUTH:
-                        this.globalEventBus.emit(NAVBAR.GET_USER_DATA);
-                        this.eventBus.emit(SETTINGS.REDIRECT);
+                        globalEventBus.emit(NAVBAR.GET_USER_DATA);
+                        globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                         break;
                     case RESPONSE.SERVER_ERROR:
                         this.eventBus.emit(SETTINGS.INVALID);
@@ -138,7 +137,7 @@ export default class SettingsModel {
                         this.eventBus.emit(SETTINGS.INVALID, errors);
                         break;
                     case RESPONSE.UNAUTH:
-                        this.eventBus.emit(SETTINGS.REDIRECT, URL.MAIN);
+                        globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                         break;
                     case RESPONSE.EXISTS:
                         errors['email'] = 'This email is already taken';

@@ -1,6 +1,7 @@
 import Api from '@libs/api';
-import {PROFILE, URL, NAVBAR, RESPONSE, PAGINATION} from '@libs/constans';
+import {PROFILE, URL, NAVBAR, RESPONSE, PAGINATION, GLOBAL} from '@libs/constans';
 import User from '@libs/user';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * Модель Профиля
@@ -9,11 +10,9 @@ export default class ProfileModel {
     /**
      * конструктор
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
         this.curPaginationTracks = 0;
         this.eventBus.on(PROFILE.GET_DATA, this.getUserData.bind(this));
         this.eventBus.on(PROFILE.GET_STAT, this.getUserStat.bind(this));
@@ -43,11 +42,11 @@ export default class ProfileModel {
                         });
                     break;
                 case RESPONSE.UNAUTH:
-                    this.globalEventBus.emit(NAVBAR.GET_USER_DATA, {});
-                    this.eventBus.emit(PROFILE.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(NAVBAR.GET_USER_DATA, {});
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     break;
                 case RESPONSE.SERVER_ERROR:
-                    this.eventBus.emit(PROFILE.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     break;
                 default:
                     console.log(res);
@@ -71,10 +70,10 @@ export default class ProfileModel {
                         });
                     break;
                 case RESPONSE.UNAUTH:
-                    this.eventBus.emit(PROFILE.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     break;
                 case RESPONSE.SERVER_ERROR:
-                    this.eventBus.emit(PROFILE.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     break;
                 default:
                     console.log(res);

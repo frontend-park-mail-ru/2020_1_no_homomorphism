@@ -1,9 +1,10 @@
-import {PROFILE, URL, DOM} from '@libs/constans';
+import {PROFILE, URL, DOM, GLOBAL} from '@libs/constans';
 import profile from '@views/profile/profile.tmpl.xml';
 import BaseView from '@libs/base_view';
 import User from '@libs/user';
-import TrackListComponent from '@components/downTrackListComponent/trackListComponent';
-import PlaylistsComponent from '@components/downPlaylistComponent/playlistListComponent';
+import TrackListComponent from '@components/track_list_component/track_list_component';
+import PlaylistsComponent from '@components/playlist_list_component/playlist_list_component';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * вью для профиля
@@ -22,6 +23,7 @@ export default class ProfileView extends BaseView {
         this.eventBus.on(PROFILE.RENDER_DATA, this.renderData.bind(this));
         this.eventBus.on(PROFILE.RENDER_STAT, this.renderStat.bind(this));
         this.eventBus.on(PROFILE.CHANGE_PLAYLIST_AMOUNT, this.changePlaylistAmount.bind(this));
+        this.eventBus.on(PROFILE.ID_ARTISTS_SECTION, this.artistSection.bind(this));
     }
 
     /**
@@ -77,7 +79,7 @@ export default class ProfileView extends BaseView {
     chooseSection() {
         switch (this.url) {
         case URL.PROFILE:
-            this.eventBus.emit(PROFILE.REDIRECT, URL.PROFILE_TRACKS);
+            globalEventBus.emit(GLOBAL.REDIRECT, URL.PROFILE_TRACKS);
             break;
         case URL.PROFILE_TRACKS:
             this.currentOpen = PROFILE.ID_TRACKS_SECTION;
@@ -94,6 +96,13 @@ export default class ProfileView extends BaseView {
         }
         const curSection = document.getElementById(this.currentOpen);
         curSection.classList.add(PROFILE.SELECTED_CLASS);
+    }
+
+    /**
+     * Секция артистов
+     */
+    artistSection() {
+        alert('This functionality is not accessible by now');
     }
 
     /**

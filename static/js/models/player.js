@@ -1,5 +1,6 @@
 import Api from '@libs/api';
 import {PLAYER, RESPONSE, GLOBAL, PAGINATION} from '@libs/constans';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * Модель плеера
@@ -8,11 +9,9 @@ export default class PlayerModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
         this.queue = [];
         this.playlist = [];
         this.current = 0;
@@ -21,17 +20,19 @@ export default class PlayerModel {
             shuffle: false,
             repeat: false,
         };
-        this.globalEventBus.on(GLOBAL.CLEAR_AND_LOCK, this.deleteAll.bind(this));
-        this.globalEventBus.on(GLOBAL.PLAY_ARTIST_TRACKS, this.deleteAll.bind(this));
-        this.globalEventBus.on(GLOBAL.PLAY_ARTIST_TRACKS, this.getArtistTracks.bind(this));
-        this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST_TRACKS, this.deleteAll.bind(this));
-        this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST_TRACKS, this.getPlaylistTracks.bind(this));
-        this.globalEventBus.on(GLOBAL.PLAY_ALBUM_TRACKS, this.deleteAll.bind(this));
-        this.globalEventBus.on(GLOBAL.PLAY_ALBUM_TRACKS, this.getAlbumTracks.bind(this));
-        this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.deleteAll.bind(this)); // TODO зачем это???
-        this.globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.getPlaylistTracks.bind(this));
-        this.globalEventBus.on(GLOBAL.PLAY_ALBUM, this.deleteAll.bind(this));
-        this.globalEventBus.on(GLOBAL.PLAY_ALBUM, this.getAlbumTracks.bind(this));
+        globalEventBus.on(GLOBAL.CLEAR_AND_LOCK, this.deleteAll.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_TRACKS, this.deleteAll.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_TRACKS, this.setData.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_ARTIST_TRACKS, this.deleteAll.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_ARTIST_TRACKS, this.getArtistTracks.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_PLAYLIST_TRACKS, this.deleteAll.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_PLAYLIST_TRACKS, this.getPlaylistTracks.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_ALBUM_TRACKS, this.deleteAll.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_ALBUM_TRACKS, this.getAlbumTracks.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.deleteAll.bind(this)); // TODO зачем это???
+        globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.getPlaylistTracks.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_ALBUM, this.deleteAll.bind(this));
+        globalEventBus.on(GLOBAL.PLAY_ALBUM, this.getAlbumTracks.bind(this));
         this.eventBus.on(PLAYER.GET_TRACK, this.getTrack.bind(this));
         this.eventBus.on(PLAYER.GET_TRACKS, this.getPlaylistTracks.bind(this));
         this.eventBus.on(PLAYER.PAUSE, this.pause.bind(this));
@@ -121,30 +122,57 @@ export default class PlayerModel {
     /**
      * останавливает воспроизведение
      * @param {Object} res
-     * @param {number} trackId
+     * @param {string} trackId
      */
     generateData(res, trackId = '') {
         res.json()
             .then((list) => {
-                if (list.tracks.length === 0) {
-                    this.globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK);
-                    return;
-                }
-                // eslint-disable-next-line guard-for-in
-                for (const song in list.tracks) {
-                    this.playlist.push(list.tracks[song]);
-                    this.queue.push(this.playlist.length - 1);
-                }
-                if (trackId !== '') {
-                    this.current = this.playlist.indexOf(this.playlist.find((track) =>
-                        track.id === trackId));
-                }
-                this.eventBus.emit(PLAYER.DRAW_TRACKLIST, this.playlist);
-                this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[this.queue[this.current]].id,
-                    this.playlist[this.queue[this.current]].id);
-                this.getTrack(this.playlist[this.queue[this.current]].id);
-                this.play();
+                this.setData.bind(this)(list, trackId);
+                // if (list.tracks.length === 0) {
+                //     globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK);
+                //     return;
+                // }
+                // // eslint-disable-next-line guard-for-in
+                // for (const song in list.tracks) {
+                //     this.playlist.push(list.tracks[song]);
+                //     this.queue.push(this.playlist.length - 1);
+                // }
+                // if (trackId !== '') {
+                //     this.current = this.playlist.indexOf(this.playlist.find((track) =>
+                //         track.id === trackId));
+                // }
+                // this.eventBus.emit(PLAYER.DRAW_TRACKLIST, this.playlist);
+                // this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[this.queue[this.current]].id,
+                //     this.playlist[this.queue[this.current]].id);
+                // this.getTrack(this.playlist[this.queue[this.current]].id);
+                // this.play();
             });
+    }
+
+    /**
+     * Установка всех данных
+     * @param {Object} list
+     * @param {string} trackID
+     */
+    setData(list, trackID='') {
+        if (list.tracks.length === 0) {
+            globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK);
+            return;
+        }
+        // eslint-disable-next-line guard-for-in
+        for (const song in list.tracks) {
+            this.playlist.push(list.tracks[song]);
+            this.queue.push(this.playlist.length - 1);
+        }
+        if (trackID !== '') {
+            this.current = this.playlist.indexOf(this.playlist.find((track) =>
+                track.id === trackID));
+        }
+        this.eventBus.emit(PLAYER.DRAW_TRACKLIST, this.playlist);
+        this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[this.queue[this.current]].id,
+            this.playlist[this.queue[this.current]].id);
+        this.getTrack(this.playlist[this.queue[this.current]].id);
+        this.play();
     }
 
     /**

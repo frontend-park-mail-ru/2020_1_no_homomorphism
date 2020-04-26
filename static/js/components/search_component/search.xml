@@ -1,0 +1,88 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <div class="l-search">
+        <fest:if test="data.artists.length + data.tracks.length + data.tracks.length === 0">
+            <div class="no-found">
+                No results found
+            </div>
+        </fest:if>
+        <fest:if test="data.artists.length + data.tracks.length + data.tracks.length > 0">
+            <a class="m-tiny-ref" href="/search/{data.input}">
+                <div class="m-obscure-title is-hover-gray">
+                    All results ➤
+                </div>
+            </a>
+        </fest:if>
+        <fest:if test="data.artists.length > 0">
+            <div class="l-search-artists">
+                <div class="m-obscure-title text-medium-size">
+                    Artists
+                </div>
+                <div class="small-line"></div>
+                <fest:for iterate="data.artists" index="i" value="artist">
+                    <a class="m-tiny-ref" href="/artist/{artist.id}">
+                        <div class="row is-hover m-small-artist">
+
+                            <div class="col m-small-image">
+                                <img class="m-medium-icon m-icon-border" src="{artist.image}" alt=""/>
+                            </div>
+                            <div class="m-small-text m-small-artist">
+                                <fest:value>artist.name</fest:value>
+                            </div>
+                        </div>
+                    </a>
+
+                    <div class="small-line"></div>
+                </fest:for>
+
+            </div>
+        </fest:if>
+        <fest:if test="data.tracks.length > 0">
+            <div class="l-search-tracks">
+                <div class="m-obscure-title text-medium-size">
+                    Tracks
+                </div>
+                <div class="small-line"></div>
+                <fest:for iterate="data.tracks" index="i" value="track">
+                    <div class="row m-small-track" t-id="{track.id}">
+                        <div class="col m-small-image">
+                            <img class="rrr m-medium-icon m-icon-border" src="{track.image}" alt=""/>
+                        </div>
+                        <div class="m-small-text">
+                            <fest:value>track.name</fest:value>
+                        </div>
+                        <div class="m-obscure-title text-small-size">
+                            <fest:value>track.artist</fest:value>
+                        </div>
+
+                    </div>
+                    <div class="small-line"></div>
+                </fest:for>
+            </div>
+        </fest:if>
+        <fest:if test="data.albums.length > 0">
+            <div class="l-search-albums">
+                <div class="m-obscure-title text-medium-size">
+                    Albums
+                </div>
+                <div class="small-line"></div>
+                <fest:for iterate="data.albums" index="i" value="album">
+                    <a class="m-tiny-ref" href="/album/{album.id}">
+                        <div class="row is-hover m-small-album">
+                            <div class="col m-small-image">
+                                <img class="m-medium-icon m-icon-border" src="{album.image}" alt=""/>
+                            </div>
+                            <div class="m-small-text">
+                                <fest:value>album.name</fest:value>
+                            </div>
+                            <div class="m-obscure-title text-small-size">
+                                <fest:value>album.artist_name</fest:value>
+                            </div>
+
+                        </div>
+                    </a>
+                    <div class="small-line"></div>
+                </fest:for>
+            </div>
+        </fest:if>
+    </div>
+</fest:template>

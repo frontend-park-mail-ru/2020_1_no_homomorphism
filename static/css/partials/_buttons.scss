@@ -54,10 +54,16 @@
 }
 
 .m-button-without-size {
-  position: relative;
+  // position: fixed;
   box-shadow: $box-shadow;
   opacity: 0.3;
   cursor: pointer;
+}
+
+.m-button-fixed {
+  position: fixed;
+  max-width: 40px;
+  max-height: 40px;
 }
 
 .m-button-without-size:hover {
@@ -91,7 +97,7 @@
 .l-track-buttons {
   text-align: right;
   float: right;
-  margin-top: -16px;
+  margin-top: -30px;
 }
 
 .l-big-track-button:hover {

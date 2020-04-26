@@ -1,5 +1,6 @@
 import Api from '@libs/api';
-import {MAIN, URL, RESPONSE} from '@libs/constans';
+import {MAIN, URL, RESPONSE, GLOBAL} from '@libs/constans';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * Модель для главной страницы
@@ -26,14 +27,14 @@ export default class NewsModel {
                     res.json()
                         .then((data) => {
                             this.artists = data.artists;
-                            this.eventBus.emit(MAIN.RENDER_ARTIST_LIST, this.artists);
+                            this.eventBus.emit(MAIN.RENDER_ARTIST, this.artists);
                         });
                     break;
                 case RESPONSE.BAD_REQUEST:
-                    this.eventBus.emit(MAIN.NO_ANSWER, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     break;
                 case RESPONSE.SERVER_ERROR:
-                    this.eventBus.emit(MAIN.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     break;
                 default:
                     console.log(res);

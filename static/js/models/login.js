@@ -1,7 +1,8 @@
 import Api from '@libs/api';
 import Validation from '@libs/validation';
-import {RESPONSE, LOGIN, NAVBAR, URL} from '@libs/constans';
+import {RESPONSE, LOGIN, NAVBAR, URL, GLOBAL} from '@libs/constans';
 import User from '@libs/user';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * Модель для страницы входа
@@ -10,11 +11,9 @@ export default class LoginModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
         this.eventBus.on(LOGIN.SUBMIT, this.submit.bind(this));
     }
 
@@ -40,8 +39,8 @@ export default class LoginModel {
                     switch (res.status) {
                     case RESPONSE.OK:
                         this.getCsrfToken();
-                        this.globalEventBus.emit(NAVBAR.GET_USER_DATA);
-                        this.eventBus.emit(LOGIN.REDIRECT, URL.PROFILE_TRACKS);
+                        globalEventBus.emit(NAVBAR.GET_USER_DATA);
+                        globalEventBus.emit(GLOBAL.REDIRECT, URL.PROFILE_TRACKS);
                         break;
                     case RESPONSE.BAD_REQUEST:
                         this.eventBus.emit(LOGIN.INVALID, {global: 'Wrong login or password'});

@@ -16,6 +16,7 @@ export const DOM = {
     CONTENT: 'l-content',
     PLAYER: 'l-player',
     NAVBAR: 'l-navbar',
+    TOP_CONTENT: 'l-top-content',
 };
 
 export const URL = {
@@ -33,6 +34,7 @@ export const URL = {
     ARTIST: /(\/artist\/)[0-9]+(\/albums|\/tracks|\/info)*/,
     PLAYLIST: /(\/playlist\/)[0-9]+/,
     ALBUM: /(\/album\/)[0-9]+/,
+    SEARCH: /(\/search\/)(.)+/,
 };
 
 export const PAGINATION = {
@@ -62,22 +64,26 @@ export const GLOBAL = {
     PLAY_ARTIST_TRACKS: 'global-play-artist-tracks',
     PLAY_PLAYLIST_TRACKS: 'global-play-playlist-tracks',
     PLAY_ALBUM_TRACKS: 'global-play-album-tracks',
+    PLAY_TRACKS: 'global-play-track-tracks',
     PLAY_PLAYLIST: 'global-play-playlist',
     PLAY_ALBUM: 'global-play-album',
     CLEAR_AND_LOCK: 'global-clear-and-lock',
     COLLAPSE: 'global-collapse',
-    REDIRECT: 'global-redirect',
+    REDIRECT: 'redirect',
+    HREF: 'global-href',
+    LOGOUT_REDIRECT: 'global-logout-redirect',
+    CLOSE_SEARCH: 'global-close-search',
 };
 
 export const MAIN = {
     GET_LIST_DATA: 'get-all-artists-data',
-    RENDER_ARTIST_LIST: 'render-artist-list',
+    RENDER_ARTIST: 'render-artist-list',
     NO_ANSWER: 'no-answer',
-    REDIRECT: 'redirect',
+    // REDIRECT: 'redirect',
 };
 
 export const LOGIN = {
-    REDIRECT: 'login-redirect',
+    // REDIRECT: 'redirect',
     INVALID: 'login-invalid',
     SUBMIT: 'login-submit',
     LOGIN_SUCCESS: 'login-success',
@@ -91,12 +97,11 @@ export const NAVBAR = {
     RENDER_LOGGED: 'navbar-logged-in',
     RENDER_NOT_LOGGED: 'navbar-guest',
     GET_USER_DATA: 'navbar-get-user-data',
-    LOGOUT_REDIRECT: 'navbar-logout-redirect',
     LOGOUT_CLICKED: 'navbar-logout-clicked',
 };
 
 export const PLAYER = {
-    REDIRECT: 'player-redirect',
+    // REDIRECT: 'player-redirect',
     GET_TRACK: 'player-get-track',
     GET_TRACKS: 'player-get-tracks',
     RESIZE: 'player-resize',
@@ -140,7 +145,7 @@ export const SETTINGS = {
     SUBMIT: 'settings-submit',
     SUBMIT_PASSWORD: 'settings-submit-password',
     INVALID: 'settings-invalid',
-    REDIRECT: 'settings-redirect',
+    // REDIRECT: 'settings-redirect',
 };
 
 export const SIGN_UP = {
@@ -157,8 +162,8 @@ export const PROFILE = {
     ID_ALBUMS_SECTION: 'profile-albums-title',
     ID_ARTISTS_SECTION: 'profile-artists-title',
     // --
-    NO_ANSWER: 'profile-no-answer',
-    REDIRECT: 'profile-redirect',
+    // NO_ANSWER: 'profile-no-answer',
+    // REDIRECT: 'profile-redirect',
     GET_DATA: 'profile-get-profile-data',
     GET_STAT: 'profile-get-profile-stat',
     GET_TRACKS: 'profile-get-profile-tracks',
@@ -183,8 +188,8 @@ export const ARTIST = {
     ID_TRACKS_SECTION: 'artist-tracks',
     ID_ALBUMS_SECTION: 'artist-albums',
     ID_INFO_SECTION: 'artist-info',
-    NO_ANSWER: 'artist-no-answer',
-    REDIRECT: 'artist-redirect',
+    // NO_ANSWER: 'artist-no-answer',
+    // REDIRECT: 'artist-redirect',
     GET_DATA: 'artist-get-artist-data',
     RENDER_DATA: 'artist-render-artist-data',
     RENDER_TRACKS: 'artist-render-track',
@@ -198,7 +203,7 @@ export const ARTIST = {
 export const PLAYLIST = {
     DROPDOWN: 'playlist-dropdown',
     SET_TRACKS_AMOUNT: 'playlist-set-tracks-amount',
-    REDIRECT: 'playlist-redirect',
+    // REDIRECT: 'playlist-redirect',
     SET_PLAYLIST_ID: 'playlist-set-id',
     GET_PLAYLIST_DATA: 'playlist-get-playlist-data',
     GET_TRACKS_DATA: 'playlist-get-tracks-data',
@@ -212,7 +217,7 @@ export const PLAYLIST = {
 };
 
 export const ALBUM = {
-    REDIRECT: 'album-redirect',
+    // REDIRECT: 'album-redirect',
     GET_ALBUM_DATA: 'album-get-album-data',
     GET_TRACKS_DATA: 'album-get-tracks-data',
     RENDER_ALBUM: 'album-render-album',
@@ -220,4 +225,17 @@ export const ALBUM = {
     SET_TRACKS_AMOUNT: 'album-set-tracks-amount',
     SET_ALBUM_ID: 'set-album-id',
     ERROR: 'album-show-errors',
+};
+
+export const SEARCH = {
+    'AMOUNT_TOP': '3',
+    'AMOUNT': '10',
+    'INTERVAL': 0,
+    // 'REDIRECT': 'search-redirect',
+    'GET_DATA': 'search-get-data',
+    'RENDER_DATA': 'search-render-data',
+    'RENDER_ALBUMS': 'search-render-albums',
+    'RENDER_ARTISTS': 'search-render-artists',
+    'RENDER_TRACKS': 'search-render-tracks',
+    'SET_LISTENERS': 'search-set-listeners',
 };

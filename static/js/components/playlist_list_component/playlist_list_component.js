@@ -1,8 +1,8 @@
-import template from '@components/downPlaylistComponent/playlist.tmpl.xml';
-import newPlaylist from '@components/downPlaylistComponent/new_playlist.tmpl.xml';
+import template from '@components/playlist_list_component/playlist.tmpl.xml';
+import newPlaylist from '@components/playlist_list_component/new_playlist.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
-import PlaylistComponent from '@components/playlistComponent/playlistComponent';
-import {PROFILE} from '@libs/constans';
+import PlaylistComponent from '@components/playlist_component/playlist_component';
+import {PROFILE, SEARCH} from '@libs/constans';
 
 /**
  * Список плейлистов или альбомомв
@@ -19,6 +19,7 @@ export default class PlaylistsComponent {
         this.eventBus = eventBus;
         this.eventBus.on(command.RENDER_ALBUMS, this.render.bind(this));
         this.eventBus.on(command.RENDER_PLAYLISTS, this.render.bind(this));
+        this.eventBus.on(SEARCH.SET_LISTENERS, this.setEventListeners.bind(this));
     }
 
     /**
@@ -29,7 +30,7 @@ export default class PlaylistsComponent {
         this._type = data.type;
         this._domItem = data.domItem;
         const elem = document.getElementsByClassName(data.domItem)[0];
-        elem.innerHTML += template(this.generateHref(data.list));
+        elem.innerHTML = template(this.generateHref(data.list));
         this.setEventListeners();
     }
 

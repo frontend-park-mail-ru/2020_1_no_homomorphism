@@ -1,6 +1,7 @@
 import {LOGIN, GLOBAL} from '@libs/constans';
 import template from '@views/login/login.tmpl.xml';
 import BaseView from '@libs/base_view';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  *  вью для входа
@@ -8,13 +9,11 @@ import BaseView from '@libs/base_view';
 export default class LoginView extends BaseView {
     /**
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         super(template);
         this.eventBus = eventBus;
         this.eventBus.on(LOGIN.INVALID, this.showErrors);
-        this.globalEventBus = globalEventBus;
     }
 
     /**
@@ -23,7 +22,7 @@ export default class LoginView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
-        this.globalEventBus.emit(GLOBAL.COLLAPSE);
+        globalEventBus.emit(GLOBAL.COLLAPSE);
         if (root.children.length > 0) {
             if (root.firstChild.classList.contains('is-emphasized')) {
                 root.removeChild(root.firstChild);
