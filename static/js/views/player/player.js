@@ -27,18 +27,37 @@ export default class PlayerView extends BaseView {
         this._choosePlaylist = new ChoosePlaylist(eventBus, PLAYER);
         this._playlistComponent = new PlaylistComponent(
             this.trackListComponent.setEventListeners.bind(this));
-        [
-            [PLAYER.DRAW_TRACKLIST, this.trackListComponent.drawTracklist, this],
-            [PLAYER.DRAW_TRACKLIST, this.trackListComponent.setEventListeners,
-                this.trackListComponent],
-            [PLAYER.REMOVE_FROM_TRACKLIST, this.trackListComponent.removeFromTracklist, this],
-            [PLAYER.REMOVE_FROM_TRACKLIST_ALL, this.trackListComponent.removeFromTracklistAll,
-                this],
-            [PLAYER.MOVE_MARKER, this.moveMarker, this],
-        ].forEach((subscription) => {
-            this.eventBus.on(subscription[0], subscription[1].bind(subscription[2]));
-        });
+        this.subscribe();
         globalEventBus.on(GLOBAL.COLLAPSE, this.collapse.bind(this));
+    }
+
+    /**
+     * Подписка на события eventBus
+     */
+    subscribe() {
+        [{
+            event: PLAYER.DRAW_TRACKLIST,
+            callback: this.trackListComponent.drawTracklist,
+            binding: this,
+        }, {
+            event: PLAYER.DRAW_TRACKLIST,
+            callback: this.trackListComponent.setEventListeners,
+            binding: this.trackListComponent,
+        }, {
+            event: PLAYER.REMOVE_FROM_TRACKLIST,
+            callback: this.trackListComponent.removeFromTracklist,
+            binding: this,
+        }, {
+            event: PLAYER.REMOVE_FROM_TRACKLIST_ALL,
+            callback: this.trackListComponent.removeFromTracklistAll,
+            binding: this,
+        }, {
+            event: PLAYER.MOVE_MARKER,
+            callback: this.moveMarker,
+            binding: this,
+        }].forEach((subscription) => {
+            this.eventBus.on(subscription.event, subscription.callback.bind(subscription.binding));
+        });
     }
 
     /**
