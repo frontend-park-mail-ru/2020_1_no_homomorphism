@@ -452,8 +452,16 @@
   // padding: 4px;
   padding-bottom: 4px;
   padding-top: 4px;
-  font-size: 12px;
   color: $obscure;
+}
+
+.text-small-size {
+  font-size: 12px;
+}
+
+.text-medium-size {
+  font-weight: bold;
+  font-size: 14px;
 }
 
 .m-small-image {

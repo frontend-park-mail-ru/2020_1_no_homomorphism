@@ -14,7 +14,7 @@
                         <div>
                             <fest:value>track.name</fest:value>
                         </div>
-                        <a class="m-obscure-title m-tiny-ref" href="/artist/{track.artist_id}">
+                        <a class="m-obscure-title text-small-size m-tiny-ref" href="/artist/{track.artist_id}">
                             <fest:value>track.artist</fest:value>
                         </a>
                     </div>
