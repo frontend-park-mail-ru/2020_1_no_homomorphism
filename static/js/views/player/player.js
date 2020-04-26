@@ -5,7 +5,8 @@ import {globalEventBus} from '@libs/eventBus';
 import ChoosePlaylist from '@components/choose_playlist_component/choose_playlist_component';
 import PlaylistComponent from '@components/playlist_component/playlist_component';
 import TopTrackComponent from '@components/top_track_component/top_track_component';
-import TrackListComponent from '@components/player_track_list_component/player_track_list_component';
+import TrackListComponent from
+    '@components/player_track_list_component/player_track_list_component';
 
 /**
  *  вью для плеера
