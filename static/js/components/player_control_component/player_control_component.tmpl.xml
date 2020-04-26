@@ -2,8 +2,8 @@
     <div class="timeline row">
         <div class="timeline-back"></div>
         <div class="timeline-front" style="width: 0;"></div>
-        <div class="current-time col" style="font-size: 0px;">0:00</div>
-        <div class="duration col" style="font-size: 0px;">0:00</div>
+        <div class="current-time col"></div>
+        <div class="duration col"></div>
     </div>
     <div class="control-elements row">
         <img src="/static/img/previous.svg" class="player-control-button prev" id="prev" alt="prev"/>

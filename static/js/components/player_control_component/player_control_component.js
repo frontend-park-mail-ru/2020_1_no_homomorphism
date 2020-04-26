@@ -124,21 +124,16 @@ export default class PlayerControlComponent {
      * Слушает вход курсора в зону таймлайна
      */
     timelineMouseOver() {
-        document.getElementsByClassName('current-time')[0].classList.remove('s-timeline-mouse-out');
-        document.getElementsByClassName('current-time')[0].classList.add('s-timeline-mouse-over');
-        document.getElementsByClassName('duration')[0].classList.remove('s-timeline-mouse-out');
-        document.getElementsByClassName('duration')[0].classList.add('s-timeline-mouse-over');
+        document.querySelector('.current-time').classList.add('s-timeline-mouse-over');
+        document.querySelector('.duration').classList.add('s-timeline-mouse-over');
     }
 
     /**
      * Слушает выход курсора из зоны таймлайна
      */
     timelineMouseOut() {
-        document.getElementsByClassName('current-time')[0].classList
-            .remove('s-timeline-mouse-over');
-        document.getElementsByClassName('current-time')[0].classList.add('s-timeline-mouse-out');
-        document.getElementsByClassName('duration')[0].classList.remove('s-timeline-mouse-over');
-        document.getElementsByClassName('duration')[0].classList.add('s-timeline-mouse-out');
+        document.querySelector('.current-time').classList.remove('s-timeline-mouse-over');
+        document.querySelector('.duration').classList.remove('s-timeline-mouse-over');
     }
 
     /**
