@@ -68,7 +68,6 @@ export default class PlayerView extends BaseView {
         const top = NAVBAR.HEIGHT;
         const height = document.documentElement.clientHeight - top;
         document.getElementsByTagName('audio')[0].volume = this.playerControlComponent.volume;
-        // this.playerControlComponent.drawVolume(height);
         this.root.style.top = top.toString() + 'px';
         this.root.style.height = height.toString() + 'px';
         document.getElementsByClassName('player-trigger')[0]
@@ -122,22 +121,18 @@ export default class PlayerView extends BaseView {
      * Слушает вход курсора на триггер плеера
      */
     triggerMouseOver() {
-        document.getElementsByClassName('trigger-button')[0].classList
-            .add('is-mouse-on');
-        document.getElementsByClassName('player-trigger')[0].classList
-            .add('is-mouse-on');
-        document.getElementsByClassName('player-trigger-arrow')[0].style.visibility = 'visible';
+        document.getElementsByClassName('trigger-button')[0].classList.add('is-mouse-on');
+        document.getElementsByClassName('player-trigger')[0].classList.add('is-mouse-on');
+        document.getElementsByClassName('player-trigger-arrow')[0].classList.add('is-visible');
     }
 
     /**
      * Слушает выход курсора с триггера плеера
      */
     triggerMouseOut() {
-        document.getElementsByClassName('trigger-button')[0].classList
-            .remove('is-mouse-on');
-        document.getElementsByClassName('player-trigger')[0].classList
-            .remove('is-mouse-on');
-        document.getElementsByClassName('player-trigger-arrow')[0].style.visibility = 'hidden';
+        document.getElementsByClassName('trigger-button')[0].classList.remove('is-mouse-on');
+        document.getElementsByClassName('player-trigger')[0].classList.remove('is-mouse-on');
+        document.getElementsByClassName('player-trigger-arrow')[0].classList.remove('is-visible');
     }
 
     /**
@@ -148,11 +143,9 @@ export default class PlayerView extends BaseView {
             return;
         }
         if (this.expanded) {
-            document.getElementsByClassName('player-trigger-arrow')[0]
-                .style.transform = 'rotate(180deg)';
+            document.querySelector('.player-trigger-arrow').classList.remove('s-rotate-0');
         } else {
-            document.getElementsByClassName('player-trigger-arrow')[0]
-                .style.transform = 'rotate(0)';
+            document.querySelector('.player-trigger-arrow').classList.add('s-rotate-0');
         }
         const body = document.getElementsByTagName('body')[0];
         const left = (
@@ -205,7 +198,8 @@ export default class PlayerView extends BaseView {
             track2.getBoundingClientRect().y;
         const base = document.getElementsByClassName('track-list')[0].children[1]
             .getBoundingClientRect().y;
-        track2.style.marginLeft = '5px';
+        track2.classList.remove('s-margin-left-0');
+        track2.classList.add('s-margin-left-5');
         marker.style.height = (50 + Math.abs(heightDifference)).toString() + 'px';
         if (heightDifference < 0) {
             setTimeout(() => {
@@ -217,7 +211,8 @@ export default class PlayerView extends BaseView {
         setTimeout(() => {
             marker.style.height = '50px';
             if (heightDifference !== 0) {
-                track1.style.marginLeft = '0';
+                track1.classList.remove('s-margin-left-5');
+                track1.classList.add('s-margin-left-0');
             }
         }, 250);
     }

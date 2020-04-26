@@ -1,7 +1,7 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="trigger-button">
-        <img src="/static/img/arrow_forward_ios.svg" class="player-trigger-arrow" alt="."
-            height="28" style="visibility: hidden; transform: rotate(180deg);"/>
+        <img src="/static/img/arrow_forward_ios.svg" class="player-trigger-arrow"
+            alt="." height="28"/>
     </div>
     <div class="row">
         <div class="col player-trigger" style="height: 1000px;">

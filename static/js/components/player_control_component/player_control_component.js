@@ -124,16 +124,21 @@ export default class PlayerControlComponent {
      * Слушает вход курсора в зону таймлайна
      */
     timelineMouseOver() {
-        document.getElementsByClassName('current-time')[0].style.fontSize = '11px';
-        document.getElementsByClassName('duration')[0].style.fontSize = '11px';
+        document.getElementsByClassName('current-time')[0].classList.remove('s-timeline-mouse-out');
+        document.getElementsByClassName('current-time')[0].classList.add('s-timeline-mouse-over');
+        document.getElementsByClassName('duration')[0].classList.remove('s-timeline-mouse-out');
+        document.getElementsByClassName('duration')[0].classList.add('s-timeline-mouse-over');
     }
 
     /**
      * Слушает выход курсора из зоны таймлайна
      */
     timelineMouseOut() {
-        document.getElementsByClassName('current-time')[0].style.fontSize = '0';
-        document.getElementsByClassName('duration')[0].style.fontSize = '0';
+        document.getElementsByClassName('current-time')[0].classList
+            .remove('s-timeline-mouse-over');
+        document.getElementsByClassName('current-time')[0].classList.add('s-timeline-mouse-out');
+        document.getElementsByClassName('duration')[0].classList.remove('s-timeline-mouse-over');
+        document.getElementsByClassName('duration')[0].classList.add('s-timeline-mouse-out');
     }
 
     /**
@@ -187,7 +192,7 @@ export default class PlayerControlComponent {
      */
     shuffleButtonMouseOver() {
         if (!this.shuffled) {
-            document.getElementsByClassName('shuffle')[0].style.opacity = '1';
+            document.querySelector('.shuffle').classList.add('s-opacity-1');
         }
     }
 
@@ -196,7 +201,7 @@ export default class PlayerControlComponent {
      */
     shuffleButtonMouseOut() {
         if (!this.shuffled) {
-            document.getElementsByClassName('shuffle')[0].style.opacity = '0.4';
+            document.querySelector('.shuffle').classList.remove('s-opacity-1');
         }
     }
 
@@ -216,7 +221,7 @@ export default class PlayerControlComponent {
      */
     repeatButtonMouseOver() {
         if (this.repeatState === 0) {
-            document.getElementsByClassName('repeat')[0].style.opacity = '1';
+            document.querySelector('.repeat').classList.add('s-opacity-1');
         }
     }
 
@@ -225,7 +230,7 @@ export default class PlayerControlComponent {
      */
     repeatButtonMouseOut() {
         if (this.repeatState === 0) {
-            document.getElementsByClassName('repeat')[0].style.opacity = '0.4';
+            document.querySelector('.repeat').classList.remove('s-opacity-1');
         }
     }
 
@@ -252,10 +257,11 @@ export default class PlayerControlComponent {
     volumeButtonMouseOver() {
         document.getElementsByClassName('volume-scale')[0]
             .style.transitionProperty = 'opacity, top';
-        document.getElementsByClassName('volume-scale')[0].style.visibility = 'visible';
-        document.getElementsByClassName('volume-scale')[0].style.opacity = '1';
-        document.getElementsByClassName('volume-scale')[0].style.top = '-52px';
-        document.getElementsByClassName('volume')[0].style.opacity = '1';
+        document.getElementsByClassName('volume-scale')[0].classList.remove('is-hidden');
+        document.getElementsByClassName('volume-scale')[0].classList.add('is-visible');
+        document.querySelector('.volume-scale').classList.add('s-opacity-1');
+        document.querySelector('.volume-scale').classList.add('s-volume-scale-hover');
+        document.querySelector('.volume').classList.add('s-opacity-1');
     }
 
     /**
@@ -264,10 +270,11 @@ export default class PlayerControlComponent {
     volumeButtonMouseOut() {
         document.getElementsByClassName('volume-scale')[0]
             .style.transitionProperty = 'opacity, visibility, top';
-        document.getElementsByClassName('volume-scale')[0].style.visibility = 'hidden';
-        document.getElementsByClassName('volume-scale')[0].style.opacity = '0';
-        document.getElementsByClassName('volume-scale')[0].style.top = '-42px';
-        document.getElementsByClassName('volume')[0].style.opacity = '0.4';
+        document.getElementsByClassName('volume-scale')[0].classList.remove('is-visible');
+        document.getElementsByClassName('volume-scale')[0].classList.add('is-hidden');
+        document.querySelector('.volume-scale').classList.remove('s-opacity-1');
+        document.querySelector('.volume-scale').classList.remove('s-volume-scale-hover');
+        document.querySelector('.volume').classList.remove('s-opacity-1');
     }
 
     /**
@@ -388,7 +395,6 @@ export default class PlayerControlComponent {
      * Рисует кнопку перемешивания в режиме перемешивания (активной)
      */
     drawShuffle() {
-        document.getElementsByClassName('shuffle')[0].style.opacity = '1';
         this.shuffled = true;
     }
 
@@ -396,7 +402,6 @@ export default class PlayerControlComponent {
      * Рисует кнопку перемешивания в режиме воспроизвдения подряд (неактивной)
      */
     drawUnshuffle() {
-        document.getElementsByClassName('shuffle')[0].style.opacity = '0.4';
         this.shuffled = false;
     }
 
@@ -404,7 +409,6 @@ export default class PlayerControlComponent {
      * Рисует кнопку зацикливания в режиме зацикливания всего плейлиста (активной, пустой внутри)
      */
     drawRepeat() {
-        document.getElementsByClassName('repeat')[0].style.opacity = '1';
         this.repeatState = 1;
     }
 
@@ -421,7 +425,6 @@ export default class PlayerControlComponent {
      */
     drawUnrepeat() {
         document.getElementsByClassName('repeat')[0].src = '/static/img/repeat.svg';
-        document.getElementsByClassName('repeat')[0].style.opacity = '0.4';
         this.repeatState = 0;
     }
 

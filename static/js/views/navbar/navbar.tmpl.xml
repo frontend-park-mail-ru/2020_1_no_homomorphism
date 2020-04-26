@@ -18,21 +18,21 @@
     <span class="m-button-without-size">
         <img src="/static/img/search.svg" class="m-medium-icon"/>
     </span>
-    <a href="/profile/tracks" class="l-navbar-info is-hidden" id="profile-link">
+    <a href="/profile/tracks" class="l-navbar-info is-not-displayed" id="profile-link">
         <img class="m-navbar-avatar m-medium-icon col" src="/static/img/avatar/default.png" alt="avatar"/>
 
         <div class="m-navbar-name col"></div>
     </a>
-    <a href="/settings" class="l-settings-icon is-hidden">
+    <a href="/settings" class="l-settings-icon is-not-displayed">
         <img src="/static/img/settings.svg" class="m-small-icon"/>
     </a>
-    <a href="/" class="m-login-button is-hidden" id="logout-link">
+    <a href="/" class="m-login-button is-not-displayed" id="logout-link">
         log out
     </a>
-    <a href="/signup" class="m-signup-button is-hidden" id="signup-link">
+    <a href="/signup" class="m-signup-button is-not-displayed" id="signup-link">
         sign up
     </a>
-    <a href="/login" class="m-login-button is-hidden" id="login-link">
+    <a href="/login" class="m-login-button is-not-displayed" id="login-link">
         log in
     </a>
     <div class="l-top-search">
