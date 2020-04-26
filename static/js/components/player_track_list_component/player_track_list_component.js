@@ -19,7 +19,6 @@ export default class TrackListComponent {
      * Sets EventListeners
      */
     setEventListeners() {
-        console.log(document.querySelectorAll('.favorite-button').length);
         document.querySelectorAll('.track-list').forEach((row) => {
             row.onclick = (event) => this.tracklistClick(event);
         });
@@ -158,7 +157,7 @@ export default class TrackListComponent {
      * @param {Object} tracks
      */
     drawTracklist(tracks) {
-        this.updateTrack(tracks[0]);
+        this.eventBus.emit(PLAYER.TRACK_UPDATE, tracks[0]);
         document.getElementsByClassName('track-list')[0].innerHTML += template(tracks);
         this.locked = false;
         if (!this.expanded) {

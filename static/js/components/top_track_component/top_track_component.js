@@ -1,3 +1,4 @@
+import {PLAYER} from '@libs/constans';
 import template from '@components/top_track_component/top_track.tmpl.xml';
 
 /**
@@ -6,8 +7,11 @@ import template from '@components/top_track_component/top_track.tmpl.xml';
 export default class TopTrackComponent {
     /**
      * Конструткор
+     * @param {Object} eventBus
      */
-    constructor() {}
+    constructor(eventBus) {
+        eventBus.on(PLAYER.TRACK_UPDATE, this.updateTrack.bind(this));
+    }
 
     /**
      * Рендер
