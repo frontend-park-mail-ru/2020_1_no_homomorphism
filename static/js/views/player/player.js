@@ -1,6 +1,6 @@
 import {PLAYER, NAVBAR, DOM, GLOBAL, URL} from '@libs/constans';
 import BaseView from '@libs/base_view';
-import track from '@views/player/track.tmpl.xml';
+import tracklist from '@views/player/tracklist.tmpl.xml';
 import player from '@views/player/player.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
 import ChoosePlaylist from '@components/choose_playlist_component/choose_playlist_component';
@@ -27,7 +27,7 @@ export default class PlayerView extends BaseView {
         this.muted = false;
         this.volume = 1;
         this.locked = true;
-        this.topTrackComponent = new TopTrackComponent(eventBus);
+        this.topTrackComponent = new TopTrackComponent();
         this._choosePlaylist = new ChoosePlaylist(eventBus, PLAYER);
         this._playlistComponent = new PlaylistComponent(this.setDynamicEventListeners.bind(this));
         this.eventBus.on(PLAYER.DRAW_PLAY, this.drawPlay.bind(this));
@@ -56,7 +56,7 @@ export default class PlayerView extends BaseView {
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.PLAYER)[0]);
-        this.top_track_component.render();
+        this.topTrackComponent.render();
         this.setStaticEventListeners();
         this.resize();
     }
@@ -677,6 +677,7 @@ export default class PlayerView extends BaseView {
      * @param {Object} track
      */
     updateTrack(track) {
+        this.topTrackComponent.updateTrack(track);
         const minutes = Math.floor(track.duration / 60);
         const seconds = Math.floor(track.duration % 60);
         document.getElementsByClassName('duration')[0].innerHTML = minutes.toString() + ':' +
@@ -722,10 +723,8 @@ export default class PlayerView extends BaseView {
      * @param {Object} tracks
      */
     drawTracklist(tracks) {
-        this.eventBus.emit(PLAYER.TRACK_UPDATE, tracks[0]);
-        for (let i = 0; i < tracks.length; i++) {
-            document.getElementsByClassName('track-list')[0].innerHTML += track(tracks[i]);
-        }
+        this.updateTrack(tracks[0]);
+        document.getElementsByClassName('track-list')[0].innerHTML += tracklist(tracks);
         this.locked = false;
         if (!this.expanded) {
             this.triggerClick();
