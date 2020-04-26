@@ -18,94 +18,73 @@ export default class PlayerControlComponent {
         this.timelineDrag = false;
         this.volumeDrag = false;
         this.eventBus = eventBus;
-        this.eventBus.on(PLAYER.TRACK_UPDATE, this.updateTrack.bind(this));
-        this.eventBus.on(PLAYER.DRAW_PLAY, this.drawPlay.bind(this));
-        this.eventBus.on(PLAYER.DRAW_PAUSE, this.drawPause.bind(this));
-        this.eventBus.on(PLAYER.DRAW_TIMELINE, this.drawTimeline.bind(this));
-        this.eventBus.on(PLAYER.DRAW_SHUFFLE, this.drawShuffle.bind(this));
-        this.eventBus.on(PLAYER.DRAW_UNSHUFLE, this.drawUnshuffle.bind(this));
-        this.eventBus.on(PLAYER.DRAW_REPEAT, this.drawRepeat.bind(this));
-        this.eventBus.on(PLAYER.DRAW_REPEAT_ONE, this.drawRepeatOne.bind(this));
-        this.eventBus.on(PLAYER.DRAW_UNREPEAT, this.drawUnrepeat.bind(this));
-        this.eventBus.on(PLAYER.DRAW_MUTE, this.drawMute.bind(this));
-        this.eventBus.on(PLAYER.DRAW_UNMUTE, this.drawUnmute.bind(this));
+        [
+            [PLAYER.TRACK_UPDATE, this.updateTrack],
+            [PLAYER.DRAW_PLAY, this.drawPlay],
+            [PLAYER.DRAW_PAUSE, this.drawPause],
+            [PLAYER.DRAW_TIMELINE, this.drawTimeline],
+            [PLAYER.DRAW_SHUFFLE, this.drawShuffle],
+            [PLAYER.DRAW_UNSHUFLE, this.drawUnshuffle],
+            [PLAYER.DRAW_REPEAT, this.drawRepeat],
+            [PLAYER.DRAW_REPEAT_ONE, this.drawRepeatOne],
+            [PLAYER.DRAW_UNREPEAT, this.drawUnrepeat],
+            [PLAYER.DRAW_MUTE, this.drawMute],
+            [PLAYER.DRAW_UNMUTE, this.drawUnmute],
+        ].forEach((subscription) => {
+            this.eventBus.on(subscription[0], subscription[1].bind(this));
+        });
     }
 
     /**
      * Рендер
      */
     render() {
-        const element = document.getElementsByClassName('container-audio')[0];
-        element.innerHTML = template();
+        document.getElementsByClassName('container-audio')[0].innerHTML = template();
+        this.drawVolume(document.getElementsByClassName('volume-scale-back')[0]
+            .getBoundingClientRect().height * this.volume);
     }
 
     /**
      * Sets EventListeners
      */
     setEventListeners() {
-        window.addEventListener('mouseup', this.windowMouseUp.bind(this));
-        document.getElementsByClassName('play-pause')[0]
-            .addEventListener('click', this.playPauseButtonClick.bind(this));
-        document.getElementById('prev').addEventListener('click', this.prevButtonClick.bind(this));
-        document.getElementById('next').addEventListener('click', this.nextButtonClick.bind(this));
-        document.getElementsByClassName('timeline')[0]
-            .addEventListener('mouseover', this.timelineMouseOver.bind(this));
-        document.getElementsByClassName('timeline')[0]
-            .addEventListener('mouseout', this.timelineMouseOut.bind(this));
-        document.getElementsByClassName('timeline-back')[0]
-            .addEventListener('mousedown', this.timelineMouseDown.bind(this));
-        document.getElementsByClassName('timeline-front')[0]
-            .addEventListener('mousedown', this.timelineMouseDown.bind(this));
-        document.getElementsByClassName('timeline-back')[0]
-            .addEventListener('mouseup', this.timelineMouseUp.bind(this));
-        document.getElementsByClassName('timeline-front')[0]
-            .addEventListener('mouseup', this.timelineMouseUp.bind(this));
-        document.getElementsByClassName('timeline-back')[0]
-            .addEventListener('mousemove', this.timelineMouseMove.bind(this));
-        document.getElementsByClassName('timeline-front')[0]
-            .addEventListener('mousemove', this.timelineMouseMove.bind(this));
-        document.getElementsByClassName('timeline-back')[0]
-            .onclick = (event) => this.timelineClick(event);
-        document.getElementsByClassName('timeline-front')[0]
-            .onclick = (event) => this.timelineClick(event);
-        document.getElementsByClassName('shuffle')[0]
-            .addEventListener('mouseover', this.shuffleButtonMouseOver.bind(this));
-        document.getElementsByClassName('shuffle')[0]
-            .addEventListener('mouseout', this.shuffleButtonMouseOut.bind(this));
-        document.getElementsByClassName('shuffle')[0]
-            .addEventListener('click', this.shuffleButtonClick.bind(this));
-        document.getElementsByClassName('repeat')[0]
-            .addEventListener('mouseover', this.repeatButtonMouseOver.bind(this));
-        document.getElementsByClassName('repeat')[0]
-            .addEventListener('mouseout', this.repeatButtonMouseOut.bind(this));
-        document.getElementsByClassName('repeat')[0]
-            .addEventListener('click', this.repeatButtonClick.bind(this));
-        document.getElementsByClassName('volume')[0]
-            .addEventListener('mouseover', this.volumeButtonMouseOver.bind(this));
-        document.getElementsByClassName('volume')[0]
-            .addEventListener('mouseout', this.volumeButtonMouseOut.bind(this));
-        document.getElementsByClassName('volume')[0]
-            .addEventListener('click', this.volumeButtonClick.bind(this));
-        document.getElementsByClassName('volume-scale')[0]
-            .addEventListener('mouseover', this.volumeButtonMouseOver.bind(this));
-        document.getElementsByClassName('volume-scale')[0]
-            .addEventListener('mouseout', this.volumeButtonMouseOut.bind(this));
-        document.getElementsByClassName('volume-scale-back')[0]
-            .addEventListener('mousedown', this.volumeMouseDown.bind(this));
-        document.getElementsByClassName('volume-scale-back')[0]
-            .onmouseup = (event) => this.volumeMouseUp(event);
-        document.getElementsByClassName('volume-scale-front')[0]
-            .addEventListener('mousedown', this.volumeMouseDown.bind(this));
-        document.getElementsByClassName('volume-scale-front')[0]
-            .onmouseup = (event) => this.volumeMouseUp(event);
-        document.getElementsByClassName('volume-scale-back')[0]
-            .onclick = (event) => this.volumeScaleClick(event);
-        document.getElementsByClassName('volume-scale-front')[0]
-            .onclick = (event) => this.volumeScaleClick(event);
-        document.getElementsByClassName('volume-scale-back')[0]
-            .onmousemove = (event) => this.volumeMouseMove(event);
-        document.getElementsByClassName('volume-scale-front')[0]
-            .onmousemove = (event) => this.volumeMouseMove(event);
+        [
+            [window, 'mouseup', this.windowMouseUp],
+            [document.querySelector('.play-pause'), 'click', this.playPauseButtonClick],
+            [document.getElementById('prev'), 'click', this.prevButtonClick],
+            [document.getElementById('next'), 'click', this.nextButtonClick],
+            [document.querySelector('.timeline'), 'mouseover', this.timelineMouseOver],
+            [document.querySelector('.timeline'), 'mouseout', this.timelineMouseOut],
+            [document.querySelector('.timeline-back'), 'mousedown', this.timelineMouseDown],
+            [document.querySelector('.timeline-front'), 'mousedown', this.timelineMouseDown],
+            [document.querySelector('.timeline-back'), 'mouseup', this.timelineMouseUp],
+            [document.querySelector('.timeline-front'), 'mouseup', this.timelineMouseUp],
+            [document.querySelector('.timeline-back'), 'mousemove', this.timelineMouseMove],
+            [document.querySelector('.timeline-front'), 'mousemove', this.timelineMouseMove],
+            [document.querySelector('.timeline-back'), 'click', this.timelineClick],
+            [document.querySelector('.timeline-front'), 'click', this.timelineClick],
+            [document.querySelector('.shuffle'), 'mouseover', this.shuffleButtonMouseOver],
+            [document.querySelector('.shuffle'), 'mouseout', this.shuffleButtonMouseOut],
+            [document.querySelector('.shuffle'), 'click', this.shuffleButtonClick],
+            [document.querySelector('.repeat'), 'mouseover', this.repeatButtonMouseOver],
+            [document.querySelector('.repeat'), 'mouseout', this.repeatButtonMouseOut],
+            [document.querySelector('.repeat'), 'click', this.repeatButtonClick],
+            [document.querySelector('.volume'), 'mouseover', this.volumeButtonMouseOver],
+            [document.querySelector('.volume'), 'mouseout', this.volumeButtonMouseOut],
+            [document.querySelector('.volume'), 'click', this.volumeButtonClick],
+            [document.querySelector('.volume-scale'), 'mouseover', this.volumeButtonMouseOver],
+            [document.querySelector('.volume-scale'), 'mouseout', this.volumeButtonMouseOut],
+            [document.querySelector('.volume-scale-back'), 'mousedown', this.volumeMouseDown],
+            [document.querySelector('.volume-scale-back'), 'mouseup', this.volumeMouseUp],
+            [document.querySelector('.volume-scale-front'), 'mousedown', this.volumeMouseDown],
+            [document.querySelector('.volume-scale-front'), 'mouseup', this.volumeMouseUp],
+            [document.querySelector('.volume-scale-back'), 'click', this.volumeScaleClick],
+            [document.querySelector('.volume-scale-front'), 'click', this.volumeScaleClick],
+            [document.querySelector('.volume-scale-back'), 'mousemove', this.volumeMouseMove],
+            [document.querySelector('.volume-scale-front'), 'mousemove', this.volumeMouseMove],
+        ].forEach((el) => {
+            el[0].addEventListener(el[1], el[2].bind(this));
+        });
     }
 
     /**

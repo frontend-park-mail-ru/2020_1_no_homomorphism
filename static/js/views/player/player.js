@@ -5,7 +5,7 @@ import {globalEventBus} from '@libs/eventBus';
 import ChoosePlaylist from '@components/choose_playlist_component/choose_playlist_component';
 import PlaylistComponent from '@components/playlist_component/playlist_component';
 import TopTrackComponent from '@components/top_track_component/top_track_component';
-import TrackListComponent from
+import PlayerTrackListComponent from
     '@components/player_track_list_component/player_track_list_component';
 import PlayerControlComponent from '@components/player_control_component/player_control_component';
 
@@ -22,20 +22,22 @@ export default class PlayerView extends BaseView {
         this.expanded = false;
         this.locked = true;
         this.topTrackComponent = new TopTrackComponent(eventBus);
-        this.trackListComponent = new TrackListComponent(eventBus);
+        this.trackListComponent = new PlayerTrackListComponent(eventBus);
         this.playerControlComponent = new PlayerControlComponent(eventBus);
         this._choosePlaylist = new ChoosePlaylist(eventBus, PLAYER);
         this._playlistComponent = new PlaylistComponent(
             this.trackListComponent.setEventListeners.bind(this));
-        this.eventBus.on(PLAYER.DRAW_TRACKLIST,
-            this.trackListComponent.drawTracklist.bind(this));
-        this.eventBus.on(PLAYER.DRAW_TRACKLIST,
-            this.trackListComponent.setEventListeners.bind(this.trackListComponent));
-        this.eventBus.on(PLAYER.REMOVE_FROM_TRACKLIST,
-            this.trackListComponent.removeFromTracklist.bind(this));
-        this.eventBus.on(PLAYER.REMOVE_FROM_TRACKLIST_ALL,
-            this.trackListComponent.removeFromTracklistAll.bind(this));
-        this.eventBus.on(PLAYER.MOVE_MARKER, this.moveMarker.bind(this));
+        [
+            [PLAYER.DRAW_TRACKLIST, this.trackListComponent.drawTracklist, this],
+            [PLAYER.DRAW_TRACKLIST, this.trackListComponent.setEventListeners,
+                this.trackListComponent],
+            [PLAYER.REMOVE_FROM_TRACKLIST, this.trackListComponent.removeFromTracklist, this],
+            [PLAYER.REMOVE_FROM_TRACKLIST_ALL, this.trackListComponent.removeFromTracklistAll,
+                this],
+            [PLAYER.MOVE_MARKER, this.moveMarker, this],
+        ].forEach((subscription) => {
+            this.eventBus.on(subscription[0], subscription[1].bind(subscription[2]));
+        });
         globalEventBus.on(GLOBAL.COLLAPSE, this.collapse.bind(this));
     }
 
@@ -66,40 +68,31 @@ export default class PlayerView extends BaseView {
         const top = NAVBAR.HEIGHT;
         const height = document.documentElement.clientHeight - top;
         document.getElementsByTagName('audio')[0].volume = this.playerControlComponent.volume;
-        this.playerControlComponent.drawVolume(height);
+        // this.playerControlComponent.drawVolume(height);
         this.root.style.top = top.toString() + 'px';
         this.root.style.height = height.toString() + 'px';
         document.getElementsByClassName('player-trigger')[0]
             .style.height = height.toString() + 'px';
-        this.playerControlComponent.drawVolume(document
-            .getElementsByClassName('volume-scale-back')[0]
-            .getBoundingClientRect().height * this.playerControlComponent.volume);
     }
 
     /**
      * Sets static EventListeners
      */
     setEventListeners() {
-        window.addEventListener('resize', this.resize.bind(this));
-        document.getElementsByTagName('body')[0]
-            .addEventListener('DOMSubtreeModified', this.resize.bind(this));
-        document.getElementsByTagName('audio')[0]
-            .addEventListener('timeupdate', this.audioTimeUpdate.bind(this));
-        document.getElementsByTagName('audio')[0]
-            .addEventListener('ended', this.audioEnded.bind(this));
-        document.getElementsByClassName('player-trigger')[0]
-            .addEventListener('mouseover', this.triggerMouseOver.bind(this));
-        document.getElementsByClassName('player-trigger')[0]
-            .addEventListener('mouseout', this.triggerMouseOut.bind(this));
-        document.getElementsByClassName('player-trigger')[0]
-            .addEventListener('click', this.triggerClick.bind(this));
-        document.getElementsByClassName('trigger-button')[0]
-            .addEventListener('mouseover', this.triggerMouseOver.bind(this));
-        document.getElementsByClassName('trigger-button')[0]
-            .addEventListener('mouseout', this.triggerMouseOut.bind(this));
-        document.getElementsByClassName('trigger-button')[0]
-            .addEventListener('click', this.triggerClick.bind(this));
-        window.onwheel = (event) => this.trackListComponent.trackListWheel(event);
+        [
+            [window, 'resize', this.resize],
+            [document.getElementsByTagName('body')[0], 'DOMSubtreeModified', this.resize],
+            [document.getElementsByTagName('audio')[0], 'timeupdate', this.audioTimeUpdate],
+            [document.getElementsByTagName('audio')[0], 'ended', this.audioEnded],
+            [document.querySelector('.player-trigger'), 'mouseover', this.triggerMouseOver],
+            [document.querySelector('.player-trigger'), 'mouseout', this.triggerMouseOut],
+            [document.querySelector('.player-trigger'), 'click', this.triggerClick],
+            [document.querySelector('.trigger-button'), 'mouseover', this.triggerMouseOver],
+            [document.querySelector('.trigger-button'), 'mouseout', this.triggerMouseOut],
+            [document.querySelector('.trigger-button'), 'click', this.triggerClick],
+        ].forEach((el) => {
+            el[0].addEventListener(el[1], el[2].bind(this));
+        });
         this.playerControlComponent.setEventListeners();
     }
 

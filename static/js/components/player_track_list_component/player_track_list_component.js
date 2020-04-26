@@ -6,7 +6,7 @@ import User from '@libs/user';
 /**
  * Компонент - список треков в плеере
  */
-export default class TrackListComponent {
+export default class PlayerTrackListComponent {
     /**
      * Конструткор
      * @param {Object} eventBus
@@ -31,6 +31,7 @@ export default class TrackListComponent {
         document.querySelectorAll('.add-button').forEach((button) => {
             button.onclick = (event) => this.trackAddButtonClick(event);
         });
+        window.addEventListener('wheel', this.trackListWheel.bind(this));
     }
 
     /**
