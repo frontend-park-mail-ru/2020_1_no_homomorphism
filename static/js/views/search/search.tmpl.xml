@@ -1,43 +1,35 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="col col-9">
-<!--        <fest:if test="data.artists.length !== 0">-->
+        <fest:if test="data.artists.length !== 0">
             <div class="l-main l-top-card">
                 <h2 class="l-small-card">
                     Artists
                 </h2>
                 <div class="small-line"></div>
                 <div class="l-track-list l-search-artists" style="top: 0;">
-                    <div class="m-empty-list">
-                        No matches :(
-                    </div>
                 </div>
             </div>
-<!--        </fest:if>-->
-<!--        <fest:if test="data.tracks.length !== 0">-->
-        <div class="l-main l-down-card">
-            <h2 class="l-small-card">
-                Tracks
-            </h2>
-            <div class="small-line"></div>
-            <div class="l-track-list l-search-tracks" style="top: 0;">
-                <div class="m-empty-list">
-                    No matches :(
+        </fest:if>
+
+        <fest:if test="data.tracks.length !== 0">
+            <div class="l-main l-down-card">
+                <h2 class="l-small-card">
+                    Tracks
+                </h2>
+                <div class="small-line"></div>
+                <div class="l-track-list l-search-tracks" style="top: 0;">
                 </div>
             </div>
-        </div>
-<!--        </fest:if>-->
-<!--        <fest:if test="data.albums.length !== 0">-->
-        <div class="l-main l-down-card">
-            <h2 class="l-small-card">
-                Albums
-            </h2>
-            <div class="small-line"></div>
-            <div class="l-track-list l-search-albums" style="top: 0;">
-                <div class="m-empty-list">
-                    No matches :(
+        </fest:if>
+        <fest:if test="data.albums.length !== 0">
+            <div class="l-main l-down-card">
+                <h2 class="l-small-card">
+                    Albums
+                </h2>
+                <div class="small-line"></div>
+                <div class="l-track-list l-search-albums" style="top: 0;">
                 </div>
             </div>
-        </div>
-<!--        </fest:if>-->
+        </fest:if>
     </div>
 </fest:template>

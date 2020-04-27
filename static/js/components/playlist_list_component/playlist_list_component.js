@@ -30,8 +30,10 @@ export default class PlaylistsComponent {
         this._type = data.type;
         this._domItem = data.domItem;
         const elem = document.getElementsByClassName(data.domItem)[0];
-        elem.innerHTML = template(this.generateHref(data.list));
-        this.setEventListeners();
+        if (data.list.length !== 0) {
+            elem.innerHTML = template(this.generateHref(data.list));
+            this.setEventListeners();
+        }
     }
 
     /**

@@ -33,7 +33,10 @@ export default class ArtistListComponent {
     render(data: input) {
         this.artistListDummy.DOMItem = data.domItem;
         this.artistList = data.artists;
-        this.artistListDummy.render(this.artistList);
+        // @ts-ignore
+        if (0 !== this.artistList.length) {
+            this.artistListDummy.render(this.artistList);
+        }
     }
 
     /**

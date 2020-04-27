@@ -45,8 +45,10 @@ export default class TrackListComponent {
         this._type = data.type;
         this._tracklist.type = this._type === 'playlist';
         const elem = document.getElementsByClassName(data.domItem)[0];
-        elem.innerHTML = template(this._tracklist);
-        this.setTracksEventListeners();
+        if (this._tracklist.length !== 0) {
+            elem.innerHTML = template(this._tracklist);
+            this.setTracksEventListeners();
+        }
     }
 
     /**

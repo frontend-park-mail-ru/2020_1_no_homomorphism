@@ -90,7 +90,6 @@ export default class SearchComponent {
                     case RESPONSE.OK:
                         res.json()
                             .then((elem) => {
-                                console.log(elem);
                                 globalEventBus.emit(GLOBAL.PLAY_TRACKS, {
                                     tracks: [elem],
                                 }, elem.id);
