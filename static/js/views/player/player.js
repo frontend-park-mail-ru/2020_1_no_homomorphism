@@ -1,7 +1,8 @@
-import {PLAYER, NAVBAR, DOM} from '@libs/constans.js';
+import {PLAYER, NAVBAR, DOM, GLOBAL} from '@libs/constans';
 import BaseView from '@libs/base_view';
 import track from '@views/player/track.tmpl.xml';
 import player from '@views/player/player.tmpl.xml';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  *  вью для плеера
@@ -38,6 +39,7 @@ export default class PlayerView extends BaseView {
         this.eventBus.on(PLAYER.DRAW_UNREPEAT, this.drawUnrepeat.bind(this));
         this.eventBus.on(PLAYER.DRAW_MUTE, this.drawMute.bind(this));
         this.eventBus.on(PLAYER.DRAW_UNMUTE, this.drawUnmute.bind(this));
+        globalEventBus.on(GLOBAL.COLLAPSE, this.collapse.bind(this));
     }
 
     /**
@@ -169,18 +171,16 @@ export default class PlayerView extends BaseView {
     setDynamicEventListeners() {
         document.querySelectorAll('.track-list .row').forEach((row) => {
             row.onclick = (event) => this.tracklistClick(event);
-            row.onmouseover = (event) => this.tracklistMouseOver(event);
-            row.onmouseout = (event) => this.tracklistMouseOut(event);
         });
-        document.querySelectorAll('img.delete-button').forEach((button) => {
+        document.querySelectorAll('.delete-button').forEach((button) => {
             button.onclick = (event) => this.trackDeleteButtonClick(event);
         });
-        document.querySelectorAll('img.favorite-button').forEach((button) => {
+        document.querySelectorAll('.favorite-button').forEach((button) => {
             button.onclick = (event) => this.trackFavoriteButtonClick(event);
         });
-        document.querySelectorAll('img.add-button').forEach((button) => {
-            button.onclick = (event) => this.trackAddButtonClick(event);
-        });
+        // document.querySelectorAll('.add-button').forEach((button) => {
+        //     button.onclick = (event) => this.trackAddButtonClick(event);
+        // });
     }
 
     /**
@@ -218,9 +218,9 @@ export default class PlayerView extends BaseView {
      */
     triggerMouseOver() {
         document.getElementsByClassName('trigger-button')[0].classList
-            .add('background--chosen-icon');
+            .add('is-mouse-on');
         document.getElementsByClassName('player-trigger')[0].classList
-            .add('background--chosen-icon');
+            .add('is-mouse-on');
         document.getElementsByClassName('player-trigger-arrow')[0].style.visibility = 'visible';
     }
 
@@ -229,9 +229,9 @@ export default class PlayerView extends BaseView {
      */
     triggerMouseOut() {
         document.getElementsByClassName('trigger-button')[0].classList
-            .remove('background--chosen-icon');
+            .remove('is-mouse-on');
         document.getElementsByClassName('player-trigger')[0].classList
-            .remove('background--chosen-icon');
+            .remove('is-mouse-on');
         document.getElementsByClassName('player-trigger-arrow')[0].style.visibility = 'hidden';
     }
 
@@ -245,11 +245,9 @@ export default class PlayerView extends BaseView {
         if (this.expanded) {
             document.getElementsByClassName('player-trigger-arrow')[0]
                 .style.transform = 'rotate(180deg)';
-            // document.getElementsByClassName('player-trigger-arrow')[0].style.marginLeft = '-1px';
         } else {
             document.getElementsByClassName('player-trigger-arrow')[0]
                 .style.transform = 'rotate(0)';
-            // document.getElementsByClassName('player-trigger-arrow')[0].style.marginLeft = '-3px';
         }
         const body = document.getElementsByTagName('body')[0];
         const left = (
@@ -527,7 +525,7 @@ export default class PlayerView extends BaseView {
                 if (delta < 0 && top - delta / 2 > 0) {
                     trackList.style.top = '0';
                 } else if (delta > 0 && trackList.getBoundingClientRect().bottom - delta / 2 <
-                           document.documentElement.clientHeight
+                    document.documentElement.clientHeight
                 ) {
                     const container = document.getElementsByClassName('container-audio')[0];
                     trackList.style.top = (document.documentElement.clientHeight -
@@ -582,10 +580,10 @@ export default class PlayerView extends BaseView {
         target = target.getElementsByClassName('col track-buttons')[0];
         if (event.clientX < target.getBoundingClientRect().x ||
             event.clientX > target.getBoundingClientRect().x +
-                target.getBoundingClientRect().width ||
+            target.getBoundingClientRect().width ||
             event.clientY < target.getBoundingClientRect().y ||
             event.clientY > target.getBoundingClientRect().y +
-                target.getBoundingClientRect().height
+            target.getBoundingClientRect().height
         ) {
             for (const elem of target.children) {
                 elem.style.opacity = '0';
@@ -599,12 +597,15 @@ export default class PlayerView extends BaseView {
      */
     tracklistClick(event) {
         let current = event.target;
+        if (current.classList.contains('m-obscure-title')) {
+            return;
+        }
         while (current !== window && current !== document.body && current != null) {
             if (current.getAttribute('class') === 'track-list' ||
                 (current.getAttribute('class') !== null &&
-                current.getAttribute('class').indexOf('button') !== -1 &&
-                current.getAttribute('class').indexOf('buttons') === -1 &&
-                current.getAttribute('class').indexOf('row') !== -1)
+                    current.getAttribute('class').indexOf('button') !== -1 &&
+                    current.getAttribute('class').indexOf('buttons') === -1 &&
+                    current.getAttribute('class').indexOf('row') !== -1)
             ) {
                 break;
             }
@@ -634,12 +635,13 @@ export default class PlayerView extends BaseView {
      * @param {Object} event
      */
     trackFavoriteButtonClick(event) {
-        if (event.target.src.indexOf('/static/img/favorite_border.svg') !== -1) {
-            event.target.src = '/static/img/favorite.svg';
-        } else {
-            event.target.src = '/static/img/favorite_border.svg';
-        }
-        this.eventBus.emit(PLAYER.LIKE, event.target.parentNode.parentNode.getAttribute('id'));
+        alert('This functionality is not accessible by now');
+        // if (event.target.src.indexOf('/static/img/favorite_border.svg') !== -1) {
+        //     event.target.src = '/static/img/favorite.svg';
+        // } else {
+        //     event.target.src = '/static/img/favorite_border.svg';
+        // }
+        // this.eventBus.emit(PLAYER.LIKE, event.target.parentNode.parentNode.getAttribute('id'));
     }
 
     /**
@@ -647,11 +649,21 @@ export default class PlayerView extends BaseView {
      * @param {Object} event
      */
     trackAddButtonClick(event) {
-        let target = event.target;
-        while (target.getAttribute('id') === null) {
-            target = target.parentNode;
+        // alert('This functionality is not accessible by now');
+        // let target = event.target;
+        // while (target.getAttribute('id') === null) {
+        //     target = target.parentNode;
+        // }
+        // this.eventBus.emit(PLAYER.ADD, target.getAttribute('id'));
+    }
+
+    /**
+     * Сворачивает плеер, если он развёрнут
+     */
+    collapse() {
+        if (this.expanded) {
+            this.triggerClick();
         }
-        this.eventBus.emit(PLAYER.ADD, target.getAttribute('id'));
     }
 
     /**
@@ -661,6 +673,7 @@ export default class PlayerView extends BaseView {
     drawPlay() {
         document.getElementsByClassName('play-pause')[0].src = '/static/img/play.svg';
         this.playing = false;
+        // localStorage.setItem('isPlaying', 'false');
     }
 
     /**

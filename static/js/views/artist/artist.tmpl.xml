@@ -1,14 +1,13 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="col col-9">
-        <div class="l-main">
+        <div class="l-main ">
             <div class="l-top-card">
-
                 <div class="row">
                     <div class="l-top-info col">
                         <div class="l-round-image col">
                             <img alt="" src="{data.image}" class=" m-round-image" id="avatar"/>
                         </div>
-                        <div class="l-top-name col" id="login-name">
+                        <div class="l-top-name col">
                             <div class="m-top-login" id="profile-login">
                                 <fest:value>data.name</fest:value>
                             </div>
@@ -19,37 +18,35 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="m-profile-tracks col col-4">
-                        <a class="m-tiny-ref" href="/artist/{data.id}/tracks">
+                    <div class="l-top-section-tracks col col-4" id="profile-tracks-title">
+                        <a class="m-tiny-ref m-top-section-tracks-ref" href="/artist/{data.id}/tracks">
                             <h2 id="artist-tracks-title">
                                 <fest:value>data.tracks</fest:value>
                             </h2>
                             <p>Tracks</p>
                         </a>
                     </div>
-                    <div class="m-profile-albums col col-4">
-                        <a class="m-tiny-ref" href="/artist/{data.id}/albums">
+                    <div class="l-top-section-albums col col-4" id="profile-albums-title">
+                        <a class="m-tiny-ref m-top-section-albums-ref" href="/artist/{data.id}/albums">
                             <h2 id="artist-albums-title">
                                 <fest:value>data.albums</fest:value>
                             </h2>
                             <p>Albums</p>
                         </a>
                     </div>
-                    <div class="m-artist-info col col-4" id="artist-info-title">
-                        <a class="m-tiny-ref" href="/artist/{data.id}/info">
+                    <div class="l-top-section-info col col-4" id="profile-info-title">
+                        <a class="m-tiny-ref l-top-section-info-ref" href="/artist/{data.id}/info">
                             <h2>Info</h2>
                         </a>
                     </div>
                 </div>
-
             </div>
-
-            <div class="l-down-card l-artist-base">
-                <div class="l-profile-album-list" id="albums" style="top: 0;">
+            <div class="l-down-card">
+                <div class="l-album-list" id="artist-albums" style="top: 0;">
                 </div>
-                <div class="l-profile-track-list" id="tracks" style="top: 0;">
+                <div class="l-track-list" id="artist-tracks" style="top: 0;">
                 </div>
-                <div class="l-profile-track-list" id="info" style="top: 0;">
+                <div class="l-profile-info-list" id="artist-info" style="top: 0;">
                 </div>
             </div>
         </div>

@@ -1,29 +1,40 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <a href="/" class="l-logo">
-        <img src="/static/img/library_music.svg" class="m-medium-icon" alt="logo"/>
+        <img src="/static/img/library_music.svg" class="m-medium-icon col" alt="logo"/>
+<!--    </a>-->
+<!--    <a href="/" class="m-project-name">-->
+        <div class="m-project-name col">
+            VirusMusic
+        </div>
+
     </a>
-    <a href="/" class="name">
-        Mystical Spiral
-    </a>
-    <input type="text" class="search"/>
-    <a class="search-button">
+<!--    <span class="l-search-form">-->
+<!--        <input type="text" class="m-search-input" placeholder="Find artist, track or album"/>-->
+<!--        <span class="m-button-without-size">-->
+<!--            <img src="/static/img/search.svg" class="m-medium-icon"/>-->
+<!--        </span>-->
+<!--    </span>-->
+    <input type="text" class="m-search-input" placeholder="Find artist, track or album"/>
+    <span class="m-button-without-size">
         <img src="/static/img/search.svg" class="m-medium-icon"/>
-    </a>
+    </span>
     <a href="/profile/tracks" class="l-navbar-info is-hidden" id="profile-link">
         <img class="m-navbar-avatar m-medium-icon col" src="/static/img/avatar/default.png" alt="avatar"/>
 
         <div class="m-navbar-name col"></div>
     </a>
     <a href="/settings" class="l-settings-icon is-hidden">
-        <img src="/static/img/settings-24px.svg" class="m-small-icon"/>
+        <img src="/static/img/settings.svg" class="m-small-icon"/>
     </a>
-    <a href="/" class="login is-hidden" id="logout-link">
+    <a href="/" class="m-login-button is-hidden" id="logout-link">
         log out
     </a>
-    <a href="/signup" class="signup is-hidden" id="signup-link">
+    <a href="/signup" class="m-signup-button is-hidden" id="signup-link">
         sign up
     </a>
-    <a href="/login" class="login is-hidden" id="login-link">
+    <a href="/login" class="m-login-button is-hidden" id="login-link">
         log in
     </a>
+    <div class="l-top-search">
+    </div>
 </fest:template>

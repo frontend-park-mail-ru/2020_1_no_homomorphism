@@ -1,4 +1,5 @@
 const path = require('path');
+// const fs = require('fs');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
@@ -17,8 +18,13 @@ module.exports = {
         app: './js/app.js',
     },
     devServer: {
+        // https: true,
+        host: '0.0.0.0',
         port: 3000,
+        // key: fs.readFileSync('privkey.pem'),
+        // cert: fs.readFileSync('cert.pem'),
         historyApiFallback: true,
+        disableHostCheck: true,
     },
     output: {
         filename: filename('js'),
@@ -26,10 +32,11 @@ module.exports = {
         publicPath: '/',
     },
     resolve: {
-        extensions: ['.js', '.json'],
+        extensions: ['.tsx', '.ts', '.js', '.json', '.scss', '.css'],
         alias: {
             '@': path.resolve(__dirname, 'static'),
             '@models': path.resolve(__dirname, 'static/js/models'),
+            '@components': path.resolve(__dirname, 'static/js/components'),
             '@views': path.resolve(__dirname, 'static/js/views'),
             '@controllers': path.resolve(__dirname, 'static/js/controllers'),
             '@libs': path.resolve(__dirname, 'static/js/libs'),
@@ -54,14 +61,17 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
+                test: /\.(css|scss)$/,
                 use: [
                     isDev ?
                         'vue-style-loader' :
                         MiniCssExtractPlugin.loader,
                     'css-loader',
+                    'sass-loader',
                 ],
             },
+
+
             {
                 test: /\.xml$/,
                 use: [
@@ -79,28 +89,9 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(ttf|woff|woff2|eot)$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                    },
-                ],
-            },
-            // {
-            //     enforce: 'pre',
-            //     test: /\.js$/,
-            //     exclude: /node_modules/,
-            //     loader: 'eslint-loader',
-            // },
-            {
-                test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env'],
-                    },
-                },
+                test: /\.(j|t)s$/,
+                exclude: /node_modules/,
+                loader: ['babel-loader', 'ts-loader'],
             },
         ],
     },

@@ -1,58 +1,57 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
-    <div class="row">
-        <div class="col col-4"></div>
+    <div class="is-emphasized l-center-pos row">
         <div class="col col-4">
-            <form class="sign-up-form card" onsubmit="return false;" autocomplete="none">
+            <form class="l-form l-card" onsubmit="return false;" autocomplete="none">
                 <h2>SIGN UP</h2>
                 <div class="l-signup-input">
                     <label>
                         Name
-                        <input class="input-regular" id="name" type="text" value="" placeholder="John Smith" use="required"/>
-                        <div class="error-message-small"></div>
+                        <input class="m-big-input" id="name" type="text" value="" placeholder="John Smith" use="required"/>
+                        <div class="m-error-message-small"></div>
                     </label>
                 </div>
                 <div class="l-signup-input">
                     <label>
                         Login
-                        <input class="input-regular" id="login" type="text" value="" placeholder="john99" use="required"/>
-                        <div class="error-message-small"></div>
+                        <input class="m-big-input" id="login" type="text" value="" placeholder="john99" use="required"/>
+                        <div class="m-error-message-small"></div>
                     </label>
                 </div>
                 <div class="l-signup-input">
                     <label>
                         Email
-                        <input class="input-regular" type="text" id="email" value="" placeholder="johnSmith@mail.ru"
+                        <input class="m-big-input" type="text" id="email" value="" placeholder="johnSmith@mail.ru"
                                use="required"/>
-                        <div class="error-message-small"></div>
+                        <div class="m-error-message-small"></div>
                     </label>
                 </div>
                 <div class="l-signup-input">
                     <label>
                         Password
-                        <input class="input-regular" type="password" id="password" value="" use="required"/>
-                        <div class="error-message-small"></div>
+                        <input class="m-big-input" type="password" id="password" value="" use="required"/>
+                        <div class="m-error-message-small"></div>
                     </label>
                 </div>
                 <div class="l-signup-input">
                     <label>
                         Password Confirmation
-                        <input class="input-regular" type="password" id="password-confirm" value="" use="required"/>
-                        <div class="error-message-small"></div>
+                        <input class="m-big-input" type="password" id="password-confirm" value="" use="required"/>
+                        <div class="m-error-message-small"></div>
                     </label>
                 </div>
-                <button class="button" type="submit" id="submit">
+                <button class="m-submit-button" type="submit" id="signup-submit">
                     Go
                 </button>
-                <div class="error-message" id="global">
-                    Signup error
+                <div class="m-error-message-small" id="global">
+<!--                    Signup error-->
+                </div>
+                <div class="m-form-description">
+                    <a class="m-tiny-ref" href="/login">
+                        Already registered? Log in.
+                    </a>
                 </div>
             </form>
-            <div class="div-center">
-                <a class="tiny-ref" href="/login">
-                    Already registered? Log in.
-                </a>
-            </div>
+
         </div>
-        <div class="col col-4"></div>
     </div>
 </fest:template>

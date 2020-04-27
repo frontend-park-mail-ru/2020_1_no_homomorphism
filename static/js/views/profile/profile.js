@@ -1,6 +1,10 @@
-import {PROFILE, URL, DOM} from '@libs/constans.js';
+import {PROFILE, URL, DOM, GLOBAL} from '@libs/constans';
 import profile from '@views/profile/profile.tmpl.xml';
 import BaseView from '@libs/base_view';
+import User from '@libs/user';
+import TrackListComponent from '@components/track_list_component/track_list_component';
+import PlaylistsComponent from '@components/playlist_list_component/playlist_list_component';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * вью для профиля
@@ -13,9 +17,13 @@ export default class ProfileView extends BaseView {
         super(profile);
         this.eventBus = eventBus;
         this.currentOpen = '';
+        this.trackListComponent = new TrackListComponent(eventBus, PROFILE);
+        this.playlistsComponent = new PlaylistsComponent(eventBus, PROFILE);
         this.eventBus.on(PROFILE.CHOOSE_SECTION, this.chooseSection.bind(this));
         this.eventBus.on(PROFILE.RENDER_DATA, this.renderData.bind(this));
         this.eventBus.on(PROFILE.RENDER_STAT, this.renderStat.bind(this));
+        this.eventBus.on(PROFILE.CHANGE_PLAYLIST_AMOUNT, this.changePlaylistAmount.bind(this));
+        this.eventBus.on(PROFILE.ID_ARTISTS_SECTION, this.artistSection.bind(this));
     }
 
     /**
@@ -25,8 +33,12 @@ export default class ProfileView extends BaseView {
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.CONTENT)[0], url);
+        if (User.exists()) {
+            this.eventBus.emit(PROFILE.GET_STAT);
+        }
         this.eventBus.emit(PROFILE.GET_DATA);
         this.eventBus.emit(PROFILE.CHOOSE_SECTION);
+        console.log(this.currentOpen);
         this.eventBus.emit(this.currentOpen);
     }
 
@@ -36,9 +48,9 @@ export default class ProfileView extends BaseView {
      */
     renderData(data) {
         this.setData(Object.assign(this.data, data));
-        document.getElementsByClassName('m-top-login')[0].innerHTML = data.login;
-        document.getElementsByClassName('m-top-name')[0].innerHTML = data.name;
-        document.getElementsByClassName('m-round-image')[0].src = data.image;
+        document.getElementsByClassName('m-top-login')[0].innerHTML = this.data.login;
+        document.getElementsByClassName('m-top-name')[0].innerHTML = this.data.name;
+        document.getElementsByClassName('m-round-image')[0].src = this.data.image;
     }
 
     /**
@@ -54,11 +66,22 @@ export default class ProfileView extends BaseView {
     }
 
     /**
+     * Изменение количества плейлистов
+     * @param {number} dif
+     */
+    changePlaylistAmount(dif) {
+        this.data.playlists += dif;
+        document.getElementById('playlists').innerText = this.data.playlists;
+    }
+
+    /**
      * Определение секции нажатия
      */
     chooseSection() {
         switch (this.url) {
         case URL.PROFILE:
+            globalEventBus.emit(GLOBAL.REDIRECT, URL.PROFILE_TRACKS);
+            break;
         case URL.PROFILE_TRACKS:
             this.currentOpen = PROFILE.ID_TRACKS_SECTION;
             break;
@@ -77,9 +100,16 @@ export default class ProfileView extends BaseView {
     }
 
     /**
+     * Секция артистов
+     */
+    artistSection() {
+        alert('This functionality is not accessible by now');
+    }
+
+    /**
      * @param {Object} data
      */
     setData(data) {
-        super.setData(data); // TODO очищение памяти при логауте !!!
+        super.setData(data);
     }
 }

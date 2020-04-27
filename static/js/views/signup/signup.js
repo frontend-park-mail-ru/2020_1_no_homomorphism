@@ -1,6 +1,7 @@
-import {SIGN_UP} from '@libs/constans.js';
-import signup from '@views/signup/signup.tmpl.xml';
+import {SIGN_UP, GLOBAL} from '@libs/constans';
+import template from '@views/signup/signup.tmpl.xml';
 import BaseView from '@libs/base_view';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * Вью для страницы регистрации
@@ -10,7 +11,7 @@ export default class SignupView extends BaseView {
      * @param {EventBus} eventBus
      */
     constructor(eventBus) {
-        super(signup);
+        super(template);
         this.eventBus = eventBus;
         this.submit.bind(this);
         this.eventBus.on(SIGN_UP.INVALID, this.showErrors);
@@ -22,8 +23,23 @@ export default class SignupView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
-        super.render(root, url);
-        this.setEventListeners();
+        globalEventBus.emit(GLOBAL.COLLAPSE);
+        if (root.children.length > 0) {
+            if (root.firstChild.classList.contains('is-emphasized')) {
+                root.removeChild(root.firstChild);
+            }
+            if (root.children.length === 2) {
+                root.removeChild(root.lastChild);
+            }
+            if (root.children.length !== 0) {
+                root.firstChild.classList.add('is-un-emphasized');
+            }
+            root.innerHTML += template();
+            this.setEventListeners.bind(this)();
+            return;
+        }
+        root.innerHTML = template();
+        this.setEventListeners.bind(this)();
     }
 
     /**
@@ -44,7 +60,7 @@ export default class SignupView extends BaseView {
      * @param {Object} errors
      */
     showErrors(errors) {
-        document.getElementsByClassName('sign-up-form')[0].style.borderColor = 'red';
+        document.getElementsByClassName('l-form')[0].style.borderColor = 'red';
         for (const key in errors) {
             if (key === 'global') {
                 document.getElementById('global').innerText = errors[key];
@@ -66,7 +82,7 @@ export default class SignupView extends BaseView {
      * отправляет данные формы
      */
     submit() {
-        document.querySelectorAll('.sign-up-form label').forEach((label) => {
+        document.querySelectorAll('.l-form label').forEach((label) => {
             label.children[0].style.borderColor = '#ccc';
             label.children[1].innerText = '';
             label.children[1].style.height = '0';

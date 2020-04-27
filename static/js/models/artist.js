@@ -1,5 +1,6 @@
-import Api from '@libs/api.js';
-import {ARTIST, URL, GLOBAL} from '@libs/constans.js';
+import Api from '@libs/api';
+import {ARTIST, URL, GLOBAL} from '@libs/constans';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * Модель для страницы артиста
@@ -8,15 +9,13 @@ export default class ArtistModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         this.albums = [];
         this.tracks = [];
+        this.id = '';
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
-        this.globalEventBus.on(GLOBAL.GET_ARTIST_TRACKS, this.getArtistTracks.bind(this));
-        this.eventBus.on(ARTIST.SET_ID, this.setId.bind(this));
+        globalEventBus.on(GLOBAL.GET_ARTIST_TRACKS, this.getArtistTracks.bind(this));
         this.eventBus.on(ARTIST.GET_DATA, this.getArtistData.bind(this));
         this.eventBus.on(ARTIST.ID_TRACKS_SECTION, this.getArtistTracks.bind(this));
         this.eventBus.on(ARTIST.ID_ALBUMS_SECTION, this.getArtistAlbums.bind(this));
@@ -24,27 +23,21 @@ export default class ArtistModel {
     }
 
     /**
-     * sets id
-     * @param {string} id
-     */
-    setId(id) {
-        this.id = id;
-    }
-
-    /**
      * Получает артиста из БД
+     * @param {number} id
      */
-    getArtistData() {
+    getArtistData(id) {
+        this.id = id.toString();
         Promise.all([
-            Api.artistFetch(this.id),
+            Api.artistGet(this.id),
             Api.artistStatFetch(this.id),
         ])
             .then((res) => {
                 if (res === undefined) {
-                    this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     return;
                 }
-                if (res.every((item) => item.ok)) {
+                if (res.every((item) => item.ok)) { // TODO Сделать красиво!!!
                     const data = {};
                     Promise.all(res.map((item) => item.json()))
                         .then((res) => res.forEach((item) => Object.assign(data, item)))
@@ -61,17 +54,22 @@ export default class ArtistModel {
      * @param {string} end
      */
     getArtistTracks(start, end) {
-        Api.artistTracksFetch(this.id, start, end)
+        Api.artistTracksGet(this.id, start, end)
             .then((res) => {
                 if (res === undefined) {
-                    this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     return;
                 }
                 if (res.ok) {
                     res.json()
                         .then((data) => {
                             this.tracks += data.tracks;
-                            this.eventBus.emit(ARTIST.RENDER_TRACKS, data.tracks);
+                            this.eventBus.emit(ARTIST.RENDER_TRACKS,
+                                {
+                                    'tracks': data.tracks,
+                                    'domItem': 'l-track-list',
+                                    'type': 'artist',
+                                });
                         });
                 } else {
                     this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
@@ -85,17 +83,22 @@ export default class ArtistModel {
      * @param {string} end
      */
     getArtistAlbums(start, end) {
-        Api.artistAlbumsFetch(this.id, start, end)
+        Api.artistAlbumsGet(this.id, start, end)
             .then((res) => {
                 if (res === undefined) {
-                    this.eventBus.emit(ARTIST.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     return;
                 }
                 if (res.ok) {
                     res.json()
                         .then((data) => {
                             this.albums = data.albums;
-                            this.eventBus.emit(ARTIST.RENDER_ALBUMS, data.albums);
+                            this.eventBus.emit(ARTIST.RENDER_ALBUMS,
+                                {
+                                    'list': data.albums,
+                                    'domItem': 'l-album-list',
+                                    'type': 'album',
+                                });
                         });
                 } else {
                     this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
@@ -107,6 +110,6 @@ export default class ArtistModel {
      * Получает информацию артиста из БД
      */
     getArtistInfo() {
-        // this.eventBus.emit(ARTIST.RENDER_INFO);
+        alert('This functionality is not accessible by now');
     }
 }

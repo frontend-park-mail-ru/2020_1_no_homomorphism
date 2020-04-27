@@ -1,0 +1,31 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "max-line-length": {
+      "options": [
+        120
+      ]
+    },
+    "typescript.tsserver.log": "verbose",
+    "new-parens": true,
+    "no-arg": true,
+    "no-bitwise": true,
+    "semicolon": [
+      true,
+      "always"
+    ],
+    "no-conditional-assignment": true,
+    "no-consecutive-blank-lines": false,
+    "no-console": {
+      "severity": "warning",
+      "options": [
+        "debug",
+        "info",
+        "log",
+        "time",
+        "timeEnd",
+        "trace"
+      ]
+    }
+  }
+}

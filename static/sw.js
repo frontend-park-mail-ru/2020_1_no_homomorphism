@@ -1,6 +1,7 @@
 const {assets} = global.serviceWorkerOption;
 const CACHE_NAME = 'No homo';
 
+
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches
@@ -35,20 +36,16 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
     const request = event.request;
 
-    // if (request.method !== 'GET') { // TODO добавить отлженную отправку форм
-    //     return;
-    // }
+    if (request.method !== 'GET') { // TODO добавить отлженную отправку форм
+        return;
+    }
 
     const resource = caches
         .match(request)
         .then((response) => {
-            if (response) {
-                console.log('CACHE');
-
+            if (!navigator.onLine && response) {
                 return response;
             }
-            console.log('BACK');
-
             return fetch(request)
                 .then((res) => {
                     if (!res || !res.ok) {

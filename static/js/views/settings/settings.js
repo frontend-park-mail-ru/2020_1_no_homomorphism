@@ -1,6 +1,7 @@
-import {SETTINGS, DOM} from '@libs/constans.js';
+import {SETTINGS, DOM} from '@libs/constans';
 import settings from '@views/settings/settings.tmpl.xml';
 import BaseView from '@libs/base_view';
+import User from '@libs/user';
 
 /**
  * вью для настроек
@@ -25,10 +26,9 @@ export default class SettingsView extends BaseView {
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.CONTENT)[0]);
-        if (JSON.stringify(this.userData) === '{}') { // TODO синглтон
-            this.eventBus.emit(SETTINGS.GET_USER_DATA);
-        } else {
-            this.renderData(this.userData);
+        this.eventBus.emit(SETTINGS.GET_USER_DATA);
+        if (User.token === undefined) {
+            this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
         }
         this.setEventListeners();
     }
@@ -69,8 +69,8 @@ export default class SettingsView extends BaseView {
         document.getElementsByClassName(' m-round-image')[0].src = data.image;
         document.getElementsByClassName('m-top-name')[0].innerHTML = data.name;
         document.getElementsByClassName('m-top-login')[0].innerHTML = data.login;
-        document.getElementsByClassName('m-settings-input')[0].value = data.name;
-        document.getElementsByClassName('m-settings-input')[1].value = data.email;
+        document.getElementsByClassName('m-big-input')[0].value = data.name;
+        document.getElementsByClassName('m-big-input')[1].value = data.email;
         document.getElementById('newPassword').value = '';
         document.getElementById('newPasswordConfirm').value = '';
         document.getElementById('password').value = '';

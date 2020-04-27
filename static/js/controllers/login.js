@@ -1,7 +1,7 @@
-import EventBus from '@libs/eventBus.js';
-import LoginModel from '@models/login.js';
-import LoginView from '@views/login/login.js';
-import {LOGIN} from '@libs/constans.js';
+import EventBus from '@libs/eventBus';
+import LoginModel from '@models/login';
+import LoginView from '@views/login/login';
+
 /**
  * Контроллер для страницы со входом
  */
@@ -9,12 +9,10 @@ export class LoginController {
     /**
      * Конструктор
      * @param {Router} router
-     * @param {EventBus} globalEventBus
      */
-    constructor(router, globalEventBus) {
+    constructor(router) {
         this.eventBus = new EventBus();
-        this.model = new LoginModel(this.eventBus, globalEventBus);
+        this.model = new LoginModel(this.eventBus);
         this.view = new LoginView(this.eventBus);
-        this.eventBus.on(LOGIN.REDIRECT, router.redirect.bind(router));
     }
 }

@@ -1,0 +1,97 @@
+// layout
+@import "../modules/_variables";
+
+.l-card {
+  border-radius: $card-border-small;
+  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  padding: 1em;
+}
+
+.l-top-card {
+  overflow: hidden;
+  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+  border-radius: $card-border;
+}
+
+.l-down-card {
+  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+  border-radius: $card-border;
+  margin-top: 16px;
+  padding: 16px;
+}
+
+.l-top-titles {
+  margin-top: 80px;
+}
+
+.l-top-info{
+
+}
+
+.l-top-name {
+  //margin-left: 32px;
+  padding-top: 100px;
+  text-align: left;
+}
+
+.m-top-login {
+  color: #070025;
+  font-size: 30px;
+  word-wrap: break-word;
+}
+
+.l-form {
+  width: 380px;
+  margin: 32px auto;
+  padding: 48px 32px 32px 32px;
+  background: #fafafa;
+  border: 1px solid #ebebeb;
+}
+
+.l-center-pos {
+  left: 40%;
+}
+
+.l-main {
+  margin-left: 3em;
+}
+
+.l-track-list {
+  border-radius: $card-border;
+}
+
+.l-list-card-description {
+  display: block;
+  color: #515151;
+  margin-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 6px;
+  padding-right: 6px;
+  text-decoration: none;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.l-input {
+  margin-top: 16px;
+}
+
+.l-navbar {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  padding: 0 5%;
+  margin-bottom: 2%;
+  background: white;
+  box-shadow: 0 3px 6px $chosen-icon;
+  display: flex;
+  align-items: center;
+  z-index: 3;
+}
+
+.l-navbar a {
+  text-decoration: none;
+  color: black;
+}

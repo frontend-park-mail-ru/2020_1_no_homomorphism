@@ -10,17 +10,17 @@
             <div class="row patch"></div>
             <div class="row l-music-bar">
                 <div class="col">
-                    <a href="/player">
-                        <img src="/static/img/album-24px.svg" height="80px" width="80px" alt="..." id="cover"/>
-                    </a>
+<!--                    <a href="/player">-->
+                        <img src="" height="80px" width="80px" alt="..." id="cover"/>
+<!--                    </a>-->
                 </div>
                 <div class="col track-group-names">
                     <div class="track-name" id="title" title="">
                         Kek
                     </div>
-                    <a class="group-name" href="/player" id="artist">
+                    <span class="group-name" id="artist">
                         Lol
-                    </a>
+                    </span>
                 </div>
             </div>
             <div class="container-audio border-bottom">

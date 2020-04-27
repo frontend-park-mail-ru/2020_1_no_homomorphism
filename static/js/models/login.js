@@ -1,6 +1,8 @@
-import Api from '@libs/api.js';
-import Validation from '@libs/validation.js';
-import {RESPONSE, LOGIN, NAVBAR, URL} from '@libs/constans.js';
+import Api from '@libs/api';
+import Validation from '@libs/validation';
+import {RESPONSE, LOGIN, NAVBAR, URL, GLOBAL} from '@libs/constans';
+import User from '@libs/user';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * Модель для страницы входа
@@ -9,11 +11,9 @@ export default class LoginModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
         this.eventBus.on(LOGIN.SUBMIT, this.submit.bind(this));
     }
 
@@ -34,13 +34,13 @@ export default class LoginModel {
         if (JSON.stringify(errors) !== '{}') {
             this.eventBus.emit(LOGIN.INVALID, errors);
         } else {
-            Api.loginFetch(values.login, values.password)
+            Api.loginPost(values.login, values.password)
                 .then((res) => {
                     switch (res.status) {
                     case RESPONSE.OK:
-                        localStorage.setItem('csrfToken', res.headers.get('Csrf-Token'));
-                        this.globalEventBus.emit(NAVBAR.GET_USER_DATA);
-                        this.eventBus.emit(LOGIN.REDIRECT, URL.PROFILE_TRACKS);
+                        this.getCsrfToken();
+                        globalEventBus.emit(NAVBAR.GET_USER_DATA);
+                        globalEventBus.emit(GLOBAL.REDIRECT, URL.PROFILE_TRACKS);
                         break;
                     case RESPONSE.BAD_REQUEST:
                         this.eventBus.emit(LOGIN.INVALID, {global: 'Wrong login or password'});
@@ -58,5 +58,15 @@ export default class LoginModel {
                     }
                 });
         }
+    }
+
+    /**
+     * Получение токена
+     */
+    getCsrfToken() {
+        Api.csrfTokenGet()
+            .then((res) => {
+                User.token = res.headers.get('Csrf-Token');
+            });
     }
 }

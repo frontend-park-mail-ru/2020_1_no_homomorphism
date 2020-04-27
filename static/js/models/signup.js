@@ -1,6 +1,8 @@
-import Validation from '@libs/validation.js';
-import Api from '@libs/api.js';
-import {SIGN_UP, URL, RESPONSE, NAVBAR} from '@libs/constans.js';
+import Validation from '@libs/validation';
+import Api from '@libs/api';
+import {SIGN_UP, URL, RESPONSE, NAVBAR, GLOBAL} from '@libs/constans';
+import User from '@libs/user';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * модель странички регистрации
@@ -9,11 +11,9 @@ export default class SignupModel {
     /**
      * конструктор
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
         this.eventBus.on(SIGN_UP.SUBMIT, this.submit.bind(this));
     }
 
@@ -41,13 +41,13 @@ export default class SignupModel {
         if (JSON.stringify(errors) !== '{}') {
             this.eventBus.emit(SIGN_UP.INVALID, errors);
         } else {
-            Api.signupFetch(values.name, values.login, 'yes', values.email, values.password)
+            Api.signupPost(values.name, values.login, 'yes', values.email, values.password)
                 .then((res) => {
                     switch (res.status) {
                     case RESPONSE.OK_ADDED:
-                        this.globalEventBus.emit(NAVBAR.GET_USER_DATA);
-                        localStorage.setItem('csrfToken', res.headers.get('Csrf-Token'));
-                        this.eventBus.emit(SIGN_UP.REDIRECT, URL.MAIN);
+                        this.getCsrfToken();
+                        globalEventBus.emit(NAVBAR.GET_USER_DATA);
+                        globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                         break;
                     case RESPONSE.BAD_REQUEST:
                         this.eventBus.emit(SIGN_UP.INVALID, {global: 'Bad request'});
@@ -87,6 +87,16 @@ export default class SignupModel {
                 } else {
                     this.eventBus.emit(SIGN_UP.INVALID, {global: 'This email is taken'});
                 }
+            });
+    }
+
+    /**
+     * Получение токена
+     */
+    getCsrfToken() {
+        Api.csrfTokenGet()
+            .then((res) => {
+                User.token = res.headers.get('Csrf-Token');
             });
     }
 }

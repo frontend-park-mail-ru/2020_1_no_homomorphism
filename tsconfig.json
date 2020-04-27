@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "module": "ES6",
+    "target": "ES6",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "experimentalDecorators": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "outDir": "./dist/",
+    "allowJs": true,
+    "baseUrl": "static",
+    "paths": {
+      "@/*": ["/*"],
+      "@models/*": ["js/models/*"],
+      "@components/*": ["js/components/*"],
+      "@views/*": ["js/views/*"],
+      "@controllers/*": ["js/controllers/*"],
+      "@libs/*": ["js/libs/*"]
+    }
+  },
+  "files": [
+    "./static/js/libs/user.ts",
+    "./static/js/components/search_component/search_component.ts",
+    "./static/js/components/artist_list_component/artist_list_component.ts"
+  ]
+}

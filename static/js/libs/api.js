@@ -1,5 +1,6 @@
-import {postFetch, getFetch, deleteFetch, putFetch, postImageFetch} from '@libs/fetch.js';
-import {API} from '@libs/constans';
+import {postFetch, getFetch, deleteFetch, putFetch, postImageFetch} from '@libs/fetch';
+import {API, RESPONSE} from '@libs/constans';
+import {inputSanitize} from '@libs/input_sanitize';
 
 /**
  * API object
@@ -7,16 +8,17 @@ import {API} from '@libs/constans';
  * @type {Api}
  */
 export default class Api {
+    // ------------- SMTH ---------------
     /**
      * Логин вход
      * @param {string} login
      * @param {string} password
      * @return {Promise<Response>}
      */
-    static loginFetch(login, password) {
+    static loginPost(login, password) {
         return postFetch(API + '/users/login', {
-            'login': login,
-            'password': password,
+            'login': inputSanitize(login),
+            'password': inputSanitize(password),
         }, (error) => {
             console.log(error.toString());
         });
@@ -26,7 +28,7 @@ export default class Api {
      * Логаут
      * @return {Promise<Response>}
      */
-    static logoutFetch() {
+    static logoutFetch() { // TODO переименовать, когда бэк придумает
         return deleteFetch(API + '/users/logout', (error) => {
             console.log(error.toString());
         });
@@ -36,8 +38,18 @@ export default class Api {
      * Проверка куки
      * @return {Promise<Response>}
      */
-    static cookieFetch() {
+    static cookieGet() {
         return getFetch(API + '/users', (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
+     * Получение csrf-токена
+     * @return {Promise<Response>}
+     */
+    static csrfTokenGet() {
+        return getFetch(API + '/users/token', (error) => {
             console.log(error.toString());
         });
     }
@@ -51,75 +63,26 @@ export default class Api {
      * @param {string} password
      * @return {Promise<Response>}
      */
-    static signupFetch(name = '', login, sex = '', email = '', password) {
+    static signupPost(name = '', login, sex = '', email = '', password) {
         return postFetch(API + '/users/signup', {
-            'name': name,
-            'login': login,
+            'name': inputSanitize(name),
+            'login': inputSanitize(login),
             'sex': 'yes',
-            'email': email,
-            'password': password,
+            'email': inputSanitize(email),
+            'password': inputSanitize(password),
         }, (error) => {
             console.log(error.toString());
         });
     }
 
-    /**
-     * Артист просмотр списка
-     * @param {string} start
-     * @param {string} end
-     * @return {Promise<Response>}
-     */
-    static artistListFetch(start, end) {
-        return getFetch(API + `/artists/${start}/${end}`).catch((error) => console.error(error));
-    }
+    // ------------- PROFILE ---------------
 
-    /**
-     * Артист просмотр
-     * @param {string} id
-     * @return {Promise<Response>}
-     */
-    static artistFetch(id) {
-        return getFetch(API + '/artists/' + id).catch((error) => console.error(error));
-    }
-
-    /**
-     * Артист просмотр статистики
-     * @param {string} id
-     * @return {Promise<Response>}
-     */
-    static artistStatFetch(id) {
-        return getFetch(API + '/artists/' + id + '/stat').catch((error) => console.error(error));
-    }
-
-    /**
-     * Артист просмотр альбомов
-     * @param {string} id
-     * @param {string} start
-     * @param {string} end
-     * @return {Promise<Response>}
-     */
-    static artistAlbumsFetch(id, start, end) {
-        return getFetch(API + '/artists/' + id + '/albums/' + start + '/' + end)
-            .catch((error) => console.error(error));
-    }
-
-    /**
-     * Артист просмотр треков
-     * @param {string} id
-     * @param {string} start
-     * @param {string} end
-     * @return {Promise<Response>}
-     */
-    static artistTracksFetch(id, start, end) {
-        return getFetch(API + '/artists/' + id + '/tracks/' + start + '/' + end)
-            .catch((error) => console.error(error));
-    }
 
     /**
      * Профиль просмотр
      * @return {Promise<Response>}
      */
-    static profileFetch() {
+    static profileGet() {
         return getFetch(API + '/users/me', (error) => {
             console.log(error.toString());
             throw new Error(error);
@@ -131,7 +94,7 @@ export default class Api {
      * @param {string} id
      * @return {Promise<Response>}
      */
-    static profileStatFetch(id) {
+    static profileStatGet(id) {
         return getFetch(API + '/users/' + id + '/stat', (error) => {
             console.log(error.toString());
             throw new Error(error);
@@ -146,13 +109,12 @@ export default class Api {
      * @param {string} newPassword
      * @return {Promise<Response>}
      */
-    static profileEditFetch(name, email, password, newPassword) {
+    static profilePut(name, email, password, newPassword) {
         return putFetch(API + '/users/settings', {
-            // user: [
-            name,
-            email,
-            password,
-            new_password: newPassword,
+            name: inputSanitize(name),
+            email: inputSanitize(email),
+            password: inputSanitize(password),
+            new_password: inputSanitize(newPassword),
         }, (error) => {
             console.log(error.toString());
         });
@@ -163,7 +125,7 @@ export default class Api {
      * @param {Object} image
      * @return {Promise<Response>}
      */
-    static profilePhotoFetch(image) {
+    static profileAvatarPost(image) {
         return postImageFetch(API + '/users/images', image, (error) => {
             console.log(error.toString());
         });
@@ -173,56 +135,8 @@ export default class Api {
      * Получение плейлистов пользователя
      * @return {Promise<Response>}
      */
-    static profilePlaylistsFetch() {
+    static profilePlaylistsGet() {
         return getFetch(API + '/users/playlists', (error) => {
-            console.log(error.toString());
-        });
-    }
-
-    /**
-     * Получение треков плейлиста
-     * @param {number} id
-     * @return {Promise<Response>}
-     */
-    static playlistAllTracksFetch(id) {
-        return getFetch(API + `/playlists/${id}`, (error) => {
-            console.log(error.toString());
-        });
-    }
-
-    /**
-     * Получение треков плейлиста
-     * @param {number} id
-     * @param {string} start
-     * @param {string} end
-     * @return {Promise<Response>}
-     */
-    static playlistTracksFetch(id, start, end) {
-        return getFetch(API + `/playlists/${id}/tracks/${start}/${end}`, (error) => {
-            console.log(error.toString());
-        });
-    }
-
-    /**
-     * Получение треков альбома
-     * @param {number} id
-     * @return {Promise<Response>}
-     */
-    static albumAllTracksFetch(id) {
-        return getFetch(API + `/albums/${id}`, (error) => {
-            console.log(error.toString());
-        });
-    }
-
-    /**
-     * Получение треков плейлиста
-     * @param {number} id
-     * @param {string} start
-     * @param {string} end
-     * @return {Promise<Response>}
-     */
-    static albumTracksFetch(id, start, end) {
-        return getFetch(API + `/albums/${id}/tracks/${start}/${end}`, (error) => {
             console.log(error.toString());
         });
     }
@@ -231,8 +145,197 @@ export default class Api {
      * Получение альбомов пользователя
      * @return {Promise<Response>}
      */
-    static profileAlbumsFetch() {
+    static profileAlbumsGet() {
         return getFetch(API + '/users/albums', (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    // ------------- ARTIST  ---------------
+
+    /**
+     * Артист просмотр списка
+     * @param {string} start
+     * @param {string} end
+     * @return {Promise<Response>}
+     */
+    static artistListGet(start, end) {
+        return getFetch(API + `/artists/${start}/${end}`).catch((error) => console.error(error));
+    }
+
+    /**
+     * Артист просмотр
+     * @param {string} id
+     * @return {Promise<Response>}
+     */
+    static artistGet(id) {
+        return getFetch(API + `/artists/${id}`).catch((error) => console.error(error));
+    }
+
+    /**
+     * Артист просмотр статистики
+     * @param {string} id
+     * @return {Promise<Response>}
+     */
+    static artistStatFetch(id) {
+        return getFetch(API + `/artists/${id}/stat`).catch((error) => console.error(error));
+    }
+
+    /**
+     * Артист просмотр альбомов
+     * @param {string} id
+     * @param {string} start
+     * @param {string} end
+     * @return {Promise<Response>}
+     */
+    static artistAlbumsGet(id, start, end) {
+        return getFetch(API + `/artists/${id}/albums/${start}/${end}`)
+            .catch((error) => console.error(error));
+    }
+
+    /**
+     * Артист просмотр треков
+     * @param {string} id
+     * @param {string} start
+     * @param {string} end
+     * @return {Promise<Response>}
+     */
+    static artistTracksGet(id, start, end) {
+        return getFetch(API + `/artists/${id}/tracks/${start}/${end}`)
+            .catch((error) => console.error(error));
+    }
+
+    // ------------- ALBUM  ---------------
+
+    /**
+     * Получение альбома
+     * @param {number} id
+     * @return {Promise<Response>}
+     */
+    static albumGet(id) {
+        return getFetch(API + `/albums/${id}`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
+     * Получение треков альбома
+     * @param {number} id
+     * @param {string} start
+     * @param {string} end
+     * @return {Promise<Response>}
+     */
+    static albumTracksGet(id, start, end) {
+        return getFetch(API + `/albums/${id}/tracks/${start}/${end}`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    // ------------- PLAYLIST  ---------------
+
+    /**
+     * Получение треков плейлиста
+     * @param {number} id
+     * @return {Promise<Response>}
+     */
+    static playlistGet(id) {
+        const res = getFetch(API + `/playlists/${id}`, (error) => {
+            console.log(error.toString());
+        });
+
+        return res.then((elem) => {
+            if (elem.status !== RESPONSE.OK) {
+                return {status: elem.status};
+            }
+            try {
+                return elem.json();
+            } catch (error) {
+                console.log(error.toString());
+            }
+        });
+    }
+
+    /**
+     * Получение треков плейлиста
+     * @param {string} id
+     * @param {string} start
+     * @param {string} end
+     * @return {Promise<Response>}
+     */
+    static playlistTracksGet(id, start, end) {
+        return getFetch(API + `/playlists/${id}/tracks/${start}/${end}`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
+     * Создание плейлиста
+     * @param {string} name
+     * @return {Promise<Response>}
+     */
+    static playlistPost(name) {
+        return postFetch(API + `/playlists/new/${name}`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
+     * Добавление трека в плейлист
+     * @param {Object} data
+     * @return {Promise<Response>}
+     */
+    static playlistTrackPost(data) {
+        return postFetch(API + '/playlists/tracks', data, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
+     * Удаление плейлиста
+     * @param {string} playlistID
+     * @return {Promise<Response>}
+     */
+    static playlistDelete(playlistID) {
+        return deleteFetch(API + `/playlists/${playlistID}`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
+     * Удаление трека из плейлиста
+     * @param {string} playlistID
+     * @param {string} trackID
+     * @return {Promise<Response>}
+     */
+    static playlistTrackDelete(playlistID, trackID) {
+        return deleteFetch(API + `/playlists/${playlistID}/tracks/${trackID}`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    // ------------- TRACK  ---------------
+
+    /**
+     * Получение списка плейлистов
+     * @param {string} trackID
+     * @return {Promise<Response>}
+     */
+    static trackPlaylistsGet(trackID) {
+        return getFetch(API + `/playlists/tracks/${trackID}`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    // -------------- SEARCH ---------------
+
+    /**
+     * Поиск
+     * @param {string} input
+     * @param {string} amount
+     * @return {Promise<Response>}
+     */
+    static searchGet(input, amount) {
+        return getFetch(API + `/media/${input}/${amount}`, (error) => {
             console.log(error.toString());
         });
     }

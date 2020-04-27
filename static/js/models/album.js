@@ -8,31 +8,31 @@ export default class AlbumModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         this.album = {};
         this.tracks = {};
         this.curPagination = 0;
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
         this.eventBus.on(ALBUM.GET_ALBUM_DATA, this.getAlbum.bind(this));
         this.eventBus.on(ALBUM.GET_TRACKS_DATA, this.getTracks.bind(this));
     }
 
     /**
      * Получение списка треков
-     * @param {Object} id
+     * @param {Object} data
      */
-    getAlbum(id) {
-        Api.albumAllTracksFetch(id.id)
+    getAlbum(data) {
+        Api.albumGet(data.id)
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
                     res.json()
                         .then((list) => {
                             this.album = list;
-                            this.eventBus.emit(ALBUM.RENDER_ALBUM_DATA, this.album);
+                            this.eventBus.emit(ALBUM.RENDER_ALBUM, this.album);
+                            this.eventBus.emit(ALBUM.SET_ALBUM_ID, data.id);
+                            this.eventBus.emit(ALBUM.GET_TRACKS_DATA, data.id);
                         });
                     break;
                 case RESPONSE.BAD_REQUEST:
@@ -47,17 +47,22 @@ export default class AlbumModel {
 
     /**
      * Получение данных альбома
-     * @param {Object} id
+     * @param {number} id
      */
     getTracks(id) {
-        Api.albumTracksFetch(id.id, this.curPagination.toString(), PAGINATION.TRACKS.toString())
+        Api.albumTracksGet(id, this.curPagination.toString(), PAGINATION.TRACKS.toString())
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
                     res.json()
                         .then((list) => {
                             this.tracks = list.tracks;
-                            this.eventBus.emit(ALBUM.RENDER_TRACKS_DATA, this.tracks);
+                            this.eventBus.emit(ALBUM.RENDER_TRACKS, {
+                                'tracks': this.tracks,
+                                'domItem': 'l-track-list',
+                                'type': 'album',
+                            });
+                            this.eventBus.emit(ALBUM.SET_TRACKS_AMOUNT, this.tracks);
                         });
                     break;
                 default:

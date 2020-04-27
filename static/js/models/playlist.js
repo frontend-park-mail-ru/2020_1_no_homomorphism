@@ -1,5 +1,6 @@
-import {PLAYLIST, RESPONSE, PAGINATION} from '@libs/constans';
+import {PLAYLIST, RESPONSE, PAGINATION, URL, GLOBAL} from '@libs/constans';
 import Api from '@libs/api';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * Модель плейлиста
@@ -8,15 +9,14 @@ export default class PlaylistModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         this.playlist = {};
         this.curPagination = 0;
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
         this.eventBus.on(PLAYLIST.GET_PLAYLIST_DATA, this.getPlaylist.bind(this));
         this.eventBus.on(PLAYLIST.GET_TRACKS_DATA, this.getTracks.bind(this));
+        this.eventBus.on(PLAYLIST.DELETE_PLAYLIST, this.deletePlaylist.bind(this));
     }
 
     /**
@@ -24,16 +24,15 @@ export default class PlaylistModel {
      * @param {Object} id
      */
     getPlaylist(id) {
-        Api.playlistAllTracksFetch(id.id)
+        Api.playlistGet(id.id)
             .then((res) => {
                 switch (res.status) {
-                case RESPONSE.OK:
-                    res.json()
-                        .then((list) => {
-                            this.playlist = list;
-                            this.eventBus.emit(PLAYLIST.RENDER_PLAYLIST_DATA,
-                                this.playlist.playlist);
-                        });
+                case undefined: // TODO Временно
+                    this.playlist = res;
+                    this.eventBus.emit(PLAYLIST.SET_PLAYLIST_ID, this.playlist.id);
+                    this.eventBus.emit(PLAYLIST.RENDER_PLAYLIST_DATA,
+                        this.playlist);
+                    this.eventBus.emit(PLAYLIST.GET_TRACKS_DATA, {id: this.playlist.id});
                     break;
                 case RESPONSE.BAD_REQUEST:
                     this.eventBus.emit(PLAYLIST.ERROR,
@@ -56,15 +55,45 @@ export default class PlaylistModel {
      * @param {Object} id
      */
     getTracks(id) {
-        Api.playlistTracksFetch(id.id, this.curPagination.toString(), PAGINATION.TRACKS.toString())
+        Api.playlistTracksGet(id.id, this.curPagination.toString(), PAGINATION.TRACKS.toString())
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
                     res.json()
                         .then((list) => {
                             this.playlist = list;
-                            this.eventBus.emit(PLAYLIST.RENDER_TRACKS_DATA, list.tracks);
+                            if (this.playlist.tracks.length > 0) {
+                                this.eventBus.emit(PLAYLIST.RENDER_TRACKS,
+                                    {
+                                        'tracks': this.playlist.tracks,
+                                        'domItem': 'l-track-list',
+                                        'type': 'playlist',
+                                    });
+                            }
+                            this.eventBus.emit(PLAYLIST.SET_TRACKS_AMOUNT,
+                                this.playlist.tracks.length);
                         });
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
+    }
+
+    /**
+     * Удаление плейлиста плейлиста
+     * @param {string} playlistID
+     */
+    deletePlaylist(playlistID) {
+        Api.playlistDelete(playlistID)
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK: // TODO обработать удаление
+                    this.eventBus.emit(PLAYLIST.RENDER_DELETED);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+                    break;
+                case RESPONSE.BAD_REQUEST:
                     break;
                 default:
                     console.log(res);

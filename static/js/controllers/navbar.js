@@ -1,7 +1,9 @@
-import EventBus from '@libs/eventBus.js';
-import NavbarModel from '@models/navbar.js';
-import NavbarView from '@views/navbar/navbar.js';
-import {NAVBAR} from '@libs/constans.js';
+import EventBus from '@libs/eventBus';
+import NavbarModel from '@models/navbar';
+import NavbarView from '@views/navbar/navbar';
+import {GLOBAL} from '@libs/constans';
+import {globalEventBus} from '@libs/eventBus';
+
 /**
  * Контроллер для навбара
  */
@@ -9,14 +11,12 @@ export class NavbarController {
     /**
      * Конструктор
      * @param {Router} router
-     * @param {EventBus} globalEventBus
      */
-    constructor(router, globalEventBus) {
+    constructor(router) {
         this.eventBus = new EventBus();
-        this.model = new NavbarModel(this.eventBus, globalEventBus);
-        this.view = new NavbarView(this.eventBus, globalEventBus);
+        this.model = new NavbarModel(this.eventBus);
+        this.view = new NavbarView(this.eventBus);
 
-        globalEventBus.on(NAVBAR.LOGOUT_REDIRECT, router.logoutRedirect.bind(router));
-        this.eventBus.on(NAVBAR.REDIRECT, router.redirect.bind(router));
+        globalEventBus.on(GLOBAL.LOGOUT_REDIRECT, router.logoutRedirect.bind(router));
     }
 }

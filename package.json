@@ -5,6 +5,7 @@
     "start": "node server.js",
     "prestart": "webpack --mode development",
     "go": "cross-env NODE_ENV=development webpack-dev-server --mode development --watch",
+    "daemon": "cross-env webpack-dev-server --mode development --watch",
     "dev": "cross-env NODE_ENV=development webpack --mode development",
     "tmpl": "cross-env NODE_ENV=development fest-build --dir=./static/js/views",
     "devstart": "cross-env NODE_ENV=development nodemon server.js"
@@ -21,7 +22,8 @@
     "forever": "^2.0.0",
     "morgan": "^1.9.1",
     "requirejs": "^2.3.6",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "ts-node": "^8.8.2"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -39,8 +41,14 @@
     "husky": "^4.2.3",
     "mini-css-extract-plugin": "^0.9.0",
     "nodemon": "^2.0.2",
+    "sass": "^1.26.3",
+    "sass-loader": "^8.0.2",
     "serviceworker-webpack-plugin": "^1.0.1",
     "style-loader": "^1.1.3",
+    "ts-loader": "^6.2.2",
+    "tslint": "^6.1.1",
+    "tslint-webpack-plugin": "^2.1.0",
+    "typescript": "^3.8.3",
     "vue-style-loader": "^4.1.2",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",

@@ -1,5 +1,7 @@
-import Api from '@libs/api.js';
-import {RESPONSE, NAVBAR, URL} from '@libs/constans.js';
+import Api from '@libs/api';
+import {RESPONSE, NAVBAR, URL, GLOBAL} from '@libs/constans';
+import User from '@libs/user';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * Модель для навбара
@@ -8,12 +10,10 @@ export default class NavbarModel {
     /**
      * Конструктор
      * @param {EventBus} eventBus
-     * @param {EventBus} globalEventBus
      */
-    constructor(eventBus, globalEventBus) {
+    constructor(eventBus) {
         this.eventBus = eventBus;
-        this.globalEventBus = globalEventBus;
-        this.globalEventBus.on(NAVBAR.GET_USER_DATA, this.getUserData.bind(this));
+        globalEventBus.on(NAVBAR.GET_USER_DATA, this.getUserData.bind(this));
         this.eventBus.on(NAVBAR.GET_USER_DATA, this.getUserData.bind(this));
         this.eventBus.on(NAVBAR.LOGOUT_CLICKED, this.doLogout.bind(this));
         this.eventBus.on(NAVBAR.CHECK_COOKIE, this.cookieFetch.bind(this));
@@ -23,7 +23,7 @@ export default class NavbarModel {
      * Узнаёт, залогинен ли пользователь
      */
     cookieFetch() {
-        Api.cookieFetch()
+        Api.cookieGet()
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
@@ -45,6 +45,7 @@ export default class NavbarModel {
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
+                    User.clean();
                     break;
                 case RESPONSE.BAD_REQUEST:
                 case RESPONSE.UNAUTH:
@@ -61,7 +62,7 @@ export default class NavbarModel {
      * Получает данные пользователя
      */
     getUserData() {
-        Api.profileFetch()
+        Api.profileGet()
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
@@ -74,7 +75,7 @@ export default class NavbarModel {
                     this.eventBus.emit(NAVBAR.RENDER_NOT_LOGGED, {});
                     break;
                 case RESPONSE.SERVER_ERROR:
-                    this.eventBus.emit(NAVBAR.REDIRECT, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     break;
                 default:
                     console.log(res);
