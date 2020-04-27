@@ -95,3 +95,30 @@
   text-decoration: none;
   color: black;
 }
+
+.l-desktop-only {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    font-size: 30px;
+    font-weight: bold;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10%;
+}
+
+@media screen and (max-width: 746px) {
+    .l-navbar,
+    .l-top-content,
+    .l-content,
+    .l-player {
+        display: none;
+    }
+    .l-desktop-only {
+        display: flex;
+    }
+}
