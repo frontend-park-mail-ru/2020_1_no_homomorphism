@@ -211,8 +211,10 @@ export default class PlayerModel {
      * начинает воспроизведение
      */
     play() {
-        document.getElementsByTagName('audio')[0].play();
-        this.playing = true;
+        document.getElementsByTagName('audio')[0].play()
+            .then(() => {
+                this.playing = true;
+            });
         this.eventBus.emit(PLAYER.DRAW_PAUSE);
     }
 
