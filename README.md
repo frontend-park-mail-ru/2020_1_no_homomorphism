@@ -14,7 +14,7 @@
 - [Владимир Северов](https://github.com/hackallcode)
 
 ## Ссылка на проект
-http://https://virusmusic.fun/
+https://virusmusic.fun/
 
 ## Репозиторий бекенда
 https://github.com/go-park-mail-ru/2020_1_no_homomorphism
