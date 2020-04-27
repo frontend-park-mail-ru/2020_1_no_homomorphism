@@ -20,16 +20,16 @@ export default class PlayerTrackListComponent {
      */
     setEventListeners() {
         document.querySelectorAll('.track-list').forEach((row) => {
-            row.addEventListener('click', this.tracklistClick);
+            row.addEventListener('click', this.tracklistClick.bind(this));
         });
         document.querySelectorAll('.delete-button').forEach((button) => {
-            button.addEventListener('click', this.trackDeleteButtonClick);
+            button.addEventListener('click', this.trackDeleteButtonClick.bind(this));
         });
         document.querySelectorAll('.favorite-button').forEach((button) => {
-            button.addEventListener('click', this.trackFavoriteButtonClick);
+            button.addEventListener('click', this.trackFavoriteButtonClick.bind(this));
         });
         document.querySelectorAll('.add-button').forEach((button) => {
-            button.addEventListener('click', this.trackAddButtonClick);
+            button.addEventListener('click', this.trackAddButtonClick.bind(this));
         });
         window.addEventListener('wheel', this.trackListWheel.bind(this));
     }
