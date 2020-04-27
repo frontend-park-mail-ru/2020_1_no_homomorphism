@@ -1,11 +1,11 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="l-search">
-        <fest:if test="data.artists.length + data.tracks.length + data.tracks.length === 0">
+        <fest:if test="data.artists.length + data.albums.length + data.tracks.length === 0">
             <div class="no-found">
                 No results found
             </div>
         </fest:if>
-        <fest:if test="data.artists.length + data.tracks.length + data.tracks.length > 0">
+        <fest:if test="data.artists.length + data.albums.length + data.tracks.length > 0">
             <a class="m-tiny-ref" href="/search/{data.input}">
                 <div class="m-obscure-title is-hover-gray m-medium-text">
                     All results ➤
