@@ -1,5 +1,5 @@
 import Router from '@libs/router';
-import {URL} from '@libs/constans';
+import {URL, GLOBAL} from '@libs/constans';
 import {NavbarController} from '@controllers/navbar';
 import {NewsController} from '@controllers/news';
 import {LoginController} from '@controllers/login';
@@ -11,6 +11,8 @@ import {ArtistController} from '@controllers/artist';
 import {PlaylistController} from '@controllers/playlist';
 import {AlbumController} from '@controllers/album';
 import {SearchController} from '@controllers/search';
+import {globalEventBus} from '@libs/eventBus';
+import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import '@css/_main.scss';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -46,7 +48,13 @@ window.addEventListener('DOMContentLoaded', () => {
     router.start();
     navbarController.view.render();
     playerController.view.render();
-    // if ('serviceWorker' in navigator) {
-    //     runtime.register();
-    // }
+    if ('serviceWorker' in navigator) {
+        runtime.register();
+    }
+});
+
+window.addEventListener('storage', (e) => {
+    if (e.key === 'isPlaying' && e.newValue === 'false') {
+        globalEventBus.emit(GLOBAL.PAUSE);
+    }
 });

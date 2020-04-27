@@ -171,8 +171,6 @@ export default class PlayerView extends BaseView {
     setDynamicEventListeners() {
         document.querySelectorAll('.track-list .row').forEach((row) => {
             row.onclick = (event) => this.tracklistClick(event);
-            // row.onmouseover = (event) => this.tracklistMouseOver(event);
-            // row.onmouseout = (event) => this.tracklistMouseOut(event);
         });
         document.querySelectorAll('.delete-button').forEach((button) => {
             button.onclick = (event) => this.trackDeleteButtonClick(event);
@@ -180,9 +178,9 @@ export default class PlayerView extends BaseView {
         document.querySelectorAll('.favorite-button').forEach((button) => {
             button.onclick = (event) => this.trackFavoriteButtonClick(event);
         });
-        document.querySelectorAll('.add-button').forEach((button) => {
-            button.onclick = (event) => this.trackAddButtonClick(event);
-        });
+        // document.querySelectorAll('.add-button').forEach((button) => {
+        //     button.onclick = (event) => this.trackAddButtonClick(event);
+        // });
     }
 
     /**
@@ -600,7 +598,6 @@ export default class PlayerView extends BaseView {
     tracklistClick(event) {
         let current = event.target;
         if (current.classList.contains('m-obscure-title')) {
-            console.log('NO PAIN NO GAIN');
             return;
         }
         while (current !== window && current !== document.body && current != null) {
@@ -652,7 +649,7 @@ export default class PlayerView extends BaseView {
      * @param {Object} event
      */
     trackAddButtonClick(event) {
-        alert('This functionality is not accessible by now');
+        // alert('This functionality is not accessible by now');
         // let target = event.target;
         // while (target.getAttribute('id') === null) {
         //     target = target.parentNode;
@@ -676,6 +673,7 @@ export default class PlayerView extends BaseView {
     drawPlay() {
         document.getElementsByClassName('play-pause')[0].src = '/static/img/play.svg';
         this.playing = false;
+        // localStorage.setItem('isPlaying', 'false');
     }
 
     /**

@@ -1,7 +1,7 @@
-import {RESPONSE, SEARCH, MAIN} from '@libs/constans'
+import {RESPONSE, SEARCH, MAIN} from '@libs/constans';
 import Api from "@libs/api";
 import EventBus from '@libs/eventBus';
-import ArtistListDummyComponent from '@components/artist_list_component/artist_list_dummy_component'
+import ArtistListDummyComponent from '@components/artist_list_component/artist_list_dummy_component';
 
 type artist = {
     id: string,
@@ -9,19 +9,19 @@ type artist = {
     image: string,
     artist_id: string,
     artist_name: string,
-}
+};
 
 type input = {
     domItem: string,
     type: string,
     artists: [artist],
-}
+};
 
 export default class ArtistListComponent {
     private eventBus: EventBus;
     private modelType: { [index: string]: string };
     private artistListDummy: ArtistListDummyComponent;
-    private artistList: [artist]
+    private artistList: [artist];
 
     constructor(eventBus: EventBus, modelType: { [index: string]: string }) {
         this.eventBus = eventBus;
