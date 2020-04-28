@@ -47,30 +47,30 @@
   background: $chosen-icon;
 }
 
-.s-rotate-0 {
+.is-rotated-0 {
     transform: rotate(0);
 }
 
-.s-rotate-180 {
+.is-rotated-180 {
     transform: rotate(180);
 }
 
-.s-margin-left-5 {
+.is-margin-left-5 {
     margin-left: 5px;
 }
 
-.s-margin-left-0 {
+.is-margin-left-0 {
     margin-left: 0;
 }
 
-.timeline .s-timeline-mouse-over {
+.timeline .is-timeline-mouse-over {
     font-size: 11px;
 }
 
-.s-opacity-1 {
+.is-opacity-1 {
     opacity: 1;
 }
 
-.s-volume-scale-hover {
+.is-volume-scale-hover {
     top: -52px;
 }
