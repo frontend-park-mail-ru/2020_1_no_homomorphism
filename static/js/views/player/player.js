@@ -191,9 +191,9 @@ export default class PlayerView extends BaseView {
             return;
         }
         if (this.expanded) {
-            document.querySelector('.player-trigger-arrow').classList.remove('s-rotate-0');
+            document.querySelector('.player-trigger-arrow').classList.remove('is-rotated-0');
         } else {
-            document.querySelector('.player-trigger-arrow').classList.add('s-rotate-0');
+            document.querySelector('.player-trigger-arrow').classList.add('is-rotated-0');
         }
         const body = document.getElementsByTagName('body')[0];
         const left = (
@@ -246,8 +246,8 @@ export default class PlayerView extends BaseView {
             track2.getBoundingClientRect().y;
         const base = document.getElementsByClassName('track-list')[0].children[1]
             .getBoundingClientRect().y;
-        track2.classList.remove('s-margin-left-0');
-        track2.classList.add('s-margin-left-5');
+        track2.classList.remove('is-margin-left-0');
+        track2.classList.add('is-margin-left-5');
         marker.style.height = (50 + Math.abs(heightDifference)).toString() + 'px';
         if (heightDifference < 0) {
             setTimeout(() => {
@@ -259,8 +259,8 @@ export default class PlayerView extends BaseView {
         setTimeout(() => {
             marker.style.height = '50px';
             if (heightDifference !== 0) {
-                track1.classList.remove('s-margin-left-5');
-                track1.classList.add('s-margin-left-0');
+                track1.classList.remove('is-margin-left-5');
+                track1.classList.add('is-margin-left-0');
             }
         }, 250);
     }
