@@ -1,7 +1,7 @@
 import {NAVBAR, GLOBAL, DOM, URL} from '@libs/constans';
 import navbar from '@views/navbar/navbar.tmpl.xml';
 import BaseView from '@libs/base_view';
-import SearchComponent from '@components/search_component/search_component';
+import SearchComponent from '@components/search/search';
 import {globalEventBus} from '@libs/eventBus';
 
 /**

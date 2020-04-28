@@ -1,4 +1,4 @@
-import SearchDummyComponent from '@components/search_component/search_dummy_component';
+import SearchDummyComponent from '@components/search/search_dummy';
 import Api from '@libs/api';
 import {GLOBAL, RESPONSE, SEARCH} from "@libs/constans";
 import {globalEventBus} from "@libs/eventBus";

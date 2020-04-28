@@ -1,7 +1,7 @@
-import template from '@components/playlist_list_component/playlist.tmpl.xml';
-import newPlaylist from '@components/playlist_list_component/new_playlist.tmpl.xml';
+import template from '@components/playlist_list/playlist.tmpl.xml';
+import newPlaylist from '@components/playlist_list/new_playlist.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
-import PlaylistComponent from '@components/playlist_component/playlist_component';
+import PlaylistComponent from '@components/playlist/playlist';
 import {PROFILE, SEARCH} from '@libs/constans';
 
 /**

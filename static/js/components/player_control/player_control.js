@@ -1,5 +1,5 @@
 import {PLAYER} from '@libs/constans';
-import template from '@components/player_control_component/player_control_component.tmpl.xml';
+import template from '@components/player_control/player_control.tmpl.xml';
 
 /**
  * Компонент - кнопки и таймлайн в плеере

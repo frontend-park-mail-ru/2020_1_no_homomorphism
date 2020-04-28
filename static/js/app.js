@@ -5,7 +5,7 @@ import {NewsController} from '@controllers/news';
 import {LoginController} from '@controllers/login';
 import {SignupController} from '@controllers/signup';
 import {PlayerController} from '@controllers/player';
-import {ProfileController} from '@controllers/profile/profile';
+import {ProfileController} from '@controllers/profile';
 import {SettingsController} from '@controllers/settings';
 import {ArtistController} from '@controllers/artist';
 import {PlaylistController} from '@controllers/playlist';

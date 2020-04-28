@@ -2,12 +2,11 @@ import {PLAYER, NAVBAR, DOM, GLOBAL} from '@libs/constans';
 import BaseView from '@libs/base_view';
 import player from '@views/player/player.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
-import ChoosePlaylist from '@components/choose_playlist_component/choose_playlist_component';
-import PlaylistComponent from '@components/playlist_component/playlist_component';
-import TopTrackComponent from '@components/top_track_component/top_track_component';
-import PlayerTrackListComponent from
-    '@components/player_track_list_component/player_track_list_component';
-import PlayerControlComponent from '@components/player_control_component/player_control_component';
+import ChoosePlaylist from '@components/choose_playlist/choose_playlist';
+import PlaylistComponent from '@components/playlist/playlist';
+import TopTrackComponent from '@components/top_track/top_track';
+import PlayerTrackListComponent from '@components/player_track_list/player_track_list';
+import PlayerControlComponent from '@components/player_control/player_control';
 
 /**
  *  вью для плеера

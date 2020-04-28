@@ -1,4 +1,4 @@
-import search from '@components/search_component/search.xml';
+import search from '@components/search/search.xml';
 
 /**
  * Глупенький компонент поиска (без высшего образования)

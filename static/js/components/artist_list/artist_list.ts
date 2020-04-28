@@ -1,7 +1,7 @@
 import {RESPONSE, SEARCH, MAIN} from '@libs/constans';
 import Api from "@libs/api";
 import EventBus from '@libs/eventBus';
-import ArtistListDummyComponent from '@components/artist_list_component/artist_list_dummy_component';
+import ArtistListDummyComponent from '@components/artist_list/artist_list_dummy';
 
 type artist = {
     id: string,

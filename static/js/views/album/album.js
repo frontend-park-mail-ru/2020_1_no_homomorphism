@@ -1,7 +1,7 @@
 import {ALBUM, GLOBAL} from '@libs/constans';
 import playlist from '@views/album/album.tmpl.xml';
 import BaseView from '@libs/base_view';
-import TrackListComponent from '@components/track_list_component/track_list_component';
+import TrackListComponent from '@components/track_list/track_list';
 import {globalEventBus} from '@libs/eventBus';
 
 /**

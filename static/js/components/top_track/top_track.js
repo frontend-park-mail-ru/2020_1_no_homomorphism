@@ -1,5 +1,5 @@
 import {PLAYER} from '@libs/constans';
-import template from '@components/top_track_component/top_track.tmpl.xml';
+import template from '@components/top_track/top_track.tmpl.xml';
 
 /**
  * Компонент - верхний трек в плеере
