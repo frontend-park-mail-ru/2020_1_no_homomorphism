@@ -113,16 +113,11 @@ export default class NavbarView extends BaseView {
     renderLogged(data) {
         document.getElementsByClassName('m-navbar-avatar')[0].src = data.image;
         document.getElementsByClassName('m-navbar-name')[0].innerHTML = data.login;
-        document.getElementById('login-link').classList.remove('is-displayed');
         document.getElementById('login-link').classList.add('is-not-displayed');
-        document.getElementById('signup-link').classList.remove('is-displayed');
         document.getElementById('signup-link').classList.add('is-not-displayed');
         document.getElementById('logout-link').classList.remove('is-not-displayed');
-        document.getElementById('logout-link').classList.add('is-displayed');
         document.getElementById('profile-link').classList.remove('is-not-displayed');
-        document.getElementById('profile-link').classList.add('is-displayed');
         document.getElementsByClassName('l-settings-icon')[0].classList.remove('is-not-displayed');
-        document.getElementsByClassName('l-settings-icon')[0].classList.add('is-displayed');
     }
 
     /**
@@ -130,14 +125,9 @@ export default class NavbarView extends BaseView {
      */
     renderNotLogged() {
         document.getElementById('login-link').classList.remove('is-not-displayed');
-        document.getElementById('login-link').classList.add('is-displayed');
         document.getElementById('signup-link').classList.remove('is-not-displayed');
-        document.getElementById('signup-link').classList.add('is-displayed');
-        document.getElementById('logout-link').classList.remove('is-displayed');
         document.getElementById('logout-link').classList.add('is-not-displayed');
-        document.getElementById('profile-link').classList.remove('is-displayed');
         document.getElementById('profile-link').classList.add('is-not-displayed');
-        document.getElementsByClassName('l-settings-icon')[0].classList.remove('is-displayed');
         document.getElementsByClassName('l-settings-icon')[0].classList.add('is-not-displayed');
     }
 }
