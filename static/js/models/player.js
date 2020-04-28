@@ -158,7 +158,7 @@ export default class PlayerModel {
      */
     setData(list, trackID='') {
         if (list.tracks.length === 0) {
-            globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK);
+            globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK, true);
             return;
         }
         // eslint-disable-next-line guard-for-in
@@ -226,8 +226,10 @@ export default class PlayerModel {
     play() {
         localStorage.setItem('isPlaying', 'false');
         localStorage.setItem('isPlaying', 'true');
-        document.getElementsByTagName('audio')[0].play();
-        this.playing = true;
+        document.getElementsByTagName('audio')[0].play()
+            .then(() => {
+                this.playing = true;
+            });
         this.eventBus.emit(PLAYER.DRAW_PAUSE);
     }
 
@@ -441,6 +443,6 @@ export default class PlayerModel {
         this.queue = [];
         this.playlist = [];
         this.current = 0;
-        this.eventBus.emit(PLAYER.REMOVE_FROM_TRACKLIST_ALL, true);
+        this.eventBus.emit(PLAYER.REMOVE_FROM_TRACKLIST_ALL);
     }
 }

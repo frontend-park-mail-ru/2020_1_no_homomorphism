@@ -3,7 +3,8 @@ import {globalEventBus} from '@libs/eventBus';
 import ChoosePlaylist from '@components/choose_playlist_component/choose_playlist_component';
 import TrackComponent from '@components/track_component/track_component';
 import PlaylistComponent from '@components/playlist_component/playlist_component';
-import {PLAYLIST} from '@libs/constans';
+import {GLOBAL, PLAYLIST, URL} from '@libs/constans';
+import User from '@libs/user';
 
 /**
  * Компонент - список треков
@@ -98,6 +99,10 @@ export default class TrackListComponent {
      * @param {Object} event
      */
     addToPlaylist(event) {
+        if (!User.exists()) {
+            globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
+            return;
+        }
         this._choosePlaylist.trackData = this.getIdByClick(event);
         this.getProfilePlaylists();
     }
@@ -169,11 +174,10 @@ export default class TrackListComponent {
      * @param {Object} event
      */
     likeClicked(event) {
+        if (!User.exists()) {
+            globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
+            return;
+        }
         alert('This functionality is not accessible by now');
-        // if (event.target.src.indexOf('/static/img/favorite_border.svg') !== -1) {
-        //     event.target.src = '/static/img/favorite.svg';
-        // } else {
-        //     event.target.src = '/static/img/favorite_border.svg';
-        // }
     }
 }

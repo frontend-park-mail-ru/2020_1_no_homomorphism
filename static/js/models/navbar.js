@@ -68,6 +68,7 @@ export default class NavbarModel {
                 case RESPONSE.OK:
                     res.json()
                         .then((data) => {
+                            User.setUserData(data);
                             this.eventBus.emit(NAVBAR.RENDER_LOGGED, data);
                         });
                     break;
