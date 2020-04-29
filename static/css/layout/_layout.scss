@@ -227,8 +227,14 @@
         margin-right: 1em;
     }
 
-    .l-content .col.col-9 {
+    .l-content .col.col-9,
+    .l-content .l-center-pos .col.col-4 {
         width: 100%;
+    }
+
+    .l-center-pos {
+        width: 100%;
+        left: 0;
     }
 
     .l-round-image, .l-top-name {
