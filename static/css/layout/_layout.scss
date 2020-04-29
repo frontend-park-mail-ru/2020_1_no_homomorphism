@@ -96,7 +96,23 @@
   color: black;
 }
 
-@media screen and (max-width: 480px) {
+.l-unter-mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10%;
+}
+
+@media screen and (max-width: 480px) and (min-width: 344px) {
     .l-player, .l-player-footer {
         position: fixed;
         width: 100%;
@@ -289,5 +305,14 @@
 
     .is-not-displayed {
         display: none;
+    }
+}
+
+@media screen and (max-width: 343px) {
+    .l-navbar, .l-top-content, .l-content, .l-player {
+        display: none;
+    }
+    .l-unter-mobile {
+        display: flex;
     }
 }
