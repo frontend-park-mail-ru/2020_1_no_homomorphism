@@ -20,6 +20,8 @@ export default class PlayerModel {
             shuffle: false,
             repeat: false,
         };
+        globalEventBus.on(GLOBAL.PAUSE, this.doPause.bind(this));
+
         globalEventBus.on(GLOBAL.CLEAR_AND_LOCK, this.deleteAll.bind(this));
         globalEventBus.on(GLOBAL.PLAY_TRACKS, this.deleteAll.bind(this));
         globalEventBus.on(GLOBAL.PLAY_TRACKS, this.setData.bind(this));
@@ -156,7 +158,7 @@ export default class PlayerModel {
      */
     setData(list, trackID='') {
         if (list.tracks.length === 0) {
-            globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK);
+            globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK, true);
             return;
         }
         // eslint-disable-next-line guard-for-in
@@ -180,6 +182,8 @@ export default class PlayerModel {
      * @param {string} id
      */
     getTrack(id) {
+        this.playing = true; // rer
+        this.eventBus.emit(PLAYER.DRAW_PAUSE);
         const currentId = this.playlist[this.queue[this.current]].id;
         this.current = this.queue.indexOf(this.playlist.indexOf(
             this.playlist.find((track) => track.id === id)));
@@ -190,6 +194,8 @@ export default class PlayerModel {
         }
         document.getElementsByTagName('audio')[0].load();
         if (this.playing) {
+            localStorage.setItem('isPlaying', 'false');
+            localStorage.setItem('isPlaying', 'true');
             document.getElementsByTagName('audio')[0].play();
         }
         this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
@@ -202,6 +208,13 @@ export default class PlayerModel {
      * останавливает воспроизведение
      */
     pause() {
+        this.doPause();
+    }
+
+    /**
+     * do Pause
+     */
+    doPause() {
         document.getElementsByTagName('audio')[0].pause();
         this.playing = false;
         this.eventBus.emit(PLAYER.DRAW_PLAY);
@@ -211,8 +224,12 @@ export default class PlayerModel {
      * начинает воспроизведение
      */
     play() {
-        document.getElementsByTagName('audio')[0].play();
-        this.playing = true;
+        localStorage.setItem('isPlaying', 'false');
+        localStorage.setItem('isPlaying', 'true');
+        document.getElementsByTagName('audio')[0].play()
+            .then(() => {
+                this.playing = true;
+            });
         this.eventBus.emit(PLAYER.DRAW_PAUSE);
     }
 
@@ -220,6 +237,8 @@ export default class PlayerModel {
      * переключает трек на предыдущий
      */
     prev() {
+        this.playing = true; // rer
+        this.eventBus.emit(PLAYER.DRAW_PAUSE);
         const currentId = this.playlist[this.queue[this.current]].id;
         if (this.current === 0) {
             if (this.state.repeat) {
@@ -237,6 +256,8 @@ export default class PlayerModel {
         }
         document.getElementsByTagName('audio')[0].load();
         if (this.playing) {
+            localStorage.setItem('isPlaying', 'false');
+            localStorage.setItem('isPlaying', 'true');
             document.getElementsByTagName('audio')[0].play();
         }
         this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
@@ -250,6 +271,8 @@ export default class PlayerModel {
      * @param {string} cause
      */
     next(cause) {
+        this.playing = true; // rer
+        this.eventBus.emit(PLAYER.DRAW_PAUSE);
         const currentId = this.playlist[this.queue[this.current]].id;
         if (this.current === this.queue.length - 1) {
             if (this.state.repeat) {
@@ -278,6 +301,8 @@ export default class PlayerModel {
         }
         document.getElementsByTagName('audio')[0].load();
         if (this.playing) {
+            localStorage.setItem('isPlaying', 'false');
+            localStorage.setItem('isPlaying', 'true');
             document.getElementsByTagName('audio')[0].play();
         }
         this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
@@ -418,6 +443,6 @@ export default class PlayerModel {
         this.queue = [];
         this.playlist = [];
         this.current = 0;
-        this.eventBus.emit(PLAYER.REMOVE_FROM_TRACKLIST_ALL, true);
+        this.eventBus.emit(PLAYER.REMOVE_FROM_TRACKLIST_ALL);
     }
 }

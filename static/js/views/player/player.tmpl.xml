@@ -1,7 +1,7 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="trigger-button">
-        <img src="/static/img/arrow_forward_ios.svg" class="player-trigger-arrow" alt="."
-            height="28" style="visibility: hidden; transform: rotate(180deg);"/>
+        <img src="/static/img/arrow_forward_ios.svg" class="player-trigger-arrow"
+            alt="." height="28"/>
     </div>
     <div class="row">
         <div class="col player-trigger" style="height: 1000px;">
@@ -9,46 +9,8 @@
         <div class="col main-col">
             <div class="row patch"></div>
             <div class="row l-music-bar">
-                <div class="col">
-<!--                    <a href="/player">-->
-                        <img src="" height="80px" width="80px" alt="..." id="cover"/>
-<!--                    </a>-->
-                </div>
-                <div class="col track-group-names">
-                    <div class="track-name" id="title" title="">
-                        Kek
-                    </div>
-                    <span class="group-name" id="artist">
-                        Lol
-                    </span>
-                </div>
             </div>
             <div class="container-audio border-bottom">
-                <div class="timeline row">
-                    <div class="timeline-back"></div>
-                    <div class="timeline-front" style="width: 0;"></div>
-                    <div class="current-time col" style="font-size: 0px;">0:00</div>
-                    <div class="duration col" style="font-size: 0px;">0:00</div>
-                </div>
-                <div class="control-elements row">
-                    <img src="/static/img/previous.svg" class="player-control-button prev" id="prev" alt="prev"/>
-                    <img src="/static/img/play.svg" class="player-control-button play-pause" alt="play/pause"/>
-                    <img src="/static/img/next.svg" class="player-control-button next" id="next" alt="next"/>
-                    <img src="/static/img/shuffle.svg" class="playlist-control-button shuffle" style="opacity: 0.4;"
-                         alt="shuffle"/>
-                    <img src="/static/img/repeat.svg" class="playlist-control-button repeat" style="opacity: 0.4;"
-                         alt="repeat"/>
-                    <img src="/static/img/volume_up.svg" class="volume" style="opacity: 0.4;" alt="volume"/>
-                    <div class="volume-scale"
-                         style="opacity: 0; top: -40px; visibility: hidden; transition-property: opacity, visibility, top;">
-                        <div class="volume-scale-back"></div>
-                        <div class="volume-scale-front"></div>
-                    </div>
-                </div>
-                <audio>
-                    <source src=""/>
-                    Your browser does not Support the audio Tag
-                </audio>
             </div>
             <div class="track-list" style="top: 0;">
                 <div class="current-marker" style="top: 5px; height: 50px;"></div>

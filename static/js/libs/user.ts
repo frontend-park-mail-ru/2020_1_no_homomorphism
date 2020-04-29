@@ -19,7 +19,7 @@ interface IUserStatic {
     CsrfToken: string;
     user: { [index: string]: string };
     statistics: { [index: string]: string };
-    token: string
+    token: string;
 
     new(): IUser;
 
@@ -38,6 +38,7 @@ interface IUserStatic {
 
 function staticImplements<T>() {
     return <U extends T>(constructor: U) => {
+        // tslint:disable-next-line:no-unused-expression
         constructor;
     };
 }
@@ -62,8 +63,10 @@ export default class User implements IUser {
      */
     public static exists(): boolean {
         if (User.instance) {
+            // tslint:disable-next-line:max-classes-per-file
             User.instance = new class implements IUser {
                 instanceMethod(): void {
+                    return;
                 }
             }();
         }
@@ -122,5 +125,6 @@ export default class User implements IUser {
     }
 
     instanceMethod(): void {
+        return;
     }
 }

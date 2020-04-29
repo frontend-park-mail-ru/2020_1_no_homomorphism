@@ -3,7 +3,7 @@
   "rules": {
     "max-line-length": {
       "options": [
-        12
+        120
       ]
     },
     "typescript.tsserver.log": "verbose",

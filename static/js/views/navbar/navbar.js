@@ -1,7 +1,7 @@
 import {NAVBAR, GLOBAL, DOM, URL} from '@libs/constans';
 import navbar from '@views/navbar/navbar.tmpl.xml';
 import BaseView from '@libs/base_view';
-import SearchComponent from '@components/search_component/search_component';
+import SearchComponent from '@components/search/search';
 import {globalEventBus} from '@libs/eventBus';
 
 /**
@@ -91,7 +91,7 @@ export default class NavbarView extends BaseView {
         this.eventBus.emit(NAVBAR.LOGOUT_CLICKED);
         this.renderNotLogged.bind(this)();
         globalEventBus.emit(GLOBAL.LOGOUT_REDIRECT, URL.MAIN);
-        globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK);
+        globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK, true);
     }
 
     /**
@@ -113,31 +113,21 @@ export default class NavbarView extends BaseView {
     renderLogged(data) {
         document.getElementsByClassName('m-navbar-avatar')[0].src = data.image;
         document.getElementsByClassName('m-navbar-name')[0].innerHTML = data.login;
-        document.getElementById('login-link').classList.remove('is-visible');
-        document.getElementById('login-link').classList.add('is-hidden');
-        document.getElementById('signup-link').classList.remove('is-visible');
-        document.getElementById('signup-link').classList.add('is-hidden');
-        document.getElementById('logout-link').classList.remove('is-hidden');
-        document.getElementById('logout-link').classList.add('is-visible');
-        document.getElementById('profile-link').classList.remove('is-hidden');
-        document.getElementById('profile-link').classList.add('is-visible');
-        document.getElementsByClassName('l-settings-icon')[0].classList.remove('is-hidden');
-        document.getElementsByClassName('l-settings-icon')[0].classList.add('is-visible');
+        document.getElementById('login-link').classList.add('is-not-displayed');
+        document.getElementById('signup-link').classList.add('is-not-displayed');
+        document.getElementById('logout-link').classList.remove('is-not-displayed');
+        document.getElementById('profile-link').classList.remove('is-not-displayed');
+        document.getElementsByClassName('l-settings-icon')[0].classList.remove('is-not-displayed');
     }
 
     /**
      * не залогинен
      */
     renderNotLogged() {
-        document.getElementById('login-link').classList.remove('is-hidden');
-        document.getElementById('login-link').classList.add('is-visible');
-        document.getElementById('signup-link').classList.remove('is-hidden');
-        document.getElementById('signup-link').classList.add('is-visible');
-        document.getElementById('logout-link').classList.remove('is-visible');
-        document.getElementById('logout-link').classList.add('is-hidden');
-        document.getElementById('profile-link').classList.remove('is-visible');
-        document.getElementById('profile-link').classList.add('is-hidden');
-        document.getElementsByClassName('l-settings-icon')[0].classList.remove('is-visible');
-        document.getElementsByClassName('l-settings-icon')[0].classList.add('is-hidden');
+        document.getElementById('login-link').classList.remove('is-not-displayed');
+        document.getElementById('signup-link').classList.remove('is-not-displayed');
+        document.getElementById('logout-link').classList.add('is-not-displayed');
+        document.getElementById('profile-link').classList.add('is-not-displayed');
+        document.getElementsByClassName('l-settings-icon')[0].classList.add('is-not-displayed');
     }
 }

@@ -1,11 +1,11 @@
-import SearchDummyComponent from '@components/search_component/search_dummy_component';
+import SearchDummyComponent from '@components/search/search_dummy';
 import Api from '@libs/api';
 import {GLOBAL, RESPONSE, SEARCH} from "@libs/constans";
 import {globalEventBus} from "@libs/eventBus";
 
 type HTMLElementEvent<T extends HTMLElement> = Event & {
     target: T;
-}
+};
 
 export default class SearchComponent {
     private input: string;
@@ -68,23 +68,38 @@ export default class SearchComponent {
      * Получение id из dom-елемента по нажатию
      */
     getIdByClick(event: HTMLElementEvent<HTMLTextAreaElement>, tracks: [{ [index: string]: string }]) {
-
         let current = event.target;
         while (!current.classList.contains('l-search-tracks')) {
             if (current.classList.contains('m-small-track') &&
                 current.getAttribute('t-id') !== null) {
                 tracks.forEach((elem) => {
                     if (elem.id === current.getAttribute('t-id')) {
-
-                        globalEventBus.emit(GLOBAL.PLAY_TRACKS, {
-                            tracks: [elem],
-                        }, elem.id)
+                        this.getTrackInfo(elem.id);
                     }
-                })
+                });
             }
             // @ts-ignore
             current = current.parentNode;
         }
+    }
+
+    getTrackInfo(id: string) {
+        Api.trackGet(id)
+            .then((res) => {
+                switch (res.status) {
+                    case RESPONSE.OK:
+                        res.json()
+                            .then((elem) => {
+                                globalEventBus.emit(GLOBAL.PLAY_TRACKS, {
+                                    tracks: [elem],
+                                }, elem.id);
+                            });
+                        break;
+                    default:
+                        console.log(res);
+                        console.error('I am a teapot');
+                }
+            });
     }
 
     /**
@@ -94,7 +109,7 @@ export default class SearchComponent {
         if (this.isOpen) {
             document.getElementsByClassName('l-top-content')[0].removeChild(document.getElementsByClassName('l-top-content')[0].firstChild);
             this.isOpen = false;
-            (<HTMLInputElement>document.getElementsByClassName('m-search-input')[0]).value = '';
+            (document.getElementsByClassName('m-search-input')[0] as HTMLInputElement).value = '';
         }
 
     }

@@ -34,7 +34,7 @@
   background: white;
   position: relative;
   z-index: 1;
-  margin-bottom: 16px;
+  padding-bottom: 16px;
 }
 
 .l-music-bar .col {
@@ -114,12 +114,14 @@
   position: relative;
   top: -3px;
   left: 207px;
+  opacity: 0.4;
 }
 
 .repeat {
   position: relative;
   top: -3px;
   left: 205px;
+  opacity: 0.4;
 }
 
 .volume {
@@ -127,6 +129,7 @@
   top: -3px;
   left: 203px;
   z-index: 2;
+  opacity: 0.4;
 }
 
 .volume-scale {
@@ -142,6 +145,7 @@
   text-align: center;
   margin-bottom: 10px;
   transition-duration: 0.3s;
+  opacity: 0;
 }
 
 .volume-scale:after,
@@ -244,7 +248,7 @@
 
 .track-list .track-name {
   font-size: 18px;
-  width: 276px;
+  width: 230px;
 }
 
 .track-list .group-name {
@@ -291,6 +295,8 @@
 .player-trigger-arrow {
   margin-top: 6px;
   margin-left: 3px;
+  visibility: hidden;
+  transform: rotate(180deg);
 }
 
 .trigger-button {

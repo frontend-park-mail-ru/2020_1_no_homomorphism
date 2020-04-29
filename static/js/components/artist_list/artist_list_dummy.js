@@ -1,4 +1,4 @@
-import artistList from '@components/artist_list_component/artist.tmpl.xml';
+import artistList from '@components/artist_list/artist.tmpl.xml';
 
 /**
  * Компонент (очень глупенький) списка артистов

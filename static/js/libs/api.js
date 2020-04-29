@@ -326,6 +326,16 @@ export default class Api {
         });
     }
 
+    /**
+     * @param {string} id
+     * @return {Promise<Response>}
+     */
+    static trackGet(id) {
+        return getFetch(API + `/tracks/${id}`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
     // -------------- SEARCH ---------------
 
     /**

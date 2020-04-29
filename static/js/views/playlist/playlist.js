@@ -1,7 +1,7 @@
 import {PLAYLIST, GLOBAL} from '@libs/constans';
 import playlist from '@views/playlist/playlist.tmpl.xml';
 import BaseView from '@libs/base_view';
-import TrackListComponent from '@components/track_list_component/track_list_component';
+import TrackListComponent from '@components/track_list/track_list';
 import {globalEventBus} from '@libs/eventBus';
 
 /**
@@ -116,6 +116,6 @@ export default class PlaylistView extends BaseView {
     showErrors(error) {
         document.getElementsByClassName('l-top-card')[0].innerHTML = error.text;
         document.getElementsByClassName('l-top-card')[0].classList.add('is-error');
-        document.getElementsByClassName('l-down-card')[0].classList.add('is-hidden');
+        document.getElementsByClassName('l-down-card')[0].classList.add('is-not-displayed');
     }
 }

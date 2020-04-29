@@ -1,0 +1,13 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <div class="col">
+        <!--a href="/player"-->
+        <img src="" height="80px" width="80px" alt="..." id="cover"/>
+        <!--/a-->
+    </div>
+    <div class="col track-group-names">
+        <div class="track-name" id="title" title="">
+        </div>
+        <span class="group-name" id="artist">
+        </span>
+    </div>
+</fest:template>

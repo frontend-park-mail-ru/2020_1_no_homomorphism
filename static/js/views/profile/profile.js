@@ -2,8 +2,8 @@ import {PROFILE, URL, DOM, GLOBAL} from '@libs/constans';
 import profile from '@views/profile/profile.tmpl.xml';
 import BaseView from '@libs/base_view';
 import User from '@libs/user';
-import TrackListComponent from '@components/track_list_component/track_list_component';
-import PlaylistsComponent from '@components/playlist_list_component/playlist_list_component';
+import TrackListComponent from '@components/track_list/track_list';
+import PlaylistsComponent from '@components/playlist_list/playlist_list';
 import {globalEventBus} from '@libs/eventBus';
 
 /**

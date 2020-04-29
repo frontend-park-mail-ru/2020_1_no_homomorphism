@@ -14,13 +14,12 @@
                         <div>
                             <fest:value>track.name</fest:value>
                         </div>
-                        <a class="m-obscure-title text-small-size m-tiny-ref" href="/artist/{track.artist_id}">
+                        <a class="m-obscure-title m-tiny-ref m-small-text" href="/artist/{track.artist_id}">
                             <fest:value>track.artist</fest:value>
                         </a>
                     </div>
                 </div>
                 <div class="l-track-buttons row">
-
                     <fest:if test="data.type">
                         <div class="col l-big-track-button delete-button">
                             <img src="/static/img/clear.svg" class="m-big-delete-button" height="15px" alt="..."/>
