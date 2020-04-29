@@ -54,10 +54,10 @@
 }
 
 .m-button-without-size {
-  // position: fixed;
-  box-shadow: $box-shadow;
-  opacity: 0.3;
-  cursor: pointer;
+    opacity: 0.4;
+    cursor: pointer;
+    position: relative;
+    left: -32px;
 }
 
 .m-button-fixed {
@@ -67,8 +67,9 @@
 }
 
 .m-button-without-size:hover {
-  opacity: 0.7;
+  opacity: 1;
 }
+
 .m-signup-button {
   height: 60px;
   width: 6%;

@@ -18,7 +18,7 @@
 
   width: 25%;
   border: 1px solid $chosen-icon;
-  padding: 8px;
+  padding: 8px 35px 8px 8px;
   //border: none;
   //outline: none;
   //background: transparent;
@@ -125,7 +125,7 @@
 .m-navbar-avatar {
   margin-top: 8px;
   margin-right: 8px;
-  border-radius: $card-border-big;
+  border-radius: $medium-icon-border;
 }
 
 .m-navbar-name {

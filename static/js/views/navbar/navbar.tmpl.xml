@@ -6,16 +6,10 @@
         </div>
 
     </a>
-<!--    <span class="l-search-form">-->
-<!--        <input type="text" class="m-search-input" placeholder="Find artist, track or album"/>-->
-<!--        <span class="m-button-without-size">-->
-<!--            <img src="/static/img/search.svg" class="m-medium-icon"/>-->
-<!--        </span>-->
-<!--    </span>-->
     <input type="text" class="m-search-input m-desktop-tablet-only" placeholder="Find artist, track or album"/>
-    <span class="m-button-without-size m-desktop-tablet-only">
-        <img src="/static/img/search.svg" class="m-medium-icon"/>
-    </span>
+    <img src="/static/img/search.svg" class="m-button-without-size m-search-icon m-desktop-tablet-only"/>
+    <!--span class="m-button-without-size m-desktop-tablet-only">
+    </span-->
     <a href="/search" class="l-navbar-small-search m-mobile-only l-navbar-icon">
         <img class="m-small-icon" src="/static/img/search.svg"/>
     </a>
