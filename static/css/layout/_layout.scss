@@ -159,4 +159,37 @@
         top: -5px;
         left: 242px;
     }
+
+
+
+
+    .l-top-name {
+        padding-top: 0;
+    }
+
+    .l-main {
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+
+    .l-content .col.col-9 {
+        width: 100%;
+    }
+
+    .l-round-image, .l-top-name {
+        width: 100%;
+        margin: 0;
+    }
+    
+    .l-top-name {
+        margin-bottom: 2em;
+    }
+
+    .m-round-image {
+        float: none;
+    }
+
+    .m-top-login, .m-top-name {
+        text-align: center;
+    }
 }
