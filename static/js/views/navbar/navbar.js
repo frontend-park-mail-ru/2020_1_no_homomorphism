@@ -154,7 +154,8 @@ export default class NavbarView extends BaseView {
                 }
                 item.classList.add('is-not-displayed');
             });
-            document.getElementsByClassName('m-search-input')[0].classList.remove('m-desktop-only');
+            document.getElementsByClassName('m-search-input')[0].classList
+                .remove('m-desktop-tablet-only');
             document.getElementsByClassName('m-search-input')[0].classList
                 .add('m-search-input-expanded');
             document.getElementsByClassName('l-navbar-small-search')[0]
@@ -173,7 +174,8 @@ export default class NavbarView extends BaseView {
                 }
                 item.classList.remove('is-not-displayed');
             });
-            document.getElementsByClassName('m-search-input')[0].classList.add('m-desktop-only');
+            document.getElementsByClassName('m-search-input')[0].classList
+                .add('m-desktop-tablet-only');
             document.getElementsByClassName('m-search-input')[0].classList
                 .remove('m-search-input-expanded');
             document.getElementsByClassName('l-navbar-small-search')[0]
