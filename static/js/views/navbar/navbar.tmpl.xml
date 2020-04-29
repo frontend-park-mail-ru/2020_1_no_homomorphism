@@ -38,7 +38,10 @@
         <div class="m-desktop-only">log out</div>
     </a>
     <a href="/signup" class="m-signup-button is-not-displayed" id="signup-link">
-        sign up
+        <div class="m-mobile-only l-navbar-icon">
+            <img class="m-small-icon" src="/static/img/person_add.svg"/>
+        </div>
+        <div class="m-desktop-only">sign up</div>
     </a>
     <a href="/login" class="m-login-button is-not-displayed" id="login-link">
         <div class="m-mobile-only l-navbar-icon">

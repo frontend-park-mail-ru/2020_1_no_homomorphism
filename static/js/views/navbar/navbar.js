@@ -141,6 +141,7 @@ export default class NavbarView extends BaseView {
      */
     renderSearch(event) {
         event.preventDefault();
+        event.stopImmediatePropagation();
         HTMLCollection.prototype.forEach = Array.prototype.forEach;
         if (document.getElementsByClassName('l-navbar-small-search')[0]
             .children[0].src.indexOf('search') != -1
@@ -165,7 +166,7 @@ export default class NavbarView extends BaseView {
                     (this.loggedIn && (item.getAttribute('id') == 'signup-link' ||
                         item.getAttribute('id') == 'login-link')) ||
                     (!this.loggedIn && (item.getAttribute('id') == 'profile-link' ||
-                        item.getAttribute('id') == 'settings-link' ||
+                        item.getAttribute('id') == 'settings-icon' ||
                         item.getAttribute('id') == 'logout-link')))
                 ) {
                     return;

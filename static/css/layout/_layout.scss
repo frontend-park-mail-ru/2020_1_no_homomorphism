@@ -186,13 +186,19 @@
         opacity: 1;
     }
 
-    .l-navbar-info, .m-login-button {
+    .l-navbar-info, .m-login-button,
+    .m-signup-button {
         padding: 0;
     }
 
-    .l-navbar-info {
+    .l-navbar-info, .m-signup-button {
         margin: 0;
     }
+
+    .m-signup-button {
+        width: 10%;
+    }
+
 
 
     .l-small-card {
