@@ -58,6 +58,8 @@ export default class NavbarView extends BaseView {
             }
         });
         document.addEventListener('click', this.closeSearchComponent.bind(this));
+        document.getElementsByClassName('l-navbar-small-search')[0]
+            .addEventListener('click', this.renderSearch.bind(this));
     }
 
     /**
@@ -88,6 +90,7 @@ export default class NavbarView extends BaseView {
      * Нажатия на логаут
      */
     logoutClicked() {
+        this.loggedIn = false;
         this.eventBus.emit(NAVBAR.LOGOUT_CLICKED);
         this.renderNotLogged.bind(this)();
         globalEventBus.emit(GLOBAL.LOGOUT_REDIRECT, URL.MAIN);
@@ -99,6 +102,7 @@ export default class NavbarView extends BaseView {
      * @param {boolean} loggedIn
      */
     analyzeCookie(loggedIn) {
+        this.loggedIn = loggedIn;
         if (loggedIn) {
             this.eventBus.emit(NAVBAR.GET_USER_DATA);
         } else {
@@ -129,5 +133,50 @@ export default class NavbarView extends BaseView {
         document.getElementById('logout-link').classList.add('is-not-displayed');
         document.getElementById('profile-link').classList.add('is-not-displayed');
         document.getElementById('settings-icon').classList.add('is-not-displayed');
+    }
+
+    /**
+     * Рендерит поиск для мобилок
+     * @param {Object} event
+     */
+    renderSearch(event) {
+        event.preventDefault();
+        HTMLCollection.prototype.forEach = Array.prototype.forEach;
+        if (document.getElementsByClassName('l-navbar-small-search')[0]
+            .children[0].src.indexOf('search') != -1
+        ) {
+            document.getElementsByClassName('l-navbar')[0].children.forEach((item) => {
+                if (item.classList.contains('l-navbar-small-search') ||
+                    item.classList.contains('m-search-input')
+                ) {
+                    return;
+                }
+                item.classList.add('is-not-displayed');
+            });
+            document.getElementsByClassName('m-search-input')[0].classList.remove('m-desktop-only');
+            document.getElementsByClassName('m-search-input')[0].classList
+                .add('m-search-input-expanded');
+            document.getElementsByClassName('l-navbar-small-search')[0]
+                .children[0].src = '/static/img/clear.svg';
+        } else {
+            document.getElementsByClassName('l-navbar')[0].children.forEach((item) => {
+                if ((item.classList.contains('l-navbar-small-search') ||
+                    item.classList.contains('m-search-input') ||
+                    (this.loggedIn && (item.getAttribute('id') == 'signup-link' ||
+                        item.getAttribute('id') == 'login-link')) ||
+                    (!this.loggedIn && (item.getAttribute('id') == 'profile-link' ||
+                        item.getAttribute('id') == 'settings-link' ||
+                        item.getAttribute('id') == 'logout-link')))
+                ) {
+                    return;
+                }
+                item.classList.remove('is-not-displayed');
+            });
+            document.getElementsByClassName('m-search-input')[0].classList.add('m-desktop-only');
+            document.getElementsByClassName('m-search-input')[0].classList
+                .remove('m-search-input-expanded');
+            document.getElementsByClassName('l-navbar-small-search')[0]
+                .children[0].src = '/static/img/search.svg';
+        }
     }
 }

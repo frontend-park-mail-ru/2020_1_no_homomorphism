@@ -43,6 +43,12 @@ export const PAGINATION = {
     TRACKS: 50,
 };
 
+export const LAYOUT = {
+    MOBILE: 'screen and (max-width: 480px)',
+    TABLET: 'screen and (min-width: 481px) and (max-width: 990px)',
+    DESKTOP: 'min-width: 991px',
+};
+
 export const VALIDATION = {
     EMAIL_EMPTY: 'Enter email',
     EMAIL_INCORRECT: 'Incorrect email syntax',

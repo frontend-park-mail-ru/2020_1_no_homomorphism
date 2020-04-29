@@ -96,7 +96,7 @@
   color: black;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 480px) {
     .l-player, .l-player-footer {
         position: fixed;
         width: 100%;
@@ -199,6 +199,16 @@
         margin: 11px;
     }
 
+    .l-navbar .m-search-input {
+        width: 0;
+        transition-property: width;
+        transition-duration: 1s;
+    }
+
+    .l-navbar .m-search-input-expanded {
+        width: 100%;
+    }
+
 
 
 
@@ -263,5 +273,9 @@
 
     .m-tracks-amount {
         margin: 1em;
+    }
+
+    .is-not-displayed {
+        display: none;
     }
 }

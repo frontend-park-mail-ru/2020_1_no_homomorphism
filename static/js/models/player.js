@@ -20,7 +20,7 @@ export default class PlayerModel {
             shuffle: false,
             repeat: false,
         };
-        globalEventBus.on(GLOBAL.PAUSE, this.doPause.bind(this));
+        globalEventBus.on(GLOBAL.PAUSE, this.pause.bind(this));
 
         globalEventBus.on(GLOBAL.CLEAR_AND_LOCK, this.deleteAll.bind(this));
         globalEventBus.on(GLOBAL.PLAY_TRACKS, this.deleteAll.bind(this));
@@ -156,7 +156,7 @@ export default class PlayerModel {
      * @param {Object} list
      * @param {string} trackID
      */
-    setData(list, trackID='') {
+    setData(list, trackID = '') {
         if (list.tracks.length === 0) {
             globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK, true);
             return;
@@ -208,13 +208,6 @@ export default class PlayerModel {
      * останавливает воспроизведение
      */
     pause() {
-        this.doPause();
-    }
-
-    /**
-     * do Pause
-     */
-    doPause() {
         document.getElementsByTagName('audio')[0].pause();
         this.playing = false;
         this.eventBus.emit(PLAYER.DRAW_PLAY);

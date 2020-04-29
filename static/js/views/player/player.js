@@ -1,4 +1,4 @@
-import {PLAYER, NAVBAR, DOM, GLOBAL} from '@libs/constants';
+import {PLAYER, NAVBAR, DOM, GLOBAL, LAYOUT} from '@libs/constants';
 import BaseView from '@libs/base_view';
 import player from '@views/player/player.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
@@ -67,7 +67,7 @@ export default class PlayerView extends BaseView {
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.PLAYER)[0]);
-        const mobile = window.matchMedia('screen and (max-width: 425px)');
+        const mobile = window.matchMedia(LAYOUT.MOBILE);
         if (mobile.matches) {
             document.getElementsByClassName('l-player')[0].classList.add('l-player-footer');
         }
@@ -85,7 +85,7 @@ export default class PlayerView extends BaseView {
             return;
         }
         const body = document.getElementsByTagName('body')[0];
-        const mobile = window.matchMedia('screen and (max-width: 425px)');
+        const mobile = window.matchMedia(LAYOUT.MOBILE);
         const left = (
             mobile.matches ?
                 0 :
@@ -214,7 +214,7 @@ export default class PlayerView extends BaseView {
             document.querySelector('.player-trigger-arrow').classList.add('is-rotated-0');
         }
         const body = document.getElementsByTagName('body')[0];
-        const mobile = window.matchMedia('screen and (max-width: 425px)');
+        const mobile = window.matchMedia(LAYOUT.MOBILE);
         if (mobile.matches) {
             if (this.expanded) {
                 document.getElementsByClassName('track-list')[0].style.top = '0px';

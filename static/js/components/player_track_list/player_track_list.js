@@ -182,16 +182,14 @@ export default class PlayerTrackListComponent {
 
     /**
      * Очищает список воспроизвдения
-     * @param {boolean} lock
      */
-    removeFromTracklistAll(lock = false) {
+    removeFromTracklistAll() {
         while (document.getElementsByClassName('track-list')[0].children.length > 1) {
             document.getElementsByClassName('track-list')[0].children[document
                 .getElementsByClassName('track-list')[0].children.length - 1].remove();
         }
-        if (lock && this.expanded) {
+        if (this.expanded) {
             this.triggerClick();
         }
-        this.locked = lock;
     }
 }
