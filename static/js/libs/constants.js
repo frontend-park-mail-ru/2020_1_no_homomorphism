@@ -45,8 +45,8 @@ export const PAGINATION = {
 
 export const LAYOUT = {
     MOBILE: 'screen and (max-width: 480px) and (min-width: 344px)',
-    TABLET: 'screen and (min-width: 481px) and (max-width: 990px)',
-    DESKTOP: 'min-width: 991px',
+    TABLET: 'screen and (min-width: 481px) and (max-width: 987px)',
+    DESKTOP: 'min-width: 988px',
 };
 
 export const VALIDATION = {

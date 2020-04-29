@@ -1,7 +1,7 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <a href="/" class="l-logo">
         <img src="/static/img/library_music.svg" class="m-medium-icon col" alt="logo"/>
-        <div class="m-project-name col">
+        <div class="m-project-name m-desktop-mobile-only col">
             VirusMusic
         </div>
 
@@ -12,8 +12,8 @@
 <!--            <img src="/static/img/search.svg" class="m-medium-icon"/>-->
 <!--        </span>-->
 <!--    </span>-->
-    <input type="text" class="m-search-input m-desktop-only" placeholder="Find artist, track or album"/>
-    <span class="m-button-without-size m-desktop-only">
+    <input type="text" class="m-search-input m-desktop-tablet-only" placeholder="Find artist, track or album"/>
+    <span class="m-button-without-size m-desktop-tablet-only">
         <img src="/static/img/search.svg" class="m-medium-icon"/>
     </span>
     <a href="/search" class="l-navbar-small-search m-mobile-only l-navbar-icon">
@@ -23,7 +23,7 @@
         <div class="m-mobile-only l-navbar-icon">
             <img class="m-small-icon" src="/static/img/person.svg"/>
         </div>
-        <div class="m-desktop-only">
+        <div class="m-desktop-tablet-only">
             <img class="m-navbar-avatar m-medium-icon col" src="/static/img/avatar/default.png" alt="avatar"/>
             <div class="m-navbar-name col"></div>
         </div>
@@ -32,19 +32,19 @@
         <img src="/static/img/settings.svg" class="m-small-icon"/>
     </a>
     <a href="/" class="m-login-button is-not-displayed" id="logout-link">
-        <div class="m-mobile-only l-navbar-icon">
+        <div class="m-mobile-only m-tablet-only l-navbar-icon">
             <img class="m-small-icon" src="/static/img/exit_to_app.svg"/>
         </div>
         <div class="m-desktop-only">log out</div>
     </a>
     <a href="/signup" class="m-signup-button is-not-displayed" id="signup-link">
-        <div class="m-mobile-only l-navbar-icon">
+        <div class="m-mobile-only m-tablet-only l-navbar-icon">
             <img class="m-small-icon" src="/static/img/person_add.svg"/>
         </div>
         <div class="m-desktop-only">sign up</div>
     </a>
     <a href="/login" class="m-login-button is-not-displayed" id="login-link">
-        <div class="m-mobile-only l-navbar-icon">
+        <div class="m-mobile-only m-tablet-only l-navbar-icon">
             <img class="m-small-icon" src="/static/img/exit_to_app.svg"/>
         </div>
         <div class="m-desktop-only">log in</div>
