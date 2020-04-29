@@ -92,7 +92,7 @@ export const LOGIN = {
 };
 
 export const NAVBAR = {
-    HEIGHT: 55,
+    HEIGHT: 60,
     LOGIN_SUCCESS: 'navbar-login-success',
     CHECK_COOKIE: 'navbar-check-cookie',
     DRAW_COOKIE_RESULT: 'navbar-draw-cookie-result',

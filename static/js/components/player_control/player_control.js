@@ -378,8 +378,7 @@ export default class PlayerControlComponent {
     volumeButtonMouseOver() {
         document.getElementsByClassName('volume-scale')[0]
             .style.transitionProperty = 'opacity, top';
-        document.getElementsByClassName('volume-scale')[0].classList.remove('is-hidden');
-        document.getElementsByClassName('volume-scale')[0].classList.add('is-visible');
+        document.getElementsByClassName('volume-scale')[0].classList.remove('is-not-displayed');
         document.querySelector('.volume-scale').classList.add('is-opacity-1');
         document.querySelector('.volume-scale').classList.add('is-volume-scale-hover');
         document.querySelector('.volume').classList.add('is-opacity-1');
@@ -391,8 +390,7 @@ export default class PlayerControlComponent {
     volumeButtonMouseOut() {
         document.getElementsByClassName('volume-scale')[0]
             .style.transitionProperty = 'opacity, visibility, top';
-        document.getElementsByClassName('volume-scale')[0].classList.remove('is-visible');
-        document.getElementsByClassName('volume-scale')[0].classList.add('is-hidden');
+        document.getElementsByClassName('volume-scale')[0].classList.add('is-not-displayed');
         document.querySelector('.volume-scale').classList.remove('is-opacity-1');
         document.querySelector('.volume-scale').classList.remove('is-volume-scale-hover');
         document.querySelector('.volume').classList.remove('is-opacity-1');

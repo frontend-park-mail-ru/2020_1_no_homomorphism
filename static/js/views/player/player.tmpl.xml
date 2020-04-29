@@ -4,6 +4,10 @@
             alt="." height="28"/>
     </div>
     <div class="row">
+        <div class="player-trigger-row">
+            <img src="/static/img/arrow_forward_ios.svg" class="player-trigger-arrow-row"
+                alt="." height="28"/>
+        </div>
         <div class="col player-trigger" style="height: 1000px;">
         </div>
         <div class="col main-col">

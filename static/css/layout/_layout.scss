@@ -96,29 +96,67 @@
   color: black;
 }
 
-.l-desktop-only {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
-    font-size: 30px;
-    font-weight: bold;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 0 10%;
-}
+@media screen and (max-width: 425px) {
+    .l-player, .l-player-footer {
+        position: fixed;
+        width: 100%;
+        padding-top: 0;
+        transition-duration: 0s, 1s;
+    }
 
-@media screen and (max-width: 746px) {
-    .l-navbar,
-    .l-top-content,
-    .l-content,
-    .l-player {
+    .l-player-footer {
+        padding-top: 1em;
+    }
+
+    .l-player-footer .current-time,
+    .l-player-footer .duration {
+        font-size: 0;
+    }
+
+    .l-player-footer, .player-trigger-row,
+    .player-trigger-arrow-row {
+        display: block;
+    }
+
+    .m-project-name, .m-navbar-name,
+    .trigger-button, .player-trigger,
+    .l-track-buttons, .volume-scale {
         display: none;
     }
-    .l-desktop-only {
-        display: flex;
+
+    .l-player .main-col {
+        width: 100%;
+    }
+
+    .current-time, .duration {
+        font-size: 11px;
+    }
+
+    .l-player-footer .play-pause {
+        position: absolute;
+        left: 321px;
+        top: 15px;
+        z-index: 3;
+        height: 35px;
+        width: 35px;
+    }
+
+    .l-music-bar .track-name {
+        width: 250px;
+    }
+
+    .shuffle {
+        top: -5px;
+        left: 238px;
+    }
+
+    .repeat {
+        top: -5px;
+        left: 240px;
+    }
+
+    .volume {
+        top: -5px;
+        left: 242px;
     }
 }
