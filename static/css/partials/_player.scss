@@ -1,17 +1,19 @@
 @import "../modules/_variables";
 
 .l-player {
-  height: 1000px;
-  width: 400px;
-  position: fixed;
-  top: 60px;
-  left: 150%;
-  z-index: 1;
-  padding-left: 0;
-  padding-top: 0;
-  transition-property: left, top;
-  transition-duration: 0.75s;
-  background: white;
+    height: 1000px;
+    width: 400px;
+    position: fixed;
+    top: 60px;
+    left: 150%;
+    z-index: 1;
+    padding-left: 0;
+    padding-top: 0;
+    transition-property: left, top;
+    transition-duration: 0.75s;
+    background: white;
+    border-radius: $card-border-small;
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
 .l-player-footer {
@@ -27,6 +29,8 @@
     transition-property: left, top;
     transition-duration: 0.75s;
     background: white;
+    border-radius: $card-border-small;
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
 .l-player .col {
