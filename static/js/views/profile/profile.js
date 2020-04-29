@@ -1,4 +1,4 @@
-import {PROFILE, URL, DOM, GLOBAL} from '@libs/constans';
+import {PROFILE, URL, DOM, GLOBAL} from '@libs/constants';
 import profile from '@views/profile/profile.tmpl.xml';
 import BaseView from '@libs/base_view';
 import User from '@libs/user';

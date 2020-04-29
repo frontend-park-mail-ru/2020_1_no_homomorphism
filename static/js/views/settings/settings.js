@@ -1,4 +1,4 @@
-import {SETTINGS, DOM} from '@libs/constans';
+import {SETTINGS, DOM} from '@libs/constants';
 import settings from '@views/settings/settings.tmpl.xml';
 import BaseView from '@libs/base_view';
 import User from '@libs/user';

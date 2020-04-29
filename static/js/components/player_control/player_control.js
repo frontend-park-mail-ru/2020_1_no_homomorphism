@@ -1,4 +1,4 @@
-import {PLAYER} from '@libs/constans';
+import {PLAYER} from '@libs/constants';
 import template from '@components/player_control/player_control.tmpl.xml';
 
 /**

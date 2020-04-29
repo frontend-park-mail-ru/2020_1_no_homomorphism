@@ -1,7 +1,7 @@
 import EventBus from '@libs/eventBus';
 import NavbarModel from '@models/navbar';
 import NavbarView from '@views/navbar/navbar';
-import {GLOBAL} from '@libs/constans';
+import {GLOBAL} from '@libs/constants';
 import {globalEventBus} from '@libs/eventBus';
 
 /**

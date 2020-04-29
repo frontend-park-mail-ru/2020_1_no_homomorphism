@@ -1,4 +1,4 @@
-import {SIGN_UP, GLOBAL} from '@libs/constans';
+import {SIGN_UP, GLOBAL} from '@libs/constants';
 import template from '@views/signup/signup.tmpl.xml';
 import BaseView from '@libs/base_view';
 import {globalEventBus} from '@libs/eventBus';

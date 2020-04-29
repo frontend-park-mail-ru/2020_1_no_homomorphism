@@ -1,5 +1,5 @@
 import Api from '@libs/api';
-import {GLOBAL, RESPONSE, URL} from '@libs/constans';
+import {GLOBAL, RESPONSE, URL} from '@libs/constants';
 import {globalEventBus} from '@libs/eventBus';
 
 /**

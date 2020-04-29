@@ -1,4 +1,4 @@
-import {NAVBAR, GLOBAL, DOM, URL} from '@libs/constans';
+import {NAVBAR, GLOBAL, DOM, URL} from '@libs/constants';
 import navbar from '@views/navbar/navbar.tmpl.xml';
 import BaseView from '@libs/base_view';
 import SearchComponent from '@components/search/search';
@@ -117,7 +117,7 @@ export default class NavbarView extends BaseView {
         document.getElementById('signup-link').classList.add('is-not-displayed');
         document.getElementById('logout-link').classList.remove('is-not-displayed');
         document.getElementById('profile-link').classList.remove('is-not-displayed');
-        document.getElementsByClassName('l-settings-icon')[0].classList.remove('is-not-displayed');
+        document.getElementById('settings-icon').classList.remove('is-not-displayed');
     }
 
     /**
@@ -128,6 +128,6 @@ export default class NavbarView extends BaseView {
         document.getElementById('signup-link').classList.remove('is-not-displayed');
         document.getElementById('logout-link').classList.add('is-not-displayed');
         document.getElementById('profile-link').classList.add('is-not-displayed');
-        document.getElementsByClassName('l-settings-icon')[0].classList.add('is-not-displayed');
+        document.getElementById('settings-icon').classList.add('is-not-displayed');
     }
 }

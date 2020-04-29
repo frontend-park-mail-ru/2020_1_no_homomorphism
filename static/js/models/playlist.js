@@ -1,4 +1,4 @@
-import {PLAYLIST, RESPONSE, PAGINATION, URL, GLOBAL} from '@libs/constans';
+import {PLAYLIST, RESPONSE, PAGINATION, URL, GLOBAL} from '@libs/constants';
 import Api from '@libs/api';
 import {globalEventBus} from '@libs/eventBus';
 

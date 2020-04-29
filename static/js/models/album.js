@@ -1,4 +1,4 @@
-import {ALBUM, RESPONSE, PAGINATION} from '@libs/constans';
+import {ALBUM, RESPONSE, PAGINATION} from '@libs/constants';
 import Api from '@libs/api';
 
 /**

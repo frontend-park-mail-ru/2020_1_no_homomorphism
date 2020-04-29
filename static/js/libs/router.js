@@ -1,4 +1,4 @@
-import {URL, DOM, GLOBAL} from '@libs/constans';
+import {URL, DOM, GLOBAL} from '@libs/constants';
 import {globalEventBus} from '@libs/eventBus';
 
 /**

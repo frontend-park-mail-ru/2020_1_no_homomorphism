@@ -1,5 +1,5 @@
 import Api from '@libs/api';
-import {RESPONSE} from '@libs/constans';
+import {RESPONSE} from '@libs/constants';
 
 /**
  * Компонент трек

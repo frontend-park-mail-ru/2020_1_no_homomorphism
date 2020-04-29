@@ -114,13 +114,13 @@
     }
 
     .l-player-footer, .player-trigger-row,
-    .player-trigger-arrow-row {
+    .player-trigger-arrow-row, .m-mobile-only {
         display: block;
     }
 
-    .m-project-name, .m-navbar-name,
     .trigger-button, .player-trigger,
-    .l-track-buttons, .volume-scale {
+    .l-track-buttons, .volume-scale,
+    .m-desktop-only {
         display: none;
     }
 
@@ -134,30 +134,69 @@
 
     .l-player-footer .play-pause {
         position: absolute;
-        left: 321px;
+        right: 13px;
         top: 15px;
         z-index: 3;
         height: 35px;
         width: 35px;
     }
 
+    .l-music-bar .track-group-names {
+        width: 72%;
+        text-align: left;
+    }
+
+    .l-player-footer .l-music-bar .track-group-names {
+        width: 37%;
+    }
+
     .l-music-bar .track-name {
-        width: 250px;
+        width: 100%;
     }
 
     .shuffle {
-        top: -5px;
-        left: 238px;
+        position: absolute;
+        top: 29px;
+        right: 45px;
     }
 
     .repeat {
-        top: -5px;
-        left: 240px;
+        position: absolute;
+        top: 29px;
+        right: 22px;
     }
 
     .volume {
-        top: -5px;
-        left: 242px;
+        position: absolute;
+        top: 29px;
+        right: -1px;
+    }
+
+    .track-list .track-group-names {
+        width: 82%;
+    }
+
+    .track-list .track-name {
+        width: 100%;
+    }
+
+
+
+    .l-navbar-icon {
+        opacity: 1;
+    }
+
+    .l-navbar-info, .m-login-button {
+        padding: 0;
+    }
+
+    .l-navbar-info {
+        margin: 0;
+    }
+
+
+    .l-small-card {
+        margin: 11px;
     }
 
 

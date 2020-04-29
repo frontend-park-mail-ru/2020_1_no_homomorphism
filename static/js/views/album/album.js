@@ -1,4 +1,4 @@
-import {ALBUM, GLOBAL} from '@libs/constans';
+import {ALBUM, GLOBAL} from '@libs/constants';
 import playlist from '@views/album/album.tmpl.xml';
 import BaseView from '@libs/base_view';
 import TrackListComponent from '@components/track_list/track_list';

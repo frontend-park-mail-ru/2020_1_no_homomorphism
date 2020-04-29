@@ -1,4 +1,4 @@
-import {PLAYER, NAVBAR, DOM, GLOBAL} from '@libs/constans';
+import {PLAYER, NAVBAR, DOM, GLOBAL} from '@libs/constants';
 import BaseView from '@libs/base_view';
 import player from '@views/player/player.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';

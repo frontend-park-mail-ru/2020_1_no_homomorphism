@@ -1,4 +1,4 @@
-import {PLAYER, GLOBAL, URL} from '@libs/constans';
+import {PLAYER, GLOBAL, URL} from '@libs/constants';
 import template from '@components/player_track_list/player_track_list.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
 import User from '@libs/user';

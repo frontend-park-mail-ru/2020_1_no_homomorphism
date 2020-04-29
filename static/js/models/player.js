@@ -1,5 +1,5 @@
 import Api from '@libs/api';
-import {PLAYER, RESPONSE, GLOBAL, PAGINATION} from '@libs/constans';
+import {PLAYER, RESPONSE, GLOBAL, PAGINATION} from '@libs/constants';
 import {globalEventBus} from '@libs/eventBus';
 
 /**

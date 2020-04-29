@@ -1,4 +1,4 @@
-import {VALIDATION} from '@libs/constans';
+import {VALIDATION} from '@libs/constants';
 /**
  * Валидация данных
  * @class Validation

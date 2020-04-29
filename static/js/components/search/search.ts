@@ -1,6 +1,6 @@
 import SearchDummyComponent from '@components/search/search_dummy';
 import Api from '@libs/api';
-import {GLOBAL, RESPONSE, SEARCH} from "@libs/constans";
+import {GLOBAL, RESPONSE, SEARCH} from "@libs/constants";
 import {globalEventBus} from "@libs/eventBus";
 
 type HTMLElementEvent<T extends HTMLElement> = Event & {

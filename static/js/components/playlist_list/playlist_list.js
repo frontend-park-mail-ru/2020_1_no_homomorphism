@@ -2,7 +2,7 @@ import template from '@components/playlist_list/playlist.tmpl.xml';
 import newPlaylist from '@components/playlist_list/new_playlist.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
 import PlaylistComponent from '@components/playlist/playlist';
-import {PROFILE, SEARCH} from '@libs/constans';
+import {PROFILE, SEARCH} from '@libs/constants';
 
 /**
  * Список плейлистов или альбомомв

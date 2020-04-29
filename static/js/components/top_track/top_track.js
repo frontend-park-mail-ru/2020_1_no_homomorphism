@@ -1,4 +1,4 @@
-import {PLAYER} from '@libs/constans';
+import {PLAYER} from '@libs/constants';
 import template from '@components/top_track/top_track.tmpl.xml';
 
 /**

@@ -1,5 +1,5 @@
 import Api from '@libs/api';
-import {RESPONSE, SEARCH} from '@libs/constans';
+import {RESPONSE, SEARCH} from '@libs/constants';
 import PlaylistsComponent from '@components/playlist_list/playlist_list';
 import TrackListComponent from '@components/track_list/track_list';
 import ArtistListComponent from '@components/artist_list/artist_list';
