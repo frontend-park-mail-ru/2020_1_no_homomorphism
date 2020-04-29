@@ -180,7 +180,7 @@
         width: 100%;
         margin: 0;
     }
-    
+
     .l-top-name {
         margin-bottom: 2em;
     }
@@ -191,5 +191,38 @@
 
     .m-top-login, .m-top-name {
         text-align: center;
+    }
+
+    .mobile-row::before, .mobile-row::after {
+      content: " ";
+      display: table;
+    }
+
+    .mobile-row::after {
+      clear: both;
+    }
+
+    .l-content .mobile-row .col.col-6 {
+        width: 100%;
+    }
+
+    .l-top-titles {
+        margin-top: 0;
+    }
+
+    .l-down-card .col.col-6 {
+        width: 100%;
+    }
+
+    .l-down-card .m-big-input {
+        margin: 1em 0;
+    }
+
+    .l-input .col.col-3 {
+        width: 100%;
+    }
+
+    .m-tracks-amount {
+        margin: 1em;
     }
 }
