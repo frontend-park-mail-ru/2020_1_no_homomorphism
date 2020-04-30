@@ -55,7 +55,7 @@ export default class PlaylistsComponent {
             button.onclick = (event) => this.elemClick.bind(this)(event);
         });
         if (this._type === 'playlist') {
-            document.getElementsByClassName('m-button-without-size')[1]
+            document.getElementsByClassName('m-button-without-size')[0]
                 .addEventListener('click', this.createPlaylistClick.bind(this));
             document.getElementsByClassName('m-small-input')[0]
                 .addEventListener('keyup', (event) => {
