@@ -42,31 +42,24 @@ export default class PlayerTrackListComponent {
     trackListWheel(event) {
         const delta = event.deltaY;
         const trackList = document.getElementsByClassName('track-list')[0];
-        if (event.clientX > trackList.getBoundingClientRect().x &&
-            event.clientX < trackList.getBoundingClientRect().x +
-            trackList.getBoundingClientRect().width &&
-            event.clientY > trackList.getBoundingClientRect().y &&
-            event.clientY < trackList.getBoundingClientRect().y +
-            trackList.getBoundingClientRect().height
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        const top = parseInt(trackList.style.top.slice(0, trackList.style.top.length - 2));
+        if (delta < 0 && top < 0 ||
+            delta > 0 && trackList.getBoundingClientRect().bottom >
+            document.documentElement.clientHeight
         ) {
-            event.preventDefault();
-            const top = parseInt(trackList.style.top.slice(0, trackList.style.top.length - 2));
-            if (delta < 0 && top < 0 ||
-                delta > 0 && trackList.getBoundingClientRect().bottom >
+            if (delta < 0 && top - delta / 2 > 0) {
+                trackList.style.top = '0';
+            } else if (delta > 0 && trackList.getBoundingClientRect().bottom - delta / 2 <
                 document.documentElement.clientHeight
             ) {
-                if (delta < 0 && top - delta / 2 > 0) {
-                    trackList.style.top = '0';
-                } else if (delta > 0 && trackList.getBoundingClientRect().bottom - delta / 2 <
-                    document.documentElement.clientHeight
-                ) {
-                    const container = document.getElementsByClassName('container-audio')[0];
-                    trackList.style.top = (document.documentElement.clientHeight -
-                        trackList.getBoundingClientRect().height -
-                        container.getBoundingClientRect().bottom).toString() + 'px';
-                } else {
-                    trackList.style.top = (top - delta / 2).toString() + 'px';
-                }
+                const container = document.getElementsByClassName('container-audio')[0];
+                trackList.style.top = (document.documentElement.clientHeight -
+                    trackList.getBoundingClientRect().height -
+                    container.getBoundingClientRect().bottom).toString() + 'px';
+            } else {
+                trackList.style.top = (top - delta / 2).toString() + 'px';
             }
         }
     }
