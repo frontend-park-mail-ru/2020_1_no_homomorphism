@@ -43,7 +43,6 @@ export default class PlayerTrackListComponent {
         const delta = event.deltaY;
         const trackList = document.getElementsByClassName('track-list')[0];
         event.preventDefault();
-        event.stopImmediatePropagation();
         const top = parseInt(trackList.style.top.slice(0, trackList.style.top.length - 2));
         if (delta < 0 && top < 0 ||
             delta > 0 && trackList.getBoundingClientRect().bottom >
