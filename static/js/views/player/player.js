@@ -97,7 +97,7 @@ export default class PlayerView extends BaseView {
                 (this.expanded ? NAVBAR.HEIGHT : document.documentElement.clientHeight) :
                 NAVBAR.HEIGHT;
         document.getElementsByTagName('audio')[0].volume = this.playerControlComponent.volume;
-        const height = document.documentElement.clientHeight - top;
+        let height = document.documentElement.clientHeight - top;
         this.root.style.top = top.toString() + 'px';
         if (height === 0) {
             return;
@@ -105,6 +105,13 @@ export default class PlayerView extends BaseView {
         this.root.style.height = height.toString() + 'px';
         document.getElementsByClassName('player-trigger')[0]
             .style.height = height.toString() + 'px';
+        height -= document.getElementsByClassName('container-audio')[0].clientHeight +
+            document.getElementsByClassName('l-music-bar')[0].clientHeight +
+            document.getElementsByClassName('patch')[0].clientHeight +
+            (mobile.matches ?
+                document.getElementsByClassName('player-trigger-row')[0].clientHeight :
+                0);
+        document.getElementsByClassName('track-list')[0].style.height = height.toString() + 'px';
     }
 
     /**

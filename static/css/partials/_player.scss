@@ -240,6 +240,10 @@
     overflow: hidden scroll;
 }
 
+.track-list::-webkit-scrollbar {
+    width: 0;
+}
+
 .current-marker {
   background: #00e676;
   width: 5px;
