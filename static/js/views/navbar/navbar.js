@@ -60,6 +60,7 @@ export default class NavbarView extends BaseView {
         document.addEventListener('click', this.closeSearchComponent.bind(this));
         document.getElementsByClassName('l-navbar-small-search')[0]
             .addEventListener('click', this.renderSearch.bind(this));
+        window.addEventListener('resize', this.renderSearch.bind(this));
     }
 
     /**
@@ -140,11 +141,13 @@ export default class NavbarView extends BaseView {
      * @param {Object} event
      */
     renderSearch(event) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
+        if (event.type != 'resize') {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
         HTMLCollection.prototype.forEach = Array.prototype.forEach;
         if (document.getElementsByClassName('l-navbar-small-search')[0]
-            .children[0].src.indexOf('search') != -1
+            .children[0].src.indexOf('search') != -1 && event.type != 'resize'
         ) {
             document.getElementsByClassName('l-navbar')[0].children.forEach((item) => {
                 if (item.classList.contains('l-navbar-small-search') ||

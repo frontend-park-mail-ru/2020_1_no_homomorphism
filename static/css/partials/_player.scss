@@ -9,8 +9,6 @@
     z-index: 1;
     padding-left: 0;
     padding-top: 0;
-    transition-property: left, top;
-    transition-duration: 0.75s;
     background: white;
     border-radius: $card-border-small;
     box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
@@ -26,11 +24,14 @@
     z-index: 1;
     padding-left: 0;
     padding-top: 0;
-    transition-property: left, top;
-    transition-duration: 0.75s;
     background: white;
     border-radius: $card-border-small;
     box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.l-player-visible {
+    transition-property: left, top;
+    transition-duration: 0.75s;
 }
 
 .l-player .col {
