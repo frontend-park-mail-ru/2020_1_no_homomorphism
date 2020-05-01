@@ -1,5 +1,5 @@
-export const SERVER_PATH = 'http://localhost:8081';
-// export const SERVER_PATH = 'https://virusmusic.fun';
+// export const SERVER_PATH = 'http://localhost:8081';
+export const SERVER_PATH = 'https://virusmusic.fun';
 
 export const API = '/api/v1';
 

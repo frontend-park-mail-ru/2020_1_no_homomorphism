@@ -1,5 +1,5 @@
 const path = require('path');
-// const fs = require('fs');
+const fs = require('fs');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
@@ -19,10 +19,10 @@ module.exports = {
     },
     devServer: {
         https: true,
-        // host: '0.0.0.0',
+        host: '0.0.0.0',
         port: 3000,
-        // key: fs.readFileSync('privkey.pem'),
-        // cert: fs.readFileSync('cert.pem'),
+        key: fs.readFileSync('privkey.pem'),
+        cert: fs.readFileSync('cert.pem'),
         historyApiFallback: true,
         disableHostCheck: true,
     },
