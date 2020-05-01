@@ -51,6 +51,7 @@ export default class NavbarView extends BaseView {
                 this.searchComponent.render(value);
             });
         document.addEventListener('click', (event) => {
+            alert('search icon');
             if (event.target.classList.contains('m-search-icon')) {
                 event.preventDefault();
                 event.stopImmediatePropagation();
@@ -141,6 +142,7 @@ export default class NavbarView extends BaseView {
      * @param {Object} event
      */
     renderSearch(event) {
+        alert('render search');
         if (event.type != 'resize') {
             event.preventDefault();
             event.stopImmediatePropagation();
