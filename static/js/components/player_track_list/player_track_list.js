@@ -31,7 +31,8 @@ export default class PlayerTrackListComponent {
         document.querySelectorAll('.add-button').forEach((button) => {
             button.addEventListener('click', this.trackAddButtonClick.bind(this));
         });
-        window.addEventListener('wheel', this.trackListWheel.bind(this));
+        document.getElementsByClassName('track-list')[0]
+            .addEventListener('scroll', this.trackListWheel.bind(this));
     }
 
     /**
@@ -158,6 +159,7 @@ export default class PlayerTrackListComponent {
      * @param {Object} tracks
      */
     drawTracklist(tracks) {
+        document.getElementsByClassName('l-player')[0].classList.add('l-player-visible');
         this.eventBus.emit(PLAYER.TRACK_UPDATE, tracks[0]);
         document.getElementsByClassName('track-list')[0].innerHTML += template(tracks);
         this.locked = false;
@@ -177,6 +179,13 @@ export default class PlayerTrackListComponent {
                 this.triggerClick();
             }
             this.locked = true;
+            if (document.getElementsByClassName('l-player')) {
+                document.getElementsByClassName('l-player')[0].classList
+                    .remove('l-player-visible');
+            } else {
+                document.getElementsByClassName('l-player-footer')[0].classList
+                    .remove('l-player-visible');
+            }
         }
     }
 
@@ -184,6 +193,13 @@ export default class PlayerTrackListComponent {
      * Очищает список воспроизвдения
      */
     removeFromTracklistAll() {
+        if (document.getElementsByClassName('l-player')) {
+            document.getElementsByClassName('l-player')[0].classList
+                .remove('l-player-visible');
+        } else {
+            document.getElementsByClassName('l-player-footer')[0].classList
+                .remove('l-player-visible');
+        }
         while (document.getElementsByClassName('track-list')[0].children.length > 1) {
             document.getElementsByClassName('track-list')[0].children[document
                 .getElementsByClassName('track-list')[0].children.length - 1].remove();

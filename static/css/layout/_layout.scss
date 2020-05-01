@@ -143,6 +143,10 @@
         opacity: 1;
     }
 
+    .l-navbar-icon:hover, .l-navbar-info:hover {
+      background: white;
+    }
+
     .l-navbar-info, .m-login-button,
     .m-signup-button {
         padding: 0;
@@ -170,14 +174,18 @@
         margin-left: 4px;
     }
 
+    .l-search {
+        left: 11.5%;
+        width: 35.5%;
+    }
+
     .l-main {
         margin-left: 1em;
         margin-right: 1em;
     }
 
     .l-content .col.col-9,
-    .l-content .l-center-pos .col.col-4
-    {
+    .l-content .l-center-pos .col.col-4 {
         width: 100%;
     }
 
@@ -217,7 +225,7 @@
 
     .m-tracks-amount {
         margin: 1em;
-    }    
+    }
 }
 
 @media screen and (max-width: 480px) and (min-width: 344px) {
@@ -310,6 +318,10 @@
         opacity: 1;
     }
 
+    .l-navbar-icon:hover, .l-navbar-info:hover {
+      background: white;
+    }
+
     .l-navbar-info, .m-login-button,
     .m-signup-button {
         padding: 0;
@@ -321,6 +333,11 @@
 
     .m-signup-button {
         width: 10%;
+    }
+
+    .l-search {
+        left: 5.5%;
+        width: 80%;
     }
 
 

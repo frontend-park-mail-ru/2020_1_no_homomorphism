@@ -51,7 +51,7 @@ export default class NavbarView extends BaseView {
                 this.searchComponent.render(value);
             });
         document.addEventListener('click', (event) => {
-            if (event.target.classList.contains('m-medium-icon')) {
+            if (event.target.classList.contains('m-search-icon')) {
                 event.preventDefault();
                 event.stopImmediatePropagation();
                 this.submit(document.getElementsByClassName('m-search-input')[0].value);

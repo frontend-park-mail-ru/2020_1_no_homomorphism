@@ -234,8 +234,10 @@
 }
 
 .track-list {
-  position: relative;
-  z-index: 0;
+    position: relative;
+    z-index: 0;
+    height: 200px;
+    overflow: hidden scroll;
 }
 
 .current-marker {
