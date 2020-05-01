@@ -52,7 +52,6 @@ export default class NavbarView extends BaseView {
             });
         document.addEventListener('click', (event) => {
             if (event.target.classList.contains('m-search-icon')) {
-                alert('search icon');
                 event.preventDefault();
                 event.stopImmediatePropagation();
                 this.submit(document.getElementsByClassName('m-search-input')[0].value);
@@ -81,8 +80,10 @@ export default class NavbarView extends BaseView {
      * @param {Object} event
      */
     closeSearchComponent(event) {
-        const choosePlaylist = document.getElementsByClassName('l-top-content')[0];
-        const isClickInside = choosePlaylist.contains(event.target);
+        const topContent = document.getElementsByClassName('l-top-content')[0];
+        const searchInput = document.getElementsByClassName('m-search-input')[0];
+        const isClickInside = (topContent.contains(event.target) ||
+            searchInput.contains(event.target));
         if (!isClickInside) {
             this.searchComponent.close();
         }
