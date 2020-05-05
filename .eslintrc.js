@@ -1,5 +1,4 @@
 module.exports = { //**/*.js - Для игнора всех js файлов
-    // "parser": 'babel-eslint',
     "env": {
         "browser": true,
         "commonjs": true,
@@ -21,8 +20,6 @@ module.exports = { //**/*.js - Для игнора всех js файлов
             "jsx": true,
             "experimentalObjectRestSpread": true
         }
-        // "ecmaVersion": 2020,
-        // "sourceType": "module",
     },
     "rules": {
         "max-len": ["error", 100, 2, {
@@ -66,7 +63,6 @@ module.exports = { //**/*.js - Для игнора всех js файлов
         },
         plugins: [
             "@typescript-eslint",
-            // "@typescript-eslint/eslint-recommended",
         ],
         extends: [
             "plugin:@typescript-eslint/eslint-recommended",

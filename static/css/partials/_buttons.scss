@@ -28,7 +28,7 @@
 .m-button-track-list-play {
   height: 30px;
   width: 30px;
-  background: url(../../static/img/play.svg) no-repeat;
+  background: url(../../static/img/icons/play.svg) no-repeat;
   border: yellow;
   cursor: pointer;
   opacity: 0.4;
@@ -148,7 +148,7 @@
 }
 
 .m-small-ticked-button {
-  background-image: url("/static/img/spizdil_is_yandexa_black.svg");
+  background-image: url("/static/img/icons/spizdil_is_yandexa_black.svg");
   display: inline-block;
   background-size: 100%;
   width: 24px;
@@ -159,7 +159,7 @@
 }
 
 .m-small-add-button {
-  background-image: url("/static/img/add.svg");
+  background-image: url("/static/img/icons/add.svg");
   opacity: .2;
   background-size: 100%;
   width: 24px;
@@ -173,7 +173,7 @@
   height: 30px;
   width: 30px;
   object-fit: cover;
-  background: url(../../static/img/play.svg) no-repeat;
+  background: url(../../static/img/icons/play.svg) no-repeat;
   border: yellow;
   cursor: pointer;
   opacity: 0;

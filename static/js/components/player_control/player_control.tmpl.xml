@@ -6,12 +6,12 @@
         <div class="duration"></div>
     </div>
     <div class="control-elements row">
-        <img src="/static/img/previous.svg" class="player-control-button prev" id="prev" alt="prev"/>
-        <img src="/static/img/play.svg" class="player-control-button play-pause" alt="play/pause"/>
-        <img src="/static/img/next.svg" class="player-control-button next" id="next" alt="next"/>
-        <img src="/static/img/shuffle.svg" class="playlist-control-button shuffle" alt="shuffle"/>
-        <img src="/static/img/repeat.svg" class="playlist-control-button repeat" alt="repeat"/>
-        <img src="/static/img/volume_up.svg" class="volume" alt="volume"/>
+        <img src="/static/img/icons/previous.svg" class="player-control-button prev" id="prev" alt="prev"/>
+        <img src="/static/img/icons/play.svg" class="player-control-button play-pause" alt="play/pause"/>
+        <img src="/static/img/icons/next.svg" class="player-control-button next" id="next" alt="next"/>
+        <img src="/static/img/icons/shuffle.svg" class="playlist-control-button shuffle" alt="shuffle"/>
+        <img src="/static/img/icons/repeat.svg" class="playlist-control-button repeat" alt="repeat"/>
+        <img src="/static/img/icons/volume_up.svg" class="volume" alt="volume"/>
         <div class="volume-scale" style="transition-property: opacity, visibility, top;">
             <div class="volume-scale-back"></div>
             <div class="volume-scale-front"></div>

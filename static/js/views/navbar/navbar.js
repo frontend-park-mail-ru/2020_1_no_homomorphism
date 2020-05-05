@@ -164,7 +164,7 @@ export default class NavbarView extends BaseView {
             document.getElementsByClassName('m-search-input')[0].classList
                 .add('m-search-input-expanded');
             document.getElementsByClassName('l-navbar-small-search')[0]
-                .children[0].src = '/static/img/clear.svg';
+                .children[0].src = '/static/img/icons/clear.svg';
         } else {
             document.getElementsByClassName('l-navbar')[0].children.forEach((item) => {
                 if ((item.classList.contains('l-navbar-small-search') ||
@@ -184,7 +184,7 @@ export default class NavbarView extends BaseView {
             document.getElementsByClassName('m-search-input')[0].classList
                 .remove('m-search-input-expanded');
             document.getElementsByClassName('l-navbar-small-search')[0]
-                .children[0].src = '/static/img/search.svg';
+                .children[0].src = '/static/img/icons/search.svg';
         }
     }
 }

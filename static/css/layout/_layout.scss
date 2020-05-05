@@ -436,6 +436,10 @@
     }
 }
 
+.l-top-content {
+    z-index: 10;
+}
+
 @media screen and (max-width: 343px) {
     .l-navbar, .l-top-content, .l-content, .l-player {
         display: none;

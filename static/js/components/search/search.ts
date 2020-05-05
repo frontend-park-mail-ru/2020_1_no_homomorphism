@@ -23,7 +23,7 @@ export default class SearchComponent {
         this.isOpen = false;
     }
 
-    render(input: string) {
+    render(input: string): void {
         if (input === '') {
             clearTimeout(this.requestInterval);
             return;

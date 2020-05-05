@@ -239,7 +239,7 @@
 .m-button-track-play {
   height: 30px;
   width: 30px;
-  background: url(../../static/img/play.svg) no-repeat;
+  background: url(../../static/img/icons/play.svg) no-repeat;
   border: yellow;
   cursor: pointer;
   opacity: 0;
@@ -383,7 +383,7 @@
 }
 
 .m-small-li:hover .m-small-ticked-button {
-  // background-image: url("/static/img/clear.svg");
+  // background-image: url("/static/img/icons/clear.svg");
   display: inline-block;
 }
 

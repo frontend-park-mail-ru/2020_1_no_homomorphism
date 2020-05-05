@@ -63,7 +63,6 @@ export default class User implements StaticUser {
      */
     public static exists(): boolean {
         if (User.instance) {
-            // tslint:disable-next-line:max-classes-per-file
             User.instance = new class implements StaticUser {
                 instanceMethod(): void {
                     return;

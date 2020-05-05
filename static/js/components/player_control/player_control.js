@@ -469,7 +469,7 @@ export default class PlayerControlComponent {
      * (воспроизвдение по нажатию)
      */
     drawPlay() {
-        document.getElementsByClassName('play-pause')[0].src = '/static/img/play.svg';
+        document.getElementsByClassName('play-pause')[0].src = '/static/img/icons/play.svg';
         this.playing = false;
     }
 
@@ -478,7 +478,7 @@ export default class PlayerControlComponent {
      * (пауза по нажатию)
      */
     drawPause() {
-        document.getElementsByClassName('play-pause')[0].src = '/static/img/pause.svg';
+        document.getElementsByClassName('play-pause')[0].src = '/static/img/icons/pause.svg';
         this.playing = true;
     }
 
@@ -535,7 +535,7 @@ export default class PlayerControlComponent {
      * Рисует кнопку зацикливания в режиме зацикливания одного трека (активной, с единичкой внутри)
      */
     drawRepeatOne() {
-        document.getElementsByClassName('repeat')[0].src = '/static/img/repeat_one.svg';
+        document.getElementsByClassName('repeat')[0].src = '/static/img/icons/repeat_one.svg';
         this.repeatState = 2;
     }
 
@@ -543,7 +543,7 @@ export default class PlayerControlComponent {
      * Рисует кнопку зацикливания в режиме одноразового проигрывания (неактивной)
      */
     drawUnrepeat() {
-        document.getElementsByClassName('repeat')[0].src = '/static/img/repeat.svg';
+        document.getElementsByClassName('repeat')[0].src = '/static/img/icons/repeat.svg';
         this.repeatState = 0;
     }
 
@@ -551,7 +551,7 @@ export default class PlayerControlComponent {
      * Рисует кнопку громкости в беззучном режиме (без волн)
      */
     drawMute() {
-        document.getElementsByClassName('volume')[0].src = '/static/img/volume_mute.svg';
+        document.getElementsByClassName('volume')[0].src = '/static/img/icons/volume_mute.svg';
         this.drawVolume(0);
         this.muted = true;
     }
@@ -561,9 +561,9 @@ export default class PlayerControlComponent {
      */
     drawUnmute() {
         if (this.volume <= 0.5) {
-            document.getElementsByClassName('volume')[0].src = '/static/img/volume_down.svg';
+            document.getElementsByClassName('volume')[0].src = '/static/img/icons/volume_down.svg';
         } else {
-            document.getElementsByClassName('volume')[0].src = '/static/img/volume_up.svg';
+            document.getElementsByClassName('volume')[0].src = '/static/img/icons/volume_up.svg';
         }
         this.drawVolume(document.getElementsByClassName('volume-scale-back')[0]
             .getBoundingClientRect().height * this.volume);

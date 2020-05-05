@@ -136,7 +136,7 @@ export default class PlayerTrackListComponent {
      */
     getIdByClick(event) {
         let current = event.target;
-        while (current != null && !current.classList.contains('track-list')) {
+        while (current !== null && !current.classList.contains('track-list')) {
             if (current.classList.contains('border-bottom') &&
                 current.getAttribute('id') !== null) {
                 return {'id': current.getAttribute('id')};
