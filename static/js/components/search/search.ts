@@ -1,7 +1,7 @@
 import SearchDummyComponent from '@components/search/search_dummy';
 import Api from '@libs/api';
-import {GLOBAL, RESPONSE, SEARCH} from "@libs/constants";
-import {globalEventBus} from "@libs/eventBus";
+import {GLOBAL, RESPONSE, SEARCH} from '@libs/constants';
+import {globalEventBus} from '@libs/eventBus';
 
 type HTMLElementEvent<T extends HTMLElement> = Event & {
     target: T;
@@ -22,16 +22,7 @@ export default class SearchComponent {
         this.waitingAnswer = false;
         this.isOpen = false;
     }
-
-    setClosed() {
-        this.isOpen = false;
-    }
-
-    setOpened() {
-        this.isOpen = true;
-    }
-
-    render(input: string) {
+    render(input: string): void {
         if (input === '') {
             clearTimeout(this.requestInterval);
             return;
@@ -44,30 +35,28 @@ export default class SearchComponent {
         this.requestInterval = setTimeout(this.getData.bind(this), SEARCH.INTERVAL);
     }
 
-    getData() {
+    getData(): void {
         this.waitingAnswer = false;
         Api.searchGet(this.input, SEARCH.AMOUNT_TOP)
             .then((res) => {
                 switch (res.status) {
-                    case RESPONSE.OK:
-                        res.json()
-                            .then((elem) => {
-                                elem.input = this.input;
-                                this.isOpen = true;
-                                this.dummySearch.render(elem);
-                            });
-                        break;
-                    default:
-                        console.log(res);
-                        console.error('I am a teapot');
+                case RESPONSE.OK:
+                    res.json()
+                        .then((elem) => {
+                            elem.input = this.input;
+                            this.isOpen = true;
+                            this.dummySearch.render(elem);
+                        });
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
                 }
             });
     }
 
-    /**
-     * Получение id из dom-елемента по нажатию
-     */
-    getIdByClick(event: HTMLElementEvent<HTMLTextAreaElement>, tracks: [{ [index: string]: string }]) {
+    getIdByClick(event: HTMLElementEvent<HTMLTextAreaElement>,
+        tracks: [{ [index: string]: string }]): void {
         let current = event.target;
         while (!current.classList.contains('l-search-tracks')) {
             if (current.classList.contains('m-small-track') &&
@@ -78,26 +67,27 @@ export default class SearchComponent {
                     }
                 });
             }
+            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
             // @ts-ignore
             current = current.parentNode;
         }
     }
 
-    getTrackInfo(id: string) {
+    getTrackInfo(id: string): void {
         Api.trackGet(id)
             .then((res) => {
                 switch (res.status) {
-                    case RESPONSE.OK:
-                        res.json()
-                            .then((elem) => {
-                                globalEventBus.emit(GLOBAL.PLAY_TRACKS, {
-                                    tracks: [elem],
-                                }, elem.id);
-                            });
-                        break;
-                    default:
-                        console.log(res);
-                        console.error('I am a teapot');
+                case RESPONSE.OK:
+                    res.json()
+                        .then((elem) => {
+                            globalEventBus.emit(GLOBAL.PLAY_TRACKS, {
+                                tracks: [elem],
+                            }, elem.id);
+                        });
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
                 }
             });
     }
@@ -105,12 +95,12 @@ export default class SearchComponent {
     /**
      * Закрытие раздела
      */
-    close() {
+    close(): void {
         if (this.isOpen) {
-            document.getElementsByClassName('l-top-content')[0].removeChild(document.getElementsByClassName('l-top-content')[0].firstChild);
+            document.getElementsByClassName('l-top-content')[0]
+                .removeChild(document.getElementsByClassName('l-top-content')[0].firstChild);
             this.isOpen = false;
             (document.getElementsByClassName('m-search-input')[0] as HTMLInputElement).value = '';
         }
-
     }
 }
