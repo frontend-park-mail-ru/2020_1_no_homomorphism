@@ -22,7 +22,8 @@ export default class SearchComponent {
         this.waitingAnswer = false;
         this.isOpen = false;
     }
-    render(input: string): void {
+
+    render(input: string) {
         if (input === '') {
             clearTimeout(this.requestInterval);
             return;

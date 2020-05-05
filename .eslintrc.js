@@ -61,24 +61,17 @@ module.exports = { //**/*.js - Для игнора всех js файлов
     overrides: [{
         files: ["*.ts", "*.tsx"],
         parser: "@typescript-eslint/parser",
+        parserOptions: {
+            project: "./tsconfig.json",
+        },
         plugins: [
             "@typescript-eslint",
-            // "plugin:@typescript-eslint/eslint-recommended",
+            // "@typescript-eslint/eslint-recommended",
         ],
-        rules: {
-            // "plugin:@typescript-eslint/eslint-recommended": 'error',
-            // "plugin:@typescript-eslint/recommended": 'error',
-            // "plugin:@typescript-eslint/recommended-requiring-type-checking": 'error',
-            '@typescript-eslint/no-unused-vars'         : 'error',
-            // Require PascalCased class and interface names
-            '@typescript-eslint/class-name-casing'      : 'error',
-            // Require a specific member delimiter style for interfaces and type literals
-            // Default Semicolon style
-            '@typescript-eslint/member-delimiter-style' : 'error',
-            // Require a consistent member declaration order
-            '@typescript-eslint/member-ordering'        : 'error',
-            // Require consistent spacing around type annotations
-            '@typescript-eslint/type-annotation-spacing': 'error',
-        },
+        extends: [
+            "plugin:@typescript-eslint/eslint-recommended",
+            "plugin:@typescript-eslint/recommended",
+            "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        ],
     }]
 }
