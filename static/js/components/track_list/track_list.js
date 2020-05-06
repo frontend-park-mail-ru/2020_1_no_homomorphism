@@ -3,7 +3,7 @@ import {globalEventBus} from '@libs/eventBus';
 import ChoosePlaylist from '@components/choose_playlist/choose_playlist';
 import TrackComponent from '@components/track/track';
 import PlaylistComponent from '@components/playlist/playlist';
-import {GLOBAL, PLAYLIST, URL} from '@libs/constants';
+import {PLAYLIST} from '@libs/constants';
 import User from '@libs/user';
 
 /**
@@ -42,6 +42,7 @@ export default class TrackListComponent {
      * @param {Object} data
      */
     render(data) {
+        console.log('GFDGDFGDFG');
         this._tracklist = data.tracks;
         this._type = data.type;
         this._tracklist.type = this._type === 'playlist';
@@ -100,7 +101,7 @@ export default class TrackListComponent {
      */
     addToPlaylist(event) {
         if (!User.exists()) {
-            globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
+            alert('Please, login');
             return;
         }
         this._choosePlaylist.trackData = this.getIdByClick(event);
@@ -174,10 +175,10 @@ export default class TrackListComponent {
      * @param {Object} event
      */
     likeClicked(event) {
-        if (!User.exists()) {
-            globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
-            return;
-        }
+        // if (!User.exists()) {
+        //     globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
+        //     return;
+        // }
         alert('This functionality is not accessible by now');
     }
 }

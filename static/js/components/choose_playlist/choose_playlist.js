@@ -30,13 +30,6 @@ export default class ChoosePlaylist {
         this._trackData = trackData;
         this._trackComponent.trackData = trackData;
     }
-    /**
-     * Установка текущего айди трека
-     * @return {Object}
-     */
-    get trackData() {
-        return this._trackData;
-    }
 
     /**
      * Подготовка к рендерингу
@@ -63,6 +56,9 @@ export default class ChoosePlaylist {
             .firstChild
             .classList
             .add('is-un-emphasized');
+        document.getElementsByClassName(DOM.NAVBAR)[0]
+            .classList
+            .add('is-untouchable');
         this.setEventListeners();
     }
 
@@ -147,6 +143,9 @@ export default class ChoosePlaylist {
             .firstChild
             .classList
             .remove('is-un-emphasized');
+        document.getElementsByClassName(DOM.NAVBAR)[0]
+            .classList
+            .remove('is-untouchable');
         this.eventBus.emit(SEARCH.SET_LISTENERS);
         this._callbackEventListener();
     }

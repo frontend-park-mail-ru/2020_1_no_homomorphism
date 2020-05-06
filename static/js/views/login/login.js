@@ -1,4 +1,4 @@
-import {LOGIN, GLOBAL, DOM} from '@libs/constants';
+import {LOGIN, GLOBAL, DOM, URL} from '@libs/constants';
 import template from '@views/login/login.tmpl.xml';
 import BaseView from '@libs/base_view';
 import {globalEventBus} from '@libs/eventBus';
@@ -14,6 +14,7 @@ export default class LoginView extends BaseView {
         super(template);
         this.eventBus = eventBus;
         this.eventBus.on(LOGIN.INVALID, this.showErrors.bind(this));
+        this.eventBus.on(LOGIN.CLOSE, this.close);
     }
 
     /**
@@ -22,19 +23,20 @@ export default class LoginView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
+        console.log('LOL');
         globalEventBus.emit(GLOBAL.COLLAPSE);
-        // window.history.back();
         if (document
             .getElementsByClassName(DOM.CONTENT)[0].children.length > 0) {
-            console.log(document
-                .getElementsByClassName(DOM.CONTENT)[0].firstChild);
             document
-                .getElementsByClassName(DOM.CONTENT)[0].firstChild
-                .classList.add('is-un-emphasized');
+                .getElementsByClassName(DOM.CONTENT)[0].classList.add('is-un-emphasized');
         }
         document
             .getElementsByClassName(DOM.TOP_CONTENT)[0].innerHTML = template();
+        document.getElementsByClassName(DOM.NAVBAR)[0]
+            .classList
+            .add('is-untouchable');
         this.setEventListeners.bind(this)();
+        this.setDynamicEventListeners.bind(this)();
 
         // globalEventBus.emit(GLOBAL.COLLAPSE);
         // if (root.children.length > 0) {
@@ -59,13 +61,19 @@ export default class LoginView extends BaseView {
      * setEventListeners
      */
     setEventListeners() {
-        // document.addEventListener('click', (event) => {
-        //     if (event.target.getAttribute('id') === 'submit-login') {
-        //         event.preventDefault();
-        //         event.stopImmediatePropagation();
-        //         this.submit();
-        //     }
-        // });
+        document.addEventListener('click', (event) => {
+            if (event.target.getAttribute('id') === 'submit-login') {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                this.submit();
+            }
+        });
+    }
+
+    /**
+     * setDynamicEventListeners
+     */
+    setDynamicEventListeners() {
         document.addEventListener('click', this.analyzeTouch.bind(this), {once: true});
     }
 
@@ -74,26 +82,31 @@ export default class LoginView extends BaseView {
      * @param {Event} event
      */
     analyzeTouch(event) {
-        if (event.target.getAttribute('id') === 'submit-login') {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-            this.submit();
-            return;
-        }
+        console.log(event);
         const loginArea = document.getElementsByClassName('is-emphasized')[0];
         if (loginArea === undefined) {
             return;
         }
         const isClickInside = loginArea.contains(event.target);
         if (isClickInside) {
-            console.log('CLICKED INSIDE');
-            this.setEventListeners();
+            this.setDynamicEventListeners();
             return;
         }
-        document
-            .getElementsByClassName(DOM.TOP_CONTENT)[0].innerHTML = '';
-        window.history.back();
-        console.log('CLICKED OUTSIDE');
+        if (document
+            .getElementsByClassName(DOM.CONTENT)[0].firstChild !== null) {
+            this.close();
+            // document
+            //     .getElementsByClassName(DOM.TOP_CONTENT)[0].innerHTML = '';
+            window.history.back();
+            return;
+        }
+        console.log(globalEventBus);
+        this.close();
+        globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+        // this.close();
+        // // document
+        // //     .getElementsByClassName(DOM.TOP_CONTENT)[0].innerHTML = '';
+        // window.history.back();
     }
 
     /**
@@ -101,7 +114,7 @@ export default class LoginView extends BaseView {
      * @param {Object} errors
      */
     showErrors(errors) {
-        this.setEventListeners.bind(this)();
+        this.setDynamicEventListeners.bind(this)();
         document.getElementsByClassName('l-form')[0].style.borderColor = 'red';
         for (const key in errors) {
             if (key === 'global') {
@@ -138,5 +151,16 @@ export default class LoginView extends BaseView {
             login: document.getElementById('login').value,
             password: document.getElementById('password').value,
         });
+    }
+
+    /**
+     * Закрытие
+     */
+    close() {
+        document.getElementsByClassName(DOM.NAVBAR)[0].classList.remove('is-untouchable');
+        document
+            .getElementsByClassName(DOM.CONTENT)[0].classList.remove('is-un-emphasized');
+        document
+            .getElementsByClassName(DOM.TOP_CONTENT)[0].innerHTML = '';
     }
 }

@@ -1,5 +1,5 @@
 import Router from '@libs/router';
-import {URL, GLOBAL} from '@libs/constants';
+import {URL, GLOBAL, DOM} from '@libs/constants';
 import {NavbarController} from '@controllers/navbar';
 import {NewsController} from '@controllers/news';
 import {LoginController} from '@controllers/login';
@@ -58,3 +58,11 @@ window.addEventListener('storage', (e) => {
         globalEventBus.emit(GLOBAL.PAUSE);
     }
 });
+
+window.onpopstate = function(event) {
+    document.getElementsByClassName(DOM.NAVBAR)[0].classList.remove('is-untouchable');
+    document
+        .getElementsByClassName(DOM.CONTENT)[0].classList.remove('is-un-emphasized');
+    document
+        .getElementsByClassName(DOM.TOP_CONTENT)[0].innerHTML = '';
+};

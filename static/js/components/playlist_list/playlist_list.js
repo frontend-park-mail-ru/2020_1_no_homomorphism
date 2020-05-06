@@ -26,9 +26,7 @@ export default class PlaylistsComponent {
      * Отрисовка списка плейлистов или альбомомв
      * @param {Object} data
      */
-    render(data) { // TODO Почекать, в чем проблема
-        console.log('WHAAAT');
-        console.log(data);
+    render(data) {
         this._type = data.type;
         this._domItem = data.domItem;
         const elem = document.getElementsByClassName(data.domItem)[0];

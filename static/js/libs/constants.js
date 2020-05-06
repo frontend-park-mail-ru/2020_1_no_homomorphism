@@ -67,7 +67,6 @@ export const VALIDATION = {
 };
 
 export const GLOBAL = {
-    GET_ARTIST_TRACKS: 'global-get-artist-tracks',
     PLAY_ARTIST_TRACKS: 'global-play-artist-tracks',
     PLAY_PLAYLIST_TRACKS: 'global-play-playlist-tracks',
     PLAY_ALBUM_TRACKS: 'global-play-album-tracks',
@@ -95,6 +94,7 @@ export const LOGIN = {
     INVALID: 'login-invalid',
     SUBMIT: 'login-submit',
     LOGIN_SUCCESS: 'login-success',
+    CLOSE: 'login-close',
 };
 
 export const NAVBAR = {
@@ -160,6 +160,7 @@ export const SIGN_UP = {
     LOGIN_SUCCESS: 'signup-success',
     SUBMIT: 'signup-submit',
     INVALID: 'signup-invalid',
+    CLOSE: 'signup-close',
 };
 
 export const PROFILE = {

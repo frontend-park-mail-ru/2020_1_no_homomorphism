@@ -15,7 +15,6 @@ export default class ArtistModel {
         this.tracks = [];
         this.id = '';
         this.eventBus = eventBus;
-        globalEventBus.on(GLOBAL.GET_ARTIST_TRACKS, this.getArtistTracks.bind(this));
         this.eventBus.on(ARTIST.GET_DATA, this.getArtistData.bind(this));
         this.eventBus.on(ARTIST.ID_TRACKS_SECTION, this.getArtistTracks.bind(this));
         this.eventBus.on(ARTIST.ID_ALBUMS_SECTION, this.getArtistAlbums.bind(this));

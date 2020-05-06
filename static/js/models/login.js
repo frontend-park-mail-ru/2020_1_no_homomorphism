@@ -40,6 +40,7 @@ export default class LoginModel {
                     case RESPONSE.OK:
                         this.getCsrfToken();
                         globalEventBus.emit(NAVBAR.GET_USER_DATA);
+                        this.eventBus.emit(LOGIN.CLOSE);
                         globalEventBus.emit(GLOBAL.REDIRECT, URL.PROFILE_TRACKS);
                         break;
                     case RESPONSE.BAD_REQUEST:

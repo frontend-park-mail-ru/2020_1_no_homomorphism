@@ -9,8 +9,12 @@
 
 .is-un-emphasized {
   transition: .6s filter;
-  filter: blur(3px) contrast(.8)
+  filter: blur(10px) contrast(.8)
   brightness(0.8);
+  pointer-events: none;
+}
+
+.is-untouchable {
   pointer-events: none;
 }
 

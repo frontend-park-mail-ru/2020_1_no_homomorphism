@@ -33,7 +33,6 @@ export default class ArtistView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
-        console.log(url);
         super.render(document.getElementsByClassName(DOM.CONTENT)[0], url);
         this.analizeUrl(url);
         this.eventBus.emit(ARTIST.GET_DATA, this.id);
