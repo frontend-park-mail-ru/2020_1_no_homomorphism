@@ -3,7 +3,7 @@ import {globalEventBus} from '@libs/eventBus';
 import ChoosePlaylist from '@components/choose_playlist/choose_playlist';
 import TrackComponent from '@components/track/track';
 import PlaylistComponent from '@components/playlist/playlist';
-import {PLAYLIST} from '@libs/constants';
+import {PLAYLIST, GLOBAL, URL} from '@libs/constants';
 import User from '@libs/user';
 
 /**
@@ -175,10 +175,10 @@ export default class TrackListComponent {
      * @param {Object} event
      */
     likeClicked(event) {
-        // if (!User.exists()) {
-        //     globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
-        //     return;
-        // }
+        if (!User.exists()) {
+            globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
+            return;
+        }
         alert('This functionality is not accessible by now');
     }
 }
