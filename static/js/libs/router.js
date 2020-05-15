@@ -17,7 +17,10 @@ export default class Router {
             URL.PROFILE_ARTISTS, URL.PROFILE_ALBUMS];
         this.forbiddenForLogout = [URL.PROFILE, URL.PROFILE_TRACKS, URL.PROFILE_PLAYLISTS,
             URL.PROFILE_ARTISTS, URL.PROFILE_ALBUMS, URL.SETTINGS];
+        this.forbiddenForLogoutRegEx = [URL.PLAYLIST];
+        this.forms = [URL.LOGIN, URL.SIGNUP];
         globalEventBus.on(GLOBAL.REDIRECT, this.redirect.bind(this));
+        globalEventBus.on(GLOBAL.LOGIN_REDIRECT, this.loginRedirect.bind(this));
     }
 
     /**
@@ -34,8 +37,19 @@ export default class Router {
      * @param {string} to
      */
     logoutRedirect(to) {
-        if (this.forbiddenForLogout.includes(window.location.pathname)) {
+        if (this.forbiddenForLogout.includes(window.location.pathname) ||
+            this.forbiddenForLogoutRegEx.some((path) => window.location.pathname.match(path))
+        ) {
             this.check(to, true);
+        }
+    }
+
+    /**
+     * Редирект после логина или регистрации
+     */
+    loginRedirect() {
+        if (this.forms.includes(window.location.pathname)) {
+            this.check(URL.MAIN, true);
         }
     }
 
@@ -92,8 +106,10 @@ export default class Router {
         if (newPath === URL.PROFILE) {
             this.redirect(URL.PROFILE_TRACKS);
         }
-        this.curPath = newPath;
-        if (pushState) {
+        if (!this.forms.includes(newPath)) {
+            this.curPath = newPath;
+        }
+        if (pushState && !this.forms.includes(newPath)) {
             window.history.pushState('', {}, newPath);
         }
         if (this.profileUrl.indexOf(newPath) !== -1) {

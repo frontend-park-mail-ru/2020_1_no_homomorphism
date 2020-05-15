@@ -1,5 +1,5 @@
-// export const SERVER_PATH = 'http://localhost:8081';
-export const SERVER_PATH = 'https://virusmusic.fun';
+export const SERVER_PATH = 'http://localhost:8081';
+// export const SERVER_PATH = 'https://virusmusic.fun';
 
 export const API = '/api/v1';
 
@@ -78,6 +78,7 @@ export const GLOBAL = {
     REDIRECT: 'redirect',
     HREF: 'global-href',
     LOGOUT_REDIRECT: 'global-logout-redirect',
+    LOGIN_REDIRECT: 'global-login-redirect',
     CLOSE_SEARCH: 'global-close-search',
     PAUSE: 'global-pause',
 };

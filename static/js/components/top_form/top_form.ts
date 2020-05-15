@@ -40,7 +40,6 @@ export default class TopFormComponent {
         if (document
             .getElementsByClassName(DOM.CONTENT)[0].firstChild !== null) {
             this.close();
-            window.history.back();
             return;
         }
         this.close();
@@ -85,5 +84,6 @@ export default class TopFormComponent {
             .getElementsByClassName(DOM.CONTENT)[0].classList.remove('is-un-emphasized');
         document
             .getElementsByClassName(DOM.TOP_CONTENT)[0].innerHTML = '';
+        globalEventBus.emit(GLOBAL.LOGIN_REDIRECT);
     }
 }
