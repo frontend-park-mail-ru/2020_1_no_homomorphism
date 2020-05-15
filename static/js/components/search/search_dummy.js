@@ -37,6 +37,6 @@ export default class SearchDummyComponent {
      * @param {Object} event
      */
     playTrack(event) {
-        this._getIdByClick(event, this._data.tracks);
+        this._getIdByClick(event);
     }
 }

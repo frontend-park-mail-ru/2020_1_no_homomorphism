@@ -60,8 +60,6 @@ window.addEventListener('storage', (e) => {
 });
 
 window.onpopstate = function(event) {
-    console.log('HREF: ');
-    console.log(window.location.href );
     document.getElementsByClassName(DOM.NAVBAR)[0].classList.remove('is-untouchable');
     document
         .getElementsByClassName(DOM.CONTENT)[0].classList.remove('is-un-emphasized');

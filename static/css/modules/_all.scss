@@ -14,22 +14,17 @@
 .l-navbar .m-search-input {
   box-shadow: $box-shadow;
   height: 40px;
-  // width: -webkit-calc(100% - 50px);
-
   width: 28%;
   border: 1px solid $chosen-icon;
   padding: 8px 35px 8px 8px;
-  //border: none;
-  //outline: none;
-  //background: transparent;
 }
 
 .m-mobile-only {
-    display: none;
+  display: none;
 }
 
 .l-navbar-small-search {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .m-login-input {
@@ -59,11 +54,11 @@
 .m-tiny-ref {
   font-weight: lighter;
   color: #000000;
-  text-decoration: none
-}
+  text-decoration: none;
 
-.m-tiny-ref:hover {
-  color: #070025;
+  &:hover {
+    color: #070025;
+  }
 }
 
 .l-top-section-albums:hover, .l-top-section-tracks:hover, .m-profile-playlists:hover, .l-top-section-artists:hover, .l-top-section-info:hover {
@@ -80,9 +75,9 @@
 }
 
 .m-top-name {
-  color: #5c4b6b;
   font-size: 16px;
   word-wrap: break-word;
+  font-family: Montserrat-Light, sans-serif;
 }
 
 .m-big-name {
@@ -135,8 +130,7 @@
 }
 
 .l-small-card {
-  margin: 32px;
-  // margin: 16px;
+  padding: 16px;
 }
 
 .m-hidden-input {
@@ -188,7 +182,6 @@
 .l-big-track-button {
   opacity: 0.4;
   transform: scale(1.5);
-  /*margin-top: -20px;*/
   padding-right: 8px;
 }
 
@@ -199,12 +192,13 @@
 
 .l-track-big img {
   float: left;
-  margin: 0 15px 4px 0;
+  margin: 0 15px 0 0;
 }
 
-.l-track-big {
+.l-track-big { // KEK
+  display: inline-block;
+  width: -webkit-calc(49%);
   padding: 2px;
-  // padding: 10px;
   overflow: hidden;
 }
 
@@ -216,6 +210,7 @@
 .m-track {
   animation-duration: 1s;
   animation-name: slidein;
+  text-align: left
 }
 
 .l-track-big:hover .m-track-image {
@@ -248,25 +243,51 @@
 }
 
 .m-track-name {
-  margin-top: -48px;
+  margin-top: -46px;
 }
 
 .l-list-card img {
   float: left;
   object-fit: cover;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
 }
+
+.l-list-rounded-card {
+  float: top;
+  animation-duration: 1s;
+  overflow: hidden;
+  background-color: white;
+  display: inline-block;
+  width: 90%;
+  max-width: 180px;
+  max-height: 220px;
+  text-decoration: none;
+  border-radius: $card-border-small;
+
+  &:hover {
+    //box-shadow: $box-shadow-hard;
+    transition: 0.11s;
+    box-shadow: $box-shadow-hard;
+    -webkit-transform: scale(1.02);
+    transform: scale(1.02);
+  }
+
+  &:not(:hover) {
+    transition: 0.11s;
+  }
+}
+
 
 .l-list-card {
   float: top;
   animation-duration: 1s;
   overflow: hidden;
-  margin: 16px;
+  margin: 8px;
   display: inline-block;
   width: 90%;
-  max-width: 200px;
-  max-height: 255px;
+  max-width: 150px;
+  max-height: 220px;
   text-decoration: none;
   border-radius: $card-border-small;
   box-shadow: 0 0 10px -3px rgba(0, 0, 0, 0.5);
@@ -303,7 +324,7 @@
 }
 
 .l-list-image {
-  height: 200px
+  height: 150px
 }
 
 .m-error-message-small {
@@ -333,7 +354,7 @@
   background-color: #ffffff;
   transition: box-shadow .3s ease;
   box-shadow: $box-shadow-hard;
-  z-index: 102;
+  z-index: $top-level;
 
   .content {
     margin: auto;
@@ -341,7 +362,7 @@
 }
 
 .l-small-list {
-  height: 250px;
+  //height: 250px;
   overflow-y: auto;
   overflow-x: hidden;
   box-sizing: border-box;
@@ -367,6 +388,14 @@
   cursor: pointer;
 }
 
+.m-index {
+  font-family: Montserrat-Light,sans-serif;
+  font-size: 16px;
+  margin-bottom: -32px;
+  margin-top: 16px;
+  padding-left: 8px;
+}
+
 .m-small-li:hover {
   background: $selected-elem;
   cursor: pointer;
@@ -383,7 +412,6 @@
 }
 
 .m-small-li:hover .m-small-ticked-button {
-  // background-image: url("/static/img/icons/clear.svg");
   display: inline-block;
 }
 
@@ -400,9 +428,9 @@
 
 .l-small-input {
   width: 100%;
-  height: 40px;
+  height: 50px;
   font-size: 14px;
-  font-family: YSTextRegular, Arial, Helvetica, sans-serif;
+  font-family: Montserrat-Thin, sans-serif;
   border-top: 1px solid #d9d6d0;
   border-radius: 0;
   line-height: 20px;
@@ -444,7 +472,7 @@
   width: 25%;
   box-shadow: $box-shadow;
   top: 52px;
-  z-index: 4;
+  z-index: $top-level;
   background-color: #ffffff;
 }
 
@@ -457,10 +485,8 @@
 }
 
 .m-obscure-title {
-  // padding: 4px;
   padding-bottom: 4px;
   padding-top: 4px;
-  // font-size: 12px;
   color: $obscure;
 }
 
@@ -468,14 +494,13 @@
   font-size: 13px;
 }
 
-.m-medium-text {
+.m-medium-bold-text {
   font-size: 16px;
   font-weight: bold;
 }
 
 .m-small-image {
   height: 40px;
-  // margin-top: 5px;
   margin-right: 5px;
   padding-left: 8px;
 }

@@ -4,7 +4,7 @@
 .is-emphasized {
   position: fixed;
   box-shadow: black;
-  z-index: 100;
+  z-index: $super-top-level;
 }
 
 .is-un-emphasized {

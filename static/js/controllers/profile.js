@@ -1,5 +1,5 @@
 import EventBus from '@libs/eventBus';
-import ProfileModel from '@models/profile/profile';
+import ProfileModel from '@models/profile';
 import ProfileView from '@views/profile/profile';
 
 /**

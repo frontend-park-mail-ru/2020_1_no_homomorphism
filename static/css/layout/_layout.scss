@@ -18,7 +18,7 @@
   box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
   border-radius: $card-border;
   margin-top: 16px;
-  padding: 16px;
+  //padding: 16px;
 }
 
 .l-top-titles {
@@ -30,7 +30,6 @@
 }
 
 .l-top-name {
-  //margin-left: 32px;
   padding-top: 100px;
   text-align: left;
 }
@@ -62,19 +61,21 @@
 
 .l-track-list {
   border-radius: $card-border;
+  padding: 8px;
 }
 
 .l-list-card-description {
   display: block;
   color: #515151;
-  margin-top: 10px;
-  padding-bottom: 20px;
+  margin-top: 12px;
+  padding-bottom: 16px;
   padding-left: 6px;
   padding-right: 6px;
   text-decoration: none;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  font-size: 16px;
 }
 
 .l-input {
@@ -91,7 +92,7 @@
   box-shadow: 0 3px 6px $chosen-icon;
   display: flex;
   align-items: center;
-  z-index: 3;
+  z-index: $main-level;
 }
 
 .l-navbar a {
@@ -171,10 +172,6 @@
 
   .m-navbar-name {
     padding: 13px 8px 0 0;
-  }
-
-  .l-small-card {
-    margin: 11px;
   }
 
   .l-navbar .m-search-input {
@@ -277,7 +274,7 @@
     position: absolute;
     right: 13px;
     top: 15px;
-    z-index: 3;
+    z-index: $top-level;
     height: 35px;
     width: 35px;
   }
@@ -342,11 +339,6 @@
   .l-search {
     left: 5.5%;
     width: 80%;
-  }
-
-
-  .l-small-card {
-    margin: 11px;
   }
 
   .l-navbar .m-search-input {
@@ -435,7 +427,7 @@
 }
 
 .l-top-content {
-  z-index: 10;
+  z-index: $top-level;
 }
 
 @media screen and (max-width: 343px) {

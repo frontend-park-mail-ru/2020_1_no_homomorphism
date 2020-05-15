@@ -10,7 +10,6 @@
                 </div>
             </div>
         </fest:if>
-
         <fest:if test="data.tracks.length !== 0">
             <div class="l-main l-down-card">
                 <h2 class="l-small-card">

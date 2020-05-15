@@ -84,7 +84,7 @@ export const GLOBAL = {
 
 export const MAIN = {
     GET_LIST_DATA: 'get-all-artists-data',
-    RENDER_ARTIST: 'render-artist-list',
+    RENDER_ARTISTs: 'render-artist-list',
     NO_ANSWER: 'no-answer',
     // REDIRECT: 'redirect',
 };

@@ -1,4 +1,3 @@
-import news from '@views/news/news.tmpl.xml';
 import artistList from '@views/news/artist_list.tmpl.xml';
 import BaseView from '@libs/base_view';
 import {MAIN, DOM} from '@libs/constants';
@@ -12,10 +11,10 @@ export default class NewsView extends BaseView {
      * @param {EventBus} eventBus
      */
     constructor(eventBus) {
-        super(news);
+        super(artistList);
         this.eventBus = eventBus;
         this.artistList = [];
-        this.eventBus.on(MAIN.RENDER_ARTIST, this.renderList.bind(this));
+        // this.eventBus.on(MAIN.RENDER_ARTIST, this.renderList.bind(this));
     }
 
     /**
@@ -24,6 +23,7 @@ export default class NewsView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
+        super.render(root, url);
         this.eventBus.emit(MAIN.GET_LIST_DATA);
     }
 

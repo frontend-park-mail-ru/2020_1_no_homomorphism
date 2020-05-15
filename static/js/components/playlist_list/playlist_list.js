@@ -10,15 +10,18 @@ import {PROFILE, SEARCH} from '@libs/constants';
 export default class PlaylistsComponent {
     /**
      * @param {EventBus} eventBus
-     * @param {Object} command
+     * @param {String} command
+     * @param {String} anotherCommand
      */
-    constructor(eventBus, command) {
+    constructor(eventBus, command, anotherCommand = '') {
         this._type = '';
         this._domItem = '';
         this._playlistComponent = new PlaylistComponent(this.setEventListeners.bind(this));
         this.eventBus = eventBus;
-        this.eventBus.on(command.RENDER_ALBUMS, this.render.bind(this));
-        this.eventBus.on(command.RENDER_PLAYLISTS, this.render.bind(this));
+        this.eventBus.on(command, this.render.bind(this));
+        if (anotherCommand !== '') {
+            this.eventBus.on(anotherCommand, this.render.bind(this));
+        }
         this.eventBus.on(SEARCH.SET_LISTENERS, this.setEventListeners.bind(this));
     }
 
@@ -30,10 +33,8 @@ export default class PlaylistsComponent {
         this._type = data.type;
         this._domItem = data.domItem;
         const elem = document.getElementsByClassName(data.domItem)[0];
-        if (data.list.length !== 0) {
-            elem.innerHTML = template(this.generateHref(data.list));
-            this.setEventListeners();
-        }
+        elem.innerHTML = template(this.generateHref(data.list));
+        this.setEventListeners();
     }
 
     /**

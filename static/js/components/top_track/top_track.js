@@ -27,6 +27,8 @@ export default class TopTrackComponent {
     updateTrack(track) {
         document.getElementById('cover').src = track.image;
         document.getElementById('artist').innerHTML = track.artist;
+        document.getElementById('artist').href = `/artist/${track.artist_id}`;
+
         document.getElementById('title').innerHTML = track.name;
         document.getElementById('title').title = track.name;
     }

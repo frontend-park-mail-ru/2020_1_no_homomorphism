@@ -6,7 +6,7 @@
     position: fixed;
     top: 60px;
     left: 150%;
-    z-index: 1;
+    z-index: $main-level;
     padding-left: 0;
     padding-top: 0;
     background: white;
@@ -21,7 +21,7 @@
     position: fixed;
     top: 60px;
     left: 150%;
-    z-index: 1;
+    z-index: $main-level;
     padding-left: 0;
     padding-top: 0;
     background: white;
@@ -46,13 +46,13 @@
   height: 1em;
   background: white;
   position: relative;
-  z-index: 1;
+  z-index: $main-level;
 }
 
 .l-music-bar {
   background: white;
   position: relative;
-  z-index: 1;
+  z-index: $main-level;
   padding-bottom: 16px;
 }
 
@@ -70,7 +70,7 @@
   color: #444;
   background: white;
   position: relative;
-  z-index: 1;
+  z-index: $main-level;
 }
 
 .timeline .timeline-back {
@@ -147,7 +147,7 @@
   position: relative;
   top: -5px;
   right: -204px;
-  z-index: 2;
+  z-index: $top-level;
   opacity: 0.4;
 }
 
@@ -235,7 +235,7 @@
 
 .track-list {
     position: relative;
-    z-index: 0;
+    z-index: $back-level;
     height: 200px;
     overflow: hidden scroll;
 }
@@ -338,14 +338,14 @@
 
 .trigger-button {
   border-radius: 4px;
-  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: $box-shadow;
   position: absolute;
   top: 50%;
   left: -37px;
   width: 40px;
   height: 40px;
   background: white;
-  z-index: -1;
+  z-index: $back-level;
   cursor: pointer;
 }
 
@@ -358,7 +358,7 @@
     height: 25px;
     background: white;
     position: relative;
-    z-index: 1;
+    z-index: $main-level;
     width: 108%;
     left: -15px;
 }
@@ -376,7 +376,7 @@
     top: 0;
     width: 100%;
     height: 60px;
-    z-index: 2;
+    z-index: $top-level;
     background: transparent;
 }
 

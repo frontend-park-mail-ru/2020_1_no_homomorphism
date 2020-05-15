@@ -40,9 +40,11 @@ export default class ArtistModel {
                     const data = {};
                     Promise.all(res.map((item) => item.json()))
                         .then((res) => res.forEach((item) => Object.assign(data, item)))
-                        .then(() => this.eventBus.emit(ARTIST.RENDER_DATA, data));
+                        .then(() => {
+                            this.eventBus.emit(ARTIST.RENDER_DATA, data);
+                        });
                 } else {
-                    this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                 }
             });
     }
@@ -71,7 +73,8 @@ export default class ArtistModel {
                                 });
                         });
                 } else {
-                    this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+                    // this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
                 }
             });
     }
@@ -95,12 +98,12 @@ export default class ArtistModel {
                             this.eventBus.emit(ARTIST.RENDER_ALBUMS,
                                 {
                                     'list': data.albums,
-                                    'domItem': 'l-album-list',
+                                    'domItem': 'l-track-list',
                                     'type': 'album',
                                 });
                         });
                 } else {
-                    this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                 }
             });
     }

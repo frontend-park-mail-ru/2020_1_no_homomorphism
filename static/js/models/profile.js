@@ -86,6 +86,13 @@ export default class ProfileModel {
      * Получение списка любимых треков
      */
     getLikedTracks() {
+        this.eventBus.emit(
+            PROFILE.RENDER_TRACKS,
+            {
+                'tracks': [],
+                'domItem': 'l-track-list',
+                'type': 'playlist',
+            });
         // const playlistID = 94; // СУПЕР ВРЕМЕННО!!!
         // Api.playlistTracksGet(
         //     playlistID.toString(),
@@ -131,7 +138,7 @@ export default class ProfileModel {
                                 PROFILE.RENDER_PLAYLISTS,
                                 {
                                     'list': list.playlists,
-                                    'domItem': 'l-playlist-list',
+                                    'domItem': 'l-track-list',
                                     'type': 'playlist',
                                 });
                         });
@@ -165,7 +172,7 @@ export default class ProfileModel {
                                 PROFILE.RENDER_PLAYLISTS,
                                 {
                                     'list': this.albums,
-                                    'domItem': 'l-album-list',
+                                    'domItem': 'l-track-list',
                                     'type': 'album',
                                 });
                         });

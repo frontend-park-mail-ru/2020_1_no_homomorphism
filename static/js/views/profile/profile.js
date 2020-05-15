@@ -18,7 +18,9 @@ export default class ProfileView extends BaseView {
         this.eventBus = eventBus;
         this.currentOpen = '';
         this.trackListComponent = new TrackListComponent(eventBus, PROFILE);
-        this.playlistsComponent = new PlaylistsComponent(eventBus, PROFILE);
+        this.playlistsComponent = new PlaylistsComponent(eventBus,
+            PROFILE.RENDER_PLAYLISTS,
+            PROFILE.RENDER_ALBUMS);
         this.eventBus.on(PROFILE.CHOOSE_SECTION, this.chooseSection.bind(this));
         this.eventBus.on(PROFILE.RENDER_DATA, this.renderData.bind(this));
         this.eventBus.on(PROFILE.RENDER_STAT, this.renderStat.bind(this));

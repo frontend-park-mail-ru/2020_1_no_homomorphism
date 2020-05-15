@@ -56,17 +56,13 @@ export default class SearchComponent {
             });
     }
 
-    getIdByClick(event: HTMLElementEvent<HTMLTextAreaElement>,
-        tracks: [{ [index: string]: string }]): void {
+    getIdByClick(event: HTMLElementEvent<HTMLTextAreaElement>): void {
         let current = event.target;
         while (!current.classList.contains('l-search-tracks')) {
             if (current.classList.contains('m-small-track') &&
                 current.getAttribute('t-id') !== null) {
-                tracks.forEach((elem) => {
-                    if (elem.id === current.getAttribute('t-id')) {
-                        this.getTrackInfo(elem.id);
-                    }
-                });
+                this.getTrackInfo(current.getAttribute('t-id'));
+                return;
             }
             // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
             // @ts-ignore

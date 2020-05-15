@@ -22,7 +22,7 @@ export default class ArtistView extends BaseView {
         this.id = 0;
         this.currentOpen = '';
         this.trackListComponent = new TrackListComponent(eventBus, ARTIST);
-        this.playlistsComponent = new PlaylistsComponent(eventBus, ARTIST);
+        this.playlistsComponent = new PlaylistsComponent(eventBus, ARTIST.RENDER_ALBUMS);
         this.eventBus = eventBus;
         this.eventBus.on(ARTIST.RENDER_DATA, this.renderData.bind(this));
     }

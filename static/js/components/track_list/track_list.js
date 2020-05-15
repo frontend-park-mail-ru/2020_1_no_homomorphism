@@ -3,8 +3,9 @@ import {globalEventBus} from '@libs/eventBus';
 import ChoosePlaylist from '@components/choose_playlist/choose_playlist';
 import TrackComponent from '@components/track/track';
 import PlaylistComponent from '@components/playlist/playlist';
-import {PLAYLIST, GLOBAL, URL} from '@libs/constants';
+import {PLAYLIST, GLOBAL, URL, RESPONSE} from '@libs/constants';
 import User from '@libs/user';
+import Api from '@libs/api';
 
 /**
  * Компонент - список треков
@@ -42,13 +43,12 @@ export default class TrackListComponent {
      * @param {Object} data
      */
     render(data) {
-        console.log('GFDGDFGDFG');
         this._tracklist = data.tracks;
         this._type = data.type;
         this._tracklist.type = this._type === 'playlist';
         const elem = document.getElementsByClassName(data.domItem)[0];
+        elem.innerHTML = template(this._tracklist);
         if (this._tracklist.length !== 0) {
-            elem.innerHTML = template(this._tracklist);
             this.setTracksEventListeners();
         }
     }
@@ -82,6 +82,10 @@ export default class TrackListComponent {
      */
     playTrack(event) {
         const trackData = this.getIdByClick(event);
+        if (this._type === 'search') {
+            this.getTrackInfo(trackData.id);
+            return;
+        }
         if (this._type === 'track') {
             const temp = this._tracklist;
             delete temp.type;
@@ -142,6 +146,29 @@ export default class TrackListComponent {
             }
             current = current.parentNode;
         }
+    }
+
+    /**
+     * Get track from db
+     * @param {String} id
+     */
+    getTrackInfo(id) {
+        Api.trackGet(id)
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    res.json()
+                        .then((elem) => {
+                            globalEventBus.emit(GLOBAL.PLAY_TRACKS, {
+                                tracks: [elem],
+                            }, elem.id);
+                        });
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
     }
 
     /**

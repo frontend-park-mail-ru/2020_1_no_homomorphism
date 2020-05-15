@@ -7,7 +7,6 @@
 
                 <div class="l-round-image col">
                     <label>
-                        <!--                        <i class="material-icons"></i>-->
                         <img alt="" src="{data.image}" class="m-round-image" id="avatar"
                              title="Add new image"/>
                         <input class="m-hidden-input" type="file" id="avatar-upload"/>
