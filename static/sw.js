@@ -1,7 +1,6 @@
 const {assets} = global.serviceWorkerOption;
 const CACHE_NAME = 'No homo';
 
-
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches
@@ -19,16 +18,19 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches
-            .keys()
-            .then((cacheNames) => {
-                return Promise.all(
-                    cacheNames.map((cacheName) => {
-                        if (cacheName.indexOf(CACHE_NAME) === 0) {
-                            return null;
-                        }
-                        return caches.delete(cacheName);
-                    }),
-                );
+            .open(CACHE_NAME)
+            .then((cache) => {
+                cache
+                    .keys()
+                    .then((elem) => {
+                        return Promise.all(
+                            elem.filter((cachedElem) => {
+                                return !cachedElem.url.includes('/static');
+                            }).map((cachedNotStatic) => {
+                                return cache.delete(cachedNotStatic);
+                            }),
+                        );
+                    });
             }),
     );
 });
@@ -36,10 +38,9 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
     const request = event.request;
 
-    if (request.method !== 'GET') { // TODO добавить отлженную отправку форм
+    if (request.method !== 'GET') {
         return;
     }
-
     const resource = caches
         .match(request)
         .then((response) => {
@@ -49,6 +50,9 @@ self.addEventListener('fetch', (event) => {
             return fetch(request)
                 .then((res) => {
                     if (!res || !res.ok) {
+                        return res;
+                    }
+                    if (!res.url.includes('/static')) {
                         return res;
                     }
                     const responseCache = res.clone();

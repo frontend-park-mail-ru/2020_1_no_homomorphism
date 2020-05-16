@@ -6,9 +6,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 
-const filename = (ext) => {
-    !isDev ? `[name].[hash].${ext}` : `[name].${ext}`;
-};
+const curHash = '[hash]';
 
 module.exports = {
     context: path.resolve(__dirname, 'static'),
@@ -23,7 +21,7 @@ module.exports = {
         disableHostCheck: true,
     },
     output: {
-        filename: filename('js'),
+        filename: `[name].${curHash}.js`,
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
     },
@@ -42,13 +40,14 @@ module.exports = {
     plugins: [
         new HTMLWebpackPlugin({
             template: './index.html',
+            filename: 'index.html',
             minify: {
                 collapseWhitespace: !isDev,
             },
         }),
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
-            filename: '[name].css',
+            filename: '[name].[hash].css',
         }),
         new ServiceWorkerWebpackPlugin({
             entry: path.join(__dirname, 'static/sw.js'),
