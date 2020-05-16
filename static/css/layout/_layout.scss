@@ -79,7 +79,8 @@
 }
 
 .l-input {
-  margin-top: 16px;
+  padding: 16px;
+  width: -webkit-calc(100%);
 }
 
 .l-navbar {
@@ -222,10 +223,6 @@
 
   .l-input .col.col-3 {
     width: 100%;
-  }
-
-  .l-input {
-    padding: 0 9px;
   }
 
   .m-tracks-amount {

@@ -26,20 +26,19 @@
 
 .l-track-big-image {
   padding-left: 32px;
-  //margin-top: -20px;
 }
 
-//.m-round-image:hover {
-//  transition: 0.3s;
-//  box-shadow: $box-shadow-hover;
-//  -webkit-transform: scale(1.02);
-//  transform: scale(1.02);
-//}
-//
-//.m-round-image:not(:hover) {
-//  transition: 0.3s;
-//  box-shadow: $box-shadow-hard;
-//}
+.m-scale-image:hover {
+  transition: 0.3s;
+  box-shadow: 0 0 40px $button-color;
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.m-scale-image:not(:hover) {
+  transition: 0.3s;
+  box-shadow: $box-shadow-hard;
+}
 
 .m-search-icon {
   height: 30px;

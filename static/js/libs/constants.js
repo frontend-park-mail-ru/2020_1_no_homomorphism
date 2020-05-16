@@ -59,7 +59,7 @@ export const VALIDATION = {
     PASSES_DIFF: 'Passwords must match',
     PASS_INCORRECT: 'Password must contain at least 3 letters or numbers',
     IMG_TOO_BIG: 'Max allowable size - 1Mb',
-    IMG_WRONG_EXT: 'Allowable extensions - png, jpg, jpeg, gif',
+    IMG_WRONG_EXT: 'Not allowable extension',
     REGEX_EMAIL: '(.)+@(.)+',
     REGEX_LOGIN: '^[a-zA-Z0-9_.]{3,}$',
     REGEX_PASSWORD: '^[a-zA-Z0-9]{3,}$',

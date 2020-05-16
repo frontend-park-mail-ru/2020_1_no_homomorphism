@@ -84,7 +84,7 @@ export default class SettingsView extends BaseView {
         this.errors = errors;
         // eslint-disable-next-line guard-for-in
         for (const key in errors) {
-            const message = document.getElementById(key).nextElementSibling;
+            const message = document.getElementById(key);
             message.innerText = errors[key];
             message.style.height = '15px';
             message.style.marginBottom = '10px';
@@ -98,7 +98,7 @@ export default class SettingsView extends BaseView {
     hideErrors() {
         // eslint-disable-next-line guard-for-in
         for (const key in this.errors) {
-            const message = document.getElementById(key).nextElementSibling;
+            const message = document.getElementById(key);
             message.innerText = '';
             message.style.height = '0';
             message.style.marginBottom = '0';
