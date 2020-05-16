@@ -2,7 +2,7 @@ import template from '@components/playlist_list/playlist.tmpl.xml';
 import newPlaylist from '@components/playlist_list/new_playlist.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
 import PlaylistComponent from '@components/playlist/playlist';
-import {PROFILE, SEARCH} from '@libs/constants';
+import {GLOBAL, PROFILE, SEARCH} from '@libs/constants';
 
 /**
  * Список плейлистов или альбомомв
@@ -52,8 +52,13 @@ export default class PlaylistsComponent {
      * Set EventListeners
      */
     setEventListeners() {
-        document.querySelectorAll('.m-button-track-play-playlist').forEach((button) => {
-            button.onclick = (event) => this.elemClick.bind(this)(event);
+        console.log('LOL');
+        document.querySelectorAll('img.m-list-image').forEach((elem) => {
+            elem.addEventListener('click', this.elemClick.bind(this));
+            // button.onclick = (event) =>
+            // this.elemClick.bind(this)(event);
+            // console.log(event);
+            // globalEventBus.emit(GLOBAL.REDIRECT, `playlist/${}`)
         });
         if (this._type === 'playlist') {
             document.getElementsByClassName('m-button-without-size')[0]
@@ -94,14 +99,18 @@ export default class PlaylistsComponent {
      * @param {Object} event
      */
     elemClick(event) {
-        let current = event.target;
-        while (!current.classList.contains('l-down-card')) {
-            if (current.classList.contains('l-list-card') &&
-                current.getAttribute('a-id') !== null) {
-                globalEventBus.emit(`global-play-${this._type}`, current.getAttribute('a-id'));
-                break;
-            }
-            current = current.parentNode;
-        }
+        // console.log(event.target.getAttribute('a-id'));
+        // globalEventBus.emit(GLOBAL.REDIRECT, `playlist/${event.target.getAttribute('a-id')}`);
+        console.log(`${this._type}/${event.target.getAttribute('a-id')}`);
+        globalEventBus.emit(GLOBAL.REDIRECT, `/${this._type}/${event.target.getAttribute('a-id')}`);
+        // let current = event.target;
+        // while (!current.classList.contains('l-down-card')) {
+        //     if (current.classList.contains('l-list-card') &&
+        //         current.getAttribute('a-id') !== null) {
+        //         globalEventBus.emit(`global-play-${this._type}`, current.getAttribute('a-id'));
+        //         break;
+        //     }
+        //     current = current.parentNode;
+        // }
     }
 }
