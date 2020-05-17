@@ -96,6 +96,8 @@ export default class PlayerTrackListComponent {
      * @param {Object} event
      */
     trackDeleteButtonClick(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
         let target = event.target;
         while (target.getAttribute('id') === null) {
             target = target.parentNode;
@@ -108,6 +110,8 @@ export default class PlayerTrackListComponent {
      * @param {Object} event
      */
     trackFavoriteButtonClick(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
         if (!User.exists()) {
             globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
             return;
@@ -120,6 +124,8 @@ export default class PlayerTrackListComponent {
      * @param {Object} event
      */
     trackAddButtonClick(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
         if (!User.exists()) {
             globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
             return;

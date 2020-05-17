@@ -2,8 +2,9 @@ import artist from '@views/artist/artist.tmpl.xml';
 import BaseView from '@libs/base_view';
 import TrackListComponent from '@components/track_list/track_list';
 import PlaylistsComponent from '@components/playlist_list/playlist_list';
-import {ARTIST, DOM} from '@libs/constants';
+import {ARTIST, DOM, POPUP} from '@libs/constants';
 import User from '@libs/user';
+import PopUp from '@components/pop-up/pop-up';
 
 /**
  *  вью для страницы артиста
@@ -22,6 +23,7 @@ export default class ArtistView extends BaseView {
         this.playlistsComponent = new PlaylistsComponent(eventBus, ARTIST.RENDER_ALBUMS);
         this.eventBus = eventBus;
         this.eventBus.on(ARTIST.RENDER_DATA, this.renderData.bind(this));
+        this.eventBus.on(ARTIST.DRAW_SUBSCRIBE, this.drawSubscribe.bind(this));
     }
 
     /**
@@ -97,25 +99,33 @@ export default class ArtistView extends BaseView {
      * Subscribe
      */
     subscribe() {
-        if (User.exists()) {
-            const button = document.getElementsByClassName('m-subscribe')[0];
-            this.textSubscribe = 'Unsubscribe';
-            if (button.classList.contains('is-subscribed')) {
-                this.textSubscribe = 'Subscribe';
-            }
-            button.classList.toggle('is-subscribed');
-            button.classList.add('is-invisible');
-            setTimeout(this.changeText.bind(this), 100);
-        }
         this.eventBus.emit(ARTIST.SUBSCRIBE, this.data.id);
     }
 
     /**
-     * Change text
+     * Subscribe result
+     * @param {Boolean} success
      */
-    changeText() {
-        const button = document.getElementsByClassName('m-subscribe')[0];
-        button.innerHTML = this.textSubscribe;
-        button.classList.remove('is-invisible');
+    drawSubscribe(success) {
+        if (!success) {
+            if (this.textSubscribe === 'Subscribe') {
+                new PopUp(POPUP.ARTIST_SUBSCRIPTION_ERROR_MESSAGE + this.data.name, true);
+            } else {
+                new PopUp(POPUP.ARTIST_UNSUBSCRIPTION_ERROR_MESSAGE + this.data.name, true);
+            }
+            return;
+        }
+        if (this.textSubscribe === 'Subscribe') {
+            new PopUp(POPUP.ARTIST_SUBSCRIPTION_MESSAGE + this.data.name);
+        } else {
+            new PopUp(POPUP.ARTIST_UNSUBSCRIPTION_MESSAGE + this.data.name);
+        }
+        if (User.exists()) {
+            const button = document.getElementsByClassName('m-subscribe')[0];
+            this.textSubscribe = button.classList.contains('is-subscribed') ?
+                'Subscribe' : 'Unsubscribe';
+            button.classList.toggle('is-subscribed');
+            button.innerText = this.textSubscribe;
+        }
     }
 }

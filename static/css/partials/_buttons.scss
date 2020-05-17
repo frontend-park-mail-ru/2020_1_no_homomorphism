@@ -255,7 +255,12 @@ input:checked + .m-slider:before {
 .l-track-buttons {
   text-align: right;
   float: right;
-  margin-top: -34px;
+  margin-top: -22px;
+}
+
+.l-player-track-buttons {
+    float: left;
+    padding-top: 17px;
 }
 
 .l-big-track-button:hover {

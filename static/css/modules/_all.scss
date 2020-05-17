@@ -188,6 +188,7 @@
   opacity: 0.4;
   transform: scale(1.5);
   padding-right: 8px;
+  float: left;
 }
 
 /**/
@@ -395,7 +396,7 @@
   font-family: Montserrat-Light, sans-serif;
   font-size: 16px;
   margin-bottom: -32px;
-  margin-top: 16px;
+  margin-top: 14px;
   padding-left: 8px;
 }
 
@@ -556,6 +557,7 @@
 }
 
 .l-pop-up-container {
+    pointer-events: none;
     overflow: hidden;
     position: fixed;
     bottom: 0;

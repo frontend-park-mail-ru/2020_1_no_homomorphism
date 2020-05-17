@@ -10,7 +10,7 @@
                         <div class="m-big-name">
                         </div>
                     </div>
-                    <div class="l-button-middle-play col">
+                    <div class="l-button-middle-play">
                         <button class="m-button-middle-play"> </button>
                         <span class="m-tracks-amount">Tracks: 0 </span>
                         <!--                        <div class="m-delete-playlist-button"> </div>-->

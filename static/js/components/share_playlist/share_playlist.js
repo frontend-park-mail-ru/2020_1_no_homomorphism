@@ -1,5 +1,6 @@
-import {PLAYLIST} from '@libs/constants';
+import {PLAYLIST, POPUP} from '@libs/constants';
 import share from '@components/share_playlist/share.tmpl.xml';
+import PopUp from '@components/pop-up/pop-up';
 
 /**
  * Компонента, отвечающая за возможности авторизированного пользователя
@@ -20,8 +21,7 @@ export default class SharePlaylistComponent {
      * @param {String} isPrivate
      */
     render(isPrivate) {
-        document.getElementsByClassName('l-top-card')[0].innerHTML +=
-            share();
+        document.getElementsByClassName('l-top-card')[0].innerHTML += share();
         document.getElementById('checkbox').checked = isPrivate;
         this._button = document.getElementsByClassName('m-button-share')[0];
         this._setOwnerEventListener();
@@ -57,6 +57,9 @@ export default class SharePlaylistComponent {
      */
     _setPrivacy(event) {
         this._playlist.private = !this._playlist.private;
+        new PopUp(this._playlist.private ?
+            POPUP.PLAYLIST_PRIVACY_PRIVATE_MESSAGE :
+            POPUP.PLAYLIST_PRIVACY_PUBLIC_MESSAGE);
         this.eventBus.emit(PLAYLIST.CHANGE_PRIVACY, this._playlist.id);
     }
 
@@ -70,8 +73,10 @@ export default class SharePlaylistComponent {
                 .then(() => {
                     this._button.classList.add('success-border');
                     setTimeout(this.delSuccessClass.bind(this), 1000);
+                    new PopUp(POPUP.PLAYLIST_LINK_COPY_MESSAGE);
                 })
                 .catch((err) => {
+                    new PopUp(POPUP.PLAYLIST_LINK_COPY_ERROR_MESSAGE, true);
                     console.log('Something went wrong', err);
                 });
             return;
@@ -98,10 +103,7 @@ export default class SharePlaylistComponent {
      * Show text
      */
     _showShareText() {
-        this.text = 'Click to copy the link';
-        if (this._playlist.private) {
-            this.text = 'Make playlist public';
-        }
+        this.text = this._playlist.private ? 'Make playlist public' : 'Click to copy the link';
         setTimeout(this._shareText.bind(this), 600);
     }
 

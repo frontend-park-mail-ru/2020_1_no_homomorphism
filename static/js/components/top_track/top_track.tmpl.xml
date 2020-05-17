@@ -2,7 +2,7 @@
     <div class="col">
         <img src="" alt="..." class="cover" id="cover"/>
     </div>
-    <div class="col track-group-names">
+    <div class="col m-track-group-names">
         <div class="track-name" id="title" title="">
         </div>
         <a class="group-name" id="artist" href="/">

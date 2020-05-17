@@ -109,17 +109,16 @@ export default class ArtistModel {
      * @param {String} id
      */
     subscribe(id) {
-        Api.artistSubscribe(id)
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    console.log('SUCCESS');
-                    break;
-                default:
-                    console.log('Error');
-                    return;
-                }
-            });
+        Api.artistSubscribe(id).then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                this.eventBus.emit(ARTIST.DRAW_SUBSCRIBE, true);
+                break;
+            default:
+                this.eventBus.emit(ARTIST.DRAW_SUBSCRIBE, false);
+                return;
+            }
+        });
     }
 
     /**

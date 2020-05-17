@@ -70,13 +70,13 @@ export default class PlaylistView extends BaseView {
      */
     setTracksAmount(amount) {
         this.tracksAmount = amount;
-        this.setEventListeners();
         if (this.tracksAmount === 0) {
             return;
         }
         document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Tracks: ' +
             this.tracksAmount;
         this.checkUser.bind(this)();
+        this.setEventListeners();
     }
 
     /**
