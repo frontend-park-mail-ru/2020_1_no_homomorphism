@@ -18,6 +18,7 @@ export default class PlaylistModel {
         this.eventBus.on(PLAYLIST.GET_TRACKS_DATA, this.getTracks.bind(this));
         this.eventBus.on(PLAYLIST.DELETE_PLAYLIST, this.deletePlaylist.bind(this));
         this.eventBus.on(PLAYLIST.CHANGE_PRIVACY, this.changePrivacy.bind(this));
+        this.eventBus.on(PLAYLIST.ADD_PLAYLIST, this.addPlaylist.bind(this));
     }
 
     /**
@@ -111,9 +112,28 @@ export default class PlaylistModel {
         Api.playlistChangePrivacy(id.toString())
             .then((res) => {
                 switch (res.status) {
-                case RESPONSE.OK: // TODO обработать удаление
-                    this.eventBus.emit(PLAYLIST.RENDER_DELETED);
-                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+                case RESPONSE.OK:
+                case RESPONSE.BAD_REQUEST:
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
+    }
+
+    /**
+     * Добавление чужого плейлиста себе :>
+     * @param {String} id
+     */
+    addPlaylist(id) {
+        Api.playlistAdd(id)
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    res.json()
+                        .then((playlist) => { // TODO Добавить попап
+                            globalEventBus.emit(GLOBAL.REDIRECT, `/playlist/${playlist.id}`);
+                        });
                     break;
                 case RESPONSE.BAD_REQUEST:
                     break;

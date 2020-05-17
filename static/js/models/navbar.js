@@ -62,7 +62,6 @@ export default class NavbarModel {
      * Получает данные пользователя
      */
     getUserData() {
-        // console.log('GETTTTTTTTTTTTt');
         Api.profileGet()
             .then((res) => {
                 switch (res.status) {
@@ -70,7 +69,6 @@ export default class NavbarModel {
                     res.json()
                         .then((data) => {
                             User.setUserData(data);
-                            console.log(User.exists());
                             this.eventBus.emit(NAVBAR.RENDER_LOGGED, data);
                         });
                     break;

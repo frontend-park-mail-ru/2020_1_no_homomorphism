@@ -291,6 +291,17 @@ export default class Api {
     }
 
     /**
+     * Добавление чужого плейлиста себе :>
+     * @param {String} id
+     * @return {Promise<Response>}
+     */
+    static playlistAdd(id) {
+        return postFetch(API + `/playlists/shared/${id}`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
      * Добавление трека в плейлист
      * @param {Object} data
      * @return {Promise<Response>}
