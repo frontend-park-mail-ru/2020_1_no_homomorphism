@@ -91,7 +91,7 @@ export default class PlaylistModel {
         Api.playlistDelete(playlistID)
             .then((res) => {
                 switch (res.status) {
-                case RESPONSE.OK: // TODO обработать удаление
+                case RESPONSE.OK:
                     this.eventBus.emit(PLAYLIST.RENDER_DELETED);
                     globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                     break;

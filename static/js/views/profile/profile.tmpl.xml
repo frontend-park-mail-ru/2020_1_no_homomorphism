@@ -51,7 +51,7 @@
                                 <h2 id="artists">
                                     <fest:value>data.artists</fest:value>
                                 </h2>
-                                <p>Subscriptions</p>
+                                <p>Artists</p>
                             </a>
                         </div>
                     </div>

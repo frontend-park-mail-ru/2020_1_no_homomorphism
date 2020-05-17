@@ -112,5 +112,5 @@ temp/
 .idea/
 package-lock.json
 static/audio
-static/img
+#static/img
 run.sh

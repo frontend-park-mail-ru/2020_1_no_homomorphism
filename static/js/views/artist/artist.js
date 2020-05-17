@@ -78,14 +78,12 @@ export default class ArtistView extends BaseView {
         document.getElementById('artist-tracks-title').innerText = data.tracks;
         document.getElementById('artist-albums-title').innerText = data.albums;
         this.setEventListeners.bind(this)();
+        this.textSubscribe = 'Subscribe';
         if (data.is_subscribed) {
             this.textSubscribe = 'Unsubscribe';
-            document.getElementsByClassName('m-subscribe')[0].innerHTML = this.textSubscribe;
             document.getElementsByClassName('m-subscribe')[0].classList.toggle('is-subscribed');
-            return;
         }
-        this.textSubscribe = 'Subscribe';
-        // document.getElementsByClassName('m-subscribe')[0].innerHTML = this.textSubscribe;
+        document.getElementsByClassName('m-subscribe')[0].innerHTML = this.textSubscribe;
     }
 
     /**
@@ -105,7 +103,6 @@ export default class ArtistView extends BaseView {
             this.textSubscribe = 'Unsubscribe';
             if (button.classList.contains('is-subscribed')) {
                 this.textSubscribe = 'Subscribe';
-                // document.getElementsByClassName('m-subscribe')[0].classList.toggle('is-subscribed');
             }
             button.classList.toggle('is-subscribed');
             button.classList.add('is-invisible');

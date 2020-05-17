@@ -5,6 +5,7 @@ import User from '@libs/user';
 import TrackListComponent from '@components/track_list/track_list';
 import PlaylistsComponent from '@components/playlist_list/playlist_list';
 import {globalEventBus} from '@libs/eventBus';
+import ArtistListComponent from '@components/artist_list/artist_list';
 
 /**
  * вью для профиля
@@ -21,6 +22,7 @@ export default class ProfileView extends BaseView {
         this.playlistsComponent = new PlaylistsComponent(eventBus,
             PROFILE.RENDER_PLAYLISTS,
             PROFILE.RENDER_ALBUMS);
+        this.artistListComponent = new ArtistListComponent(eventBus, PROFILE.RENDER_ARTISTS);
         this.eventBus.on(PROFILE.CHOOSE_SECTION, this.chooseSection.bind(this));
         this.eventBus.on(PROFILE.RENDER_DATA, this.renderData.bind(this));
         this.eventBus.on(PROFILE.RENDER_STAT, this.renderStat.bind(this));
@@ -98,13 +100,6 @@ export default class ProfileView extends BaseView {
         }
         const curSection = document.getElementById(this.currentOpen);
         curSection.classList.add(PROFILE.SELECTED_CLASS);
-    }
-
-    /**
-     * Секция артистов
-     */
-    artistSection() {
-        alert('This functionality is not accessible by now');
     }
 
     /**

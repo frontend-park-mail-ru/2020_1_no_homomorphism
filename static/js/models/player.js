@@ -31,7 +31,7 @@ export default class PlayerModel {
         globalEventBus.on(GLOBAL.PLAY_PLAYLIST_TRACKS, this.getPlaylistTracks.bind(this));
         globalEventBus.on(GLOBAL.PLAY_ALBUM_TRACKS, this.deleteAll.bind(this));
         globalEventBus.on(GLOBAL.PLAY_ALBUM_TRACKS, this.getAlbumTracks.bind(this));
-        globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.deleteAll.bind(this)); // TODO зачем это???
+        globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.deleteAll.bind(this));
         globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.getPlaylistTracks.bind(this));
         globalEventBus.on(GLOBAL.PLAY_ALBUM, this.deleteAll.bind(this));
         globalEventBus.on(GLOBAL.PLAY_ALBUM, this.getAlbumTracks.bind(this));
@@ -81,16 +81,11 @@ export default class PlayerModel {
      * @param {number} number
      */
     getPlaylistTracks(id, trackId, number = PAGINATION.TRACKS) {
-        Api.playlistTracksGet(id, '0', number)
+        Api.playlistTracksGet(id, '0', number.toString())
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
                     this.generateData.bind(this)(res, trackId);
-                    break;
-                case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
-                    break;
-                case RESPONSE.UNAUTH: // TODO Пользователь не залогинен => дефолтный плейлист
-                case RESPONSE.NO_ACCESS_RIGHT: // TODO Нет прав к этому плейлисту
                     break;
                 default:
                     console.log(res);
@@ -112,7 +107,7 @@ export default class PlayerModel {
                 case RESPONSE.OK:
                     this.generateData.bind(this)(res, trackId);
                     break;
-                case RESPONSE.BAD_REQUEST: // TODO обработать ошибку
+                case RESPONSE.BAD_REQUEST:
                     break;
                 default:
                     console.log(res);
@@ -182,7 +177,7 @@ export default class PlayerModel {
      * @param {string} id
      */
     getTrack(id) {
-        this.playing = true; // rer
+        this.playing = true;
         this.eventBus.emit(PLAYER.DRAW_PAUSE);
         const currentId = this.playlist[this.queue[this.current]].id;
         this.current = this.queue.indexOf(this.playlist.indexOf(
@@ -230,7 +225,7 @@ export default class PlayerModel {
      * переключает трек на предыдущий
      */
     prev() {
-        this.playing = true; // rer
+        this.playing = true;
         this.eventBus.emit(PLAYER.DRAW_PAUSE);
         const currentId = this.playlist[this.queue[this.current]].id;
         if (this.current === 0) {
@@ -264,7 +259,7 @@ export default class PlayerModel {
      * @param {string} cause
      */
     next(cause) {
-        this.playing = true; // rer
+        this.playing = true;
         this.eventBus.emit(PLAYER.DRAW_PAUSE);
         const currentId = this.playlist[this.queue[this.current]].id;
         if (this.current === this.queue.length - 1) {

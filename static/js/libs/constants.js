@@ -86,11 +86,9 @@ export const MAIN = {
     GET_LIST_DATA: 'get-all-artists-data',
     RENDER_ARTISTs: 'render-artist-list',
     NO_ANSWER: 'no-answer',
-    // REDIRECT: 'redirect',
 };
 
 export const LOGIN = {
-    // REDIRECT: 'redirect',
     INVALID: 'login-invalid',
     SUBMIT: 'login-submit',
     LOGIN_SUCCESS: 'login-success',

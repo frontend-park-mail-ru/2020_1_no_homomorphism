@@ -65,7 +65,7 @@ export default class SignupModel {
                         break;
                     default:
                         console.log(res);
-                        console.error('I am a teapot'); // В случае, если бэк - кек
+                        console.error('I am a teapot');
                     }
                 });
         }

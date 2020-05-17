@@ -19,6 +19,7 @@ export default class ProfileModel {
         this.eventBus.on(PROFILE.ID_TRACKS_SECTION, this.getLikedTracks.bind(this));
         this.eventBus.on(PROFILE.ID_PLAYLISTS_SECTION, this.getPlaylists.bind(this));
         this.eventBus.on(PROFILE.ID_ALBUMS_SECTION, this.getAlbums.bind(this));
+        this.eventBus.on(PROFILE.ID_ARTISTS_SECTION, this.getArtists.bind(this));
     }
 
     /**
@@ -85,7 +86,7 @@ export default class ProfileModel {
     /**
      * Получение списка любимых треков
      */
-    getLikedTracks() {
+    getLikedTracks() { // TODO СУПЕР ВРЕМЕННО!!!
         this.eventBus.emit(
             PROFILE.RENDER_TRACKS,
             {
@@ -93,7 +94,7 @@ export default class ProfileModel {
                 'domItem': 'l-track-list',
                 'type': 'playlist',
             });
-        // const playlistID = 94; // СУПЕР ВРЕМЕННО!!!
+        // const playlistID = 94;
         // Api.playlistTracksGet(
         //     playlistID.toString(),
         //     this.curPaginationTracks.toString(),
@@ -143,11 +144,6 @@ export default class ProfileModel {
                                 });
                         });
                     break;
-                case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
-                    break;
-                case RESPONSE.UNAUTH: // TODO Пользователь не залогинен => дефолтный плейлист
-                case RESPONSE.NO_ACCESS_RIGHT: // TODO Нет прав к этому плейлисту
-                    break;
                 default:
                     console.log(res);
                     console.error('I am a teapot');
@@ -177,10 +173,30 @@ export default class ProfileModel {
                                 });
                         });
                     break;
-                case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
-                    break;
-                case RESPONSE.UNAUTH: // TODO Пользователь не залогинен => дефолтный плейлист
-                case RESPONSE.NO_ACCESS_RIGHT: // TODO Нет прав к этому плейлисту
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
+    }
+
+    /**
+     * Получение списка альбомов
+     */
+    getArtists() {
+        Api.profileArtistsGet()
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    res.json()
+                        .then((list) => {
+                            this.eventBus.emit(PROFILE.RENDER_ARTISTS,
+                                {
+                                    domItem: 'l-track-list',
+                                    artists: list,
+                                    type: 'profile',
+                                });
+                        });
                     break;
                 default:
                     console.log(res);

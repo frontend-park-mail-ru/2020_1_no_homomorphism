@@ -28,7 +28,7 @@ export default class Api {
      * Логаут
      * @return {Promise<Response>}
      */
-    static logoutFetch() { // TODO переименовать, когда бэк придумает
+    static logoutFetch() {
         return deleteFetch(API + '/users/logout', (error) => {
             console.log(error.toString());
         });
