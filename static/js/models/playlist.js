@@ -113,6 +113,7 @@ export default class PlaylistModel {
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
+                    break;
                 case RESPONSE.BAD_REQUEST:
                 default:
                     console.log(res);

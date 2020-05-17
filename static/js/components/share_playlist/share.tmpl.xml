@@ -1,9 +1,9 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="m-right-col">
-        <div class="m-privacy-title col">Privacy:</div>
+        <div class="m-privacy-title col">Private:</div>
         <label class="m-switch col">
-            <input type="checkbox" id="checkbox" checked="{data}" value="1"></input>
-            <span class="m-slider"></span>
+            <input type="checkbox" id="checkbox" checked="true" value="1"> </input>
+            <span class="m-slider"> </span>
         </label>
         <div class="col">
             <button class="m-button-share">

@@ -1,5 +1,5 @@
 import Api from '@libs/api';
-import {ARTIST, URL, GLOBAL} from '@libs/constants';
+import {ARTIST, URL, GLOBAL, RESPONSE} from '@libs/constants';
 import {globalEventBus} from '@libs/eventBus';
 
 /**
@@ -19,6 +19,7 @@ export default class ArtistModel {
         this.eventBus.on(ARTIST.ID_TRACKS_SECTION, this.getArtistTracks.bind(this));
         this.eventBus.on(ARTIST.ID_ALBUMS_SECTION, this.getArtistAlbums.bind(this));
         this.eventBus.on(ARTIST.ID_INFO_SECTION, this.getArtistInfo.bind(this));
+        this.eventBus.on(ARTIST.SUBSCRIBE, this.subscribe.bind(this));
     }
 
     /**
@@ -57,11 +58,8 @@ export default class ArtistModel {
     getArtistTracks(start, end) {
         Api.artistTracksGet(this.id, start, end)
             .then((res) => {
-                if (res === undefined) {
-                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
-                    return;
-                }
-                if (res.ok) {
+                switch (res.status) {
+                case RESPONSE.OK:
                     res.json()
                         .then((data) => {
                             this.tracks += data.tracks;
@@ -72,9 +70,9 @@ export default class ArtistModel {
                                     'type': 'artist',
                                 });
                         });
-                } else {
+                    break;
+                default:
                     globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
-                    // this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
                 }
             });
     }
@@ -87,11 +85,8 @@ export default class ArtistModel {
     getArtistAlbums(start, end) {
         Api.artistAlbumsGet(this.id, start, end)
             .then((res) => {
-                if (res === undefined) {
-                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
-                    return;
-                }
-                if (res.ok) {
+                switch (res.status) {
+                case RESPONSE.OK:
                     res.json()
                         .then((data) => {
                             this.albums = data.albums;
@@ -102,8 +97,27 @@ export default class ArtistModel {
                                     'type': 'album',
                                 });
                         });
-                } else {
+                    break;
+                default:
                     globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+                }
+            });
+    }
+
+    /**
+     * Подписка на артиста
+     * @param {String} id
+     */
+    subscribe(id) {
+        Api.artistSubscribe(id)
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    console.log('SUCCESS');
+                    break;
+                default:
+                    console.log('Error');
+                    return;
                 }
             });
     }

@@ -46,7 +46,9 @@ export default class PlaylistView extends BaseView {
      */
     setPlaylistData(playlist) {
         this.playlistData = playlist;
-        this.playlistData.private = true; // TODO временное решение
+        if (this.playlistData.private === undefined) {
+            this.playlistData.private = false;
+        }
         this.renderPlaylist();
     }
 
@@ -78,8 +80,9 @@ export default class PlaylistView extends BaseView {
      */
     checkUser() {
         console.log(User.getUserData());
+        console.log(this.playlistData);
         if (User.exists()) {
-            if (User.getUserData().id === this.playlistData.user_id) { // TODO временное решение - если зашел не хозяин
+            if (User.getUserData().id !== this.playlistData.user_id) { // TODO временное решение - если зашел не хозяин
                 this.addComponent.playlistData = this.playlistData.id;
                 this.addComponent.render();
                 return;

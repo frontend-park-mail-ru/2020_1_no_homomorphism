@@ -14,13 +14,16 @@ export default class SharePlaylistComponent {
         this.eventBus = eventBus;
         this._playlist = {};
     }
+
     /**
      * Render
      * @param {String} isPrivate
      */
     render(isPrivate) {
         document.getElementsByClassName('l-top-card')[0].innerHTML +=
-            share(isPrivate);
+            share();
+        document.getElementById('checkbox').checked = isPrivate;
+        this._button = document.getElementsByClassName('m-button-share')[0];
         this._setOwnerEventListener();
     }
 
@@ -40,11 +43,11 @@ export default class SharePlaylistComponent {
             this._deletePlaylist.bind(this));
         document.getElementsByClassName('m-slider')[0].addEventListener('click',
             this._setPrivacy.bind(this));
-        document.getElementsByClassName('m-button-share')[0].addEventListener('click',
+        this._button.addEventListener('click',
             this._copyLink.bind(this));
-        document.getElementsByClassName('m-button-share')[0].addEventListener('mouseover',
+        this._button.addEventListener('mouseover',
             this._showShareText.bind(this));
-        document.getElementsByClassName('m-button-share')[0].addEventListener('mouseout',
+        this._button.addEventListener('mouseout',
             this._hideShareText.bind(this));
     }
 
@@ -65,14 +68,30 @@ export default class SharePlaylistComponent {
         if (!this._playlist.private) {
             navigator.clipboard.writeText(window.location.href)
                 .then(() => {
-                    // TODO добавить попап
+                    this._button.classList.add('success-border');
+                    setTimeout(this.delSuccessClass.bind(this), 1000);
                 })
                 .catch((err) => {
                     console.log('Something went wrong', err);
                 });
             return;
         }
-        document.getElementsByClassName('m-button-share')[0].classList.add('is-error-border');
+        this._button.classList.toggle('error-border');
+        setTimeout(this.delErrorClass.bind(this), 1000);
+    }
+
+    /**
+     * Удаление класса
+     */
+    delSuccessClass() {
+        this._button.classList.remove('success-border');
+    }
+
+    /**
+     * Удаление класса
+     */
+    delErrorClass() {
+        this._button.classList.remove('error-border');
     }
 
     /**

@@ -205,6 +205,16 @@ export default class Api {
             .catch((error) => console.error(error));
     }
 
+    /**
+     * Артист просмотр треков
+     * @param {string} id
+     * @return {Promise<Response>}
+     */
+    static artistSubscribe(id) {
+        return getFetch(API + `/artists/${id}/subscription`)
+            .catch((error) => console.error(error));
+    }
+
     // ------------- ALBUM  ---------------
 
     /**
