@@ -185,6 +185,7 @@ export default class NavbarView extends BaseView {
                 .remove('m-search-input-expanded');
             document.getElementsByClassName('l-navbar-small-search')[0]
                 .children[0].src = '/static/img/icons/search.svg';
+            this.closeSearchComponent({target: document.documentElement});
         }
     }
 }

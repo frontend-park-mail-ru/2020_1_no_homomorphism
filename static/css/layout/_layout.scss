@@ -65,9 +65,7 @@
 }
 
 .l-list-card-description {
-  display: block;
   color: #515151;
-  margin-top: 12px;
   padding-bottom: 16px;
   padding-left: 6px;
   padding-right: 6px;
@@ -122,7 +120,7 @@
   height: 60px;
 }
 
-@media screen and (min-width: 481px) and (max-width: 987px) {
+@media screen and (min-width: 481px) and (max-width: 1105px) {
   .m-tablet-only, .m-desktop-tablet-only {
     display: block;
   }
@@ -230,6 +228,10 @@
 
   .m-tracks-amount {
     margin: 1em;
+  }
+
+  .l-track-big {
+    display: inline;
   }
 }
 
@@ -354,6 +356,14 @@
 
   .l-top-name {
     padding-top: 0;
+  }
+
+  .l-list-card-description {
+    margin-top: 24px;
+  }
+
+  .l-track-big {
+    display: inline;
   }
 
   .l-main {
