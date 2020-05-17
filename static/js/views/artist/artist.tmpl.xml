@@ -16,10 +16,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="m-right-col">
-                    <div class="col">
-                        <div class="m-subscribe"> </div>
+                    <div class="m-right-col">
+                        <div class="col">
+                                <div class="m-subscribe">
+                                    <span class="m-text-in-button">Subscribe</span>
+                                </div>
+                        </div>
                     </div>
                 </div>
 

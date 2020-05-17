@@ -7,7 +7,7 @@
         </label>
         <div class="col">
             <button class="m-button-share">
-                <span class="m-share-text"></span>
+                <span class="m-text-in-button"></span>
             </button>
         </div>
         <div class="l-delete-playlist-button">

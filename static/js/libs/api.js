@@ -211,7 +211,7 @@ export default class Api {
      * @return {Promise<Response>}
      */
     static artistSubscribe(id) {
-        return getFetch(API + `/artists/${id}/subscription`)
+        return postFetch(API + `/artists/${id}/subscription`)
             .catch((error) => console.error(error));
     }
 

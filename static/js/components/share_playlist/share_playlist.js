@@ -117,7 +117,7 @@ export default class SharePlaylistComponent {
      * Set text
      */
     _shareText() {
-        document.getElementsByClassName('m-share-text')[0].innerHTML = this.text;
+        document.getElementsByClassName('m-text-in-button')[0].innerHTML = this.text;
     }
 
     /**
