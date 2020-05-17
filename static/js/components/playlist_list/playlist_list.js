@@ -75,8 +75,7 @@ export default class PlaylistsComponent {
         const value = document.getElementsByClassName('m-small-input')[0].value;
         if (value !== '') {
             document.getElementsByClassName('m-small-input')[0].value = '';
-            this._playlistComponent
-                .createPlaylist(this.updatePlaylistList.bind(this), value);
+            this._playlistComponent.createPlaylist(this.updatePlaylistList.bind(this), value);
         }
     }
 

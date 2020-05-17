@@ -30,56 +30,52 @@ export default class ProfileModel {
             this.eventBus.emit(PROFILE.RENDER_DATA, User.getUserData());
             return;
         }
-        Api.profileGet()
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    res.json()
-                        .then((data) => {
-                            User.setUserData(data);
-                            this.eventBus.emit(PROFILE.GET_STAT);
-                            this.eventBus.emit(PROFILE.RENDER_DATA, User.getUserData());
-                        });
-                    break;
-                case RESPONSE.UNAUTH:
-                    globalEventBus.emit(NAVBAR.GET_USER_DATA, {});
-                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
-                    break;
-                case RESPONSE.SERVER_ERROR:
-                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
-                    break;
-                default:
-                    console.log(res);
-                    console.error('I am a teapot');
-                }
-            });
+        Api.profileGet().then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                res.json().then((data) => {
+                    User.setUserData(data);
+                    this.eventBus.emit(PROFILE.GET_STAT);
+                    this.eventBus.emit(PROFILE.RENDER_DATA, User.getUserData());
+                });
+                break;
+            case RESPONSE.UNAUTH:
+                globalEventBus.emit(NAVBAR.GET_USER_DATA, {});
+                globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+                break;
+            case RESPONSE.SERVER_ERROR:
+                globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+                break;
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
     }
 
     /**
      * получает статистику юзера
      */
     getUserStat() {
-        Api.profileStatGet(User.getUserData().id)
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    res.json()
-                        .then((data) => {
-                            User.setStatistics(data);
-                            this.eventBus.emit(PROFILE.RENDER_STAT, User.getStatistics());
-                        });
-                    break;
-                case RESPONSE.UNAUTH:
-                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
-                    break;
-                case RESPONSE.SERVER_ERROR:
-                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
-                    break;
-                default:
-                    console.log(res);
-                    console.error('I am a teapot');
-                }
-            });
+        Api.profileStatGet(User.getUserData().id).then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                res.json().then((data) => {
+                    User.setStatistics(data);
+                    this.eventBus.emit(PROFILE.RENDER_STAT, User.getStatistics());
+                });
+                break;
+            case RESPONSE.UNAUTH:
+                globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+                break;
+            case RESPONSE.SERVER_ERROR:
+                globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+                break;
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
     }
 
     /**
@@ -128,64 +124,56 @@ export default class ProfileModel {
      * Получение списка плейлистов
      */
     getPlaylists() {
-        Api.profilePlaylistsGet()
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    res.json()
-                        .then((list) => {
-                            this.eventBus.emit(
-                                PROFILE.RENDER_PLAYLISTS,
-                                {
-                                    'list': list.playlists,
-                                    'domItem': 'l-track-list',
-                                    'type': 'playlist',
-                                });
-                        });
-                    break;
-                case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
-                    break;
-                case RESPONSE.UNAUTH: // TODO Пользователь не залогинен => дефолтный плейлист
-                case RESPONSE.NO_ACCESS_RIGHT: // TODO Нет прав к этому плейлисту
-                    break;
-                default:
-                    console.log(res);
-                    console.error('I am a teapot');
-                }
-            });
+        Api.profilePlaylistsGet().then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                res.json().then((list) => {
+                    this.eventBus.emit(PROFILE.RENDER_PLAYLISTS, {
+                        'list': list.playlists,
+                        'domItem': 'l-track-list',
+                        'type': 'playlist',
+                    });
+                });
+                break;
+            case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
+                break;
+            case RESPONSE.UNAUTH: // TODO Пользователь не залогинен => дефолтный плейлист
+            case RESPONSE.NO_ACCESS_RIGHT: // TODO Нет прав к этому плейлисту
+                break;
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
     }
 
     /**
      * Получение списка альбомов
      */
     getAlbums() {
-        Api.profileAlbumsGet()
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    res.json()
-                        .then((list) => {
-                            this.albums = list.albums;
-                        })
-                        .then(() => {
-                            this.eventBus.emit(
-                                PROFILE.RENDER_PLAYLISTS,
-                                {
-                                    'list': this.albums,
-                                    'domItem': 'l-track-list',
-                                    'type': 'album',
-                                });
-                        });
-                    break;
-                case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
-                    break;
-                case RESPONSE.UNAUTH: // TODO Пользователь не залогинен => дефолтный плейлист
-                case RESPONSE.NO_ACCESS_RIGHT: // TODO Нет прав к этому плейлисту
-                    break;
-                default:
-                    console.log(res);
-                    console.error('I am a teapot');
-                }
-            });
+        Api.profileAlbumsGet().then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                res.json().then((list) => {
+                    this.albums = list.albums;
+                })
+                .then(() => {
+                    this.eventBus.emit(PROFILE.RENDER_PLAYLISTS, {
+                        'list': this.albums,
+                        'domItem': 'l-track-list',
+                        'type': 'album',
+                    });
+                });
+                break;
+            case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
+                break;
+            case RESPONSE.UNAUTH: // TODO Пользователь не залогинен => дефолтный плейлист
+            case RESPONSE.NO_ACCESS_RIGHT: // TODO Нет прав к этому плейлисту
+                break;
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
     }
 }

@@ -84,7 +84,6 @@ export const GLOBAL = {
 
 export const MAIN = {
     GET_LIST_DATA: 'get-all-artists-data',
-    RENDER_ARTISTs: 'render-artist-list',
     NO_ANSWER: 'no-answer',
     // REDIRECT: 'redirect',
 };
@@ -250,6 +249,13 @@ export const SEARCH = {
 };
 
 export const POPUP = {
+    NEW: 'new pop-up',
+    SETTINGS_MESSAGE: 'Profile data successfully updated',
+    PASSWORD_MESSAGE: 'Password successfully changed',
+    AVATAR_MESSAGE: 'Profile picture successfully changed',
+    PLAYLIST_CREATION_MESSAGE: 'Playlist successfully created',
+    PLAYLIST_CREATION_ERROR_MESSAGE: 'Playlist with this name already exists',
+    PLAYLIST_DELETION_MESSAGE: 'Playlist successfully deleted',
     LIFETIME: 2000,
     DISSOLUTIONTIME: 1000,
 };

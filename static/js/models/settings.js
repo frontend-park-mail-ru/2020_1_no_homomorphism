@@ -1,6 +1,6 @@
 import Validation from '@libs/validation';
 import Api from '@libs/api';
-import {SETTINGS, URL, RESPONSE, NAVBAR, GLOBAL} from '@libs/constants';
+import {SETTINGS, URL, RESPONSE, NAVBAR, GLOBAL, POPUP} from '@libs/constants';
 import User from '@libs/user';
 import {globalEventBus} from '@libs/eventBus';
 
@@ -29,27 +29,25 @@ export default class SettingsModel {
             this.eventBus.emit(SETTINGS.RENDER_LOGGED, User.getUserData());
             return;
         }
-        Api.profileGet()
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    res.json()
-                        .then((data) => {
-                            User.setUserData(data);
-                            this.getCsrfToken();
-                            this.eventBus.emit(SETTINGS.RENDER_LOGGED, User.getUserData());
-                        });
-                    break;
-                case RESPONSE.UNAUTH:
-                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
-                    break;
-                case RESPONSE.SERVER_ERROR:
-                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
-                    break;
-                default:
-                    console.error('I am a teapot');
-                }
-            });
+        Api.profileGet().then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                res.json().then((data) => {
+                    User.setUserData(data);
+                    this.getCsrfToken();
+                    this.eventBus.emit(SETTINGS.RENDER_LOGGED, User.getUserData());
+                });
+                break;
+            case RESPONSE.UNAUTH:
+                globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+                break;
+            case RESPONSE.SERVER_ERROR:
+                globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+                break;
+            default:
+                console.error('I am a teapot');
+            }
+        });
     }
 
     /**
@@ -73,6 +71,7 @@ export default class SettingsModel {
                     switch (res.status) {
                     case RESPONSE.OK:
                         this.getUserData.bind(this)(true);
+                        this.eventBus.emit(POPUP.NEW, POPUP.AVATAR_MESSAGE);
                         globalEventBus.emit(NAVBAR.GET_USER_DATA);
                         break;
                     case RESPONSE.BAD_REQUEST: // TODO Обработать ошибку
@@ -130,6 +129,11 @@ export default class SettingsModel {
                     this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
                     switch (res.status) {
                     case RESPONSE.OK:
+                        if (values.newPassword === '') {
+                            this.eventBus.emit(POPUP.NEW, POPUP.SETTINGS_MESSAGE);
+                        } else {
+                            this.eventBus.emit(POPUP.NEW, POPUP.PASSWORD_MESSAGE);
+                        }
                         this.getUserData.bind(this)(true);
                         break;
                     case RESPONSE.BAD_REQUEST:
@@ -158,9 +162,8 @@ export default class SettingsModel {
      * Получение токена
      */
     getCsrfToken() {
-        Api.csrfTokenGet()
-            .then((res) => {
-                User.token = res.headers.get('Csrf-Token');
-            });
+        Api.csrfTokenGet().then((res) => {
+            User.token = res.headers.get('Csrf-Token');
+        });
     }
 }

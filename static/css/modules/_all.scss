@@ -550,28 +550,30 @@
 
 }
 
-.pop-up-container {
+.l-pop-up-container {
     overflow: hidden;
     position: fixed;
     bottom: 0;
     right: 0;
-    width: 250px;
+    width: -webkit-calc(18%);
     height: 228px;
+    z-index: $super-top-level;
 }
 
 .m-pop-up {
-    width: 200px;
+    width: -webkit-calc(80%);
     height: 50px;
     box-shadow: 0 1px 20px rgba(12, 12, 12, 0.2);
     position: absolute;
     right: 28px;
     bottom: -60px;
-    background-color: white;
-    border-radius: 8px;
+    background-color: $selected-elem;
+    border-radius: $card-border-small;
     font-size: 13px;
-    z-index: $super-top-level;
     transition-property: bottom, opacity;
     transition-duration: 0.5s, 1s;
+    display: flex;
+    align-items: center;
 }
 
 .m-pop-up-error {

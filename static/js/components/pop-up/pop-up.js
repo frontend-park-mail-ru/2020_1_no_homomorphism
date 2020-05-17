@@ -11,7 +11,7 @@ export default class PopUpComponent {
      * @param {Boolean} error
      */
     constructor(message, error = false) {
-        this.container = document.getElementsByClassName('pop-up-container')[0];
+        this.container = document.getElementsByClassName('l-pop-up-container')[0];
         for (let i = 0; i <= this.container.children.length; i++) {
             if (!this.container.children.find((child) => {
                 return child.getAttribute('p-id') === i.toString();
@@ -61,8 +61,14 @@ export default class PopUpComponent {
             setTimeout(this.dissolve.bind(this), 500);
             return;
         }
-        this.element.style.opacity = 0;
-        setTimeout(this.close.bind(this), POPUP.DISSOLUTIONTIME);
+        new Promise((r) => setTimeout(r, 1000)).then(() => {
+            if (this.mouseX || this.mouseY) {
+                setTimeout(this.dissolve.bind(this), 500);
+                return;
+            }
+            this.element.style.opacity = 0;
+            setTimeout(this.close.bind(this), POPUP.DISSOLUTIONTIME);
+        });
     }
 
     /*

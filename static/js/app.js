@@ -14,7 +14,6 @@ import {SearchController} from '@controllers/search';
 import {globalEventBus} from '@libs/eventBus';
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import '@css/_main.scss';
-import PopUp from '@components/pop-up/pop-up';
 
 window.addEventListener('DOMContentLoaded', () => {
     HTMLCollection.prototype.forEach = Array.prototype.forEach;
@@ -55,16 +54,6 @@ window.addEventListener('DOMContentLoaded', () => {
     if ('serviceWorker' in navigator) {
         runtime.register();
     }
-    new PopUp('App started');
-    setTimeout(() => {
-        new PopUp('App started 2');
-    }, 500);
-    setTimeout(() => {
-        new PopUp('App started 3');
-    }, 1000);
-    setTimeout(() => {
-        new PopUp('App started 4');
-    }, 2000);
 });
 
 window.addEventListener('storage', (e) => {

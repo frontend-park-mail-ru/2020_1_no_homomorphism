@@ -1,7 +1,8 @@
-import {SETTINGS, DOM} from '@libs/constants';
+import {SETTINGS, DOM, POPUP} from '@libs/constants';
 import settings from '@views/settings/settings.tmpl.xml';
 import BaseView from '@libs/base_view';
 import User from '@libs/user';
+import PopUp from '@components/pop-up/pop-up';
 
 /**
  * вью для настроек
@@ -17,6 +18,9 @@ export default class SettingsView extends BaseView {
         this.errors = {};
         this.eventBus.on(SETTINGS.INVALID, this.showErrors.bind(this));
         this.eventBus.on(SETTINGS.RENDER_LOGGED, this.renderData.bind(this));
+        this.eventBus.on(POPUP.NEW, (message) => {
+            new PopUp(message);
+        });
     }
 
     /**

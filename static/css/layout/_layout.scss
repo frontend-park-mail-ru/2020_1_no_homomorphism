@@ -92,7 +92,7 @@
   box-shadow: 0 3px 6px $chosen-icon;
   display: flex;
   align-items: center;
-  z-index: $main-level;
+  z-index: $top-level;
 }
 
 .l-navbar a {
