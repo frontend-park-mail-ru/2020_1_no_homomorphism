@@ -1,5 +1,6 @@
 import add from '@components/add_playlist/add.tmpl.xml';
 import {PLAYLIST} from '@libs/constants';
+
 /**
  * Управление плейлистом для авторизированных пользователей,
  * не являющихся владельцем данного плейлиста

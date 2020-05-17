@@ -29,8 +29,8 @@ export default class PlaylistView extends BaseView {
         this.eventBus.on(PLAYLIST.ERROR, this.showErrors.bind(this));
         this.eventBus.on(PLAYLIST.RENDER_DELETED, this.renderDeleted.bind(this));
         this.eventBus.on(PLAYLIST.CHANGE_TRACK_AMOUNT, this.changeTrackAmount.bind(this));
-        this.eventBus.on(POPUP.NEW, (message) => {
-            new PopUp(message);
+        this.eventBus.on(POPUP.NEW, (message, error = false) => {
+            new PopUp(message, error);
         });
     }
 

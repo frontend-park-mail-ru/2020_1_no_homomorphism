@@ -262,6 +262,8 @@ export const POPUP = {
     PLAYLIST_PRIVACY_PUBLIC_MESSAGE: 'Playlist is public now',
     PLAYLIST_LINK_COPY_MESSAGE: 'Link copied',
     PLAYLIST_LINK_COPY_ERROR_MESSAGE: 'Cannot copy link',
+    PLAYLIST_ADDITION_MESSAGE: 'Playlist added',
+    PLAYLIST_ADDITION_ERROR_MESSAGE: 'Cannot add playlist',
     ARTIST_SUBSCRIPTION_MESSAGE: 'Subscribed to ',
     ARTIST_SUBSCRIPTION_ERROR_MESSAGE: 'Cannot subscribe to ',
     ARTIST_UNSUBSCRIPTION_MESSAGE: 'Unsubscribed from ',

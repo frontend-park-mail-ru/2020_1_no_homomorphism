@@ -124,13 +124,16 @@ export default class PlaylistModel {
         Api.playlistAdd(id).then((res) => {
             switch (res.status) {
             case RESPONSE.OK:
-                res.json().then((playlist) => { // TODO Добавить попап
+                res.json().then((playlist) => {
                     globalEventBus.emit(GLOBAL.REDIRECT, `/playlist/${playlist.id}`);
+                    this.eventBus.emit(POPUP.NEW, POPUP.PLAYLIST_ADDITION_MESSAGE);
                 });
                 break;
             case RESPONSE.BAD_REQUEST:
+                this.eventBus.emit(POPUP.NEW, POPUP.PLAYLIST_ADDITION_ERROR_MESSAGE, true);
                 break;
             default:
+                this.eventBus.emit(POPUP.NEW, POPUP.PLAYLIST_ADDITION_ERROR_MESSAGE, true);
                 console.log(res);
                 console.error('I am a teapot');
             }

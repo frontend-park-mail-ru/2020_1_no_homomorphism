@@ -277,6 +277,7 @@ input:checked + .m-slider:before {
   margin: 16px;
   vertical-align: middle;
   opacity: 0.4;
+  cursor: pointer;
   &:hover {
     -webkit-transform: scale(1.2);
     transform: scale(1.2);
