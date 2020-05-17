@@ -78,6 +78,7 @@ export const GLOBAL = {
     REDIRECT: 'redirect',
     HREF: 'global-href',
     LOGOUT_REDIRECT: 'global-logout-redirect',
+    LOGIN_REDIRECT: 'global-login-redirect',
     CLOSE_SEARCH: 'global-close-search',
     PAUSE: 'global-pause',
 };
