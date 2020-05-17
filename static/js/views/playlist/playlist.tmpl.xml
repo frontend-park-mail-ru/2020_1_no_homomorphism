@@ -6,26 +6,30 @@
                     <div class="l-round-image col">
                         <img alt="" src="{data.image}" class="m-rounded-image" id="avatar"/>
                     </div>
-                    <div class="col">
-                        <button class="m-button-track-list-play"> </button>
-                    </div>
                     <div class="l-top-name col">
                         <div class="m-big-name">
                         </div>
                     </div>
-                </div>
-
-                <div class="m-right-col">
-                    <div class="l-delete-playlist-button">
-                        <div class="m-delete-playlist-button"> </div>
-                    </div>
-                    <div class="m-tracks-amount ">
-                        <div>Amount of tracks: 0 </div>
+                    <div class="l-button-middle-play col">
+                        <button class="m-button-middle-play"> </button>
+                        <span class="m-tracks-amount">Tracks: 0 </span>
+                        <!--                        <div class="m-delete-playlist-button"> </div>-->
                     </div>
                 </div>
 
-
-
+<!--                <div class="m-right-col">-->
+<!--                    <div class="m-privacy-title col"> Privacy: </div>-->
+<!--                    <label class="m-switch col">-->
+<!--                        <input type="checkbox" id="checkbox" checked="true" value="1"> </input>-->
+<!--                        <span class="m-slider"> </span>-->
+<!--                    </label>-->
+<!--                    <div class="col">-->
+<!--                        <button class="m-button-share"> <span class="m-text-in-button"> </span> </button>-->
+<!--                    </div>-->
+<!--                    <div class="l-delete-playlist-button">-->
+<!--                        <div class="m-delete-playlist-button"> </div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
             <div class="l-down-card">
                 <div class="l-track-list" style="top: 0;">

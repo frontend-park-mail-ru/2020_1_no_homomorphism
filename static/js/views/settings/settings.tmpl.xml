@@ -1,20 +1,15 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="col col-9">
         <div class="l-main">
-
-
             <div class="l-top-card">
-
                 <div class="l-round-image col">
                     <label>
-                        <img alt="" src="{data.image}" class="m-round-image" id="avatar"
+                        <img alt="" src="{data.image}" class="m-round-image m-scale-image" id="avatar"
                              title="Add new image"/>
                         <input class="m-hidden-input" type="file" id="avatar-upload"/>
                     </label>
-                    <div class="m-error-message-small"></div>
+                    <div class="m-error-message-small" id="avatar-error" style="padding-left: 32px"> </div>
                 </div>
-
-
                 <div class="l-top-name col">
                     <div class="m-top-login" id="profile-login">
                         <fest:value>data.login</fest:value>
@@ -28,19 +23,18 @@
             </div>
 
             <div class="l-down-card col">
-
                 <div class="col col-6 l-input">
-                    <div class="col col-9">
+                    <div class="col col-12">
                         <div class="l-input">
                             <span class="m-settings-title">Name</span>
 
                             <label for="login">
                                 <input type="text" class="m-big-input" id="name"/>
-                                <div class="m-error-message-small"></div>
+                                <div class="m-error-message-small" id="name-error"></div>
                             </label>
                         </div>
                     </div>
-                    <div class="col col-9">
+                    <div class="col col-12">
                         <div class="l-input">
                             <span class=" m-settings-title">Email</span>
 
@@ -48,11 +42,11 @@
                                 <input type="text" class="m-big-input" id="email"
                                        value="{data.email} "
                                        autocomplete="off"/>
-                                <div class="m-error-message-small"></div>
+                                <div class="m-error-message-small" id="email-error"></div>
                             </label>
-                        </div>
                     </div>
-                    <div class="col col-3">
+                    </div>
+                    <div class="col col-12">
                         <button class="m-small-button" type="submit" id="submit-setting-changes-data">
                             Save
                         </button>
@@ -60,40 +54,40 @@
                 </div>
 
                 <div class="col col-6 l-input">
-                    <div class="col col-9">
+                    <div class="col col-12">
                         <div class="l-input">
                             <span class="m-settings-title">New password</span>
                             <label for="newPassword">
                                 <input type="password" class="m-big-input" id="newPassword"
                                        value=""
                                        autocomplete="off"/>
-                                <div class="m-error-message-small"></div>
+                                <div class="m-error-message-small" id="new-password-error"></div>
                             </label>
                         </div>
                     </div>
-                    <div class="col col-9">
+                    <div class="col col-12">
                         <div class="l-input">
                             <span class="m-settings-title">Repeat password</span>
                             <label for="newPasswordConfirm">
                                 <input type="password" class="m-big-input" id="newPasswordConfirm"
                                        autocomplete="off"/>
-                                <div class="m-error-message-small"></div>
+                                <div class="m-error-message-small" id="new-password-confirm-error"></div>
                             </label>
                         </div>
                     </div>
 
-                    <div class="col col-9">
+                    <div class="col col-12">
                         <div class="l-input">
                             <span class="m-settings-title">Old password</span>
                             <label for="password">
                                 <input type="password" class="m-big-input" id="password"
                                        placeholder=""
                                        autocomplete="off"/>
-                                <div class="m-error-message-small"></div>
+                                <div class="m-error-message-small" id="password-error"></div>
                             </label>
                         </div>
                     </div>
-                    <div class="col col-3">
+                    <div class="col col-12">
                         <button type="submit" class="m-small-button" id="submit-setting-changes-pass">
                             Change
                         </button>

@@ -205,6 +205,16 @@ export default class Api {
             .catch((error) => console.error(error));
     }
 
+    /**
+     * Артист просмотр треков
+     * @param {string} id
+     * @return {Promise<Response>}
+     */
+    static artistSubscribe(id) {
+        return postFetch(API + `/artists/${id}/subscription`)
+            .catch((error) => console.error(error));
+    }
+
     // ------------- ALBUM  ---------------
 
     /**
@@ -275,6 +285,28 @@ export default class Api {
      */
     static playlistPost(name) {
         return postFetch(API + `/playlists/new/${name}`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
+     * Изменение приватности
+     * @param {String} id
+     * @return {Promise<Response>}
+     */
+    static playlistChangePrivacy(id) {
+        return postFetch(API + `/playlists/${id}/privacy`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
+     * Добавление чужого плейлиста себе :>
+     * @param {String} id
+     * @return {Promise<Response>}
+     */
+    static playlistAdd(id) {
+        return postFetch(API + `/playlists/shared/${id}`, (error) => {
             console.log(error.toString());
         });
     }

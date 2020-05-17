@@ -90,3 +90,9 @@
 .is-volume-scale-hover {
   top: -52px;
 }
+
+.is-empty-track {
+  display: inline-block;
+  width: -webkit-calc(49%);
+  overflow: hidden;
+}

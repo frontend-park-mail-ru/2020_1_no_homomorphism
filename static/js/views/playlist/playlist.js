@@ -4,6 +4,9 @@ import BaseView from '@libs/base_view';
 import TrackListComponent from '@components/track_list/track_list';
 import PopUp from '@components/pop-up/pop-up';
 import {globalEventBus} from '@libs/eventBus';
+import User from '@libs/user';
+import SharePlaylistComponent from '@components/share_playlist/share_playlist';
+import AddPlaylistComponent from '@components/add_playlist/add_playlist';
 
 /**
  *  вью для входа
@@ -17,6 +20,9 @@ export default class PlaylistView extends BaseView {
         this.eventBus = eventBus;
         this.playlistData = {};
         this.tracksAmount = 0;
+        this.text = '';
+        this.shareComponent = new SharePlaylistComponent(eventBus);
+        this.addComponent = new AddPlaylistComponent(eventBus);
         this.trackListComponent = new TrackListComponent(eventBus, PLAYLIST);
         this.eventBus.on(PLAYLIST.RENDER_PLAYLIST_DATA, this.setPlaylistData.bind(this));
         this.eventBus.on(PLAYLIST.SET_TRACKS_AMOUNT, this.setTracksAmount.bind(this));
@@ -44,6 +50,9 @@ export default class PlaylistView extends BaseView {
      */
     setPlaylistData(playlist) {
         this.playlistData = playlist;
+        if (this.playlistData.private === undefined) {
+            this.playlistData.private = false;
+        }
         this.renderPlaylist();
     }
 
@@ -60,30 +69,39 @@ export default class PlaylistView extends BaseView {
      * @param {number} amount
      */
     setTracksAmount(amount) {
-        this.tracksAmount= amount;
+        this.tracksAmount = amount;
         this.setEventListeners();
         if (this.tracksAmount === 0) {
             return;
         }
-        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Amount of tracks: ' +
+        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Tracks: ' +
             this.tracksAmount;
+        this.checkUser.bind(this)();
+    }
+
+    /**
+     * check what type of user came - owner, authed or not authed
+     */
+    checkUser() {
+        console.log(User.getUserData());
+        console.log(this.playlistData);
+        if (User.exists()) {
+            if (User.getUserData().id !== this.playlistData.user_id) { // TODO временное решение - если зашел не хозяин
+                this.addComponent.playlistData = this.playlistData.id;
+                this.addComponent.render();
+                return;
+            }
+            this.shareComponent.playlistData = this.playlistData;
+            this.shareComponent.render(this.playlistData.private);
+        }
     }
 
     /**
      * Слушает события
      */
     setEventListeners() {
-        document.getElementsByClassName('m-button-track-list-play')[0].addEventListener('click',
+        document.getElementsByClassName('l-button-middle-play')[0].addEventListener('click',
             this.playPlaylist.bind(this));
-        document.getElementsByClassName('m-delete-playlist-button')[0].addEventListener('click',
-            this.deletePlaylist.bind(this));
-    }
-
-    /**
-     * Удаление плейлиста
-     */
-    deletePlaylist() {
-        this.eventBus.emit(PLAYLIST.DELETE_PLAYLIST, this.playlistData.id);
     }
 
     /**
@@ -109,7 +127,7 @@ export default class PlaylistView extends BaseView {
      */
     changeTrackAmount(dif) {
         this.tracksAmount += dif;
-        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Amount of tracks: ' +
+        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Tracks: ' +
             this.tracksAmount;
     }
 

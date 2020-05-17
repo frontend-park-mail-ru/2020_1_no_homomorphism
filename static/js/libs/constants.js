@@ -59,7 +59,7 @@ export const VALIDATION = {
     PASSES_DIFF: 'Passwords must match',
     PASS_INCORRECT: 'Password must contain at least 3 letters or numbers',
     IMG_TOO_BIG: 'Max allowable size - 1Mb',
-    IMG_WRONG_EXT: 'Allowable extensions - png, jpg, jpeg, gif',
+    IMG_WRONG_EXT: 'Not allowable extension',
     REGEX_EMAIL: '(.)+@(.)+',
     REGEX_LOGIN: '^[a-zA-Z0-9_.]{3,}$',
     REGEX_PASSWORD: '^[a-zA-Z0-9]{3,}$',
@@ -197,8 +197,7 @@ export const ARTIST = {
     ID_TRACKS_SECTION: 'artist-tracks',
     ID_ALBUMS_SECTION: 'artist-albums',
     ID_INFO_SECTION: 'artist-info',
-    // NO_ANSWER: 'artist-no-answer',
-    // REDIRECT: 'artist-redirect',
+    SUBSCRIBE: 'artist-subscribe',
     GET_DATA: 'artist-get-artist-data',
     RENDER_DATA: 'artist-render-artist-data',
     RENDER_TRACKS: 'artist-render-track',
@@ -223,6 +222,8 @@ export const PLAYLIST = {
     ERROR: 'playlist-show-errors',
     RENDER_DELETED: 'playlist-render-deleted',
     CHANGE_TRACK_AMOUNT: 'playlist-change-track-amount',
+    CHANGE_PRIVACY: 'playlist-privacy',
+    ADD_PLAYLIST: 'playlist-add',
 };
 
 export const ALBUM = {

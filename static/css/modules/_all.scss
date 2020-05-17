@@ -74,6 +74,11 @@
   padding-bottom: 16px;
 }
 
+.m-privacy-title {
+  padding-top: 20px;
+  padding-right: 8px
+}
+
 .m-top-name {
   font-size: 16px;
   word-wrap: break-word;
@@ -81,17 +86,17 @@
 }
 
 .m-big-name {
-  font-size: x-large;
+  font-size: 24px;
 }
 
 .m-tracks-amount {
-  padding: 8px;
-  border-radius: $card-border;
-  margin-top: 130px;
-  margin-right: 16px;
-  color: #155724;
-  background-color: $selected-elem;
-  float: right !important;
+  padding-top: 8px;
+  //border-radius: $card-border;
+  //margin-top: 16px;
+  //margin-right: 16px;
+  //color: #155724;
+  //background-color: $selected-elem;
+  //float: right !important;
 }
 
 .m-right-col {
@@ -195,7 +200,7 @@
   margin: 0 15px 0 0;
 }
 
-.l-track-big { // KEK
+.l-track-big {
   display: inline-block;
   width: -webkit-calc(49%);
   padding: 2px;
@@ -387,7 +392,7 @@
 }
 
 .m-index {
-  font-family: Montserrat-Light,sans-serif;
+  font-family: Montserrat-Light, sans-serif;
   font-size: 16px;
   margin-bottom: -32px;
   margin-top: 16px;

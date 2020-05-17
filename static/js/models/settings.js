@@ -61,7 +61,7 @@ export default class SettingsModel {
                 .pop()
                 .toLowerCase());
         if (resImage !== '') {
-            this.eventBus.emit(SETTINGS.INVALID, {'avatar-upload': resImage});
+            this.eventBus.emit(SETTINGS.INVALID, {'avatar-error': resImage});
         } else {
             const fData = new FormData();
             fData.append('profile_image', fileAttach.files[0], 'kek.png');
@@ -105,20 +105,20 @@ export default class SettingsModel {
                 values.newPassword !== '',
             );
             if (values.newPassword !== '' && resPassword !== '') {
-                errors['newPassword'] = resPassword;
+                errors['new-password-error'] = resPassword;
             }
             if (values.password === '') {
-                errors['password'] = 'Enter old password';
+                errors['password-error'] = 'Enter old password';
             }
         } else {
             values.password = '';
             values.newPassword = '';
             const resEmail = Validation.email(values.email);
             if (resEmail !== '') {
-                errors['email'] = resEmail;
+                errors['email-error'] = resEmail;
             }
             if (values.name === '') {
-                errors['name'] = 'Enter name';
+                errors['name-error'] = 'Enter name';
             }
         }
         if (JSON.stringify(errors) !== '{}') {
@@ -137,14 +137,14 @@ export default class SettingsModel {
                         this.getUserData.bind(this)(true);
                         break;
                     case RESPONSE.BAD_REQUEST:
-                        errors['password'] = 'Wrong password';
+                        errors['password-error'] = 'Wrong password';
                         this.eventBus.emit(SETTINGS.INVALID, errors);
                         break;
                     case RESPONSE.UNAUTH:
                         globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                         break;
                     case RESPONSE.EXISTS:
-                        errors['email'] = 'This email is already taken';
+                        errors['email-error'] = 'This email is already taken';
                         this.eventBus.emit(SETTINGS.INVALID, errors);
                         break;
                     case RESPONSE.SERVER_ERROR:

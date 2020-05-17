@@ -192,9 +192,22 @@ export default class TrackListComponent {
             if (this._tracklist[i].id === trackID) {
                 this.trackToDelete.remove();
                 this._tracklist.splice(i, 1);
+                this._changeNumbers(i);
                 break;
             }
         }
+    }
+
+    /**
+     * Change track number after deleting
+     * @param {number} index
+     */
+    _changeNumbers(index) {
+        document.querySelectorAll('.m-index').forEach((elem) => {
+            if (elem.innerHTML > index) {
+                elem.innerHTML--;
+            }
+        });
     }
 
     /**

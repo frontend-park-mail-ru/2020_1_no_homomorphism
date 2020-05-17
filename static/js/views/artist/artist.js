@@ -3,6 +3,7 @@ import BaseView from '@libs/base_view';
 import TrackListComponent from '@components/track_list/track_list';
 import PlaylistsComponent from '@components/playlist_list/playlist_list';
 import {ARTIST, DOM} from '@libs/constants';
+import User from '@libs/user';
 
 /**
  *  вью для страницы артиста
@@ -15,10 +16,6 @@ export default class ArtistView extends BaseView {
     constructor(eventBus) {
         super(artist);
         this.data = {};
-        this.tracksRendered = 0;
-        this.allTracksRendered = true;
-        this.albumsRendered = 0;
-        this.allAlbumsRendered = true;
         this.id = 0;
         this.currentOpen = '';
         this.trackListComponent = new TrackListComponent(eventBus, ARTIST);
@@ -79,5 +76,28 @@ export default class ArtistView extends BaseView {
             .href = `/artist/${data.id}/info`;
         document.getElementById('artist-tracks-title').innerText = data.tracks;
         document.getElementById('artist-albums-title').innerText = data.albums;
+        if (data.is_subscribed) {
+            document.getElementsByClassName('m-subscribe')[0].classList.toggle('is-subscribed');
+        }
+        this.setEventListeners.bind(this)();
+    }
+
+    /**
+     * Set event listeners
+     */
+    setEventListeners() {
+        document.getElementsByClassName('m-subscribe')[0]
+            .addEventListener('click', this.subscribe.bind(this));
+    }
+
+    /**
+     * Subscribe
+     */
+    subscribe() {
+        console.log('LOL');
+        if (User.exists()) {
+            document.getElementsByClassName('m-subscribe')[0].classList.toggle('is-subscribed');
+            this.eventBus.emit(ARTIST.SUBSCRIBE, this.data.id);
+        }
     }
 }
