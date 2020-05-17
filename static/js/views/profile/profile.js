@@ -27,7 +27,6 @@ export default class ProfileView extends BaseView {
         this.eventBus.on(PROFILE.RENDER_DATA, this.renderData.bind(this));
         this.eventBus.on(PROFILE.RENDER_STAT, this.renderStat.bind(this));
         this.eventBus.on(PROFILE.CHANGE_PLAYLIST_AMOUNT, this.changePlaylistAmount.bind(this));
-        this.eventBus.on(PROFILE.ID_ARTISTS_SECTION, this.artistSection.bind(this));
     }
 
     /**

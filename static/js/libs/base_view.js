@@ -6,7 +6,7 @@ export default class BaseView {
      */
     constructor(template) {
         this.template = template;
-        this.data = {};
+        this._data = {};
         this.root = '';
         this.url = '';
     }
@@ -18,19 +18,19 @@ export default class BaseView {
     render(root, url = '') {
         this.url = url;
         this.root = root;
-        this.root.innerHTML = this.template(this.data);
+        this.root.innerHTML = this.template(this._data);
     }
 
     /**
      */
-    get getData() {
-        return this.data;
+    get data() {
+        return this._data;
     }
 
     /**
      * @param {Object} data
      */
     setData(data) {
-        console.log(data);
+        this._data = data;
     }
 }

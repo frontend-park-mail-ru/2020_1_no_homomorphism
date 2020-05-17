@@ -10,7 +10,6 @@
                 There aren't any tracks
             </div>
         </fest:if>
-
     </fest:if>
     <fest:if test="data.length > 0">
         <fest:for iterate="data" index="i" value="track">
