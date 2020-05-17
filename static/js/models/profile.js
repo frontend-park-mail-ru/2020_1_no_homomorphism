@@ -156,8 +156,7 @@ export default class ProfileModel {
             case RESPONSE.OK:
                 res.json().then((list) => {
                     this.albums = list.albums;
-                })
-                .then(() => {
+                }).then(() => {
                     this.eventBus.emit(PROFILE.RENDER_PLAYLISTS, {
                         'list': this.albums,
                         'domItem': 'l-track-list',
