@@ -280,6 +280,17 @@ export default class Api {
     }
 
     /**
+     * Изменение приватности
+     * @param {String} id
+     * @return {Promise<Response>}
+     */
+    static playlistChangePrivacy(id) {
+        return postFetch(API + `/playlists/${id}/privacy`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
      * Добавление трека в плейлист
      * @param {Object} data
      * @return {Promise<Response>}

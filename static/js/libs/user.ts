@@ -83,8 +83,11 @@ export default class User implements StaticUser {
                 playlists: undefined,
                 artists: undefined,
             };
+            console.log('false');
             return false;
         }
+        console.log(this.user.id !== undefined);
+
         return this.user.id !== undefined;
     }
 

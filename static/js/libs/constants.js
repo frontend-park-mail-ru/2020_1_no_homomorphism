@@ -223,6 +223,7 @@ export const PLAYLIST = {
     ERROR: 'playlist-show-errors',
     RENDER_DELETED: 'playlist-render-deleted',
     CHANGE_TRACK_AMOUNT: 'playlist-change-track-amount',
+    CHANGE_PRIVACY: 'playlist-privacy',
 };
 
 export const ALBUM = {

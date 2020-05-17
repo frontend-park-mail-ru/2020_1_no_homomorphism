@@ -32,5 +32,6 @@ export default class BaseView {
      */
     setData(data) {
         this.data = data;
+        console.log(data);
     }
 }
