@@ -256,6 +256,7 @@ export const POPUP = {
     PLAYLIST_CREATION_MESSAGE: 'Playlist successfully created',
     PLAYLIST_CREATION_ERROR_MESSAGE: 'Playlist with this name already exists',
     PLAYLIST_DELETION_MESSAGE: 'Playlist successfully deleted',
+    TRACK_ADDITION_MESSAGE: 'Added to playlist ',
     LIFETIME: 2000,
     DISSOLUTIONTIME: 1000,
 };
