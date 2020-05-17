@@ -18,7 +18,7 @@ export default class Router {
         this.forbiddenForLogout = [URL.PROFILE, URL.PROFILE_TRACKS, URL.PROFILE_PLAYLISTS,
             URL.PROFILE_ARTISTS, URL.PROFILE_ALBUMS, URL.SETTINGS];
         this.forbiddenForLogoutRegEx = [URL.PLAYLIST];
-        this.forms = [URL.LOGIN, URL.SIGNUP];
+        this.forms = [URL.LOGIN, URL.SIGN_UP];
         globalEventBus.on(GLOBAL.REDIRECT, this.redirect.bind(this));
         globalEventBus.on(GLOBAL.LOGIN_REDIRECT, this.loginRedirect.bind(this));
     }
