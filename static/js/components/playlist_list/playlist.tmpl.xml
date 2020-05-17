@@ -36,7 +36,7 @@
                 <a class="l-list-card-description  m-tiny-ref" href="{data.href}{elem.id}" style="padding-bottom: 0">
                     <fest:value>elem.name</fest:value>
                 </a>
-                <a class="m-obscure-title m-tiny-ref m-small-text" href="/artist/{elem.artist_id}" style="margin-bottom: 10px">
+                <a class="m-obscure-title m-tiny-ref m-small-text row" href="/artist/{elem.artist_id}" style="margin-bottom: 10px">
                     <fest:value>elem.artist_name</fest:value>
                 </a>
             </div>
