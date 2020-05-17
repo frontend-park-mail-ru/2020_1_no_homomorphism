@@ -28,8 +28,8 @@ export default class NavbarView extends BaseView {
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.NAVBAR)[0]);
-        this.setEventListeners.bind(this)();
         this.eventBus.emit(NAVBAR.CHECK_COOKIE);
+        this.setEventListeners();
     }
 
     /**
@@ -147,7 +147,6 @@ export default class NavbarView extends BaseView {
             event.preventDefault();
             event.stopImmediatePropagation();
         }
-        HTMLCollection.prototype.forEach = Array.prototype.forEach;
         if (document.getElementsByClassName('l-navbar-small-search')[0]
             .children[0].src.indexOf('search') != -1 && event.type != 'resize'
         ) {

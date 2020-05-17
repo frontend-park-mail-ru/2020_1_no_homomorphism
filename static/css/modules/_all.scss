@@ -254,7 +254,6 @@
 }
 
 .l-list-rounded-card {
-  float: top;
   animation-duration: 1s;
   overflow: hidden;
   background-color: white;
@@ -280,7 +279,6 @@
 
 
 .l-list-card {
-  float: top;
   animation-duration: 1s;
   overflow: hidden;
   margin: 8px;
@@ -552,6 +550,51 @@
 
 }
 
-.l-playlists {
+.pop-up-container {
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 250px;
+    height: 228px;
+}
 
+.m-pop-up {
+    width: 200px;
+    height: 50px;
+    box-shadow: 0 1px 20px rgba(12, 12, 12, 0.2);
+    position: absolute;
+    right: 28px;
+    bottom: -60px;
+    background-color: white;
+    border-radius: 8px;
+    font-size: 13px;
+    z-index: $super-top-level;
+    transition-property: bottom, opacity;
+    transition-duration: 0.5s, 1s;
+}
+
+.m-pop-up-error {
+    background-color: #FFCCCC;
+}
+
+.m-pop-up-message {
+    padding: 5px 21px 5px 10px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.m-pop-up-close {
+    opacity: 0.4;
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.m-pop-up-close:hover {
+    opacity: 1;
 }

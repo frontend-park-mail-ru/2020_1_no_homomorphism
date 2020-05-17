@@ -1,5 +1,5 @@
-// export const SERVER_PATH = 'http://localhost:8081';
-export const SERVER_PATH = 'https://virusmusic.fun';
+export const SERVER_PATH = 'http://localhost:8081';
+// export const SERVER_PATH = 'https://virusmusic.fun';
 
 export const API = '/api/v1';
 
@@ -247,4 +247,9 @@ export const SEARCH = {
     'RENDER_ARTISTS': 'search-render-artists',
     'RENDER_TRACKS': 'search-render-tracks',
     'SET_LISTENERS': 'search-set-listeners',
+};
+
+export const POPUP = {
+    LIFETIME: 2000,
+    DISSOLUTIONTIME: 1000,
 };
