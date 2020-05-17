@@ -104,7 +104,7 @@
     height: 26px;
     width: 26px;
     left: 4px;
-    bottom: 4px;
+    bottom: 3px;
     border-radius: 50%;
     background-color: white;
     -webkit-transition: .4s;
@@ -158,10 +158,11 @@ input:checked + .m-slider:before {
   opacity: 0.5;
   margin-top: 20px;
   margin-left: 20px;
+  margin-right: 12px;
   position: relative;
   transform: scale(1.3);
   width: 30px;
-  height: 30px;
+  height: 26px;
   border: 0 solid gray;
   transition: border 10s cubic-bezier(0, 0, 1, 1);
 
@@ -311,6 +312,7 @@ input:checked + .m-slider:before {
   margin-top: 130px;
   margin-right: 16px;
   float: right !important;
+  cursor: pointer;
 }
 
 .m-small-ticked-button {
