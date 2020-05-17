@@ -98,18 +98,6 @@ export default class PlaylistsComponent {
      * @param {Object} event
      */
     elemClick(event) {
-        // console.log(event.target.getAttribute('a-id'));
-        // globalEventBus.emit(GLOBAL.REDIRECT, `playlist/${event.target.getAttribute('a-id')}`);
-        console.log(`${this._type}/${event.target.getAttribute('a-id')}`);
         globalEventBus.emit(GLOBAL.REDIRECT, `/${this._type}/${event.target.getAttribute('a-id')}`);
-        // let current = event.target;
-        // while (!current.classList.contains('l-down-card')) {
-        //     if (current.classList.contains('l-list-card') &&
-        //         current.getAttribute('a-id') !== null) {
-        //         globalEventBus.emit(`global-play-${this._type}`, current.getAttribute('a-id'));
-        //         break;
-        //     }
-        //     current = current.parentNode;
-        // }
     }
 }

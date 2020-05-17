@@ -20,7 +20,7 @@ export default class ArtistListComponent {
     private artistListDummy: ArtistListDummyComponent;
     private artistList: [artist];
 
-    constructor(eventBus: EventBus, renderMessage: string ) {
+    constructor(eventBus: EventBus, renderMessage: string) {
         this.eventBus = eventBus;
         this.artistListDummy = new ArtistListDummyComponent();
         this.eventBus.on(renderMessage, this.render.bind(this));
@@ -29,10 +29,6 @@ export default class ArtistListComponent {
     render(data: input): void {
         this.artistListDummy.DOMItem = data.domItem;
         this.artistList = data.artists;
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-        // @ts-ignore
-        if (this.artistList.length !== 0) {
-            this.artistListDummy.render(this.artistList);
-        }
+        this.artistListDummy.render(this.artistList);
     }
 }

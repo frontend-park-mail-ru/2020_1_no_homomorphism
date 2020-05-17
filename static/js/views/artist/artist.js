@@ -15,7 +15,6 @@ export default class ArtistView extends BaseView {
      */
     constructor(eventBus) {
         super(artist);
-        this.data = {};
         this.id = 0;
         this.currentOpen = '';
         this.textSubscribe = '';
@@ -64,7 +63,7 @@ export default class ArtistView extends BaseView {
      * @param {Object} data
      */
     renderData(data) {
-        this.setData(data);
+        super.setData(data);
         this.eventBus.emit(ARTIST.SET_ARTIST_ID, data.id);
         document.getElementsByClassName('m-top-login')[0].innerHTML = data.name;
         document.getElementsByClassName('m-round-image')[0].src = data.image;
