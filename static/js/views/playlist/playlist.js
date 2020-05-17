@@ -1,7 +1,8 @@
-import {PLAYLIST, GLOBAL} from '@libs/constants';
+import {PLAYLIST, GLOBAL, POPUP} from '@libs/constants';
 import playlist from '@views/playlist/playlist.tmpl.xml';
 import BaseView from '@libs/base_view';
 import TrackListComponent from '@components/track_list/track_list';
+import PopUp from '@components/pop-up/pop-up';
 import {globalEventBus} from '@libs/eventBus';
 
 /**
@@ -22,6 +23,9 @@ export default class PlaylistView extends BaseView {
         this.eventBus.on(PLAYLIST.ERROR, this.showErrors.bind(this));
         this.eventBus.on(PLAYLIST.RENDER_DELETED, this.renderDeleted.bind(this));
         this.eventBus.on(PLAYLIST.CHANGE_TRACK_AMOUNT, this.changeTrackAmount.bind(this));
+        this.eventBus.on(POPUP.NEW, (message) => {
+            new PopUp(message);
+        });
     }
 
     /**
@@ -76,7 +80,7 @@ export default class PlaylistView extends BaseView {
     }
 
     /**
-     * Удаление плейлиста плейлиста
+     * Удаление плейлиста
      */
     deletePlaylist() {
         this.eventBus.emit(PLAYLIST.DELETE_PLAYLIST, this.playlistData.id);
