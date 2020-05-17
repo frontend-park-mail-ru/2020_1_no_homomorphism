@@ -90,6 +90,17 @@ export default class Api {
     }
 
     /**
+     * Получение лайкнутых списка артистов
+     * @return {Promise<Response>}
+     */
+    static profileArtistsGet() {
+        return getFetch(API + '/users/artists', (error) => {
+            console.log(error.toString());
+            throw new Error(error);
+        });
+    }
+
+    /**
      * Профиль просмотр статистики
      * @param {string} id
      * @return {Promise<Response>}
