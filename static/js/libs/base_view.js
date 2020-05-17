@@ -31,7 +31,6 @@ export default class BaseView {
      * @param {Object} data
      */
     setData(data) {
-        this.data = data;
         console.log(data);
     }
 }

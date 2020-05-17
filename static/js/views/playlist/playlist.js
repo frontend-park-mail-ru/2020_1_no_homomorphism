@@ -83,10 +83,8 @@ export default class PlaylistView extends BaseView {
      * check what type of user came - owner, authed or not authed
      */
     checkUser() {
-        console.log(User.getUserData());
-        console.log(this.playlistData);
         if (User.exists()) {
-            if (User.getUserData().id !== this.playlistData.user_id) { // TODO временное решение - если зашел не хозяин
+            if (User.getUserData().id !== this.playlistData.user_id) {
                 this.addComponent.playlistData = this.playlistData.id;
                 this.addComponent.render();
                 return;
@@ -108,7 +106,6 @@ export default class PlaylistView extends BaseView {
      * Отрисовка удаления
      */
     renderDeleted() { // TODO Отрисовка удаленного плейлиста
-        // console.log(this.playlistData);
     }
 
     /**

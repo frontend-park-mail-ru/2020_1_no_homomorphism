@@ -38,9 +38,6 @@ export default class AddPlaylistComponent {
      * Add playlist to user
      */
     _addPlaylist() {
-        // console.log(this._playlistID);
         this.eventBus.emit(PLAYLIST.ADD_PLAYLIST, this._playlistID);
-        // this.eventBus.emit(PLAYLIST.ADD_PLAYLIST, 34);
-        // console.log(this._playlistID);
     }
 }

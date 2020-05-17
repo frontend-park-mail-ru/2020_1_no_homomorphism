@@ -104,17 +104,16 @@ export default class PlaylistModel {
      * @param {Object} id
      */
     changePrivacy(id) {
-        Api.playlistChangePrivacy(id.toString())
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    break;
-                case RESPONSE.BAD_REQUEST:
-                default:
-                    console.log(res);
-                    console.error('I am a teapot');
-                }
-            });
+        Api.playlistChangePrivacy(id.toString()).then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                break;
+            case RESPONSE.BAD_REQUEST:
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
     }
 
     /**
@@ -122,21 +121,19 @@ export default class PlaylistModel {
      * @param {String} id
      */
     addPlaylist(id) {
-        Api.playlistAdd(id)
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    res.json()
-                        .then((playlist) => { // TODO Добавить попап
-                            globalEventBus.emit(GLOBAL.REDIRECT, `/playlist/${playlist.id}`);
-                        });
-                    break;
-                case RESPONSE.BAD_REQUEST:
-                    break;
-                default:
-                    console.log(res);
-                    console.error('I am a teapot');
-                }
-            });
+        Api.playlistAdd(id).then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                res.json().then((playlist) => { // TODO Добавить попап
+                    globalEventBus.emit(GLOBAL.REDIRECT, `/playlist/${playlist.id}`);
+                });
+                break;
+            case RESPONSE.BAD_REQUEST:
+                break;
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
     }
 }

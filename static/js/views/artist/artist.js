@@ -18,6 +18,7 @@ export default class ArtistView extends BaseView {
         this.data = {};
         this.id = 0;
         this.currentOpen = '';
+        this.textSubscribe = '';
         this.trackListComponent = new TrackListComponent(eventBus, ARTIST);
         this.playlistsComponent = new PlaylistsComponent(eventBus, ARTIST.RENDER_ALBUMS);
         this.eventBus = eventBus;
@@ -76,10 +77,13 @@ export default class ArtistView extends BaseView {
             .href = `/artist/${data.id}/info`;
         document.getElementById('artist-tracks-title').innerText = data.tracks;
         document.getElementById('artist-albums-title').innerText = data.albums;
+        this.setEventListeners.bind(this)();
+        this.textSubscribe = 'Subscribe';
         if (data.is_subscribed) {
+            this.textSubscribe = 'Unsubscribe';
             document.getElementsByClassName('m-subscribe')[0].classList.toggle('is-subscribed');
         }
-        this.setEventListeners.bind(this)();
+        document.getElementsByClassName('m-subscribe')[0].innerHTML = this.textSubscribe;
     }
 
     /**
@@ -94,10 +98,25 @@ export default class ArtistView extends BaseView {
      * Subscribe
      */
     subscribe() {
-        console.log('LOL');
         if (User.exists()) {
-            document.getElementsByClassName('m-subscribe')[0].classList.toggle('is-subscribed');
-            this.eventBus.emit(ARTIST.SUBSCRIBE, this.data.id);
+            const button = document.getElementsByClassName('m-subscribe')[0];
+            this.textSubscribe = 'Unsubscribe';
+            if (button.classList.contains('is-subscribed')) {
+                this.textSubscribe = 'Subscribe';
+            }
+            button.classList.toggle('is-subscribed');
+            button.classList.add('is-invisible');
+            setTimeout(this.changeText.bind(this), 100);
         }
+        this.eventBus.emit(ARTIST.SUBSCRIBE, this.data.id);
+    }
+
+    /**
+     * Change text
+     */
+    changeText() {
+        const button = document.getElementsByClassName('m-subscribe')[0];
+        button.innerHTML = this.textSubscribe;
+        button.classList.remove('is-invisible');
     }
 }

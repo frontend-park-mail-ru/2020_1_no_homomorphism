@@ -28,7 +28,7 @@ export default class Api {
      * Логаут
      * @return {Promise<Response>}
      */
-    static logoutFetch() { // TODO переименовать, когда бэк придумает
+    static logoutFetch() {
         return deleteFetch(API + '/users/logout', (error) => {
             console.log(error.toString());
         });
@@ -84,6 +84,17 @@ export default class Api {
      */
     static profileGet() {
         return getFetch(API + '/users/me', (error) => {
+            console.log(error.toString());
+            throw new Error(error);
+        });
+    }
+
+    /**
+     * Получение лайкнутых списка артистов
+     * @return {Promise<Response>}
+     */
+    static profileArtistsGet() {
+        return getFetch(API + '/users/artists', (error) => {
             console.log(error.toString());
             throw new Error(error);
         });
