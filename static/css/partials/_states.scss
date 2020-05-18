@@ -2,97 +2,97 @@
 @import "../modules/_variables";
 
 .is-emphasized {
-  position: fixed;
-  box-shadow: black;
-  z-index: $super-top-level;
+    position: fixed;
+    box-shadow: black;
+    z-index: $super-top-level;
 }
 
 .is-un-emphasized {
-  transition: .6s filter;
-  filter: blur(10px) contrast(.8) brightness(0.8);
-  pointer-events: none;
+    transition: .6s filter;
+    filter: blur(10px) contrast(.8) brightness(0.8);
+    pointer-events: none;
 }
 
 .is-untouchable {
-  pointer-events: none;
+    pointer-events: none;
 }
 
 .is-touched-section {
-  background: $selected-elem;
-  border-radius: $card-border-small;
-  cursor: pointer;
-  transition: 0.1s;
-  transform: scale(1.1);
+    background: $selected-elem;
+    border-radius: $card-border-small;
+    cursor: pointer;
+    transition: 0.1s;
+    transform: scale(1.1);
 }
 
 .is-hidden {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 .is-visible {
-  visibility: visible;
+    visibility: visible;
 }
 
 .is-not-displayed {
-  display: none;
+    display: none;
 }
 
 .is-displayed {
-  display: block;
+    display: block;
 }
 
 .is-error {
-  border: 1px solid red;
-  padding: 32px;
-  font-size: 32px;
+    border: 1px solid red;
+    padding: 32px;
+    font-size: 32px;
 }
 
 .is-error-input-duplication {
-  height: 20px;
-  visibility: visible;
-  margin-top: 21px;
+    height: 20px;
+    visibility: visible;
+    margin-top: 21px;
 }
 
 .is-error-input-underline {
-  height: 15px;
-  margin-bottom: 10px;
-  visibility: visible;
+    height: 15px;
+    margin-bottom: 10px;
+    visibility: visible;
 }
 
 .is-error-border {
-  border-color: red !important;
+    border-color: red !important;
 }
 
 .is-mouse-on {
-  background: $chosen-icon;
+    background: $chosen-icon;
 }
 
 .is-rotated-0 {
-  transform: rotate(0);
+    transform: rotate(0);
 }
 
 .is-margin-left-5 {
-  margin-left: 5px;
+    margin-left: 5px;
 }
 
 .is-margin-left-0 {
-  margin-left: 0;
+    margin-left: 0;
 }
 
 .timeline .is-timeline-mouse-over {
-  font-size: 11px;
+    font-size: 11px;
 }
 
 .is-opacity-1 {
-  opacity: 1;
+    opacity: 1;
 }
 
 .is-volume-scale-hover {
-  top: -52px;
+    top: -52px;
 }
 
 .is-empty-track {
-  display: inline-block;
-  width: -webkit-calc(49%);
-  overflow: hidden;
+    display: inline-block;
+    width: -webkit-calc(49%);
+    overflow: hidden;
 }
