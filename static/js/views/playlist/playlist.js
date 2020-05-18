@@ -85,7 +85,6 @@ export default class PlaylistView extends BaseView {
      * check what type of user came - owner, authed or not authed
      */
     checkUser() {
-        console.log(User.getUserData());
         if (User.exists()) {
             if (User.getUserData().id !== this.playlistData.user_id) {
                 this.addComponent.playlistData = this.playlistData.id;
