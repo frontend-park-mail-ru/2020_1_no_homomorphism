@@ -1,4 +1,5 @@
 import template from '@components/track_list/tracks.tmpl.xml';
+import emptyTemplate from '@components/empty_block/empty.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
 import ChoosePlaylist from '@components/choose_playlist/choose_playlist';
 import TrackComponent from '@components/track/track';
@@ -28,6 +29,7 @@ export default class TrackListComponent {
         this._tracklist = [];
         this._id = 0;
         this._type = '';
+        this._baseDom = '';
     }
 
     /**
@@ -46,6 +48,7 @@ export default class TrackListComponent {
         this._tracklist = data.tracks;
         this._type = data.type;
         this._tracklist.type = this._type === 'playlist';
+        this._baseDom = data.domItem;
         const elem = document.getElementsByClassName(data.domItem)[0];
         elem.innerHTML = template(this._tracklist);
         if (this._tracklist.length !== 0) {
@@ -82,21 +85,27 @@ export default class TrackListComponent {
      */
     playTrack(event) {
         const trackData = this.getIdByClick(event);
-        if (this._type === 'search') {
+        switch (this._type) {
+        case 'search':
             this.getTrackInfo(trackData.id);
-            return;
-        }
-        if (this._type === 'track') {
-            const temp = this._tracklist;
-            delete temp.type;
+            break;
+        case 'track':
+            delete this._tracklist.type;
             globalEventBus.emit(`global-play-${this._type}-tracks`,
                 {'tracks': this._tracklist}, trackData.id);
+            break;
+        case 'liked':
+            delete this._tracklist.type;
+            globalEventBus.emit(GLOBAL.PLAY_TRACKS,
+                {'tracks': this._tracklist}, trackData.id);
+            break;
+        default:
+            globalEventBus.emit(`global-play-${this._type}-tracks`,
+                this._id,
+                trackData.id,
+                this._tracklist.length);
             return;
         }
-        globalEventBus.emit(`global-play-${this._type}-tracks`,
-            this._id,
-            trackData.id,
-            this._tracklist.length);
     }
 
     /**
@@ -105,7 +114,7 @@ export default class TrackListComponent {
      */
     addToPlaylist(event) {
         if (!User.exists()) {
-            alert('Please, login');
+            globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
             return;
         }
         this._choosePlaylist.trackData = this.getIdByClick(event);
@@ -196,6 +205,9 @@ export default class TrackListComponent {
                 break;
             }
         }
+        if (this._tracklist.length < 2) {
+            this._setEmpty();
+        }
     }
 
     /**
@@ -219,6 +231,59 @@ export default class TrackListComponent {
             globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
             return;
         }
-        alert('This functionality is not accessible by now');
+        const likedTrack = this.getIdByClick(event);
+        this._tracklist.forEach((elem) => {
+            if (elem.id === likedTrack.id) {
+                elem.is_liked = !elem.is_liked;
+            }
+        });
+        this._doLike(likedTrack.id, event.target);
+    }
+
+    /**
+     * Change liked\dislike image in track or delete
+     * @param {number} id
+     * @param {Object} domItem
+     */
+    _changeImage(id, domItem) {
+        if (this._type === 'liked') {
+            const elem = this._tracklist.filter((elem) => {
+                if (elem.id === id) {
+                    return elem;
+                }
+            });
+            this._tracklist.slice(this._tracklist.indexOf(elem[0]), 1);
+            this.deleteFromDOM(id.toString());
+            return;
+        }
+        domItem.classList.toggle('is-liked');
+        domItem.classList.toggle('is-not-liked');
+    }
+
+    /**
+     * Установка заглушки после удаление всего
+     */
+    _setEmpty() {
+        document.getElementsByClassName(this._baseDom)[0]
+            .innerHTML = emptyTemplate('You dont have any liked tracks');
+    }
+
+    /**
+     * Отправка лайка
+     * @param {number} id
+     * @param {Object} domItem
+     */
+    _doLike(id, domItem) {
+        Api.trackLike(id.toString())
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    this._changeImage.bind(this)(id, domItem);
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
     }
 }

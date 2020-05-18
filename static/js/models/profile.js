@@ -82,43 +82,26 @@ export default class ProfileModel {
     /**
      * Получение списка любимых треков
      */
-    getLikedTracks() { // TODO СУПЕР ВРЕМЕННО!!!
-        this.eventBus.emit(
-            PROFILE.RENDER_TRACKS,
-            {
-                'tracks': [],
-                'domItem': 'l-track-list',
-                'type': 'playlist',
+    getLikedTracks() {
+        Api.profileTracksGet()
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    res.json().then((list) => {
+                        this.eventBus.emit(
+                            PROFILE.RENDER_TRACKS,
+                            {
+                                'tracks': list.tracks,
+                                'domItem': 'l-track-list',
+                                'type': 'liked',
+                            });
+                    });
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
             });
-        // const playlistID = 94;
-        // Api.playlistTracksGet(
-        //     playlistID.toString(),
-        //     this.curPaginationTracks.toString(),
-        //     PAGINATION.TRACKS.toString())
-        //     .then((res) => {
-        //         switch (res.status) {
-        //         case RESPONSE.OK:
-        //             res.json()
-        //                 .then((list) => {
-        //                     this.eventBus.emit(PROFILE.SET_PLAYLIST_ID, playlistID);
-        //                     this.eventBus.emit(
-        //                         PROFILE.RENDER_TRACKS,
-        //                         {
-        //                             'tracks': list.tracks,
-        //                             'domItem': 'l-track-list',
-        //                             'type': 'playlist',
-        //                         });
-        //                 });
-        //             break;
-        //         case RESPONSE.BAD_REQUEST:
-        //         case RESPONSE.UNAUTH:
-        //         case RESPONSE.NO_ACCESS_RIGHT:
-        //             break;
-        //         default:
-        //             console.log(res);
-        //             console.error('I am a teapot');
-        //         }
-        //     });
     }
 
     /**

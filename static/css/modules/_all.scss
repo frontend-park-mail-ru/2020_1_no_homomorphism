@@ -192,8 +192,19 @@
 }
 
 /**/
-.m-big-like-button, .m-big-delete-button, .m-big-add-button {
+.m-big-delete-button, .m-big-add-button {
     opacity: 0;
+}
+
+.m-big-like-button {
+    opacity: 0;
+    &.is-liked{
+        content: url("../../static/img/icons/favorite.svg");
+    }
+
+    &.is-not-liked {
+        content: url("../../static/img/icons/favorite_border.svg");
+    }
 }
 
 .l-track-big img {

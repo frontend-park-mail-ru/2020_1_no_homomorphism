@@ -162,6 +162,16 @@ export default class Api {
         });
     }
 
+    /**
+     * Получение альбомов пользователя
+     * @return {Promise<Response>}
+     */
+    static profileTracksGet() {
+        return getFetch(API + '/users/tracks', (error) => {
+            console.log(error.toString());
+        });
+    }
+
     // ------------- ARTIST  ---------------
 
     /**
@@ -375,6 +385,15 @@ export default class Api {
      */
     static trackGet(id) {
         return getFetch(API + `/tracks/${id}`, (error) => {
+            console.log(error.toString());
+        });
+    }
+    /**
+     * @param {string} id
+     * @return {Promise<Response>}
+     */
+    static trackLike(id) {
+        return postFetch(API + `/tracks/${id}/rating`, (error) => {
             console.log(error.toString());
         });
     }

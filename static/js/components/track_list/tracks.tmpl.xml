@@ -44,8 +44,15 @@
                                 </fest:if>
 
                                 <div class="col l-big-track-button favorite-button">
-                                    <img src="/static/img/icons/favorite_border.svg" class="m-big-like-button" height="15px"
-                                         alt="..."/>
+                                    <fest:if test="!track.is_liked">
+                                        <img class="m-big-like-button is-not-liked" height="15px"
+                                             alt="..."/>
+                                    </fest:if>
+                                    <fest:if test="track.is_liked">
+                                        <img class="m-big-like-button is-liked" height="15px"
+                                             alt="..."/>
+                                    </fest:if>
+
                                 </div>
                                 <div class="col l-big-track-button add-button">
                                     <img src="/static/img/icons/add.svg" class="m-big-add-button" height="15px" alt="..."/>
@@ -89,8 +96,14 @@
                             </fest:if>
 
                             <div class="col l-big-track-button favorite-button">
-                                <img src="/static/img/icons/favorite_border.svg" class="m-big-like-button" height="15px"
-                                     alt="..."/>
+                                <fest:if test="!track.is_liked">
+                                    <img class="m-big-like-button is-not-liked" height="15px"
+                                         alt="..."/>
+                                </fest:if>
+                                <fest:if test="track.is_liked">
+                                    <img class="m-big-like-button is-liked" height="15px"
+                                         alt="..."/>
+                                </fest:if>
                             </div>
                             <div class="col l-big-track-button add-button">
                                 <img src="/static/img/icons/add.svg" class="m-big-add-button" height="15px" alt="..."/>
