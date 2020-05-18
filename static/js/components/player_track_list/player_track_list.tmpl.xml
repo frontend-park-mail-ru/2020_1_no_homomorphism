@@ -16,12 +16,12 @@
                 <div class="l-big-track-button delete-button">
                     <img src="/static/img/icons/clear.svg" class="m-big-delete-button" height="15px" alt="..."/>
                 </div>
-                <div class="l-big-track-button favorite-button">
-                    <img src="/static/img/icons/favorite_border.svg" class="m-big-like-button" height="15px" alt="..."/>
-                </div>
-                <div class="l-big-track-button add-button">
-                    <img src="/static/img/icons/add.svg" class="m-big-add-button" height="15px" alt="..."/>
-                </div>
+<!--                <div class="l-big-track-button favorite-button">-->
+<!--                    <img src="/static/img/icons/favorite_border.svg" class="m-big-like-button" height="15px" alt="..."/>-->
+<!--                </div>-->
+<!--                <div class="l-big-track-button add-button">-->
+<!--                    <img src="/static/img/icons/add.svg" class="m-big-add-button" height="15px" alt="..."/>-->
+<!--                </div>-->
             </div>
         </div>
     </fest:for>
