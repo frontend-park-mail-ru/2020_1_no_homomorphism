@@ -187,6 +187,7 @@ export const PROFILE = {
     SET_ALBUM_ID: 'profile-set-album-id',
     CHANGE_PLAYLIST_AMOUNT: 'profile-change-playlist-amount',
     DROPDOWN: 'profile-dropdown',
+    CHANGE_TRACK_AMOUNT: 'profile-change-tracks-amount',
 };
 
 export const ARTIST = {

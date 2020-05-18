@@ -27,6 +27,7 @@ export default class ProfileView extends BaseView {
         this.eventBus.on(PROFILE.RENDER_DATA, this.renderData.bind(this));
         this.eventBus.on(PROFILE.RENDER_STAT, this.renderStat.bind(this));
         this.eventBus.on(PROFILE.CHANGE_PLAYLIST_AMOUNT, this.changePlaylistAmount.bind(this));
+        this.eventBus.on(PROFILE.CHANGE_TRACK_AMOUNT, this.changeTrackAmount.bind(this));
     }
 
     /**
@@ -74,6 +75,14 @@ export default class ProfileView extends BaseView {
     changePlaylistAmount(dif) {
         this.data.playlists += dif;
         document.getElementById('playlists').innerText = this.data.playlists;
+    }
+
+    /**
+     * Изменение количества плейлистов
+     * @param {number} newAmount
+     */
+    changeTrackAmount(newAmount) {
+        document.getElementById('tracks').innerText = newAmount.toString();
     }
 
     /**

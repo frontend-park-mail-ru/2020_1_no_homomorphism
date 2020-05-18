@@ -4,7 +4,7 @@ import {globalEventBus} from '@libs/eventBus';
 import ChoosePlaylist from '@components/choose_playlist/choose_playlist';
 import TrackComponent from '@components/track/track';
 import PlaylistComponent from '@components/playlist/playlist';
-import {PLAYLIST, GLOBAL, URL, RESPONSE} from '@libs/constants';
+import {PLAYLIST, GLOBAL, URL, RESPONSE, PROFILE} from '@libs/constants';
 import User from '@libs/user';
 import Api from '@libs/api';
 
@@ -196,7 +196,6 @@ export default class TrackListComponent {
      * @param {string} trackID
      */
     deleteFromDOM(trackID) {
-        this.eventBus.emit(PLAYLIST.CHANGE_TRACK_AMOUNT, -1);
         for (let i = this._tracklist.length - 1; i >= 0; i--) {
             if (this._tracklist[i].id === trackID) {
                 this.trackToDelete.remove();
@@ -205,8 +204,14 @@ export default class TrackListComponent {
                 break;
             }
         }
-        if (this._tracklist.length < 2) {
+        if (this._tracklist.length < 1) {
             this._setEmpty();
+        }
+        if (this._type === 'playlist') {
+            this.eventBus.emit(PLAYLIST.CHANGE_TRACK_AMOUNT, -1);
+        }
+        if (this._type === 'liked') {
+            this.eventBus.emit(PROFILE.CHANGE_TRACK_AMOUNT, this._tracklist.length);
         }
     }
 
@@ -247,12 +252,12 @@ export default class TrackListComponent {
      */
     _changeImage(id, domItem) {
         if (this._type === 'liked') {
-            const elem = this._tracklist.filter((elem) => {
-                if (elem.id === id) {
-                    return elem;
-                }
-            });
-            this._tracklist.slice(this._tracklist.indexOf(elem[0]), 1);
+            // const elem = this._tracklist.filter((elem) => {
+            //     if (elem.id === id) {
+            //         return elem;
+            //     }
+            // });
+            // this._tracklist.slice(this._tracklist.indexOf(elem[0]), 1);
             this.deleteFromDOM(id.toString());
             return;
         }
