@@ -252,6 +252,7 @@ export const SEARCH = {
 
 export const POPUP = {
     NEW: 'new pop-up',
+    LOG_IN_MESSAGE: 'Please, log in',
     SETTINGS_MESSAGE: 'Profile data successfully updated',
     PASSWORD_MESSAGE: 'Password successfully changed',
     AVATAR_MESSAGE: 'Profile picture successfully changed',
@@ -259,10 +260,13 @@ export const POPUP = {
     PLAYLIST_CREATION_ERROR_MESSAGE: 'Playlist with this name already exists',
     PLAYLIST_DELETION_MESSAGE: 'Playlist successfully deleted',
     TRACK_ADDITION_MESSAGE: 'Added to playlist ',
+    TRACK_DELETION_MESSAGE: 'Deleted from playlist ',
+    TRACK_DELETION_ERROR_MESSAGE: 'Cannot delete this track',
     PLAYLIST_PRIVACY_PRIVATE_MESSAGE: 'Playlist is private now',
     PLAYLIST_PRIVACY_PUBLIC_MESSAGE: 'Playlist is public now',
     PLAYLIST_LINK_COPY_MESSAGE: 'Link copied',
     PLAYLIST_LINK_COPY_ERROR_MESSAGE: 'Cannot copy link',
+    PLAYLIST_LINK_COPY_PRIVACY_ERROR_MESSAGE: 'No link copied. Make the playlist public first',
     PLAYLIST_ADDITION_MESSAGE: 'Playlist added',
     PLAYLIST_ADDITION_ERROR_MESSAGE: 'Cannot add playlist',
     ARTIST_SUBSCRIPTION_MESSAGE: 'Subscribed to ',

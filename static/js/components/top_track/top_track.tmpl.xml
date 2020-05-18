@@ -5,7 +5,7 @@
     <div class="col m-track-group-names">
         <div class="track-name" id="title" title="">
         </div>
-        <a class="group-name" id="artist" href="/">
+        <a class="group-name is-underlined-ref" id="artist" href="/">
         </a>
     </div>
 </fest:template>

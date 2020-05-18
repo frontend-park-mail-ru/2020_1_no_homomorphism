@@ -16,7 +16,7 @@
             <fest:if test="data.length == i+1">
                     <div class="l-track-big" t-id="{track.id}" t-image="{track.image}">
                         <div class="m-track row">
-                            <div>
+                            <div class="m-track-info-col">
                                 <div class="m-index">
                                     <fest:value>i+1</fest:value>
                                 </div>
@@ -30,7 +30,7 @@
                                     <div>
                                         <fest:value>track.name</fest:value>
                                     </div>
-                                    <a class="m-obscure-title m-tiny-ref m-small-text" href="/artist/{track.artist_id}">
+                                    <a class="m-obscure-title m-tiny-ref m-small-text is-underlined-ref" href="/artist/{track.artist_id}">
                                         <fest:value>track.artist</fest:value>
                                     </a>
                                 </div>
@@ -66,7 +66,7 @@
             <fest:if test="data.length != i+1">
                 <div class="l-track-big" t-id="{track.id}" t-image="{track.image}">
                     <div class="m-track row">
-                        <div>
+                        <div class="m-track-info-col">
                             <div class="m-index">
                                 <!--                            <span>-->
                                 <fest:value>i+1</fest:value>
@@ -82,7 +82,7 @@
                                 <div>
                                     <fest:value>track.name</fest:value>
                                 </div>
-                                <a class="m-obscure-title m-tiny-ref m-small-text" href="/artist/{track.artist_id}">
+                                <a class="m-obscure-title m-tiny-ref m-small-text is-underlined-ref" href="/artist/{track.artist_id}">
                                     <fest:value>track.artist</fest:value>
                                 </a>
                             </div>

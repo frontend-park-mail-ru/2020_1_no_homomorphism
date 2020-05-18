@@ -260,9 +260,10 @@ input:checked + .m-slider:before {
 }
 
 .l-track-buttons {
-    text-align: right;
-    float: right;
-    margin-top: -22px;
+  //text-align: right;
+  margin-top: 16px;
+  float: right;
+  //margin-top: -22px;
 }
 
 .l-player-track-buttons {
