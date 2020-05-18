@@ -47,6 +47,8 @@ export default class NewsView extends BaseView {
         }
         node.innerHTML = newsSection(data);
         node.classList.remove(data.domItem);
-        node.firstChild.lastChild.classList.add(data.domItem);
+        if (node.firstChild !== undefined && node.firstChild.lastChild !== undefined) {
+            node.firstChild.lastChild.classList.add(data.domItem);
+        }
     }
 }
