@@ -1,8 +1,9 @@
 import dropdown from '@components/choose_playlist/choose_playlist.tmpl.xml';
 import createdPlaylist from '@components/choose_playlist/created_playlist.tmpl.xml';
-import {DOM, SEARCH} from '@libs/constants';
+import {DOM, SEARCH, POPUP} from '@libs/constants';
 import TrackComponent from '@components/track/track';
 import PlaylistComponent from '@components/playlist/playlist';
+import PopUp from '@components/pop-up/pop-up';
 
 /**
  * Компонент - выпадающее меню при добавлении трека в плейлист
@@ -30,13 +31,6 @@ export default class ChoosePlaylist {
         this._trackData = trackData;
         this._trackComponent.trackData = trackData;
     }
-    /**
-     * Установка текущего айди трека
-     * @return {Object}
-     */
-    get trackData() {
-        return this._trackData;
-    }
 
     /**
      * Подготовка к рендерингу
@@ -63,6 +57,9 @@ export default class ChoosePlaylist {
             .firstChild
             .classList
             .add('is-un-emphasized');
+        document.getElementsByClassName(DOM.NAVBAR)[0]
+            .classList
+            .add('is-untouchable');
         this.setEventListeners();
     }
 
@@ -113,6 +110,7 @@ export default class ChoosePlaylist {
         this._curPlaylist.setAttribute('is-include', 'true');
         const playlist = this._playlists.find((item) => item.id === playlistID);
         playlist.include = true;
+        new PopUp(POPUP.TRACK_ADDITION_MESSAGE + playlist.name);
     }
 
 
@@ -147,6 +145,9 @@ export default class ChoosePlaylist {
             .firstChild
             .classList
             .remove('is-un-emphasized');
+        document.getElementsByClassName(DOM.NAVBAR)[0]
+            .classList
+            .remove('is-untouchable');
         this.eventBus.emit(SEARCH.SET_LISTENERS);
         this._callbackEventListener();
     }

@@ -59,7 +59,7 @@ export const VALIDATION = {
     PASSES_DIFF: 'Passwords must match',
     PASS_INCORRECT: 'Password must contain at least 3 letters or numbers',
     IMG_TOO_BIG: 'Max allowable size - 1Mb',
-    IMG_WRONG_EXT: 'Allowable extensions - png, jpg, jpeg, gif',
+    IMG_WRONG_EXT: 'Not allowable extension',
     REGEX_EMAIL: '(.)+@(.)+',
     REGEX_LOGIN: '^[a-zA-Z0-9_.]{3,}$',
     REGEX_PASSWORD: '^[a-zA-Z0-9]{3,}$',
@@ -67,7 +67,6 @@ export const VALIDATION = {
 };
 
 export const GLOBAL = {
-    GET_ARTIST_TRACKS: 'global-get-artist-tracks',
     PLAY_ARTIST_TRACKS: 'global-play-artist-tracks',
     PLAY_PLAYLIST_TRACKS: 'global-play-playlist-tracks',
     PLAY_ALBUM_TRACKS: 'global-play-album-tracks',
@@ -79,22 +78,21 @@ export const GLOBAL = {
     REDIRECT: 'redirect',
     HREF: 'global-href',
     LOGOUT_REDIRECT: 'global-logout-redirect',
+    LOGIN_REDIRECT: 'global-login-redirect',
     CLOSE_SEARCH: 'global-close-search',
     PAUSE: 'global-pause',
 };
 
 export const MAIN = {
     GET_LIST_DATA: 'get-all-artists-data',
-    RENDER_ARTIST: 'render-artist-list',
     NO_ANSWER: 'no-answer',
-    // REDIRECT: 'redirect',
 };
 
 export const LOGIN = {
-    // REDIRECT: 'redirect',
     INVALID: 'login-invalid',
     SUBMIT: 'login-submit',
     LOGIN_SUCCESS: 'login-success',
+    CLOSE: 'login-close',
 };
 
 export const NAVBAR = {
@@ -160,6 +158,7 @@ export const SIGN_UP = {
     LOGIN_SUCCESS: 'signup-success',
     SUBMIT: 'signup-submit',
     INVALID: 'signup-invalid',
+    CLOSE: 'signup-close',
 };
 
 export const PROFILE = {
@@ -188,6 +187,7 @@ export const PROFILE = {
     SET_ALBUM_ID: 'profile-set-album-id',
     CHANGE_PLAYLIST_AMOUNT: 'profile-change-playlist-amount',
     DROPDOWN: 'profile-dropdown',
+    CHANGE_TRACK_AMOUNT: 'profile-change-tracks-amount',
 };
 
 export const ARTIST = {
@@ -196,8 +196,8 @@ export const ARTIST = {
     ID_TRACKS_SECTION: 'artist-tracks',
     ID_ALBUMS_SECTION: 'artist-albums',
     ID_INFO_SECTION: 'artist-info',
-    // NO_ANSWER: 'artist-no-answer',
-    // REDIRECT: 'artist-redirect',
+    SUBSCRIBE: 'artist-subscribe',
+    DRAW_SUBSCRIBE: 'artist-draw-subscribe',
     GET_DATA: 'artist-get-artist-data',
     RENDER_DATA: 'artist-render-artist-data',
     RENDER_TRACKS: 'artist-render-track',
@@ -222,6 +222,8 @@ export const PLAYLIST = {
     ERROR: 'playlist-show-errors',
     RENDER_DELETED: 'playlist-render-deleted',
     CHANGE_TRACK_AMOUNT: 'playlist-change-track-amount',
+    CHANGE_PRIVACY: 'playlist-privacy',
+    ADD_PLAYLIST: 'playlist-add',
 };
 
 export const ALBUM = {
@@ -246,4 +248,31 @@ export const SEARCH = {
     'RENDER_ARTISTS': 'search-render-artists',
     'RENDER_TRACKS': 'search-render-tracks',
     'SET_LISTENERS': 'search-set-listeners',
+};
+
+export const POPUP = {
+    NEW: 'new pop-up',
+    LOG_IN_MESSAGE: 'Please, log in',
+    SETTINGS_MESSAGE: 'Profile data successfully updated',
+    PASSWORD_MESSAGE: 'Password successfully changed',
+    AVATAR_MESSAGE: 'Profile picture successfully changed',
+    PLAYLIST_CREATION_MESSAGE: 'Playlist successfully created',
+    PLAYLIST_CREATION_ERROR_MESSAGE: 'Playlist with this name already exists',
+    PLAYLIST_DELETION_MESSAGE: 'Playlist successfully deleted',
+    TRACK_ADDITION_MESSAGE: 'Added to playlist ',
+    TRACK_DELETION_MESSAGE: 'Deleted from playlist ',
+    TRACK_DELETION_ERROR_MESSAGE: 'Cannot delete this track',
+    PLAYLIST_PRIVACY_PRIVATE_MESSAGE: 'Playlist is private now',
+    PLAYLIST_PRIVACY_PUBLIC_MESSAGE: 'Playlist is public now',
+    PLAYLIST_LINK_COPY_MESSAGE: 'Link copied',
+    PLAYLIST_LINK_COPY_ERROR_MESSAGE: 'Cannot copy link',
+    PLAYLIST_LINK_COPY_PRIVACY_ERROR_MESSAGE: 'No link copied. Make the playlist public first',
+    PLAYLIST_ADDITION_MESSAGE: 'Playlist added',
+    PLAYLIST_ADDITION_ERROR_MESSAGE: 'Cannot add playlist',
+    ARTIST_SUBSCRIPTION_MESSAGE: 'Subscribed to ',
+    ARTIST_SUBSCRIPTION_ERROR_MESSAGE: 'Cannot subscribe to ',
+    ARTIST_UNSUBSCRIPTION_MESSAGE: 'Unsubscribed from ',
+    ARTIST_UNSUBSCRIPTION_ERROR_MESSAGE: 'Cannot unsubscribe from ',
+    LIFETIME: 2000,
+    DISSOLUTIONTIME: 1000,
 };

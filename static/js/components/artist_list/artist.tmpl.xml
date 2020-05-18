@@ -1,9 +1,14 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <fest:if test="data.length < 1">
+        <div class="m-empty-list">
+            You haven't subscribed to any artists
+        </div>
+    </fest:if>
     <fest:for iterate="data" index="i" value="artist">
         <a href="/artist/{artist.id}/tracks">
-            <div class="l-list-card" a-id="{artist.id}">
+            <div class="l-list-rounded-card" a-id="{artist.id}">
                 <div class="l-list-image">
-                    <img class="m-list-image" src="{artist.image}" alt=""/>
+                    <img class="m-round-image" src="{artist.image}" alt=""/>
                 </div>
                 <div class="l-list-card-description">
                     <fest:value>artist.name</fest:value>

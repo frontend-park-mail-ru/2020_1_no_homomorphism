@@ -84,7 +84,7 @@ export default class PlayerView extends BaseView {
         if (this.footer) {
             return;
         }
-        const body = document.getElementsByTagName('body')[0];
+        const body = document.documentElement;
         const mobile = window.matchMedia(LAYOUT.MOBILE);
         const left = (
             mobile.matches ?

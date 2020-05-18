@@ -2,7 +2,7 @@ import template from '@components/playlist_list/playlist.tmpl.xml';
 import newPlaylist from '@components/playlist_list/new_playlist.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
 import PlaylistComponent from '@components/playlist/playlist';
-import {PROFILE, SEARCH} from '@libs/constants';
+import {GLOBAL, PROFILE, SEARCH} from '@libs/constants';
 
 /**
  * Список плейлистов или альбомомв
@@ -10,15 +10,18 @@ import {PROFILE, SEARCH} from '@libs/constants';
 export default class PlaylistsComponent {
     /**
      * @param {EventBus} eventBus
-     * @param {Object} command
+     * @param {String} command
+     * @param {String} anotherCommand
      */
-    constructor(eventBus, command) {
+    constructor(eventBus, command, anotherCommand = '') {
         this._type = '';
         this._domItem = '';
         this._playlistComponent = new PlaylistComponent(this.setEventListeners.bind(this));
         this.eventBus = eventBus;
-        this.eventBus.on(command.RENDER_ALBUMS, this.render.bind(this));
-        this.eventBus.on(command.RENDER_PLAYLISTS, this.render.bind(this));
+        this.eventBus.on(command, this.render.bind(this));
+        if (anotherCommand !== '') {
+            this.eventBus.on(anotherCommand, this.render.bind(this));
+        }
         this.eventBus.on(SEARCH.SET_LISTENERS, this.setEventListeners.bind(this));
     }
 
@@ -30,10 +33,8 @@ export default class PlaylistsComponent {
         this._type = data.type;
         this._domItem = data.domItem;
         const elem = document.getElementsByClassName(data.domItem)[0];
-        if (data.list.length !== 0) {
-            elem.innerHTML = template(this.generateHref(data.list));
-            this.setEventListeners();
-        }
+        elem.innerHTML = template(this.generateHref(data.list));
+        this.setEventListeners();
     }
 
     /**
@@ -51,8 +52,13 @@ export default class PlaylistsComponent {
      * Set EventListeners
      */
     setEventListeners() {
-        document.querySelectorAll('.m-button-track-play-playlist').forEach((button) => {
-            button.onclick = (event) => this.elemClick.bind(this)(event);
+        console.log('LOL');
+        document.querySelectorAll('img.m-list-image').forEach((elem) => {
+            elem.addEventListener('click', this.elemClick.bind(this));
+            // button.onclick = (event) =>
+            // this.elemClick.bind(this)(event);
+            // console.log(event);
+            // globalEventBus.emit(GLOBAL.REDIRECT, `playlist/${}`)
         });
         if (this._type === 'playlist') {
             document.getElementsByClassName('m-button-without-size')[0]
@@ -74,8 +80,7 @@ export default class PlaylistsComponent {
         const value = document.getElementsByClassName('m-small-input')[0].value;
         if (value !== '') {
             document.getElementsByClassName('m-small-input')[0].value = '';
-            this._playlistComponent
-                .createPlaylist(this.updatePlaylistList.bind(this), value);
+            this._playlistComponent.createPlaylist(this.updatePlaylistList.bind(this), value);
         }
     }
 
@@ -93,14 +98,6 @@ export default class PlaylistsComponent {
      * @param {Object} event
      */
     elemClick(event) {
-        let current = event.target;
-        while (!current.classList.contains('l-down-card')) {
-            if (current.classList.contains('l-list-card') &&
-                current.getAttribute('a-id') !== null) {
-                globalEventBus.emit(`global-play-${this._type}`, current.getAttribute('a-id'));
-                break;
-            }
-            current = current.parentNode;
-        }
+        globalEventBus.emit(GLOBAL.REDIRECT, `/${this._type}/${event.target.getAttribute('a-id')}`);
     }
 }

@@ -25,12 +25,12 @@ export default class PlayerTrackListComponent {
         document.querySelectorAll('.delete-button').forEach((button) => {
             button.addEventListener('click', this.trackDeleteButtonClick.bind(this));
         });
-        document.querySelectorAll('.favorite-button').forEach((button) => {
-            button.addEventListener('click', this.trackFavoriteButtonClick.bind(this));
-        });
-        document.querySelectorAll('.add-button').forEach((button) => {
-            button.addEventListener('click', this.trackAddButtonClick.bind(this));
-        });
+        // document.querySelectorAll('.favorite-button').forEach((button) => {
+        //     button.addEventListener('click', this.trackFavoriteButtonClick.bind(this));
+        // });
+        // document.querySelectorAll('.add-button').forEach((button) => {
+        //     button.addEventListener('click', this.trackAddButtonClick.bind(this));
+        // });
         document.getElementsByClassName('track-list')[0]
             .addEventListener('scroll', this.trackListWheel.bind(this));
     }
@@ -96,6 +96,8 @@ export default class PlayerTrackListComponent {
      * @param {Object} event
      */
     trackDeleteButtonClick(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
         let target = event.target;
         while (target.getAttribute('id') === null) {
             target = target.parentNode;
@@ -108,11 +110,11 @@ export default class PlayerTrackListComponent {
      * @param {Object} event
      */
     trackFavoriteButtonClick(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
         if (!User.exists()) {
             globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
-            return;
         }
-        alert('This functionality is not accessible by now');
     }
 
     /**
@@ -120,6 +122,8 @@ export default class PlayerTrackListComponent {
      * @param {Object} event
      */
     trackAddButtonClick(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
         if (!User.exists()) {
             globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
             return;
@@ -136,7 +140,7 @@ export default class PlayerTrackListComponent {
      */
     getIdByClick(event) {
         let current = event.target;
-        while (current != null && !current.classList.contains('track-list')) {
+        while (current !== null && !current.classList.contains('track-list')) {
             if (current.classList.contains('border-bottom') &&
                 current.getAttribute('id') !== null) {
                 return {'id': current.getAttribute('id')};

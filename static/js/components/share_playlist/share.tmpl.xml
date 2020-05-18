@@ -1,0 +1,17 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <div class="m-right-col">
+        <div class="m-privacy-title col">Private:</div>
+        <label class="m-switch col">
+            <input type="checkbox" id="checkbox" checked="true" value="1"> </input>
+            <span class="m-slider"> </span>
+        </label>
+        <div class="col">
+            <button class="m-button-share">
+                <span class="m-text-in-button"></span>
+            </button>
+        </div>
+        <div class="l-delete-playlist-button">
+            <div class="m-delete-playlist-button"></div>
+        </div>
+    </div>
+</fest:template>

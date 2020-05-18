@@ -28,7 +28,7 @@ export default class Api {
      * Логаут
      * @return {Promise<Response>}
      */
-    static logoutFetch() { // TODO переименовать, когда бэк придумает
+    static logoutFetch() {
         return deleteFetch(API + '/users/logout', (error) => {
             console.log(error.toString());
         });
@@ -84,6 +84,17 @@ export default class Api {
      */
     static profileGet() {
         return getFetch(API + '/users/me', (error) => {
+            console.log(error.toString());
+            throw new Error(error);
+        });
+    }
+
+    /**
+     * Получение лайкнутых списка артистов
+     * @return {Promise<Response>}
+     */
+    static profileArtistsGet() {
+        return getFetch(API + '/users/artists', (error) => {
             console.log(error.toString());
             throw new Error(error);
         });
@@ -151,6 +162,16 @@ export default class Api {
         });
     }
 
+    /**
+     * Получение альбомов пользователя
+     * @return {Promise<Response>}
+     */
+    static profileTracksGet() {
+        return getFetch(API + '/users/tracks', (error) => {
+            console.log(error.toString());
+        });
+    }
+
     // ------------- ARTIST  ---------------
 
     /**
@@ -202,6 +223,16 @@ export default class Api {
      */
     static artistTracksGet(id, start, end) {
         return getFetch(API + `/artists/${id}/tracks/${start}/${end}`)
+            .catch((error) => console.error(error));
+    }
+
+    /**
+     * Артист просмотр треков
+     * @param {string} id
+     * @return {Promise<Response>}
+     */
+    static artistSubscribe(id) {
+        return postFetch(API + `/artists/${id}/subscription`)
             .catch((error) => console.error(error));
     }
 
@@ -280,6 +311,28 @@ export default class Api {
     }
 
     /**
+     * Изменение приватности
+     * @param {String} id
+     * @return {Promise<Response>}
+     */
+    static playlistChangePrivacy(id) {
+        return postFetch(API + `/playlists/${id}/privacy`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
+     * Добавление чужого плейлиста себе :>
+     * @param {String} id
+     * @return {Promise<Response>}
+     */
+    static playlistAdd(id) {
+        return postFetch(API + `/playlists/shared/${id}`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
      * Добавление трека в плейлист
      * @param {Object} data
      * @return {Promise<Response>}
@@ -332,6 +385,15 @@ export default class Api {
      */
     static trackGet(id) {
         return getFetch(API + `/tracks/${id}`, (error) => {
+            console.log(error.toString());
+        });
+    }
+    /**
+     * @param {string} id
+     * @return {Promise<Response>}
+     */
+    static trackLike(id) {
+        return postFetch(API + `/tracks/${id}/rating`, (error) => {
             console.log(error.toString());
         });
     }

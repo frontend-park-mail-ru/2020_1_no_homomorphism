@@ -7,14 +7,14 @@
         </fest:if>
         <fest:if test="data.artists.length + data.albums.length + data.tracks.length > 0">
             <a class="m-tiny-ref" href="/search/{data.input}">
-                <div class="m-obscure-title is-hover-gray m-medium-text">
+                <div class="m-obscure-title is-hover-gray m-medium-bold-text">
                     All results ➤
                 </div>
             </a>
         </fest:if>
         <fest:if test="data.artists.length > 0">
             <div class="l-search-artists">
-                <div class="m-obscure-title m-medium-text">
+                <div class="m-obscure-title m-medium-bold-text">
                     Artists
                 </div>
                 <div class="small-line"></div>
@@ -38,7 +38,7 @@
         </fest:if>
         <fest:if test="data.tracks.length > 0">
             <div class="l-search-tracks">
-                <div class="m-obscure-title m-medium-text">
+                <div class="m-obscure-title m-medium-bold-text">
                     Tracks
                 </div>
                 <div class="small-line"></div>
@@ -61,7 +61,7 @@
         </fest:if>
         <fest:if test="data.albums.length > 0">
             <div class="l-search-albums">
-                <div class="m-obscure-title m-medium-text">
+                <div class="m-obscure-title m-medium-bold-text">
                     Albums
                 </div>
                 <div class="small-line"></div>

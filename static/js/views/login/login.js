@@ -1,7 +1,8 @@
-import {LOGIN, GLOBAL} from '@libs/constants';
+import {LOGIN, GLOBAL, DOM} from '@libs/constants';
 import template from '@views/login/login.tmpl.xml';
 import BaseView from '@libs/base_view';
 import {globalEventBus} from '@libs/eventBus';
+import TopFormComponent from '@components/top_form/top_form';
 
 /**
  *  вью для входа
@@ -12,8 +13,8 @@ export default class LoginView extends BaseView {
      */
     constructor(eventBus) {
         super(template);
+        this.form = new TopFormComponent(eventBus, LOGIN);
         this.eventBus = eventBus;
-        this.eventBus.on(LOGIN.INVALID, this.showErrors);
     }
 
     /**
@@ -22,22 +23,9 @@ export default class LoginView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
+        super.render(document.getElementsByClassName(DOM.TOP_CONTENT)[0], url);
         globalEventBus.emit(GLOBAL.COLLAPSE);
-        if (root.children.length > 0) {
-            if (root.firstChild.classList.contains('is-emphasized')) {
-                root.removeChild(root.firstChild);
-            }
-            if (root.children.length === 2) {
-                root.removeChild(root.lastChild);
-            }
-            if (root.children.length !== 0) {
-                root.firstChild.classList.add('is-un-emphasized');
-            }
-            root.innerHTML += template();
-            this.setEventListeners.bind(this)();
-            return;
-        }
-        root.innerHTML = template();
+        this.form.configure();
         this.setEventListeners.bind(this)();
     }
 
@@ -55,42 +43,10 @@ export default class LoginView extends BaseView {
     }
 
     /**
-     * показывает, какие поля неверно заполнены
-     * @param {Object} errors
-     */
-    showErrors(errors) {
-        document.getElementsByClassName('l-form')[0].style.borderColor = 'red';
-        for (const key in errors) {
-            if (key === 'global') {
-                document.getElementById('global').innerText = errors[key];
-                document.getElementById('global').style.height = '20px';
-                document.getElementById('global').style.visibility = 'visible';
-                document.getElementById('global').style.marginTop = '21px';
-            } else {
-                const message = document.getElementById(key).nextElementSibling;
-                message.previousElementSibling.style.borderColor = 'red';
-                message.innerText = errors[key];
-                message.style.height = '15px';
-                message.style.marginBottom = '10px';
-                message.style.visibility = 'visible';
-            }
-        }
-    }
-
-    /**
      * отправляет данные формы
      */
     submit() {
-        document.querySelectorAll('.l-form label').forEach((label) => {
-            label.children[0].style.borderColor = '#ccc';
-            label.children[1].innerText = '';
-            label.children[1].style.height = '0';
-            label.children[1].style.marginBottom = '0';
-            label.children[1].style.visibility = 'hidden';
-        });
-        document.getElementById('global').style.height = '0';
-        document.getElementById('global').style.visibility = 'hidden';
-        document.getElementById('global').style.marginTop = '0';
+        this.form.hideErrors();
         this.eventBus.emit(LOGIN.SUBMIT, {
             login: document.getElementById('login').value,
             password: document.getElementById('password').value,

@@ -1,5 +1,5 @@
 import Api from '@libs/api';
-import {ARTIST, URL, GLOBAL} from '@libs/constants';
+import {ARTIST, URL, GLOBAL, RESPONSE} from '@libs/constants';
 import {globalEventBus} from '@libs/eventBus';
 
 /**
@@ -15,11 +15,11 @@ export default class ArtistModel {
         this.tracks = [];
         this.id = '';
         this.eventBus = eventBus;
-        globalEventBus.on(GLOBAL.GET_ARTIST_TRACKS, this.getArtistTracks.bind(this));
         this.eventBus.on(ARTIST.GET_DATA, this.getArtistData.bind(this));
         this.eventBus.on(ARTIST.ID_TRACKS_SECTION, this.getArtistTracks.bind(this));
         this.eventBus.on(ARTIST.ID_ALBUMS_SECTION, this.getArtistAlbums.bind(this));
         this.eventBus.on(ARTIST.ID_INFO_SECTION, this.getArtistInfo.bind(this));
+        this.eventBus.on(ARTIST.SUBSCRIBE, this.subscribe.bind(this));
     }
 
     /**
@@ -41,9 +41,11 @@ export default class ArtistModel {
                     const data = {};
                     Promise.all(res.map((item) => item.json()))
                         .then((res) => res.forEach((item) => Object.assign(data, item)))
-                        .then(() => this.eventBus.emit(ARTIST.RENDER_DATA, data));
+                        .then(() => {
+                            this.eventBus.emit(ARTIST.RENDER_DATA, data);
+                        });
                 } else {
-                    this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                 }
             });
     }
@@ -56,11 +58,8 @@ export default class ArtistModel {
     getArtistTracks(start, end) {
         Api.artistTracksGet(this.id, start, end)
             .then((res) => {
-                if (res === undefined) {
-                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
-                    return;
-                }
-                if (res.ok) {
+                switch (res.status) {
+                case RESPONSE.OK:
                     res.json()
                         .then((data) => {
                             this.tracks += data.tracks;
@@ -71,8 +70,9 @@ export default class ArtistModel {
                                     'type': 'artist',
                                 });
                         });
-                } else {
-                    this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
+                    break;
+                default:
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                 }
             });
     }
@@ -85,25 +85,40 @@ export default class ArtistModel {
     getArtistAlbums(start, end) {
         Api.artistAlbumsGet(this.id, start, end)
             .then((res) => {
-                if (res === undefined) {
-                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
-                    return;
-                }
-                if (res.ok) {
+                switch (res.status) {
+                case RESPONSE.OK:
                     res.json()
                         .then((data) => {
                             this.albums = data.albums;
                             this.eventBus.emit(ARTIST.RENDER_ALBUMS,
                                 {
                                     'list': data.albums,
-                                    'domItem': 'l-album-list',
+                                    'domItem': 'l-track-list',
                                     'type': 'album',
                                 });
                         });
-                } else {
-                    this.eventBus.emit(ARTIST.NO_ANSWER, URL.MAIN);
+                    break;
+                default:
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                 }
             });
+    }
+
+    /**
+     * Подписка на артиста
+     * @param {String} id
+     */
+    subscribe(id) {
+        Api.artistSubscribe(id).then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                this.eventBus.emit(ARTIST.DRAW_SUBSCRIBE, true);
+                break;
+            default:
+                this.eventBus.emit(ARTIST.DRAW_SUBSCRIBE, false);
+                return;
+            }
+        });
     }
 
     /**

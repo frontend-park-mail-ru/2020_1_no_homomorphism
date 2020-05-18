@@ -43,7 +43,6 @@
                     Go
                 </button>
                 <div class="m-error-message-small" id="global">
-<!--                    Signup error-->
                 </div>
                 <div class="m-form-description">
                     <a class="m-tiny-ref" href="/login">

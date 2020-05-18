@@ -2,96 +2,102 @@
 @import "../modules/_variables";
 
 .l-card {
-  border-radius: $card-border-small;
-  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-  padding: 1em;
+    border-radius: $card-border-small;
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    padding: 1em;
 }
 
 .l-top-card {
-  overflow: hidden;
-  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
-  border-radius: $card-border;
+    overflow: hidden;
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+    border-radius: $card-border;
 }
 
 .l-down-card {
-  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
-  border-radius: $card-border;
-  margin-top: 16px;
-  padding: 16px;
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+    border-radius: $card-border;
+    margin-top: 16px;
+    //padding: 16px;
 }
 
 .l-top-titles {
-  margin-top: 80px;
+    margin-top: 80px;
 }
 
-.l-top-info{
+.l-top-info {
 
 }
 
 .l-top-name {
-  //margin-left: 32px;
-  padding-top: 100px;
-  text-align: left;
+    padding-top: 100px;
+    text-align: left;
 }
 
 .m-top-login {
-  color: #070025;
-  font-size: 30px;
-  word-wrap: break-word;
+    color: #070025;
+    font-size: 30px;
+    word-wrap: break-word;
 }
 
 .l-form {
-  width: 380px;
-  margin: 32px auto;
-  padding: 48px 32px 32px 32px;
-  background: #fafafa;
-  border: 1px solid #ebebeb;
+    max-height: -webkit-calc(90% - 60px);
+    width: 450px;
+    height: max-content;
+    position: fixed;
+    padding: 48px 32px 32px 32px;
+    background: white;
+    border: 1px solid #ebebeb;
+    overflow-y: scroll;
 }
 
 .l-center-pos {
-  left: 40%;
+    left: 40%;
 }
 
 .l-main {
-  margin-left: 3em;
+    margin-left: 3em;
 }
 
 .l-track-list {
-  border-radius: $card-border;
+    border-radius: $card-border;
+    padding: 8px;
 }
 
 .l-list-card-description {
-  color: #515151;
-  padding-bottom: 20px;
-  padding-left: 6px;
-  padding-right: 6px;
-  text-decoration: none;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+    display: block;
+    margin-top: 12px;
+    color: #515151;
+    padding-bottom: 20px;
+    padding-left: 6px;
+    padding-right: 6px;
+    text-decoration: none;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .l-input {
-  margin-top: 16px;
+    padding: 16px;
+    width: -webkit-calc(100%);
 }
 
 .l-navbar {
-  width: 100%;
-  position: sticky;
-  top: 0;
-  padding: 0 5%;
-  margin-bottom: 2%;
-  background: white;
-  box-shadow: 0 3px 6px $chosen-icon;
-  display: flex;
-  align-items: center;
-  z-index: 3;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    padding: 0 5%;
+    margin-bottom: -webkit-calc(1% + 10px);
+    background: white;
+    box-shadow: 0 3px 6px $chosen-icon;
+    display: flex;
+    align-items: center;
+    z-index: $top-level;
 }
 
 .l-navbar a {
-  text-decoration: none;
-  color: black;
+    text-decoration: none;
+    color: black;
 }
 
 .l-unter-mobile {
@@ -132,7 +138,7 @@
         font-size: 11px;
     }
 
-    .track-list .track-group-names {
+    .track-list .m-track-group-names {
         width: 82%;
     }
 
@@ -141,14 +147,13 @@
     }
 
 
-
     .l-navbar-icon {
         padding: 20px 4px 16px 4px;
         opacity: 1;
     }
 
     .l-navbar-icon:hover, .l-navbar-info:hover {
-      background: white;
+        background: white;
     }
 
     .l-navbar-info, .m-login-button,
@@ -167,10 +172,6 @@
 
     .m-navbar-name {
         padding: 13px 8px 0 0;
-    }
-
-    .l-small-card {
-        margin: 11px;
     }
 
     .l-navbar .m-search-input {
@@ -199,12 +200,12 @@
     }
 
     .mobile-row::before, .mobile-row::after {
-      content: " ";
-      display: table;
+        content: " ";
+        display: table;
     }
 
     .mobile-row::after {
-      clear: both;
+        clear: both;
     }
 
     .l-content .mobile-row .col.col-6 {
@@ -221,10 +222,6 @@
 
     .l-input .col.col-3 {
         width: 100%;
-    }
-
-    .l-input {
-        padding: 0 9px;
     }
 
     .m-tracks-amount {
@@ -277,12 +274,12 @@
         position: absolute;
         right: 13px;
         top: 15px;
-        z-index: 3;
+        z-index: $top-level;
         height: 35px;
         width: 35px;
     }
 
-    .l-music-bar .track-group-names {
+    .l-music-bar .m-track-group-names {
         width: 72%;
         text-align: left;
     }
@@ -309,7 +306,7 @@
         right: -1px;
     }
 
-    .track-list .track-group-names {
+    .track-list .m-track-group-names {
         width: 82%;
     }
 
@@ -318,13 +315,12 @@
     }
 
 
-
     .l-navbar-icon {
         opacity: 1;
     }
 
     .l-navbar-icon:hover, .l-navbar-info:hover {
-      background: transparent;
+        background: transparent;
     }
 
     .l-navbar-info, .m-login-button,
@@ -343,12 +339,6 @@
     .l-search {
         left: 5.5%;
         width: 80%;
-    }
-
-
-
-    .l-small-card {
-        margin: 11px;
     }
 
     .l-navbar .m-search-input {
@@ -406,12 +396,12 @@
     }
 
     .mobile-row::before, .mobile-row::after {
-      content: " ";
-      display: table;
+        content: " ";
+        display: table;
     }
 
     .mobile-row::after {
-      clear: both;
+        clear: both;
     }
 
     .l-content .mobile-row .col.col-6 {
@@ -434,13 +424,13 @@
         width: 100%;
     }
 
-    .m-tracks-amount {
-        margin: 1em;
-    }
-
     .is-not-displayed {
         display: none;
     }
+}
+
+.l-top-content {
+    z-index: $top-level;
 }
 
 @media screen and (max-width: 343px) {

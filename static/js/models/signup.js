@@ -1,6 +1,6 @@
 import Validation from '@libs/validation';
 import Api from '@libs/api';
-import {SIGN_UP, URL, RESPONSE, NAVBAR, GLOBAL} from '@libs/constants';
+import {SIGN_UP, RESPONSE, NAVBAR} from '@libs/constants';
 import User from '@libs/user';
 import {globalEventBus} from '@libs/eventBus';
 
@@ -46,8 +46,8 @@ export default class SignupModel {
                     switch (res.status) {
                     case RESPONSE.OK_ADDED:
                         this.getCsrfToken();
+                        this.eventBus.emit(SIGN_UP.CLOSE);
                         globalEventBus.emit(NAVBAR.GET_USER_DATA);
-                        globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                         break;
                     case RESPONSE.BAD_REQUEST:
                         this.eventBus.emit(SIGN_UP.INVALID, {global: 'Bad request'});
@@ -64,7 +64,7 @@ export default class SignupModel {
                         break;
                     default:
                         console.log(res);
-                        console.error('I am a teapot'); // В случае, если бэк - кек
+                        console.error('I am a teapot');
                     }
                 });
         }

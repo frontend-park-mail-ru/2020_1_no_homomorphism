@@ -3,25 +3,26 @@ type userDataKeys =
     | 'login'
     | 'email'
     | 'image';
+
 type statisticsKeys =
-    'user_id'
+    'userID'
     | 'tracks'
     | 'albums'
     | 'playlists'
     | 'artists';
 
-interface IUser {
+interface StaticUser {
     instanceMethod(): void;
 }
 
-interface IUserStatic {
-    instance: IUser;
+interface AbstractUser {
+    instance: StaticUser;
     CsrfToken: string;
     user: { [index: string]: string };
     statistics: { [index: string]: string };
     token: string;
 
-    new(): IUser;
+    new(): StaticUser;
 
     setUserData(input: { [index in userDataKeys]: string }): void;
 
@@ -38,15 +39,13 @@ interface IUserStatic {
 
 function staticImplements<T>() {
     return <U extends T>(constructor: U) => {
-        // tslint:disable-next-line:no-unused-expression
         constructor;
     };
 }
 
-@staticImplements<IUserStatic>()
-export default class User implements IUser {
-
-    static instance: IUser;
+@staticImplements<AbstractUser>()
+export default class User implements StaticUser {
+    static instance: StaticUser;
     static user: { [index: string]: string } = {};
     static CsrfToken: string;
     static statistics: { [index: string]: string } = {};
@@ -60,11 +59,11 @@ export default class User implements IUser {
     }
 
     /** Проверяет, существует ли пользователь
+     * @return {boolean}
      */
     public static exists(): boolean {
         if (User.instance) {
-            // tslint:disable-next-line:max-classes-per-file
-            User.instance = new class implements IUser {
+            User.instance = new class implements StaticUser {
                 instanceMethod(): void {
                     return;
                 }
@@ -75,14 +74,14 @@ export default class User implements IUser {
                 email: undefined,
                 id: undefined,
                 login: undefined,
-                image: undefined
+                image: undefined,
             };
             User.statistics = {
-                user_id: undefined,
+                userID: undefined,
                 tracks: undefined,
                 albums: undefined,
                 playlists: undefined,
-                artists: undefined
+                artists: undefined,
             };
             return false;
         }
@@ -97,7 +96,7 @@ export default class User implements IUser {
         return this.CsrfToken;
     }
 
-    public static setUserData(input: { [index in userDataKeys]: string }) {
+    public static setUserData(input: { [index in userDataKeys]: string }): void {
         this.exists();
         Object.keys(input)
             .forEach((key: Extract<keyof typeof input, string>) => {
@@ -109,8 +108,6 @@ export default class User implements IUser {
         return this.user;
     }
 
-    /** Запись статистики пользователя
-     */
     public static setStatistics(input: { [index in statisticsKeys]: string }): void {
         Object.keys(input)
             .forEach((key: Extract<keyof typeof input, string>) => {
@@ -119,6 +116,7 @@ export default class User implements IUser {
     }
 
     /** Получение статистики пользователя
+     * @return {Object}
      */
     public static getStatistics(): { [index: string]: string } {
         return this.statistics;

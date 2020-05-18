@@ -1,5 +1,4 @@
 const path = require('path');
-const fs = require('fs');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
@@ -7,9 +6,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 
-const filename = (ext) => {
-    !isDev ? `[name].[hash].${ext}` : `[name].${ext}`;
-};
+const curHash = '[hash]';
 
 module.exports = {
     context: path.resolve(__dirname, 'static'),
@@ -18,16 +15,13 @@ module.exports = {
         app: './js/app.js',
     },
     devServer: {
-        https: true,
         host: '0.0.0.0',
         port: 3000,
-        key: fs.readFileSync('privkey.pem'),
-        cert: fs.readFileSync('cert.pem'),
         historyApiFallback: true,
         disableHostCheck: true,
     },
     output: {
-        filename: filename('js'),
+        filename: `[name].${curHash}.js`,
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
     },
@@ -46,13 +40,14 @@ module.exports = {
     plugins: [
         new HTMLWebpackPlugin({
             template: './index.html',
+            filename: 'index.html',
             minify: {
                 collapseWhitespace: !isDev,
             },
         }),
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
-            filename: '[name].css',
+            filename: '[name].[hash].css',
         }),
         new ServiceWorkerWebpackPlugin({
             entry: path.join(__dirname, 'static/sw.js'),

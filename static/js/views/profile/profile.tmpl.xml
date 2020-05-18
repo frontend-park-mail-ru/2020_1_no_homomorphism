@@ -51,22 +51,15 @@
                                 <h2 id="artists">
                                     <fest:value>data.artists</fest:value>
                                 </h2>
-                                <p>Subscriptions</p>
+                                <p>Artists</p>
                             </a>
                         </div>
                     </div>
                 </div>
 
             </div>
-
             <div class="l-down-card">
-                <div class="l-album-list" style="top: 0;">
-                </div>
-                <div class="l-track-list" style="top: 0;">
-                </div>
-                <div class="l-playlist-list" style="top: 0;">
-                </div>
-                <div class="l-artist-list" style="top: 0;">
+                <div class="l-track-list">
                 </div>
             </div>
         </div>

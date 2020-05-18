@@ -13,7 +13,7 @@
         <fest:for iterate="data" index="i" value="elem">
             <div class="l-list-card" a-id="{elem.id}">
                 <div class="l-list-image">
-                    <img class="m-list-image" src="{elem.image}" alt=""/>
+                    <img class="m-list-image" src="{elem.image}" a-id="{elem.id}" alt=""/>
                 </div>
                 <div class="l-button-play-track">
                     <button class="m-button-track-play-playlist"></button>
@@ -25,15 +25,21 @@
         </fest:for>
     </fest:if>
     <fest:if test="!data.type">
+        <fest:if test="data.length < 1">
+            <div class="m-empty-list">
+                There aren't any albums
+            </div>
+        </fest:if>
         <fest:for iterate="data" index="i" value="elem">
-            <div class="l-list-card" a-id="{elem.id}" style="max-height: 310px">
+            <div class="l-list-card" a-id="{elem.id}">
                 <div class="l-list-image">
-                    <img class="m-list-image" src="{elem.image}" alt=""/>
+                    <img class="m-list-image" src="{elem.image}" a-id="{elem.id}" alt=""/>
                 </div>
-                <div class="l-button-play-track">
-                    <button class="m-button-track-play-playlist"></button>
-                </div>
-                <a class="l-list-card-description  m-tiny-ref" href="{data.href}{elem.id}" style="padding-bottom: 0">
+<!--                <div class="l-button-play-track">-->
+<!--                    <button class="m-button-track-play-playlist"></button>-->
+<!--                </div>-->
+                <a class="l-list-card-description  m-tiny-ref" href="{data.href}{elem.id}"
+                   style="padding-bottom: 0">
                     <fest:value>elem.name</fest:value>
                 </a>
                 <a class="m-obscure-title m-tiny-ref m-small-text row" href="/artist/{elem.artist_id}" style="margin-bottom: 10px">
@@ -41,5 +47,6 @@
                 </a>
             </div>
         </fest:for>
+
     </fest:if>
 </fest:template>
