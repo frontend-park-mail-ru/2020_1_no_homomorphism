@@ -14,8 +14,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="m-tracks-amount col ">
-                    Amount of tracks: 0
+                <div class="l-button-middle-play">
+                    <button class="m-button-middle-play"> </button>
+                    <span class="m-tracks-amount">Tracks: 0 </span>
+                </div>
+                <div class="m-right-col">
+                    <div class="col">
+                        <div class="m-large-like-button is-not-liked" title="Like album"> </div>
+                    </div>
                 </div>
             </div>
             <div class="l-down-card">

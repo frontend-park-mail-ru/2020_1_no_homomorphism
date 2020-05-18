@@ -25,12 +25,6 @@ export default class PlayerTrackListComponent {
         document.querySelectorAll('.delete-button').forEach((button) => {
             button.addEventListener('click', this.trackDeleteButtonClick.bind(this));
         });
-        // document.querySelectorAll('.favorite-button').forEach((button) => {
-        //     button.addEventListener('click', this.trackFavoriteButtonClick.bind(this));
-        // });
-        // document.querySelectorAll('.add-button').forEach((button) => {
-        //     button.addEventListener('click', this.trackAddButtonClick.bind(this));
-        // });
         document.getElementsByClassName('track-list')[0]
             .addEventListener('scroll', this.trackListWheel.bind(this));
     }

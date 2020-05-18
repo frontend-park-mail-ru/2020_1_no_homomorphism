@@ -262,6 +262,16 @@ export default class Api {
         });
     }
 
+    /**
+     * Лайк альбома
+     * @param {number} id
+     * @return {Promise<Response>}
+     */
+    static albumLike(id) {
+        return postFetch(API + `/albums/${id}/rating`, (error) => {
+            console.log(error.toString());
+        });
+    }
     // ------------- PLAYLIST  ---------------
 
     /**
@@ -388,6 +398,7 @@ export default class Api {
             console.log(error.toString());
         });
     }
+
     /**
      * @param {string} id
      * @return {Promise<Response>}

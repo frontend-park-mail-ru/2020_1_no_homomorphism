@@ -18,10 +18,6 @@ export default class TrackListComponent {
      * @param {object} constType
      */
     constructor(eventBus, constType) {
-        eventBus.on(constType.RENDER_TRACKS, this.render.bind(this));
-        eventBus.on(constType.SET_PLAYLIST_ID, this.setId.bind(this));
-        eventBus.on(constType.SET_ALBUM_ID, this.setId.bind(this));
-        eventBus.on(constType.SET_ARTIST_ID, this.setId.bind(this));
         this._choosePlaylist = new ChoosePlaylist(eventBus, constType);
         this._trackComponent = new TrackComponent();
         this._playlistComponent = new PlaylistComponent(this.setTracksEventListeners.bind(this));
@@ -30,6 +26,24 @@ export default class TrackListComponent {
         this._id = 0;
         this._type = '';
         this._baseDom = '';
+        this._subscribe.bind(this)(constType);
+    }
+
+    /**
+     * Конструткор
+     * @param {object} constType
+     */
+    _subscribe(constType) {
+        this.eventBus.on(constType.RENDER_TRACKS, this.render.bind(this));
+        if (constType.SET_PLAYLIST_ID !== undefined) {
+            this.eventBus.on(constType.SET_PLAYLIST_ID, this.setId.bind(this));
+        }
+        if (constType.SET_ALBUM_ID !== undefined) {
+            this.eventBus.on(constType.SET_ALBUM_ID, this.setId.bind(this));
+        }
+        if (constType.SET_ARTIST_ID !== undefined) {
+            this.eventBus.on(constType.SET_ARTIST_ID, this.setId.bind(this));
+        }
     }
 
     /**
@@ -49,6 +63,9 @@ export default class TrackListComponent {
         this._type = data.type;
         this._tracklist.type = this._type === 'playlist';
         this._baseDom = data.domItem;
+        if (this._type === 'search' && this._tracklist.length === 0) {
+            return;
+        }
         const elem = document.getElementsByClassName(data.domItem)[0];
         elem.innerHTML = template(this._tracklist);
         if (this._tracklist.length !== 0) {
@@ -252,12 +269,6 @@ export default class TrackListComponent {
      */
     _changeImage(id, domItem) {
         if (this._type === 'liked') {
-            // const elem = this._tracklist.filter((elem) => {
-            //     if (elem.id === id) {
-            //         return elem;
-            //     }
-            // });
-            // this._tracklist.slice(this._tracklist.indexOf(elem[0]), 1);
             this.deleteFromDOM(id.toString());
             return;
         }

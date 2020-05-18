@@ -1,4 +1,4 @@
-import {ALBUM, RESPONSE, PAGINATION} from '@libs/constants';
+import {ALBUM, RESPONSE, PAGINATION, POPUP} from '@libs/constants';
 import Api from '@libs/api';
 
 /**
@@ -16,6 +16,7 @@ export default class AlbumModel {
         this.eventBus = eventBus;
         this.eventBus.on(ALBUM.GET_ALBUM_DATA, this.getAlbum.bind(this));
         this.eventBus.on(ALBUM.GET_TRACKS_DATA, this.getTracks.bind(this));
+        this.eventBus.on(ALBUM.LIKE, this.likeAlbum.bind(this));
     }
 
     /**
@@ -64,6 +65,28 @@ export default class AlbumModel {
                             });
                             this.eventBus.emit(ALBUM.SET_TRACKS_AMOUNT, this.tracks);
                         });
+                    break;
+                default:
+                    console.error('I am a teapot');
+                }
+            });
+    }
+
+    /**
+     * Лайк альбома
+     * @param {number} id
+     */
+    likeAlbum(id) {
+        Api.albumLike(id)
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    this.album.is_liked = !this.album.is_liked;
+                    if (this.album.is_liked) {
+                        this.eventBus.emit(POPUP.NEW, POPUP.ALBUM_LIKED);
+                        return;
+                    }
+                    this.eventBus.emit(POPUP.NEW, POPUP.ALBUM_UN_LIKED);
                     break;
                 default:
                     console.error('I am a teapot');

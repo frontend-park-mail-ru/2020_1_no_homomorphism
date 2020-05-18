@@ -6,6 +6,7 @@ import TrackListComponent from '@components/track_list/track_list';
 import PlaylistsComponent from '@components/playlist_list/playlist_list';
 import {globalEventBus} from '@libs/eventBus';
 import ArtistListComponent from '@components/artist_list/artist_list';
+import {inputSanitize} from '@libs/input_sanitize';
 
 /**
  * вью для профиля
@@ -51,8 +52,9 @@ export default class ProfileView extends BaseView {
      */
     renderData(data) {
         this.setData(Object.assign(this.data, data));
-        document.getElementsByClassName('m-top-login')[0].innerHTML = this.data.login;
-        document.getElementsByClassName('m-top-name')[0].innerHTML = this.data.name;
+        document.getElementsByClassName('m-top-login')[0].innerHTML =
+            inputSanitize(this.data.login);
+        document.getElementsByClassName('m-top-name')[0].innerHTML = inputSanitize(this.data.name);
         document.getElementsByClassName('m-round-image')[0].src = this.data.image;
     }
 
