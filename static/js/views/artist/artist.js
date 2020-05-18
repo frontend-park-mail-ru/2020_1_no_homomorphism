@@ -124,8 +124,12 @@ export default class ArtistView extends BaseView {
             const button = document.getElementsByClassName('m-subscribe')[0];
             this.textSubscribe = button.classList.contains('is-subscribed') ?
                 'Subscribe' : 'Unsubscribe';
+            button.classList.add('is-invisible');
             button.classList.toggle('is-subscribed');
             button.innerText = this.textSubscribe;
+            setTimeout(() => {
+                button.classList.remove('is-invisible');
+            }, 100);
         }
     }
 }

@@ -96,3 +96,22 @@
   width: -webkit-calc(49%);
   overflow: hidden;
 }
+
+.is-underlined-ref {
+    position: relative;
+    &::after {
+        content: "";
+        position: absolute;
+        top: 85%;
+        height: 1px;
+        width: 0;
+        left: 0;
+        background-color: gray;
+        transition: 0.5s ease all;
+    }
+    &:hover::after {
+        background-color: black;
+        width: 100%;
+        transition: 0.3s ease all;
+    }
+}

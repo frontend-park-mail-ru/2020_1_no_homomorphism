@@ -3,6 +3,7 @@ import {globalEventBus} from '@libs/eventBus';
 import ChoosePlaylist from '@components/choose_playlist/choose_playlist';
 import TrackComponent from '@components/track/track';
 import PlaylistComponent from '@components/playlist/playlist';
+// import PopUp from '@components/pop-up/pop-up';
 import {PLAYLIST, GLOBAL, URL, RESPONSE} from '@libs/constants';
 import User from '@libs/user';
 import Api from '@libs/api';
@@ -105,7 +106,6 @@ export default class TrackListComponent {
      */
     addToPlaylist(event) {
         if (!User.exists()) {
-            alert('Please, login');
             return;
         }
         this._choosePlaylist.trackData = this.getIdByClick(event);
@@ -124,8 +124,7 @@ export default class TrackListComponent {
      * @param {Array} playlistList
      */
     callChoosePlaylist(playlistList) {
-        this._choosePlaylist
-            .render(this.setTracksEventListeners.bind(this), playlistList);
+        this._choosePlaylist.render(this.setTracksEventListeners.bind(this), playlistList);
     }
 
     /**
@@ -153,22 +152,20 @@ export default class TrackListComponent {
      * @param {String} id
      */
     getTrackInfo(id) {
-        Api.trackGet(id)
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    res.json()
-                        .then((elem) => {
-                            globalEventBus.emit(GLOBAL.PLAY_TRACKS, {
-                                tracks: [elem],
-                            }, elem.id);
-                        });
-                    break;
-                default:
-                    console.log(res);
-                    console.error('I am a teapot');
-                }
-            });
+        Api.trackGet(id).then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                res.json().then((elem) => {
+                    globalEventBus.emit(GLOBAL.PLAY_TRACKS, {
+                        tracks: [elem],
+                    }, elem.id);
+                });
+                break;
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
     }
 
     /**
@@ -215,6 +212,7 @@ export default class TrackListComponent {
      * @param {Object} event
      */
     likeClicked(event) {
+        // Поп-апы
         if (!User.exists()) {
             globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
             return;

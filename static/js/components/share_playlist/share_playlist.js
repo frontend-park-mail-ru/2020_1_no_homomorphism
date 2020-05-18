@@ -81,6 +81,7 @@ export default class SharePlaylistComponent {
                 });
             return;
         }
+        new PopUp(POPUP.PLAYLIST_LINK_COPY_PRIVACY_ERROR_MESSAGE, true);
         this._button.classList.toggle('error-border');
         setTimeout(this.delErrorClass.bind(this), 1000);
     }

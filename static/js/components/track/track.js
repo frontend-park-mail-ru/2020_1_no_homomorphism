@@ -1,5 +1,6 @@
 import Api from '@libs/api';
-import {RESPONSE} from '@libs/constants';
+import {RESPONSE, POPUP} from '@libs/constants';
+import PopUp from '@components/pop-up/pop-up';
 
 /**
  * Компонент трек
@@ -26,23 +27,21 @@ export default class TrackComponent {
      * @param {function} callback
      */
     getTrackPlaylists(trackID, callback) {
-        Api.trackPlaylistsGet(trackID)
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    res.json()
-                        .then((elem) => {
-                            callback(elem.playlists);
-                        });
-                    break;
-                case RESPONSE.BAD_REQUEST:
-                    console.log('ALREADY ADDED');
-                    break;
-                default:
-                    console.log(res);
-                    console.error('I am a teapot');
-                }
-            });
+        Api.trackPlaylistsGet(trackID).then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                res.json().then((elem) => {
+                    callback(elem.playlists);
+                });
+                break;
+            case RESPONSE.BAD_REQUEST:
+                console.log('ALREADY ADDED');
+                break;
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
     }
 
     /**
@@ -56,20 +55,19 @@ export default class TrackComponent {
             'track_id': this._trackData.id,
             'image': this._trackData.image,
         };
-        Api.playlistTrackPost(data)
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    callback(playlistID);
-                    break;
-                case RESPONSE.BAD_REQUEST:
-                    console.log('ALREADY ADDED');
-                    break;
-                default:
-                    console.log(res);
-                    console.error('I am a teapot');
-                }
-            });
+        Api.playlistTrackPost(data).then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                callback(playlistID);
+                break;
+            case RESPONSE.BAD_REQUEST:
+                console.log('ALREADY ADDED');
+                break;
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
     }
 
     /**
@@ -77,16 +75,18 @@ export default class TrackComponent {
      * @param {number} playlistID
      */
     delFromPlaylist(playlistID) {
-        Api.playlistTrackDelete(playlistID.toString(), this._trackData.id)
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    break;
-                case RESPONSE.BAD_REQUEST:
-                default:
-                    console.log(res);
-                    console.error('I am a teapot');
-                }
-            });
+        Api.playlistTrackDelete(playlistID.toString(), this._trackData.id).then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                new PopUp(POPUP.TRACK_DELETION_MESSAGE);
+                break;
+            case RESPONSE.BAD_REQUEST:
+                new PopUp(POPUP.TRACK_DELETION_ERROR_MESSAGE, true);
+                break;
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
     }
 }

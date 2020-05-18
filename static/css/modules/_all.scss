@@ -187,7 +187,6 @@
 .l-big-track-button {
   opacity: 0.4;
   transform: scale(1.5);
-  padding-right: 8px;
   float: left;
 }
 
@@ -217,6 +216,11 @@
   animation-duration: 1s;
   animation-name: slidein;
   text-align: left
+}
+
+.m-track-info-col {
+    width: 360px;
+    float: left;
 }
 
 .l-track-big:hover .m-track-image {
@@ -568,6 +572,7 @@
 }
 
 .m-pop-up {
+    pointer-events: auto;
     width: -webkit-calc(80%);
     height: 50px;
     box-shadow: 0 1px 20px rgba(12, 12, 12, 0.2);

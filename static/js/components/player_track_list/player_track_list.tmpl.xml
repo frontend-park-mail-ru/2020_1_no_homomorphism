@@ -8,7 +8,7 @@
                 <div class="track-name" title="{track.name}">
                     <fest:value>track.name</fest:value>
                 </div>
-                <a class="m-obscure-title m-tiny-ref m-small-text" href="/artist/{track.artist_id}">
+                <a class="m-obscure-title m-tiny-ref m-small-text is-underlined-ref" href="/artist/{track.artist_id}">
                     <fest:value>track.artist</fest:value>
                 </a>
             </div>
