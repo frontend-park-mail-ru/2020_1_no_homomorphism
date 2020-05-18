@@ -114,9 +114,7 @@ export default class PlayerTrackListComponent {
         event.stopImmediatePropagation();
         if (!User.exists()) {
             globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
-            return;
         }
-        alert('This functionality is not accessible by now');
     }
 
     /**
