@@ -21,7 +21,7 @@ export default class NewsModel {
             MAIN.RENDER_ARTISTS_LIST, MAIN.RENDER_ARTISTS);
         this.trackListComponent = new TrackListComponent(eventBus, MAIN);
         this.eventBus.on(MAIN.GET_SUBSCRIPTIONS_DATA, this.getSubscriptionsData.bind(this));
-        this.eventBus.on(MAIN.GET_PLAYLISTS_OF_THE_DAY_DATA, this.getTracksOfTheDay.bind(this));
+        this.eventBus.on(MAIN.GET_TRACKS_DATA, this.getTracksOfTheDay.bind(this));
         this.eventBus.on(MAIN.GET_ARTISTS_DATA, this.getArtistListData.bind(this));
     }
 
@@ -36,7 +36,7 @@ export default class NewsModel {
                     this.eventBus.emit(MAIN.RENDER_ARTISTS, {
                         domItem: 'subscriptions-section',
                         caption: 'Subscriptions',
-                        ok: true,
+                        ok: data.length > 0,
                     });
                     this.eventBus.emit(MAIN.RENDER_ARTISTS_LIST, {
                         domItem: 'subscriptions-section',
