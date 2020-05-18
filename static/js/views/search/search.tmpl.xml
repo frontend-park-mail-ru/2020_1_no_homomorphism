@@ -1,97 +1,34 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="col col-9">
-        <div class="l-main l-top-card">
-            <h2 class="l-small-card">
-                Artists
-            </h2>
-            <div class="small-line"></div>
-            <div class="l-track-list l-search-artists" style="top: 0;">
-                <div class="m-empty-list">
-                    No matches :(
+        <fest:if test="data.artists.length !== 0">
+            <div class="l-main l-top-card">
+                <h2 class="l-small-card">
+                    Artists
+                </h2>
+                <div class="small-line"></div>
+                <div class="l-track-list l-search-artists" style="top: 0;">
                 </div>
             </div>
-        </div>
-        <div class="l-main l-down-card">
-            <h2 class="l-small-card">
-                Tracks
-            </h2>
-            <div class="small-line"></div>
-            <div class="l-track-list l-search-tracks" style="top: 0;">
-                <div class="m-empty-list">
-                    No matches :(
+        </fest:if>
+        <fest:if test="data.tracks.length !== 0">
+            <div class="l-main l-down-card">
+                <h2 class="l-small-card">
+                    Tracks
+                </h2>
+                <div class="small-line"></div>
+                <div class="l-track-list l-search-tracks" style="top: 0;">
                 </div>
             </div>
-        </div>
-        <div class="l-main l-down-card">
-            <h2 class="l-small-card">
-                Albums
-            </h2>
-            <div class="small-line"></div>
-            <div class="l-track-list l-search-albums" style="top: 0;">
-                <div class="m-empty-list">
-                    No matches :(
+        </fest:if>
+        <fest:if test="data.albums.length !== 0">
+            <div class="l-main l-down-card">
+                <h2 class="l-small-card">
+                    Albums
+                </h2>
+                <div class="small-line"></div>
+                <div class="l-track-list l-search-albums" style="top: 0;">
                 </div>
             </div>
-        </div>
+        </fest:if>
     </div>
-
-    <!--    <div class="col col-9">-->
-    <!--        <div class="l-main l-top-card">-->
-    <!--            <div class="l-search-artist">-->
-    <!--                <div class="small-line"></div>-->
-    <!--                <div class="m-obscure-title">-->
-    <!--                    Artists:-->
-    <!--                </div>-->
-    <!--                <div class="small-line"></div>-->
-    <!--                <fest:for iterate="data.artists" index="i" value="artist">-->
-    <!--                    <div class="row">-->
-    <!--                        <div class="col">-->
-    <!--                            <img class="m-medium-icon" src="{artist.image}" alt=""/>-->
-    <!--                        </div>-->
-    <!--                        <div class="">-->
-    <!--                            <fest:value>artist.name</fest:value>-->
-    <!--                        </div>-->
-    <!--                    </div>-->
-
-
-    <!--                </fest:for>-->
-    <!--            </div>-->
-    <!--            <div class="l-search-tracks">-->
-    <!--                <div class="m-obscure-title">-->
-    <!--                    Tracks:-->
-    <!--                </div>-->
-    <!--                <div class="small-line"></div>-->
-    <!--                <fest:for iterate="data.tracks" index="i" value="track">-->
-    <!--                    <div class="row">-->
-    <!--                        <div class="col">-->
-    <!--                            <img class="m-medium-icon" src="{track.image}" alt=""/>-->
-    <!--                        </div>-->
-    <!--                        <div class="">-->
-    <!--                            <fest:value>track.track_name</fest:value>-->
-    <!--                        </div>-->
-    <!--                    </div>-->
-    <!--                </fest:for>-->
-    <!--            </div>-->
-    <!--            <div class="l-search-album">-->
-    <!--                <div class="m-obscure-title">-->
-    <!--                    Albums:-->
-    <!--                </div>-->
-    <!--                <div>-->
-    <!--                    <img class="m-medium-icon" src="static/img/icons/arrow-24px.svg" alt=""/>-->
-    <!--                </div>-->
-    <!--                <div class="small-line"></div>-->
-    <!--                <fest:for iterate="data.albums" index="i" value="album">-->
-    <!--                    <div class="row">-->
-    <!--                        <div class="col">-->
-    <!--                            <img class="m-medium-icon" src="{album.image}" alt=""/>-->
-    <!--                        </div>-->
-    <!--                        <div class="">-->
-    <!--                            <fest:value>album.album_name</fest:value>-->
-    <!--                        </div>-->
-    <!--                    </div>-->
-    <!--                </fest:for>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-
 </fest:template>

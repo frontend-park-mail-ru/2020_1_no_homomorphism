@@ -16,7 +16,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="m-right-col">
+                        <div class="col">
+                                <div class="m-subscribe">
+                                </div>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="row">
                     <div class="l-top-section-tracks col col-4" id="profile-tracks-title">
                         <a class="m-tiny-ref m-top-section-tracks-ref" href="/artist/{data.id}/tracks">
@@ -42,11 +49,7 @@
                 </div>
             </div>
             <div class="l-down-card">
-                <div class="l-album-list" id="artist-albums" style="top: 0;">
-                </div>
-                <div class="l-track-list" id="artist-tracks" style="top: 0;">
-                </div>
-                <div class="l-profile-info-list" id="artist-info" style="top: 0;">
+                <div class="l-track-list" id="artist-albums">
                 </div>
             </div>
         </div>

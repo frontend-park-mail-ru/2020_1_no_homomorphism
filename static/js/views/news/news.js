@@ -1,7 +1,8 @@
 import news from '@views/news/news.tmpl.xml';
-import artistList from '@views/news/artist_list.tmpl.xml';
+import newsSection from '@views/news/news_section.tmpl.xml';
 import BaseView from '@libs/base_view';
-import {MAIN, DOM} from '@libs/constans';
+import {MAIN, GLOBAL} from '@libs/constants';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  *  вью для главной
@@ -14,8 +15,13 @@ export default class NewsView extends BaseView {
     constructor(eventBus) {
         super(news);
         this.eventBus = eventBus;
-        this.artistList = [];
-        this.eventBus.on(MAIN.RENDER_ARTIST, this.renderList.bind(this));
+        this.eventBus.on(MAIN.RENDER_SUBSCRIPTIONS, this.renderList.bind(this));
+        this.eventBus.on(MAIN.RENDER_TRACKS_LIST, this.renderList.bind(this));
+        this.eventBus.on(MAIN.RENDER_ARTISTS, this.renderList.bind(this));
+        globalEventBus.on(GLOBAL.HIDE_SUBSCRIPTIONS, () => {
+            document.getElementsByClassName('subscriptions-section')[0]
+                .parentNode.parentNode.remove();
+        });
     }
 
     /**
@@ -24,7 +30,10 @@ export default class NewsView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
-        this.eventBus.emit(MAIN.GET_LIST_DATA);
+        super.render(root, url);
+        this.eventBus.emit(MAIN.GET_SUBSCRIPTIONS_DATA);
+        this.eventBus.emit(MAIN.GET_TRACKS_DATA);
+        this.eventBus.emit(MAIN.GET_ARTISTS_DATA);
     }
 
     /**
@@ -32,6 +41,12 @@ export default class NewsView extends BaseView {
      * @param {Object} data
      */
     renderList(data) {
-        document.getElementsByClassName(DOM.CONTENT)[0].innerHTML = artistList(data);
+        const node = document.getElementsByClassName(data.domItem)[0];
+        if (node === null) {
+            return;
+        }
+        node.innerHTML = newsSection(data);
+        node.classList.remove(data.domItem);
+        node.firstChild.lastChild.classList.add(data.domItem);
     }
 }

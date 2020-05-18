@@ -1,11 +1,11 @@
 import Router from '@libs/router';
-import {URL, GLOBAL} from '@libs/constans';
+import {URL, GLOBAL, DOM} from '@libs/constants';
 import {NavbarController} from '@controllers/navbar';
 import {NewsController} from '@controllers/news';
 import {LoginController} from '@controllers/login';
 import {SignupController} from '@controllers/signup';
 import {PlayerController} from '@controllers/player';
-import {ProfileController} from '@controllers/profile/profile';
+import {ProfileController} from '@controllers/profile';
 import {SettingsController} from '@controllers/settings';
 import {ArtistController} from '@controllers/artist';
 import {PlaylistController} from '@controllers/playlist';
@@ -16,6 +16,9 @@ import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import '@css/_main.scss';
 
 window.addEventListener('DOMContentLoaded', () => {
+    HTMLCollection.prototype.forEach = Array.prototype.forEach;
+    HTMLCollection.prototype.find = Array.prototype.find;
+
     const router = new Router();
     const navbarController = new NavbarController(router);
     const newsController = new NewsController(router);
@@ -58,3 +61,11 @@ window.addEventListener('storage', (e) => {
         globalEventBus.emit(GLOBAL.PAUSE);
     }
 });
+
+window.onpopstate = function(event) {
+    document.getElementsByClassName(DOM.NAVBAR)[0].classList.remove('is-untouchable');
+    document
+        .getElementsByClassName(DOM.CONTENT)[0].classList.remove('is-un-emphasized');
+    document
+        .getElementsByClassName(DOM.TOP_CONTENT)[0].innerHTML = '';
+};

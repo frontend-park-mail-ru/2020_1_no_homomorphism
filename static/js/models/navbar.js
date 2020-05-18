@@ -1,5 +1,5 @@
 import Api from '@libs/api';
-import {RESPONSE, NAVBAR, URL, GLOBAL} from '@libs/constans';
+import {RESPONSE, NAVBAR, URL, GLOBAL} from '@libs/constants';
 import User from '@libs/user';
 import {globalEventBus} from '@libs/eventBus';
 
@@ -62,12 +62,17 @@ export default class NavbarModel {
      * Получает данные пользователя
      */
     getUserData() {
+        if (User.exists()) {
+            this.eventBus.emit(NAVBAR.RENDER_LOGGED, User.getUserData());
+            return;
+        }
         Api.profileGet()
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
                     res.json()
                         .then((data) => {
+                            User.setUserData(data);
                             this.eventBus.emit(NAVBAR.RENDER_LOGGED, data);
                         });
                     break;

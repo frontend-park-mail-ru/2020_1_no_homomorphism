@@ -4,66 +4,62 @@
 
 
             <div class="l-top-card">
-
-                <div class="l-top-info col col-6">
-                    <div class="l-round-image col">
-                        <img alt="" src="{data.image}" class=" m-round-image" id="avatar"/>
-                    </div>
-                    <div class="l-top-name col">
-                        <div class="m-top-login" id="profile-login">
-                            <fest:value>data.login</fest:value>
+                <div class="mobile-row">
+                    <div class="l-top-info col col-6">
+                        <div class="l-round-image col">
+                            <img alt="" src="{data.image}" class=" m-round-image" id="avatar"/>
                         </div>
-                        <div class="m-top-name" id="profile-name">
-                            <fest:value>data.name</fest:value>
+                        <div class="l-top-name col">
+                            <div class="m-top-login" id="profile-login">
+                                <fest:value>data.login</fest:value>
+                            </div>
+                            <div class="m-top-name" id="profile-name">
+                                <fest:value>data.name</fest:value>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="l-top-titles col col-6">
-                    <div class="l-top-section-tracks col col-3" id="profile-tracks-title">
-                        <a class="m-tiny-ref" href="/profile/tracks">
-                            <h2 id="tracks">
-                                <fest:value>data.tracks</fest:value>
-                            </h2>
-                            <p>Tracks</p>
-                        </a>
-                    </div>
-                    <div class="m-profile-playlists col col-3" id="profile-playlists-title">
-                        <a class="m-tiny-ref" href="/profile/playlists">
-                            <h2 id="playlists">
-                                <fest:value>data.playlists</fest:value>
-                            </h2>
-                            <p>Playlists</p>
-                        </a>
-                    </div>
-                    <div class="l-top-section-albums col col-3" id="profile-albums-title">
-                        <a class="m-tiny-ref" href="/profile/albums">
-                            <h2 id="albums">
-                                <fest:value>data.albums</fest:value>
-                            </h2>
-                            <p>Albums</p>
-                        </a>
-                    </div>
-                    <div class="l-top-section-artists col col-3" id="profile-artists-title">
-                        <a class="m-tiny-ref" href="/profile/artists">
-                            <h2 id="artists">
-                                <fest:value>data.artists</fest:value>
-                            </h2>
-                            <p>Subscriptions</p>
-                        </a>
+                <div class="mobile-row">
+                    <div class="l-top-titles col col-6">
+                        <div class="l-top-section-tracks col col-3" id="profile-tracks-title">
+                            <a class="m-tiny-ref" href="/profile/tracks">
+                                <h2 id="tracks">
+                                    <fest:value>data.tracks</fest:value>
+                                </h2>
+                                <p>Tracks</p>
+                            </a>
+                        </div>
+                        <div class="m-profile-playlists col col-3" id="profile-playlists-title">
+                            <a class="m-tiny-ref" href="/profile/playlists">
+                                <h2 id="playlists">
+                                    <fest:value>data.playlists</fest:value>
+                                </h2>
+                                <p>Playlists</p>
+                            </a>
+                        </div>
+                        <div class="l-top-section-albums col col-3" id="profile-albums-title">
+                            <a class="m-tiny-ref" href="/profile/albums">
+                                <h2 id="albums">
+                                    <fest:value>data.albums</fest:value>
+                                </h2>
+                                <p>Albums</p>
+                            </a>
+                        </div>
+                        <div class="l-top-section-artists col col-3" id="profile-artists-title">
+                            <a class="m-tiny-ref" href="/profile/artists">
+                                <h2 id="artists">
+                                    <fest:value>data.artists</fest:value>
+                                </h2>
+                                <p>Artists</p>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
             </div>
-
             <div class="l-down-card">
-                <div class="l-album-list" style="top: 0;">
-                </div>
-                <div class="l-track-list" style="top: 0;">
-                </div>
-                <div class="l-playlist-list" style="top: 0;">
-                </div>
-                <div class="l-artist-list" style="top: 0;">
+                <div class="l-track-list">
                 </div>
             </div>
         </div>

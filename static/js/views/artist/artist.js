@@ -1,8 +1,11 @@
 import artist from '@views/artist/artist.tmpl.xml';
 import BaseView from '@libs/base_view';
-import TrackListComponent from '@components/track_list_component/track_list_component';
-import PlaylistsComponent from '@components/playlist_list_component/playlist_list_component';
-import {ARTIST, DOM} from '@libs/constans';
+import TrackListComponent from '@components/track_list/track_list';
+import PlaylistsComponent from '@components/playlist_list/playlist_list';
+import {ARTIST, DOM, POPUP} from '@libs/constants';
+import User from '@libs/user';
+import PopUp from '@components/pop-up/pop-up';
+import {inputSanitize} from '@libs/input_sanitize';
 
 /**
  *  вью для страницы артиста
@@ -14,17 +17,14 @@ export default class ArtistView extends BaseView {
      */
     constructor(eventBus) {
         super(artist);
-        this.data = {};
-        this.tracksRendered = 0;
-        this.allTracksRendered = true;
-        this.albumsRendered = 0;
-        this.allAlbumsRendered = true;
         this.id = 0;
         this.currentOpen = '';
+        this.textSubscribe = '';
         this.trackListComponent = new TrackListComponent(eventBus, ARTIST);
-        this.playlistsComponent = new PlaylistsComponent(eventBus, ARTIST);
+        this.playlistsComponent = new PlaylistsComponent(eventBus, ARTIST.RENDER_ALBUMS);
         this.eventBus = eventBus;
         this.eventBus.on(ARTIST.RENDER_DATA, this.renderData.bind(this));
+        this.eventBus.on(ARTIST.DRAW_SUBSCRIBE, this.drawSubscribe.bind(this));
     }
 
     /**
@@ -66,11 +66,11 @@ export default class ArtistView extends BaseView {
      * @param {Object} data
      */
     renderData(data) {
-        this.setData(data);
+        super.setData(data);
         this.eventBus.emit(ARTIST.SET_ARTIST_ID, data.id);
-        document.getElementsByClassName('m-top-login')[0].innerHTML = data.name;
+        document.getElementsByClassName('m-top-login')[0].innerHTML = inputSanitize(data.name);
         document.getElementsByClassName('m-round-image')[0].src = data.image;
-        document.getElementsByClassName('m-top-name')[0].innerHTML = data.genre;
+        document.getElementsByClassName('m-top-name')[0].innerHTML = inputSanitize(data.genre);
         document.getElementsByClassName('m-top-section-tracks-ref')[0].href =
             `/artist/${data.id}/tracks`;
         document.getElementsByClassName('m-top-section-albums-ref')[0].href =
@@ -79,5 +79,59 @@ export default class ArtistView extends BaseView {
             .href = `/artist/${data.id}/info`;
         document.getElementById('artist-tracks-title').innerText = data.tracks;
         document.getElementById('artist-albums-title').innerText = data.albums;
+        this.setEventListeners.bind(this)();
+        this.textSubscribe = 'Subscribe';
+        if (data.is_subscribed) {
+            this.textSubscribe = 'Unsubscribe';
+            document.getElementsByClassName('m-subscribe')[0].classList.toggle('is-subscribed');
+        }
+        document.getElementsByClassName('m-subscribe')[0].innerHTML =
+            inputSanitize(this.textSubscribe);
+    }
+
+    /**
+     * Set event listeners
+     */
+    setEventListeners() {
+        document.getElementsByClassName('m-subscribe')[0]
+            .addEventListener('click', this.subscribe.bind(this));
+    }
+
+    /**
+     * Subscribe
+     */
+    subscribe() {
+        this.eventBus.emit(ARTIST.SUBSCRIBE, this.data.id);
+    }
+
+    /**
+     * Subscribe result
+     * @param {Boolean} success
+     */
+    drawSubscribe(success) {
+        if (!success) {
+            if (this.textSubscribe === 'Subscribe') {
+                new PopUp(POPUP.ARTIST_SUBSCRIPTION_ERROR_MESSAGE + this.data.name, true);
+            } else {
+                new PopUp(POPUP.ARTIST_UNSUBSCRIPTION_ERROR_MESSAGE + this.data.name, true);
+            }
+            return;
+        }
+        if (this.textSubscribe === 'Subscribe') {
+            new PopUp(POPUP.ARTIST_SUBSCRIPTION_MESSAGE + this.data.name);
+        } else {
+            new PopUp(POPUP.ARTIST_UNSUBSCRIPTION_MESSAGE + this.data.name);
+        }
+        if (User.exists()) {
+            const button = document.getElementsByClassName('m-subscribe')[0];
+            this.textSubscribe = button.classList.contains('is-subscribed') ?
+                'Subscribe' : 'Unsubscribe';
+            button.classList.add('is-invisible');
+            button.classList.toggle('is-subscribed');
+            button.innerText = this.textSubscribe;
+            setTimeout(() => {
+                button.classList.remove('is-invisible');
+            }, 100);
+        }
     }
 }

@@ -1,0 +1,20 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <fest:choose>
+        <fest:when test="data.error">
+            <div class="m-pop-up m-pop-up-error" p-id="{data.id}" style="bottom: -60px; opacity: 1;">
+                <div class="m-pop-up-message">
+                    <fest:value>data.message</fest:value>
+                </div>
+                <img src="/static/img/icons/clear.svg" class="m-pop-up-close" height="15px" alt="..."/>
+            </div>
+        </fest:when>
+        <fest:otherwise>
+            <div class="m-pop-up" p-id="{data.id}" style="bottom: -60px; opacity: 1;">
+                <div class="m-pop-up-message">
+                    <fest:value>data.message</fest:value>
+                </div>
+                <img src="/static/img/icons/clear.svg" class="m-pop-up-close" height="15px" alt="..."/>
+            </div>
+        </fest:otherwise>
+    </fest:choose>
+</fest:template>

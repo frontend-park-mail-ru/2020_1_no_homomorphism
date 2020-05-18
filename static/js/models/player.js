@@ -1,5 +1,5 @@
 import Api from '@libs/api';
-import {PLAYER, RESPONSE, GLOBAL, PAGINATION} from '@libs/constans';
+import {PLAYER, RESPONSE, GLOBAL, PAGINATION} from '@libs/constants';
 import {globalEventBus} from '@libs/eventBus';
 
 /**
@@ -20,7 +20,7 @@ export default class PlayerModel {
             shuffle: false,
             repeat: false,
         };
-        globalEventBus.on(GLOBAL.PAUSE, this.doPause.bind(this));
+        globalEventBus.on(GLOBAL.PAUSE, this.pause.bind(this));
 
         globalEventBus.on(GLOBAL.CLEAR_AND_LOCK, this.deleteAll.bind(this));
         globalEventBus.on(GLOBAL.PLAY_TRACKS, this.deleteAll.bind(this));
@@ -31,7 +31,7 @@ export default class PlayerModel {
         globalEventBus.on(GLOBAL.PLAY_PLAYLIST_TRACKS, this.getPlaylistTracks.bind(this));
         globalEventBus.on(GLOBAL.PLAY_ALBUM_TRACKS, this.deleteAll.bind(this));
         globalEventBus.on(GLOBAL.PLAY_ALBUM_TRACKS, this.getAlbumTracks.bind(this));
-        globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.deleteAll.bind(this)); // TODO зачем это???
+        globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.deleteAll.bind(this));
         globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.getPlaylistTracks.bind(this));
         globalEventBus.on(GLOBAL.PLAY_ALBUM, this.deleteAll.bind(this));
         globalEventBus.on(GLOBAL.PLAY_ALBUM, this.getAlbumTracks.bind(this));
@@ -81,16 +81,11 @@ export default class PlayerModel {
      * @param {number} number
      */
     getPlaylistTracks(id, trackId, number = PAGINATION.TRACKS) {
-        Api.playlistTracksGet(id, '0', number)
+        Api.playlistTracksGet(id, '0', number.toString())
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
                     this.generateData.bind(this)(res, trackId);
-                    break;
-                case RESPONSE.BAD_REQUEST: // TODO Плейлиста не существует
-                    break;
-                case RESPONSE.UNAUTH: // TODO Пользователь не залогинен => дефолтный плейлист
-                case RESPONSE.NO_ACCESS_RIGHT: // TODO Нет прав к этому плейлисту
                     break;
                 default:
                     console.log(res);
@@ -112,7 +107,7 @@ export default class PlayerModel {
                 case RESPONSE.OK:
                     this.generateData.bind(this)(res, trackId);
                     break;
-                case RESPONSE.BAD_REQUEST: // TODO обработать ошибку
+                case RESPONSE.BAD_REQUEST:
                     break;
                 default:
                     console.log(res);
@@ -156,9 +151,9 @@ export default class PlayerModel {
      * @param {Object} list
      * @param {string} trackID
      */
-    setData(list, trackID='') {
+    setData(list, trackID = '') {
         if (list.tracks.length === 0) {
-            globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK);
+            globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK, true);
             return;
         }
         // eslint-disable-next-line guard-for-in
@@ -182,7 +177,7 @@ export default class PlayerModel {
      * @param {string} id
      */
     getTrack(id) {
-        this.playing = true; // rer
+        this.playing = true;
         this.eventBus.emit(PLAYER.DRAW_PAUSE);
         const currentId = this.playlist[this.queue[this.current]].id;
         this.current = this.queue.indexOf(this.playlist.indexOf(
@@ -208,13 +203,6 @@ export default class PlayerModel {
      * останавливает воспроизведение
      */
     pause() {
-        this.doPause();
-    }
-
-    /**
-     * do Pause
-     */
-    doPause() {
         document.getElementsByTagName('audio')[0].pause();
         this.playing = false;
         this.eventBus.emit(PLAYER.DRAW_PLAY);
@@ -226,8 +214,10 @@ export default class PlayerModel {
     play() {
         localStorage.setItem('isPlaying', 'false');
         localStorage.setItem('isPlaying', 'true');
-        document.getElementsByTagName('audio')[0].play();
-        this.playing = true;
+        document.getElementsByTagName('audio')[0].play()
+            .then(() => {
+                this.playing = true;
+            });
         this.eventBus.emit(PLAYER.DRAW_PAUSE);
     }
 
@@ -235,7 +225,7 @@ export default class PlayerModel {
      * переключает трек на предыдущий
      */
     prev() {
-        this.playing = true; // rer
+        this.playing = true;
         this.eventBus.emit(PLAYER.DRAW_PAUSE);
         const currentId = this.playlist[this.queue[this.current]].id;
         if (this.current === 0) {
@@ -269,7 +259,7 @@ export default class PlayerModel {
      * @param {string} cause
      */
     next(cause) {
-        this.playing = true; // rer
+        this.playing = true;
         this.eventBus.emit(PLAYER.DRAW_PAUSE);
         const currentId = this.playlist[this.queue[this.current]].id;
         if (this.current === this.queue.length - 1) {
@@ -441,6 +431,6 @@ export default class PlayerModel {
         this.queue = [];
         this.playlist = [];
         this.current = 0;
-        this.eventBus.emit(PLAYER.REMOVE_FROM_TRACKLIST_ALL, true);
+        this.eventBus.emit(PLAYER.REMOVE_FROM_TRACKLIST_ALL);
     }
 }

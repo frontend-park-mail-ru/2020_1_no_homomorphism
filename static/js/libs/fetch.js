@@ -1,5 +1,5 @@
-import {SERVER_PATH} from '@libs/constans';
-import {API} from '@libs/constans';
+import {SERVER_PATH} from '@libs/constants';
+import {API} from '@libs/constants';
 import User from '@libs/user';
 
 /* *

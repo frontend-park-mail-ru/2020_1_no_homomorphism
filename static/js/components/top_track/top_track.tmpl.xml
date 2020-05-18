@@ -1,0 +1,11 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <div class="col">
+        <img src="" alt="..." class="cover" id="cover"/>
+    </div>
+    <div class="col m-track-group-names">
+        <div class="track-name" id="title" title="">
+        </div>
+        <a class="group-name is-underlined-ref" id="artist" href="/">
+        </a>
+    </div>
+</fest:template>

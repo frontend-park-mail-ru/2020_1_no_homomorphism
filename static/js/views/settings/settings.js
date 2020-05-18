@@ -1,7 +1,9 @@
-import {SETTINGS, DOM} from '@libs/constans';
+import {SETTINGS, DOM, POPUP} from '@libs/constants';
 import settings from '@views/settings/settings.tmpl.xml';
 import BaseView from '@libs/base_view';
 import User from '@libs/user';
+import PopUp from '@components/pop-up/pop-up';
+import {inputSanitize} from '@libs/input_sanitize';
 
 /**
  * вью для настроек
@@ -17,6 +19,9 @@ export default class SettingsView extends BaseView {
         this.errors = {};
         this.eventBus.on(SETTINGS.INVALID, this.showErrors.bind(this));
         this.eventBus.on(SETTINGS.RENDER_LOGGED, this.renderData.bind(this));
+        this.eventBus.on(POPUP.NEW, (message) => {
+            new PopUp(message);
+        });
     }
 
     /**
@@ -67,10 +72,10 @@ export default class SettingsView extends BaseView {
     renderData(data) {
         this.userData = data;
         document.getElementsByClassName(' m-round-image')[0].src = data.image;
-        document.getElementsByClassName('m-top-name')[0].innerHTML = data.name;
-        document.getElementsByClassName('m-top-login')[0].innerHTML = data.login;
-        document.getElementsByClassName('m-big-input')[0].value = data.name;
-        document.getElementsByClassName('m-big-input')[1].value = data.email;
+        document.getElementsByClassName('m-top-name')[0].innerHTML = inputSanitize(data.name);
+        document.getElementsByClassName('m-top-login')[0].innerHTML = inputSanitize(data.login);
+        document.getElementsByClassName('m-big-input')[0].value = inputSanitize(data.name);
+        document.getElementsByClassName('m-big-input')[1].value = inputSanitize(data.email);
         document.getElementById('newPassword').value = '';
         document.getElementById('newPasswordConfirm').value = '';
         document.getElementById('password').value = '';
@@ -84,7 +89,7 @@ export default class SettingsView extends BaseView {
         this.errors = errors;
         // eslint-disable-next-line guard-for-in
         for (const key in errors) {
-            const message = document.getElementById(key).nextElementSibling;
+            const message = document.getElementById(key);
             message.innerText = errors[key];
             message.style.height = '15px';
             message.style.marginBottom = '10px';
@@ -98,7 +103,7 @@ export default class SettingsView extends BaseView {
     hideErrors() {
         // eslint-disable-next-line guard-for-in
         for (const key in this.errors) {
-            const message = document.getElementById(key).nextElementSibling;
+            const message = document.getElementById(key);
             message.innerText = '';
             message.style.height = '0';
             message.style.marginBottom = '0';

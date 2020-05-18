@@ -1,311 +1,384 @@
 @import "../modules/_variables";
 
 .l-player {
-  height: 1000px;
-  width: 400px;
-  position: fixed;
-  top: 55px;
-  left: 150%;
-  z-index: 1;
-  padding-left: 0;
-  padding-top: 0;
-  transition-property: left;
-  transition-duration: 0.75s;
-  /* overflow: hidden; */
-  background: white;
+    height: 1000px;
+    width: 400px;
+    position: fixed;
+    top: 60px;
+    left: 150%;
+    z-index: $main-level;
+    padding-left: 0;
+    padding-top: 0;
+    background: white;
+    border-radius: $card-border-small;
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.l-player-footer {
+    display: none;
+}
+
+.l-player-visible {
+    transition-property: left, top;
+    transition-duration: 0.75s;
 }
 
 .l-player .col {
-  text-align: left;
+    text-align: left;
 }
 
 .l-player .main-col {
-  width: 361px;
+    width: 361px;
 }
 
 .patch {
-  height: 1em;
-  background: white;
-  position: relative;
-  z-index: 1;
+    height: 1em;
+    background: white;
+    position: relative;
+    z-index: $main-level;
 }
 
 .l-music-bar {
-  background: white;
-  position: relative;
-  z-index: 1;
-  padding-bottom: 16px;
+    background: white;
+    position: relative;
+    z-index: $main-level;
+    padding-bottom: 16px;
 }
 
 .l-music-bar .col {
-  height: 80px;
+    height: 80px;
 }
 
-.l-music-bar .track-group-names {
-  padding-left: 7px;
-  padding-top: 0;
+.l-music-bar .m-track-group-names {
+    padding-left: 7px;
+    padding-top: 0;
 }
 
 .container-audio {
-  height: auto;
-  color: #444;
-  background: white;
-  position: relative;
-  z-index: 1;
+    height: auto;
+    color: #444;
+    background: white;
+    position: relative;
+    z-index: $main-level;
 }
 
 .timeline .timeline-back {
-  width: 100%;
-  height: 7px;
-  background: $chosen-icon;
-  cursor: pointer;
+    width: 100%;
+    height: 7px;
+    background: $chosen-icon;
+    cursor: pointer;
 }
 
 .timeline .timeline-front {
-  position: relative;
-  top: -7px;
-  height: 7px;
-  background: black;
-  cursor: pointer;
+    position: relative;
+    top: -7px;
+    height: 7px;
+    background: black;
+    cursor: pointer;
 }
 
-.timeline .current-time {
-  transition-property: font-size;
-  transition-duration: 0.3s;
-  font-size: 0;
-  position: absolute;
-  top: 11px;
+.current-time {
+    transition-property: font-size;
+    transition-duration: 0.3s;
+    font-size: 0;
+    position: absolute;
+    top: 11px;
 }
 
-.timeline .duration {
-  text-align: right;
-  transition-property: font-size;
-  transition-duration: 0.3s;
-  font-size: 0;
-  margin-left: 339px;
-  position: absolute;
-  top: 11px;
+.duration {
+    text-align: right;
+    transition-property: font-size;
+    transition-duration: 0.3s;
+    font-size: 0;
+    position: absolute;
+    top: 11px;
+    right: 0;
 }
 
 .control-elements {
-  margin: 10px 0 6px;
+    margin: 10px 0 6px;
 }
 
 .player-control-button {
-  text-align: center;
-  opacity: 0.4;
-  height: 30px;
-  width: 30px;
-  cursor: pointer;
+    text-align: center;
+    opacity: 0.4;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
 }
 
 .player-control-button:hover {
-  opacity: 1;
+    opacity: 1;
 }
 
 .volume,
 .playlist-control-button {
-  height: 20px;
-  width: 20px;
-  cursor: pointer;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
 }
 
 .shuffle {
-  position: relative;
-  top: -3px;
-  left: 207px;
+    position: relative;
+    top: -5px;
+    right: -208px;
+    opacity: 0.4;
 }
 
 .repeat {
-  position: relative;
-  top: -3px;
-  left: 205px;
+    position: relative;
+    top: -5px;
+    right: -206px;
+    opacity: 0.4;
 }
 
 .volume {
-  position: relative;
-  top: -3px;
-  left: 203px;
-  z-index: 2;
+    position: relative;
+    top: -5px;
+    right: -204px;
+    z-index: $top-level;
+    opacity: 0.4;
 }
 
 .volume-scale {
-  height: 74px;
-  top: -42px;
-  left: 330px;
-  background: white;
-  border: 1px solid $chosen-icon;
-  border-radius: 2px;
-  position: absolute;
-  padding: 5px;
-  width: 25px;
-  text-align: center;
-  margin-bottom: 10px;
-  transition-duration: 0.3s;
+    height: 74px;
+    top: -42px;
+    left: 330px;
+    background: white;
+    border: 1px solid $chosen-icon;
+    border-radius: 2px;
+    position: absolute;
+    padding: 5px;
+    width: 25px;
+    text-align: center;
+    margin-bottom: 10px;
+    transition-duration: 0.3s;
+    opacity: 0;
 }
 
 .volume-scale:after,
 .volume-scale:before {
-  content: '';
-  border: solid transparent;
-  position: absolute;
-  left: 50%;
-  margin-left: -8px;
-  top: 72px;
-  width: 0;
+    content: '';
+    border: solid transparent;
+    position: absolute;
+    left: 50%;
+    margin-left: -8px;
+    top: 72px;
+    width: 0;
 }
 
 .volume-scale:before {
-  border-top-color: $chosen-icon;
-  border-width: 8px;
+    border-top-color: $chosen-icon;
+    border-width: 8px;
 }
 
 .volume-scale:after {
-  border-top-color: white;
-  border-width: 6px;
-  margin-left: -6px;
+    border-top-color: white;
+    border-width: 6px;
+    margin-left: -6px;
 }
 
 .volume-scale-back {
-  height: 60px;
-  width: 5px;
-  background: $chosen-icon;
-  position: relative;
-  left: 4px;
-  cursor: pointer;
+    height: 60px;
+    width: 5px;
+    background: $chosen-icon;
+    position: relative;
+    left: 4px;
+    cursor: pointer;
 }
 
 .volume-scale-front {
-  width: 5px;
-  background: black;
-  position: relative;
-  left: 4px;
-  cursor: pointer;
+    width: 5px;
+    background: black;
+    position: relative;
+    left: 4px;
+    cursor: pointer;
+}
+
+.cover {
+    width: 80px;
+    height: 80px;
+    transition-property: width, height;
+    transition-duration: 0.4s;
+}
+
+.in-footer-cover {
+    width: 40px;
+    height: 40px;
 }
 
 .track-name {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .l-music-bar .track-name {
-  font-size: 19px;
-  width: 274px;
+    font-size: 19px;
+    width: 274px;
 }
 
 .group-name {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .track-list {
-  position: relative;
-  z-index: 0;
+    position: relative;
+    z-index: $back-level;
+    height: 200px;
+    overflow: hidden scroll;
+}
+
+.track-list::-webkit-scrollbar {
+    width: 0;
 }
 
 .current-marker {
-  background: #00e676;
-  width: 5px;
-  position: absolute;
-  transition-property: height, top;
-  transition-duration: 0.25s;
+    background: #00e676;
+    width: 5px;
+    position: absolute;
+    transition-property: height, top;
+    transition-duration: 0.25s;
 }
 
 .track-buttons {
-  position: absolute;
-  left: 341px;
+    position: absolute;
+    left: 341px;
 }
 
 .track-button {
-  opacity: 0;
+    opacity: 0;
 }
 
 .track-list > .row {
-  background: white;
-  cursor: pointer;
-  padding-bottom: 17px;
-  padding-top: 5px;
-  transition-property: margin;
-  transition-duration: 0.1s;
+    background: white;
+    cursor: pointer;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    transition-property: margin;
+    transition-duration: 0.1s;
 }
 
 .track-list > .row:hover {
-  background: $selected-elem;
+    background: $selected-elem;
 }
 
 .track-list .row {
-  cursor: pointer;
+    cursor: pointer;
 }
 
-.track-list .track-group-names {
+.track-list .m-track-group-names {
   padding-left: 8px;
-  height: 54px;
+  height: 50px;
+  float: left;
 }
 
 .track-list .track-name {
-  font-size: 18px;
-  width: 276px;
+    font-size: 18px;
+    width: 224px;
 }
 
 .track-list .group-name {
-  font-size: 12px;
+    font-size: 12px;
 }
 
 .track-list .col {
-  height: 38px;
-  margin-bottom: 0;
+    height: 50px;
+    margin-bottom: 0;
 }
 
-.track-photo {
+.m-track-photo {
   padding-left: 5px;
+  float: left;
+  height: 50px;
 }
 
 .border-bottom {
-  border-bottom: 1px solid $chosen-icon;
+    border-bottom: 1px solid $chosen-icon;
 }
 
 .top-line {
-  border-top: 1px solid $chosen-icon;
-  margin-top: 16px;
+    border-top: 1px solid $chosen-icon;
+    margin-top: 16px;
 }
 
 .track-list .top-line {
-  margin-top: 0;
-  margin-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: 5px;
 }
 
 .group-name {
-  text-decoration: none;
-  color: black;
-  font-size: 15px;
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
 }
 
 .player-trigger {
-  width: 13px;
-  height: 1000px;
-  margin-right: 5px;
-  background: white;
-  cursor: pointer;
+    width: 13px;
+    height: 1000px;
+    margin-right: 5px;
+    background: white;
+    cursor: pointer;
 }
 
 .player-trigger-arrow {
-  margin-top: 6px;
-  margin-left: 3px;
+    margin-top: 6px;
+    margin-left: 3px;
+    visibility: hidden;
+    transform: rotate(180deg);
 }
 
 .trigger-button {
-  border-radius: 4px;
-  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
-  position: absolute;
-  top: 50%;
-  left: -37px;
-  width: 40px;
-  height: 40px;
-  background: white;
-  z-index: -1;
-  cursor: pointer;
+    border-radius: 4px;
+    box-shadow: $box-shadow;
+    position: absolute;
+    top: 50%;
+    left: -37px;
+    width: 40px;
+    height: 40px;
+    background: white;
+    z-index: $under-level;
+    cursor: pointer;
 }
 
 .trigger-button:hover {
-  background: $chosen-icon;
+    background: $chosen-icon;
+}
+
+.player-trigger-row {
+    display: none;
+    height: 25px;
+    background: white;
+    position: relative;
+    z-index: $main-level;
+    width: 108%;
+    left: -15px;
+}
+
+.player-trigger-arrow-row {
+    display: none;
+    transform: rotate(90deg);
+    position: relative;
+    left: 46.5%;
+}
+
+.l-player-footer .player-trigger-row {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    z-index: $top-level;
+    background: transparent;
+}
+
+.l-player-footer .patch {
+    display: none;
+}
+
+.l-player-footer .timeline-back,
+.l-player-footer .timeline-front {
+    position: absolute;
+    left: 0;
+    top: 0;
 }

@@ -1,12 +1,20 @@
 // Переменные
 $card-border: 10px;
 $card-border-small: 8px;
-$card-border-big: 16px;
+$medium-icon-border: 20px;
 $selected-elem: #d6ffeb;
 
-$button-color: #499181;
+$button-color: #0ab992;
 $chosen-icon: #ebeae7;
 $obscure: gray;
+$light-gray: #ebeae7;
 $box-shadow: 0 1px 20px 0 #ebeae7;
-$box-shadow-hard: 0 1px 40px rgba(12, 12, 12, 0.2);
+$box-shadow-hover: 0 0 20px #6b6b6b;
+$box-shadow-hard: 0 1px 20px rgba(12, 12, 12, 0.2);
 $small-pad: 8px;
+
+$under-level: -1;
+$back-level: 0;
+$main-level: 1;
+$top-level: 2;
+$super-top-level: 3;
