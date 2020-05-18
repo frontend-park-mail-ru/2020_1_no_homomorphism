@@ -33,10 +33,14 @@ export default class NewsModel {
             switch (res.status) {
             case RESPONSE.OK:
                 res.json().then((data) => {
-                    this.eventBus.emit(MAIN.RENDER_SUBSCRIPTIONS_LIST, {
+                    this.eventBus.emit(MAIN.RENDER_ARTISTS, {
                         domItem: 'subscriptions-section',
                         caption: 'Subscriptions',
-                        list: data,
+                        ok: true,
+                    });
+                    this.eventBus.emit(MAIN.RENDER_ARTISTS_LIST, {
+                        domItem: 'subscriptions-section',
+                        artists: data,
                     });
                 });
                 break;
@@ -74,8 +78,13 @@ export default class NewsModel {
                         this.eventBus.emit(MAIN.RENDER_TRACKS_LIST, {
                             domItem: 'tracks-section',
                             caption: 'Tracks of the day',
-                            list: data,
+                            ok: true,
                         }, this.eventBus);
+                        this.eventBus.emit(MAIN.RENDER_TRACKS, {
+                            domItem: 'tracks-section',
+                            type: 'track',
+                            tracks: data,
+                        });
                     });
             }
         });
@@ -89,10 +98,14 @@ export default class NewsModel {
             switch (res.status) {
             case RESPONSE.OK:
                 res.json().then((data) => {
-                    this.eventBus.emit(MAIN.RENDER_ARTISTS_LIST, {
+                    this.eventBus.emit(MAIN.RENDER_ARTISTS, {
                         domItem: 'artists-section',
                         caption: 'Artists',
-                        list: data.artists,
+                        ok: true,
+                    });
+                    this.eventBus.emit(MAIN.RENDER_ARTISTS_LIST, {
+                        domItem: 'artists-section',
+                        artists: data.artists,
                     });
                 });
                 break;

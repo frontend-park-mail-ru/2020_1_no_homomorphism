@@ -5,6 +5,7 @@
                 <fest:value>data.caption</fest:value>
             </h2>
             <div class="small-line"></div>
+            <div></div>
         </div>
     </fest:if>
 </fest:template>

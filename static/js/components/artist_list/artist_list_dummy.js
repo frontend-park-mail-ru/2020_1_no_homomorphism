@@ -21,11 +21,8 @@ export default class ArtistListDummyComponent {
     /**
      * Отрисовка
      * @param {Object} data
-     * @return {Node}
      */
     render(data) {
-        const elem = document.createElement('div');
-        elem.innerHTML = artistList(data);
-        return elem;
+        document.getElementsByClassName(this._DOMItem)[0].innerHTML = artistList(data);
     }
 }

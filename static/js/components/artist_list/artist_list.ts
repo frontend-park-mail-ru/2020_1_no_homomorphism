@@ -13,7 +13,7 @@ type artist = {
 type input = {
     domItem: string;
     caption: string;
-    list: [artist];
+    artists: [artist];
 };
 
 export default class ArtistListComponent {
@@ -31,14 +31,7 @@ export default class ArtistListComponent {
 
     render(data: input): void {
         this.artistListDummy.DOMItem = data.domItem;
-        this.artistList = data.list;
-        this.eventBus.emit(this.message,
-        {
-            domItem: data.domItem,
-            caption: data.caption,
-            node: this.artistListDummy.render(this.artistList),
-            ok: data.list.length > 0,
-        }
-        );
+        this.artistList = data.artists;
+        this.artistListDummy.render(this.artistList);
     }
 }

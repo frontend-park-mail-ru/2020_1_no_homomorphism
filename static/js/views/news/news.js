@@ -16,7 +16,7 @@ export default class NewsView extends BaseView {
         super(news);
         this.eventBus = eventBus;
         this.eventBus.on(MAIN.RENDER_SUBSCRIPTIONS, this.renderList.bind(this));
-        this.eventBus.on(MAIN.RENDER_TRACKS, this.renderList.bind(this));
+        this.eventBus.on(MAIN.RENDER_TRACKS_LIST, this.renderList.bind(this));
         this.eventBus.on(MAIN.RENDER_ARTISTS, this.renderList.bind(this));
         globalEventBus.on(GLOBAL.HIDE_SUBSCRIPTIONS, () => {
             document.getElementById('subscriptions-section').remove();
@@ -38,16 +38,11 @@ export default class NewsView extends BaseView {
     /**
      * Рендер
      * @param {Object} data
-     * @param {function} setEventListeners
      */
-    renderList(data, setEventListeners) {
-        let elem = document.createElement('div');
-        elem.innerHTML = newsSection(data);
-        elem = elem.firstChild;
-        elem.appendChild(data.node);
-        document.getElementById(data.domItem).appendChild(elem);
-        if (data.domItem === 'tracks-section') {
-            setTimeout(setEventListeners, 1000);
-        }
+    renderList(data) {
+        const node = document.getElementsByClassName(data.domItem)[0];
+        node.innerHTML = newsSection(data);
+        node.classList.remove(data.domItem);
+        node.firstChild.lastChild.classList.add(data.domItem);
     }
 }
