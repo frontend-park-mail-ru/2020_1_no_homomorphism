@@ -40,6 +40,9 @@ export default class NewsView extends BaseView {
      * @param {Object} data
      */
     renderList(data) {
+        if (node === null) {
+            return;
+        }
         const node = document.getElementsByClassName(data.domItem)[0];
         node.innerHTML = newsSection(data);
         node.classList.remove(data.domItem);
