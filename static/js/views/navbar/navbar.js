@@ -3,6 +3,7 @@ import navbar from '@views/navbar/navbar.tmpl.xml';
 import BaseView from '@libs/base_view';
 import SearchComponent from '@components/search/search';
 import {globalEventBus} from '@libs/eventBus';
+import {inputSanitize} from '@libs/input_sanitize';
 
 /**
  *  вью для навбара
@@ -119,7 +120,7 @@ export default class NavbarView extends BaseView {
      */
     renderLogged(data) {
         document.getElementsByClassName('m-navbar-avatar')[0].src = data.image;
-        document.getElementsByClassName('m-navbar-name')[0].innerHTML = data.login;
+        document.getElementsByClassName('m-navbar-name')[0].innerHTML = inputSanitize(data.login);
         document.getElementById('login-link').classList.add('is-not-displayed');
         document.getElementById('signup-link').classList.add('is-not-displayed');
         document.getElementById('logout-link').classList.remove('is-not-displayed');

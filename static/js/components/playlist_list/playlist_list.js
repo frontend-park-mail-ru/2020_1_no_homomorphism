@@ -22,7 +22,9 @@ export default class PlaylistsComponent {
         if (anotherCommand !== '') {
             this.eventBus.on(anotherCommand, this.render.bind(this));
         }
-        this.eventBus.on(SEARCH.SET_LISTENERS, this.setEventListeners.bind(this));
+        if (command === SEARCH.RENDER_ALBUMS) {
+            this.eventBus.on(SEARCH.SET_LISTENERS, this.setEventListeners.bind(this));
+        }
     }
 
     /**
@@ -33,8 +35,10 @@ export default class PlaylistsComponent {
         this._type = data.type;
         this._domItem = data.domItem;
         const elem = document.getElementsByClassName(data.domItem)[0];
-        elem.innerHTML = template(this.generateHref(data.list));
-        this.setEventListeners();
+        if (elem !== undefined) {
+            elem.innerHTML = template(this.generateHref(data.list));
+            this.setEventListeners();
+        }
     }
 
     /**
@@ -52,13 +56,8 @@ export default class PlaylistsComponent {
      * Set EventListeners
      */
     setEventListeners() {
-        console.log('LOL');
         document.querySelectorAll('img.m-list-image').forEach((elem) => {
             elem.addEventListener('click', this.elemClick.bind(this));
-            // button.onclick = (event) =>
-            // this.elemClick.bind(this)(event);
-            // console.log(event);
-            // globalEventBus.emit(GLOBAL.REDIRECT, `playlist/${}`)
         });
         if (this._type === 'playlist') {
             document.getElementsByClassName('m-button-without-size')[0]

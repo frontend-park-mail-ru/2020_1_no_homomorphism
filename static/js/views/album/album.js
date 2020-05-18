@@ -5,6 +5,7 @@ import TrackListComponent from '@components/track_list/track_list';
 import {globalEventBus} from '@libs/eventBus';
 import User from '@libs/user';
 import PopUp from '@components/pop-up/pop-up';
+import {inputSanitize} from '@libs/input_sanitize';
 
 /**
  *  вью для входа
@@ -50,8 +51,10 @@ export default class AlbumView extends BaseView {
      * Выводит данные альбома
      */
     renderAlbum() {
-        document.getElementsByClassName('m-big-name')[0].innerHTML = this.albumData.name;
-        document.getElementsByClassName('m-rounded-image')[0].src = this.albumData.image;
+        document.getElementsByClassName('m-big-name')[0].innerHTML =
+            inputSanitize(this.albumData.name);
+        document.getElementsByClassName('m-rounded-image')[0].src =
+            inputSanitize(this.albumData.image);
         if (this.albumData.is_liked) {
             this._changeLike();
         }
@@ -61,7 +64,7 @@ export default class AlbumView extends BaseView {
      * Слушает события
      */
     setEventListeners() {
-        document.getElementsByClassName('m-button-track-list-play')[0].addEventListener('click',
+        document.getElementsByClassName('l-button-middle-play')[0].addEventListener('click',
             this.playAlbum.bind(this));
         document.getElementsByClassName('m-large-like-button')[0].addEventListener('click',
             this._likeClicked.bind(this));
@@ -98,8 +101,8 @@ export default class AlbumView extends BaseView {
         if (this.tracksData.length === 0) {
             return;
         }
-        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Tracks: ' +
-            this.tracksData.length;
+        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = inputSanitize('Tracks: ' +
+            this.tracksData.length);
     }
 
     /**
@@ -114,7 +117,7 @@ export default class AlbumView extends BaseView {
      * @param {Object} error
      */
     showErrors(error) {
-        document.getElementsByClassName('l-top-card')[0].innerHTML = error.text;
+        document.getElementsByClassName('l-top-card')[0].innerHTML = inputSanitize(error.text);
         document.getElementsByClassName('l-top-card')[0].classList.add('is-error');
         document.getElementsByClassName('l-down-card')[0].classList.add('is-not-displayed');
     }

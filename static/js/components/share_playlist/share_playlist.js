@@ -1,6 +1,7 @@
 import {PLAYLIST, POPUP} from '@libs/constants';
 import share from '@components/share_playlist/share.tmpl.xml';
 import PopUp from '@components/pop-up/pop-up';
+import {inputSanitize} from '@libs/input_sanitize';
 
 /**
  * Компонента, отвечающая за возможности авторизированного пользователя
@@ -77,7 +78,6 @@ export default class SharePlaylistComponent {
                 })
                 .catch((err) => {
                     new PopUp(POPUP.PLAYLIST_LINK_COPY_ERROR_MESSAGE, true);
-                    console.log('Something went wrong', err);
                 });
             return;
         }
@@ -120,7 +120,7 @@ export default class SharePlaylistComponent {
      * Set text
      */
     _shareText() {
-        document.getElementsByClassName('m-text-in-button')[0].innerHTML = this.text;
+        document.getElementsByClassName('m-text-in-button')[0].innerHTML = inputSanitize(this.text);
     }
 
     /**

@@ -239,16 +239,15 @@ export const ALBUM = {
 };
 
 export const SEARCH = {
-    'AMOUNT_TOP': '3',
-    'AMOUNT': '10',
-    'INTERVAL': 0,
-    // 'REDIRECT': 'search-redirect',
-    'GET_DATA': 'search-get-data',
-    'RENDER_DATA': 'search-render-data',
-    'RENDER_ALBUMS': 'search-render-albums',
-    'RENDER_ARTISTS': 'search-render-artists',
-    'RENDER_TRACKS': 'search-render-tracks',
-    'SET_LISTENERS': 'search-set-listeners',
+    AMOUNT_TOP: '3',
+    AMOUNT: '10',
+    INTERVAL: 0,
+    GET_DATA: 'search-get-data',
+    RENDER_DATA: 'search-render-data',
+    RENDER_ALBUMS: 'search-render-albums',
+    RENDER_ARTISTS: 'search-render-artists',
+    RENDER_TRACKS: 'search-render-tracks',
+    SET_LISTENERS: 'search-set-listeners',
 };
 
 export const POPUP = {
