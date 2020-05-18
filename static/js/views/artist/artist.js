@@ -5,6 +5,7 @@ import PlaylistsComponent from '@components/playlist_list/playlist_list';
 import {ARTIST, DOM, POPUP} from '@libs/constants';
 import User from '@libs/user';
 import PopUp from '@components/pop-up/pop-up';
+import {inputSanitize} from '@libs/input_sanitize';
 
 /**
  *  вью для страницы артиста
@@ -67,9 +68,9 @@ export default class ArtistView extends BaseView {
     renderData(data) {
         super.setData(data);
         this.eventBus.emit(ARTIST.SET_ARTIST_ID, data.id);
-        document.getElementsByClassName('m-top-login')[0].innerHTML = data.name;
+        document.getElementsByClassName('m-top-login')[0].innerHTML = inputSanitize(data.name);
         document.getElementsByClassName('m-round-image')[0].src = data.image;
-        document.getElementsByClassName('m-top-name')[0].innerHTML = data.genre;
+        document.getElementsByClassName('m-top-name')[0].innerHTML = inputSanitize(data.genre);
         document.getElementsByClassName('m-top-section-tracks-ref')[0].href =
             `/artist/${data.id}/tracks`;
         document.getElementsByClassName('m-top-section-albums-ref')[0].href =
@@ -84,7 +85,8 @@ export default class ArtistView extends BaseView {
             this.textSubscribe = 'Unsubscribe';
             document.getElementsByClassName('m-subscribe')[0].classList.toggle('is-subscribed');
         }
-        document.getElementsByClassName('m-subscribe')[0].innerHTML = this.textSubscribe;
+        document.getElementsByClassName('m-subscribe')[0].innerHTML =
+            inputSanitize(this.textSubscribe);
     }
 
     /**

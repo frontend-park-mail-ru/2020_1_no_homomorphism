@@ -14,7 +14,8 @@ export default class SearchModel {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.playlistListComponent = new PlaylistsComponent(this.eventBus, SEARCH.RENDER_ALBUMS);
+        this.playlistListComponent =
+            new PlaylistsComponent(this.eventBus, SEARCH.RENDER_ALBUMS, '');
         this.trackListComponent = new TrackListComponent(this.eventBus, SEARCH);
         this.artistListComponent = new ArtistListComponent(this.eventBus, SEARCH.RENDER_ARTISTS);
         this.eventBus.on(SEARCH.GET_DATA, this.getData.bind(this));
@@ -32,12 +33,6 @@ export default class SearchModel {
                     res.json()
                         .then((elem) => {
                             this.eventBus.emit(SEARCH.RENDER_DATA, elem);
-                            this.eventBus.emit(SEARCH.RENDER_ALBUMS,
-                                {
-                                    domItem: 'l-search-albums',
-                                    list: elem.albums,
-                                    type: 'album',
-                                });
                             this.eventBus.emit(SEARCH.RENDER_TRACKS,
                                 {
                                     domItem: 'l-search-tracks',
@@ -49,6 +44,12 @@ export default class SearchModel {
                                     domItem: 'l-search-artists',
                                     artists: elem.artists,
                                     type: 'search',
+                                });
+                            this.eventBus.emit(SEARCH.RENDER_ALBUMS,
+                                {
+                                    domItem: 'l-search-albums',
+                                    list: elem.albums,
+                                    type: 'album',
                                 });
                         });
                     break;

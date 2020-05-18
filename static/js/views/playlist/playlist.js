@@ -7,6 +7,7 @@ import {globalEventBus} from '@libs/eventBus';
 import User from '@libs/user';
 import SharePlaylistComponent from '@components/share_playlist/share_playlist';
 import AddPlaylistComponent from '@components/add_playlist/add_playlist';
+import {inputSanitize} from '@libs/input_sanitize';
 
 /**
  *  вью для входа
@@ -60,7 +61,8 @@ export default class PlaylistView extends BaseView {
      * Выводит данные плейлиста
      */
     renderPlaylist() {
-        document.getElementsByClassName('m-big-name')[0].innerHTML = this.playlistData.name;
+        document.getElementsByClassName('m-big-name')[0].innerHTML =
+            inputSanitize(this.playlistData.name);
         document.getElementsByClassName('m-rounded-image')[0].src = this.playlistData.image;
     }
 
@@ -70,12 +72,12 @@ export default class PlaylistView extends BaseView {
      */
     setTracksAmount(amount) {
         this.tracksAmount = amount;
+        this.checkUser.bind(this)();
         if (this.tracksAmount === 0) {
             return;
         }
         document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Tracks: ' +
             this.tracksAmount;
-        this.checkUser.bind(this)();
         this.setEventListeners();
     }
 

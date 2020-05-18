@@ -22,7 +22,9 @@ export default class PlaylistsComponent {
         if (anotherCommand !== '') {
             this.eventBus.on(anotherCommand, this.render.bind(this));
         }
-        this.eventBus.on(SEARCH.SET_LISTENERS, this.setEventListeners.bind(this));
+        if (command === SEARCH.RENDER_ALBUMS) {
+            this.eventBus.on(SEARCH.SET_LISTENERS, this.setEventListeners.bind(this));
+        }
     }
 
     /**
@@ -33,8 +35,10 @@ export default class PlaylistsComponent {
         this._type = data.type;
         this._domItem = data.domItem;
         const elem = document.getElementsByClassName(data.domItem)[0];
-        elem.innerHTML = template(this.generateHref(data.list));
-        this.setEventListeners();
+        if (elem !== undefined) {
+            elem.innerHTML = template(this.generateHref(data.list));
+            this.setEventListeners();
+        }
     }
 
     /**
@@ -52,13 +56,8 @@ export default class PlaylistsComponent {
      * Set EventListeners
      */
     setEventListeners() {
-        console.log('LOL');
         document.querySelectorAll('img.m-list-image').forEach((elem) => {
             elem.addEventListener('click', this.elemClick.bind(this));
-            // button.onclick = (event) =>
-            // this.elemClick.bind(this)(event);
-            // console.log(event);
-            // globalEventBus.emit(GLOBAL.REDIRECT, `playlist/${}`)
         });
         if (this._type === 'playlist') {
             document.getElementsByClassName('m-button-without-size')[0]
@@ -89,6 +88,7 @@ export default class PlaylistsComponent {
      * @param {Object} playlist
      */
     updatePlaylistList(playlist) {
+        console.log(playlist);
         document.getElementsByClassName(this._domItem)[0].innerHTML += newPlaylist(playlist);
         this.eventBus.emit(PROFILE.CHANGE_PLAYLIST_AMOUNT, 1);
     }
@@ -98,6 +98,8 @@ export default class PlaylistsComponent {
      * @param {Object} event
      */
     elemClick(event) {
+        console.log(event.target);
+        console.log(`/${this._type}/${event.target.getAttribute('a-id')}`);
         globalEventBus.emit(GLOBAL.REDIRECT, `/${this._type}/${event.target.getAttribute('a-id')}`);
     }
 }

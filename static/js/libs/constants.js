@@ -243,20 +243,20 @@ export const ALBUM = {
     RENDER_TRACKS: 'album-render-tracks',
     SET_TRACKS_AMOUNT: 'album-set-tracks-amount',
     SET_ALBUM_ID: 'set-album-id',
+    LIKE: 'album-like',
     ERROR: 'album-show-errors',
 };
 
 export const SEARCH = {
-    'AMOUNT_TOP': '3',
-    'AMOUNT': '10',
-    'INTERVAL': 0,
-    // 'REDIRECT': 'search-redirect',
-    'GET_DATA': 'search-get-data',
-    'RENDER_DATA': 'search-render-data',
-    'RENDER_ALBUMS': 'search-render-albums',
-    'RENDER_ARTISTS': 'search-render-artists',
-    'RENDER_TRACKS': 'search-render-tracks',
-    'SET_LISTENERS': 'search-set-listeners',
+    AMOUNT_TOP: '3',
+    AMOUNT: '10',
+    INTERVAL: 0,
+    GET_DATA: 'search-get-data',
+    RENDER_DATA: 'search-render-data',
+    RENDER_ALBUMS: 'search-render-albums',
+    RENDER_ARTISTS: 'search-render-artists',
+    RENDER_TRACKS: 'search-render-tracks',
+    SET_LISTENERS: 'search-set-listeners',
 };
 
 export const POPUP = {
@@ -279,9 +279,12 @@ export const POPUP = {
     PLAYLIST_ADDITION_MESSAGE: 'Playlist added',
     PLAYLIST_ADDITION_ERROR_MESSAGE: 'Cannot add playlist',
     ARTIST_SUBSCRIPTION_MESSAGE: 'Subscribed to ',
-    ARTIST_SUBSCRIPTION_ERROR_MESSAGE: 'Cannot subscribe to ',
+    ARTIST_SUBSCRIPTION_ERROR_MESSAGE: 'Please, login. Can not subscribe to ',
     ARTIST_UNSUBSCRIPTION_MESSAGE: 'Unsubscribed from ',
     ARTIST_UNSUBSCRIPTION_ERROR_MESSAGE: 'Cannot unsubscribe from ',
+    ALBUM_LIKED: 'Album successfully liked',
+    ALBUM_UN_LIKED: 'Like successfully removed',
+    LOGIN_ERROR: 'Please login',
     LIFETIME: 2000,
     DISSOLUTIONTIME: 1000,
 };

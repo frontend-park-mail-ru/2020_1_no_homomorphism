@@ -62,6 +62,10 @@ export default class NavbarModel {
      * Получает данные пользователя
      */
     getUserData() {
+        if (User.exists()) {
+            this.eventBus.emit(NAVBAR.RENDER_LOGGED, User.getUserData());
+            return;
+        }
         Api.profileGet()
             .then((res) => {
                 switch (res.status) {
