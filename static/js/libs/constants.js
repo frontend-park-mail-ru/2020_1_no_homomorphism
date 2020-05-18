@@ -234,6 +234,7 @@ export const ALBUM = {
     RENDER_TRACKS: 'album-render-tracks',
     SET_TRACKS_AMOUNT: 'album-set-tracks-amount',
     SET_ALBUM_ID: 'set-album-id',
+    LIKE: 'album-like',
     ERROR: 'album-show-errors',
 };
 
@@ -273,6 +274,8 @@ export const POPUP = {
     ARTIST_SUBSCRIPTION_ERROR_MESSAGE: 'Cannot subscribe to ',
     ARTIST_UNSUBSCRIPTION_MESSAGE: 'Unsubscribed from ',
     ARTIST_UNSUBSCRIPTION_ERROR_MESSAGE: 'Cannot unsubscribe from ',
+    ALBUM_LIKED: 'Album successfully liked',
+    ALBUM_UN_LIKED: 'Like successfully removed',
     LIFETIME: 2000,
     DISSOLUTIONTIME: 1000,
 };

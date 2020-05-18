@@ -13,23 +13,8 @@
                     <div class="l-button-middle-play">
                         <button class="m-button-middle-play"> </button>
                         <span class="m-tracks-amount">Tracks: 0 </span>
-                        <!--                        <div class="m-delete-playlist-button"> </div>-->
                     </div>
                 </div>
-
-<!--                <div class="m-right-col">-->
-<!--                    <div class="m-privacy-title col"> Privacy: </div>-->
-<!--                    <label class="m-switch col">-->
-<!--                        <input type="checkbox" id="checkbox" checked="true" value="1"> </input>-->
-<!--                        <span class="m-slider"> </span>-->
-<!--                    </label>-->
-<!--                    <div class="col">-->
-<!--                        <button class="m-button-share"> <span class="m-text-in-button"> </span> </button>-->
-<!--                    </div>-->
-<!--                    <div class="l-delete-playlist-button">-->
-<!--                        <div class="m-delete-playlist-button"> </div>-->
-<!--                    </div>-->
-<!--                </div>-->
             </div>
             <div class="l-down-card">
                 <div class="l-track-list" style="top: 0;">

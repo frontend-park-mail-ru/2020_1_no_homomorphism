@@ -1,8 +1,10 @@
-import {ALBUM, GLOBAL} from '@libs/constants';
+import {ALBUM, GLOBAL, POPUP, URL} from '@libs/constants';
 import playlist from '@views/album/album.tmpl.xml';
 import BaseView from '@libs/base_view';
 import TrackListComponent from '@components/track_list/track_list';
 import {globalEventBus} from '@libs/eventBus';
+import User from '@libs/user';
+import PopUp from '@components/pop-up/pop-up';
 
 /**
  *  вью для входа
@@ -20,6 +22,9 @@ export default class AlbumView extends BaseView {
         this.eventBus.on(ALBUM.RENDER_ALBUM, this.setAlbumData.bind(this));
         this.eventBus.on(ALBUM.ERROR, this.showErrors.bind(this));
         this.eventBus.on(ALBUM.SET_TRACKS_AMOUNT, this.setTracksAmount.bind(this));
+        this.eventBus.on(POPUP.NEW, (message, error = false) => {
+            new PopUp(message, error);
+        });
     }
 
     /**
@@ -47,7 +52,9 @@ export default class AlbumView extends BaseView {
     renderAlbum() {
         document.getElementsByClassName('m-big-name')[0].innerHTML = this.albumData.name;
         document.getElementsByClassName('m-rounded-image')[0].src = this.albumData.image;
-        this.setEventListeners();
+        if (this.albumData.is_liked) {
+            this._changeLike();
+        }
     }
 
     /**
@@ -56,6 +63,29 @@ export default class AlbumView extends BaseView {
     setEventListeners() {
         document.getElementsByClassName('m-button-track-list-play')[0].addEventListener('click',
             this.playAlbum.bind(this));
+        document.getElementsByClassName('m-large-like-button')[0].addEventListener('click',
+            this._likeClicked.bind(this));
+    }
+
+    /**
+     * Clicked like track
+     */
+    _likeClicked() {
+        if (!User.exists()) {
+            globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
+            return;
+        }
+        this._changeLike();
+        this.eventBus.emit(ALBUM.LIKE, this.albumData.id);
+    }
+
+    /**
+     * Change like
+     */
+    _changeLike() {
+        const domItem = document.getElementsByClassName('m-large-like-button')[0];
+        domItem.classList.toggle('is-liked');
+        domItem.classList.toggle('is-not-liked');
     }
 
     /**
@@ -68,7 +98,7 @@ export default class AlbumView extends BaseView {
         if (this.tracksData.length === 0) {
             return;
         }
-        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Amount of tracks: ' +
+        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Tracks: ' +
             this.tracksData.length;
     }
 

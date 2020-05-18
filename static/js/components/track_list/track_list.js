@@ -252,12 +252,6 @@ export default class TrackListComponent {
      */
     _changeImage(id, domItem) {
         if (this._type === 'liked') {
-            // const elem = this._tracklist.filter((elem) => {
-            //     if (elem.id === id) {
-            //         return elem;
-            //     }
-            // });
-            // this._tracklist.slice(this._tracklist.indexOf(elem[0]), 1);
             this.deleteFromDOM(id.toString());
             return;
         }
