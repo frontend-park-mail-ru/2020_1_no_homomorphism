@@ -81,10 +81,19 @@ export const GLOBAL = {
     LOGIN_REDIRECT: 'global-login-redirect',
     CLOSE_SEARCH: 'global-close-search',
     PAUSE: 'global-pause',
+    HIDE_SUBSCRIPTIONS: 'hide subscriptions',
 };
 
 export const MAIN = {
-    GET_LIST_DATA: 'get-all-artists-data',
+    GET_SUBSCRIPTIONS_DATA: 'get-all-subscriptions-data',
+    GET_TRACKS_DATA: 'get-all-tracks-data',
+    GET_ARTISTS_DATA: 'get-all-artists-data',
+    RENDER_SUBSCRIPTIONS: 'render subscriptions',
+    RENDER_ARTISTS: 'render artists',
+    RENDER_TRACKS: 'render tracks',
+    RENDER_SUBSCRIPTIONS_LIST: 'render subscriptions list',
+    RENDER_ARTISTS_LIST: 'render artists list',
+    RENDER_TRACKS_LIST: 'render tracks list',
     NO_ANSWER: 'no-answer',
 };
 
@@ -270,11 +279,12 @@ export const POPUP = {
     PLAYLIST_ADDITION_MESSAGE: 'Playlist added',
     PLAYLIST_ADDITION_ERROR_MESSAGE: 'Cannot add playlist',
     ARTIST_SUBSCRIPTION_MESSAGE: 'Subscribed to ',
-    ARTIST_SUBSCRIPTION_ERROR_MESSAGE: 'Cannot subscribe to ',
+    ARTIST_SUBSCRIPTION_ERROR_MESSAGE: 'Please, login. Can not subscribe to ',
     ARTIST_UNSUBSCRIPTION_MESSAGE: 'Unsubscribed from ',
     ARTIST_UNSUBSCRIPTION_ERROR_MESSAGE: 'Cannot unsubscribe from ',
     ALBUM_LIKED: 'Album successfully liked',
     ALBUM_UN_LIKED: 'Like successfully removed',
+    LOGIN_ERROR: 'Please login',
     LIFETIME: 2000,
     DISSOLUTIONTIME: 1000,
 };

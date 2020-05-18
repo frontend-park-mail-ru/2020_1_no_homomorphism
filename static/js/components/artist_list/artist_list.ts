@@ -1,5 +1,6 @@
 import EventBus from '@libs/eventBus';
 import ArtistListDummyComponent from '@components/artist_list/artist_list_dummy';
+import {MAIN} from '@libs/constants';
 
 type artist = {
     id: string;
@@ -11,7 +12,7 @@ type artist = {
 
 type input = {
     domItem: string;
-    type: string;
+    caption: string;
     artists: [artist];
 };
 

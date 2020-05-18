@@ -1,6 +1,8 @@
-import artistList from '@views/news/artist_list.tmpl.xml';
+import news from '@views/news/news.tmpl.xml';
+import newsSection from '@views/news/news_section.tmpl.xml';
 import BaseView from '@libs/base_view';
-import {MAIN, DOM} from '@libs/constants';
+import {MAIN, GLOBAL} from '@libs/constants';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  *  вью для главной
@@ -11,9 +13,18 @@ export default class NewsView extends BaseView {
      * @param {EventBus} eventBus
      */
     constructor(eventBus) {
-        super(artistList);
+        super(news);
         this.eventBus = eventBus;
-        this.artistList = [];
+        this.eventBus.on(MAIN.RENDER_SUBSCRIPTIONS, this.renderList.bind(this));
+        this.eventBus.on(MAIN.RENDER_TRACKS_LIST, this.renderList.bind(this));
+        this.eventBus.on(MAIN.RENDER_ARTISTS, this.renderList.bind(this));
+        globalEventBus.on(GLOBAL.HIDE_SUBSCRIPTIONS, () => {
+            if (!document.getElementsByClassName('subscriptions-section')[0]) {
+                return;
+            }
+            document.getElementsByClassName('subscriptions-section')[0]
+                .parentNode.parentNode.remove();
+        });
     }
 
     /**
@@ -23,7 +34,9 @@ export default class NewsView extends BaseView {
      */
     render(root, url) {
         super.render(root, url);
-        this.eventBus.emit(MAIN.GET_LIST_DATA);
+        this.eventBus.emit(MAIN.GET_SUBSCRIPTIONS_DATA);
+        this.eventBus.emit(MAIN.GET_TRACKS_DATA);
+        this.eventBus.emit(MAIN.GET_ARTISTS_DATA);
     }
 
     /**
@@ -31,6 +44,15 @@ export default class NewsView extends BaseView {
      * @param {Object} data
      */
     renderList(data) {
-        document.getElementsByClassName(DOM.CONTENT)[0].innerHTML = artistList(data);
+        const node = document.getElementsByClassName(data.domItem)[0];
+        if (node === null) {
+            return;
+        }
+        node.innerHTML = newsSection(data);
+        node.classList.remove(data.domItem);
+        if (!data.ok) {
+            return;
+        }
+        node.firstChild.lastChild.classList.add(data.domItem);
     }
 }
