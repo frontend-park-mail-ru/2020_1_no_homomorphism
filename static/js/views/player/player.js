@@ -112,6 +112,14 @@ export default class PlayerView extends BaseView {
                 document.getElementsByClassName('player-trigger-row')[0].clientHeight :
                 0);
         document.getElementsByClassName('track-list')[0].style.height = height.toString() + 'px';
+        if (mobile.matches) {
+            if (this.expanded) {
+                document.getElementsByClassName('l-pop-up-container')[0].style.bottom = '0';
+            } else {
+                document.getElementsByClassName('l-pop-up-container')[0].style.bottom =
+                    (top - document.documentElement.clientHeight).toString() + 'px';
+            }
+        }
     }
 
     /**
@@ -241,6 +249,7 @@ export default class PlayerView extends BaseView {
                         document.getElementsByClassName('play-pause')[0],
                     );
                 }, 1000);
+                document.getElementsByClassName('l-pop-up-container')[0].style.bottom = '60px';
             } else {
                 this.footer = false;
                 document.getElementsByClassName('player-trigger-arrow-row')[0].classList
@@ -256,6 +265,7 @@ export default class PlayerView extends BaseView {
                     document.getElementById('next'),
                 );
                 document.getElementById('cover').classList.remove('in-footer-cover');
+                document.getElementsByClassName('l-pop-up-container')[0].style.bottom = '0';
             }
             const top =
                 this.expanded ?

@@ -27,7 +27,7 @@
     margin-left: auto;
 }
 
-.m-login-input {
+.m-form-input {
     margin-top: 32px;
     padding-bottom: 32px;
     margin-bottom: 32px;
@@ -159,12 +159,6 @@
     padding-bottom: 16px;
     margin-bottom: 16px;
 }
-
-.l-signup-input {
-    margin-top: 32px;
-    padding-bottom: 32px;
-}
-
 
 .l-track-big:hover .m-big-like-button, .l-track-big:hover .m-big-delete-button, .l-track-big:hover .m-big-add-button {
     transition: 0.3s;
@@ -619,6 +613,7 @@
     position: absolute;
     right: 5px;
     top: 5px;
+    height: 15px;
 }
 
 .m-pop-up-close:hover {

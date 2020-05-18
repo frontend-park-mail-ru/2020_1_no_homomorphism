@@ -1,4 +1,4 @@
-import {PLAYLIST, POPUP} from '@libs/constants';
+import {PLAYLIST, POPUP, LAYOUT} from '@libs/constants';
 import share from '@components/share_playlist/share.tmpl.xml';
 import PopUp from '@components/pop-up/pop-up';
 import {inputSanitize} from '@libs/input_sanitize';
@@ -120,6 +120,9 @@ export default class SharePlaylistComponent {
      * Set text
      */
     _shareText() {
+        if (window.matchMedia(LAYOUT.MOBILE).matches) {
+            return;
+        }
         document.getElementsByClassName('m-text-in-button')[0].innerHTML = inputSanitize(this.text);
     }
 

@@ -1,0 +1,429 @@
+@import "../modules/_variables";
+
+@media screen and (min-width: 481px) and (max-width: 1105px) {
+    .m-tablet-only, .m-desktop-tablet-only {
+        display: block;
+    }
+
+    .l-track-buttons,
+    .l-player-track-buttons,
+    .volume-scale,
+    .m-desktop-only,
+    .m-desktop-mobile-only {
+        display: none;
+    }
+
+    .current-time, .duration {
+        font-size: 11px;
+    }
+
+    .track-list .m-track-group-names {
+        width: 82%;
+    }
+
+    .track-list .m-track-name {
+        width: 100%;
+    }
+
+
+    .l-navbar-icon {
+        padding: 20px 4px 16px 4px;
+        opacity: 1;
+    }
+
+    .l-navbar-icon:hover, .l-navbar-info:hover {
+        background: white;
+    }
+
+    .l-navbar-info, .m-login-button,
+    .m-signup-button {
+        padding: 0;
+    }
+
+    .l-navbar-info, .m-signup-button {
+        margin: 0;
+        margin-left: auto;
+    }
+
+    .m-signup-button {
+        width: 10%;
+    }
+
+    .m-navbar-name {
+        padding: 13px 8px 0 0;
+    }
+
+    .l-navbar .m-search-input {
+        width: 40%;
+        margin-left: 4px;
+    }
+
+    .l-search {
+        left: 11.5%;
+        width: 35.5%;
+    }
+
+    .l-main {
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+
+    .l-content .col.col-9,
+    .l-content .l-center-pos .col.col-4 {
+        width: 100%;
+    }
+
+    .l-center-pos {
+        width: 100%;
+        left: 0;
+    }
+
+    .mobile-row::before, .mobile-row::after {
+        content: " ";
+        display: table;
+    }
+
+    .mobile-row::after {
+        clear: both;
+    }
+
+    .l-content .mobile-row .col.col-6 {
+        width: 100%;
+    }
+
+    .l-top-titles {
+        margin-top: 0;
+    }
+
+    .l-down-card .m-big-input {
+        margin: 0 0 1em;
+    }
+
+    .l-input .col.col-3 {
+        width: 100%;
+    }
+
+    .m-tracks-amount {
+        margin: 1em;
+    }
+
+    .l-track-big {
+        display: inline;
+    }
+}
+
+@media screen and (max-width: 480px) and (min-width: 344px) {
+    .l-player, .l-player-footer {
+        position: fixed;
+        width: 100%;
+        padding: 0 1em;
+        transition-duration: 0s, 1s;
+    }
+
+    .l-player-footer {
+        padding-top: 1em;
+    }
+
+    .l-player-footer .current-time,
+    .l-player-footer .duration {
+        font-size: 0;
+    }
+
+    ::-webkit-scrollbar {
+        width: 0px;
+    }
+
+    .l-player-footer, .player-trigger-row,
+    .player-trigger-arrow-row, .m-mobile-only,
+    .l-footer-patch {
+        display: block;
+    }
+
+    .trigger-button, .player-trigger,
+    .l-track-buttons, .volume-scale,
+    .m-desktop-only, .m-desktop-tablet-only,
+    .l-player-track-buttons {
+        display: none;
+    }
+
+    .l-player .main-col,
+    .l-pop-up-container,
+    .l-music-bar .track-name,
+    .track-list .track-name {
+        width: 100%;
+    }
+
+    .current-time, .duration {
+        font-size: 11px;
+    }
+
+    .l-player-footer .play-pause {
+        position: absolute;
+        right: 13px;
+        top: 15px;
+        z-index: $top-level;
+        height: 35px;
+        width: 35px;
+    }
+
+    .l-music-bar .m-track-group-names {
+        width: 72%;
+        text-align: left;
+    }
+
+    .shuffle {
+        position: absolute;
+        top: 29px;
+        right: 45px;
+    }
+
+    .repeat {
+        position: absolute;
+        top: 29px;
+        right: 22px;
+    }
+
+    .volume {
+        position: absolute;
+        top: 29px;
+        right: -1px;
+    }
+
+    .track-list .m-track-group-names {
+        width: 82%;
+    }
+
+    .l-navbar {
+        padding-right: 0;
+    }
+
+    .l-navbar-icon {
+        opacity: 1;
+    }
+
+    .l-navbar-icon:hover, .l-navbar-info:hover {
+        background: transparent;
+    }
+
+    .l-navbar-info, .m-login-button,
+    .m-signup-button {
+        padding: 0;
+    }
+
+    .m-login-button {
+        width: 11%;
+    }
+
+    .l-navbar-info, .m-signup-button {
+        margin: 0;
+    }
+
+    .m-signup-button {
+        width: 10%;
+    }
+
+    .l-search {
+        left: 5.5%;
+        width: 80%;
+    }
+
+    .l-navbar .m-search-input {
+        width: 0;
+        transition-property: width;
+        transition-duration: 1s;
+    }
+
+    .l-navbar .m-search-input-expanded {
+        width: 100%;
+    }
+
+    .l-top-name {
+        padding-top: 0;
+    }
+
+    .l-list-card-description {
+        margin-top: 24px;
+    }
+
+    .l-list-card .l-list-card-description {
+        margin-top: 12px;
+    }
+
+    .l-track-big {
+        display: inline;
+    }
+
+    .l-form {
+        width: 90%;
+        margin-left: 5%;
+        overflow-x: hidden;
+        max-height: -webkit-calc(88%);
+    }
+
+    .l-form::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .l-form::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px white;
+        border-radius: 10px;
+    }
+
+    .l-form::-webkit-scrollbar-thumb {
+        background: $chosen-icon;
+        box-shadow: inset 0 0 2px $chosen-icon;
+        border-radius: 10px;
+    }
+
+    .m-submit-button {
+        margin-left: 0;
+    }
+
+    .m-form-description {
+        width: 100%;
+    }
+
+    .l-main {
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+
+    .l-content .col.col-9,
+    .l-content .l-center-pos .col.col-4 {
+        width: 100%;
+    }
+
+    .l-center-pos {
+        width: 100%;
+        left: 0;
+    }
+
+    .l-round-image, .l-top-name, .l-top-info {
+        width: 100%;
+        margin: 0;
+    }
+
+    .l-top-name {
+        margin-bottom: 2em;
+    }
+
+    .m-round-image {
+        float: none;
+    }
+
+    .m-top-login, .m-top-name {
+        text-align: center;
+    }
+
+    .mobile-row::before, .mobile-row::after {
+        content: " ";
+        display: table;
+    }
+
+    .mobile-row::after {
+        clear: both;
+    }
+
+    .l-content .mobile-row .col.col-6 {
+        width: 100%;
+    }
+
+    .l-top-titles {
+        margin-top: 0;
+    }
+
+    .l-down-card .col.col-6 {
+        width: 100%;
+    }
+
+    .l-down-card .m-big-input {
+        margin: 1em 0;
+    }
+
+    .l-input .col.col-3 {
+        width: 100%;
+    }
+
+    .m-track-info-col {
+        width: -webkit-calc(100%);
+    }
+
+    .m-track-name div {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .m-subscribe {
+        border: solid black 1px;
+        opacity: 0.4;
+        transform: scale(1);
+        width: 123px;
+        height: 32px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 3px;
+        background: none;
+        transition: opacity 2s ease;
+        margin: 0;
+        position: relative;
+        top: 0;
+        left: -webkit-calc(-100%);
+        margin-bottom: 17px;
+        margin-top: -14px;
+        &:hover {
+            opacity: 0.4;
+            transform: scale(1);
+        }
+        &:hover.is-subscribed {
+            opacity: 0.8;
+            transform: scale(1);
+        }
+    }
+
+    .m-button-share {
+        background: url(../../static/img/icons/share.svg) no-repeat;
+        opacity: 0.5;
+        margin-top: 20px;
+        margin-left: 20px;
+        margin-right: 12px;
+        position: relative;
+        transform: scale(1.3);
+        width: 30px;
+        height: 26px;
+        &.success-border {
+            border: 1px solid $button-color !important;
+        }
+        &.error-border {
+            border: 1px solid red !important;
+        }
+        &:hover {
+            width: 30px;
+            margin-left: 20px;
+            margin-right: 12px;
+            box-shadow: none;
+            border-radius: 10px;
+        }
+    }
+
+    .l-pop-up-container {
+        width: 100%;
+    }
+
+    .m-pop-up-close {
+        height: 25px;
+    }
+
+    .is-not-displayed {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 343px) {
+    .l-navbar, .l-top-content, .l-content, .l-player {
+        display: none;
+    }
+    .l-unter-mobile {
+        display: flex;
+    }
+}
