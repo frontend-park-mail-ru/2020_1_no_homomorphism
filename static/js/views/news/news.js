@@ -19,7 +19,8 @@ export default class NewsView extends BaseView {
         this.eventBus.on(MAIN.RENDER_TRACKS_LIST, this.renderList.bind(this));
         this.eventBus.on(MAIN.RENDER_ARTISTS, this.renderList.bind(this));
         globalEventBus.on(GLOBAL.HIDE_SUBSCRIPTIONS, () => {
-            document.getElementById('subscriptions-section').remove();
+            document.getElementsByClassName('subscriptions-section')[0]
+                .parentNode.parentNode.remove();
         });
     }
 
@@ -40,10 +41,10 @@ export default class NewsView extends BaseView {
      * @param {Object} data
      */
     renderList(data) {
+        const node = document.getElementsByClassName(data.domItem)[0];
         if (node === null) {
             return;
         }
-        const node = document.getElementsByClassName(data.domItem)[0];
         node.innerHTML = newsSection(data);
         node.classList.remove(data.domItem);
         node.firstChild.lastChild.classList.add(data.domItem);
