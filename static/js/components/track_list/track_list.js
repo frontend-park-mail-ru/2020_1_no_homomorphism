@@ -4,9 +4,10 @@ import {globalEventBus} from '@libs/eventBus';
 import ChoosePlaylist from '@components/choose_playlist/choose_playlist';
 import TrackComponent from '@components/track/track';
 import PlaylistComponent from '@components/playlist/playlist';
-import {PLAYLIST, GLOBAL, URL, RESPONSE, PROFILE} from '@libs/constants';
+import {PLAYLIST, GLOBAL, RESPONSE, PROFILE, POPUP} from '@libs/constants';
 import User from '@libs/user';
 import Api from '@libs/api';
+import PopUp from '@components/pop-up/pop-up';
 
 /**
  * Компонент - список треков
@@ -131,7 +132,8 @@ export default class TrackListComponent {
      */
     addToPlaylist(event) {
         if (!User.exists()) {
-            globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
+            new PopUp(POPUP.LOGIN_ERROR, true);
+            // globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
             return;
         }
         this._choosePlaylist.trackData = this.getIdByClick(event);
@@ -250,7 +252,8 @@ export default class TrackListComponent {
      */
     likeClicked(event) {
         if (!User.exists()) {
-            globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
+            new PopUp(POPUP.LOGIN_ERROR, true);
+            // globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
             return;
         }
         const likedTrack = this.getIdByClick(event);

@@ -270,11 +270,12 @@ export const POPUP = {
     PLAYLIST_ADDITION_MESSAGE: 'Playlist added',
     PLAYLIST_ADDITION_ERROR_MESSAGE: 'Cannot add playlist',
     ARTIST_SUBSCRIPTION_MESSAGE: 'Subscribed to ',
-    ARTIST_SUBSCRIPTION_ERROR_MESSAGE: 'Cannot subscribe to ',
+    ARTIST_SUBSCRIPTION_ERROR_MESSAGE: 'Please, login. Can not subscribe to ',
     ARTIST_UNSUBSCRIPTION_MESSAGE: 'Unsubscribed from ',
     ARTIST_UNSUBSCRIPTION_ERROR_MESSAGE: 'Cannot unsubscribe from ',
     ALBUM_LIKED: 'Album successfully liked',
     ALBUM_UN_LIKED: 'Like successfully removed',
+    LOGIN_ERROR: 'Please login',
     LIFETIME: 2000,
     DISSOLUTIONTIME: 1000,
 };
