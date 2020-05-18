@@ -16,17 +16,6 @@
 
 .l-player-footer {
     display: none;
-    height: 1000px;
-    width: 400px;
-    position: fixed;
-    top: 60px;
-    left: 150%;
-    z-index: $main-level;
-    padding-left: 0;
-    padding-top: 0;
-    background: white;
-    border-radius: $card-border-small;
-    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
 .l-player-visible {
