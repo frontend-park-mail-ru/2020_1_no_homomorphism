@@ -25,7 +25,6 @@
         width: 100%;
     }
 
-
     .l-navbar-icon {
         padding: 20px 4px 16px 4px;
         opacity: 1;
@@ -109,6 +108,75 @@
 
     .l-track-big {
         display: inline;
+    }
+
+    .l-form {
+        margin-left: -webkit-calc((100% - 450px) / 2);
+        overflow-x: hidden;
+        max-height: -webkit-calc(88%);
+    }
+
+    .l-form::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .l-form::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px white;
+        border-radius: 10px;
+    }
+
+    .l-form::-webkit-scrollbar-thumb {
+        background: $chosen-icon;
+        box-shadow: inset 0 0 2px $chosen-icon;
+        border-radius: 10px;
+    }
+
+    .m-submit-button {
+        margin-left: 0;
+    }
+
+    .m-form-description {
+        width: 100%;
+    }
+
+    .l-top-card .l-top-info.col,
+    .l-top-card .m-right-col {
+        width: 100%;
+    }
+
+    .m-subscribe {
+        border: solid black 1px;
+        opacity: 0.4;
+        transform: scale(1.3);
+        width: 123px;
+        height: 32px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 3px;
+        background: none;
+        transition: opacity 2s ease;
+        margin: 0;
+        margin-top: -34px;
+        margin-bottom: 25px;
+        position: relative;
+        top: 0;
+        left: -webkit-calc(212%);
+        &:hover {
+            opacity: 0.4;
+            transform: scale(1.3);
+        }
+        &:hover.is-subscribed {
+            opacity: 0.8;
+            transform: scale(1.3);
+        }
+    }
+
+    .l-pop-up-container {
+        width: 50%;
+    }
+
+    .m-pop-up-close {
+        height: 25px;
     }
 }
 
@@ -404,10 +472,6 @@
             box-shadow: none;
             border-radius: 10px;
         }
-    }
-
-    .l-pop-up-container {
-        width: 100%;
     }
 
     .m-pop-up-close {
