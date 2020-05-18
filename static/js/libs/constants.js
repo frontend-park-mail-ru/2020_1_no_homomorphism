@@ -81,10 +81,19 @@ export const GLOBAL = {
     LOGIN_REDIRECT: 'global-login-redirect',
     CLOSE_SEARCH: 'global-close-search',
     PAUSE: 'global-pause',
+    HIDE_SUBSCRIPTIONS: 'hide subscriptions',
 };
 
 export const MAIN = {
-    GET_LIST_DATA: 'get-all-artists-data',
+    GET_SUBSCRIPTIONS_DATA: 'get-all-subscriptions-data',
+    GET_TRACKS_DATA: 'get-all-tracks-data',
+    GET_ARTISTS_DATA: 'get-all-artists-data',
+    RENDER_SUBSCRIPTIONS: 'render subscriptions',
+    RENDER_ARTISTS: 'render artists',
+    RENDER_TRACKS: 'render tracks',
+    RENDER_SUBSCRIPTIONS_LIST: 'render subscriptions list',
+    RENDER_ARTISTS_LIST: 'render artists list',
+    RENDER_TRACKS_LIST: 'render tracks list',
     NO_ANSWER: 'no-answer',
 };
 

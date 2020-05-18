@@ -4,7 +4,7 @@ import {globalEventBus} from '@libs/eventBus';
 import ChoosePlaylist from '@components/choose_playlist/choose_playlist';
 import TrackComponent from '@components/track/track';
 import PlaylistComponent from '@components/playlist/playlist';
-import {PLAYLIST, GLOBAL, URL, RESPONSE, PROFILE} from '@libs/constants';
+import {PLAYLIST, GLOBAL, URL, RESPONSE, PROFILE, MAIN} from '@libs/constants';
 import User from '@libs/user';
 import Api from '@libs/api';
 
@@ -18,7 +18,10 @@ export default class TrackListComponent {
      * @param {object} constType
      */
     constructor(eventBus, constType) {
-        eventBus.on(constType.RENDER_TRACKS, this.render.bind(this));
+        if (constType != MAIN) {
+            eventBus.on(constType.RENDER_TRACKS, this.render.bind(this));
+        }
+        eventBus.on(constType.RENDER_TRACKS_LIST, this.renderforMain.bind(this));
         eventBus.on(constType.SET_PLAYLIST_ID, this.setId.bind(this));
         eventBus.on(constType.SET_ALBUM_ID, this.setId.bind(this));
         eventBus.on(constType.SET_ARTIST_ID, this.setId.bind(this));
@@ -54,6 +57,24 @@ export default class TrackListComponent {
         if (this._tracklist.length !== 0) {
             this.setTracksEventListeners();
         }
+    }
+
+    /**
+     * Отрисовка списка треков для главной страницы
+     * @param {Object} data
+     * @param {Object} eventBus
+     */
+    renderforMain(data, eventBus) {
+        this._tracklist = data.list;
+        this._type = 'track';
+        const elem = document.createElement('div');
+        elem.innerHTML = template(data.list);
+        eventBus.emit(MAIN.RENDER_TRACKS, {
+            domItem: data.domItem,
+            caption: data.caption,
+            node: elem,
+            ok: data.list.length > 0,
+        }, this.setTracksEventListeners.bind(this));
     }
 
     /**

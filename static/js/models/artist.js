@@ -31,23 +31,22 @@ export default class ArtistModel {
         Promise.all([
             Api.artistGet(this.id),
             Api.artistStatFetch(this.id),
-        ])
-            .then((res) => {
-                if (res === undefined) {
-                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
-                    return;
-                }
-                if (res.every((item) => item.ok)) { // TODO Сделать красиво!!!
-                    const data = {};
-                    Promise.all(res.map((item) => item.json()))
-                        .then((res) => res.forEach((item) => Object.assign(data, item)))
-                        .then(() => {
-                            this.eventBus.emit(ARTIST.RENDER_DATA, data);
-                        });
-                } else {
-                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
-                }
-            });
+        ]).then((res) => {
+            if (res === undefined) {
+                globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+                return;
+            }
+            if (res.every((item) => item.ok)) { // TODO Сделать красиво!!!
+                const data = {};
+                Promise.all(res.map((item) => item.json()))
+                    .then((res) => res.forEach((item) => Object.assign(data, item)))
+                    .then(() => {
+                        this.eventBus.emit(ARTIST.RENDER_DATA, data);
+                    });
+            } else {
+                globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+            }
+        });
     }
 
     /**

@@ -2,6 +2,7 @@ import Api from '@libs/api';
 import {MAIN, URL, RESPONSE, GLOBAL} from '@libs/constants';
 import {globalEventBus} from '@libs/eventBus';
 import ArtistListComponent from '@components/artist_list/artist_list';
+import TrackListComponent from '@components/track_list/track_list';
 
 /**
  * Модель для главной страницы
@@ -14,38 +15,97 @@ export default class NewsModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.artists = [];
-        this.artistListComponent = new ArtistListComponent(eventBus, MAIN.RENDER_ARTISTS);
-        this.eventBus.on(MAIN.GET_LIST_DATA, this.getArtistListData.bind(this));
+        this.subscriptionsListComponent = new ArtistListComponent(eventBus,
+            MAIN.RENDER_SUBSCRIPTIONS_LIST, MAIN.RENDER_SUBSCRIPTIONS);
+        this.artistListComponent = new ArtistListComponent(eventBus,
+            MAIN.RENDER_ARTISTS_LIST, MAIN.RENDER_ARTISTS);
+        this.trackListComponent = new TrackListComponent(eventBus, MAIN);
+        this.eventBus.on(MAIN.GET_SUBSCRIPTIONS_DATA, this.getSubscriptionsData.bind(this));
+        this.eventBus.on(MAIN.GET_PLAYLISTS_OF_THE_DAY_DATA, this.getTracksOfTheDay.bind(this));
+        this.eventBus.on(MAIN.GET_ARTISTS_DATA, this.getArtistListData.bind(this));
     }
 
     /**
-     * Получает списка артистов
+     * Получает список подписок
+     */
+    getSubscriptionsData() {
+        Api.profileArtistsGet().then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                res.json().then((data) => {
+                    this.eventBus.emit(MAIN.RENDER_SUBSCRIPTIONS_LIST, {
+                        domItem: 'subscriptions-section',
+                        caption: 'Subscriptions',
+                        list: data,
+                    });
+                });
+                break;
+            case RESPONSE.BAD_REQUEST:
+                globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+                break;
+            case RESPONSE.SERVER_ERROR:
+                globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+                break;
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
+    }
+
+    /**
+     * Получает список треков дня
+     */
+    getTracksOfTheDay() {
+        const promises = [];
+        for (let i = 0; i < 10; i++) {
+            let p = Math.floor(Math.random() * (37 - 1) + 1);
+            while (promises.indexOf(p) !== -1) {
+                p = Math.floor(Math.random() * (37 - 1) + 1);
+            }
+            promises.push(p);
+        }
+        Promise.all(promises.map((p) => Api.trackGet(p))).then((res) => {
+            if (res.every((item) => item.ok)) {
+                const data = [];
+                Promise.all(res.map((item) => item.json()))
+                    .then((res) => res.forEach((item) => data.push(item)))
+                    .then(() => {
+                        this.eventBus.emit(MAIN.RENDER_TRACKS_LIST, {
+                            domItem: 'tracks-section',
+                            caption: 'Tracks of the day',
+                            list: data,
+                        }, this.eventBus);
+                    });
+            }
+        });
+    }
+
+    /**
+     * Получает список артистов
      */
     getArtistListData() {
-        Api.artistListGet('0', '100')
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    res.json()
-                        .then((data) => {
-                            this.eventBus.emit(MAIN.RENDER_ARTISTS,
-                                {
-                                    domItem: 'kekkkk',
-                                    artists: data.artists,
-                                    type: 'main',
-                                });
-                        });
-                    break;
-                case RESPONSE.BAD_REQUEST:
-                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
-                    break;
-                case RESPONSE.SERVER_ERROR:
-                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
-                    break;
-                default:
-                    console.log(res);
-                    console.error('I am a teapot');
-                }
-            });
+        Api.artistListGet('0', '100').then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                res.json().then((data) => {
+                    this.eventBus.emit(MAIN.RENDER_ARTISTS_LIST, {
+                        domItem: 'artists-section',
+                        caption: 'Artists',
+                        list: data.artists,
+                    });
+                });
+                break;
+            case RESPONSE.BAD_REQUEST:
+                globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+                break;
+            case RESPONSE.SERVER_ERROR:
+                globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+                break;
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
     }
 }
