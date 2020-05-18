@@ -1,5 +1,5 @@
 import Router from '@libs/router';
-import {URL, GLOBAL} from '@libs/constans';
+import {URL, GLOBAL} from '@libs/constants';
 import {NavbarController} from '@controllers/navbar';
 import {NewsController} from '@controllers/news';
 import {LoginController} from '@controllers/login';

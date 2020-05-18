@@ -1,6 +1,6 @@
 import Validation from '@libs/validation';
 import Api from '@libs/api';
-import {SIGN_UP, URL, RESPONSE, NAVBAR, GLOBAL} from '@libs/constans';
+import {SIGN_UP, URL, RESPONSE, NAVBAR, GLOBAL} from '@libs/constants';
 import User from '@libs/user';
 import {globalEventBus} from '@libs/eventBus';
 

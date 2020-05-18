@@ -53,11 +53,26 @@
   transition: 0.3s;
 }
 
+.m-lupa-button {
+    opacity: 0.4;
+    cursor: pointer;
+    position: relative;
+    left: -32px;
+}
+
+.m-lupa-button:hover {
+    opacity: 1;
+}
+
 .m-button-without-size {
   // position: fixed;
   box-shadow: $box-shadow;
   opacity: 0.3;
   cursor: pointer;
+}
+
+.m-button-without-size:hover {
+  opacity: 0.7;
 }
 
 .m-button-fixed {
@@ -66,13 +81,10 @@
   max-height: 40px;
 }
 
-.m-button-without-size:hover {
-  opacity: 0.7;
-}
 .m-signup-button {
-  height: 55px;
+  height: 60px;
   width: 6%;
-  padding-top: 16px;
+  padding-top: 20px;
   text-align: center;
   font-weight: bold;
   margin-left: auto;
@@ -97,7 +109,7 @@
 .l-track-buttons {
   text-align: right;
   float: right;
-  margin-top: -25px;
+  margin-top: -1px;
 }
 
 .l-big-track-button:hover {

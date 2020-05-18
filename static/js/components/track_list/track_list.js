@@ -3,7 +3,7 @@ import {globalEventBus} from '@libs/eventBus';
 import ChoosePlaylist from '@components/choose_playlist/choose_playlist';
 import TrackComponent from '@components/track/track';
 import PlaylistComponent from '@components/playlist/playlist';
-import {GLOBAL, PLAYLIST, URL} from '@libs/constans';
+import {GLOBAL, PLAYLIST, URL} from '@libs/constants';
 import User from '@libs/user';
 
 /**

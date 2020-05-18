@@ -1,4 +1,4 @@
-import {RESPONSE, SEARCH, MAIN} from '@libs/constans';
+import {RESPONSE, SEARCH, MAIN} from '@libs/constants';
 import Api from "@libs/api";
 import EventBus from '@libs/eventBus';
 import ArtistListDummyComponent from '@components/artist_list/artist_list_dummy';

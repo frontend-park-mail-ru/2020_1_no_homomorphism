@@ -1,7 +1,7 @@
 import news from '@views/news/news.tmpl.xml';
 import artistList from '@views/news/artist_list.tmpl.xml';
 import BaseView from '@libs/base_view';
-import {MAIN, DOM} from '@libs/constans';
+import {MAIN, DOM} from '@libs/constants';
 
 /**
  *  вью для главной

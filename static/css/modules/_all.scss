@@ -16,12 +16,20 @@
   height: 40px;
   // width: -webkit-calc(100% - 50px);
 
-  width: 25%;
+  width: 28%;
   border: 1px solid $chosen-icon;
-  padding: 8px;
+  padding: 8px 35px 8px 8px;
   //border: none;
   //outline: none;
   //background: transparent;
+}
+
+.m-mobile-only {
+    display: none;
+}
+
+.l-navbar-small-search {
+    margin-left: auto;
 }
 
 .m-login-input {
@@ -117,7 +125,7 @@
 .m-navbar-avatar {
   margin-top: 8px;
   margin-right: 8px;
-  border-radius: $card-border-big;
+  border-radius: $medium-icon-border;
 }
 
 .m-navbar-name {

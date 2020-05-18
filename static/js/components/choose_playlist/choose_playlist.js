@@ -1,6 +1,6 @@
 import dropdown from '@components/choose_playlist/choose_playlist.tmpl.xml';
 import createdPlaylist from '@components/choose_playlist/created_playlist.tmpl.xml';
-import {DOM, SEARCH} from '@libs/constans';
+import {DOM, SEARCH} from '@libs/constants';
 import TrackComponent from '@components/track/track';
 import PlaylistComponent from '@components/playlist/playlist';
 

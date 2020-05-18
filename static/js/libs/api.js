@@ -1,5 +1,5 @@
 import {postFetch, getFetch, deleteFetch, putFetch, postImageFetch} from '@libs/fetch';
-import {API, RESPONSE} from '@libs/constans';
+import {API, RESPONSE} from '@libs/constants';
 import {inputSanitize} from '@libs/input_sanitize';
 
 /**

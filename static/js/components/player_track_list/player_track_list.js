@@ -1,4 +1,4 @@
-import {PLAYER, GLOBAL, URL} from '@libs/constans';
+import {PLAYER, GLOBAL, URL} from '@libs/constants';
 import template from '@components/player_track_list/player_track_list.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
 import User from '@libs/user';
@@ -31,7 +31,8 @@ export default class PlayerTrackListComponent {
         document.querySelectorAll('.add-button').forEach((button) => {
             button.addEventListener('click', this.trackAddButtonClick.bind(this));
         });
-        window.addEventListener('wheel', this.trackListWheel.bind(this));
+        document.getElementsByClassName('track-list')[0]
+            .addEventListener('scroll', this.trackListWheel.bind(this));
     }
 
     /**
@@ -41,31 +42,23 @@ export default class PlayerTrackListComponent {
     trackListWheel(event) {
         const delta = event.deltaY;
         const trackList = document.getElementsByClassName('track-list')[0];
-        if (event.clientX > trackList.getBoundingClientRect().x &&
-            event.clientX < trackList.getBoundingClientRect().x +
-            trackList.getBoundingClientRect().width &&
-            event.clientY > trackList.getBoundingClientRect().y &&
-            event.clientY < trackList.getBoundingClientRect().y +
-            trackList.getBoundingClientRect().height
+        event.preventDefault();
+        const top = parseInt(trackList.style.top.slice(0, trackList.style.top.length - 2));
+        if (delta < 0 && top < 0 ||
+            delta > 0 && trackList.getBoundingClientRect().bottom >
+            document.documentElement.clientHeight
         ) {
-            event.preventDefault();
-            const top = parseInt(trackList.style.top.slice(0, trackList.style.top.length - 2));
-            if (delta < 0 && top < 0 ||
-                delta > 0 && trackList.getBoundingClientRect().bottom >
+            if (delta < 0 && top - delta / 2 > 0) {
+                trackList.style.top = '0';
+            } else if (delta > 0 && trackList.getBoundingClientRect().bottom - delta / 2 <
                 document.documentElement.clientHeight
             ) {
-                if (delta < 0 && top - delta / 2 > 0) {
-                    trackList.style.top = '0';
-                } else if (delta > 0 && trackList.getBoundingClientRect().bottom - delta / 2 <
-                    document.documentElement.clientHeight
-                ) {
-                    const container = document.getElementsByClassName('container-audio')[0];
-                    trackList.style.top = (document.documentElement.clientHeight -
-                        trackList.getBoundingClientRect().height -
-                        container.getBoundingClientRect().bottom).toString() + 'px';
-                } else {
-                    trackList.style.top = (top - delta / 2).toString() + 'px';
-                }
+                const container = document.getElementsByClassName('container-audio')[0];
+                trackList.style.top = (document.documentElement.clientHeight -
+                    trackList.getBoundingClientRect().height -
+                    container.getBoundingClientRect().bottom).toString() + 'px';
+            } else {
+                trackList.style.top = (top - delta / 2).toString() + 'px';
             }
         }
     }
@@ -158,6 +151,7 @@ export default class PlayerTrackListComponent {
      * @param {Object} tracks
      */
     drawTracklist(tracks) {
+        document.getElementsByClassName('l-player')[0].classList.add('l-player-visible');
         this.eventBus.emit(PLAYER.TRACK_UPDATE, tracks[0]);
         document.getElementsByClassName('track-list')[0].innerHTML += template(tracks);
         this.locked = false;
@@ -177,21 +171,33 @@ export default class PlayerTrackListComponent {
                 this.triggerClick();
             }
             this.locked = true;
+            if (document.getElementsByClassName('l-player')) {
+                document.getElementsByClassName('l-player')[0].classList
+                    .remove('l-player-visible');
+            } else {
+                document.getElementsByClassName('l-player-footer')[0].classList
+                    .remove('l-player-visible');
+            }
         }
     }
 
     /**
      * Очищает список воспроизвдения
-     * @param {boolean} lock
      */
-    removeFromTracklistAll(lock = false) {
+    removeFromTracklistAll() {
+        if (document.getElementsByClassName('l-player')) {
+            document.getElementsByClassName('l-player')[0].classList
+                .remove('l-player-visible');
+        } else {
+            document.getElementsByClassName('l-player-footer')[0].classList
+                .remove('l-player-visible');
+        }
         while (document.getElementsByClassName('track-list')[0].children.length > 1) {
             document.getElementsByClassName('track-list')[0].children[document
                 .getElementsByClassName('track-list')[0].children.length - 1].remove();
         }
-        if (lock && this.expanded) {
+        if (this.expanded) {
             this.triggerClick();
         }
-        this.locked = lock;
     }
 }

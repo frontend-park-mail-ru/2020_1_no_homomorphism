@@ -1,4 +1,4 @@
-import {PLAYER, NAVBAR, DOM, GLOBAL} from '@libs/constans';
+import {PLAYER, NAVBAR, DOM, GLOBAL, LAYOUT} from '@libs/constants';
 import BaseView from '@libs/base_view';
 import player from '@views/player/player.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
@@ -20,6 +20,7 @@ export default class PlayerView extends BaseView {
         this.eventBus = eventBus;
         this.expanded = false;
         this.locked = true;
+        this.footer = false;
         this.topTrackComponent = new TopTrackComponent(eventBus);
         this.trackListComponent = new PlayerTrackListComponent(eventBus);
         this.playerControlComponent = new PlayerControlComponent(eventBus);
@@ -66,6 +67,10 @@ export default class PlayerView extends BaseView {
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.PLAYER)[0]);
+        const mobile = window.matchMedia(LAYOUT.MOBILE);
+        if (mobile.matches) {
+            document.getElementsByClassName('l-player')[0].classList.add('l-player-footer');
+        }
         this.topTrackComponent.render();
         this.playerControlComponent.render();
         this.setEventListeners();
@@ -76,20 +81,37 @@ export default class PlayerView extends BaseView {
      * Действия при изменении размера
      */
     resize() {
+        if (this.footer) {
+            return;
+        }
         const body = document.getElementsByTagName('body')[0];
+        const mobile = window.matchMedia(LAYOUT.MOBILE);
         const left = (
-            this.expanded ?
-                body.clientWidth - this.root.clientWidth :
-                body.clientWidth - 13
+            mobile.matches ?
+                0 :
+                (this.expanded ? body.clientWidth - this.root.clientWidth : body.clientWidth - 13)
         );
         this.root.style.left = left.toString() + 'px';
-        const top = NAVBAR.HEIGHT;
-        const height = document.documentElement.clientHeight - top;
+        const top =
+            mobile.matches ?
+                (this.expanded ? NAVBAR.HEIGHT : document.documentElement.clientHeight) :
+                NAVBAR.HEIGHT;
         document.getElementsByTagName('audio')[0].volume = this.playerControlComponent.volume;
+        let height = document.documentElement.clientHeight - top;
         this.root.style.top = top.toString() + 'px';
+        if (height === 0) {
+            return;
+        }
         this.root.style.height = height.toString() + 'px';
         document.getElementsByClassName('player-trigger')[0]
             .style.height = height.toString() + 'px';
+        height -= document.getElementsByClassName('container-audio')[0].clientHeight +
+            document.getElementsByClassName('l-music-bar')[0].clientHeight +
+            document.getElementsByClassName('patch')[0].clientHeight +
+            (mobile.matches ?
+                document.getElementsByClassName('player-trigger-row')[0].clientHeight :
+                0);
+        document.getElementsByClassName('track-list')[0].style.height = height.toString() + 'px';
     }
 
     /**
@@ -122,6 +144,10 @@ export default class PlayerView extends BaseView {
             callback: this.triggerMouseOut,
         }, {
             element: document.querySelector('.player-trigger'),
+            event: 'click',
+            callback: this.triggerClick,
+        }, {
+            element: document.querySelector('.player-trigger-row'),
             event: 'click',
             callback: this.triggerClick,
         }, {
@@ -186,7 +212,7 @@ export default class PlayerView extends BaseView {
      * Слушает клик мышью по триггеру плеера
      */
     triggerClick() {
-        if (this.locked === true) {
+        if (this.locked) {
             return;
         }
         if (this.expanded) {
@@ -195,12 +221,54 @@ export default class PlayerView extends BaseView {
             document.querySelector('.player-trigger-arrow').classList.add('is-rotated-0');
         }
         const body = document.getElementsByTagName('body')[0];
-        const left = (
-            this.expanded ?
-                body.clientWidth - 13 :
-                body.clientWidth - this.root.clientWidth
-        );
-        this.root.style.left = left + 'px';
+        const mobile = window.matchMedia(LAYOUT.MOBILE);
+        if (mobile.matches) {
+            if (this.expanded) {
+                document.getElementsByClassName('track-list')[0].style.top = '0px';
+                this.footer = true;
+                document.getElementsByClassName('player-trigger-arrow-row')[0].classList
+                    .add('is-hidden');
+                setTimeout(() => {
+                    document.getElementsByClassName('l-player')[0].classList.add('l-player-footer');
+                    document.getElementsByClassName('l-player')[0].classList.remove('l-player');
+                    document.getElementsByClassName('l-player-footer')[0].appendChild(
+                        document.getElementsByClassName('timeline')[0],
+                    );
+                    document.getElementById('cover').classList.add('in-footer-cover');
+                }, 600);
+                setTimeout(() => {
+                    document.getElementsByClassName('l-player-footer')[0].appendChild(
+                        document.getElementsByClassName('play-pause')[0],
+                    );
+                }, 1000);
+            } else {
+                this.footer = false;
+                document.getElementsByClassName('player-trigger-arrow-row')[0].classList
+                    .remove('is-hidden');
+                document.getElementsByClassName('l-player-footer')[0].classList.add('l-player');
+                document.getElementsByClassName('l-player')[0].classList.remove('l-player-footer');
+                document.getElementsByClassName('container-audio')[0].insertBefore(
+                    document.getElementsByClassName('timeline')[0],
+                    document.getElementsByClassName('control-elements')[0],
+                );
+                document.getElementsByClassName('control-elements')[0].insertBefore(
+                    document.getElementsByClassName('play-pause')[0],
+                    document.getElementById('next'),
+                );
+                document.getElementById('cover').classList.remove('in-footer-cover');
+            }
+            const top =
+                this.expanded ?
+                    document.documentElement.clientHeight - 60 :
+                    NAVBAR.HEIGHT;
+            this.root.style.top = top + 'px';
+        } else {
+            const left =
+                this.expanded ?
+                    body.clientWidth - 13 :
+                    body.clientWidth - this.root.clientWidth;
+            this.root.style.left = left + 'px';
+        }
         this.expanded = !this.expanded;
     }
 

@@ -1,5 +1,5 @@
-export const SERVER_PATH = 'http://localhost:8081';
-// export const SERVER_PATH = 'https://virusmusic.fun';
+// export const SERVER_PATH = 'http://localhost:8081';
+export const SERVER_PATH = 'https://virusmusic.fun';
 
 export const API = '/api/v1';
 
@@ -41,6 +41,12 @@ export const URL = {
 export const PAGINATION = {
     ALBUMS: 20,
     TRACKS: 50,
+};
+
+export const LAYOUT = {
+    MOBILE: 'screen and (max-width: 480px) and (min-width: 344px)',
+    TABLET: 'screen and (min-width: 481px) and (max-width: 987px)',
+    DESKTOP: 'min-width: 988px',
 };
 
 export const VALIDATION = {
@@ -92,7 +98,7 @@ export const LOGIN = {
 };
 
 export const NAVBAR = {
-    HEIGHT: 55,
+    HEIGHT: 60,
     LOGIN_SUCCESS: 'navbar-login-success',
     CHECK_COOKIE: 'navbar-check-cookie',
     DRAW_COOKIE_RESULT: 'navbar-draw-cookie-result',

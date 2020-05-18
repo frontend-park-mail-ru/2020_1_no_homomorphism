@@ -60,7 +60,7 @@
                     </div>
                 </div>
 
-                <div class="col col-6">
+                <div class="col col-6 l-input">
                     <div class="col col-9">
                         <div class="l-input">
                             <span class="m-settings-title">New password</span>

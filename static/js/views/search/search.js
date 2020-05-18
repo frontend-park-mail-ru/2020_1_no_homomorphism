@@ -1,6 +1,6 @@
 import BaseView from '@libs/base_view';
 import search from '@views/search/search.tmpl.xml';
-import {DOM, SEARCH} from '@libs/constans';
+import {DOM, SEARCH} from '@libs/constants';
 import TrackListComponent from '@components/track_list/track_list';
 import PlaylistsComponent from '@components/playlist_list/playlist_list';
 

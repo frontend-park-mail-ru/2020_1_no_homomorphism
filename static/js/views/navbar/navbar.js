@@ -1,4 +1,4 @@
-import {NAVBAR, GLOBAL, DOM, URL} from '@libs/constans';
+import {NAVBAR, GLOBAL, DOM, URL} from '@libs/constants';
 import navbar from '@views/navbar/navbar.tmpl.xml';
 import BaseView from '@libs/base_view';
 import SearchComponent from '@components/search/search';
@@ -51,13 +51,16 @@ export default class NavbarView extends BaseView {
                 this.searchComponent.render(value);
             });
         document.addEventListener('click', (event) => {
-            if (event.target.classList.contains('m-medium-icon')) {
+            if (event.target.classList.contains('m-search-icon')) {
                 event.preventDefault();
                 event.stopImmediatePropagation();
                 this.submit(document.getElementsByClassName('m-search-input')[0].value);
             }
         });
         document.addEventListener('click', this.closeSearchComponent.bind(this));
+        document.getElementsByClassName('l-navbar-small-search')[0]
+            .addEventListener('click', this.renderSearch.bind(this));
+        window.addEventListener('resize', this.renderSearch.bind(this));
     }
 
     /**
@@ -77,8 +80,10 @@ export default class NavbarView extends BaseView {
      * @param {Object} event
      */
     closeSearchComponent(event) {
-        const choosePlaylist = document.getElementsByClassName('l-top-content')[0];
-        const isClickInside = choosePlaylist.contains(event.target);
+        const topContent = document.getElementsByClassName('l-top-content')[0];
+        const searchInput = document.getElementsByClassName('m-search-input')[0];
+        const isClickInside = (topContent.contains(event.target) ||
+            searchInput.contains(event.target));
         if (!isClickInside) {
             this.searchComponent.close();
         }
@@ -88,6 +93,7 @@ export default class NavbarView extends BaseView {
      * Нажатия на логаут
      */
     logoutClicked() {
+        this.loggedIn = false;
         this.eventBus.emit(NAVBAR.LOGOUT_CLICKED);
         this.renderNotLogged.bind(this)();
         globalEventBus.emit(GLOBAL.LOGOUT_REDIRECT, URL.MAIN);
@@ -99,6 +105,7 @@ export default class NavbarView extends BaseView {
      * @param {boolean} loggedIn
      */
     analyzeCookie(loggedIn) {
+        this.loggedIn = loggedIn;
         if (loggedIn) {
             this.eventBus.emit(NAVBAR.GET_USER_DATA);
         } else {
@@ -117,7 +124,7 @@ export default class NavbarView extends BaseView {
         document.getElementById('signup-link').classList.add('is-not-displayed');
         document.getElementById('logout-link').classList.remove('is-not-displayed');
         document.getElementById('profile-link').classList.remove('is-not-displayed');
-        document.getElementsByClassName('l-settings-icon')[0].classList.remove('is-not-displayed');
+        document.getElementById('settings-icon').classList.remove('is-not-displayed');
     }
 
     /**
@@ -128,6 +135,57 @@ export default class NavbarView extends BaseView {
         document.getElementById('signup-link').classList.remove('is-not-displayed');
         document.getElementById('logout-link').classList.add('is-not-displayed');
         document.getElementById('profile-link').classList.add('is-not-displayed');
-        document.getElementsByClassName('l-settings-icon')[0].classList.add('is-not-displayed');
+        document.getElementById('settings-icon').classList.add('is-not-displayed');
+    }
+
+    /**
+     * Рендерит поиск для мобилок
+     * @param {Object} event
+     */
+    renderSearch(event) {
+        if (event.type != 'resize') {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+        HTMLCollection.prototype.forEach = Array.prototype.forEach;
+        if (document.getElementsByClassName('l-navbar-small-search')[0]
+            .children[0].src.indexOf('search') != -1 && event.type != 'resize'
+        ) {
+            document.getElementsByClassName('l-navbar')[0].children.forEach((item) => {
+                if (item.classList.contains('l-navbar-small-search') ||
+                    item.classList.contains('m-search-input')
+                ) {
+                    return;
+                }
+                item.classList.add('is-not-displayed');
+            });
+            document.getElementsByClassName('m-search-input')[0].classList
+                .remove('m-desktop-tablet-only');
+            document.getElementsByClassName('m-search-input')[0].classList
+                .add('m-search-input-expanded');
+            document.getElementsByClassName('l-navbar-small-search')[0]
+                .children[0].src = '/static/img/clear.svg';
+        } else {
+            document.getElementsByClassName('l-navbar')[0].children.forEach((item) => {
+                if ((item.classList.contains('l-navbar-small-search') ||
+                    item.classList.contains('m-search-input') ||
+                    (this.loggedIn && (item.getAttribute('id') == 'signup-link' ||
+                        item.getAttribute('id') == 'login-link')) ||
+                    (!this.loggedIn && (item.getAttribute('id') == 'profile-link' ||
+                        item.getAttribute('id') == 'settings-icon' ||
+                        item.getAttribute('id') == 'logout-link')))
+                ) {
+                    return;
+                }
+                item.classList.remove('is-not-displayed');
+            });
+            document.getElementsByClassName('m-search-input')[0].classList
+                .add('m-desktop-tablet-only');
+            document.getElementsByClassName('m-search-input')[0].classList
+                .remove('m-search-input-expanded');
+            document.getElementsByClassName('l-navbar-small-search')[0]
+                .children[0].src = '/static/img/search.svg';
+            this.closeSearchComponent({target: document.documentElement});
+        }
     }
 }

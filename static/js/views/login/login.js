@@ -1,4 +1,4 @@
-import {LOGIN, GLOBAL} from '@libs/constans';
+import {LOGIN, GLOBAL} from '@libs/constants';
 import template from '@views/login/login.tmpl.xml';
 import BaseView from '@libs/base_view';
 import {globalEventBus} from '@libs/eventBus';
