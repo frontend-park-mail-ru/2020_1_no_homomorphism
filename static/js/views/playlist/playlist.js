@@ -72,12 +72,12 @@ export default class PlaylistView extends BaseView {
      */
     setTracksAmount(amount) {
         this.tracksAmount = amount;
+        this.checkUser.bind(this)();
         if (this.tracksAmount === 0) {
             return;
         }
         document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Tracks: ' +
             this.tracksAmount;
-        this.checkUser.bind(this)();
         this.setEventListeners();
     }
 
@@ -85,6 +85,7 @@ export default class PlaylistView extends BaseView {
      * check what type of user came - owner, authed or not authed
      */
     checkUser() {
+        console.log(User.getUserData());
         if (User.exists()) {
             if (User.getUserData().id !== this.playlistData.user_id) {
                 this.addComponent.playlistData = this.playlistData.id;
