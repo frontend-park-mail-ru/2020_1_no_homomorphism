@@ -13,76 +13,61 @@
     </fest:if>
     <fest:if test="data.length > 0">
         <fest:for iterate="data" index="i" value="track">
+            <div class="l-track-big" t-id="{track.id}" t-image="{track.image}">
+                <div class="m-index">
+                    <fest:value>i+1</fest:value>
+                </div>
+                <img class="m-track-image" src="{track.image}" alt=""/>
+                <button class="m-button-track-play" id="playlist-play"></button>
+                <div class="m-track-name">
+                    <div>
+                        <fest:value>track.name</fest:value>
+                    </div>
+                    <a class="m-obscure-title m-tiny-ref m-small-text is-underlined-ref" href="/artist/{track.artist_id}">
+                        <fest:value>track.artist</fest:value>
+                    </a>
+                </div>
+                <fest:if test="data.type">
+                    <div class="l-track-buttons">
+                        <div class="l-big-track-button delete-button">
+                            <img src="/static/img/icons/clear.svg" class="m-big-delete-button" height="15px" alt="..."/>
+                        </div>
+                        <div class="l-big-track-button favorite-button">
+                            <fest:if test="!track.is_liked">
+                                <img class="m-big-like-button is-not-liked" height="15px" alt="..."/>
+                            </fest:if>
+                            <fest:if test="track.is_liked">
+                                <img class="m-big-like-button is-liked" height="15px" alt="..."/>
+                            </fest:if>
+                        </div>
+                        <div class="l-big-track-button add-button">
+                            <img src="/static/img/icons/add.svg" class="m-big-add-button" height="15px" alt="..."/>
+                        </div>
+                    </div>
+                </fest:if>
+                <fest:if test="!data.type">
+                    <div class="l-track-buttons" style="padding-left: 40px;">
+                        <div class="l-big-track-button favorite-button">
+                            <fest:if test="!track.is_liked">
+                                <img class="m-big-like-button is-not-liked" height="15px" alt="..."/>
+                            </fest:if>
+                            <fest:if test="track.is_liked">
+                                <img class="m-big-like-button is-liked" height="15px" alt="..."/>
+                            </fest:if>
+                        </div>
+                        <div class="l-big-track-button add-button">
+                            <img src="/static/img/icons/add.svg" class="m-big-add-button" height="15px" alt="..."/>
+                        </div>
+                    </div>
+                </fest:if>
+            </div>
             <fest:if test="data.length == i+1">
-                <div class="l-track-big" t-id="{track.id}" t-image="{track.image}">
-                    <div class="m-index">
-                        <fest:value>i+1</fest:value>
-                    </div>
-                    <img class="m-track-image" src="{track.image}" alt=""/>
-                    <button class="m-button-track-play" id="playlist-play"></button>
-                    <div class="m-track-name">
-                        <div>
-                            <fest:value>track.name</fest:value>
-                        </div>
-                        <a class="m-obscure-title m-tiny-ref m-small-text is-underlined-ref" href="/artist/{track.artist_id}">
-                            <fest:value>track.artist</fest:value>
-                        </a>
-                    </div>
-                    <div class="l-track-buttons row">
-                        <fest:if test="data.type">
-                            <div class="col l-big-track-button delete-button">
-                                <img src="/static/img/icons/clear.svg" class="m-big-delete-button" height="15px" alt="..."/>
-                            </div>
-                        </fest:if>
-                        <div class="col l-big-track-button favorite-button">
-                            <fest:if test="!track.is_liked">
-                                <img class="m-big-like-button is-not-liked" height="15px" alt="..."/>
-                            </fest:if>
-                            <fest:if test="track.is_liked">
-                                <img class="m-big-like-button is-liked" height="15px" alt="..."/>
-                            </fest:if>
-                        </div>
-                        <div class="col l-big-track-button add-button">
-                            <img src="/static/img/icons/add.svg" class="m-big-add-button" height="15px" alt="..."/>
-                        </div>
-                    </div>
-                </div>
-                <div class="is-empty-track"></div>
-            </fest:if>
-            <fest:if test="data.length != i+1">
-                <div class="l-track-big" t-id="{track.id}" t-image="{track.image}">
-                    <div class="m-index">
-                        <fest:value>i+1</fest:value>
-                    </div>
-                    <img class="m-track-image" src="{track.image}" alt=""/>
-                    <button class="m-button-track-play" id="playlist-play"></button>
-                    <div class="m-track-name">
-                        <div>
-                            <fest:value>track.name</fest:value>
-                        </div>
-                        <a class="m-obscure-title m-tiny-ref m-small-text is-underlined-ref" href="/artist/{track.artist_id}">
-                            <fest:value>track.artist</fest:value>
-                        </a>
-                    </div>
-                    <div class="l-track-buttons row">
-                        <fest:if test="data.type">
-                            <div class="col l-big-track-button delete-button">
-                                <img src="/static/img/icons/clear.svg" class="m-big-delete-button" height="15px" alt="..."/>
-                            </div>
-                        </fest:if>
-                        <div class="col l-big-track-button favorite-button">
-                            <fest:if test="!track.is_liked">
-                                <img class="m-big-like-button is-not-liked" height="15px" alt="..."/>
-                            </fest:if>
-                            <fest:if test="track.is_liked">
-                                <img class="m-big-like-button is-liked" height="15px" alt="..."/>
-                            </fest:if>
-                        </div>
-                        <div class="col l-big-track-button add-button">
-                            <img src="/static/img/icons/add.svg" class="m-big-add-button" height="15px" alt="..."/>
-                        </div>
-                    </div>
-                </div>
+                <fest:if test="data.length % 2 === 1">
+                    <div class="is-empty-track" style="height: 50px;"></div>
+                </fest:if>
+                <fest:if test="data.length % 2 !== 1">
+                    <div class="is-empty-track"></div>
+                </fest:if>
             </fest:if>
         </fest:for>
     </fest:if>

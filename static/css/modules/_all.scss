@@ -196,11 +196,13 @@
 
 .l-track-big img {
     float: left;
-    margin: 0 15px 0 0;
+    margin-right: 15px;
 }
 
 .l-track-big {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    float: left;
     width: -webkit-calc(49%);
     padding: 2px;
     overflow: hidden;
@@ -237,13 +239,13 @@
     cursor: pointer;
     opacity: 0;
     margin-left: -50px;
-    margin-top: 15px;
+    margin-right: 15px;
+    margin-top: 11px;
     float: left;
 }
 
 .m-track-name {
     text-align: left;
-    margin-top: 6px;
     width: -webkit-calc(60%);
     float: left;
     & div {
@@ -396,7 +398,6 @@
 .m-index {
     font-family: Montserrat-Light, sans-serif;
     font-size: 16px;
-    margin-top: 14px;
     width: 6%;
     float: left;
 }
