@@ -1,0 +1,28 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <div class="col col-9">
+        <div class="l-main">
+            <div class="l-top-card row">
+                <div class="l-top-info col">
+                    <div class="l-round-image col">
+                        <img alt="" src="{data.image}" class="m-rounded-image" id="avatar"/>
+                    </div>
+                    <div class="l-top-name col">
+                        <div class="m-big-name">
+                        </div>
+                    </div>
+                    <div class="l-button-middle-play">
+                        <button class="m-button-middle-play"> </button>
+                        <span class="m-tracks-amount">0 tracks</span>
+                    </div>
+                </div>
+            </div>
+            <div class="l-down-card">
+                <div class="l-track-list" style="top: 0;">
+                    <div class="m-empty-list">
+                        Playlist is empty :(
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fest:template>
