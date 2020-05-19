@@ -106,11 +106,11 @@
         height: 1px;
         width: 0;
         left: 0;
-        background-color: gray;
+        background-color: $obscure;
         transition: 0.5s ease all;
     }
     &:hover::after {
-        background-color: black;
+        background-color: $font-color;
         width: 100%;
         transition: 0.3s ease all;
     }

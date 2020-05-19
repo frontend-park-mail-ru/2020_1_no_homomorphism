@@ -9,7 +9,7 @@
     z-index: $main-level;
     padding-left: 0;
     padding-top: 0;
-    background: white;
+    background: $background-color;
     border-radius: $card-border-small;
     box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
 }
@@ -33,13 +33,13 @@
 
 .patch {
     height: 1em;
-    background: white;
+    background: $background-color;
     position: relative;
     z-index: $main-level;
 }
 
 .l-music-bar {
-    background: white;
+    background: $background-color;
     position: relative;
     z-index: $main-level;
     padding-bottom: 16px;
@@ -57,9 +57,13 @@
 .container-audio {
     height: auto;
     color: #444;
-    background: white;
+    background: $background-color;
     position: relative;
     z-index: $main-level;
+}
+
+.timeline {
+    color: $font-color;
 }
 
 .timeline .timeline-back {
@@ -144,7 +148,7 @@
     height: 74px;
     top: -42px;
     left: 330px;
-    background: white;
+    background: $background-color;
     border: 1px solid $chosen-icon;
     border-radius: 2px;
     position: absolute;
@@ -173,7 +177,7 @@
 }
 
 .volume-scale:after {
-    border-top-color: white;
+    border-top-color: $background-color;
     border-width: 6px;
     margin-left: -6px;
 }
@@ -251,7 +255,7 @@
 }
 
 .track-list > .row {
-    background: white;
+    background: $background-color;
     cursor: pointer;
     padding-bottom: 5px;
     padding-top: 5px;
@@ -309,7 +313,7 @@
 
 .group-name {
     text-decoration: none;
-    color: black;
+    color: $font-color;
     font-size: 15px;
 }
 
@@ -317,7 +321,7 @@
     width: 13px;
     height: 1000px;
     margin-right: 5px;
-    background: white;
+    background: $background-color;
     cursor: pointer;
 }
 
@@ -336,7 +340,7 @@
     left: -37px;
     width: 40px;
     height: 40px;
-    background: white;
+    background: $background-color;
     z-index: $under-level;
     cursor: pointer;
 }
@@ -348,7 +352,7 @@
 .player-trigger-row {
     display: none;
     height: 25px;
-    background: white;
+    background: $background-color;
     position: relative;
     z-index: $main-level;
     width: 108%;
