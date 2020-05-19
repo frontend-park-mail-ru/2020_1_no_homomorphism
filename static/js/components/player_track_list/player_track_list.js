@@ -149,7 +149,11 @@ export default class PlayerTrackListComponent {
      * @param {Object} tracks
      */
     drawTracklist(tracks) {
-        document.getElementsByClassName('l-player')[0].classList.add('l-player-visible');
+        if (document.getElementsByClassName('l-player')[0]) {
+            document.getElementsByClassName('l-player')[0].classList.add('l-player-visible');
+        } else {
+            document.getElementsByClassName('l-player-footer')[0].classList.add('l-player-visible');
+        }
         this.eventBus.emit(PLAYER.TRACK_UPDATE, tracks[0]);
         document.getElementsByClassName('track-list')[0].innerHTML += template(tracks);
         this.locked = false;
@@ -183,7 +187,7 @@ export default class PlayerTrackListComponent {
      * Очищает список воспроизвдения
      */
     removeFromTracklistAll() {
-        if (document.getElementsByClassName('l-player')) {
+        if (document.getElementsByClassName('l-player')[0]) {
             document.getElementsByClassName('l-player')[0].classList
                 .remove('l-player-visible');
         } else {
