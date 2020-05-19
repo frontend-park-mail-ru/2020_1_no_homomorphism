@@ -1,6 +1,6 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <img class="m-top-right-angle m-more-button" src="/static/img/icons/more_horiz.svg"/>
-    <div class="m-top-right-angle m-more-dropdown">
+    <div class="m-top-right-angle m-more-dropdown is-not-displayed">
         <div class="row">
             <div class="col">
                 <div class="m-privacy-title">private playlist</div>
