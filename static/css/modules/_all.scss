@@ -211,17 +211,6 @@
     cursor: pointer;
 }
 
-.m-track {
-    animation-duration: 1s;
-    animation-name: slidein;
-    text-align: left
-}
-
-.m-track-info-col {
-    width: -webkit-calc(80%);
-    float: left;
-}
-
 .l-track-big:hover .m-track-image {
     transition: 0.3s;
     -webkit-transform: scale(1.02);
@@ -249,10 +238,19 @@
     opacity: 0;
     margin-left: -50px;
     margin-top: 15px;
+    float: left;
 }
 
 .m-track-name {
-    margin-top: -46px;
+    text-align: left;
+    margin-top: 6px;
+    width: -webkit-calc(60%);
+    float: left;
+    & div {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
 }
 
 .l-list-card img {
@@ -398,9 +396,9 @@
 .m-index {
     font-family: Montserrat-Light, sans-serif;
     font-size: 16px;
-    margin-bottom: -32px;
     margin-top: 14px;
-    padding-left: 8px;
+    width: 6%;
+    float: left;
 }
 
 .m-small-li:hover {
