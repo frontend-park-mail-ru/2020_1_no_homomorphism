@@ -46,12 +46,12 @@ export default class MorePlaylistComponent {
             .addEventListener('click', (event) => {
                 event.stopImmediatePropagation();
                 document.getElementsByClassName('m-more-dropdown')[0].classList
-                    .toggle('is-not-displayed');
+                    .toggle('is-expanded');
             });
         window.addEventListener('click', (event) => {
             if (!document.getElementsByClassName('m-more-dropdown')[0].contains(event.target)) {
                 document.getElementsByClassName('m-more-dropdown')[0].classList
-                    .add('is-not-displayed');
+                    .remove('is-expanded');
             }
         });
         document.getElementById('playlist-delete-button').addEventListener('click',
