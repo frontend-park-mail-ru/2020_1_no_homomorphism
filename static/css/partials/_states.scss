@@ -115,3 +115,8 @@
         transition: 0.3s ease all;
     }
 }
+
+.is-button-disabled {
+    pointer-events: none;
+    opacity: 0.3;
+}

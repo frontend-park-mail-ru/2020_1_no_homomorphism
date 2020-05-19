@@ -19,8 +19,10 @@ export default class PlayerTrackListComponent {
      * Sets EventListeners
      */
     setEventListeners() {
-        document.querySelectorAll('.track-list').forEach((row) => {
+        document.querySelectorAll('.track-list .row').forEach((row) => {
             row.addEventListener('click', this.tracklistClick.bind(this));
+            row.addEventListener('mouseenter', this.tracklistMouseEnter.bind(this));
+            row.addEventListener('mouseleave', this.tracklistMouseLeave.bind(this));
         });
         document.querySelectorAll('.delete-button').forEach((button) => {
             button.addEventListener('click', this.trackDeleteButtonClick.bind(this));
@@ -62,26 +64,34 @@ export default class PlayerTrackListComponent {
      * @param {Object} event
      */
     tracklistClick(event) {
-        let current = event.target;
-        if (current.classList.contains('m-obscure-title') ||
-            current.classList.contains('m-big-delete-button')) {
-            return;
+        this.eventBus.emit(PLAYER.GET_TRACK, this.getIdByClick(event.target));
+    }
+
+    /**
+     * Слушает наведение мыши на трек в плейлисте
+     * @param {Object} event
+     */
+    tracklistMouseEnter(event) {
+        const marker = document.getElementsByClassName('current-marker')[0];
+        if (marker.getBoundingClientRect().top === event.target.getBoundingClientRect().top + 5) {
+            marker.style.top = (parseInt(marker.style.top.slice(0, marker.style.top.length -
+                2)) - 5).toString() + 'px';
+            marker.style.height = (parseInt(marker.style.height.slice(0,
+                marker.style.height.length - 2)) + 10).toString() + 'px';
         }
-        while (current !== window && current !== document.body && current != null) { // TODO Сделать по-человечески :(
-            if (current.getAttribute('class') === 'track-list' ||
-                (current.getAttribute('class') !== null &&
-                    current.getAttribute('class').indexOf('button') !== -1 &&
-                    current.getAttribute('class').indexOf('buttons') === -1 &&
-                    current.getAttribute('class').indexOf('row') !== -1)
-            ) {
-                break;
-            }
-            if (current.getAttribute('id') !== null) {
-                this.eventBus.emit(PLAYER.GET_TRACK, current.getAttribute('id'));
-                break;
-            } else {
-                current = current.parentNode;
-            }
+    }
+
+    /**
+     * Слушает выход мыши с трека в плейлисте
+     * @param {Object} event
+     */
+    tracklistMouseLeave(event) {
+        const marker = document.getElementsByClassName('current-marker')[0];
+        if (marker.getBoundingClientRect().top === event.target.getBoundingClientRect().top) {
+            marker.style.top = (parseInt(marker.style.top.slice(0, marker.style.top.length -
+                2)) + 5).toString() + 'px';
+            marker.style.height = (parseInt(marker.style.height.slice(0,
+                marker.style.height.length - 2)) - 10).toString() + 'px';
         }
     }
 
@@ -122,26 +132,24 @@ export default class PlayerTrackListComponent {
             globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
             return;
         }
-        this._choosePlaylist.trackData = this.getIdByClick(event);
+        this._choosePlaylist.trackData = {'id': this.getIdByClick(event)};
         alert('NIKITA, I havent finished it yet');
         this.getProfilePlaylists();
     }
 
     /**
      * Получение id из dom-елемента по нажатию
-     * @param {Object} event
-     * @return {Object}
+     * @param {Node} target
+     * @return {Node}
      */
-    getIdByClick(event) {
-        let current = event.target;
-        while (current !== null && !current.classList.contains('track-list')) {
-            if (current.classList.contains('border-bottom') &&
-                current.getAttribute('id') !== null) {
-                return {'id': current.getAttribute('id')};
+    getIdByClick(target) {
+        while (target) {
+            if (target.classList.contains('border-bottom') && target.getAttribute('id') !== null) {
+                return target.getAttribute('id');
             }
-            current = current.parentNode;
+            target = target.parentNode;
         }
-        return '';
+        return undefined;
     }
 
     /**

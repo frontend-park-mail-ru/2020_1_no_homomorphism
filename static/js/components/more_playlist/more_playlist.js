@@ -1,0 +1,118 @@
+import {PLAYLIST, POPUP} from '@libs/constants';
+import more from '@components/more_playlist/more.tmpl.xml';
+import PopUp from '@components/pop-up/pop-up';
+
+/**
+ * Компонента, отвечающая за возможности авторизированного пользователя
+ * управлять некоторыми функциям своего плейлиста
+ */
+export default class MorePlaylistComponent {
+    /**
+     * Constructor
+     * @param {Object} eventBus
+     */
+    constructor(eventBus) {
+        this.eventBus = eventBus;
+        this._playlist = {};
+    }
+
+    /**
+     * Render
+     * @param {String} isPrivate
+     */
+    render(isPrivate) {
+        document.getElementsByClassName('l-top-card')[0].innerHTML += more();
+        document.getElementById('checkbox').checked = isPrivate;
+        this._button = document.getElementById('playlist-share-button');
+        if (isPrivate) {
+            this._button.classList.add('is-button-disabled');
+        }
+        this._setOwnerEventListener();
+    }
+
+    /**
+     * Set playlist data
+     * @param {Object} playlist
+     */
+    set playlistData(playlist) {
+        this._playlist = playlist;
+    }
+
+    /**
+     * set owner event listeners
+     */
+    _setOwnerEventListener() {
+        document.getElementsByClassName('m-more-button')[0]
+            .addEventListener('click', (event) => {
+                event.stopImmediatePropagation();
+                document.getElementsByClassName('m-more-dropdown')[0].classList
+                    .toggle('is-not-displayed');
+            });
+        window.addEventListener('click', (event) => {
+            if (!document.getElementsByClassName('m-more-dropdown')[0].contains(event.target)) {
+                document.getElementsByClassName('m-more-dropdown')[0].classList
+                    .add('is-not-displayed');
+            }
+        });
+        document.getElementById('playlist-delete-button').addEventListener('click',
+            this._deletePlaylist.bind(this));
+        document.getElementsByClassName('m-slider')[0].addEventListener('click',
+            this._setPrivacy.bind(this));
+        this._button.addEventListener('click', this._copyLink.bind(this));
+    }
+
+    /**
+     * Set privacy
+     * @param {Object} event
+     */
+    _setPrivacy(event) {
+        this._playlist.private = !this._playlist.private;
+        this._button.classList.toggle('is-button-disabled');
+        new PopUp(this._playlist.private ?
+            POPUP.PLAYLIST_PRIVACY_PRIVATE_MESSAGE :
+            POPUP.PLAYLIST_PRIVACY_PUBLIC_MESSAGE);
+        this.eventBus.emit(PLAYLIST.CHANGE_PRIVACY, this._playlist.id);
+    }
+
+    /**
+     * Copy playlist link to share
+     * @param {Object} event
+     */
+    _copyLink(event) {
+        if (!this._playlist.private) {
+            navigator.clipboard.writeText(window.location.href)
+                .then(() => {
+                    this._button.classList.add('success-border');
+                    setTimeout(this.delSuccessClass.bind(this), 1000);
+                    new PopUp(POPUP.PLAYLIST_LINK_COPY_MESSAGE);
+                })
+                .catch((err) => {
+                    new PopUp(POPUP.PLAYLIST_LINK_COPY_ERROR_MESSAGE, true);
+                });
+            return;
+        }
+        this._button.classList.toggle('error-border');
+        setTimeout(this.delErrorClass.bind(this), 1000);
+    }
+
+    /**
+     * Удаление класса
+     */
+    delSuccessClass() {
+        this._button.classList.remove('success-border');
+    }
+
+    /**
+     * Удаление класса
+     */
+    delErrorClass() {
+        this._button.classList.remove('error-border');
+    }
+
+    /**
+     * Удаление плейлиста плейлиста
+     */
+    _deletePlaylist() {
+        this.eventBus.emit(PLAYLIST.DELETE_PLAYLIST, this._playlist.id);
+    }
+}

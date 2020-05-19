@@ -75,8 +75,14 @@
 }
 
 .m-privacy-title {
-    padding-top: 20px;
-    padding-right: 8px
+    padding-top: 8px;
+    margin-left: 11px;
+    float: left;
+}
+
+.m-text-in-button {
+    position: relative;
+    bottom: 5.5px;
 }
 
 .m-top-name {
@@ -87,16 +93,6 @@
 
 .m-big-name {
     font-size: 24px;
-}
-
-.m-tracks-amount {
-    padding-top: 8px;
-    //border-radius: $card-border;
-    //margin-top: 16px;
-    //margin-right: 16px;
-    //color: #155724;
-    //background-color: $selected-elem;
-    //float: right !important;
 }
 
 .m-right-col {
@@ -148,9 +144,6 @@
     opacity: 0;
     pointer-events: none;
     user-select: none
-}
-
-.m-settings-title {
 }
 
 .m-settings-input {
@@ -618,4 +611,25 @@
 
 .m-pop-up-close:hover {
     opacity: 1;
+}
+
+.m-top-right-angle {
+    position: relative;
+    top: 0;
+    right: 0;
+    float: right;
+    margin: 10px;
+}
+
+.m-more-dropdown {
+    border-radius: 10px;
+    background: white;
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0 1px 20px rgba(12, 12, 12, 0.2);
+    padding-bottom: 6px;
+    font-size: 13px;
+    overflow: hidden;
+    & .row .col {
+        width: 100%;
+    }
 }
