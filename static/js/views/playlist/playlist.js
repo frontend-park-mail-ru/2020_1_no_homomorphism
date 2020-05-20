@@ -5,7 +5,7 @@ import TrackListComponent from '@components/track_list/track_list';
 import PopUp from '@components/pop-up/pop-up';
 import {globalEventBus} from '@libs/eventBus';
 import User from '@libs/user';
-import SharePlaylistComponent from '@components/share_playlist/share_playlist';
+import MorePlaylistComponent from '@components/more_playlist/more_playlist';
 import AddPlaylistComponent from '@components/add_playlist/add_playlist';
 import {inputSanitize} from '@libs/input_sanitize';
 
@@ -22,7 +22,7 @@ export default class PlaylistView extends BaseView {
         this.playlistData = {};
         this.tracksAmount = 0;
         this.text = '';
-        this.shareComponent = new SharePlaylistComponent(eventBus);
+        this.moreComponent = new MorePlaylistComponent(eventBus);
         this.addComponent = new AddPlaylistComponent(eventBus);
         this.trackListComponent = new TrackListComponent(eventBus, PLAYLIST);
         this.eventBus.on(PLAYLIST.RENDER_PLAYLIST_DATA, this.setPlaylistData.bind(this));
@@ -76,8 +76,8 @@ export default class PlaylistView extends BaseView {
         if (this.tracksAmount === 0) {
             return;
         }
-        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Tracks: ' +
-            this.tracksAmount;
+        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = this.tracksAmount +
+            (this.tracksAmount !== 1 ? ' tracks' : ' track');
         this.setEventListeners();
     }
 
@@ -91,8 +91,8 @@ export default class PlaylistView extends BaseView {
                 this.addComponent.render();
                 return;
             }
-            this.shareComponent.playlistData = this.playlistData;
-            this.shareComponent.render(this.playlistData.private);
+            this.moreComponent.playlistData = this.playlistData;
+            this.moreComponent.render(this.playlistData.private);
         }
     }
 
@@ -126,8 +126,8 @@ export default class PlaylistView extends BaseView {
      */
     changeTrackAmount(dif) {
         this.tracksAmount += dif;
-        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = 'Tracks: ' +
-            this.tracksAmount;
+        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = this.tracksAmount +
+            (this.tracksAmount !== 1 ? ' tracks' : ' track');
     }
 
     /**

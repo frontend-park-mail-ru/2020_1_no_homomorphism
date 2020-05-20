@@ -10,10 +10,10 @@
                         <div class="m-big-name">
                         </div>
                     </div>
-                    <div class="l-button-middle-play">
-                        <button class="m-button-middle-play"> </button>
-                        <span class="m-tracks-amount">Tracks: 0 </span>
-                    </div>
+                </div>
+                <div class="l-button-middle-play">
+                    <button class="m-button-middle-play"> </button>
+                    <span class="m-tracks-amount">0 tracks</span>
                 </div>
             </div>
             <div class="l-down-card">
