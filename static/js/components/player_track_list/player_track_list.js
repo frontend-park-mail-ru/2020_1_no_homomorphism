@@ -29,7 +29,7 @@ export default class PlayerTrackListComponent {
         });
         document.getElementsByClassName('track-list')[0]
             .addEventListener('scroll', this.trackListWheel.bind(this));
-        if (window.matchMedia(LAYOUT.MOBILE).matches) {
+        if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
             document.querySelectorAll('.more-button').forEach((button) => {
                 button.onclick = (event) => this.moreClicked(event);
             });

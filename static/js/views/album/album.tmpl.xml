@@ -15,7 +15,7 @@
                     <button class="m-button-middle-play"> </button>
                     <span class="m-tracks-amount">0 tracks</span>
                 </div>
-                <div class="m-right-col">
+                <div class="m-right-col m-tablet-auto">
                     <div class="col">
                         <div class="m-large-like-button is-not-liked" title="Like album"> </div>
                     </div>

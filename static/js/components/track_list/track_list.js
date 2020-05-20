@@ -95,7 +95,7 @@ export default class TrackListComponent {
                 button.onclick = (event) => this.deleteClicked(event);
             });
         }
-        if (window.matchMedia(LAYOUT.MOBILE).matches) {
+        if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
             document.querySelectorAll('.more-button').forEach((button) => {
                 button.onclick = (event) => this.moreClicked(event);
             });
@@ -314,7 +314,7 @@ export default class TrackListComponent {
             this.deleteFromDOM(id.toString());
             return;
         }
-        if (window.matchMedia(LAYOUT.MOBILE).matches) {
+        if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
             if (domItem.firstChild.src.indexOf('/static/img/icons/favorite.svg') !== -1) {
                 domItem.firstChild.src = '/static/img/icons/favorite_border.svg';
                 domItem.children[1].innerText = 'like';

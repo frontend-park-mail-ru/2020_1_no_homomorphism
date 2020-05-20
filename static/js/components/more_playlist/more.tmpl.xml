@@ -1,5 +1,5 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
-    <div class="m-right-col">
+    <div class="m-right-col m-tablet-auto">
         <div class="row" style="float: right">
             <div class="m-privacy-title col">Private playlist</div>
             <label class="m-switch col">

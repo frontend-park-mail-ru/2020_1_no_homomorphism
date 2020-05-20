@@ -22,7 +22,7 @@ export default class MorePlaylistComponent {
      * @param {String} isPrivate
      */
     render(isPrivate) {
-        if (window.matchMedia(LAYOUT.MOBILE).matches) {
+        if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
             document.getElementsByClassName('l-top-card')[0].innerHTML += moreMobile();
         } else {
             document.getElementsByClassName('l-top-card')[0].innerHTML += more();
@@ -47,7 +47,7 @@ export default class MorePlaylistComponent {
      * set owner event listeners
      */
     _setOwnerEventListener() {
-        if (window.matchMedia(LAYOUT.MOBILE).matches) {
+        if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
             document.getElementsByClassName('m-more-button')[0]
                 .addEventListener('click', (event) => {
                     event.stopImmediatePropagation();
