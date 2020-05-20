@@ -21,6 +21,8 @@ export default class ChoosePlaylist {
         this._trackData = {};
         this._playlists = [];
         this._callbackEventListener = {};
+        this.analyzeTouchBinded = this.analyzeTouch.bind(this);
+        this.keyupBinded = this.keyup.bind(this);
     }
 
     /**
@@ -67,7 +69,8 @@ export default class ChoosePlaylist {
      * Set EventListeners
      */
     setEventListeners() {
-        document.addEventListener('click', this.analyzeTouch.bind(this), {once: true});
+        document.addEventListener('click', this.analyzeTouchBinded, {once: true});
+        window.addEventListener('keyup', this.keyupBinded);
         document.getElementsByClassName('m-small-input')[0]
             .addEventListener('keyup', (event) => {
                 const value = event.target.value;
@@ -77,6 +80,24 @@ export default class ChoosePlaylist {
                         .createPlaylist(this.renderNewPlaylist.bind(this), value);
                 }
             });
+    }
+
+    /**
+     * Unset EventListeners
+     */
+    unsetEventListeners() {
+        document.removeEventListener('click', this.analyzeTouchBinded, {once: true});
+        window.removeEventListener('keyup', this.keyupBinded);
+    }
+
+    /**
+     * Слушает keyup
+     * @param {Object} event
+     */
+    keyup(event) {
+        if (event.keyCode === 27) {
+            this.close();
+        }
     }
 
     /**
@@ -112,7 +133,6 @@ export default class ChoosePlaylist {
         playlist.include = true;
         new PopUp(POPUP.TRACK_ADDITION_MESSAGE + playlist.name);
     }
-
 
     /**
      * Анализ зоны нажатия
@@ -150,8 +170,8 @@ export default class ChoosePlaylist {
             .remove('is-untouchable');
         this.eventBus.emit(SEARCH.SET_LISTENERS);
         this._callbackEventListener();
+        this.unsetEventListeners();
     }
-
 
     /**
      * Получение id из dom-елемента по нажатию
