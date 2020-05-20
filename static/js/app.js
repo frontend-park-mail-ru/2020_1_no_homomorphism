@@ -18,6 +18,8 @@ import '@css/_main.scss';
 window.addEventListener('DOMContentLoaded', () => {
     HTMLCollection.prototype.forEach = Array.prototype.forEach;
     HTMLCollection.prototype.find = Array.prototype.find;
+    HTMLCollection.prototype.indexOf = Array.prototype.indexOf;
+    HTMLCollection.prototype.slice = Array.prototype.slice;
 
     const router = new Router();
     const navbarController = new NavbarController(router);

@@ -12,9 +12,9 @@ $main-level: 1;
 $top-level: 2;
 $super-top-level: 3;
 
-
 //Светлая тема (зелёный)
 // $selected-elem: #d6ffeb;
+// $marker-color: #00e676;
 // $background-color: white;
 // $overlay-color: white;
 // $font-color: black;
@@ -29,6 +29,7 @@ $super-top-level: 3;
 
 //Тёмная тема (зелёный)
 $selected-elem: #2d9c66;
+$marker-color: #2d9c66;
 $background-color: #27292D;
 $overlay-color: #383B40;
 $font-color: #e0e0e0;
@@ -43,10 +44,7 @@ $box-shadow: 0 1px 20px 0 #1F2023;
 
 .l-logo .m-medium-icon,
 .l-navbar .m-small-icon,
-.l-navbar .m-search-icon {
+.l-navbar .m-search-icon,
+.m-more-dropdown-button img {
     filter: invert(0.9);
-}
-
-.current-marker {
-    background: $selected-elem;
 }

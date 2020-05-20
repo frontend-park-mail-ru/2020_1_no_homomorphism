@@ -105,24 +105,56 @@ export default class PlayerControlComponent {
             event: 'mousedown',
             callback: this.timelineMouseDown,
         }, {
+            element: document.querySelector('.timeline-back'),
+            event: 'touchstart',
+            callback: this.timelineMouseDown,
+        }, {
             element: document.querySelector('.timeline-front'),
             event: 'mousedown',
+            callback: this.timelineMouseDown,
+        }, {
+            element: document.querySelector('.timeline-front'),
+            event: 'touchstart',
+            callback: this.timelineMouseDown,
+        }, {
+            element: document.querySelector('.timeline-toggler'),
+            event: 'mousedown',
+            callback: this.timelineMouseDown,
+        }, {
+            element: document.querySelector('.timeline-toggler'),
+            event: 'touchstart',
             callback: this.timelineMouseDown,
         }, {
             element: document.querySelector('.timeline-back'),
             event: 'mouseup',
             callback: this.timelineMouseUp,
         }, {
+            element: document.querySelector('.timeline-back'),
+            event: 'touchend',
+            callback: this.timelineMouseUp,
+        }, {
             element: document.querySelector('.timeline-front'),
             event: 'mouseup',
             callback: this.timelineMouseUp,
         }, {
-            element: document.querySelector('.timeline-back'),
+            element: document.querySelector('.timeline-front'),
+            event: 'touchend',
+            callback: this.timelineMouseUp,
+        }, {
+            element: document.querySelector('.timeline-toggler'),
+            event: 'mouseup',
+            callback: this.timelineMouseUp,
+        }, {
+            element: document.querySelector('.timeline-toggler'),
+            event: 'touchend',
+            callback: this.timelineMouseUp,
+        }, {
+            element: window,
             event: 'mousemove',
             callback: this.timelineMouseMove,
         }, {
-            element: document.querySelector('.timeline-front'),
-            event: 'mousemove',
+            element: window,
+            event: 'touchmove',
             callback: this.timelineMouseMove,
         }, {
             element: document.querySelector('.timeline-back'),
@@ -275,10 +307,8 @@ export default class PlayerControlComponent {
      */
     timelineMouseUp(event) {
         this.timelineDrag = false;
-        const width = event.clientX - document.getElementsByClassName('timeline-back')[0]
-            .getBoundingClientRect().x;
-        const ratio = width / document.getElementsByClassName('timeline-back')[0]
-            .getBoundingClientRect().width;
+        const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
+        const ratio = ((event.clientX | event.changedTouches[0].pageX) - bcr.x) / bcr.width;
         this.eventBus.emit(PLAYER.REWIND, ratio);
     }
 
@@ -288,10 +318,8 @@ export default class PlayerControlComponent {
      */
     timelineMouseMove(event) {
         if (this.timelineDrag) {
-            const width = event.clientX - document.getElementsByClassName('timeline-back')[0]
-                .getBoundingClientRect().x;
-            const ratio = width / document.getElementsByClassName('timeline-back')[0]
-                .getBoundingClientRect().width;
+            const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
+            const ratio = ((event.clientX | event.changedTouches[0].pageX) - bcr.x) / bcr.width;
             this.drawTimeline(ratio);
         }
     }
@@ -301,10 +329,8 @@ export default class PlayerControlComponent {
      * @param {Object} event
      */
     timelineClick(event) {
-        const width = event.clientX - document.getElementsByClassName('timeline-back')[0]
-            .getBoundingClientRect().x;
-        const ratio = width / document.getElementsByClassName('timeline-back')[0]
-            .getBoundingClientRect().width;
+        const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
+        const ratio = (event.clientX - bcr.x) / bcr.width;
         this.eventBus.emit(PLAYER.REWIND, ratio);
     }
 
@@ -502,6 +528,8 @@ export default class PlayerControlComponent {
         const width = ratio * document.getElementsByClassName('timeline-back')[0]
             .getBoundingClientRect().width;
         document.getElementsByClassName('timeline-front')[0].style.width = width.toString() + 'px';
+        document.getElementsByClassName('timeline-toggler')[0].style.left =
+            (width - 9).toString() + 'px';
         const minutes = Math.floor((ratio *
             document.getElementsByTagName('audio')[0].duration) / 60);
         const seconds = Math.floor((ratio *

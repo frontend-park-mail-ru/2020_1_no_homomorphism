@@ -21,6 +21,8 @@ export default class PlayerView extends BaseView {
         this.expanded = false;
         this.locked = true;
         this.footer = false;
+        this.triggerTouchedY = undefined;
+        this.playerTouchedY = undefined;
         this.topTrackComponent = new TopTrackComponent(eventBus);
         this.trackListComponent = new PlayerTrackListComponent(eventBus);
         this.playerControlComponent = new PlayerControlComponent(eventBus);
@@ -155,10 +157,6 @@ export default class PlayerView extends BaseView {
             event: 'click',
             callback: this.triggerClick,
         }, {
-            element: document.querySelector('.player-trigger-row'),
-            event: 'click',
-            callback: this.triggerClick,
-        }, {
             element: document.querySelector('.trigger-button'),
             event: 'mouseover',
             callback: this.triggerMouseOver,
@@ -170,6 +168,22 @@ export default class PlayerView extends BaseView {
             element: document.querySelector('.trigger-button'),
             event: 'click',
             callback: this.triggerClick,
+        }, {
+            element: document.getElementsByClassName('player-trigger-row')[0],
+            event: 'touchstart',
+            callback: this.triggerTouch,
+        }, {
+            element: window,
+            event: 'touchend',
+            callback: this.triggerSwipe,
+        }, {
+            element: document.getElementsByClassName('l-player')[0],
+            event: 'touchstart',
+            callback: this.playerTouch,
+        }, {
+            element: document.getElementsByClassName('l-player')[0],
+            event: 'touchend',
+            callback: this.playerSwipe,
         }].forEach((el) => {
             el.element.addEventListener(el.event, el.callback.bind(this));
         });
@@ -280,6 +294,61 @@ export default class PlayerView extends BaseView {
             this.root.style.left = left + 'px';
         }
         this.expanded = !this.expanded;
+    }
+
+    /**
+     * Слушает touchstart по триггеру плеера
+     * @param {Object} event
+     */
+    triggerTouch(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        this.triggerTouchedY = event.changedTouches[0].clientY;
+        setTimeout(() => {
+            this.triggerTouchedY = undefined;
+        }, 500);
+    }
+
+    /**
+     * Слушает свайп по триггеру плеера
+     * @param {Object} event
+     */
+    triggerSwipe(event) {
+        if (this.triggerTouchedY) {
+            this.triggerClick();
+        }
+    }
+
+    /**
+     * Слушает touchstart по плееру
+     * @param {Object} event
+     */
+    playerTouch(event) {
+        if (this.footer ||
+            document.getElementsByClassName('track-list')[0].contains(event.target)
+        ) {
+            return;
+        }
+        setTimeout(() => {
+            this.playerTouchedY = event.changedTouches[0].clientY;
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            console.log(event);
+        }, 100);
+        setTimeout(() => {
+            this.playerTouchedY = undefined;
+        }, 500);
+    }
+
+    /**
+     * Слушает свайп по плееру
+     * @param {Object} event
+     */
+    playerSwipe(event) {
+        if (this.playerTouchedY && !this.footer) {
+            console.log(event);
+            this.triggerClick();
+        }
     }
 
     /**

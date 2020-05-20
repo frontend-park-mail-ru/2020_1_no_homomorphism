@@ -27,7 +27,7 @@
     }
 
     .l-navbar-icon:hover, .l-navbar-info:hover {
-        background: white;
+        background: $overlay-color;
     }
 
     .l-navbar-info, .m-login-button,
@@ -121,17 +121,6 @@
         width: 4px;
     }
 
-    .l-form::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 5px white;
-        border-radius: 10px;
-    }
-
-    .l-form::-webkit-scrollbar-thumb {
-        background: $chosen-icon;
-        box-shadow: inset 0 0 2px $chosen-icon;
-        border-radius: 10px;
-    }
-
     .m-submit-button {
         margin-left: 0;
     }
@@ -158,7 +147,7 @@
         padding-left: 10px;
         padding-right: 10px;
         padding-top: 3px;
-        background: none;
+        background: $background-color;
         transition: opacity 2s ease;
         margin: 0;
         margin-top: -34px;
@@ -266,6 +255,10 @@
         font-size: 11px;
     }
 
+    .control-elements {
+        margin-top: 0;
+    }
+
     .l-player-footer .play-pause {
         position: absolute;
         right: 13px;
@@ -282,19 +275,19 @@
 
     .shuffle {
         position: absolute;
-        top: 29px;
+        top: 40px;
         right: 45px;
     }
 
     .repeat {
         position: absolute;
-        top: 29px;
+        top: 40px;
         right: 22px;
     }
 
     .volume {
         position: absolute;
-        top: 29px;
+        top: 40px;
         right: -1px;
     }
 
@@ -391,17 +384,6 @@
         width: 4px;
     }
 
-    .l-form::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 5px white;
-        border-radius: 10px;
-    }
-
-    .l-form::-webkit-scrollbar-thumb {
-        background: $chosen-icon;
-        box-shadow: inset 0 0 2px $chosen-icon;
-        border-radius: 10px;
-    }
-
     .m-submit-button {
         margin-left: 0;
     }
@@ -478,14 +460,14 @@
 
     .m-subscribe {
         border: solid black 1px;
-        opacity: 0.4;
+        opacity: 0.8;
         transform: scale(1);
         width: 123px;
         height: 32px;
         padding-left: 10px;
         padding-right: 10px;
         padding-top: 3px;
-        background: none;
+        background: $background-color;
         transition: opacity 2s ease;
         margin: 0;
         position: relative;
@@ -494,11 +476,11 @@
         margin-bottom: 17px;
         margin-top: -14px;
         &:hover {
-            opacity: 0.4;
+            opacity: 0.8;
             transform: scale(1);
         }
         &:hover.is-subscribed {
-            opacity: 0.8;
+            opacity: 0.4;
             transform: scale(1);
         }
     }

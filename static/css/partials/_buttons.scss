@@ -136,7 +136,7 @@ input:checked + .m-slider:before {
 
 .m-subscribe {
     cursor: pointer;
-    opacity: 0.4;
+    opacity: 0.8;
     margin-top: 40px;
     margin-right: 170px;
     position: relative;
@@ -159,7 +159,7 @@ input:checked + .m-slider:before {
     }
 
     &.is-subscribed {
-        opacity: 0.8;
+        opacity: 0.4;
     }
 
     &.is-invisible {
@@ -187,9 +187,10 @@ input:checked + .m-slider:before {
 }
 
 .m-more-dropdown-button {
-    background: white;
+    background: $overlay-color;
     border: none;
     text-align: left;
+    color: $font-color;
     cursor: pointer;
     opacity: 0.5;
     position: relative;
