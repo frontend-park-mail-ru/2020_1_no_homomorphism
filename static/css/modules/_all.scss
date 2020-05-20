@@ -75,14 +75,15 @@
 }
 
 .m-privacy-title {
-    padding-top: 8px;
+    padding-top: 15px;
     margin-left: 11px;
     float: left;
 }
 
 .m-text-in-button {
     position: relative;
-    bottom: 5.5px;
+    bottom: 7.5px;
+    margin-left: 17px
 }
 
 .m-top-name {
@@ -151,6 +152,10 @@
     width: 25em;
     padding-bottom: 16px;
     margin-bottom: 16px;
+}
+
+.l-big-track-button.more-button {
+    display: none;
 }
 
 .l-track-big:hover .m-big-like-button, .l-track-big:hover .m-big-delete-button, .l-track-big:hover .m-big-add-button {
@@ -613,7 +618,7 @@
     opacity: 1;
 }
 
-.m-top-right-angle {
+.m-top-right-corner {
     position: relative;
     top: 0;
     right: 0;
@@ -629,6 +634,7 @@
     transition: box-shadow 0.3s, opacity 0.3s;
     box-shadow: 0 1px 20px rgba(12, 12, 12, 0.2);
     padding-bottom: 6px;
+    margin-top: 10px;
     font-size: 13px;
     overflow: hidden;
     & .row .col {
@@ -636,6 +642,6 @@
     }
     &.is-expanded {
         opacity: 1;
-        z-index: $back-level;
+        z-index: $main-level;
     }
 }

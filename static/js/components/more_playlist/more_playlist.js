@@ -1,5 +1,6 @@
-import {PLAYLIST, POPUP} from '@libs/constants';
+import {PLAYLIST, POPUP, LAYOUT} from '@libs/constants';
 import more from '@components/more_playlist/more.tmpl.xml';
+import moreMobile from '@components/more_playlist/more_mobile.tmpl.xml';
 import PopUp from '@components/pop-up/pop-up';
 
 /**
@@ -21,7 +22,11 @@ export default class MorePlaylistComponent {
      * @param {String} isPrivate
      */
     render(isPrivate) {
-        document.getElementsByClassName('l-top-card')[0].innerHTML += more();
+        if (window.matchMedia(LAYOUT.MOBILE).matches) {
+            document.getElementsByClassName('l-top-card')[0].innerHTML += moreMobile();
+        } else {
+            document.getElementsByClassName('l-top-card')[0].innerHTML += more();
+        }
         document.getElementById('checkbox').checked = isPrivate;
         this._button = document.getElementById('playlist-share-button');
         if (isPrivate) {
@@ -42,18 +47,21 @@ export default class MorePlaylistComponent {
      * set owner event listeners
      */
     _setOwnerEventListener() {
-        document.getElementsByClassName('m-more-button')[0]
-            .addEventListener('click', (event) => {
-                event.stopImmediatePropagation();
-                document.getElementsByClassName('m-more-dropdown')[0].classList
-                    .toggle('is-expanded');
-            });
-        window.addEventListener('click', (event) => {
-            if (!document.getElementsByClassName('m-more-dropdown')[0].contains(event.target)) {
-                document.getElementsByClassName('m-more-dropdown')[0].classList
-                    .remove('is-expanded');
-            }
-        });
+        if (window.matchMedia(LAYOUT.MOBILE).matches) {
+            document.getElementsByClassName('m-more-button')[0]
+                .addEventListener('click', (event) => {
+                    event.stopImmediatePropagation();
+                    document.getElementsByClassName('m-more-dropdown')[0].classList
+                        .toggle('is-expanded');
+                });
+        } else {
+            document.getElementsByClassName('m-button-share')[0]
+                .addEventListener('click', (event) => {
+                    event.stopImmediatePropagation();
+                    document.getElementsByClassName('m-more-dropdown')[0].classList
+                        .toggle('is-expanded');
+                });
+        }
         document.getElementById('playlist-delete-button').addEventListener('click',
             this._deletePlaylist.bind(this));
         document.getElementsByClassName('m-slider')[0].addEventListener('click',

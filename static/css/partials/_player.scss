@@ -17,6 +17,7 @@
 .l-player-footer {
     background: white;
     display: none;
+    z-index: $main-level;
 }
 
 .l-player-visible {

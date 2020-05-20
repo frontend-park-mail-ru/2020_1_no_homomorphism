@@ -4,7 +4,7 @@ import {globalEventBus} from '@libs/eventBus';
 import ChoosePlaylist from '@components/choose_playlist/choose_playlist';
 import TrackComponent from '@components/track/track';
 import PlaylistComponent from '@components/playlist/playlist';
-import {PLAYLIST, GLOBAL, RESPONSE, PROFILE, POPUP} from '@libs/constants';
+import {PLAYLIST, GLOBAL, RESPONSE, PROFILE, POPUP, LAYOUT} from '@libs/constants';
 import User from '@libs/user';
 import Api from '@libs/api';
 import PopUp from '@components/pop-up/pop-up';
@@ -95,6 +95,22 @@ export default class TrackListComponent {
                 button.onclick = (event) => this.deleteClicked(event);
             });
         }
+        if (window.matchMedia(LAYOUT.MOBILE).matches) {
+            document.querySelectorAll('.more-button').forEach((button) => {
+                button.onclick = (event) => this.moreClicked(event);
+            });
+            document.querySelectorAll('.add-button').forEach((track) => {
+                track.onclick = (event) => this.addToPlaylist.bind(this)(event);
+            });
+            document.querySelectorAll('.like-button').forEach((button) => {
+                button.onclick = (event) => this.likeClicked(event);
+            });
+            if (this._tracklist.type) {
+                document.querySelectorAll('.remove-button').forEach((button) => {
+                    button.onclick = (event) => this.deleteClicked(event);
+                });
+            }
+        }
     }
 
     /**
@@ -181,22 +197,45 @@ export default class TrackListComponent {
      * @param {String} id
      */
     getTrackInfo(id) {
-        Api.trackGet(id)
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    res.json()
-                        .then((elem) => {
-                            globalEventBus.emit(GLOBAL.PLAY_TRACKS, {
-                                tracks: [elem],
-                            }, elem.id);
-                        });
-                    break;
-                default:
-                    console.log(res);
-                    console.error('I am a teapot');
-                }
-            });
+        Api.trackGet(id).then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                res.json().then((elem) => {
+                    globalEventBus.emit(GLOBAL.PLAY_TRACKS, {
+                        tracks: [elem],
+                    }, elem.id);
+                });
+                break;
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
+    }
+
+    /**
+     * Открытие нужного меню
+     * @param {Object} event
+     */
+    moreClicked(event) {
+        event.stopImmediatePropagation();
+        document.getElementsByClassName('m-more-dropdown').forEach((dropdown) => {
+            if (dropdown != event.target.parentNode.parentNode.parentNode.lastChild) {
+                dropdown.classList.remove('is-expanded');
+            }
+        });
+        const dropdown = event.target.parentNode.parentNode.parentNode.lastChild;
+        const tbcr = event.target.getBoundingClientRect();
+        dropdown.classList.toggle('is-expanded');
+        const dbcr = dropdown.getBoundingClientRect();
+        dropdown.style.right = (document.documentElement.clientWidth - tbcr.right + 20)
+            .toString() + 'px';
+        if (tbcr.bottom + dbcr.height > document.documentElement.clientHeight) {
+            dropdown.style.top = (document.documentElement.clientHeight + window.pageYOffset -
+                dbcr.height - 20).toString() + 'px';
+        } else {
+            dropdown.style.top = (tbcr.top + window.pageYOffset - 10).toString() + 'px';
+        }
     }
 
     /**
@@ -275,8 +314,18 @@ export default class TrackListComponent {
             this.deleteFromDOM(id.toString());
             return;
         }
-        domItem.classList.toggle('is-liked');
-        domItem.classList.toggle('is-not-liked');
+        if (window.matchMedia(LAYOUT.MOBILE).matches) {
+            if (domItem.firstChild.src.indexOf('/static/img/icons/favorite.svg') !== -1) {
+                domItem.firstChild.src = '/static/img/icons/favorite_border.svg';
+                domItem.children[1].innerText = 'like';
+            } else {
+                domItem.firstChild.src = '/static/img/icons/favorite.svg';
+                domItem.children[1].innerText = 'unlike';
+            }
+        } else {
+            domItem.classList.toggle('is-liked');
+            domItem.classList.toggle('is-not-liked');
+        }
     }
 
     /**
@@ -293,16 +342,15 @@ export default class TrackListComponent {
      * @param {Object} domItem
      */
     _doLike(id, domItem) {
-        Api.trackLike(id.toString())
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    this._changeImage.bind(this)(id, domItem);
-                    break;
-                default:
-                    console.log(res);
-                    console.error('I am a teapot');
-                }
-            });
+        Api.trackLike(id.toString()).then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                this._changeImage.bind(this)(id, domItem);
+                break;
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
     }
 }

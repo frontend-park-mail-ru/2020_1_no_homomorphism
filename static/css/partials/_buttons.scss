@@ -73,7 +73,7 @@
         margin-left: 20.4px;
         width: 130px;
         transform: scale(1.2);
-        transition: 0.3s; //cubic-bezier(0, 0, 0.5, 1) 200ms;
+        transition: 0.3s;
     }
     &:hover .m-tracks-amount {
         opacity: 1;
@@ -91,7 +91,8 @@
     display: inline-block;
     width: 60px;
     height: 34px;
-
+    margin-top: 10px;
+    margin-right: 10px;
     input {
         opacity: 0;
         width: 0;
@@ -117,7 +118,7 @@
         height: 26px;
         width: 26px;
         left: 4px;
-        bottom: 4px;
+        bottom: 3px;
         border-radius: 50%;
         background-color: white;
         -webkit-transition: .4s;
@@ -167,8 +168,28 @@ input:checked + .m-slider:before {
 }
 
 .m-button-share {
+    background: url(../../static/img/icons/share.svg) no-repeat;
+    border: yellow;
+    cursor: pointer;
+    opacity: 0.5;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 12px;
+    position: relative;
+    transform: scale(1.3);
+    width: 30px;
+    height: 26px;
+    border: 0 solid gray;
+    transition: border 10s cubic-bezier(0, 0, 1, 1);
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.m-more-dropdown-button {
     background: white;
     border: none;
+    text-align: left;
     cursor: pointer;
     opacity: 0.5;
     position: relative;
@@ -183,11 +204,13 @@ input:checked + .m-slider:before {
     }
     &:hover {
         box-shadow: $box-shadow-hard;
-        transition: 0.1s;// cubic-bezier(0, 0, 0.5, 1) 200ms;
+        transition: 0.1s;
         opacity: 0.8;
     }
     & img{
         height: 22.1px;
+        margin: 0;
+        float: none;
     }
 }
 
@@ -325,6 +348,36 @@ input:checked + .m-slider:before {
     &:not(:hover) {
         transition: 0.3s;
     }
+}
+
+.m-delete-playlist-button {
+    background-image: url("/static/img/icons/delete_outline-24px.svg");
+    display: inline-block;
+    background-size: 100%;
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-right: 10px;
+    vertical-align: middle;
+    opacity: 0.4;
+
+    &:hover {
+        background-image: url("/static/img/icons/delete-24px.svg");
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+        transition: 0.3s;
+        opacity: 0.7;
+    }
+
+    &:not(:hover) {
+        transition: 0.3s;
+    }
+}
+
+.l-delete-playlist-button {
+    margin-top: 58px;
+    float: right !important;
+    cursor: pointer;
 }
 
 .m-small-ticked-button {

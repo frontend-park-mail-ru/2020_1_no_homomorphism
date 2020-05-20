@@ -1,4 +1,4 @@
-import {PLAYER, GLOBAL, URL} from '@libs/constants';
+import {PLAYER, GLOBAL, URL, LAYOUT} from '@libs/constants';
 import template from '@components/player_track_list/player_track_list.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
 import User from '@libs/user';
@@ -29,6 +29,11 @@ export default class PlayerTrackListComponent {
         });
         document.getElementsByClassName('track-list')[0]
             .addEventListener('scroll', this.trackListWheel.bind(this));
+        if (window.matchMedia(LAYOUT.MOBILE).matches) {
+            document.querySelectorAll('.more-button').forEach((button) => {
+                button.onclick = (event) => this.moreClicked(event);
+            });
+        }
     }
 
     /**
@@ -135,6 +140,34 @@ export default class PlayerTrackListComponent {
         this._choosePlaylist.trackData = {'id': this.getIdByClick(event)};
         alert('NIKITA, I havent finished it yet');
         this.getProfilePlaylists();
+    }
+
+    /**
+     * Открытие нужного меню
+     * @param {Object} event
+     */
+    moreClicked(event) {
+        event.stopImmediatePropagation();
+        document.getElementsByClassName('m-more-dropdown').forEach((dropdown) => {
+            if (dropdown != event.target.parentNode.parentNode.parentNode.lastChild) {
+                dropdown.classList.remove('is-expanded');
+            }
+        });
+        const dropdown = event.target.parentNode.parentNode.parentNode.lastChild;
+        const tbcr = event.target.getBoundingClientRect();
+        dropdown.classList.toggle('is-expanded');
+        const dbcr = dropdown.getBoundingClientRect();
+        dropdown.style.right = (document.documentElement.clientWidth - tbcr.right + 10)
+            .toString() + 'px';
+        const tracklistSTop = document.getElementsByClassName('track-list')[0].scrollTop;
+        const tracklistCTop = document.getElementsByClassName('track-list')[0]
+            .getBoundingClientRect().top;
+        if (tbcr.bottom + dbcr.height > document.documentElement.clientHeight) {
+            dropdown.style.top = (document.documentElement.clientHeight + tracklistSTop -
+                tracklistCTop - dbcr.height - 20).toString() + 'px';
+        } else {
+            dropdown.style.top = (tbcr.top + tracklistSTop - tracklistCTop - 10).toString() + 'px';
+        }
     }
 
     /**

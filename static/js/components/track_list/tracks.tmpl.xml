@@ -43,6 +43,9 @@
                         <div class="l-big-track-button add-button">
                             <img src="/static/img/icons/add.svg" class="m-big-add-button" height="15px" alt="..."/>
                         </div>
+                        <div class="l-big-track-button more-button">
+                            <img src="/static/img/icons/more_vert.svg" class="m-big-more-button" height="15px" alt="..."/>
+                        </div>
                     </div>
                 </fest:if>
                 <fest:if test="!data.type">
@@ -58,12 +61,48 @@
                         <div class="l-big-track-button add-button">
                             <img src="/static/img/icons/add.svg" class="m-big-add-button" height="15px" alt="..."/>
                         </div>
+                        <div class="l-big-track-button more-button">
+                            <img src="/static/img/icons/more_vert.svg" class="m-big-more-button" height="15px" alt="..."/>
+                        </div>
                     </div>
                 </fest:if>
+                <div class="m-top-right-corner m-more-dropdown m-mobile-only">
+                    <fest:if test="data.type">
+                        <div class="row">
+                            <div class="col">
+                                <button class="m-more-dropdown-button remove-button">
+                                    <img src="/static/img/icons/clear.svg"/>
+                                    <span class="m-text-in-button">remove</span>
+                                </button>
+                            </div>
+                        </div>
+                    </fest:if>
+                    <div class="row">
+                        <div class="col">
+                            <button class="m-more-dropdown-button like-button">
+                                <fest:if test="!track.is_liked">
+                                    <img src="/static/img/icons/favorite_border.svg"/>
+                                </fest:if>
+                                <fest:if test="track.is_liked">
+                                    <img src="/static/img/icons/favorite.svg"/>
+                                </fest:if>
+                                <span class="m-text-in-button">like</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button class="m-more-dropdown-button add-button">
+                                <img src="/static/img/icons/add.svg"/>
+                                <span class="m-text-in-button">add</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <fest:if test="data.length == i+1">
                 <fest:if test="data.length % 2 === 1">
-                    <div class="is-empty-track" style="height: 50px;"></div>
+                    <div class="is-empty-track is-height-50"></div>
                 </fest:if>
                 <fest:if test="data.length % 2 !== 1">
                     <div class="is-empty-track"></div>
