@@ -3,6 +3,7 @@ import {MAIN, URL, RESPONSE, GLOBAL} from '@libs/constants';
 import {globalEventBus} from '@libs/eventBus';
 import ArtistListComponent from '@components/artist_list/artist_list';
 import TrackListComponent from '@components/track_list/track_list';
+import User from '@libs/user';
 
 /**
  * Модель для главной страницы
@@ -29,6 +30,9 @@ export default class NewsModel {
      * Получает список подписок
      */
     getSubscriptionsData() {
+        if (!User.exists()) {
+            return;
+        }
         Api.profileArtistsGet().then((res) => {
             switch (res.status) {
             case RESPONSE.OK:

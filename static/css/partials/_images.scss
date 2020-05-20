@@ -24,10 +24,6 @@
     box-shadow: $box-shadow-hard;
 }
 
-.l-track-big-image {
-    padding-left: 32px;
-}
-
 .m-scale-image:hover {
     transition: 0.3s;
     box-shadow: 0 0 40px $chosen-icon;
@@ -74,5 +70,4 @@
     width: 50px;
     z-index: $main-level;
     border-radius: 5px;
-    margin-bottom: 4px;
 }

@@ -107,7 +107,7 @@ export default class Router {
         if (newPath === URL.PROFILE) {
             this.redirect(URL.PROFILE_TRACKS);
         }
-        if (this.forms.includes(newPath) && !this.forms.includes(this.curPath)) {
+        if (this.forms.includes(newPath) && this.curPath && !this.forms.includes(this.curPath)) {
             this.returnTo = this.curPath;
         }
         this.curPath = newPath;

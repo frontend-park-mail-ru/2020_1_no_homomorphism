@@ -101,8 +101,8 @@ export default class AlbumView extends BaseView {
         if (this.tracksData.length === 0) {
             return;
         }
-        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = inputSanitize('Tracks: ' +
-            this.tracksData.length);
+        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = inputSanitize(
+            this.tracksData.length + (this.tracksData.length !== 1 ? ' tracks' : ' track'));
     }
 
     /**

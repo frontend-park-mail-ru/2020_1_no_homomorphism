@@ -1,4 +1,4 @@
-import {NAVBAR, GLOBAL, DOM, URL} from '@libs/constants';
+import {NAVBAR, GLOBAL, DOM, URL, LAYOUT} from '@libs/constants';
 import navbar from '@views/navbar/navbar.tmpl.xml';
 import BaseView from '@libs/base_view';
 import SearchComponent from '@components/search/search';
@@ -62,6 +62,16 @@ export default class NavbarView extends BaseView {
         document.getElementsByClassName('l-navbar-small-search')[0]
             .addEventListener('click', this.renderSearch.bind(this));
         window.addEventListener('resize', this.renderSearch.bind(this));
+        if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
+            window.addEventListener('click', (event) => {
+                const dropdown = document.getElementsByClassName('m-more-dropdown').find((elem) => {
+                    return elem.classList.contains('is-expanded');
+                });
+                if (dropdown && !dropdown.contains(event.target)) {
+                    dropdown.classList.remove('is-expanded');
+                }
+            });
+        }
     }
 
     /**
