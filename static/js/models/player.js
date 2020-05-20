@@ -214,10 +214,9 @@ export default class PlayerModel {
     play() {
         localStorage.setItem('isPlaying', 'false');
         localStorage.setItem('isPlaying', 'true');
-        document.getElementsByTagName('audio')[0].play()
-            .then(() => {
-                this.playing = true;
-            });
+        document.getElementsByTagName('audio')[0].play().then(() => {
+            this.playing = true;
+        });
         this.eventBus.emit(PLAYER.DRAW_PAUSE);
     }
 
