@@ -27,40 +27,10 @@ export default class PlayerTrackListComponent {
         document.querySelectorAll('.delete-button').forEach((button) => {
             button.addEventListener('click', this.trackDeleteButtonClick.bind(this));
         });
-        document.getElementsByClassName('track-list')[0]
-            .addEventListener('scroll', this.trackListWheel.bind(this));
         if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
             document.querySelectorAll('.more-button').forEach((button) => {
                 button.onclick = (event) => this.moreClicked(event);
             });
-        }
-    }
-
-    /**
-     * Слушает скрол для прокрутки плейлиста
-     * @param {Object} event
-     */
-    trackListWheel(event) {
-        const delta = event.deltaY;
-        const trackList = document.getElementsByClassName('track-list')[0];
-        event.preventDefault();
-        const top = parseInt(trackList.style.top.slice(0, trackList.style.top.length - 2));
-        if (delta < 0 && top < 0 ||
-            delta > 0 && trackList.getBoundingClientRect().bottom >
-            document.documentElement.clientHeight
-        ) {
-            if (delta < 0 && top - delta / 2 > 0) {
-                trackList.style.top = '0';
-            } else if (delta > 0 && trackList.getBoundingClientRect().bottom - delta / 2 <
-                document.documentElement.clientHeight
-            ) {
-                const container = document.getElementsByClassName('container-audio')[0];
-                trackList.style.top = (document.documentElement.clientHeight -
-                    trackList.getBoundingClientRect().height -
-                    container.getBoundingClientRect().bottom).toString() + 'px';
-            } else {
-                trackList.style.top = (top - delta / 2).toString() + 'px';
-            }
         }
     }
 

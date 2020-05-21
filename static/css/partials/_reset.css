@@ -1,4 +1,4 @@
-// ресет стандратрных стилей
+/* ресет стандратрных стилей */
 @import "../modules/_variables";
 
 /* width */
@@ -8,19 +8,20 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px transparent;
-    border-radius: 10px;
+    background: transparent;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: $obscure;
+    background: var(--obscure);
     border-radius: 10px;
 }
 
 body {
     margin: 0 auto;
     font-family: Montserrat-Regular, sans-serif;
+    background: var(--background-color);
+    color: var(--font-color);
 }
 
 hr {
@@ -42,7 +43,8 @@ p {
 input {
     font-family: Montserrat-Medium, sans-serif;
     outline: none;
-    background-color: white;
+    background-color: var(--overlay-color);
+    color: var(--font-color);
 }
 
 img {

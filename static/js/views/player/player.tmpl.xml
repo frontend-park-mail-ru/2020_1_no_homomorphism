@@ -16,6 +16,8 @@
             </div>
             <div class="container-audio border-bottom">
             </div>
+        </div>
+        <div class="col side-col">
             <div class="track-list">
                 <div class="current-marker" style="top: 5px; height: 50px;"></div>
             </div>
