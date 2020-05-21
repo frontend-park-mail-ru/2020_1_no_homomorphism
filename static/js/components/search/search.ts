@@ -99,6 +99,8 @@ export default class SearchComponent {
             this.isOpen = false;
             if (blur) {
                 (document.getElementsByClassName('m-search-input')[0] as HTMLInputElement).blur();
+            }
+            if (clear) {
                 (document.getElementsByClassName('m-search-input')[0] as HTMLInputElement).value = '';
             }
         }

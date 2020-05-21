@@ -72,26 +72,26 @@ window.onpopstate = function(event) {
         .getElementsByClassName(DOM.TOP_CONTENT)[0].innerHTML = '';
 };
 
-import {THEME} from '@libs/constants';
-document.getElementById('theme').addEventListener('change', (event) => {
-    switch (event.target.value) {
-    case '1':
-        document.documentElement.setAttribute('theme', 'light');
-        THEME.LIGHT.GREEN.forEach((prop) => {
-            document.documentElement.style.setProperty(prop[0], prop[1]);
-        });
-        break;
-    case '2':
-        document.documentElement.setAttribute('theme', 'dark');
-        THEME.DARK.GREEN.forEach((prop) => {
-            document.documentElement.style.setProperty(prop[0], prop[1]);
-        });
-        break;
-    case '3':
-        document.documentElement.setAttribute('theme', 'dark');
-        THEME.DARK.PINK.forEach((prop) => {
-            document.documentElement.style.setProperty(prop[0], prop[1]);
-        });
-        break;
-    }
-});
+// import {THEME} from '@libs/constants';
+// document.getElementById('theme').addEventListener('change', (event) => {
+//     switch (event.target.value) {
+//     case '1':
+//         document.documentElement.setAttribute('theme', 'light');
+//         THEME.LIGHT.GREEN.forEach((prop) => {
+//             document.documentElement.style.setProperty(prop[0], prop[1]);
+//         });
+//         break;
+//     case '2':
+//         document.documentElement.setAttribute('theme', 'dark');
+//         THEME.DARK.GREEN.forEach((prop) => {
+//             document.documentElement.style.setProperty(prop[0], prop[1]);
+//         });
+//         break;
+//     case '3':
+//         document.documentElement.setAttribute('theme', 'dark');
+//         THEME.DARK.PINK.forEach((prop) => {
+//             document.documentElement.style.setProperty(prop[0], prop[1]);
+//         });
+//         break;
+//     }
+// });

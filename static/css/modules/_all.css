@@ -16,12 +16,11 @@
 }
 
 .l-navbar .m-search-input {
-    /* box-shadow: var(--box-shadow); */
     height: 40px;
     width: 28%;
     border: 1px solid var(--chosen-icon);
     border-radius: 5px;
-    background: var(--chosen-icon);
+    background: var(--overlay-color);
     padding: 8px 35px 8px 8px;
 }
 
@@ -254,7 +253,7 @@
 
 .m-track-name {
     text-align: left;
-    width: calc(59%);
+    width: calc(61%);
     float: left;
     & div {
         overflow: hidden;
@@ -279,17 +278,10 @@
     max-height: 220px;
     text-decoration: none;
     border-radius: var(--card-border-small);
-
+    transition: 0.11s;
     &:hover {
-        /* box-shadow: var(--box-shadow-hard); */
-        transition: 0.11s;
         box-shadow: var(--box-shadow-hard);
-        -webkit-transform: scale(1.02);
         transform: scale(1.02);
-    }
-
-    &:not(:hover) {
-        transition: 0.11s;
     }
 }
 
@@ -476,11 +468,10 @@
     position: fixed;
     left: calc(5% + 186px);
     width: 25.1%;
-    box-shadow: var(--box-shadow);
+    box-shadow: 4px 4px 6px -1px rgba(12, 12, 12, 0.1), -4px 4px 6px -1px rgba(12, 12, 12, 0.1);
     top: 52px;
     z-index: var(--top-level);
-    background-color: var(--chosen-icon);
-    /* background-color: var(--overlay-color); */
+    background: var(--overlay-color);
 }
 
 .l-search-artists {
@@ -539,7 +530,7 @@
 }
 
 .is-hover-gray:hover {
-    background: var(--gray-hover);
+    background: var(--chosen-icon);
     width: inherit;
     cursor: pointer;
     transition: 0.1s;
@@ -617,8 +608,7 @@
     border-radius: 10px;
     background: var(--overlay-color);
     opacity: 0;
-    position: relative;
-    z-index: var(--under-level);
+    pointer-events: none;
     transition: box-shadow 0.3s, opacity 0.3s;
     box-shadow: 0 1px 20px rgba(12, 12, 12, 0.2);
     padding-bottom: 6px;
@@ -630,6 +620,6 @@
     }
     &.is-expanded {
         opacity: 1;
-        z-index: var(--main-level);
+        pointer-events: all;
     }
 }

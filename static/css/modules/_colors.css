@@ -1,4 +1,10 @@
 /* Цвета */
+:root {
+    --selected-elem: #d6ffeb;
+    --marker-color: #00e676;
+    --button-color: #0ab992;
+}
+
 :root, :root[theme="light"] {
     /* Светлая тема (зелёный) */
     --background-color: white;
@@ -33,5 +39,9 @@
     .l-navbar .m-search-icon,
     .m-more-dropdown-button img {
         filter: invert(0.9);
+    }
+
+    .l-list-rounded-card:hover {
+        box-shadow: 0 0 0 1px var(--selected-elem);
     }
 }

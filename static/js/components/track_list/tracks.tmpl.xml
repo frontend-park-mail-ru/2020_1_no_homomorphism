@@ -49,7 +49,7 @@
                     </div>
                 </fest:if>
                 <fest:if test="!data.type">
-                    <div class="l-track-buttons" style="padding-left: 40px;">
+                    <div class="l-track-buttons">
                         <div class="l-big-track-button favorite-button">
                             <fest:if test="!track.is_liked">
                                 <img class="m-big-like-button is-not-liked" height="15px" alt="..."/>
