@@ -1,10 +1,10 @@
-// Кнопки
+/* Кнопки */
 @import "../modules/_variables";
 
 .m-submit-button {
     border-radius: 6px;
     margin-left: 213px;
-    background-color: $button-color;
+    background-color: var(--button-color);
     border: none;
     color: #FFFFFF;
     text-align: center;
@@ -58,7 +58,7 @@
     height: 45px;
     padding: 11px;
     border-radius: 100px;
-    background-color: $selected-elem;
+    background-color: var(--selected-elem);
     cursor: pointer;
     margin-top: 92px;
     margin-left: 17px;
@@ -120,14 +120,14 @@
         left: 4px;
         bottom: 3px;
         border-radius: 50%;
-        background-color: $overlay-color;
+        background-color: var(--overlay-color);
         -webkit-transition: .4s;
         transition: .4s;
     }
 }
 
 input:checked + .m-slider {
-    background-color: $button-color;
+    background-color: var(--button-color);
 }
 
 input:checked + .m-slider:before {
@@ -187,10 +187,10 @@ input:checked + .m-slider:before {
 }
 
 .m-more-dropdown-button {
-    background: $overlay-color;
+    background: var(--overlay-color);
     border: none;
     text-align: left;
-    color: $font-color;
+    color: var(--font-color);
     cursor: pointer;
     opacity: 0.5;
     position: relative;
@@ -198,13 +198,13 @@ input:checked + .m-slider:before {
     height: 39px;
     transition: border 10s cubic-bezier(0, 0, 1, 1);
     &.success-border {
-        border: 1px solid $button-color !important;
+        border: 1px solid var(--button-color) !important;
     }
     &.error-border {
         border: 1px solid red !important;
     }
     &:hover {
-        box-shadow: $box-shadow-hard;
+        box-shadow: var(--box-shadow-hard);
         transition: 0.1s;
         opacity: 0.8;
     }
@@ -242,7 +242,7 @@ input:checked + .m-slider:before {
 }
 
 .m-button-without-size {
-    box-shadow: $box-shadow;
+    box-shadow: var(--box-shadow);
     opacity: 0.3;
     cursor: pointer;
 
@@ -267,7 +267,7 @@ input:checked + .m-slider:before {
 }
 
 .m-signup-button:hover {
-    background: $chosen-icon;
+    background: var(--chosen-icon);
 }
 
 .m-login-button {
@@ -279,7 +279,7 @@ input:checked + .m-slider:before {
 }
 
 .m-login-button:hover {
-    background: $chosen-icon;
+    background: var(--chosen-icon);
 }
 
 .l-track-buttons {
@@ -421,7 +421,7 @@ input:checked + .m-slider:before {
 
 .m-small-button {
     border-radius: 6px;
-    background-color: $button-color;
+    background-color: var(--button-color);
     border: none;
     color: #FFFFFF;
     text-align: center;

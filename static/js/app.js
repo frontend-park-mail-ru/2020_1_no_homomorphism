@@ -13,7 +13,7 @@ import {AlbumController} from '@controllers/album';
 import {SearchController} from '@controllers/search';
 import {globalEventBus} from '@libs/eventBus';
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
-import '@css/_main.scss';
+import '@css/_main.css';
 
 window.addEventListener('DOMContentLoaded', () => {
     HTMLCollection.prototype.forEach = Array.prototype.forEach;
@@ -71,3 +71,27 @@ window.onpopstate = function(event) {
     document
         .getElementsByClassName(DOM.TOP_CONTENT)[0].innerHTML = '';
 };
+
+import {THEME} from '@libs/constants';
+document.getElementById('theme').addEventListener('change', (event) => {
+    switch (event.target.value) {
+    case '1':
+        document.documentElement.setAttribute('theme', 'light');
+        THEME.LIGHT.GREEN.forEach((prop) => {
+            document.documentElement.style.setProperty(prop[0], prop[1]);
+        });
+        break;
+    case '2':
+        document.documentElement.setAttribute('theme', 'dark');
+        THEME.DARK.GREEN.forEach((prop) => {
+            document.documentElement.style.setProperty(prop[0], prop[1]);
+        });
+        break;
+    case '3':
+        document.documentElement.setAttribute('theme', 'dark');
+        THEME.DARK.PINK.forEach((prop) => {
+            document.documentElement.style.setProperty(prop[0], prop[1]);
+        });
+        break;
+    }
+});

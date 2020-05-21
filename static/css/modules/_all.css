@@ -1,8 +1,12 @@
-// Стили всех разделов
-@import "_variables";
+/* Стили всех разделов */
+@import "_variables.css";
 
 .small-line {
-    border-top: 1px solid $chosen-icon;
+    border-top: 1px solid var(--chosen-icon);
+}
+
+.l-search .small-line {
+    border-top: 1px solid var(--overlay-color);
 }
 
 .m-project-name {
@@ -12,12 +16,12 @@
 }
 
 .l-navbar .m-search-input {
-    // box-shadow: $box-shadow;
+    /* box-shadow: var(--box-shadow); */
     height: 40px;
     width: 28%;
-    border: 1px solid $chosen-icon;
+    border: 1px solid var(--chosen-icon);
     border-radius: 5px;
-    background: $chosen-icon;
+    background: var(--chosen-icon);
     padding: 8px 35px 8px 8px;
 }
 
@@ -35,14 +39,10 @@
     margin-bottom: 32px;
 }
 
-.m-signup-input {
-
-}
-
 .m-error-message-small {
     font-size: 13px;
     text-align: left;
-    color: $error-color;
+    color: var(--error-color);
     padding-left: 8px;
     height: 0;
 }
@@ -55,15 +55,15 @@
 
 .m-tiny-ref {
     font-weight: lighter;
-    color: $font-color;
+    color: var(--font-color);
     text-decoration: none;
     &:hover {
-        color: $tiny-ref-color;
+        color: var(--tiny-ref-color);
     }
 }
 
 .l-top-section-albums:hover, .l-top-section-tracks:hover, .m-profile-playlists:hover, .l-top-section-artists:hover, .l-top-section-info:hover {
-    background: $selected-elem;
+    background: var(--selected-elem);
     cursor: pointer;
     transition: 0.1s;
     transform: scale(1.1);
@@ -97,8 +97,8 @@
     font-size: 24px;
 }
 
-.m-right-col {
-    border-radius: $card-border;
+.m-right-col, .m-right-col-bottom {
+    border-radius: var(--card-border);
     float: right !important;
 }
 
@@ -117,13 +117,13 @@
 }
 
 .l-navbar-info:hover {
-    background: $chosen-icon;
+    background: var(--chosen-icon);
 }
 
 .m-navbar-avatar {
     margin-top: 8px;
     margin-right: 8px;
-    border-radius: $medium-icon-border;
+    border-radius: var(--medium-icon-border);
 }
 
 .m-navbar-name {
@@ -137,6 +137,7 @@
 }
 
 .m-hidden-input {
+    display: none;
     height: 1px;
     width: 1px;
 }
@@ -178,10 +179,10 @@
 }
 
 .l-big-track-button {
-  opacity: 0.4;
-  transform: scale(1.5);
-  //padding-right: 8px;
-  float: left;
+    opacity: 0.4;
+    transform: scale(1.5);
+    /* padding-right: 8px; */
+    float: left;
 }
 
 /**/
@@ -209,14 +210,14 @@
     display: flex;
     align-items: center;
     float: left;
-    width: -webkit-calc(49%);
+    width: calc(49%);
     padding: 2px;
     overflow: hidden;
     margin-bottom: 2px;
 }
 
 .l-track-big:hover {
-    background: $selected-elem;
+    background: var(--selected-elem);
     cursor: pointer;
 }
 
@@ -253,7 +254,7 @@
 
 .m-track-name {
     text-align: left;
-    width: -webkit-calc(59%);
+    width: calc(59%);
     float: left;
     & div {
         overflow: hidden;
@@ -264,7 +265,6 @@
 
 .l-list-card img {
     float: left;
-    object-fit: cover;
     width: 150px;
     height: 150px;
 }
@@ -272,18 +272,18 @@
 .l-list-rounded-card {
     animation-duration: 1s;
     overflow: hidden;
-    background-color: $overlay-color;
+    background-color: var(--overlay-color);
     display: inline-block;
     width: 90%;
     max-width: 180px;
     max-height: 220px;
     text-decoration: none;
-    border-radius: $card-border-small;
+    border-radius: var(--card-border-small);
 
     &:hover {
-        //box-shadow: $box-shadow-hard;
+        /* box-shadow: var(--box-shadow-hard); */
         transition: 0.11s;
-        box-shadow: $box-shadow-hard;
+        box-shadow: var(--box-shadow-hard);
         -webkit-transform: scale(1.02);
         transform: scale(1.02);
     }
@@ -303,14 +303,14 @@
     max-width: 150px;
     max-height: 220px;
     text-decoration: none;
-    border-radius: $card-border-small;
+    border-radius: var(--card-border-small);
     box-shadow: 0 0 10px -3px rgba(0, 0, 0, 0.5);
     transition: transform 0.1s ease-in-out, box-shadow 0.1s;
 }
 
 .l-list-card:hover {
-    // background: #eee;
-    background: $chosen-icon;
+    /* background: #eee; */
+    background: var(--chosen-icon);
     cursor: pointer;
     transform: translateY(-0.1rem) scale(1.0125);
     transition: 0.2s;
@@ -319,8 +319,8 @@
 
 .l-list-card:hover .m-small-input {
     transition: 0.3s;
-    // background-color: #eeeeee;
-    background: $chosen-icon;
+    /* background-color: #eeeeee; */
+    background: var(--chosen-icon);
 }
 
 .l-list-card:hover .m-button-track-play-playlist {
@@ -343,7 +343,7 @@
     height: 150px
 }
 
-// МЕНЮ
+/* МЕНЮ */
 .blurred-bg {
     background-repeat: no-repeat;
     background-size: cover;
@@ -353,16 +353,16 @@
 
 .m-choose-menu {
     width: 300px;
-    left: -webkit-calc(50% - 250px);
+    left: calc(50% - 250px);
     top: 20%;
     position: fixed;
-    border-radius: $card-border;
+    border-radius: var(--card-border);
     padding: 4px;
     box-sizing: border-box;
-    background-color: $overlay-color;
+    background-color: var(--overlay-color);
     transition: box-shadow .3s ease;
-    box-shadow: $box-shadow-hard;
-    z-index: $top-level;
+    box-shadow: var(--box-shadow-hard);
+    z-index: var(--top-level);
 
     .content {
         margin: auto;
@@ -370,11 +370,10 @@
 }
 
 .l-small-list {
-    //height: 250px;
+    /* height: 250px; */
     overflow-y: auto;
     overflow-x: hidden;
     box-sizing: border-box;
-    scrollbar-track-color: transparent;
 }
 
 
@@ -404,7 +403,7 @@
 }
 
 .m-small-li:hover {
-    background: $selected-elem;
+    background: var(--selected-elem);
     cursor: pointer;
     transition: 0.1s;
     display: block;
@@ -471,16 +470,17 @@
 
 .l-search {
     height: max-content;
-    max-height: -webkit-calc(70%);
+    max-height: calc(70%);
     overflow-y: scroll;
     padding: 16px;
     position: fixed;
-    left: -webkit-calc(5% + 183px);
-    width: 25%;
-    box-shadow: $box-shadow;
+    left: calc(5% + 186px);
+    width: 25.1%;
+    box-shadow: var(--box-shadow);
     top: 52px;
-    z-index: $top-level;
-    background-color: $overlay-color;
+    z-index: var(--top-level);
+    background-color: var(--chosen-icon);
+    /* background-color: var(--overlay-color); */
 }
 
 .l-search-artists {
@@ -494,7 +494,7 @@
 .m-obscure-title {
     padding-bottom: 4px;
     padding-top: 4px;
-    color: $obscure;
+    color: var(--obscure);
 }
 
 .m-small-text {
@@ -517,7 +517,7 @@
 }
 
 .m-small-track:hover {
-    background: $selected-elem;
+    background: var(--selected-elem);
     cursor: pointer;
     transition: 0.1s;
     display: block;
@@ -532,14 +532,14 @@
 }
 
 .is-hover:hover {
-    background: $selected-elem;
+    background: var(--selected-elem);
     cursor: pointer;
     transition: 0.1s;
     display: block;
 }
 
 .is-hover-gray:hover {
-    background: $chosen-icon;
+    background: var(--gray-hover);
     width: inherit;
     cursor: pointer;
     transition: 0.1s;
@@ -551,35 +551,27 @@
     text-align: center;
 }
 
-.l-artist {
-
-}
-
-.l-playlists {
-
-}
-
 .l-pop-up-container {
     pointer-events: none;
     overflow: hidden;
     position: fixed;
     bottom: 0;
     right: 0;
-    width: -webkit-calc(18%);
+    width: calc(18%);
     height: 228px;
-    z-index: $super-top-level;
+    z-index: var(--super-top-level);
 }
 
 .m-pop-up {
     pointer-events: auto;
-    width: -webkit-calc(80%);
+    width: calc(80%);
     height: 50px;
     box-shadow: 0 1px 20px rgba(12, 12, 12, 0.2);
     position: absolute;
     right: 28px;
     bottom: -60px;
-    background-color: $selected-elem;
-    border-radius: $card-border-small;
+    background-color: var(--selected-elem);
+    border-radius: var(--card-border-small);
     font-size: 13px;
     transition-property: bottom, opacity;
     transition-duration: 0.5s, 1s;
@@ -588,7 +580,7 @@
 }
 
 .m-pop-up-error {
-    background-color: $pop-up-error-color;
+    background-color: var(--pop-up-error-color);
 }
 
 .m-pop-up-message {
@@ -623,10 +615,10 @@
 
 .m-more-dropdown {
     border-radius: 10px;
-    background: $overlay-color;
+    background: var(--overlay-color);
     opacity: 0;
     position: relative;
-    z-index: $under-level;
+    z-index: var(--under-level);
     transition: box-shadow 0.3s, opacity 0.3s;
     box-shadow: 0 1px 20px rgba(12, 12, 12, 0.2);
     padding-bottom: 6px;
@@ -638,6 +630,6 @@
     }
     &.is-expanded {
         opacity: 1;
-        z-index: $main-level;
+        z-index: var(--main-level);
     }
 }

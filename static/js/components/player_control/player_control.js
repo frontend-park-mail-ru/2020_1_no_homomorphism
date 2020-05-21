@@ -308,7 +308,8 @@ export default class PlayerControlComponent {
     timelineMouseUp(event) {
         this.timelineDrag = false;
         const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
-        const ratio = ((event.clientX | event.changedTouches[0].pageX) - bcr.x) / bcr.width;
+        const width = event.clientX | (event.changedTouches ? event.changedTouches[0].pageX : 0);
+        const ratio = (width - bcr.x) / bcr.width;
         this.eventBus.emit(PLAYER.REWIND, ratio);
     }
 
@@ -319,7 +320,10 @@ export default class PlayerControlComponent {
     timelineMouseMove(event) {
         if (this.timelineDrag) {
             const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
-            const ratio = ((event.clientX | event.changedTouches[0].pageX) - bcr.x) / bcr.width;
+            const width = event.clientX | (event.changedTouches ?
+                event.changedTouches[0].pageX :
+                0);
+            const ratio = (width - bcr.x) / bcr.width;
             this.drawTimeline(ratio);
         }
     }

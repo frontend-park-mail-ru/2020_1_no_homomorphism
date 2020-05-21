@@ -82,11 +82,12 @@
                             <button class="m-more-dropdown-button like-button">
                                 <fest:if test="!track.is_liked">
                                     <img src="/static/img/icons/favorite_border.svg"/>
+                                    <span class="m-text-in-button">like</span>
                                 </fest:if>
                                 <fest:if test="track.is_liked">
                                     <img src="/static/img/icons/favorite.svg"/>
+                                    <span class="m-text-in-button">unlike</span>
                                 </fest:if>
-                                <span class="m-text-in-button">like</span>
                             </button>
                         </div>
                     </div>

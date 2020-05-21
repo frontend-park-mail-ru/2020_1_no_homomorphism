@@ -1,4 +1,4 @@
-// изображения
+/* изображения */
 @import "../modules/_variables";
 
 .l-round-image {
@@ -6,34 +6,35 @@
 }
 
 .m-rounded-image {
-    z-index: $main-level;
+    z-index: var(--main-level);
     height: 150px;
     width: 150px;
     border-radius: 100px;
     float: right;
-    box-shadow: $box-shadow-hard;
+    box-shadow: var(--box-shadow-hard);
 }
 
 .m-round-image {
-    z-index: $main-level;
+    z-index: var(--main-level);
     height: 150px;
     width: 150px;
     border-radius: 100px;
     margin: 16px;
     float: right;
-    box-shadow: $box-shadow-hard;
+    box-shadow: var(--box-shadow-hard);
 }
 
 .m-scale-image:hover {
     transition: 0.3s;
-    box-shadow: 0 0 40px $chosen-icon;
+    box-shadow: 0 0 40px var(--chosen-icon);
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
+    cursor: pointer;
 }
 
 .m-scale-image:not(:hover) {
     transition: 0.3s;
-    box-shadow: $box-shadow-hard;
+    box-shadow: var(--box-shadow-hard);
 }
 
 .m-search-icon {
@@ -57,7 +58,7 @@
 
 .l-navbar-icon:hover {
     opacity: 1;
-    background: $chosen-icon;
+    background: var(--chosen-icon);
 }
 
 .m-small-icon {
@@ -68,6 +69,6 @@
 .m-track-image {
     height: 50px;
     width: 50px;
-    z-index: $main-level;
+    z-index: var(--main-level);
     border-radius: 5px;
 }

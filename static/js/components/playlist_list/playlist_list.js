@@ -88,7 +88,6 @@ export default class PlaylistsComponent {
      * @param {Object} playlist
      */
     updatePlaylistList(playlist) {
-        console.log(playlist);
         document.getElementsByClassName(this._domItem)[0].innerHTML += newPlaylist(playlist);
         this.eventBus.emit(PROFILE.CHANGE_PLAYLIST_AMOUNT, 1);
     }
@@ -98,8 +97,6 @@ export default class PlaylistsComponent {
      * @param {Object} event
      */
     elemClick(event) {
-        console.log(event.target);
-        console.log(`/${this._type}/${event.target.getAttribute('a-id')}`);
         globalEventBus.emit(GLOBAL.REDIRECT, `/${this._type}/${event.target.getAttribute('a-id')}`);
     }
 }

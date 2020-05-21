@@ -1,10 +1,10 @@
-// Состояния
+/* Состояния */
 @import "../modules/_variables";
 
 .is-emphasized {
     position: fixed;
     box-shadow: black;
-    z-index: $super-top-level;
+    z-index: var(--super-top-level);
 }
 
 .is-un-emphasized {
@@ -18,8 +18,8 @@
 }
 
 .is-touched-section {
-    background: $selected-elem;
-    border-radius: $card-border-small;
+    background: var(--selected-elem);
+    border-radius: var(--card-border-small);
     cursor: pointer;
     transition: 0.1s;
     transform: scale(1.1);
@@ -60,11 +60,11 @@
 }
 
 .is-error-border {
-    border-color: $error-color !important;
+    border-color: var(--error-color) !important;
 }
 
 .is-mouse-on {
-    background: $chosen-icon;
+    background: var(--chosen-icon);
 }
 
 .is-rotated-0 {
@@ -93,7 +93,7 @@
 
 .is-empty-track {
     display: inline-block;
-    width: -webkit-calc(49%);
+    width: calc(49%);
     overflow: hidden;
 }
 
@@ -106,11 +106,11 @@
         height: 1px;
         width: 0;
         left: 0;
-        background-color: $obscure;
+        background-color: var(--obscure);
         transition: 0.5s ease all;
     }
     &:hover::after {
-        background-color: $font-color;
+        background-color: var(--font-color);
         width: 100%;
         transition: 0.3s ease all;
     }

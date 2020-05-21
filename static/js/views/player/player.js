@@ -88,6 +88,7 @@ export default class PlayerView extends BaseView {
         }
         const body = document.documentElement;
         const mobile = window.matchMedia(LAYOUT.MOBILE);
+        const tablet = window.matchMedia(LAYOUT.TABLET);
         const left = (
             mobile.matches ?
                 0 :
@@ -96,31 +97,41 @@ export default class PlayerView extends BaseView {
         this.root.style.left = left.toString() + 'px';
         const top =
             mobile.matches ?
-                (this.expanded ? NAVBAR.HEIGHT : document.documentElement.clientHeight) :
+                (this.expanded ?
+                    NAVBAR.HEIGHT :
+                    document.getElementsByTagName('audio')[0].currentSrc !== '' ?
+                        NAVBAR.HEIGHT :
+                        body.clientHeight) :
                 NAVBAR.HEIGHT;
-        document.getElementsByTagName('audio')[0].volume = this.playerControlComponent.volume;
-        let height = document.documentElement.clientHeight - top;
         this.root.style.top = top.toString() + 'px';
+        document.getElementsByTagName('audio')[0].volume = this.playerControlComponent.volume;
+        if (mobile.matches) {
+            if (this.expanded) {
+                document.getElementsByClassName('l-pop-up-container')[0].style.bottom = '0';
+            } else {
+                document.getElementsByClassName('l-pop-up-container')[0].style.bottom =
+                    (top - body.clientHeight).toString() + 'px';
+            }
+        }
+        let height = body.clientHeight - top;
         if (height === 0) {
             return;
         }
         this.root.style.height = height.toString() + 'px';
         document.getElementsByClassName('player-trigger')[0]
             .style.height = height.toString() + 'px';
-        height -= document.getElementsByClassName('container-audio')[0].clientHeight +
-            document.getElementsByClassName('l-music-bar')[0].clientHeight +
-            document.getElementsByClassName('patch')[0].clientHeight +
-            (mobile.matches ?
-                document.getElementsByClassName('player-trigger-row')[0].clientHeight :
-                0);
-        document.getElementsByClassName('track-list')[0].style.height = height.toString() + 'px';
-        if (mobile.matches) {
-            if (this.expanded) {
-                document.getElementsByClassName('l-pop-up-container')[0].style.bottom = '0';
-            } else {
-                document.getElementsByClassName('l-pop-up-container')[0].style.bottom =
-                    (top - document.documentElement.clientHeight).toString() + 'px';
-            }
+        if (tablet.matches) {
+            document.getElementsByClassName('track-list')[0].style.height = (body.clientHeight -
+                NAVBAR.HEIGHT).toString() + 'px';
+        } else {
+            height -= document.getElementsByClassName('container-audio')[0].clientHeight +
+                document.getElementsByClassName('l-music-bar')[0].clientHeight +
+                document.getElementsByClassName('patch')[0].clientHeight +
+                (mobile.matches ?
+                    document.getElementsByClassName('player-trigger-row')[0].clientHeight :
+                    0);
+            document.getElementsByClassName('track-list')[0].style.height =
+                height.toString() + 'px';
         }
     }
 
@@ -333,7 +344,6 @@ export default class PlayerView extends BaseView {
             this.playerTouchedY = event.changedTouches[0].clientY;
             event.preventDefault();
             event.stopImmediatePropagation();
-            console.log(event);
         }, 100);
         setTimeout(() => {
             this.playerTouchedY = undefined;
@@ -346,7 +356,6 @@ export default class PlayerView extends BaseView {
      */
     playerSwipe(event) {
         if (this.playerTouchedY && !this.footer) {
-            console.log(event);
             this.triggerClick();
         }
     }
