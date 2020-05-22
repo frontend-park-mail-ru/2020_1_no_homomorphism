@@ -49,17 +49,18 @@ export default class TopFormComponent {
     showErrors(errors: { [index: string]: string }): void {
         this.setDynamicEventListeners.bind(this)();
         document.getElementsByClassName('l-form')[0].classList.add('is-error-border');
-        // eslint-disable-next-line guard-for-in
         for (const key in errors) {
-            if (key === 'global') {
-                document.getElementById('global').innerText = errors[key];
-                document.getElementById('global').classList.add('is-error-input-duplication');
-                break;
+            if ({}.hasOwnProperty.call(errors, key)) {
+                if (key === 'global') {
+                    document.getElementById('global').innerText = errors[key];
+                    document.getElementById('global').classList.add('is-error-input-duplication');
+                    break;
+                }
+                const message = document.getElementById(key).nextElementSibling as HTMLElement;
+                message.previousElementSibling.classList.add('is-error-border');
+                message.innerText = errors[key];
+                message.classList.add('is-error-input-underline');
             }
-            const message = document.getElementById(key).nextElementSibling as HTMLElement;
-            message.previousElementSibling.classList.add('is-error-border');
-            message.innerText = errors[key];
-            message.classList.add('is-error-input-underline');
         }
     }
 

@@ -1,4 +1,4 @@
-import {NAVBAR, GLOBAL, DOM, URL} from '@libs/constants';
+import {NAVBAR, GLOBAL, DOM, URL, THEME} from '@libs/constants';
 import navbar from '@views/navbar/navbar.tmpl.xml';
 import BaseView from '@libs/base_view';
 import SearchComponent from '@components/search/search';
@@ -30,6 +30,13 @@ export default class NavbarView extends BaseView {
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.NAVBAR)[0]);
         this.eventBus.emit(NAVBAR.CHECK_COOKIE);
+        if (window.localStorage.getItem('theme')) {
+            const split = window.localStorage.getItem('theme').split(' ');
+            document.documentElement.setAttribute('theme', split[0]);
+            THEME[split[0]][split[1]].forEach((prop) => {
+                document.documentElement.style.setProperty(prop[0], prop[1]);
+            });
+        }
         this.setEventListeners();
     }
 
@@ -135,6 +142,11 @@ export default class NavbarView extends BaseView {
         document.getElementById('logout-link').classList.remove('is-not-displayed');
         document.getElementById('profile-link').classList.remove('is-not-displayed');
         document.getElementById('settings-icon').classList.remove('is-not-displayed');
+        const split = data.theme.split(' ');
+        document.documentElement.setAttribute('theme', split[0]);
+        THEME[split[0]][split[1]].forEach((prop) => {
+            document.documentElement.style.setProperty(prop[0], prop[1]);
+        });
     }
 
     /**

@@ -289,24 +289,54 @@ export const POPUP = {
     DISSOLUTIONTIME: 1000,
 };
 
+export const THEME_OVERLAY = {
+    'light': 'white',
+    'dark': '#383b40',
+};
+
 export const THEME = {
-    LIGHT: {
-        GREEN: [
+    'light': {
+        'green': [
             ['--selected-elem', '#d6ffeb'],
             ['--marker-color', '#00e676'],
             ['--button-color', '#0ab992'],
         ],
+        'red': [
+            ['--selected-elem', '#ffe0e4'],
+            ['--marker-color', '#ff2137'],
+            ['--button-color', '#ff4255'],
+        ],
+        'purple': [
+            ['--selected-elem', '#f9d4ff'],
+            ['--marker-color', '#ab47bc'],
+            ['--button-color', '#7b1fa2'],
+        ],
+        'blue': [
+            ['--selected-elem', '#d0eaff'],
+            ['--marker-color', '#29b6f6'],
+            ['--button-color', '#186db1'],
+        ],
     },
-    DARK: {
-        GREEN: [
+    'dark': {
+        'green': [
             ['--selected-elem', '#2d9c66'],
             ['--marker-color', '#2d9c66'],
             ['--button-color', '#2d9c66'],
         ],
-        PINK: [
+        'pink': [
             ['--selected-elem', '#de4a7d'],
             ['--marker-color', '#de4a7d'],
             ['--button-color', '#de4a7d'],
+        ],
+        'purple': [
+            ['--selected-elem', '#7b1fa2'],
+            ['--marker-color', '#7b1fa2'],
+            ['--button-color', '#7b1fa2'],
+        ],
+        'blue': [
+            ['--selected-elem', '#01579b'],
+            ['--marker-color', '#01579b'],
+            ['--button-color', '#01579b'],
         ],
     },
 };

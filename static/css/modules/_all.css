@@ -155,49 +155,54 @@
     margin-bottom: 16px;
 }
 
-.l-big-track-button.more-button {
-    display: none;
-}
-
-.l-track-big:hover .m-big-like-button, .l-track-big:hover .m-big-delete-button, .l-track-big:hover .m-big-add-button {
-    transition: 0.3s;
-    -webkit-transform: scale(2);
-    transform: scale(1.2);
-    opacity: 1;
+.l-track-big:hover {
+    & .m-big-like-button, .m-big-delete-button, .m-big-add-button {
+        transition: 0.3s;
+        -webkit-transform: scale(2);
+        transform: scale(1.2);
+    }
+    & .m-big-like-button, .m-big-delete-button, .m-big-add-button {
+        opacity: 0.4;
+    }
 }
 
 .border-bottom:hover .m-big-like-button, .border-bottom:hover .m-big-delete-button, .border-bottom:hover .m-big-add-button {
     transition: 0.3s;
     -webkit-transform: scale(2);
     transform: scale(0.8);
-    opacity: 1;
+    opacity: 0.8;
 }
 
 .l-track-big:not(:hover) .m-big-like-button, .l-track-big:not(:hover) .m-big-delete-button, .l-track-big:not(:hover) .m-big-add-button {
     transition: 0.1s;
 }
 
-.l-big-track-button {
-    opacity: 0.4;
+.l-track-big .l-big-track-button {
     transform: scale(1.5);
-    /* padding-right: 8px; */
     float: left;
 }
 
-/**/
-.m-big-delete-button, .m-big-add-button {
-    opacity: 0;
+.l-track-big {
+    & .m-big-like-button, .m-big-delete-button, .m-big-add-button {
+        opacity: 0;
+        &:hover {
+            opacity: 1;
+        }
+    }
 }
 
 .m-big-like-button {
-    opacity: 0;
     &.is-liked{
-        content: url("../../static/img/icons/favorite.svg");
+        opacity: 1 !important;
+        content: var(--like-src);
     }
-
     &.is-not-liked {
         content: url("../../static/img/icons/favorite_border.svg");
     }
+}
+
+.l-big-track-button.more-button {
+    display: none;
 }
 
 .l-track-big img {
@@ -561,7 +566,7 @@
     position: absolute;
     right: 28px;
     bottom: -60px;
-    background-color: var(--selected-elem);
+    background: var(--pop-up-color);
     border-radius: var(--card-border-small);
     font-size: 13px;
     transition-property: bottom, opacity;
@@ -607,12 +612,14 @@
 .m-more-dropdown {
     border-radius: 10px;
     background: var(--overlay-color);
+    z-index: var(--main-level);
     opacity: 0;
     pointer-events: none;
     transition: box-shadow 0.3s, opacity 0.3s;
     box-shadow: 0 1px 20px rgba(12, 12, 12, 0.2);
     padding-bottom: 6px;
     margin-top: 10px;
+    margin-left: 17px;
     font-size: 13px;
     overflow: hidden;
     & .row .col {
@@ -622,4 +629,28 @@
         opacity: 1;
         pointer-events: all;
     }
+}
+
+.m-theme-big {
+    size: 60px;
+    border-radius: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    float: left;
+    margin: 27px 7px 0;
+    transition: 0.3s;
+    &:hover {
+        transform: scale(1.2);
+    }
+    &.is-current-theme .m-theme-small {
+        size: 45px;
+    }
+}
+
+.m-theme-small {
+    size: 30px;
+    border-radius: 23px;
+    transition: 0.3s;
 }

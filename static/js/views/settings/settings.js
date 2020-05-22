@@ -3,6 +3,7 @@ import settings from '@views/settings/settings.tmpl.xml';
 import BaseView from '@libs/base_view';
 import User from '@libs/user';
 import PopUp from '@components/pop-up/pop-up';
+import ChooseThemeComponent from '@components/choose_theme/choose_theme';
 import {inputSanitize} from '@libs/input_sanitize';
 
 /**
@@ -17,6 +18,7 @@ export default class SettingsView extends BaseView {
         this.eventBus = eventBus;
         this.userData = {};
         this.errors = {};
+        this.chooseThemeComponent = new ChooseThemeComponent(this.submitTheme.bind(this));
         this.eventBus.on(SETTINGS.INVALID, this.showErrors.bind(this));
         this.eventBus.on(SETTINGS.RENDER_LOGGED, this.renderData.bind(this));
         this.eventBus.on(POPUP.NEW, (message) => {
@@ -32,6 +34,7 @@ export default class SettingsView extends BaseView {
     render(root, url) {
         super.setData({mobile: window.matchMedia(LAYOUT.MOBILE).matches});
         super.render(document.getElementsByClassName(DOM.CONTENT)[0]);
+        this.chooseThemeComponent.render();
         this.eventBus.emit(SETTINGS.GET_USER_DATA);
         if (User.token === undefined) {
             this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
@@ -80,6 +83,7 @@ export default class SettingsView extends BaseView {
         document.getElementById('newPassword').value = '';
         document.getElementById('newPasswordConfirm').value = '';
         document.getElementById('password').value = '';
+        document.getElementById(data.theme).classList.add('is-current-theme');
     }
 
     /**
@@ -88,37 +92,54 @@ export default class SettingsView extends BaseView {
      */
     showErrors(errors) {
         this.errors = errors;
-        // eslint-disable-next-line guard-for-in
         for (const key in errors) {
-            const message = document.getElementById(key);
-            message.innerText = errors[key];
-            message.style.height = '15px';
-            message.style.marginBottom = '10px';
-            message.style.visibility = 'visible';
+            if ({}.hasOwnProperty.call(errors, key)) {
+                const message = document.getElementById(key);
+                message.innerText = errors[key];
+                message.style.height = '15px';
+                message.style.marginBottom = '10px';
+                message.style.visibility = 'visible';
+            }
         }
     }
 
     /**
-     * показывает, какие поля формы заполнены неправильно
+     * не показывает, какие поля формы заполнены неправильно
      */
     hideErrors() {
-        // eslint-disable-next-line guard-for-in
         for (const key in this.errors) {
-            const message = document.getElementById(key);
-            message.innerText = '';
-            message.style.height = '0';
-            message.style.marginBottom = '0';
-            message.style.visibility = 'hidden';
+            if ({}.hasOwnProperty.call(this.errors, key)) {
+                const message = document.getElementById(key);
+                message.innerText = '';
+                message.style.height = '0';
+                message.style.marginBottom = '0';
+                message.style.visibility = 'hidden';
+            }
         }
     }
 
     /**
-     * отправляет данные формы - почти или имя
+     * отправляет данные формы - почта или имя
      */
     submitData() {
         this.eventBus.emit(SETTINGS.SUBMIT, {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
+            theme: this.userData.theme,
+            newPassword: '',
+            newPasswordConfirm: '',
+            password: '',
+        });
+    }
+
+    /**
+    * отправляет данные формы - тема
+    */
+    submitTheme() {
+        this.eventBus.emit(SETTINGS.SUBMIT, {
+            name: this.userData.name,
+            email: this.userData.email,
+            theme: document.getElementsByClassName('is-current-theme')[0].getAttribute('id'),
             newPassword: '',
             newPasswordConfirm: '',
             password: '',
@@ -132,6 +153,7 @@ export default class SettingsView extends BaseView {
         this.eventBus.emit(SETTINGS.SUBMIT, {
             name: this.userData.name,
             email: this.userData.email,
+            theme: this.userData.theme,
             newPassword: document.getElementById('newPassword').value,
             newPasswordConfirm: document.getElementById('newPasswordConfirm').value,
             password: document.getElementById('password').value,

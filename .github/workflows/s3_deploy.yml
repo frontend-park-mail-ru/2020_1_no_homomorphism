@@ -5,10 +5,9 @@ on:
     branches:
       - master
       - dev
+      - themes
   pull_request:
-    branches:
-        - master
-        - dev
+    branches: [ master ]
 
 jobs:
   build:

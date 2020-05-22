@@ -204,7 +204,7 @@
 
     .m-subscribe {
         border: solid black 1px;
-        opacity: 0.4;
+        opacity: 0.8;
         transform: scale(1.3);
         width: 123px;
         height: 32px;
@@ -220,11 +220,11 @@
         top: 0;
         left: calc(212%);
         &:hover {
-            opacity: 0.4;
+            opacity: 0.8;
             transform: scale(1.3);
         }
         &:hover.is-subscribed {
-            opacity: 0.8;
+            opacity: 0.4;
             transform: scale(1.3);
         }
     }
@@ -259,11 +259,14 @@
     .m-more-dropdown {
         margin-top: 0;
         opacity: 1;
-        z-index: var(--back-level);
         display: none;
         &.is-expanded {
             display: block;
         }
+    }
+
+    .m-more-dropdown-button {
+        opacity: 0.8;
     }
 
     .l-pop-up-container {
@@ -272,6 +275,11 @@
 
     .m-pop-up-close {
         height: 25px;
+    }
+
+    .is-button-disabled {
+        pointer-events: none;
+        opacity: 0.3;
     }
 }
 
@@ -428,11 +436,7 @@
     }
 
     .m-track-name {
-        width: calc(56%);
-    }
-
-    .l-track-buttons {
-        padding-left: 40px;
+        width: calc(66%);
     }
 
     .l-big-track-button.more-button {
@@ -595,11 +599,14 @@
     .m-more-dropdown {
         margin-top: 0;
         opacity: 1;
-        z-index: var(--back-level);
         display: none;
         &.is-expanded {
             display: block;
         }
+    }
+
+    .m-more-dropdown-button {
+        opacity: 0.8;
     }
 
     .m-privacy-title {
@@ -616,6 +623,11 @@
 
     .m-pop-up-close {
         height: 25px;
+    }
+
+    .is-button-disabled {
+        pointer-events: none;
+        opacity: 0.3;
     }
 
     .is-not-displayed {

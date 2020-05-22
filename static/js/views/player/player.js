@@ -325,7 +325,9 @@ export default class PlayerView extends BaseView {
      * @param {Object} event
      */
     triggerSwipe(event) {
-        if (this.triggerTouchedY) {
+        if (this.triggerTouchedY &&
+            Math.abs(event.changedTouches[0].clientY - this.triggerTouchedY) > 300
+        ) {
             this.triggerClick();
         }
     }
@@ -355,7 +357,9 @@ export default class PlayerView extends BaseView {
      * @param {Object} event
      */
     playerSwipe(event) {
-        if (this.playerTouchedY && !this.footer) {
+        if (this.playerTouchedY && !this.footer &&
+            Math.abs(event.changedTouches[0].clientY - this.playerTouchedY) > 300
+        ) {
             this.triggerClick();
         }
     }

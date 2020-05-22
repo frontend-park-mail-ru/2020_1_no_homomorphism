@@ -41,7 +41,7 @@
                             </fest:if>
                         </div>
                         <div class="l-big-track-button add-button">
-                            <img src="/static/img/icons/add.svg" class="m-big-add-button" height="15px" alt="..."/>
+                            <img src="/static/img/icons/playlist_add.svg" class="m-big-add-button" height="15px" alt="..."/>
                         </div>
                         <div class="l-big-track-button more-button">
                             <img src="/static/img/icons/more_vert.svg" class="m-big-more-button" height="15px" alt="..."/>
@@ -59,7 +59,7 @@
                             </fest:if>
                         </div>
                         <div class="l-big-track-button add-button">
-                            <img src="/static/img/icons/add.svg" class="m-big-add-button" height="15px" alt="..."/>
+                            <img src="/static/img/icons/playlist_add.svg" class="m-big-add-button" height="15px" alt="..."/>
                         </div>
                         <div class="l-big-track-button more-button">
                             <img src="/static/img/icons/more_vert.svg" class="m-big-more-button" height="15px" alt="..."/>
@@ -69,35 +69,29 @@
                 <div class="m-top-right-corner m-more-dropdown m-mobile-tablet-only">
                     <fest:if test="data.type">
                         <div class="row">
-                            <div class="col">
-                                <button class="m-more-dropdown-button remove-button">
-                                    <img src="/static/img/icons/clear.svg"/>
-                                    <span class="m-text-in-button">remove</span>
-                                </button>
-                            </div>
+                            <button class="m-more-dropdown-button remove-button">
+                                <img src="/static/img/icons/clear.svg"/>
+                                <span class="m-text-in-button">remove</span>
+                            </button>
                         </div>
                     </fest:if>
                     <div class="row">
-                        <div class="col">
-                            <button class="m-more-dropdown-button like-button">
-                                <fest:if test="!track.is_liked">
-                                    <img src="/static/img/icons/favorite_border.svg"/>
-                                    <span class="m-text-in-button">like</span>
-                                </fest:if>
-                                <fest:if test="track.is_liked">
-                                    <img src="/static/img/icons/favorite.svg"/>
-                                    <span class="m-text-in-button">unlike</span>
-                                </fest:if>
-                            </button>
-                        </div>
+                        <button class="m-more-dropdown-button like-button">
+                            <fest:if test="!track.is_liked">
+                                <img src="/static/img/icons/favorite_border.svg"/>
+                                <span class="m-text-in-button">like</span>
+                            </fest:if>
+                            <fest:if test="track.is_liked">
+                                <img src="/static/img/icons/favorite.svg"/>
+                                <span class="m-text-in-button">unlike</span>
+                            </fest:if>
+                        </button>
                     </div>
                     <div class="row">
-                        <div class="col">
-                            <button class="m-more-dropdown-button add-button">
-                                <img src="/static/img/icons/add.svg"/>
-                                <span class="m-text-in-button">add</span>
-                            </button>
-                        </div>
+                        <button class="m-more-dropdown-button add-button">
+                            <img src="/static/img/icons/playlist_add.svg"/>
+                            <span class="m-text-in-button">add</span>
+                        </button>
                     </div>
                 </div>
             </div>

@@ -2,7 +2,8 @@ type userDataKeys =
     'id'
     | 'login'
     | 'email'
-    | 'image';
+    | 'image'
+    | 'theme';
 
 type statisticsKeys =
     'userID'
@@ -75,6 +76,7 @@ export default class User implements StaticUser {
                 id: undefined,
                 login: undefined,
                 image: undefined,
+                theme: undefined,
             };
             User.statistics = {
                 userID: undefined,

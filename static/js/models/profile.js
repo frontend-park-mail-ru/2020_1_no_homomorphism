@@ -151,7 +151,7 @@ export default class ProfileModel {
     }
 
     /**
-     * Получение списка альбомов
+     * Получение списка артистов
      */
     getArtists() {
         Api.profileArtistsGet().then((res) => {

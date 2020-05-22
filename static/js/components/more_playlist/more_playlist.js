@@ -1,6 +1,5 @@
 import {PLAYLIST, POPUP, LAYOUT} from '@libs/constants';
 import more from '@components/more_playlist/more.tmpl.xml';
-import moreMobile from '@components/more_playlist/more_mobile.tmpl.xml';
 import PopUp from '@components/pop-up/pop-up';
 
 /**
@@ -23,9 +22,9 @@ export default class MorePlaylistComponent {
      */
     render(isPrivate) {
         if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
-            document.getElementsByClassName('l-top-card')[0].innerHTML += moreMobile();
+            document.getElementsByClassName('l-top-card')[0].innerHTML += more({mobile: true});
         } else {
-            document.getElementsByClassName('l-top-card')[0].innerHTML += more();
+            document.getElementsByClassName('l-top-card')[0].innerHTML += more({mobile: false});
         }
         document.getElementById('checkbox').checked = isPrivate;
         this._button = document.getElementById('playlist-share-button');
@@ -51,6 +50,11 @@ export default class MorePlaylistComponent {
             document.getElementsByClassName('m-more-button')[0]
                 .addEventListener('click', (event) => {
                     event.stopImmediatePropagation();
+                    document.getElementsByClassName('m-more-dropdown').forEach((dropdown) => {
+                        if (dropdown != event.target.nextElementSibling) {
+                            dropdown.classList.remove('is-expanded');
+                        }
+                    });
                     document.getElementsByClassName('m-more-dropdown')[0].classList
                         .toggle('is-expanded');
                 });

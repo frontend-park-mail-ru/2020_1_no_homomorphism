@@ -34,6 +34,7 @@ export default class SettingsModel {
             case RESPONSE.OK:
                 res.json().then((data) => {
                     User.setUserData(data);
+                    window.localStorage.setItem('theme', data.theme);
                     this.getCsrfToken();
                     this.eventBus.emit(SETTINGS.RENDER_LOGGED, User.getUserData());
                 });
@@ -124,7 +125,8 @@ export default class SettingsModel {
         if (JSON.stringify(errors) !== '{}') {
             this.eventBus.emit(SETTINGS.INVALID, errors);
         } else {
-            Api.profilePut(values.name, values.email, values.password, values.newPassword)
+            Api.profilePut(values.name, values.email, values.password, values.newPassword,
+                values.theme)
                 .then((res) => {
                     this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
                     switch (res.status) {

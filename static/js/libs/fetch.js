@@ -2,12 +2,12 @@ import {SERVER_PATH} from '@libs/constants';
 import {API} from '@libs/constants';
 import User from '@libs/user';
 
-/* *
+/**
  * POST
  * @static
  * @param {string} path
  * @param {Object} body
- * return {Promise<Response>}
+ * @return {Promise<Response>}
  */
 export const postFetch = (path = '/', body = {}) => {
     return fetch(SERVER_PATH + path, {
@@ -22,12 +22,12 @@ export const postFetch = (path = '/', body = {}) => {
     });
 };
 
-/* *
+/**
  * GET
  * @static
  * @param {string} path
  * @param {Object} body
- * return {Promise<Response>}
+ * @return {Promise<Response>}
  */
 export const getFetch = (path = '/') => {
     return fetch(SERVER_PATH + path, {
@@ -37,11 +37,11 @@ export const getFetch = (path = '/') => {
     });
 };
 
-/* *
+/**
  * DELETE
  * @static
  * @param {string} path
- * return {Promise<Response>}
+ * @return {Promise<Response>}
  */
 export const deleteFetch = (path = '/') => {
     return fetch(SERVER_PATH + path, {
@@ -54,12 +54,12 @@ export const deleteFetch = (path = '/') => {
     });
 };
 
-/* *
+/**
  * PUT
  * @static
  * @param {string} path
  * @param {Object} body
- * return {Promise<Response>}
+ * @return {Promise<Response>}
  */
 export const putFetch = (path = '/', body = {}) => {
     return fetch(SERVER_PATH + path, {
@@ -74,12 +74,12 @@ export const putFetch = (path = '/', body = {}) => {
     });
 };
 
-/* *
+/**
  * POST IMAGE
  * @static
  * @param {string} path
  * @param {Object} body
- * return {Promise<Response>}
+ * @return {Promise<Response>}
  */
 export const postImageFetch = (path = API + '/users/images', body = {}) => {
     return fetch(SERVER_PATH + path, {
@@ -93,12 +93,12 @@ export const postImageFetch = (path = API + '/users/images', body = {}) => {
     });
 };
 
-/* *
+/**
  * PATCH
  * @static
  * @param {string} path
  * @param {Object} body
- * return {Promise<Response>}
+ * @return {Promise<Response>}
  */
 export const patchFetch = (path = '/', body = {}) => {
     return fetch(SERVER_PATH + path, {

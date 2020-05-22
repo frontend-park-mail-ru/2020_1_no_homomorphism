@@ -19,6 +19,7 @@
 
 body {
     margin: 0 auto;
+    padding-bottom: 60px;
     font-family: Montserrat-Regular, sans-serif;
     background: var(--background-color);
     color: var(--font-color);

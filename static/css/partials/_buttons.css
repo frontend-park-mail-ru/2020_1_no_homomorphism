@@ -191,8 +191,9 @@ input:checked + .m-slider:before {
     cursor: pointer;
     opacity: 0.5;
     position: relative;
-    width: 169px;
-    height: 39px;
+    min-width: 90px;
+    size: 100% 39px;
+    padding: 0 12px 0 6px;
     transition: border 10s cubic-bezier(0, 0, 1, 1);
     &.success-border {
         border: 1px solid var(--button-color) !important;
@@ -290,10 +291,6 @@ input:checked + .m-slider:before {
     padding-top: 17px;
 }
 
-.l-big-track-button:hover {
-    opacity: 1;
-}
-
 .m-add-playlist-button {
     background-image: url("/static/img/icons/add.svg");
     display: inline-block;
@@ -375,7 +372,7 @@ input:checked + .m-slider:before {
 }
 
 .l-delete-playlist-button {
-    margin-top: 58px;
+    margin-top: 42px;
     float: right !important;
     cursor: pointer;
 }
