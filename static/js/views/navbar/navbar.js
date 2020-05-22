@@ -68,7 +68,6 @@ export default class NavbarView extends BaseView {
         document.addEventListener('click', this.closeSearchComponent.bind(this));
         document.getElementsByClassName('l-navbar-small-search')[0]
             .addEventListener('click', this.renderSearch.bind(this));
-        window.addEventListener('resize', this.renderSearch.bind(this));
         window.addEventListener('click', (event) => {
             const dropdown = document.getElementsByClassName('m-more-dropdown').find((elem) => {
                 return elem.classList.contains('is-expanded');
@@ -165,12 +164,10 @@ export default class NavbarView extends BaseView {
      * @param {Object} event
      */
     renderSearch(event) {
-        if (event.type != 'resize') {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-        }
+        event.preventDefault();
+        event.stopImmediatePropagation();
         if (document.getElementsByClassName('l-navbar-small-search')[0]
-            .children[0].src.indexOf('search') != -1 && event.type != 'resize'
+            .children[0].src.indexOf('search') != -1
         ) {
             document.getElementsByClassName('l-navbar')[0].children.forEach((item) => {
                 if (item.classList.contains('l-navbar-small-search') ||

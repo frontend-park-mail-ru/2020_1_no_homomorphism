@@ -116,12 +116,6 @@
     padding: 0 10%;
 }
 
-.l-footer-patch {
-    display: none;
-    width: 100%;
-    height: 60px;
-}
-
 .l-top-content {
     z-index: var(--top-level);
 }

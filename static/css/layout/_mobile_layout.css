@@ -306,7 +306,7 @@
 
     .l-player-footer, .player-trigger-row,
     .player-trigger-arrow-row, .m-mobile-only,
-    .l-footer-patch, .m-mobile-tablet-only {
+    .m-mobile-tablet-only {
         display: block;
     }
 
