@@ -2,6 +2,7 @@
     <div class="timeline row">
         <div class="timeline-back"></div>
         <div class="timeline-front" style="width: 0;"></div>
+        <div class="timeline-toggler m-mobile-tablet-only" style="left: 0;"></div>
         <div class="current-time"></div>
         <div class="duration"></div>
     </div>

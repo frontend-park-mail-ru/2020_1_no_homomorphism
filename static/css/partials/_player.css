@@ -6,16 +6,18 @@
     position: fixed;
     top: 60px;
     left: 150%;
-    z-index: $main-level;
+    z-index: var(--main-level);
     padding-left: 0;
     padding-top: 0;
-    background: white;
-    border-radius: $card-border-small;
+    background: var(--background-color);
+    border-radius: var(--card-border-small);
     box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
 .l-player-footer {
+    background: var(--overlay-color);
     display: none;
+    z-index: var(--main-level);
 }
 
 .l-player-visible {
@@ -27,21 +29,21 @@
     text-align: left;
 }
 
-.l-player .main-col {
+.l-player .main-col,
+.l-player .side-col {
     width: 361px;
 }
 
 .patch {
     height: 1em;
-    background: white;
+    background: var(--background-color);
     position: relative;
-    z-index: $main-level;
+    z-index: var(--main-level);
 }
 
 .l-music-bar {
-    background: white;
     position: relative;
-    z-index: $main-level;
+    z-index: var(--main-level);
     padding-bottom: 16px;
 }
 
@@ -57,15 +59,19 @@
 .container-audio {
     height: auto;
     color: #444;
-    background: white;
+    background: var(--background-color);
     position: relative;
-    z-index: $main-level;
+    z-index: var(--main-level);
+}
+
+.timeline {
+    color: var(--font-color);
 }
 
 .timeline .timeline-back {
     width: 100%;
     height: 7px;
-    background: $chosen-icon;
+    background: var(--chosen-icon);
     cursor: pointer;
 }
 
@@ -77,12 +83,21 @@
     cursor: pointer;
 }
 
+.timeline .timeline-toggler {
+    height: 18px;
+    width: 18px;
+    background: black;
+    border-radius: 9px;
+    position: relative;
+    top: -19px;
+}
+
 .current-time {
     transition-property: font-size;
     transition-duration: 0.3s;
     font-size: 0;
     position: absolute;
-    top: 11px;
+    top: 10px;
 }
 
 .duration {
@@ -91,7 +106,7 @@
     transition-duration: 0.3s;
     font-size: 0;
     position: absolute;
-    top: 11px;
+    top: 10px;
     right: 0;
 }
 
@@ -136,7 +151,7 @@
     position: relative;
     top: -5px;
     right: -204px;
-    z-index: $top-level;
+    z-index: var(--top-level);
     opacity: 0.4;
 }
 
@@ -144,8 +159,8 @@
     height: 74px;
     top: -42px;
     left: 330px;
-    background: white;
-    border: 1px solid $chosen-icon;
+    background: var(--background-color);
+    border: 1px solid var(--chosen-icon);
     border-radius: 2px;
     position: absolute;
     padding: 5px;
@@ -168,12 +183,12 @@
 }
 
 .volume-scale:before {
-    border-top-color: $chosen-icon;
+    border-top-color: var(--chosen-icon);
     border-width: 8px;
 }
 
 .volume-scale:after {
-    border-top-color: white;
+    border-top-color: var(--background-color);
     border-width: 6px;
     margin-left: -6px;
 }
@@ -181,7 +196,7 @@
 .volume-scale-back {
     height: 60px;
     width: 5px;
-    background: $chosen-icon;
+    background: var(--chosen-icon);
     position: relative;
     left: 4px;
     cursor: pointer;
@@ -224,17 +239,13 @@
 
 .track-list {
     position: relative;
-    z-index: $back-level;
+    z-index: var(--back-level);
     height: 200px;
     overflow: hidden scroll;
 }
 
-.track-list::-webkit-scrollbar {
-    width: 0;
-}
-
 .current-marker {
-    background: #00e676;
+    background: var(--marker-color);
     width: 5px;
     position: absolute;
     transition-property: height, top;
@@ -250,8 +261,12 @@
     opacity: 0;
 }
 
+.track-list::-webkit-scrollbar {
+    width: 4px;
+}
+
 .track-list > .row {
-    background: white;
+    background: var(--background-color);
     cursor: pointer;
     padding-bottom: 5px;
     padding-top: 5px;
@@ -260,7 +275,7 @@
 }
 
 .track-list > .row:hover {
-    background: $selected-elem;
+    background: var(--selected-elem);
 }
 
 .track-list .row {
@@ -294,11 +309,11 @@
 }
 
 .border-bottom {
-    border-bottom: 1px solid $chosen-icon;
+    border-bottom: 1px solid var(--chosen-icon);
 }
 
 .top-line {
-    border-top: 1px solid $chosen-icon;
+    border-top: 1px solid var(--chosen-icon);
     margin-top: 16px;
 }
 
@@ -309,7 +324,7 @@
 
 .group-name {
     text-decoration: none;
-    color: black;
+    color: var(--font-color);
     font-size: 15px;
 }
 
@@ -317,7 +332,7 @@
     width: 13px;
     height: 1000px;
     margin-right: 5px;
-    background: white;
+    background: var(--background-color);
     cursor: pointer;
 }
 
@@ -330,27 +345,27 @@
 
 .trigger-button {
     border-radius: 4px;
-    box-shadow: $box-shadow;
+    box-shadow: var(--box-shadow);
     position: absolute;
     top: 50%;
     left: -37px;
     width: 40px;
     height: 40px;
-    background: white;
-    z-index: $under-level;
+    background: var(--background-color);
+    z-index: var(--under-level);
     cursor: pointer;
 }
 
 .trigger-button:hover {
-    background: $chosen-icon;
+    background: var(--chosen-icon);
 }
 
 .player-trigger-row {
     display: none;
     height: 25px;
-    background: white;
+    background: var(--background-color);
     position: relative;
-    z-index: $main-level;
+    z-index: var(--main-level);
     width: 108%;
     left: -15px;
 }
@@ -368,7 +383,7 @@
     top: 0;
     width: 100%;
     height: 60px;
-    z-index: $top-level;
+    z-index: var(--top-level);
     background: transparent;
 }
 

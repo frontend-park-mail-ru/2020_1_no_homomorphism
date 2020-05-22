@@ -75,6 +75,13 @@ export default class PopUpComponent {
      * удаляет из DOM поп-ап
      */
     close() {
+        const previous = this.container.children.slice(0,
+            this.container.children.indexOf(this.element));
+        previous.forEach((popUp) => {
+            popUp.style.bottom = (
+                parseInt(popUp.style.bottom.slice(0, popUp.style.bottom.length - 2)) - 75
+            ).toString() + 'px';
+        });
         this.element.remove();
     }
 }

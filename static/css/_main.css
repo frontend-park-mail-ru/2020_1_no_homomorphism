@@ -1,0 +1,24 @@
+@import "modules/_colors.css";
+@import "modules/_variables.css";
+@import "modules/_all.css";
+@import "partials/_base.css";
+@import "partials/_buttons.css";
+@import "partials/_grids.css";
+@import "partials/_images.css";
+@import "partials/_player.css";
+@import "partials/_reset.css";
+@import "partials/_states.css";
+@import "layout/_layout.css";
+@import "layout/_mobile_layout.css";
+@import "../fonts/fonts.css";
+
+@keyframes slidein {
+    from {
+        margin-left: 100%;
+        width: 100%;
+    }
+
+    to {
+        margin-left: 0%;
+    }
+}

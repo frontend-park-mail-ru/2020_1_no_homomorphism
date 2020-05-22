@@ -62,6 +62,14 @@ export default class NavbarView extends BaseView {
         document.getElementsByClassName('l-navbar-small-search')[0]
             .addEventListener('click', this.renderSearch.bind(this));
         window.addEventListener('resize', this.renderSearch.bind(this));
+        window.addEventListener('click', (event) => {
+            const dropdown = document.getElementsByClassName('m-more-dropdown').find((elem) => {
+                return elem.classList.contains('is-expanded');
+            });
+            if (dropdown && !dropdown.contains(event.target)) {
+                dropdown.classList.remove('is-expanded');
+            }
+        });
     }
 
     /**

@@ -1,5 +1,5 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
-    <div class="m-right-col">
+    <div class="m-right-col-bottom">
         <div class="col">
             <div class="m-add-playlist-button" title="Add playlist"> </div>
         </div>

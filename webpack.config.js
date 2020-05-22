@@ -54,40 +54,38 @@ module.exports = {
         }),
     ],
     module: {
-        rules: [
-            {
-                test: /\.(css|scss)$/,
-                use: [
-                    isDev ?
-                        'vue-style-loader' :
-                        MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    'sass-loader',
-                ],
-            },
-
-
-            {
-                test: /\.xml$/,
-                use: [
-                    {
-                        loader: 'fest-webpack-loader',
+        rules: [{
+            test: /\.css$/,
+            exclude: /node_modules/,
+            use: [
+                'style-loader',
+                {
+                    loader: 'css-loader',
+                    options: {
+                        importLoaders: 1,
                     },
-                ],
-            },
-            {
-                test: /\.(png|svg|jpe?g|gif)$/,
-                use: [
-                    {
-                        loader: 'file-loader',
+                }, {
+                    loader: 'postcss-loader',
+                    options: {
+                        config: {
+                            path: 'postcss.config.js',
+                        },
                     },
-                ],
-            },
-            {
-                test: /\.(j|t)s$/,
-                exclude: /node_modules/,
-                loader: ['babel-loader', 'ts-loader'],
-            },
-        ],
+                }],
+        }, {
+            test: /\.xml$/,
+            use: [{
+                loader: 'fest-webpack-loader',
+            }],
+        }, {
+            test: /\.(png|svg|jpe?g|gif)$/,
+            use: [{
+                loader: 'file-loader',
+            }],
+        }, {
+            test: /\.(j|t)s$/,
+            exclude: /node_modules/,
+            loader: ['babel-loader', 'ts-loader'],
+        }],
     },
 };

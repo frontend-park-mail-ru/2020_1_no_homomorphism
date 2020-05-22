@@ -3,14 +3,14 @@
         <div class="col col-4">
             <form class="l-form l-card" method="post" autocomplete="none">
                 <h2>LOG IN</h2>
-                <div class="m-login-input">
+                <div class="m-form-input">
                     <label>
                         Login
                         <input class="m-big-input" type="text" id="login" use = "required"/>
                         <div class="m-error-message-small"></div>
                     </label>
                 </div>
-                <div class="m-login-input">
+                <div class="m-form-input">
                     <label>
                         Password
                         <input class="m-big-input" type="password" id="password" use="required"/>

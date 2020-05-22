@@ -1,4 +1,4 @@
-import {SETTINGS, DOM, POPUP} from '@libs/constants';
+import {SETTINGS, DOM, POPUP, LAYOUT} from '@libs/constants';
 import settings from '@views/settings/settings.tmpl.xml';
 import BaseView from '@libs/base_view';
 import User from '@libs/user';
@@ -30,6 +30,7 @@ export default class SettingsView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
+        super.setData({mobile: window.matchMedia(LAYOUT.MOBILE).matches});
         super.render(document.getElementsByClassName(DOM.CONTENT)[0]);
         this.eventBus.emit(SETTINGS.GET_USER_DATA);
         if (User.token === undefined) {
@@ -71,7 +72,7 @@ export default class SettingsView extends BaseView {
      */
     renderData(data) {
         this.userData = data;
-        document.getElementsByClassName(' m-round-image')[0].src = data.image;
+        document.getElementsByClassName('m-round-image')[0].src = data.image;
         document.getElementsByClassName('m-top-name')[0].innerHTML = inputSanitize(data.name);
         document.getElementsByClassName('m-top-login')[0].innerHTML = inputSanitize(data.login);
         document.getElementsByClassName('m-big-input')[0].value = inputSanitize(data.name);

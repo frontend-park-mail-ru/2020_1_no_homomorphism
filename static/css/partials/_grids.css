@@ -1,4 +1,4 @@
-// Блочная вёрстка
+/* Блочная вёрстка */
 @import "../modules/_variables";
 
 * {
@@ -130,20 +130,3 @@
 .row::after {
     clear: both;
 }
-
-// @media screen and (max-width: 425px) {
-//   .l-content .col.col-1,
-//   .l-content .col.col-2,
-//   .l-content .col.col-3,
-//   .l-content .col.col-4,
-//   .l-content .col.col-5,
-//   .l-content .col.col-6,
-//   .l-content .col.col-7,
-//   .l-content .col.col-8,
-//   .l-content .col.col-9,
-//   .l-content .col.col-10,
-//   .l-content .col.col-11,
-//   .l-content .col.col-12 {
-//     width: 100%;
-//   }
-// }
