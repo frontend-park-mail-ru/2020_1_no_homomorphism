@@ -31,8 +31,6 @@ export default class PlayerView extends BaseView {
             this.trackListComponent.setEventListeners.bind(this));
         this.subscribe();
         globalEventBus.on(GLOBAL.COLLAPSE, this.collapse.bind(this));
-        // globalEventBus.on(GLOBAL.LOCK, () => this.locked = true);
-        // globalEventBus.on(GLOBAL.CLEAR_AND_LOCK, () => this.locked = true);
     }
 
     /**

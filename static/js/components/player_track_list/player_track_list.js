@@ -168,6 +168,7 @@ export default class PlayerTrackListComponent {
         this.eventBus.emit(PLAYER.TRACK_UPDATE, tracks[0]);
         document.getElementsByClassName('track-list')[0].innerHTML += template(tracks);
         this.locked = false;
+        globalEventBus.emit(GLOBAL.UNLOCK);
         if (!this.expanded) {
             this.triggerClick();
         }
@@ -184,6 +185,7 @@ export default class PlayerTrackListComponent {
                 this.triggerClick();
             }
             this.locked = true;
+            globalEventBus.emit(GLOBAL.LOCK);
             if (document.getElementsByClassName('l-player')) {
                 document.getElementsByClassName('l-player')[0].classList
                     .remove('l-player-visible');
