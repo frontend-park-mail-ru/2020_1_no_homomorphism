@@ -1,4 +1,5 @@
-import {PLAYER} from '@libs/constants';
+import {PLAYER, GLOBAL} from '@libs/constants';
+import {globalEventBus} from '@libs/eventBus';
 import template from '@components/player_control/player_control.tmpl.xml';
 
 /**
@@ -17,8 +18,12 @@ export default class PlayerControlComponent {
         this.volume = 1;
         this.timelineDrag = false;
         this.volumeDrag = false;
+        this.locked = true;
         this.eventBus = eventBus;
         this.subscribe();
+        globalEventBus.on(GLOBAL.UNLOCK, () => this.locked = false);
+        globalEventBus.on(GLOBAL.LOCK, () => this.locked = true);
+        globalEventBus.on(GLOBAL.CLEAR_AND_LOCK, () => this.locked = true);
     }
 
     /**
@@ -240,6 +245,14 @@ export default class PlayerControlComponent {
             element: document.querySelector('.volume-scale-front'),
             event: 'mousemove',
             callback: this.volumeMouseMove,
+        }, {
+            element: window,
+            event: 'keydown',
+            callback: this.keydown,
+        }, {
+            element: window,
+            event: 'keyup',
+            callback: this.keyup,
         }].forEach((el) => {
             el.element.addEventListener(el.event, el.callback.bind(this));
         });
@@ -491,6 +504,92 @@ export default class PlayerControlComponent {
             this.eventBus.emit(PLAYER.UNMUTE);
         } else {
             this.eventBus.emit(PLAYER.MUTE);
+        }
+    }
+
+    /**
+     * Слушает нажатие клавиш
+     * @param {Object} event
+     */
+    keydown(event) {
+        if (document.activeElement.tagName === 'INPUT' || this.locked) {
+            return;
+        }
+        let time;
+        let duration;
+        switch (event.code) {
+        case PLAYER.KEYS.PLUS_SECS:
+            event.preventDefault();
+            time = document.getElementsByTagName('audio')[0].currentTime +
+                PLAYER.KEYS.SECS_DELTA;
+            duration = document.getElementsByTagName('audio')[0].duration;
+            time = time > duration ? duration : time;
+            this.eventBus.emit(PLAYER.REWIND, time / duration);
+            break;
+        case PLAYER.KEYS.MINUS_SECS:
+            event.preventDefault();
+            time = document.getElementsByTagName('audio')[0].currentTime -
+                PLAYER.KEYS.SECS_DELTA;
+            duration = document.getElementsByTagName('audio')[0].duration;
+            time = time < 0 ? 0 : time;
+            this.eventBus.emit(PLAYER.REWIND, time / duration);
+            break;
+        case PLAYER.KEYS.VOLUME_UP:
+            event.preventDefault();
+            this.volume += PLAYER.KEYS.VOLUME_DELTA;
+            this.volume = this.volume > 1 ? 1 : this.volume;
+            document.getElementsByTagName('audio')[0].volume = this.volume;
+            this.drawVolume(this.volume * 60);
+            this.drawUnmute();
+            break;
+        case PLAYER.KEYS.VOLUME_DOWN:
+            event.preventDefault();
+            this.volume -= PLAYER.KEYS.VOLUME_DELTA;
+            this.volume = this.volume < 0 ? 0 : this.volume;
+            document.getElementsByTagName('audio')[0].volume = this.volume;
+            this.drawVolume(this.volume * 60);
+            this.drawUnmute();
+            break;
+        }
+    }
+
+    /**
+     * Слушает нажатие клавиш
+     * @param {Object} event
+     */
+    keyup(event) {
+        if (document.activeElement.tagName === 'INPUT' || this.locked) {
+            return;
+        }
+        switch (event.code) {
+        case PLAYER.KEYS.PLAY_PAUSE:
+            event.preventDefault();
+            this.playPauseButtonClick();
+            break;
+        case PLAYER.KEYS.PREV:
+            event.preventDefault();
+            this.prevButtonClick();
+            break;
+        case PLAYER.KEYS.NEXT:
+            event.preventDefault();
+            this.nextButtonClick();
+            break;
+        case PLAYER.KEYS.MUTE:
+            event.preventDefault();
+            this.volumeButtonClick();
+            break;
+        case PLAYER.KEYS.SHUFFLE:
+            event.preventDefault();
+            this.shuffleButtonMouseOver();
+            this.shuffleButtonClick();
+            this.shuffleButtonMouseOut();
+            break;
+        case PLAYER.KEYS.REPEAT:
+            event.preventDefault();
+            this.repeatButtonMouseOver();
+            this.repeatButtonClick();
+            this.repeatButtonMouseOut();
+            break;
         }
     }
 

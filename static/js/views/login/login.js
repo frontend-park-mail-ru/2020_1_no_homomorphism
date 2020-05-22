@@ -33,12 +33,10 @@ export default class LoginView extends BaseView {
      * setEventListeners
      */
     setEventListeners() {
-        document.addEventListener('click', (event) => {
-            if (event.target.getAttribute('id') === 'submit-login') {
-                event.preventDefault();
-                event.stopImmediatePropagation();
-                this.submit();
-            }
+        document.getElementById('submit-login').addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            this.submit();
         });
     }
 

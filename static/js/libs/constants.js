@@ -74,6 +74,8 @@ export const GLOBAL = {
     PLAY_PLAYLIST: 'global-play-playlist',
     PLAY_ALBUM: 'global-play-album',
     CLEAR_AND_LOCK: 'global-clear-and-lock',
+    LOCK: 'global-lock',
+    UNLOCK: 'global-unlock',
     COLLAPSE: 'global-collapse',
     REDIRECT: 'redirect',
     HREF: 'global-href',
@@ -150,6 +152,20 @@ export const PLAYER = {
     DRAW_UNREPEAT: 'player-draw-unrepeat',
     DRAW_MUTE: 'player-draw-mute',
     DRAW_UNMUTE: 'player-draw-unmute',
+    KEYS: {
+        PLAY_PAUSE: 'Space',
+        SECS_DELTA: 5,
+        PLUS_SECS: 'ArrowRight',
+        MINUS_SECS: 'ArrowLeft',
+        PREV: 'KeyC',
+        NEXT: 'KeyV',
+        VOLUME_DELTA: 0.05,
+        VOLUME_UP: 'ArrowUp',
+        VOLUME_DOWN: 'ArrowDown',
+        MUTE: 'KeyM',
+        SHUFFLE: 'KeyB',
+        REPEAT: 'KeyN',
+    },
 };
 
 export const SETTINGS = {
