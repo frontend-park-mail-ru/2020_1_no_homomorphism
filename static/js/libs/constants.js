@@ -45,7 +45,7 @@ export const PAGINATION = {
 
 export const LAYOUT = {
     MOBILE: 'screen and (max-width: 480px) and (min-width: 344px)',
-    TABLET: 'screen and (min-width: 481px) and (max-width: 987px)',
+    TABLET: 'screen and (min-width: 481px) and (max-width: 1106px)',
     DESKTOP: 'min-width: 988px',
 };
 
@@ -303,4 +303,26 @@ export const POPUP = {
     LOGIN_ERROR: 'Please login',
     LIFETIME: 2000,
     DISSOLUTIONTIME: 1000,
+};
+
+export const THEME = {
+    LIGHT: {
+        GREEN: [
+            ['--selected-elem', '#d6ffeb'],
+            ['--marker-color', '#00e676'],
+            ['--button-color', '#0ab992'],
+        ],
+    },
+    DARK: {
+        GREEN: [
+            ['--selected-elem', '#2d9c66'],
+            ['--marker-color', '#2d9c66'],
+            ['--button-color', '#2d9c66'],
+        ],
+        PINK: [
+            ['--selected-elem', '#de4a7d'],
+            ['--marker-color', '#de4a7d'],
+            ['--button-color', '#de4a7d'],
+        ],
+    },
 };

@@ -21,6 +21,8 @@ export default class PlayerView extends BaseView {
         this.expanded = false;
         this.locked = true;
         this.footer = false;
+        this.triggerTouchedY = undefined;
+        this.playerTouchedY = undefined;
         this.topTrackComponent = new TopTrackComponent(eventBus);
         this.trackListComponent = new PlayerTrackListComponent(eventBus);
         this.playerControlComponent = new PlayerControlComponent(eventBus);
@@ -86,6 +88,7 @@ export default class PlayerView extends BaseView {
         }
         const body = document.documentElement;
         const mobile = window.matchMedia(LAYOUT.MOBILE);
+        const tablet = window.matchMedia(LAYOUT.TABLET);
         const left = (
             mobile.matches ?
                 0 :
@@ -94,24 +97,42 @@ export default class PlayerView extends BaseView {
         this.root.style.left = left.toString() + 'px';
         const top =
             mobile.matches ?
-                (this.expanded ? NAVBAR.HEIGHT : document.documentElement.clientHeight) :
+                (this.expanded ?
+                    NAVBAR.HEIGHT :
+                    document.getElementsByTagName('audio')[0].currentSrc !== '' ?
+                        NAVBAR.HEIGHT :
+                        body.clientHeight) :
                 NAVBAR.HEIGHT;
-        document.getElementsByTagName('audio')[0].volume = this.playerControlComponent.volume;
-        let height = document.documentElement.clientHeight - top;
         this.root.style.top = top.toString() + 'px';
+        document.getElementsByTagName('audio')[0].volume = this.playerControlComponent.volume;
+        if (mobile.matches) {
+            if (this.expanded) {
+                document.getElementsByClassName('l-pop-up-container')[0].style.bottom = '0';
+            } else {
+                document.getElementsByClassName('l-pop-up-container')[0].style.bottom =
+                    (top - body.clientHeight).toString() + 'px';
+            }
+        }
+        let height = body.clientHeight - top;
         if (height === 0) {
             return;
         }
         this.root.style.height = height.toString() + 'px';
         document.getElementsByClassName('player-trigger')[0]
             .style.height = height.toString() + 'px';
-        height -= document.getElementsByClassName('container-audio')[0].clientHeight +
-            document.getElementsByClassName('l-music-bar')[0].clientHeight +
-            document.getElementsByClassName('patch')[0].clientHeight +
-            (mobile.matches ?
-                document.getElementsByClassName('player-trigger-row')[0].clientHeight :
-                0);
-        document.getElementsByClassName('track-list')[0].style.height = height.toString() + 'px';
+        if (tablet.matches) {
+            document.getElementsByClassName('track-list')[0].style.height = (body.clientHeight -
+                NAVBAR.HEIGHT).toString() + 'px';
+        } else {
+            height -= document.getElementsByClassName('container-audio')[0].clientHeight +
+                document.getElementsByClassName('l-music-bar')[0].clientHeight +
+                document.getElementsByClassName('patch')[0].clientHeight +
+                (mobile.matches ?
+                    document.getElementsByClassName('player-trigger-row')[0].clientHeight :
+                    0);
+            document.getElementsByClassName('track-list')[0].style.height =
+                height.toString() + 'px';
+        }
     }
 
     /**
@@ -147,10 +168,6 @@ export default class PlayerView extends BaseView {
             event: 'click',
             callback: this.triggerClick,
         }, {
-            element: document.querySelector('.player-trigger-row'),
-            event: 'click',
-            callback: this.triggerClick,
-        }, {
             element: document.querySelector('.trigger-button'),
             event: 'mouseover',
             callback: this.triggerMouseOver,
@@ -162,6 +179,22 @@ export default class PlayerView extends BaseView {
             element: document.querySelector('.trigger-button'),
             event: 'click',
             callback: this.triggerClick,
+        }, {
+            element: document.getElementsByClassName('player-trigger-row')[0],
+            event: 'touchstart',
+            callback: this.triggerTouch,
+        }, {
+            element: window,
+            event: 'touchend',
+            callback: this.triggerSwipe,
+        }, {
+            element: document.getElementsByClassName('l-player')[0],
+            event: 'touchstart',
+            callback: this.playerTouch,
+        }, {
+            element: document.getElementsByClassName('l-player')[0],
+            event: 'touchend',
+            callback: this.playerSwipe,
         }].forEach((el) => {
             el.element.addEventListener(el.event, el.callback.bind(this));
         });
@@ -241,6 +274,7 @@ export default class PlayerView extends BaseView {
                         document.getElementsByClassName('play-pause')[0],
                     );
                 }, 1000);
+                document.getElementsByClassName('l-pop-up-container')[0].style.bottom = '60px';
             } else {
                 this.footer = false;
                 document.getElementsByClassName('player-trigger-arrow-row')[0].classList
@@ -256,6 +290,7 @@ export default class PlayerView extends BaseView {
                     document.getElementById('next'),
                 );
                 document.getElementById('cover').classList.remove('in-footer-cover');
+                document.getElementsByClassName('l-pop-up-container')[0].style.bottom = '0';
             }
             const top =
                 this.expanded ?
@@ -270,6 +305,59 @@ export default class PlayerView extends BaseView {
             this.root.style.left = left + 'px';
         }
         this.expanded = !this.expanded;
+    }
+
+    /**
+     * Слушает touchstart по триггеру плеера
+     * @param {Object} event
+     */
+    triggerTouch(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        this.triggerTouchedY = event.changedTouches[0].clientY;
+        setTimeout(() => {
+            this.triggerTouchedY = undefined;
+        }, 500);
+    }
+
+    /**
+     * Слушает свайп по триггеру плеера
+     * @param {Object} event
+     */
+    triggerSwipe(event) {
+        if (this.triggerTouchedY) {
+            this.triggerClick();
+        }
+    }
+
+    /**
+     * Слушает touchstart по плееру
+     * @param {Object} event
+     */
+    playerTouch(event) {
+        if (this.footer ||
+            document.getElementsByClassName('track-list')[0].contains(event.target)
+        ) {
+            return;
+        }
+        setTimeout(() => {
+            this.playerTouchedY = event.changedTouches[0].clientY;
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }, 100);
+        setTimeout(() => {
+            this.playerTouchedY = undefined;
+        }, 500);
+    }
+
+    /**
+     * Слушает свайп по плееру
+     * @param {Object} event
+     */
+    playerSwipe(event) {
+        if (this.playerTouchedY && !this.footer) {
+            this.triggerClick();
+        }
     }
 
     /**

@@ -22,6 +22,40 @@
 <!--                <div class="l-big-track-button add-button">-->
 <!--                    <img src="/static/img/icons/add.svg" class="m-big-add-button" height="15px" alt="..."/>-->
 <!--                </div>-->
+                <div class="l-big-track-button more-button">
+                    <img src="/static/img/icons/more_vert.svg" class="m-big-more-button" height="15px" alt="..."/>
+                </div>
+            </div>
+            <div class="m-top-right-corner m-more-dropdown m-mobile-tablet-only">
+                <div class="row">
+                    <div class="col">
+                        <button class="m-more-dropdown-button delete-button">
+                            <img src="/static/img/icons/clear.svg"/>
+                            <span class="m-text-in-button">remove</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col">
+                        <button class="m-more-dropdown-button like-button">
+                            <fest:if test="!track.is_liked">
+                                <img src="/static/img/icons/favorite_border.svg"/>
+                            </fest:if>
+                            <fest:if test="track.is_liked">
+                                <img src="/static/img/icons/favorite.svg"/>
+                            </fest:if>
+                            <span class="m-text-in-button">like</span>
+                        </button>
+                    </div>
+                </div> -->
+                <!-- <div class="row">
+                    <div class="col">
+                        <button class="m-more-dropdown-button add-button">
+                            <img src="/static/img/icons/add.svg"/>
+                            <span class="m-text-in-button">add</span>
+                        </button>
+                    </div>
+                </div> -->
             </div>
         </div>
     </fest:for>

@@ -6,10 +6,12 @@ import search from '@components/search/search.xml';
 export default class SearchDummyComponent {
     /** Конструктор
      * @param {function} callback
+     * @param {function} close
      */
-    constructor(callback) {
+    constructor(callback, close) {
         this._data = {};
         this._getIdByClick = callback;
+        this.close = close;
     }
 
     /**
@@ -27,6 +29,9 @@ export default class SearchDummyComponent {
      * setEventListener
      */
     setEventListener() {
+        window.addEventListener('scroll', () => {
+            this.close(true, false);
+        });
         document.querySelectorAll('.m-small-track').forEach((track) => {
             track.onclick = (event) => this.playTrack.bind(this)(event);
         });

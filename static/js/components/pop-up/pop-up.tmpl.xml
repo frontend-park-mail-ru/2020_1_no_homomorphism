@@ -13,7 +13,7 @@
                 <div class="m-pop-up-message">
                     <fest:value>data.message</fest:value>
                 </div>
-                <img src="/static/img/icons/clear.svg" class="m-pop-up-close" height="15px" alt="..."/>
+                <img src="/static/img/icons/clear.svg" class="m-pop-up-close" alt="..."/>
             </div>
         </fest:otherwise>
     </fest:choose>

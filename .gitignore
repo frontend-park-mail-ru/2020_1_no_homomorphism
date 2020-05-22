@@ -114,5 +114,4 @@ package-lock.json
 static/music
 static/audio
 static/img/background
-#static/img
 run.sh

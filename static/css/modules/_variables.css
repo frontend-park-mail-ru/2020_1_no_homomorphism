@@ -1,0 +1,16 @@
+/* Переменные */
+@import "_colors.css";
+:root {
+    --card-border: 10px;
+    --card-border-small: 8px;
+    --medium-icon-border: 20px;
+    --box-shadow-hover: 0 0 20px #6b6b6b;
+    --box-shadow-hard: 0 1px 20px rgba(12, 12, 12, 0.2);
+    --small-pad: 8px;
+
+    --under-level: -1;
+    --back-level: 0;
+    --main-level: 1;
+    --top-level: 2;
+    --super-top-level: 3;
+}

@@ -1,13 +1,13 @@
-import {PLAYLIST, POPUP} from '@libs/constants';
-import share from '@components/share_playlist/share.tmpl.xml';
+import {PLAYLIST, POPUP, LAYOUT} from '@libs/constants';
+import more from '@components/more_playlist/more.tmpl.xml';
+import moreMobile from '@components/more_playlist/more_mobile.tmpl.xml';
 import PopUp from '@components/pop-up/pop-up';
-import {inputSanitize} from '@libs/input_sanitize';
 
 /**
  * Компонента, отвечающая за возможности авторизированного пользователя
  * управлять некоторыми функциям своего плейлиста
  */
-export default class SharePlaylistComponent {
+export default class MorePlaylistComponent {
     /**
      * Constructor
      * @param {Object} eventBus
@@ -22,9 +22,16 @@ export default class SharePlaylistComponent {
      * @param {String} isPrivate
      */
     render(isPrivate) {
-        document.getElementsByClassName('l-top-card')[0].innerHTML += share();
+        if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
+            document.getElementsByClassName('l-top-card')[0].innerHTML += moreMobile();
+        } else {
+            document.getElementsByClassName('l-top-card')[0].innerHTML += more();
+        }
         document.getElementById('checkbox').checked = isPrivate;
-        this._button = document.getElementsByClassName('m-button-share')[0];
+        this._button = document.getElementById('playlist-share-button');
+        if (isPrivate) {
+            this._button.classList.add('is-button-disabled');
+        }
         this._setOwnerEventListener();
     }
 
@@ -40,16 +47,26 @@ export default class SharePlaylistComponent {
      * set owner event listeners
      */
     _setOwnerEventListener() {
-        document.getElementsByClassName('m-delete-playlist-button')[0].addEventListener('click',
+        if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
+            document.getElementsByClassName('m-more-button')[0]
+                .addEventListener('click', (event) => {
+                    event.stopImmediatePropagation();
+                    document.getElementsByClassName('m-more-dropdown')[0].classList
+                        .toggle('is-expanded');
+                });
+        } else {
+            document.getElementsByClassName('m-button-share')[0]
+                .addEventListener('click', (event) => {
+                    event.stopImmediatePropagation();
+                    document.getElementsByClassName('m-more-dropdown')[0].classList
+                        .toggle('is-expanded');
+                });
+        }
+        document.getElementById('playlist-delete-button').addEventListener('click',
             this._deletePlaylist.bind(this));
         document.getElementsByClassName('m-slider')[0].addEventListener('click',
             this._setPrivacy.bind(this));
-        this._button.addEventListener('click',
-            this._copyLink.bind(this));
-        this._button.addEventListener('mouseover',
-            this._showShareText.bind(this));
-        this._button.addEventListener('mouseout',
-            this._hideShareText.bind(this));
+        this._button.addEventListener('click', this._copyLink.bind(this));
     }
 
     /**
@@ -58,6 +75,7 @@ export default class SharePlaylistComponent {
      */
     _setPrivacy(event) {
         this._playlist.private = !this._playlist.private;
+        this._button.classList.toggle('is-button-disabled');
         new PopUp(this._playlist.private ?
             POPUP.PLAYLIST_PRIVACY_PRIVATE_MESSAGE :
             POPUP.PLAYLIST_PRIVACY_PUBLIC_MESSAGE);
@@ -81,7 +99,6 @@ export default class SharePlaylistComponent {
                 });
             return;
         }
-        new PopUp(POPUP.PLAYLIST_LINK_COPY_PRIVACY_ERROR_MESSAGE, true);
         this._button.classList.toggle('error-border');
         setTimeout(this.delErrorClass.bind(this), 1000);
     }
@@ -98,29 +115,6 @@ export default class SharePlaylistComponent {
      */
     delErrorClass() {
         this._button.classList.remove('error-border');
-    }
-
-    /**
-     * Show text
-     */
-    _showShareText() {
-        this.text = this._playlist.private ? 'Make playlist public' : 'Click to copy the link';
-        setTimeout(this._shareText.bind(this), 600);
-    }
-
-    /**
-     * Hide text
-     */
-    _hideShareText() {
-        this.text = '';
-        setTimeout(this._shareText.bind(this), 200);
-    }
-
-    /**
-     * Set text
-     */
-    _shareText() {
-        document.getElementsByClassName('m-text-in-button')[0].innerHTML = inputSanitize(this.text);
     }
 
     /**
