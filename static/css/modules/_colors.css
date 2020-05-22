@@ -49,3 +49,23 @@
         box-shadow: 0 0 0 1px var(--selected-elem);
     }
 }
+
+:root[theme="special"][theme-name="prezentaciya"] {
+    --background-color: white;
+    --overlay-color: white;
+    --font-color: black;
+    --tiny-ref-color: #070025;
+    --chosen-icon: #ebeae7;
+    --obscure: gray;
+    --light-gray: #ebeae7;
+    --pop-up-color: #d6ffeb;
+    --pop-up-error-color: #ffcccc;
+    --error-color: red;
+    --box-shadow: 0 1px 20px 0 #ebeae7;
+    --gray-hover: gray;
+    --like-src: url("../../static/img/icons/favorite_light.svg");
+
+    .paNqSg, .G2Vk3A, .NYcNWw {
+        display: block;
+    }
+}

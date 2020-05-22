@@ -53,6 +53,11 @@ export default class ChooseThemeComponent {
                 target.classList.add('is-current-theme');
                 const split = target.getAttribute('id').split(' ');
                 document.documentElement.setAttribute('theme', split[0]);
+                if (split[0] === 'special') {
+                    document.documentElement.setAttribute('theme-name', split[1]);
+                } else {
+                    document.documentElement.removeAttribute('theme-name');
+                }
                 THEME[split[0]][split[1]].forEach((prop) => {
                     document.documentElement.style.setProperty(prop[0], prop[1]);
                 });

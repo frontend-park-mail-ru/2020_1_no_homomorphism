@@ -33,6 +33,11 @@ export default class NavbarView extends BaseView {
         if (window.localStorage.getItem('theme')) {
             const split = window.localStorage.getItem('theme').split(' ');
             document.documentElement.setAttribute('theme', split[0]);
+            if (split[0] === 'special') {
+                document.documentElement.setAttribute('theme-name', split[1]);
+            } else {
+                document.documentElement.removeAttribute('theme-name');
+            }
             THEME[split[0]][split[1]].forEach((prop) => {
                 document.documentElement.style.setProperty(prop[0], prop[1]);
             });
@@ -143,9 +148,14 @@ export default class NavbarView extends BaseView {
         document.getElementById('settings-icon').classList.remove('is-not-displayed');
         const split = data.theme.split(' ');
         document.documentElement.setAttribute('theme', split[0]);
-        THEME[split[0]][split[1]].forEach((prop) => {
-            document.documentElement.style.setProperty(prop[0], prop[1]);
-        });
+        if (split[0] === 'special') {
+            document.documentElement.setAttribute('theme-name', split[1]);
+        } else {
+            document.documentElement.removeAttribute('theme-name');
+            THEME[split[0]][split[1]].forEach((prop) => {
+                document.documentElement.style.setProperty(prop[0], prop[1]);
+            });
+        }
     }
 
     /**
