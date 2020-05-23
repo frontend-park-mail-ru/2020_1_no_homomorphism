@@ -195,6 +195,10 @@ export default class PlayerView extends BaseView {
             element: document.getElementsByClassName('l-player')[0],
             event: 'touchend',
             callback: this.playerSwipe,
+        }, {
+            element: window,
+            event: 'keyup',
+            callback: this.keyup,
         }].forEach((el) => {
             el.element.addEventListener(el.event, el.callback.bind(this));
         });
@@ -356,6 +360,20 @@ export default class PlayerView extends BaseView {
      */
     playerSwipe(event) {
         if (this.playerTouchedY && !this.footer) {
+            this.triggerClick();
+        }
+    }
+
+    /**
+     * Слушает нажатие клавиш
+     * @param {Object} event
+     */
+    keyup(event) {
+        if (document.activeElement.tagName === 'INPUT' || this.locked) {
+            return;
+        }
+        if (event.code === PLAYER.KEYS.EXPAND) {
+            event.preventDefault();
             this.triggerClick();
         }
     }

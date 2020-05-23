@@ -518,6 +518,9 @@ export default class PlayerControlComponent {
         let time;
         let duration;
         switch (event.code) {
+        case PLAYER.KEYS.PLAY_PAUSE:
+            event.preventDefault();
+            break;
         case PLAYER.KEYS.PLUS_SECS:
             event.preventDefault();
             time = document.getElementsByTagName('audio')[0].currentTime +

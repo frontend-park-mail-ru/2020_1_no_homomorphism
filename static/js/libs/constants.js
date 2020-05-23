@@ -118,7 +118,6 @@ export const NAVBAR = {
 };
 
 export const PLAYER = {
-    // REDIRECT: 'player-redirect',
     GET_TRACK: 'player-get-track',
     GET_TRACKS: 'player-get-tracks',
     RESIZE: 'player-resize',
@@ -153,6 +152,7 @@ export const PLAYER = {
     DRAW_MUTE: 'player-draw-mute',
     DRAW_UNMUTE: 'player-draw-unmute',
     KEYS: {
+        EXPAND: 'Comma',
         PLAY_PAUSE: 'Space',
         SECS_DELTA: 5,
         PLUS_SECS: 'ArrowRight',
