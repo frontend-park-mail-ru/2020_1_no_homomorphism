@@ -13,7 +13,7 @@
                 </div>
                 <div class="l-button-middle-play">
                     <button class="m-button-middle-play"> </button>
-                    <span class="m-tracks-amount">0 tracks</span>
+                    <div class="m-tracks-amount">0 tracks</div>
                 </div>
             </div>
             <div class="l-down-card">

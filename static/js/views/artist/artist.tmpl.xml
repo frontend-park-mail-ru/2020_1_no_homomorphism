@@ -15,6 +15,10 @@
                                 <fest:value>data.genre</fest:value>
                             </div>
                         </div>
+                        <div class="l-button-middle-play artist">
+                            <button class="m-button-middle-play"> </button>
+                            <!-- <div class="m-tracks-amount">0 tracks</div> -->
+                        </div>
                     </div>
                     <div class="m-right-col">
                         <div class="col">

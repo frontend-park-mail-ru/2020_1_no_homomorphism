@@ -205,10 +205,8 @@ export default class PlayerView extends BaseView {
      * Слушает обновление времени аудио
      */
     audioTimeUpdate() {
-        if (
-            isNaN(document.getElementsByTagName('audio')[0].currentTime /
-                document.getElementsByTagName('audio')[0].duration) ||
-            this.timelineDrag
+        if (isNaN(document.getElementsByTagName('audio')[0].currentTime /
+            document.getElementsByTagName('audio')[0].duration) || this.timelineDrag
         ) {
             return;
         }
