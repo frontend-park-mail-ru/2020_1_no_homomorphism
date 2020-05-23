@@ -26,10 +26,10 @@
                     <img src="/static/img/icons/more_vert.svg" class="m-big-more-button" height="15px" alt="..."/>
                 </div>
             </div>
-            <div class="m-top-right-corner m-more-dropdown m-mobile-tablet-only">
+            <div class="m-top-right-corner m-dropdown m-mobile-tablet-only">
                 <div class="row">
                     <div class="col">
-                        <button class="m-more-dropdown-button delete-button">
+                        <button class="m-dropdown-button delete-button">
                             <img src="/static/img/icons/clear.svg"/>
                             <span class="m-text-in-button">remove</span>
                         </button>
@@ -37,7 +37,7 @@
                 </div>
                 <!-- <div class="row">
                     <div class="col">
-                        <button class="m-more-dropdown-button like-button">
+                        <button class="m-dropdown-button like-button">
                             <fest:if test="!track.is_liked">
                                 <img src="/static/img/icons/favorite_border.svg"/>
                             </fest:if>
@@ -50,7 +50,7 @@
                 </div> -->
                 <!-- <div class="row">
                     <div class="col">
-                        <button class="m-more-dropdown-button add-button">
+                        <button class="m-dropdown-button add-button">
                             <img src="/static/img/icons/playlist_add.svg"/>
                             <span class="m-text-in-button">add</span>
                         </button>

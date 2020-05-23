@@ -66,17 +66,17 @@
                         </div>
                     </div>
                 </fest:if>
-                <div class="m-top-right-corner m-more-dropdown m-mobile-tablet-only">
+                <div class="m-top-right-corner m-dropdown m-mobile-tablet-only">
                     <fest:if test="data.type">
                         <div class="row">
-                            <button class="m-more-dropdown-button remove-button">
+                            <button class="m-dropdown-button remove-button">
                                 <img src="/static/img/icons/clear.svg"/>
                                 <span class="m-text-in-button">remove</span>
                             </button>
                         </div>
                     </fest:if>
                     <div class="row">
-                        <button class="m-more-dropdown-button like-button">
+                        <button class="m-dropdown-button like-button">
                             <fest:if test="!track.is_liked">
                                 <img src="/static/img/icons/favorite_border.svg"/>
                                 <span class="m-text-in-button">like</span>
@@ -88,7 +88,7 @@
                         </button>
                     </div>
                     <div class="row">
-                        <button class="m-more-dropdown-button add-button">
+                        <button class="m-dropdown-button add-button">
                             <img src="/static/img/icons/playlist_add.svg"/>
                             <span class="m-text-in-button">add</span>
                         </button>

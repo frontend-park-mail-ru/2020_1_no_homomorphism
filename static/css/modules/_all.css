@@ -609,7 +609,7 @@
     margin: 10px;
 }
 
-.m-more-dropdown {
+.m-dropdown {
     border-radius: 10px;
     background: var(--overlay-color);
     z-index: var(--main-level);

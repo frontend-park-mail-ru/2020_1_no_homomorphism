@@ -190,7 +190,7 @@ input:checked + .m-slider:before {
     }
 }
 
-.m-more-dropdown-button {
+.m-dropdown-button {
     background: var(--overlay-color);
     border: none;
     text-align: left;

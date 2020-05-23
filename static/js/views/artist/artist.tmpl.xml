@@ -15,16 +15,15 @@
                                 <fest:value>data.genre</fest:value>
                             </div>
                         </div>
-                        <div class="l-button-middle-play artist">
+                    </div>
+                    <div class="l-play-button-col col">
+                          <div class="l-button-middle-play artist">
                             <button class="m-button-middle-play"> </button>
-                            <!-- <div class="m-tracks-amount">0 tracks</div> -->
+                            <div class="m-tracks-amount m-mobile-only">play all tracks</div>
                         </div>
                     </div>
                     <div class="m-right-col">
-                        <div class="col">
-                            <div class="m-subscribe">
-                            </div>
-                        </div>
+                        <div class="m-subscribe"></div>
                     </div>
                 </div>
                 <div class="row">

@@ -219,7 +219,7 @@ export default class TrackListComponent {
      */
     moreClicked(event) {
         event.stopImmediatePropagation();
-        document.getElementsByClassName('m-more-dropdown').forEach((dropdown) => {
+        document.getElementsByClassName('m-dropdown').forEach((dropdown) => {
             if (dropdown != event.target.parentNode.parentNode.parentNode.lastChild) {
                 dropdown.classList.remove('is-expanded');
             }

@@ -50,19 +50,19 @@ export default class MorePlaylistComponent {
             document.getElementsByClassName('m-more-button')[0]
                 .addEventListener('click', (event) => {
                     event.stopImmediatePropagation();
-                    document.getElementsByClassName('m-more-dropdown').forEach((dropdown) => {
+                    document.getElementsByClassName('m-dropdown').forEach((dropdown) => {
                         if (dropdown != event.target.nextElementSibling) {
                             dropdown.classList.remove('is-expanded');
                         }
                     });
-                    document.getElementsByClassName('m-more-dropdown')[0].classList
+                    document.getElementsByClassName('m-dropdown')[0].classList
                         .toggle('is-expanded');
                 });
         } else {
             document.getElementsByClassName('m-button-share')[0]
                 .addEventListener('click', (event) => {
                     event.stopImmediatePropagation();
-                    document.getElementsByClassName('m-more-dropdown')[0].classList
+                    document.getElementsByClassName('m-dropdown')[0].classList
                         .toggle('is-expanded');
                 });
         }

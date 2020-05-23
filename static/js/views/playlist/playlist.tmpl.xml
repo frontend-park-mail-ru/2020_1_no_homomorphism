@@ -11,9 +11,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="l-button-middle-play">
-                    <button class="m-button-middle-play"> </button>
-                    <div class="m-tracks-amount">0 tracks</div>
+                <div class="l-play-button-col col">
+                    <div class="l-button-middle-play">
+                        <button class="m-button-middle-play"> </button>
+                        <div class="m-tracks-amount">0 tracks</div>
+                    </div>
                 </div>
             </div>
             <div class="l-down-card">
