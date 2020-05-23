@@ -360,19 +360,10 @@
     transition: box-shadow .3s ease;
     box-shadow: var(--box-shadow-hard);
     z-index: var(--top-level);
-
     .content {
         margin: auto;
     }
 }
-
-.l-small-list {
-    /* height: 250px; */
-    overflow-y: auto;
-    overflow-x: hidden;
-    box-sizing: border-box;
-}
-
 
 .m-small-ul {
     position: relative;
@@ -381,6 +372,9 @@
     overflow-x: hidden;
     box-sizing: border-box;
     font: 13px YSTextRegular, Arial, Helvetica, sans-serif;
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
 }
 
 .m-small-li {

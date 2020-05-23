@@ -203,7 +203,7 @@ input:checked + .m-slider:before {
     padding: 0 12px 0 6px;
     transition: border 10s cubic-bezier(0, 0, 1, 1);
     &.success-border {
-        border: 1px solid var(--button-color) !important;
+        border: 1px solid var(--pop-up-color) !important;
     }
     &.error-border {
         border: 1px solid red !important;
@@ -442,4 +442,27 @@ input:checked + .m-slider:before {
     &:hover {
         opacity: 0.8;
     }
+}
+
+.submit-input-button {
+    size: 24px;
+    background: var(--button-color);
+    border-radius: 4px;
+    position: absolute;
+    bottom: 13px;
+    right: 10px;
+    cursor: pointer;
+    & img {
+        filter: invert(0.9);
+    }
+    &.is-pressed {
+        box-shadow: 0 24px 0 0 #0000002e inset;
+    }
+}
+
+.m-close-choose-menu-button {
+    position: absolute;
+    right: -30px;
+    top: 0;
+    cursor: pointer;
 }

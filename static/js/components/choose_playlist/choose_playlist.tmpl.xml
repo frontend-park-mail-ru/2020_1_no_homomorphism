@@ -1,26 +1,26 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
-    <div class="row">
-        <div class="m-choose-menu ">
-            <div class="l-small-list">
-                <div class="m-small-ul">
-                    <fest:for iterate="data" index="i" value="playlist">
-                        <div class="m-small-li" p-id="{playlist.id}" is-include="{playlist.include}">
-                                <fest:if test="playlist.include === true">
-                                    <span class="m-small-ticked-button"></span>
-                                </fest:if>
-                                <fest:if test="playlist.include !== true">
-                                    <span class="m-small-add-button"></span>
-                                </fest:if>
-                            <span class="m-small-title" title="Мне нравится">
-                                <fest:value>playlist.name</fest:value>
-                            </span>
-                        </div>
-                    </fest:for>
+    <div class="m-choose-menu ">
+          <div class="m-small-ul">
+            <fest:for iterate="data" index="i" value="playlist">
+                <div class="m-small-li" p-id="{playlist.id}" is-include="{playlist.include}">
+                    <fest:if test="playlist.include === true">
+                        <span class="m-small-ticked-button"></span>
+                    </fest:if>
+                    <fest:if test="playlist.include !== true">
+                        <span class="m-small-add-button"></span>
+                    </fest:if>
+                    <span class="m-small-title">
+                        <fest:value>playlist.name</fest:value>
+                    </span>
                 </div>
-            </div>
-            <div class="l-small-input">
-                <input type="text" placeholder="Create playlist" class="m-small-input"></input>
+            </fest:for>
+        </div>
+        <div class="l-small-input" style="padding-right: 44px;">
+            <input type="text" placeholder="Create playlist" class="m-small-input"></input>
+            <div class="submit-input-button">
+                <img src="/static/img/icons/keyboard_return.svg"/>
             </div>
         </div>
+        <img class="m-close-choose-menu-button" src="/static/img/icons/clear.svg"/>
     </div>
 </fest:template>

@@ -262,14 +262,15 @@ export const SEARCH = {
 
 export const POPUP = {
     NEW: 'new pop-up',
-    LOG_IN_MESSAGE: 'Please, log in',
     SETTINGS_MESSAGE: 'Profile data successfully updated',
     PASSWORD_MESSAGE: 'Password successfully changed',
     AVATAR_MESSAGE: 'Profile picture successfully changed',
     PLAYLIST_CREATION_MESSAGE: 'Playlist successfully created',
+    PLAYLIST_EMPTY_NAME_ERROR: 'Enter name first',
     PLAYLIST_CREATION_ERROR_MESSAGE: 'Playlist with this name already exists',
     PLAYLIST_DELETION_MESSAGE: 'Playlist successfully deleted',
     TRACK_ADDITION_MESSAGE: 'Added to playlist ',
+    TRACK_ADDITION_ERROR_MESSAGE: 'Already added',
     TRACK_DELETION_MESSAGE: 'Deleted from playlist ',
     TRACK_DELETION_ERROR_MESSAGE: 'Cannot delete this track',
     PLAYLIST_PRIVACY_PRIVATE_MESSAGE: 'Playlist is private now',
@@ -285,7 +286,7 @@ export const POPUP = {
     ARTIST_UNSUBSCRIPTION_ERROR_MESSAGE: 'Cannot unsubscribe from ',
     ALBUM_LIKED: 'Album successfully liked',
     ALBUM_UN_LIKED: 'Like successfully removed',
-    LOGIN_ERROR: 'Please login',
+    LOGIN_ERROR: 'Please, login',
     LIFETIME: 2000,
     DISSOLUTIONTIME: 1000,
 };

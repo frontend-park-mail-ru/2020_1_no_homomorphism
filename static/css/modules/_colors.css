@@ -47,7 +47,8 @@
     .m-delete-playlist-button,
     .m-large-like-button,
     .m-theme-selector-container-button,
-    .container-audio img {
+    .container-audio img,
+    .m-close-choose-menu-button {
         filter: invert(0.9);
     }
 
