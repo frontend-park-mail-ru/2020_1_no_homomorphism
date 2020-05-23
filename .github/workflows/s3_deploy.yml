@@ -5,7 +5,6 @@ on:
     branches:
       - master
       - dev
-      - themes
   pull_request:
     branches: [ master ]
 

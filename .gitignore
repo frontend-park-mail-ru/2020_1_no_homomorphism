@@ -113,4 +113,5 @@ temp/
 package-lock.json
 static/music
 static/audio
+static/img/background
 run.sh
