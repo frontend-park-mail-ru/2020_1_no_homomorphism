@@ -1,6 +1,7 @@
 import {NAVBAR, GLOBAL, DOM, URL, THEME} from '@libs/constants';
 import navbar from '@views/navbar/navbar.tmpl.xml';
 import BaseView from '@libs/base_view';
+import User from '@libs/user';
 import SearchComponent from '@components/search/search';
 import {globalEventBus} from '@libs/eventBus';
 import {inputSanitize} from '@libs/input_sanitize';
@@ -31,6 +32,9 @@ export default class NavbarView extends BaseView {
         super.render(document.getElementsByClassName(DOM.NAVBAR)[0]);
         this.eventBus.emit(NAVBAR.CHECK_COOKIE);
         if (window.localStorage.getItem('theme')) {
+            this.renderTheme(window.localStorage.getItem('theme'));
+        } else if (User.exists()) {
+            window.localStorage.setItem('theme', User.getUserData().theme);
             this.renderTheme(window.localStorage.getItem('theme'));
         }
         this.setEventListeners();
