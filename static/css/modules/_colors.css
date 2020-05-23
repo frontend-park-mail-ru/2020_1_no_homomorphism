@@ -5,7 +5,8 @@
     --button-color: #0ab992;
 }
 
-:root, :root[theme="light"] {
+:root, :root[theme="light"],
+:root[theme="special"][theme-name="lsd"] {
     /* Светлая тема */
     --background-color: white;
     --overlay-color: white;
@@ -19,7 +20,6 @@
     --error-color: red;
     --box-shadow: 0 1px 20px 0 #ebeae7;
     --gray-hover: gray;
-    --like-src: url("../../static/img/icons/favorite_light.svg");
 }
 
 :root[theme="dark"] {
@@ -36,12 +36,18 @@
     --error-color: #da3333;
     --box-shadow: 0 1px 20px 0 #1f2023;
     --gray-hover: #1f2023;
-    --like-src: url("../../static/img/icons/favorite_dark.svg");
 
     .l-logo .m-medium-icon,
     .l-navbar .m-small-icon,
     .l-navbar .m-search-icon,
-    .m-more-dropdown-button img {
+    .m-more-dropdown-button img,
+    .l-track-buttons img,
+    .l-player-track-buttons img,
+    .m-button-share,
+    .m-delete-playlist-button,
+    .m-large-like-button,
+    .m-theme-selector-container-button,
+    .container-audio img {
         filter: invert(0.9);
     }
 
@@ -50,22 +56,11 @@
     }
 }
 
-:root[theme="special"][theme-name="prezentaciya"] {
-    --background-color: white;
-    --overlay-color: white;
-    --font-color: black;
-    --tiny-ref-color: #070025;
-    --chosen-icon: #ebeae7;
-    --obscure: gray;
-    --light-gray: #ebeae7;
-    --pop-up-color: #d6ffeb;
-    --pop-up-error-color: #ffcccc;
-    --error-color: red;
-    --box-shadow: 0 1px 20px 0 #ebeae7;
-    --gray-hover: gray;
-    --like-src: url("../../static/img/icons/favorite_light.svg");
-
+:root[theme="special"][theme-name="lsd"] {
     .paNqSg, .G2Vk3A, .NYcNWw {
         display: block;
+    }
+    .container-audio {
+        overflow: hidden;
     }
 }
