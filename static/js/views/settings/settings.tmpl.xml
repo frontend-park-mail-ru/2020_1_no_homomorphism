@@ -47,8 +47,24 @@
                                 Save
                             </button>
                         </div>
-                        <div class="col col-12" id="theme selector">
-                        </div>
+                        <fest:for iterate="data.themes" index="i" value="themeGroup">
+                            <div class="col col-12 m-theme-selector-container-caption">
+                                <h2 class="m-theme-selector-container-name">
+                                    <fest:value>themeGroup.name</fest:value>
+                                </h2>
+                                <img class="m-theme-selector-container-button" src="/static/img/icons/arrow_forward_ios.svg"/>
+                            </div>
+                            <div class="col col-12">
+                                <div class="m-theme-selector-container">
+                                    <fest:for iterate="themeGroup.themes" index="j" value="theme">
+                                        <div class="m-theme-big" id="{theme.name}" style="background: {theme.color}">
+                                            <div class="m-theme-small" style="background: {theme.general}">
+                                            </div>
+                                        </div>
+                                    </fest:for>
+                                </div>
+                            </div>
+                        </fest:for>
                     </div>
                 </div>
                 <div class="l-down-card col">
@@ -121,8 +137,24 @@
                                 Save
                             </button>
                         </div>
-                        <div class="col col-12" id="theme selector">
-                        </div>
+                        <fest:for iterate="data.themes" index="i" value="themeGroup">
+                            <div class="col col-12 m-theme-selector-container-caption">
+                                <h2 class="m-theme-selector-container-name">
+                                    <fest:value>themeGroup.name</fest:value>
+                                </h2>
+                                <img class="m-theme-selector-container-button" src="/static/img/icons/arrow_forward_ios.svg"/>
+                            </div>
+                            <div class="col col-12">
+                                <div class="m-theme-selector-container">
+                                    <fest:for iterate="themeGroup.themes" index="j" value="theme">
+                                        <div class="m-theme-big" id="{theme.name}" style="background: {theme.color}">
+                                            <div class="m-theme-small" style="background: {theme.general}">
+                                            </div>
+                                        </div>
+                                    </fest:for>
+                                </div>
+                            </div>
+                        </fest:for>
                     </div>
                     <div class="col col-6 l-input">
                         <div class="row">

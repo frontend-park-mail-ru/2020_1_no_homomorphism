@@ -19,7 +19,7 @@
     --error-color: red;
     --box-shadow: 0 1px 20px 0 #ebeae7;
     --gray-hover: gray;
-    --like-src: url("../../static/img/icons/favorite_light.svg");
+    --like-src: url("../../static/img/icons/favorite.svg");
 }
 
 :root[theme="dark"] {
@@ -36,7 +36,7 @@
     --error-color: #da3333;
     --box-shadow: 0 1px 20px 0 #1f2023;
     --gray-hover: #1f2023;
-    --like-src: url("../../static/img/icons/favorite_dark.svg");
+    --like-src: url("../../static/img/icons/favorite.svg");
 
     .l-logo .m-medium-icon,
     .l-navbar .m-small-icon,
@@ -50,7 +50,7 @@
     }
 }
 
-:root[theme="special"][theme-name="prezentaciya"] {
+:root[theme="special"][theme-name="lsd"] {
     --background-color: white;
     --overlay-color: white;
     --font-color: black;
@@ -63,7 +63,7 @@
     --error-color: red;
     --box-shadow: 0 1px 20px 0 #ebeae7;
     --gray-hover: gray;
-    --like-src: url("../../static/img/icons/favorite_light.svg");
+    --like-src: url("../../static/img/icons/favorite.svg");
 
     .paNqSg, .G2Vk3A, .NYcNWw {
         display: block;

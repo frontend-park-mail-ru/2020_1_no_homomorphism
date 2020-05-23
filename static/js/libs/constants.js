@@ -82,6 +82,7 @@ export const GLOBAL = {
     CLOSE_SEARCH: 'global-close-search',
     PAUSE: 'global-pause',
     HIDE_SUBSCRIPTIONS: 'hide subscriptions',
+    RENDER_THEME: 'render theme',
 };
 
 export const MAIN = {
@@ -317,6 +318,11 @@ export const THEME = {
             ['--marker-color', '#29b6f6'],
             ['--button-color', '#186db1'],
         ],
+        'black': [
+            ['--selected-elem', '#dcdcdc'],
+            ['--marker-color', 'black'],
+            ['--button-color', '#1d1d1d'],
+        ],
     },
     'dark': {
         'green': [
@@ -341,7 +347,7 @@ export const THEME = {
         ],
     },
     'special': {
-        'prezentaciya': [
+        'lsd': [
             ['--selected-elem', '#dcc4ff'],
             ['--marker-color', '#6900ff'],
             ['--button-color', '#6900ff'],

@@ -62,6 +62,9 @@ window.addEventListener('storage', (e) => {
     if (e.key === 'isPlaying' && e.newValue === 'false') {
         globalEventBus.emit(GLOBAL.PAUSE);
     }
+    if (e.key === 'theme' && e.newValue) {
+        globalEventBus.emit(GLOBAL.RENDER_THEME, e.newValue);
+    }
 });
 
 window.onpopstate = function(event) {

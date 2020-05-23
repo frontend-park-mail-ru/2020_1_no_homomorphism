@@ -16,7 +16,7 @@ export default class NavbarView extends BaseView {
         super(navbar);
         this.eventBus = eventBus;
         this.searchComponent = new SearchComponent();
-        // globalEventBus.on(GLOBAL.REDIRECT, this.setEmpty.bind(this));
+        globalEventBus.on(GLOBAL.RENDER_THEME, this.renderTheme.bind(this));
         this.eventBus.on(NAVBAR.DRAW_COOKIE_RESULT, this.analyzeCookie.bind(this));
         this.eventBus.on(NAVBAR.RENDER_LOGGED, this.renderLogged.bind(this));
         this.eventBus.on(NAVBAR.RENDER_NOT_LOGGED, this.renderNotLogged.bind(this));
@@ -31,18 +31,26 @@ export default class NavbarView extends BaseView {
         super.render(document.getElementsByClassName(DOM.NAVBAR)[0]);
         this.eventBus.emit(NAVBAR.CHECK_COOKIE);
         if (window.localStorage.getItem('theme')) {
-            const split = window.localStorage.getItem('theme').split(' ');
-            document.documentElement.setAttribute('theme', split[0]);
-            if (split[0] === 'special') {
-                document.documentElement.setAttribute('theme-name', split[1]);
-            } else {
-                document.documentElement.removeAttribute('theme-name');
-            }
-            THEME[split[0]][split[1]].forEach((prop) => {
-                document.documentElement.style.setProperty(prop[0], prop[1]);
-            });
+            this.renderTheme(window.localStorage.getItem('theme'));
         }
         this.setEventListeners();
+    }
+
+    /**
+     * Рендерит тему
+     * @param {string} name
+     */
+    renderTheme(name) {
+        const split = name.split(' ');
+        document.documentElement.setAttribute('theme', split[0]);
+        if (split[0] === 'special') {
+            document.documentElement.setAttribute('theme-name', split[1]);
+        } else {
+            document.documentElement.removeAttribute('theme-name');
+        }
+        THEME[split[0]][split[1]].forEach((prop) => {
+            document.documentElement.style.setProperty(prop[0], prop[1]);
+        });
     }
 
     /**
@@ -146,16 +154,7 @@ export default class NavbarView extends BaseView {
         document.getElementById('logout-link').classList.remove('is-not-displayed');
         document.getElementById('profile-link').classList.remove('is-not-displayed');
         document.getElementById('settings-icon').classList.remove('is-not-displayed');
-        const split = data.theme.split(' ');
-        document.documentElement.setAttribute('theme', split[0]);
-        if (split[0] === 'special') {
-            document.documentElement.setAttribute('theme-name', split[1]);
-        } else {
-            document.documentElement.removeAttribute('theme-name');
-            THEME[split[0]][split[1]].forEach((prop) => {
-                document.documentElement.style.setProperty(prop[0], prop[1]);
-            });
-        }
+        this.renderTheme(data.theme);
     }
 
     /**

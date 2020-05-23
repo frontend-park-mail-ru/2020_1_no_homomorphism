@@ -186,14 +186,14 @@
     & .m-big-like-button, .m-big-delete-button, .m-big-add-button {
         opacity: 0;
         &:hover {
-            opacity: 1;
+            opacity: 0.8;
         }
     }
 }
 
 .m-big-like-button {
     &.is-liked{
-        opacity: 1 !important;
+        opacity: 0.8 !important;
         content: var(--like-src);
     }
     &.is-not-liked {
@@ -631,6 +631,36 @@
     }
 }
 
+.m-theme-selector-container-caption {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.m-theme-selector-container-name {
+    cursor: pointer;
+    float: left;
+}
+
+.m-theme-selector-container-button {
+    height: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    float: left;
+    transition: 0.3s;
+    &.is-expanded {
+        transform: rotate(90deg);
+    }
+}
+
+.m-theme-selector-container {
+    height: 0;
+    overflow: hidden;
+    &.is-expanded {
+        height: fit-content;
+    }
+}
+
 .m-theme-big {
     size: 60px;
     border-radius: 33px;
@@ -639,7 +669,7 @@
     justify-content: center;
     cursor: pointer;
     float: left;
-    margin: 27px 7px 0;
+    margin: 10px 7px;
     transition: 0.3s;
     &:hover {
         transform: scale(1.2);
