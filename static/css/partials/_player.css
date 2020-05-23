@@ -9,7 +9,7 @@
     z-index: var(--main-level);
     padding-left: 0;
     padding-top: 0;
-    background: var(--background-color);
+    background: var(--overlay-color);
     border-radius: var(--card-border-small);
     box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
 }
@@ -36,7 +36,7 @@
 
 .patch {
     height: 1em;
-    background: var(--background-color);
+    background: var(--overlay-color);
     position: relative;
     z-index: var(--main-level);
 }
@@ -44,7 +44,6 @@
 .l-music-bar {
     position: relative;
     z-index: var(--main-level);
-    padding-bottom: 16px;
 }
 
 .l-music-bar .col {
@@ -58,11 +57,11 @@
 
 .container-audio {
     height: auto;
+    padding-top: 16px;
     color: #444;
-    background: var(--background-color);
+    background: var(--overlay-color);
     position: relative;
     z-index: var(--main-level);
-    overflow: hidden;
 }
 
 .timeline {
@@ -80,7 +79,7 @@
     position: relative;
     top: -7px;
     height: 7px;
-    background: black;
+    background: var(--font-color);
     cursor: pointer;
 }
 
@@ -98,7 +97,7 @@
     transition-duration: 0.3s;
     font-size: 0;
     position: absolute;
-    top: 10px;
+    top: 26px;
 }
 
 .duration {
@@ -107,7 +106,7 @@
     transition-duration: 0.3s;
     font-size: 0;
     position: absolute;
-    top: 10px;
+    top: 26px;
     right: 0;
 }
 
@@ -158,9 +157,9 @@
 
 .volume-scale {
     height: 74px;
-    top: -42px;
+    top: -26px;
     left: 330px;
-    background: var(--background-color);
+    background: var(--overlay-color);
     border: 1px solid var(--chosen-icon);
     border-radius: 2px;
     position: absolute;
@@ -168,7 +167,8 @@
     width: 25px;
     text-align: center;
     margin-bottom: 10px;
-    transition-duration: 0.3s;
+    transition-property: opacity, top;
+    transition-duration: 0.3s, 0.3s;
     opacity: 0;
 }
 
@@ -189,7 +189,7 @@
 }
 
 .volume-scale:after {
-    border-top-color: var(--background-color);
+    border-top-color: var(--overlay-color);
     border-width: 6px;
     margin-left: -6px;
 }
@@ -205,7 +205,7 @@
 
 .volume-scale-front {
     width: 5px;
-    background: black;
+    background: var(--font-color);
     position: relative;
     left: 4px;
     cursor: pointer;
@@ -267,7 +267,7 @@
 }
 
 .track-list > .row {
-    background: var(--background-color);
+    background: var(--overlay-color);
     cursor: pointer;
     padding-bottom: 5px;
     padding-top: 5px;
@@ -333,7 +333,7 @@
     width: 13px;
     height: 1000px;
     margin-right: 5px;
-    background: var(--background-color);
+    background: var(--overlay-color);
     cursor: pointer;
 }
 
@@ -352,7 +352,7 @@
     left: -37px;
     width: 40px;
     height: 40px;
-    background: var(--background-color);
+    background: var(--overlay-color);
     z-index: var(--under-level);
     cursor: pointer;
 }
@@ -364,7 +364,7 @@
 .player-trigger-row {
     display: none;
     height: 25px;
-    background: var(--background-color);
+    background: var(--overlay-color);
     position: relative;
     z-index: var(--main-level);
     width: 108%;

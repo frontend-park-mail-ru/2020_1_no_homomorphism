@@ -194,7 +194,7 @@
 .m-big-like-button {
     &.is-liked{
         opacity: 0.8 !important;
-        content: var(--like-src);
+        content: url("../../static/img/icons/favorite.svg");
     }
     &.is-not-liked {
         content: url("../../static/img/icons/favorite_border.svg");

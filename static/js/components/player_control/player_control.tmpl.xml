@@ -13,7 +13,7 @@
         <img src="/static/img/icons/shuffle.svg" class="playlist-control-button shuffle" alt="shuffle"/>
         <img src="/static/img/icons/repeat.svg" class="playlist-control-button repeat" alt="repeat"/>
         <img src="/static/img/icons/volume_up.svg" class="volume" alt="volume"/>
-        <div class="volume-scale" style="transition-property: opacity, visibility, top;">
+        <div class="volume-scale">
             <div class="volume-scale-back"></div>
             <div class="volume-scale-front"></div>
         </div>

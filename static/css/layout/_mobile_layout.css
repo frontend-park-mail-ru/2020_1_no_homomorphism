@@ -56,25 +56,25 @@
 
     .shuffle {
         position: absolute;
-        top: 37px;
+        top: 53px;
         right: 45px;
     }
 
     .repeat {
         position: absolute;
-        top: 37px;
+        top: 53px;
         right: 22px;
     }
 
     .volume {
         position: absolute;
-        top: 37px;
+        top: 53px;
         right: -1px;
     }
 
     .current-time, .duration {
         font-size: 11px;
-        top: 18px;
+        top: 34px;
     }
 
     .track-list .m-track-group-names {
@@ -330,7 +330,7 @@
 
     .current-time, .duration {
         font-size: 11px;
-        top: 18px;
+        top: 34px;
     }
 
     .control-elements {
@@ -353,19 +353,19 @@
 
     .shuffle {
         position: absolute;
-        top: 45px;
+        top: 61px;
         right: 45px;
     }
 
     .repeat {
         position: absolute;
-        top: 45px;
+        top: 61px;
         right: 22px;
     }
 
     .volume {
         position: absolute;
-        top: 45px;
+        top: 61px;
         right: -1px;
     }
 
