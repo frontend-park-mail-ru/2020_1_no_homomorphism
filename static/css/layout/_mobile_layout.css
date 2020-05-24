@@ -128,7 +128,7 @@
     }
 
     .col-9 {
-        width: 98%;   
+        width: 98%;
     }
 
     .l-content .l-center-pos .col-4 {
@@ -216,6 +216,8 @@
         padding-right: 10px;
         padding-top: 3px;
         background: var(--background-color);
+        filter: invert(0) !important;
+        color: var(--font-color);
         transition: opacity 2s ease;
         margin: 0;
         margin-top: -34px;
@@ -251,6 +253,7 @@
         &.m-more-button {
             right: 14px;
             margin: 10px;
+            opacity: 0.9;
         }
         &.m-dropdown {
             right: 44px;
@@ -570,6 +573,8 @@
         padding-right: 10px;
         padding-top: 6px;
         background: var(--background-color);
+        filter: invert(0) !important;
+        color: var(--font-color);
         transition: opacity 2s ease;
         margin: 0 0 20px 0;
         position: relative;
@@ -615,6 +620,7 @@
         &.m-more-button {
             right: 14px;
             margin: 10px;
+            opacity: 0.9;
         }
         &.m-dropdown {
             right: 44px;

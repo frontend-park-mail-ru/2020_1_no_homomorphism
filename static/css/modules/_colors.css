@@ -47,7 +47,9 @@
     .m-large-like-button,
     .m-theme-selector-container-button,
     .container-audio img,
-    .m-close-choose-menu-button {
+    .m-close-choose-menu-button,
+    .m-subscribe,
+    .m-more-button {
         filter: invert(0.9);
     }
 
