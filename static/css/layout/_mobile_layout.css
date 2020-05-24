@@ -288,6 +288,10 @@
         top: -191px;
     }
 
+    .m-playlist-image-upload-button {
+        right: -10px;
+    }
+
     .is-button-disabled {
         pointer-events: none;
         opacity: 0.3;
@@ -673,6 +677,10 @@
         margin-top: 0;
         position: relative;
         top: -191px;
+    }
+
+    .m-playlist-image-upload-button {
+        right: -10px;
     }
 
     .is-button-disabled {
