@@ -294,7 +294,6 @@ export const POPUP = {
 export const THEME_OVERLAY = {
     'light': 'white',
     'dark': '#383b40',
-    'special': 'white',
 };
 
 export const THEME = {
@@ -345,13 +344,6 @@ export const THEME = {
             ['--selected-elem', '#01579b'],
             ['--marker-color', '#01579b'],
             ['--button-color', '#01579b'],
-        ],
-    },
-    'special': {
-        'lsd': [
-            ['--selected-elem', '#dcc4ff'],
-            ['--marker-color', '#6900ff'],
-            ['--button-color', '#6900ff'],
         ],
     },
 };

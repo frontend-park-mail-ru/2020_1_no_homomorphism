@@ -5,8 +5,7 @@
     --button-color: #0ab992;
 }
 
-:root, :root[theme="light"],
-:root[theme="special"][theme-name="lsd"] {
+:root, :root[theme="light"] {
     /* Светлая тема */
     --background-color: white;
     --overlay-color: white;
@@ -54,14 +53,5 @@
 
     .l-list-rounded-card:hover {
         box-shadow: 0 0 0 1px var(--selected-elem);
-    }
-}
-
-:root[theme="special"][theme-name="lsd"] {
-    .paNqSg, .G2Vk3A, .NYcNWw {
-        display: block;
-    }
-    .container-audio {
-        overflow: hidden;
     }
 }
