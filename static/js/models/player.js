@@ -122,28 +122,9 @@ export default class PlayerModel {
      * @param {string} trackId
      */
     generateData(res, trackId = '') {
-        res.json()
-            .then((list) => {
-                this.setData.bind(this)(list, trackId);
-                // if (list.tracks.length === 0) {
-                //     globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK);
-                //     return;
-                // }
-                // // eslint-disable-next-line guard-for-in
-                // for (const song in list.tracks) {
-                //     this.playlist.push(list.tracks[song]);
-                //     this.queue.push(this.playlist.length - 1);
-                // }
-                // if (trackId !== '') {
-                //     this.current = this.playlist.indexOf(this.playlist.find((track) =>
-                //         track.id === trackId));
-                // }
-                // this.eventBus.emit(PLAYER.DRAW_TRACKLIST, this.playlist);
-                // this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[this.queue[this.current]].id,
-                //     this.playlist[this.queue[this.current]].id);
-                // this.getTrack(this.playlist[this.queue[this.current]].id);
-                // this.play();
-            });
+        res.json().then((list) => {
+            this.setData.bind(this)(list, trackId);
+        });
     }
 
     /**
@@ -156,10 +137,11 @@ export default class PlayerModel {
             globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK, true);
             return;
         }
-        // eslint-disable-next-line guard-for-in
         for (const song in list.tracks) {
-            this.playlist.push(list.tracks[song]);
-            this.queue.push(this.playlist.length - 1);
+            if ({}.hasOwnProperty.call(list.tracks, song)) {
+                this.playlist.push(list.tracks[song]);
+                this.queue.push(this.playlist.length - 1);
+            }
         }
         if (trackID !== '') {
             this.current = this.playlist.indexOf(this.playlist.find((track) =>

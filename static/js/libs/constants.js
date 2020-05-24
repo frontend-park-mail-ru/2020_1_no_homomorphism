@@ -82,6 +82,7 @@ export const GLOBAL = {
     CLOSE_SEARCH: 'global-close-search',
     PAUSE: 'global-pause',
     HIDE_SUBSCRIPTIONS: 'hide subscriptions',
+    RENDER_THEME: 'render theme',
 };
 
 export const MAIN = {
@@ -261,14 +262,15 @@ export const SEARCH = {
 
 export const POPUP = {
     NEW: 'new pop-up',
-    LOG_IN_MESSAGE: 'Please, log in',
     SETTINGS_MESSAGE: 'Profile data successfully updated',
     PASSWORD_MESSAGE: 'Password successfully changed',
     AVATAR_MESSAGE: 'Profile picture successfully changed',
     PLAYLIST_CREATION_MESSAGE: 'Playlist successfully created',
+    PLAYLIST_EMPTY_NAME_ERROR: 'Enter name first',
     PLAYLIST_CREATION_ERROR_MESSAGE: 'Playlist with this name already exists',
     PLAYLIST_DELETION_MESSAGE: 'Playlist successfully deleted',
     TRACK_ADDITION_MESSAGE: 'Added to playlist ',
+    TRACK_ADDITION_ERROR_MESSAGE: 'Already added',
     TRACK_DELETION_MESSAGE: 'Deleted from playlist ',
     TRACK_DELETION_ERROR_MESSAGE: 'Cannot delete this track',
     PLAYLIST_PRIVACY_PRIVATE_MESSAGE: 'Playlist is private now',
@@ -284,29 +286,72 @@ export const POPUP = {
     ARTIST_UNSUBSCRIPTION_ERROR_MESSAGE: 'Cannot unsubscribe from ',
     ALBUM_LIKED: 'Album successfully liked',
     ALBUM_UN_LIKED: 'Like successfully removed',
-    LOGIN_ERROR: 'Please login',
+    LOGIN_ERROR: 'Please, login',
     LIFETIME: 2000,
     DISSOLUTIONTIME: 1000,
 };
 
+export const THEME_OVERLAY = {
+    'light': 'white',
+    'dark': '#383b40',
+    'special': 'white',
+};
+
 export const THEME = {
-    LIGHT: {
-        GREEN: [
+    'light': {
+        'green': [
             ['--selected-elem', '#d6ffeb'],
             ['--marker-color', '#00e676'],
             ['--button-color', '#0ab992'],
         ],
+        'red': [
+            ['--selected-elem', '#ffe0e4'],
+            ['--marker-color', '#ff2137'],
+            ['--button-color', '#ff4255'],
+        ],
+        'purple': [
+            ['--selected-elem', '#f9d4ff'],
+            ['--marker-color', '#ab47bc'],
+            ['--button-color', '#7b1fa2'],
+        ],
+        'blue': [
+            ['--selected-elem', '#d0eaff'],
+            ['--marker-color', '#29b6f6'],
+            ['--button-color', '#186db1'],
+        ],
+        'black': [
+            ['--selected-elem', '#dcdcdc'],
+            ['--marker-color', 'black'],
+            ['--button-color', '#1d1d1d'],
+        ],
     },
-    DARK: {
-        GREEN: [
+    'dark': {
+        'green': [
             ['--selected-elem', '#2d9c66'],
             ['--marker-color', '#2d9c66'],
             ['--button-color', '#2d9c66'],
         ],
-        PINK: [
+        'pink': [
             ['--selected-elem', '#de4a7d'],
             ['--marker-color', '#de4a7d'],
             ['--button-color', '#de4a7d'],
+        ],
+        'purple': [
+            ['--selected-elem', '#7b1fa2'],
+            ['--marker-color', '#7b1fa2'],
+            ['--button-color', '#7b1fa2'],
+        ],
+        'blue': [
+            ['--selected-elem', '#01579b'],
+            ['--marker-color', '#01579b'],
+            ['--button-color', '#01579b'],
+        ],
+    },
+    'special': {
+        'lsd': [
+            ['--selected-elem', '#dcc4ff'],
+            ['--marker-color', '#6900ff'],
+            ['--button-color', '#6900ff'],
         ],
     },
 };

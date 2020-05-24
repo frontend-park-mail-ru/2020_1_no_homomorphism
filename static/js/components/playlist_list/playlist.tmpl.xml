@@ -4,10 +4,8 @@
             <div class="l-list-image">
                 <img class="m-button-without-size" src="/static/img/icons/add.svg" alt=""/>
             </div>
-            <div class="l-small-list">
-                <div class="l-small-input">
-                    <input type="text" placeholder="Create playlist" class="m-small-input"></input>
-                </div>
+            <div class="l-small-input">
+                <input type="text" placeholder="Create playlist" class="m-small-input"></input>
             </div>
         </div>
         <fest:for iterate="data" index="i" value="elem">

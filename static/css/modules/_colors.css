@@ -5,8 +5,9 @@
     --button-color: #0ab992;
 }
 
-:root, :root[theme="light"] {
-    /* Светлая тема (зелёный) */
+:root, :root[theme="light"],
+:root[theme="special"][theme-name="lsd"] {
+    /* Светлая тема */
     --background-color: white;
     --overlay-color: white;
     --font-color: black;
@@ -14,7 +15,8 @@
     --chosen-icon: #ebeae7;
     --obscure: gray;
     --light-gray: #ebeae7;
-    --pop-up-error-color: #FFCCCC;
+    --pop-up-color: #d6ffeb;
+    --pop-up-error-color: #ffcccc;
     --error-color: red;
     --box-shadow: 0 1px 20px 0 #ebeae7;
     --gray-hover: gray;
@@ -23,25 +25,43 @@
 :root[theme="dark"] {
     /* Тёмная тема */
     --background-color: #27292D;
-    --overlay-color: #383B40;
+    --overlay-color: #383b40;
     --font-color: #e0e0e0;
     --tiny-ref-color: #e0e0e0;
-    --chosen-icon: #1F2023;
+    --chosen-icon: #1f2023;
     --obscure: #c3c3c3;
     --light-gray: #ebeae7;
+    --pop-up-color: #2d9c66;
     --pop-up-error-color: #da3333;
     --error-color: #da3333;
-    --box-shadow: 0 1px 20px 0 #1F2023;
+    --box-shadow: 0 1px 20px 0 #1f2023;
     --gray-hover: #1f2023;
 
     .l-logo .m-medium-icon,
     .l-navbar .m-small-icon,
     .l-navbar .m-search-icon,
-    .m-more-dropdown-button img {
+    .m-dropdown-button img,
+    .l-track-buttons img,
+    .l-player-track-buttons img,
+    .m-button-share,
+    .m-delete-playlist-button,
+    .m-large-like-button,
+    .m-theme-selector-container-button,
+    .container-audio img,
+    .m-close-choose-menu-button {
         filter: invert(0.9);
     }
 
     .l-list-rounded-card:hover {
         box-shadow: 0 0 0 1px var(--selected-elem);
+    }
+}
+
+:root[theme="special"][theme-name="lsd"] {
+    .paNqSg, .G2Vk3A, .NYcNWw {
+        display: block;
+    }
+    .container-audio {
+        overflow: hidden;
     }
 }

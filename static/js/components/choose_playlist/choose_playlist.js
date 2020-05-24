@@ -21,6 +21,11 @@ export default class ChoosePlaylist {
         this._trackData = {};
         this._playlists = [];
         this._callbackEventListener = {};
+        this.analyzeTouchBinded = this.analyzeTouch.bind(this);
+        this.windowKeyupBinded = this.windowKeyup.bind(this);
+        this.inputKeyupBinded = this.inputKeyup.bind(this);
+        this.submitButtonClickBinded = this.submitButtonClick.bind(this);
+        this.closeBinded = this.close.bind(this);
     }
 
     /**
@@ -67,16 +72,77 @@ export default class ChoosePlaylist {
      * Set EventListeners
      */
     setEventListeners() {
-        document.addEventListener('click', this.analyzeTouch.bind(this), {once: true});
+        document.addEventListener('click', this.analyzeTouchBinded);
+        window.addEventListener('keyup', this.windowKeyupBinded);
         document.getElementsByClassName('m-small-input')[0]
-            .addEventListener('keyup', (event) => {
-                const value = event.target.value;
-                if (event.keyCode === 13 && value !== '') {
-                    event.target.value = '';
-                    this._playlistComponent
-                        .createPlaylist(this.renderNewPlaylist.bind(this), value);
-                }
-            });
+            .addEventListener('keyup', this.inputKeyupBinded);
+        document.getElementsByClassName('submit-input-button')[0]
+            .addEventListener('click', this.submitButtonClickBinded);
+        document.getElementsByClassName('m-close-choose-menu-button')[0]
+            .addEventListener('click', this.closeBinded);
+    }
+
+    /**
+     * Unset EventListeners
+     */
+    unsetEventListeners() {
+        document.removeEventListener('click', this.analyzeTouchBinded);
+        window.removeEventListener('keyup', this.windowKeyupBinded);
+        document.getElementsByClassName('m-small-input')[0]
+            .removeEventListener('keyup', this.inputKeyupBinded);
+        document.getElementsByClassName('submit-input-button')[0]
+            .removeEventListener('click', this.submitButtonClickBinded);
+        document.getElementsByClassName('m-close-choose-menu-button')[0]
+            .removeEventListener('click', this.closeBinded);
+    }
+
+    /**
+     * Слушает keyup
+     * @param {Object} event
+     */
+    windowKeyup(event) {
+        if (event.keyCode === 27) {
+            this.close();
+        }
+    }
+
+    /**
+     * Слушает keyup
+     * @param {Object} event
+     */
+    inputKeyup(event) {
+        const value = event.target.value;
+        if (event.keyCode !== 13) {
+            return;
+        }
+        if (value !== '') {
+            event.target.value = '';
+            this.unsetEventListeners();
+            this._playlistComponent
+                .createPlaylist(this.renderNewPlaylist.bind(this), value);
+        } else {
+            new PopUp(POPUP.PLAYLIST_EMPTY_NAME_ERROR, true);
+        }
+    }
+
+    /**
+     * Слушает клик по кнопке в инпуте
+     * @param {Object} event
+     */
+    submitButtonClick(event) {
+        const value = event.target.parentNode.parentNode.firstChild.value;
+        if (value !== '') {
+            event.target.parentNode.classList.add('is-pressed');
+            setTimeout(() => {
+                event.target.parentNode.classList.remove('is-pressed');
+            }, 100);
+            event.target.parentNode.parentNode.firstChild.value = '';
+            this.unsetEventListeners();
+            this._playlistComponent
+                .createPlaylist(this.renderNewPlaylist.bind(this), value);
+        } else {
+            new PopUp(POPUP.PLAYLIST_EMPTY_NAME_ERROR, true);
+        }
     }
 
     /**
@@ -88,16 +154,6 @@ export default class ChoosePlaylist {
         this._playlists.push(playlist);
         this._curPlaylist = document.getElementsByClassName('m-small-ul')[0].lastChild;
         this.addToPlaylist(playlist.id);
-    }
-
-    /**
-     * Добавление трека в плейлист
-     * @param {string} playlistID
-     */
-    addToPlaylist(playlistID) {
-        if (playlistID !== '') {
-            this._trackComponent.addToPlaylist(playlistID, this.renderAddedToPlaylist.bind(this));
-        }
     }
 
     /**
@@ -113,19 +169,45 @@ export default class ChoosePlaylist {
         new PopUp(POPUP.TRACK_ADDITION_MESSAGE + playlist.name);
     }
 
+    /**
+     * Трек удалён в плейлиста
+     * @param {string} playlistID
+     */
+    renderDeletedFromPlaylist(playlistID) {
+        this._curPlaylist.firstChild.classList.add('m-small-add-button');
+        this._curPlaylist.firstChild.classList.remove('m-small-ticked-button');
+        this._curPlaylist.setAttribute('is-include', 'false');
+        const playlist = this._playlists.find((item) => item.id === playlistID);
+        playlist.include = false;
+        new PopUp(POPUP.TRACK_DELETION_MESSAGE + playlist.name);
+    }
 
     /**
      * Анализ зоны нажатия
      * @param {Object} event
      */
     analyzeTouch(event) {
-        const choosePlaylist = document.getElementsByClassName('m-choose-menu')[0];
-        if (choosePlaylist === undefined) {
+        const bcr = document.getElementsByClassName('l-pop-up-container')[0]
+            .getBoundingClientRect();
+        const isPopUpClicked = event.clientX > bcr.left && event.clientX < bcr.right &&
+                event.clientY > bcr.top && event.clientY < bcr.bottom;
+        if (isPopUpClicked) {
             return;
         }
-        const isClickInside = choosePlaylist.contains(event.target);
+        const isClickInside = document.getElementsByClassName('m-choose-menu')[0]
+            .contains(event.target);
         if (isClickInside) {
-            this.addToPlaylist(this.getIdByClick(event));
+            const info = this.getInfoByClick(event);
+            if (info.playlistId !== '') {
+                if (info.action === 'add') {
+                    this._trackComponent.addToPlaylist(info.playlistId,
+                        this.renderAddedToPlaylist.bind(this));
+                } else if (info.action === 'remove') {
+                    this._trackComponent.delFromPlaylist(info.playlistId,
+                        this.renderDeletedFromPlaylist.bind(this));
+                }
+            }
+            this.unsetEventListeners();
             this.setEventListeners();
             return;
         }
@@ -136,6 +218,7 @@ export default class ChoosePlaylist {
      * Закрытие раздела
      */
     close() {
+        this.unsetEventListeners();
         document
             .getElementsByClassName(DOM.TOP_CONTENT)[0]
             .removeChild(
@@ -154,23 +237,23 @@ export default class ChoosePlaylist {
 
 
     /**
-     * Получение id из dom-елемента по нажатию
+     * Получение информации из dom-елемента по нажатию
      * @param {Object} event
-     * @return {string}
+     * @return {Object}
      */
-    getIdByClick(event) {
+    getInfoByClick(event) {
         let current = event.target;
         while (current != null && !current.classList.contains('m-choose-menu')) {
             if (current.classList.contains('m-small-li') &&
                 current.getAttribute('p-id') !== null) {
                 this._curPlaylist = current;
                 if (current.getAttribute('is-include') === 'true') {
-                    return '';
+                    return {action: 'remove', playlistId: current.getAttribute('p-id')};
                 }
-                return current.getAttribute('p-id');
+                return {action: 'add', playlistId: current.getAttribute('p-id')};
             }
             current = current.parentNode;
         }
-        return '';
+        return {action: 'add', playlistId: ''};
     }
 }

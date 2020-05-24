@@ -2,10 +2,11 @@ import artist from '@views/artist/artist.tmpl.xml';
 import BaseView from '@libs/base_view';
 import TrackListComponent from '@components/track_list/track_list';
 import PlaylistsComponent from '@components/playlist_list/playlist_list';
-import {ARTIST, DOM, POPUP} from '@libs/constants';
+import {GLOBAL, ARTIST, DOM, POPUP} from '@libs/constants';
 import User from '@libs/user';
 import PopUp from '@components/pop-up/pop-up';
 import {inputSanitize} from '@libs/input_sanitize';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  *  вью для страницы артиста
@@ -44,8 +45,7 @@ export default class ArtistView extends BaseView {
      * @param {string} url
      */
     analizeUrl(url) {
-        this.id = (url.indexOf('/') === -1 ? url : url.slice(0, url.indexOf('/'))
-        );
+        this.id = (url.indexOf('/') === -1 ? url : url.slice(0, url.indexOf('/')));
         this.currentOpen = (url.indexOf('/') === -1 ?
             'tracks' :
             url.slice(url.indexOf('/') + 1, url.length));
@@ -95,6 +95,21 @@ export default class ArtistView extends BaseView {
     setEventListeners() {
         document.getElementsByClassName('m-subscribe')[0]
             .addEventListener('click', this.subscribe.bind(this));
+        document.getElementsByClassName('l-button-middle-play')[0]
+            .addEventListener('click', this.playArtistTracks.bind(this));
+    }
+
+    /**
+     * Проигрование всех треков артиста
+     */
+    playArtistTracks() {
+        console.log(this);
+        if (this._data.tracks === 0) {
+            return;
+        }
+        globalEventBus.emit(GLOBAL.PLAY_ARTIST_TRACKS, this.id,
+            document.getElementsByClassName('l-track-big')[0].getAttribute('t-id'),
+            this._data.tracks);
     }
 
     /**

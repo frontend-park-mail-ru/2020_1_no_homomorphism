@@ -1,5 +1,5 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
-    <div class="col col-9">
+    <div class="col-9">
         <div class="l-main">
             <div class="l-top-card row">
                 <div class="l-top-info col">
@@ -11,11 +11,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="l-button-middle-play">
-                    <button class="m-button-middle-play"> </button>
-                    <span class="m-tracks-amount">0 tracks</span>
+                <div class="l-play-button-col album">
+                    <div class="l-button-middle-play">
+                        <button class="m-button-middle-play"> </button>
+                        <div class="m-tracks-amount">0 tracks</div>
+                    </div>
                 </div>
-                <div class="m-right-col-bottom m-tablet-auto">
+                <div class="m-right-col-bottom">
                     <div class="col">
                         <div class="m-large-like-button is-not-liked" title="Like album"> </div>
                     </div>

@@ -54,8 +54,8 @@
 }
 
 .l-button-middle-play {
-    width: 45px;
-    height: 45px;
+    size: 45px;
+    max-width: fit-content;
     padding: 11px;
     border-radius: 100px;
     background-color: var(--selected-elem);
@@ -65,21 +65,28 @@
     overflow: hidden;
     float: left;
     transition: 0.3s;
+    &.artist {
+        margin-top: 99px;
+    }
     & .m-tracks-amount {
-        /* transition: opacity 0.1s 0.2s; */
+        transition: opacity 0.1s 0.2s;
         opacity: 0;
-        padding-top: 3px;
+        margin-left: 35px;
+        margin-top: 1px;
+        white-space: nowrap;
     }
     &:hover {
         margin-left: 20.4px;
-        width: fit-content;
+        width: 150px;
         transform: scale(1.2);
+        & .m-tracks-amount {
+            opacity: 1;
+        }
     }
-    &:hover .m-tracks-amount {
-        opacity: 1;
-    }
-    &:not(:hover) .m-tracks-amount {
-        /* transition: opacity 0.1s; */
+    &:not(:hover) {
+        & .m-tracks-amount {
+            transition: opacity 0.1s;
+        }
     }
 }
 
@@ -183,7 +190,7 @@ input:checked + .m-slider:before {
     }
 }
 
-.m-more-dropdown-button {
+.m-dropdown-button {
     background: var(--overlay-color);
     border: none;
     text-align: left;
@@ -191,11 +198,12 @@ input:checked + .m-slider:before {
     cursor: pointer;
     opacity: 0.5;
     position: relative;
-    width: 169px;
-    height: 39px;
+    min-width: 90px;
+    size: 100% 39px;
+    padding: 0 12px 0 6px;
     transition: border 10s cubic-bezier(0, 0, 1, 1);
     &.success-border {
-        border: 1px solid var(--button-color) !important;
+        border: 1px solid var(--pop-up-color) !important;
     }
     &.error-border {
         border: 1px solid red !important;
@@ -213,13 +221,12 @@ input:checked + .m-slider:before {
 }
 
 .m-button-middle-play {
-    height: 10px;
-    width: 10px;
+    size: 25px;
     background: url(../../static/img/icons/play.svg) no-repeat;
     border: none;
     cursor: pointer;
     opacity: 0.5;
-    padding: 15px;
+    padding: 0;
     transform: scale(1.7);
     float: left;
     &:hover {
@@ -288,10 +295,6 @@ input:checked + .m-slider:before {
 .l-player-track-buttons {
     float: left;
     padding-top: 17px;
-}
-
-.l-big-track-button:hover {
-    opacity: 1;
 }
 
 .m-add-playlist-button {
@@ -375,7 +378,7 @@ input:checked + .m-slider:before {
 }
 
 .l-delete-playlist-button {
-    margin-top: 58px;
+    margin-top: 42px;
     float: right !important;
     cursor: pointer;
 }
@@ -424,9 +427,9 @@ input:checked + .m-slider:before {
     border: none;
     color: #FFFFFF;
     text-align: center;
-    font-size: 16px;
+    font-size: 20px;
     padding: 8px;
-    width: 70px;
+    width: 90px;
     transition: all 0.5s;
     cursor: pointer;
     margin-top: 16px;
@@ -439,4 +442,27 @@ input:checked + .m-slider:before {
     &:hover {
         opacity: 0.8;
     }
+}
+
+.submit-input-button {
+    size: 24px;
+    background: var(--button-color);
+    border-radius: 4px;
+    position: absolute;
+    bottom: 13px;
+    right: 10px;
+    cursor: pointer;
+    & img {
+        filter: invert(0.9);
+    }
+    &.is-pressed {
+        box-shadow: 0 24px 0 0 #0000002e inset;
+    }
+}
+
+.m-close-choose-menu-button {
+    position: absolute;
+    right: -30px;
+    top: 0;
+    cursor: pointer;
 }

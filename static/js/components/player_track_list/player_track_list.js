@@ -19,6 +19,22 @@ export default class PlayerTrackListComponent {
      * Sets EventListeners
      */
     setEventListeners() {
+        // window.addEventListener('mousemove', (event) => {
+        //     const marker = document.getElementsByClassName('current-marker')[0];
+        //     const bcr = marker.getBoundingClientRect();
+        //     const row = document.getElementsByClassName('track-list')[0]
+        //         .getElementsByClassName('row').find((row) => {
+        //             return bcr.top === row.getBoundingClientRect().top;
+        //         });
+        //     if (!row || row.contains(event.target)) {
+        //         return;
+        //     }
+        //     console.log(row);
+        //     marker.style.top = (parseInt(marker.style.top.slice(0, marker.style.top.length -
+        //         2)) + 5).toString() + 'px';
+        //     marker.style.height = (parseInt(marker.style.height.slice(0,
+        //         marker.style.height.length - 2)) - 10).toString() + 'px';
+        // });
         document.querySelectorAll('.track-list .row').forEach((row) => {
             row.addEventListener('click', this.tracklistClick.bind(this));
             row.addEventListener('mouseenter', this.tracklistMouseEnter.bind(this));
@@ -118,7 +134,7 @@ export default class PlayerTrackListComponent {
      */
     moreClicked(event) {
         event.stopImmediatePropagation();
-        document.getElementsByClassName('m-more-dropdown').forEach((dropdown) => {
+        document.getElementsByClassName('m-dropdown').forEach((dropdown) => {
             if (dropdown != event.target.parentNode.parentNode.parentNode.lastChild) {
                 dropdown.classList.remove('is-expanded');
             }
