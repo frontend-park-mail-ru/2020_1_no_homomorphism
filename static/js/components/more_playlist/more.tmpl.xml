@@ -17,6 +17,12 @@
                 </button>
             </div>
             <div class="row">
+                <button class="m-dropdown-button" id="playlist-edit-button">
+                    <img src="/static/img/icons/edit.svg"/>
+                    <span class="m-text-in-button">edit playlist</span>
+                </button>
+            </div>
+            <div class="row">
                 <button class="m-dropdown-button" id="playlist-delete-button">
                     <img src="/static/img/icons/delete-24px.svg"/>
                     <span class="m-text-in-button">delete playlist</span>
@@ -26,7 +32,7 @@
     </fest:if>
     <fest:if test="data.mobile === false">
         <div class="m-right-col m-tablet-auto">
-            <div class="row" style="float: right">
+            <div class="row">
                 <div class="m-privacy-title col">Private playlist</div>
                 <label class="m-switch col">
                     <input type="checkbox" id="checkbox" checked="true" value="1"> </input>
@@ -42,9 +48,12 @@
                         </button>
                     </div>
                 </div>
-                <div class="col" style="float: right;">
+                <div class="col">
                     <button class="m-button-share"></button>
                 </div>
+            </div>
+            <div class="row">
+                <img class="m-playlist-edit-button" id="playlist-edit-button" src="/static/img/icons/edit.svg"/>
             </div>
             <div class="l-delete-playlist-button" id="playlist-delete-button">
                 <div class="m-delete-playlist-button"></div>

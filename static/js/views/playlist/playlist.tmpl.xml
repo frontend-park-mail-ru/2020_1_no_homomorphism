@@ -4,11 +4,17 @@
             <div class="l-top-card row">
                 <div class="l-top-info col">
                     <div class="l-round-image col">
-                        <img alt="" src="{data.image}" class="m-rounded-image" id="avatar"/>
+                        <label class="is-not-displayed">
+                            <img alt="" src="{data.image}" class="m-rounded-image m-scale-image" id="image"
+                                 title="Change image"/>
+                            <input class="m-hidden-input" type="file" id="image-upload"/>
+                        </label>
+                        <div class="m-error-message-small" id="image-error" style="padding-left: 32px"> </div>
+                        <img alt="" src="{data.image}" class="m-rounded-image" id="image"/>
                     </div>
-                    <div class="l-top-name col">
-                        <div class="m-big-name">
-                        </div>
+                    <div class="l-top-name col playlist">
+                        <div class="m-big-name"></div>
+                        <input class="m-big-name is-not-displayed"></input>
                     </div>
                 </div>
                 <div class="l-play-button-col">

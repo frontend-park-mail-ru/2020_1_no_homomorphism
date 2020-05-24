@@ -28,6 +28,8 @@ export default class PlaylistsComponent {
             this.eventBus.on(SEARCH.SET_LISTENERS, this.setEventListeners.bind(this));
         }
         this.deleteClickBinded = this.deleteClick.bind(this);
+        this.inputChangeBinded = this.inputChange.bind(this);
+        this.imageChangeBinded = this.imageChange.bind(this);
     }
 
     /**
@@ -59,20 +61,30 @@ export default class PlaylistsComponent {
      * Set EventListeners
      */
     setEventListeners() {
+        document.getElementsByClassName(this._domItem)[0].onclick = (event) => {
+            const card = document.getElementsByClassName('l-list-card').find((card) => {
+                return card.contains(event.target);
+            });
+            if (!card && this._edit && event.target !== document
+                .getElementsByClassName('m-playlist-section-edit-button')[0]
+            ) {
+                this.renderEdit();
+            }
+        };
         document.querySelectorAll('img.m-list-image').forEach((elem) => {
-            elem.addEventListener('click', this.elemClick.bind(this));
+            elem.onclick = this.elemClick.bind(this);
         });
         if (this._type === 'playlist') {
             document.getElementsByClassName('m-button-without-size')[0]
-                .addEventListener('click', this.createPlaylistClick.bind(this));
+                .onclick = this.createPlaylistClick.bind(this);
             document.getElementsByClassName('m-small-input')[0]
-                .addEventListener('keyup', (event) => {
+                .onkeyup = (event) => {
                     if (event.keyCode === 13) {
                         this.createPlaylistClick.bind(this)(event);
                     }
-                });
+                };
             document.getElementsByClassName('m-playlist-section-edit-button')[0]
-                .addEventListener('click', this.renderEdit.bind(this));
+                .onclick = this.renderEdit.bind(this);
         }
     }
 
@@ -80,8 +92,15 @@ export default class PlaylistsComponent {
      * Set dynamic EventListeners
      */
     setDynamicEventListeners() {
-        // имя document.getElementsByClassName('')[0].
-        // картинка
+        const newPlaylist = document.getElementById('new playlist input');
+        document.getElementsByClassName('m-small-input').forEach((input) => {
+            if (!newPlaylist.contains(input)) {
+                input.addEventListener('change', this.inputChangeBinded);
+            }
+        });
+        document.getElementsByClassName('m-hidden-input').forEach((input) => {
+            input.addEventListener('change', this.imageChangeBinded);
+        });
         document.getElementsByClassName('m-playlist-delete-button').forEach((button) => {
             button.addEventListener('click', this.deleteClickBinded);
         });
@@ -90,11 +109,20 @@ export default class PlaylistsComponent {
     /**
      * Unset dynamic EventListeners
      */
-    // unsetDynamicEventListeners() {
-    // имя document.getElementsByClassName('')[0].
-    // картинка
-    // удалить
-    // }
+    unsetDynamicEventListeners() {
+        const newPlaylist = document.getElementById('new playlist input');
+        document.getElementsByClassName('m-small-input').forEach((input) => {
+            if (!newPlaylist.contains(input)) {
+                input.removeEventListener('change', this.inputChangeBinded);
+            }
+        });
+        document.getElementsByClassName('m-hidden-input').forEach((input) => {
+            input.removeEventListener('change', this.imageChangeBinded);
+        });
+        document.getElementsByClassName('m-playlist-delete-button').forEach((button) => {
+            button.removeEventListener('click', this.deleteClickBinded);
+        });
+    }
 
     /**
      * Рендерит в состояние редактирования или обратно
@@ -104,14 +132,14 @@ export default class PlaylistsComponent {
             return;
         }
         this._edit = !this._edit;
-        if (this._edit) {
+        if (!this._edit) {
             this.unsetDynamicEventListeners();
         }
         document.getElementsByClassName('l-list-card').forEach((card) => {
             if (card.getAttribute('id') !== 'new playlist input') {
                 const description = card.getElementsByClassName('l-list-card-description')[0];
                 const input = card.getElementsByClassName('l-small-input')[0];
-                description.classList.toggle('is-not-displayed');
+                description.classList.toggle('is-geometricaly-invisible');
                 input.classList.toggle('is-not-displayed');
                 if (this._edit) {
                     input.getElementsByTagName('input')[0].value = description.innerText;
@@ -122,8 +150,8 @@ export default class PlaylistsComponent {
                     .toggle('is-not-displayed');
                 card.getElementsByClassName('m-playlist-delete-button')[0].classList
                     .toggle('is-not-displayed');
-                // card.getElementsByClassName('l-button-play-track')[0].classList
-                //     .toggle('is-not-displayed');
+                card.getElementsByClassName('l-button-play-track')[0].classList
+                    .toggle('is-not-displayed');
             }
         });
         if (this._edit) {
@@ -147,16 +175,81 @@ export default class PlaylistsComponent {
 
     /**
      * analyze click of playlist deletion
+     * @param {Object} event
      */
-    deleteClick() {}
+    deleteClick(event) {
+        const id = event.target.parentElement.parentElement.getAttribute('a-id');
+        this._playlistComponent.deletePlaylist(this.updatePlaylistList.bind(this), id);
+    }
 
     /**
-     * Рендеринг нового плейлиста
+     * Слушает изменение названия плейлиста
+     * @param {Object} event
+     */
+    inputChange(event) {
+        const id = event.target.parentElement.parentElement.getAttribute('a-id');
+        this._playlistComponent.changeName(id, event.target.value, this.updatePlaylist.bind(this));
+    }
+
+    /**
+     * Слушает изменение картинки плейлиста
+     * @param {Object} event
+     */
+    imageChange(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        const id = event.target.parentElement.parentElement.getAttribute('a-id');
+        this._playlistComponent.changeImage(id, event.target, this.updatePlaylist.bind(this));
+    }
+
+    /**
+     * Рендеринг обновлённого списка плейлистов
      * @param {Object} playlist
      */
     updatePlaylistList(playlist) {
-        document.getElementsByClassName(this._domItem)[0].innerHTML += newPlaylist(playlist);
-        this.eventBus.emit(PROFILE.CHANGE_PLAYLIST_AMOUNT, 1);
+        if (playlist['name']) {
+            document.getElementsByClassName(this._domItem)[0].innerHTML += newPlaylist(playlist);
+            this.eventBus.emit(PROFILE.CHANGE_PLAYLIST_AMOUNT, 1);
+        } else {
+            const card = document.getElementsByClassName('l-list-card').find((card) => {
+                return card.getAttribute('a-id') === playlist['id'];
+            });
+            card.remove();
+            this.eventBus.emit(PROFILE.CHANGE_PLAYLIST_AMOUNT, -1);
+        }
+    }
+
+    /**
+     * Обновление названия или картинки плейлиста
+     * @param {string} id
+     * @param {string} name
+     * @param {string} image
+     */
+    updatePlaylist(id, name = '', image = '') {
+        document.getElementsByClassName('l-list-card').forEach((card) => {
+            if (card.getAttribute('a-id') === id) {
+                if (name !== '') {
+                    card.getElementsByClassName('is-geometricaly-invisible')[0].innerText = name;
+                }
+                if (image !== '') {
+                    this._playlistComponent.getPlaylist(id, this.setImage.bind(this));
+                }
+            }
+        });
+    }
+
+    /**
+     * Обновление картинки
+     * @param {String} id
+     * @param {String} image
+     */
+    setImage(id, image) {
+        document.getElementsByClassName('l-list-card').forEach((card) => {
+            if (card.getAttribute('a-id') === id) {
+                card.getElementsByClassName('m-list-image')[0].src = image;
+                card.getElementsByClassName('m-list-image')[1].src = image;
+            }
+        });
     }
 
     /**

@@ -1,6 +1,8 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <fest:if test="data.type">
-        <img class="m-right-col m-playlist-section-edit-button" src="/static/img/icons/edit.svg"/>
+        <div class="mobile-row">
+            <img class="m-right-col m-playlist-section-edit-button" src="/static/img/icons/edit.svg"/>
+        </div>
         <div class="l-list-card" id="new playlist input">
             <div class="l-list-image">
                 <img class="m-button-without-size" src="/static/img/icons/add.svg" alt=""/>
@@ -18,17 +20,17 @@
                     <img class="m-list-image" src="{elem.image}" a-id="{elem.id}" alt=""/>
                     <input class="m-hidden-input is-not-displayed" type="file"/>
                 </label>
-                <div class="m-playlist-delete-button m-top-right-corner is-margin-top--144 is-not-displayed">
-                    <img src="/static/img/icons/delete-24px.svg"/>
-                </div>
-                <!-- <div class="l-button-play-track">
+                <div class="l-button-play-track">
                     <button class="m-button-track-play-playlist"></button>
-                </div> -->
+                </div>
+                <div class="l-small-input is-not-displayed">
+                    <input class="is-margin-top--191" type="text" placeholder="Playlist name" class="m-small-input"></input>
+                </div>
                 <a class="l-list-card-description  m-tiny-ref" href="{data.href}{elem.id}">
                     <fest:value>elem.name</fest:value>
                 </a>
-                <div class="l-small-input is-not-displayed">
-                    <input class="is-margin-top--144" type="text" placeholder="Playlist name" class="m-small-input"></input>
+                <div class="m-playlist-delete-button m-top-right-corner is-margin-top--191 is-not-displayed">
+                    <img src="/static/img/icons/delete-24px.svg"/>
                 </div>
             </div>
         </fest:for>

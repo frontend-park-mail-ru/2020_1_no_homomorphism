@@ -22,17 +22,24 @@ export default class PlaylistView extends BaseView {
         this.playlistData = {};
         this.tracksAmount = 0;
         this.text = '';
+        this.edit = false;
         this.moreComponent = new MorePlaylistComponent(eventBus);
         this.addComponent = new AddPlaylistComponent(eventBus);
         this.trackListComponent = new TrackListComponent(eventBus, PLAYLIST);
         this.eventBus.on(PLAYLIST.RENDER_PLAYLIST_DATA, this.setPlaylistData.bind(this));
+        this.eventBus.on(PLAYLIST.RENDER_EDIT, this.renderEdit.bind(this));
         this.eventBus.on(PLAYLIST.SET_TRACKS_AMOUNT, this.setTracksAmount.bind(this));
         this.eventBus.on(PLAYLIST.ERROR, this.showErrors.bind(this));
         this.eventBus.on(PLAYLIST.RENDER_DELETED, this.renderDeleted.bind(this));
         this.eventBus.on(PLAYLIST.CHANGE_TRACK_AMOUNT, this.changeTrackAmount.bind(this));
+        this.eventBus.on(PLAYLIST.RENDER_NAME, this.renderName.bind(this));
+        this.eventBus.on(PLAYLIST.RENDER_IMAGE, this.renderImage.bind(this));
+        this.eventBus.on(PLAYLIST.INVALID, this.showErrors.bind(this));
         this.eventBus.on(POPUP.NEW, (message, error = false) => {
             new PopUp(message, error);
         });
+        this.inputChangeBinded = this.inputChange.bind(this);
+        this.imgeChangeBinded = this.imageChange.bind(this);
     }
 
     /**
@@ -61,9 +68,36 @@ export default class PlaylistView extends BaseView {
      * Выводит данные плейлиста
      */
     renderPlaylist() {
-        document.getElementsByClassName('m-big-name')[0].innerHTML =
+        document.getElementsByClassName('m-big-name')[0].innerText =
             inputSanitize(this.playlistData.name);
         document.getElementsByClassName('m-rounded-image')[0].src = this.playlistData.image;
+        document.getElementsByClassName('m-rounded-image')[1].src = this.playlistData.image;
+        if (this.edit) {
+            this.renderEdit();
+        }
+    }
+
+    /**
+     * Рендерит редактирование плейлиста и обратно
+     */
+    renderEdit() {
+        this.edit = !this.edit;
+        if (!this.edit) {
+            this.unsetDynamicEventListeners();
+        }
+        document.getElementsByClassName('m-big-name')[1].classList.toggle('is-not-displayed');
+        document.getElementsByClassName('m-big-name')[1].value =
+            document.getElementsByClassName('m-big-name')[0].innerText;
+        document.getElementsByClassName('m-big-name')[1].size =
+            document.getElementsByClassName('m-big-name')[0].innerText.length;
+        document.getElementsByClassName('m-big-name')[0].classList.toggle('is-not-displayed');
+        document.getElementsByClassName('l-round-image')[0].firstChild.classList
+            .toggle('is-not-displayed');
+        document.getElementsByClassName('l-round-image')[0].lastChild.classList
+            .toggle('is-not-displayed');
+        if (this.edit) {
+            this.setDynamicEventListeners();
+        }
     }
 
     /**
@@ -102,6 +136,99 @@ export default class PlaylistView extends BaseView {
     setEventListeners() {
         document.getElementsByClassName('l-button-middle-play')[0].addEventListener('click',
             this.playPlaylist.bind(this));
+    }
+
+    /**
+     * Set dynamic EventListeners
+     */
+    setDynamicEventListeners() {
+        document.getElementsByClassName('m-big-name')[1]
+            .addEventListener('change', this.inputChangeBinded);
+        document.getElementById('image-upload')
+            .addEventListener('change', this.imgeChangeBinded);
+    }
+
+    /**
+     * Unset dynamic EventListeners
+     */
+    unsetDynamicEventListeners() {
+        document.getElementsByClassName('m-big-name')[1]
+            .removeEventListener('change', this.inputChangeBinded);
+        document.getElementById('image-upload')
+            .removeEventListener('change', this.imgeChangeBinded);
+    }
+
+    /**
+     * Слушает изменение названия плейлиста
+     * @param {Object} event
+     */
+    inputChange(event) {
+        if (event.target.value === '') {
+            new PopUp(POPUP.PLAYLIST_EMPTY_NAME_ERROR, true);
+        }
+        this.eventBus.emit(PLAYLIST.CHANGE_NAME, this.playlistData.id, event.target.value);
+    }
+
+    /**
+     * Рендерит новое название
+     * @param {String} name
+     */
+    renderName(name) {
+        this.playlistData.name = name;
+        this.renderPlaylist();
+    }
+
+    /**
+     * Слушает изменение картинки плейлиста
+     * @param {Object} event
+     */
+    imageChange(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        this.eventBus.emit(PLAYLIST.CHANGE_IMAGE, this.playlistData.id);
+    }
+
+    /**
+     * Рендерит новую картинку
+     * @param {String} image
+     */
+    renderImage(image) {
+        this.playlistData.image = image;
+        this.renderPlaylist();
+    }
+
+    /**
+     * показывает ошибку загрузки картинки
+     * @param {Object} errors
+     */
+    showImageErrors(errors) {
+        this.errors = errors;
+        for (const key in errors) {
+            if (!{}.hasOwnProperty.call(errors, key)) {
+                continue;
+            }
+            const message = document.getElementById(key);
+            message.innerText = errors[key];
+            message.style.height = '15px';
+            message.style.marginBottom = '10px';
+            message.style.visibility = 'visible';
+        }
+    }
+
+    /**
+     * не показывает ошибку загрузки картинки
+     */
+    hideErrors() {
+        for (const key in this.errors) {
+            if (!{}.hasOwnProperty.call(this.errors, key)) {
+                continue;
+            }
+            const message = document.getElementById(key);
+            message.innerText = '';
+            message.style.height = '0';
+            message.style.marginBottom = '0';
+            message.style.visibility = 'hidden';
+        }
     }
 
     /**

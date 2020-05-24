@@ -121,6 +121,12 @@
     height: 50px;
 }
 
-.is-margin-top--144 {
-    margin-top: -144px;
+.is-margin-top--191 {
+    margin-top: -191px;
+}
+
+.is-geometricaly-invisible {
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }

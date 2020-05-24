@@ -242,8 +242,8 @@
             opacity: 1;
         }
         &:hover {
-            margin-left: calc(50% - 65px);
-            transform: scale(1.2);
+            margin-left: 0;
+            transform: scale(1);
         }
     }
 
@@ -251,12 +251,12 @@
         position: absolute;
         top: 72px;
         &.m-more-button {
-            right: 14px;
+            right: 24px;
             margin: 10px;
             opacity: 0.9;
         }
         &.m-dropdown {
-            right: 44px;
+            right: 54px;
             margin: 10px;
         }
     }
@@ -280,6 +280,12 @@
 
     .m-pop-up-close {
         height: 25px;
+    }
+
+    .m-playlist-delete-button {
+        margin-top: 0;
+        position: relative;
+        top: -191px;
     }
 
     .is-button-disabled {
@@ -424,6 +430,11 @@
 
     .l-top-name {
         padding-top: 0;
+    }
+
+    .l-top-name.playlist {
+        display: flex;
+        justify-content: center;
     }
 
     .l-list-card-description {
@@ -609,8 +620,9 @@
             opacity: 1;
         }
         &:hover {
-            margin-left: calc(50% - 65px);
-            transform: scale(1.2);
+            margin-left: 0;
+            transform: scale(1);
+            width: auto;
         }
     }
 
@@ -655,6 +667,12 @@
 
     .m-pop-up-close {
         height: 25px;
+    }
+
+    .m-playlist-delete-button {
+        margin-top: 0;
+        position: relative;
+        top: -191px;
     }
 
     .is-button-disabled {

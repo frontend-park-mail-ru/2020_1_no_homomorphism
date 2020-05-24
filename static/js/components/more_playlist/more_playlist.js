@@ -68,6 +68,8 @@ export default class MorePlaylistComponent {
         }
         document.getElementById('playlist-delete-button').addEventListener('click',
             this._deletePlaylist.bind(this));
+        document.getElementById('playlist-edit-button').addEventListener('click',
+            this._editPlaylist.bind(this));
         document.getElementsByClassName('m-slider')[0].addEventListener('click',
             this._setPrivacy.bind(this));
         this._button.addEventListener('click', this._copyLink.bind(this));
@@ -126,5 +128,12 @@ export default class MorePlaylistComponent {
      */
     _deletePlaylist() {
         this.eventBus.emit(PLAYLIST.DELETE_PLAYLIST, this._playlist.id);
+    }
+
+    /**
+     * Изменение плейлиста
+     */
+    _editPlaylist() {
+        this.eventBus.emit(PLAYLIST.RENDER_EDIT);
     }
 }

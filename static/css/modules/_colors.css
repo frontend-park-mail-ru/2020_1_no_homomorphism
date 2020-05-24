@@ -51,7 +51,9 @@
     .m-subscribe,
     .m-more-button,
     .m-playlist-section-edit-button,
-    .m-playlist-delete-button img {
+    .m-playlist-delete-button img,
+    .m-button-without-size,
+    .m-playlist-edit-button {
         filter: invert(0.9);
     }
 

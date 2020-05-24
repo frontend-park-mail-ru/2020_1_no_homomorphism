@@ -304,7 +304,7 @@
     display: inline-block;
     width: 90%;
     max-width: 150px;
-    max-height: 220px;
+    max-height: 201px;
     text-decoration: none;
     border-radius: var(--card-border-small);
     box-shadow: 0 0 10px -3px rgba(0, 0, 0, 0.5);
@@ -700,4 +700,16 @@
 
 .settings-right-col {
     float: right;
+}
+
+input.m-big-name {
+    border: none;
+    margin-top: -6px;
+    padding: 5px 10px;
+    &:hover, &:focus {
+        margin-top: -8px;
+        border: solid 2px var(--button-color);
+        margin-left: -2px;
+        margin-right: -2px;
+    }
 }
