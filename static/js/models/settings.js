@@ -111,7 +111,12 @@ export default class SettingsModel {
             if (values.password === '') {
                 errors['password-error'] = 'Enter old password';
             }
-        } else {
+        } else if (values.theme === User.getUserData().theme) {
+            if (values.name === User.getUserData().name &&
+                values.email === User.getUserData().email
+            ) {
+                return;
+            }
             values.password = '';
             values.newPassword = '';
             const resEmail = Validation.email(values.email);
@@ -125,14 +130,26 @@ export default class SettingsModel {
         if (JSON.stringify(errors) !== '{}') {
             this.eventBus.emit(SETTINGS.INVALID, errors);
         } else {
+            let type;
+            if (values.name !== User.getUserData().name ||
+                values.email !== User.getUserData().email
+            ) {
+                type = 'profile data';
+            } else if (values.theme !== User.getUserData().theme) {
+                type = 'theme';
+            } else {
+                type = 'password';
+            }
             Api.profilePut(values.name, values.email, values.password, values.newPassword,
                 values.theme)
                 .then((res) => {
                     this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
                     switch (res.status) {
                     case RESPONSE.OK:
-                        if (values.newPassword === '') {
+                        if (type === 'profile data') {
                             this.eventBus.emit(POPUP.NEW, POPUP.SETTINGS_MESSAGE);
+                        } else if (type === 'theme') {
+                            this.eventBus.emit(POPUP.NEW, POPUP.THEME_MESSAGE);
                         } else {
                             this.eventBus.emit(POPUP.NEW, POPUP.PASSWORD_MESSAGE);
                         }
@@ -150,7 +167,7 @@ export default class SettingsModel {
                         this.eventBus.emit(SETTINGS.INVALID, errors);
                         break;
                     case RESPONSE.SERVER_ERROR:
-                        this.eventBus.emit(SETTINGS.INVALID, errors);
+                        this.eventBus.emit(POPUP.NEW, POPUP.SOMETHING_WENT_WRONG, true);
                         break;
                     default:
                         console.log(res);

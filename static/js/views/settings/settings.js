@@ -19,8 +19,8 @@ export default class SettingsView extends BaseView {
         this.errors = {};
         this.eventBus.on(SETTINGS.INVALID, this.showErrors.bind(this));
         this.eventBus.on(SETTINGS.RENDER_LOGGED, this.renderData.bind(this));
-        this.eventBus.on(POPUP.NEW, (message) => {
-            new PopUp(message);
+        this.eventBus.on(POPUP.NEW, (message, error = false) => {
+            new PopUp(message, error);
         });
     }
 
@@ -115,6 +115,21 @@ export default class SettingsView extends BaseView {
                     document.documentElement.style.setProperty(prop[0], prop[1]);
                 });
                 this.submitTheme();
+            });
+        });
+        document.getElementsByClassName('m-big-input').forEach((input) => {
+            input.addEventListener('keyup', (event) => {
+                if (event.keyCode === 13) {
+                    let next = event.target.parentElement.parentElement.parentElement.nextSibling
+                        .firstChild;
+                    if (next.nodeName === 'BUTTON') {
+                        event.target.blur();
+                        next.click();
+                    } else {
+                        next = next.lastChild.firstChild;
+                        next.focus();
+                    }
+                }
             });
         });
     }

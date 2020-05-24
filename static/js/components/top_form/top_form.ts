@@ -51,7 +51,7 @@ export default class TopFormComponent {
             }
             let next: HTMLElement = event.target.parentElement.parentElement.nextElementSibling.firstElementChild as HTMLElement;
             if (next) {
-                next.firstElementChild as HTMLElement;
+                next = next.firstElementChild as HTMLElement;
                 next.focus();
             }
         }

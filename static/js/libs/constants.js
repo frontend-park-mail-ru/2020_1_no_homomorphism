@@ -262,7 +262,9 @@ export const SEARCH = {
 
 export const POPUP = {
     NEW: 'new pop-up',
+    SOMETHING_WENT_WRONG: 'Something went wrong',
     SETTINGS_MESSAGE: 'Profile data successfully updated',
+    THEME_MESSAGE: 'Theme successfully updated',
     PASSWORD_MESSAGE: 'Password successfully changed',
     AVATAR_MESSAGE: 'Profile picture successfully changed',
     PLAYLIST_CREATION_MESSAGE: 'Playlist successfully created',
