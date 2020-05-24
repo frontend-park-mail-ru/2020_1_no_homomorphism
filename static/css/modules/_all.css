@@ -267,10 +267,16 @@
     }
 }
 
-.l-list-card img {
-    float: left;
+.l-list-image img {
+    /* float: left; */
     width: 150px;
     height: 150px;
+}
+
+.l-list-image-label img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: -4px;
 }
 
 .l-list-rounded-card {

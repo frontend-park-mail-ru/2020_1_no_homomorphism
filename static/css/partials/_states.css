@@ -34,11 +34,7 @@
 }
 
 .is-not-displayed {
-    display: none;
-}
-
-.is-displayed {
-    display: block;
+    display: none !important;
 }
 
 .is-error {
@@ -123,4 +119,8 @@
 
 .is-height-50 {
     height: 50px;
+}
+
+.is-margin-top--144 {
+    margin-top: -144px;
 }

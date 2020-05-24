@@ -467,3 +467,23 @@ input:checked + .m-slider:before {
     top: 0;
     cursor: pointer;
 }
+
+.m-playlist-section-edit-button {
+    cursor: pointer;
+    opacity: 0.4;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.m-playlist-delete-button {
+    size: 24px;
+    border-radius: 3px;
+    background: var(--overlay-color);
+    & img {
+        opacity: 0.4;
+    }
+    &:hover img {
+        opacity: 0.8;
+    }
+}
