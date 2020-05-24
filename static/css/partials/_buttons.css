@@ -495,3 +495,22 @@ input:checked + .m-slider:before {
         opacity: 0.8;
     }
 }
+
+.m-playlist-image-upload-button {
+    size: 24px;
+    border-radius: 12px;
+    background: var(--overlay-color);
+    position: relative;
+    top: 0;
+    right: 34px;
+    float: right;
+    margin: 10px;
+    margin-top: -191px;
+    & img {
+        transform: scale(0.9);
+        opacity: 0.4;
+    }
+    &:hover img {
+        opacity: 0.8;
+    }
+}

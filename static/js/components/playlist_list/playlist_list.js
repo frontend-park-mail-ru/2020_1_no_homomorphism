@@ -28,6 +28,7 @@ export default class PlaylistsComponent {
             this.eventBus.on(SEARCH.SET_LISTENERS, this.setEventListeners.bind(this));
         }
         this.deleteClickBinded = this.deleteClick.bind(this);
+        this.uploadClickBinded = this.uploadClick.bind(this);
         this.inputChangeBinded = this.inputChange.bind(this);
         this.imageChangeBinded = this.imageChange.bind(this);
     }
@@ -104,6 +105,9 @@ export default class PlaylistsComponent {
         document.getElementsByClassName('m-playlist-delete-button').forEach((button) => {
             button.addEventListener('click', this.deleteClickBinded);
         });
+        document.getElementsByClassName('m-playlist-image-upload-button').forEach((button) => {
+            button.addEventListener('click', this.uploadClickBinded);
+        });
     }
 
     /**
@@ -121,6 +125,9 @@ export default class PlaylistsComponent {
         });
         document.getElementsByClassName('m-playlist-delete-button').forEach((button) => {
             button.removeEventListener('click', this.deleteClickBinded);
+        });
+        document.getElementsByClassName('m-playlist-image-upload-button').forEach((button) => {
+            button.removeEventListener('click', this.uploadClickBinded);
         });
     }
 
@@ -150,6 +157,8 @@ export default class PlaylistsComponent {
                     .toggle('is-not-displayed');
                 card.getElementsByClassName('m-playlist-delete-button')[0].classList
                     .toggle('is-not-displayed');
+                card.getElementsByClassName('m-playlist-image-upload-button')[0].classList
+                    .toggle('is-not-displayed');
                 card.getElementsByClassName('l-button-play-track')[0].classList
                     .toggle('is-not-displayed');
             }
@@ -178,8 +187,19 @@ export default class PlaylistsComponent {
      * @param {Object} event
      */
     deleteClick(event) {
-        const id = event.target.parentElement.parentElement.getAttribute('a-id');
+        const id = event.target.parentElement.parentElement.parentElement.getAttribute('a-id');
         this._playlistComponent.deletePlaylist(this.updatePlaylistList.bind(this), id);
+    }
+
+    /**
+     * analyze click of playlist image upload
+     * @param {Object} event
+     */
+    uploadClick(event) {
+        const label = event.target.parentElement.parentElement.parentElement
+            .getElementsByTagName('label')[0];
+        console.log(label);
+        label.click();
     }
 
     /**

@@ -53,7 +53,8 @@
     .m-playlist-section-edit-button,
     .m-playlist-delete-button img,
     .m-button-without-size,
-    .m-playlist-edit-button {
+    .m-playlist-edit-button,
+    .m-playlist-image-upload-button img {
         filter: invert(0.9);
     }
 
