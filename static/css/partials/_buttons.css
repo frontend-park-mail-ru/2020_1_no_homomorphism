@@ -427,9 +427,9 @@ input:checked + .m-slider:before {
     border: none;
     color: #FFFFFF;
     text-align: center;
-    font-size: 16px;
+    font-size: 20px;
     padding: 8px;
-    width: 70px;
+    width: 90px;
     transition: all 0.5s;
     cursor: pointer;
     margin-top: 16px;

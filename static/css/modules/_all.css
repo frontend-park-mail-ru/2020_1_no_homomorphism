@@ -626,6 +626,8 @@
 }
 
 .m-theme-selector-container-caption {
+    padding-left: 20px;
+    font-size: 20px;
     margin-top: 10px;
     display: flex;
     align-items: center;
@@ -637,7 +639,7 @@
 }
 
 .m-theme-selector-container-button {
-    height: 20px;
+    height: 16px;
     margin-left: 10px;
     cursor: pointer;
     float: left;
@@ -648,6 +650,8 @@
 }
 
 .m-theme-selector-container {
+    padding-top: 16px;
+    padding-left: 20px;
     height: 0;
     overflow: hidden;
     &.is-expanded {
@@ -677,4 +681,17 @@
     size: 30px;
     border-radius: 23px;
     transition: 0.3s;
+}
+
+.settings-left-col,
+.settings-right-col {
+    width: 49%;
+}
+
+.settings-left-col {
+    float: left;
+}
+
+.settings-right-col {
+    float: right;
 }

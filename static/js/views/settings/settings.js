@@ -130,8 +130,8 @@ export default class SettingsView extends BaseView {
     renderData(data) {
         this.userData = data;
         document.getElementsByClassName('m-round-image')[0].src = data.image;
-        document.getElementsByClassName('m-top-name')[0].innerHTML = inputSanitize(data.name);
-        document.getElementsByClassName('m-top-login')[0].innerHTML = inputSanitize(data.login);
+        document.getElementsByClassName('m-top-name')[0].innerHTML = inputSanitize(data.login);
+        document.getElementsByClassName('m-top-login')[0].innerHTML = inputSanitize(data.name);
         document.getElementsByClassName('m-big-input')[0].value = inputSanitize(data.name);
         document.getElementsByClassName('m-big-input')[1].value = inputSanitize(data.email);
         document.getElementById('newPassword').value = '';

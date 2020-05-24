@@ -1,6 +1,6 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="is-emphasized l-center-pos row">
-        <div class="col col-4">
+        <div class="col-4">
             <form class="l-form l-card" method="post" autocomplete="none">
                 <h2>LOG IN</h2>
                 <div class="m-form-input">
