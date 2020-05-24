@@ -184,6 +184,10 @@ export default class PlayerView extends BaseView {
             event: 'touchstart',
             callback: this.triggerTouch,
         }, {
+            element: document.getElementsByClassName('player-trigger-row')[0],
+            event: 'touchend',
+            callback: this.triggerTouchEnd,
+        }, {
             element: window,
             event: 'touchend',
             callback: this.triggerSwipe,
@@ -316,6 +320,18 @@ export default class PlayerView extends BaseView {
         setTimeout(() => {
             this.triggerTouchedY = undefined;
         }, 500);
+    }
+
+    /**
+     * Слушает нажатие по триггеру плеера
+     * @param {Object} event
+     */
+    triggerTouchEnd(event) {
+        if (this.triggerTouchedY &&
+            Math.abs(event.changedTouches[0].clientY - this.triggerTouchedY) < 50
+        ) {
+            this.triggerClick();
+        }
     }
 
     /**
