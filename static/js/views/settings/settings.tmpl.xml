@@ -1,25 +1,65 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="col-9">
         <div class="l-main">
-            <div class="l-top-card">
-                <div class="l-round-image col">
-                    <label>
-                        <img alt="" src="{data.image}" class="m-round-image m-scale-image" id="avatar"
-                             title="Add new image"/>
-                        <input class="m-hidden-input" type="file" id="avatar-upload"/>
-                    </label>
-                    <div class="m-error-message-small" id="avatar-error" style="padding-left: 32px"> </div>
-                </div>
-                <div class="l-top-name col">
-                    <div class="m-top-login" id="profile-login">
-                        <fest:value>data.name</fest:value>
+            <div class="settings-left-col">
+                <div class="l-down-card col-12">
+                    <h2 class="l-small-card">Avatar</h2>
+                    <div class="small-line"></div>
+                    <div class="l-avatar-input">
+                        <div class="l-round-image col">
+                            <label>
+                                <img alt="" src="{data.image}" class="m-round-image m-scale-image" id="avatar"
+                                    title="Add new image"/>
+                                <input class="m-hidden-input" type="file" id="avatar-upload"/>
+                            </label>
+                            <div class="m-error-message-small" id="avatar-error" style="padding-left: 32px"> </div>
+                        </div>
                     </div>
-                    <div class="m-top-name" id="profile-name">
-                        <fest:value>data.login</fest:value>
+                </div>
+                <div class="l-down-card col-12">
+                    <h2 class="l-small-card">Password</h2>
+                    <div class="small-line"></div>
+                    <div class="l-input">
+                        <div class="row">
+                            <div class="l-input">
+                                <span class="m-settings-title">New password</span>
+                                <label for="newPassword">
+                                    <input type="password" class="m-big-input" id="newPassword"
+                                        value=""
+                                        autocomplete="off"/>
+                                    <div class="m-error-message-small" id="new-password-error"></div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="l-input">
+                                <span class="m-settings-title">Repeat password</span>
+                                <label for="newPasswordConfirm">
+                                    <input type="password" class="m-big-input" id="newPasswordConfirm"
+                                        autocomplete="off"/>
+                                    <div class="m-error-message-small" id="new-password-confirm-error"></div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="l-input">
+                                <span class="m-settings-title">Old password</span>
+                                <label for="password">
+                                    <input type="password" class="m-big-input" id="password"
+                                        placeholder="" autocomplete="off"/>
+                                    <div class="m-error-message-small" id="password-error"></div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button type="submit" class="m-small-button" id="submit-setting-changes-pass">
+                                Change
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="settings-left-col">
+            <div class="settings-right-col">
                 <div class="l-down-card col-12">
                     <h2 class="l-small-card">Profile data</h2>
                     <div class="small-line"></div>
@@ -72,50 +112,6 @@
                                 </div>
                             </div>
                         </fest:for>
-                    </div>
-                </div>
-            </div>
-            <div class="settings-right-col">
-                <div class="l-down-card col-12">
-                    <h2 class="l-small-card">Password</h2>
-                    <div class="small-line"></div>
-                    <div class="l-input">
-                        <div class="row">
-                            <div class="l-input">
-                                <span class="m-settings-title">New password</span>
-                                <label for="newPassword">
-                                    <input type="password" class="m-big-input" id="newPassword"
-                                        value=""
-                                        autocomplete="off"/>
-                                    <div class="m-error-message-small" id="new-password-error"></div>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="l-input">
-                                <span class="m-settings-title">Repeat password</span>
-                                <label for="newPasswordConfirm">
-                                    <input type="password" class="m-big-input" id="newPasswordConfirm"
-                                        autocomplete="off"/>
-                                    <div class="m-error-message-small" id="new-password-confirm-error"></div>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="l-input">
-                                <span class="m-settings-title">Old password</span>
-                                <label for="password">
-                                    <input type="password" class="m-big-input" id="password"
-                                        placeholder="" autocomplete="off"/>
-                                    <div class="m-error-message-small" id="password-error"></div>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <button type="submit" class="m-small-button" id="submit-setting-changes-pass">
-                                Change
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>
