@@ -57,6 +57,10 @@ export default class PlayerView extends BaseView {
             event: PLAYER.MOVE_MARKER,
             callback: this.moveMarker,
             binding: this,
+        }, {
+            event: PLAYER.MOVE_MARKER_TO_CURRENT,
+            callback: this.moveMarkerToCurrent,
+            binding: this,
         }].forEach((subscription) => {
             this.eventBus.on(subscription.event, subscription.callback.bind(subscription.binding));
         });
@@ -415,26 +419,41 @@ export default class PlayerView extends BaseView {
         const marker = document.getElementsByClassName('current-marker')[0];
         const track1 = document.getElementById(currentId);
         const track2 = document.getElementById(newId);
+        const track2BCR = track2.getBoundingClientRect();
         const heightDifference = track1.getBoundingClientRect().y -
-            track2.getBoundingClientRect().y;
-        const base = document.getElementsByClassName('track-list')[0].children[1]
+            track2BCR.y;
+        const base = document.getElementsByClassName('track-list')[0].children[2]
             .getBoundingClientRect().y;
-        track2.classList.remove('is-margin-left-0');
         track2.classList.add('is-margin-left-5');
         marker.style.height = (50 + Math.abs(heightDifference)).toString() + 'px';
         if (heightDifference < 0) {
             setTimeout(() => {
-                marker.style.top = (track2.getBoundingClientRect().y - base + 5).toString() + 'px';
+                marker.style.top = (track2BCR.y - base + 5).toString() + 'px';
             }, 250);
         } else {
-            marker.style.top = (track2.getBoundingClientRect().y - base + 5).toString() + 'px';
+            marker.style.top = (track2BCR.y - base + 5).toString() + 'px';
         }
+        marker.setAttribute('current-id', track2.getAttribute('id'));
         setTimeout(() => {
             marker.style.height = '50px';
             if (heightDifference !== 0) {
                 track1.classList.remove('is-margin-left-5');
-                track1.classList.add('is-margin-left-0');
             }
         }, 250);
+    }
+
+    /**
+     * Передвигает маркер к треку
+     */
+    moveMarkerToCurrent() {
+        if (document.querySelectorAll('.track-list .row').length === 0) {
+            return;
+        }
+        const marker = document.getElementsByClassName('current-marker')[0];
+        const track = document.getElementById(marker.getAttribute('current-id'));
+        const base = document.getElementsByClassName('track-list')[0].children[1]
+            .getBoundingClientRect().y;
+        marker.style.top = (track.getBoundingClientRect().y - base + 5).toString() + 'px';
+        marker.style.height = '50px';
     }
 }

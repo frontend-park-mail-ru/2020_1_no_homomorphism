@@ -1,6 +1,6 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <fest:for iterate="data" index="i" value="track">
-        <div class="row border-bottom" id="{track.id}">
+        <div class="row border-bottom" id="{track.id}" draggable="true">
             <div class="m-track-photo">
                 <img src="{track.image}" height="50px" width="50px" alt="..."/>
             </div>

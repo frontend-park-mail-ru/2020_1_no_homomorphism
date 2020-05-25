@@ -50,6 +50,7 @@ export default class PlayerModel {
         this.eventBus.on(PLAYER.MUTE, this.mute.bind(this));
         this.eventBus.on(PLAYER.UNMUTE, this.unmute.bind(this));
         this.eventBus.on(PLAYER.DELETE, this.delete.bind(this));
+        this.eventBus.on(PLAYER.CHANGE_ORDER, this.changeOrder.bind(this));
     }
 
     /**
@@ -371,6 +372,22 @@ export default class PlayerModel {
     unmute() {
         document.getElementsByTagName('audio')[0].muted = false;
         this.eventBus.emit(PLAYER.DRAW_UNMUTE);
+    }
+
+    /**
+     * Изменение порядка
+     * @param {string} targetId
+     * @param {string} setAfterId
+     */
+    changeOrder(targetId, setAfterId) {
+        const temp = this.playlist.find((track) => track.id === targetId);
+        this.playlist.splice(this.playlist.indexOf(temp), 1);
+        const setAfter = this.playlist.find((track) => track.id === setAfterId);
+        if (this.playlist.indexOf(setAfter) == this.playlist.length - 1) {
+            this.playlist.push(temp);
+        } else {
+            this.playlist.splice(this.playlist.indexOf(setAfter) + 1, 0, temp);
+        }
     }
 
     /**

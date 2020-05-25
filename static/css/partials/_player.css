@@ -398,3 +398,11 @@
     left: 0;
     top: 0;
 }
+
+.drag-patch {
+    width: 100%;
+    height: 0;
+    &.is-active {
+        height: 50px;
+    }
+}
