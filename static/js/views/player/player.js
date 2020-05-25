@@ -30,7 +30,7 @@ export default class PlayerView extends BaseView {
             this.trackListComponent.setEventListeners.bind(this));
         this.subscribe();
         globalEventBus.on(GLOBAL.COLLAPSE, this.collapse.bind(this));
-        globalEventBus.on(GLOBAL.COLLAPSE_AND_LOCK, this.collapseAndLock.bind(this));
+        // globalEventBus.on(GLOBAL.COLLAPSE_AND_LOCK, this.collapseAndLock.bind(this));
         globalEventBus.on(GLOBAL.COLLAPSE_IF_MOBILE, this.collapseIfMobile.bind(this));
     }
 
@@ -335,15 +335,9 @@ export default class PlayerView extends BaseView {
 
     /**
      * Слушает клик мышью по триггеру плеера
-     * @param {Boolean} lockAfter
      */
-    triggerClick(lockAfter = false) {
+    triggerClick() {
         if (this.locked) {
-            return;
-        }
-        if (lockAfter) {
-            this.locked = true;
-            this.resize();
             return;
         }
         if (this.expanded) {
@@ -381,8 +375,12 @@ export default class PlayerView extends BaseView {
                     .classList.add('is-hidden');
                 document.getElementsByClassName('track-list')[0].style.top = '0';
                 setTimeout(() => {
-                    document.getElementsByClassName('l-player')[0].classList.add('l-player-footer');
-                    document.getElementsByClassName('l-player')[0].classList.remove('l-player');
+                    if (!document.getElementsByClassName('l-player-footer')[0]) {
+                        document.getElementsByClassName('l-player')[0]
+                            .classList.add('l-player-footer');
+                        document.getElementsByClassName('l-player')[0]
+                            .classList.remove('l-player');
+                    }
                     document.getElementsByClassName('l-player-footer')[0].appendChild(
                         document.getElementsByClassName('timeline')[0]);
                     document.getElementById('cover').classList.add('in-footer-cover');

@@ -1,4 +1,4 @@
-import {PLAYLIST, GLOBAL, POPUP} from '@libs/constants';
+import {PLAYLIST, GLOBAL, POPUP, LAYOUT} from '@libs/constants';
 import playlist from '@views/playlist/playlist.tmpl.xml';
 import BaseView from '@libs/base_view';
 import TrackListComponent from '@components/track_list/track_list';
@@ -85,8 +85,15 @@ export default class PlaylistView extends BaseView {
         this.edit = !this.edit;
         if (!this.edit) {
             this.unsetDynamicEventListeners();
-            document.getElementById('playlist-edit-button').firstChild.src =
-                '/static/img/icons/edit.svg';
+            if (window.matchMedia(LAYOUT.MOBILE).matches ||
+                window.matchMedia(LAYOUT.TABLET).matches
+            ) {
+                document.getElementById('playlist-edit-button').firstChild.src =
+                    '/static/img/icons/edit.svg';
+            } else {
+                document.getElementById('playlist-edit-button').src =
+                    '/static/img/icons/edit.svg';
+            }
         }
         document.getElementsByClassName('m-big-name')[1].classList.toggle('is-not-displayed');
         document.getElementsByClassName('m-big-name')[1].value =
@@ -100,8 +107,15 @@ export default class PlaylistView extends BaseView {
             .toggle('is-not-displayed');
         if (this.edit) {
             this.setDynamicEventListeners();
-            document.getElementById('playlist-edit-button').firstChild.src =
-                '/static/img/icons/edit_outline.svg';
+            if (window.matchMedia(LAYOUT.MOBILE).matches ||
+                window.matchMedia(LAYOUT.TABLET).matches
+            ) {
+                document.getElementById('playlist-edit-button').firstChild.src =
+                    '/static/img/icons/edit_outline.svg';
+            } else {
+                document.getElementById('playlist-edit-button').src =
+                    '/static/img/icons/edit_outline.svg';
+            }
         }
     }
 

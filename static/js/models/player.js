@@ -259,7 +259,8 @@ export default class PlayerModel {
                 }
                 this.current = -1;
             } else {
-                if (cause === 'self') {
+                if (cause === 'self' || cause === 'delete') {
+                    document.getElementsByTagName('audio')[0].pause();
                     this.eventBus.emit(PLAYER.DRAW_PLAY);
                     this.current = 0;
                     this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
@@ -411,8 +412,6 @@ export default class PlayerModel {
             if (this.playlist.length === 1) {
                 this.pause();
                 document.title = 'VirusMusic';
-                globalEventBus.emit(GLOBAL.COLLAPSE_AND_LOCK);
-                return;
             } else {
                 this.next('delete');
                 decCurrent = true;

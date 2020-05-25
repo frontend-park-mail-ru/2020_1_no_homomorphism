@@ -255,18 +255,22 @@ export default class PlayerTrackListComponent {
      */
     removeFromTracklist(id) {
         document.getElementById(id).remove();
-        if (document.getElementsByClassName('track-list')[0].children.length === 1) {
+        if (document.getElementsByClassName('track-list')[0].children.length === 2) {
             if (this.expanded) {
                 this.triggerClick();
+                this.footer = false;
             }
             this.locked = true;
-            if (document.getElementsByClassName('l-player')) {
-                document.getElementsByClassName('l-player')[0].classList
-                    .remove('l-player-visible');
-            } else {
-                document.getElementsByClassName('l-player-footer')[0].classList
-                    .remove('l-player-visible');
+            if (window.matchMedia(LAYOUT.MOBILE).matches) {
+                this.resize();
             }
+            // if (document.getElementsByClassName('l-player')[0]) {
+            // document.getElementsByClassName('l-player')[0].classList
+            // .remove('l-player-visible');
+            // } else {
+            // document.getElementsByClassName('l-player-footer')[0].classList
+            // .remove('l-player-visible');
+            // }
         }
     }
 
