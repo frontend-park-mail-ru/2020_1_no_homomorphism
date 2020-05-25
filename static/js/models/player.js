@@ -135,7 +135,7 @@ export default class PlayerModel {
      */
     setData(list, trackID = '') {
         if (list.tracks.length === 0) {
-            globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK, true);
+            globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK);
             return;
         }
         for (const song in list.tracks) {
@@ -175,6 +175,8 @@ export default class PlayerModel {
             localStorage.setItem('isPlaying', 'false');
             localStorage.setItem('isPlaying', 'true');
             document.getElementsByTagName('audio')[0].play();
+            document.title = this.playlist[this.queue[this.current]].name + ' – ' +
+                this.playlist[this.queue[this.current]].artist;
         }
         this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
         this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[this.current]]);
@@ -189,6 +191,7 @@ export default class PlayerModel {
         document.getElementsByTagName('audio')[0].pause();
         this.playing = false;
         this.eventBus.emit(PLAYER.DRAW_PLAY);
+        document.title = 'VirusMusic';
     }
 
     /**
@@ -201,6 +204,8 @@ export default class PlayerModel {
             .then(() => {
                 this.playing = true;
             });
+        document.title = this.playlist[this.queue[this.current]].name + ' – ' +
+            this.playlist[this.queue[this.current]].artist;
         this.eventBus.emit(PLAYER.DRAW_PAUSE);
     }
 
@@ -230,6 +235,8 @@ export default class PlayerModel {
             localStorage.setItem('isPlaying', 'false');
             localStorage.setItem('isPlaying', 'true');
             document.getElementsByTagName('audio')[0].play();
+            document.title = this.playlist[this.queue[this.current]].name + ' – ' +
+                this.playlist[this.queue[this.current]].artist;
         }
         this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
         this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[this.current]]);
@@ -275,6 +282,8 @@ export default class PlayerModel {
             localStorage.setItem('isPlaying', 'false');
             localStorage.setItem('isPlaying', 'true');
             document.getElementsByTagName('audio')[0].play();
+            document.title = this.playlist[this.queue[this.current]].name + ' – ' +
+                this.playlist[this.queue[this.current]].artist;
         }
         this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
         this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[this.current]]);
@@ -401,6 +410,9 @@ export default class PlayerModel {
         if (this.playlist[this.queue[this.current]].id === id) {
             if (this.playlist.length === 1) {
                 this.pause();
+                document.title = 'VirusMusic';
+                globalEventBus.emit(GLOBAL.COLLAPSE_AND_LOCK);
+                return;
             } else {
                 this.next('delete');
                 decCurrent = true;
@@ -418,6 +430,7 @@ export default class PlayerModel {
         }
         this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[this.queue[this.current]].id,
             this.playlist[this.queue[this.current]].id);
+        this.eventBus.emit(PLAYER.MOVE_MARKER_TO_CURRENT);
     }
 
     /**
@@ -426,6 +439,7 @@ export default class PlayerModel {
     deleteAll() {
         if (this.playing) {
             this.pause();
+            document.title = 'VirusMusic';
         }
         this.queue = [];
         this.playlist = [];

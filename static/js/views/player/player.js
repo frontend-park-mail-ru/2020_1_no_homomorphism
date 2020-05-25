@@ -30,6 +30,7 @@ export default class PlayerView extends BaseView {
             this.trackListComponent.setEventListeners.bind(this));
         this.subscribe();
         globalEventBus.on(GLOBAL.COLLAPSE, this.collapse.bind(this));
+        globalEventBus.on(GLOBAL.COLLAPSE_AND_LOCK, this.collapseAndLock.bind(this));
         globalEventBus.on(GLOBAL.COLLAPSE_IF_MOBILE, this.collapseIfMobile.bind(this));
     }
 
@@ -189,7 +190,7 @@ export default class PlayerView extends BaseView {
             // ---- TOP ----
             this.root.style.top = NAVBAR.HEIGHT.toString() + 'px';
             // ---- HEIGHT ----
-            height = body.clientHeight - top;
+            height = body.clientHeight - NAVBAR.HEIGHT;
             this.root.style.height = height.toString() + 'px';
             document.getElementsByClassName('player-trigger')[0]
                 .style.height = height.toString() + 'px';
@@ -334,9 +335,15 @@ export default class PlayerView extends BaseView {
 
     /**
      * Слушает клик мышью по триггеру плеера
+     * @param {Boolean} lockAfter
      */
-    triggerClick() {
+    triggerClick(lockAfter = false) {
         if (this.locked) {
+            return;
+        }
+        if (lockAfter) {
+            this.locked = true;
+            this.resize();
             return;
         }
         if (this.expanded) {
@@ -499,6 +506,16 @@ export default class PlayerView extends BaseView {
             window.matchMedia(LAYOUT.TABLET).matches)
         ) {
             this.triggerClick();
+        }
+    }
+
+    /**
+     * Сворачивает плеер, если он развёрнут и блокирует его
+     */
+    collapseAndLock() {
+        if (this.expanded) {
+            this.expanded = false;
+            this.triggerClick(true);
         }
     }
 
