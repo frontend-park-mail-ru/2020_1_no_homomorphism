@@ -70,6 +70,7 @@ export default class PlayerControlComponent {
         document.getElementsByClassName('container-audio')[0].innerHTML = template();
         this.drawVolume(document.getElementsByClassName('volume-scale-back')[0]
             .getBoundingClientRect().height * this.volume);
+        document.getElementsByTagName('audio')[0].volume = this.volume;
     }
 
     /**

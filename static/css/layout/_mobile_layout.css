@@ -304,7 +304,8 @@
         position: fixed;
         width: 100%;
         padding: 0 1em;
-        transition-duration: 0s, 1s;
+        transition-duration: 0s, 0.5s;
+        transition-timing-function: ease;
     }
 
     .l-player-footer {
@@ -367,6 +368,15 @@
     .l-music-bar .m-track-group-names {
         width: 72%;
         text-align: left;
+    }
+
+    .cover {
+        transition: 0s;
+    }
+
+    .animated-cover {
+        transition-property: width, height;
+        transition-duration: 0.2s;
     }
 
     .shuffle {

@@ -212,15 +212,11 @@
 }
 
 .cover {
-    width: 80px;
-    height: 80px;
-    transition-property: width, height;
-    transition-duration: 0.4s;
+    size: 80px;
 }
 
 .in-footer-cover {
-    width: 40px;
-    height: 40px;
+    size: 40px;
 }
 
 .track-name {
