@@ -103,9 +103,10 @@ export default class PlayerTrackListComponent {
             button.addEventListener('click', this.trackDeleteButtonClick.bind(this));
         });
         if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
-            document.querySelectorAll('.more-button').forEach((button) => {
-                button.onclick = (event) => this.moreClicked(event);
-            });
+            document.getElementsByClassName('l-player')[0]
+                .querySelectorAll('.more-button').forEach((button) => {
+                    button.onclick = (event) => this.moreClicked(event);
+                });
         }
     }
 

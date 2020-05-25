@@ -251,12 +251,13 @@
         position: absolute;
         top: 72px;
         &.m-more-button {
+            width: 36px;
             right: 24px;
             margin: 10px;
             opacity: 0.9;
         }
         &.m-dropdown {
-            right: 54px;
+            right: 64px;
             margin: 10px;
         }
     }
@@ -455,6 +456,9 @@
         &:hover {
             background: initial;
         }
+        & .l-track-buttons img {
+            margin-right: 6px;
+        }
     }
 
     .m-track-name {
@@ -634,12 +638,12 @@
         position: absolute;
         top: 72px;
         &.m-more-button {
+            width: 36px;
             right: 14px;
-            margin: 10px;
             opacity: 0.9;
         }
         &.m-dropdown {
-            right: 44px;
+            right: 64px;
             margin: 10px;
         }
     }
@@ -658,15 +662,18 @@
     }
 
     .m-privacy-title {
-        padding-top: 8px;
+        padding-top: 11px;
     }
 
     .m-switch {
-        margin: 0;
+        margin: 4px;
     }
 
-    .m-slider:before {
-        bottom: 4px;
+    .m-slider {
+        transform: scale(0.8);
+        &:before {
+            bottom: 4px;
+        }
     }
 
     .m-pop-up-close {

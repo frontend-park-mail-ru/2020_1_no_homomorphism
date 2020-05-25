@@ -315,6 +315,9 @@ export default class TrackListComponent {
             return;
         }
         if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
+            while (!domItem.classList.contains('m-dropdown-button')) {
+                domItem = domItem.parentNode;
+            }
             if (domItem.firstChild.src.indexOf('/static/img/icons/favorite.svg') !== -1) {
                 domItem.firstChild.src = '/static/img/icons/favorite_border.svg';
                 domItem.children[1].innerText = 'like';

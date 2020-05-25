@@ -17,6 +17,37 @@
                     </div>
                 </div>
                 <div class="l-down-card col-12">
+                    <h2 class="l-small-card">Profile data</h2>
+                    <div class="small-line"></div>
+                    <div class="l-input">
+                        <div class="row">
+                            <div class="l-input">
+                                <span class="m-settings-title">Name</span>
+                                <label for="login">
+                                    <input type="text" class="m-big-input" id="name"/>
+                                    <div class="m-error-message-small" id="name-error"></div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="l-input">
+                                <span class=" m-settings-title">Email</span>
+                                <label for="email">
+                                    <input type="text" class="m-big-input" id="email" autocomplete="off"/>
+                                    <div class="m-error-message-small" id="email-error"></div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button class="m-small-button" type="submit" id="submit-setting-changes-data">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="settings-right-col">
+                <div class="l-down-card col-12">
                     <h2 class="l-small-card">Password</h2>
                     <div class="small-line"></div>
                     <div class="l-input">
@@ -24,9 +55,7 @@
                             <div class="l-input">
                                 <span class="m-settings-title">New password</span>
                                 <label for="newPassword">
-                                    <input type="password" class="m-big-input" id="newPassword"
-                                        value=""
-                                        autocomplete="off"/>
+                                    <input type="password" class="m-big-input" id="newPassword" autocomplete="off"/>
                                     <div class="m-error-message-small" id="new-password-error"></div>
                                 </label>
                             </div>
@@ -54,38 +83,6 @@
                         <div class="row">
                             <button type="submit" class="m-small-button" id="submit-setting-changes-pass">
                                 Change
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="settings-right-col">
-                <div class="l-down-card col-12">
-                    <h2 class="l-small-card">Profile data</h2>
-                    <div class="small-line"></div>
-                    <div class="l-input">
-                        <div class="row">
-                            <div class="l-input">
-                                <span class="m-settings-title">Name</span>
-                                <label for="login">
-                                    <input type="text" class="m-big-input" id="name"/>
-                                    <div class="m-error-message-small" id="name-error"></div>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="l-input">
-                                <span class=" m-settings-title">Email</span>
-                                <label for="email">
-                                    <input type="text" class="m-big-input" id="email"
-                                        value="{data.email}" autocomplete="off"/>
-                                    <div class="m-error-message-small" id="email-error"></div>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <button class="m-small-button" type="submit" id="submit-setting-changes-data">
-                                Save
                             </button>
                         </div>
                     </div>

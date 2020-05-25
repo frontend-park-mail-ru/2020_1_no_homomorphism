@@ -75,6 +75,7 @@ export const GLOBAL = {
     PLAY_ALBUM: 'global-play-album',
     CLEAR_AND_LOCK: 'global-clear-and-lock',
     COLLAPSE: 'global-collapse',
+    COLLAPSE_IF_MOBILE: 'global-collapse-if-mobile',
     REDIRECT: 'redirect',
     HREF: 'global-href',
     LOGOUT_REDIRECT: 'global-logout-redirect',

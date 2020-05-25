@@ -1,7 +1,6 @@
 import Api from '@libs/api';
-// import {GLOBAL, RESPONSE, URL, POPUP} from '@libs/constants';
-import {RESPONSE, POPUP} from '@libs/constants';
-// import {globalEventBus} from '@libs/eventBus';
+import {GLOBAL, RESPONSE, URL, POPUP} from '@libs/constants';
+import {globalEventBus} from '@libs/eventBus';
 import PopUp from '@components/pop-up/pop-up';
 import Validation from '@libs/validation';
 import User from '@libs/user';
@@ -22,23 +21,23 @@ export default class PlaylistComponent {
      * @param {function} callback
      */
     getProfilePlaylistsApi(callback) {
-        // Api.profilePlaylistsGet().then((res) => {
-        //     switch (res.status) {
-        //     case RESPONSE.OK:
-        //         res.json().then((list) => {
-        //             callback(list.playlists);
-        //         });
-        //         break;
-        //     case RESPONSE.UNAUTH:
-        //     case RESPONSE.NO_ACCESS_RIGHT:
-        //         globalEventBus.emit(GLOBAL.REDIRECT, URL.SIGN_UP);
-        //         break;
-        //     case RESPONSE.BAD_REQUEST:
-        //     default:
-        //         console.log(res);
-        //         console.error('I am a teapot');
-        //     }
-        // });
+        Api.profilePlaylistsGet().then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                res.json().then((list) => {
+                    callback(list.playlists);
+                });
+                break;
+            case RESPONSE.UNAUTH:
+            case RESPONSE.NO_ACCESS_RIGHT:
+                globalEventBus.emit(GLOBAL.REDIRECT, URL.SIGN_UP);
+                break;
+            case RESPONSE.BAD_REQUEST:
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
     }
 
     /**

@@ -44,7 +44,7 @@
                             <img src="/static/img/icons/playlist_add.svg" class="m-big-add-button" height="15px" alt="..."/>
                         </div>
                         <div class="l-big-track-button more-button">
-                            <img src="/static/img/icons/more_vert.svg" class="m-big-more-button" height="15px" alt="..."/>
+                            <img src="/static/img/icons/more_vert.svg" class="m-big-more-button" height="20px" alt="..."/>
                         </div>
                     </div>
                 </fest:if>
@@ -62,7 +62,7 @@
                             <img src="/static/img/icons/playlist_add.svg" class="m-big-add-button" height="15px" alt="..."/>
                         </div>
                         <div class="l-big-track-button more-button">
-                            <img src="/static/img/icons/more_vert.svg" class="m-big-more-button" height="15px" alt="..."/>
+                            <img src="/static/img/icons/more_vert.svg" class="m-big-more-button" height="20px" alt="..."/>
                         </div>
                     </div>
                 </fest:if>
@@ -91,6 +91,24 @@
                         <button class="m-dropdown-button add-button">
                             <img src="/static/img/icons/playlist_add.svg"/>
                             <span class="m-text-in-button">add</span>
+                        </button>
+                    </div>
+                    <div class="row">
+                        <button class="m-dropdown-button add-button">
+                            <img src="/static/img/icons/queue_music.svg"/>
+                            <span class="m-text-in-button">add to player</span>
+                        </button>
+                    </div>
+                    <div class="row">
+                        <button class="m-dropdown-button add-button">
+                            <img src="/static/img/icons/album.svg"/>
+                            <span class="m-text-in-button">go to album</span>
+                        </button>
+                    </div>
+                    <div class="row">
+                        <button class="m-dropdown-button add-button">
+                            <img src="/static/img/icons/person.svg"/>
+                            <span class="m-text-in-button">go to artist</span>
                         </button>
                     </div>
                 </div>

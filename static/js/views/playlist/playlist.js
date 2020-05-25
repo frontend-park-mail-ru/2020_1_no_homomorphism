@@ -48,6 +48,7 @@ export default class PlaylistView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
+        globalEventBus.emit(GLOBAL.COLLAPSE_IF_MOBILE);
         super.render(root);
         this.eventBus.emit(PLAYLIST.GET_PLAYLIST_DATA, {id: url});
     }

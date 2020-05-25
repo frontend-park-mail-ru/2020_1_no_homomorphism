@@ -1,4 +1,4 @@
-import {NAVBAR, GLOBAL, DOM, URL, THEME} from '@libs/constants';
+import {NAVBAR, GLOBAL, DOM, URL, THEME, LAYOUT} from '@libs/constants';
 import navbar from '@views/navbar/navbar.tmpl.xml';
 import BaseView from '@libs/base_view';
 import User from '@libs/user';
@@ -81,6 +81,7 @@ export default class NavbarView extends BaseView {
         document.addEventListener('click', this.closeSearchComponent.bind(this));
         document.getElementsByClassName('l-navbar-small-search')[0]
             .addEventListener('click', this.renderSearch.bind(this));
+        window.addEventListener('orientationchange', this.closeSearch.bind(this));
         window.addEventListener('click', (event) => {
             const dropdown = document.getElementsByClassName('m-dropdown').find((elem) => {
                 return elem.classList.contains('is-expanded');
@@ -181,7 +182,7 @@ export default class NavbarView extends BaseView {
         event.preventDefault();
         event.stopImmediatePropagation();
         if (document.getElementsByClassName('l-navbar-small-search')[0]
-            .children[0].src.indexOf('search') != -1
+            .children[0].src.indexOf('search') !== -1
         ) {
             document.getElementsByClassName('l-navbar')[0].children.forEach((item) => {
                 if (item.classList.contains('l-navbar-small-search') ||
@@ -219,5 +220,34 @@ export default class NavbarView extends BaseView {
                 .children[0].src = '/static/img/icons/search.svg';
             this.closeSearchComponent({target: document.documentElement});
         }
+    }
+
+    /**
+     * Закрывает поиск во время orientationchange
+     */
+    closeSearch() {
+        if (window.matchMedia(LAYOUT.MOBILE).matches) {
+            return;
+        }
+        document.getElementsByClassName('l-navbar')[0].children.forEach((item) => {
+            if ((item.classList.contains('l-navbar-small-search') ||
+                item.classList.contains('m-search-input') ||
+                (this.loggedIn && (item.getAttribute('id') == 'signup-link' ||
+                    item.getAttribute('id') == 'login-link')) ||
+                (!this.loggedIn && (item.getAttribute('id') == 'profile-link' ||
+                    item.getAttribute('id') == 'settings-icon' ||
+                    item.getAttribute('id') == 'logout-link')))
+            ) {
+                return;
+            }
+            item.classList.remove('is-not-displayed');
+        });
+        document.getElementsByClassName('m-search-input')[0].classList
+            .add('m-desktop-tablet-only');
+        document.getElementsByClassName('m-search-input')[0].classList
+            .remove('m-search-input-expanded');
+        document.getElementsByClassName('l-navbar-small-search')[0]
+            .children[0].src = '/static/img/icons/search.svg';
+        this.closeSearchComponent({target: document.documentElement});
     }
 }

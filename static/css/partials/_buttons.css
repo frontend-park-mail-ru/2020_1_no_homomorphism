@@ -203,6 +203,7 @@ input:checked + .m-slider:before {
     size: 100% 39px;
     padding: 0 12px 0 6px;
     transition: border 10s cubic-bezier(0, 0, 1, 1);
+    font-size: 16px;
     &.success-border {
         border: 1px solid var(--pop-up-color) !important;
     }
