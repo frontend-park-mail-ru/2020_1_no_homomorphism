@@ -5,8 +5,8 @@
             <div class="row">
                 <div class="m-privacy-title">private playlist</div>
                 <label class="m-switch">
-                    <input type="checkbox" id="checkbox" checked="true" value="1"> </input>
-                    <span class="m-slider"> </span>
+                    <input type="checkbox" id="checkbox" checked="true" value="1"></input>
+                    <span class="m-slider"></span>
                 </label>
             </div>
             <div class="small-line"></div>
@@ -29,8 +29,8 @@
             <div class="row" style="float: right">
                 <div class="m-privacy-title col">Private playlist</div>
                 <label class="m-switch col">
-                    <input type="checkbox" id="checkbox" checked="true" value="1"> </input>
-                    <span class="m-slider"> </span>
+                    <input type="checkbox" id="checkbox" checked="true" value="1"></input>
+                    <span class="m-slider"></span>
                 </label>
             </div>
             <div class="row">
@@ -41,9 +41,33 @@
                             <span class="m-text-in-button">copy link</span>
                         </button>
                     </div>
+                    <div class="row">
+                        <div class="m-share-button" id="azazazaza">
+                            <fest:script>
+                            </fest:script>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="m-share-button">
+                            <div class="fb-share-button" data-href="https://virusmusic.fun" data-layout="button"
+                                 data-size="small">
+                                <a target="_blank"
+                                   href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
+                                   class="fb-xfbml-parse-ignore">Share
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="=">
+                            <fest:value id="rrr" output="js">
+                            </fest:value>
+                        </div>
+                    </div>
                 </div>
                 <div class="col" style="float: right;">
                     <button class="m-button-share"></button>
+
                 </div>
             </div>
             <div class="l-delete-playlist-button" id="playlist-delete-button">

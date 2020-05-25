@@ -25,6 +25,13 @@ export default class MorePlaylistComponent {
             document.getElementsByClassName('l-top-card')[0].innerHTML += more({mobile: true});
         } else {
             document.getElementsByClassName('l-top-card')[0].innerHTML += more({mobile: false});
+            // eslint-disable-next-line no-undef
+            const elem = VK.Share.button(false, {
+                url: window.location.href,
+                type: 'round_nocount',
+                text: 'Поделиться',
+            });
+            document.getElementById('azazazaza').innerHTML += elem;
         }
         document.getElementById('checkbox').checked = isPrivate;
         this._button = document.getElementById('playlist-share-button');
@@ -91,31 +98,22 @@ export default class MorePlaylistComponent {
      * @param {Object} event
      */
     _copyLink(event) {
-        // const shareData = {
-        //     title: 'ahaha',
-        //     text: 'Lolkek',
-        //     url: window.location.href,
-        // };
         if (!this._playlist.private) {
             if (navigator.share) {
-                console.log('Congrats! Your browser supports Web Share API');
-                alert('yes');
-
-                // navigator.share принимает объект с URL, title или text
                 navigator.share({
-                    title: 'Bits and pieces: Web Share APприI article',
-                    text: 'Web Share API feature is awesome. You must check it',
+                    title: 'Shared a playlist',
+                    text: this._playlist.name,
                     url: window.location.href,
                 })
-                    .then(function() {
-                        console.log('Sharing successfull');
+                    .then(() => {
+                        this._button.classList.add('success-border');
+                        setTimeout(this.delSuccessClass.bind(this), 1000);
+                        new PopUp(POPUP.PLAYLIST_LINK_COPY_MESSAGE);
                     })
-                    .catch(function() {
-                        console.log('Sharing failed');
+                    .catch((err) => {
+                        new PopUp(POPUP.PLAYLIST_LINK_COPY_ERROR_MESSAGE, true);
                     });
             } else {
-                alert('no');
-                console.log('Sorry! Your browser does not support Web Share API');
                 navigator.clipboard.writeText(window.location.href)
                     .then(() => {
                         this._button.classList.add('success-border');

@@ -200,7 +200,7 @@ input:checked + .m-slider:before {
     position: relative;
     min-width: 90px;
     size: 100% 39px;
-    padding: 0 12px 0 6px;
+    height: 50px;
     transition: border 10s cubic-bezier(0, 0, 1, 1);
     &.success-border {
         border: 1px solid var(--pop-up-color) !important;
@@ -465,4 +465,23 @@ input:checked + .m-slider:before {
     right: -30px;
     top: 0;
     cursor: pointer;
+}
+
+.m-share-button {
+    background: var(--overlay-color);
+    border: none;
+    text-align: -webkit-center;
+    color: var(--font-color);
+    cursor: pointer;
+    opacity: 0.5;
+    position: relative;
+    min-width: 90px;
+    padding: 4px;
+    height: 30px;
+    transition: border 10s cubic-bezier(0, 0, 1, 1);
+    &:hover {
+        box-shadow: var(--box-shadow-hard);
+        transition: 0.1s;
+        opacity: 0.8;
+    }
 }
