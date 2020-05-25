@@ -26,12 +26,12 @@ export default class MorePlaylistComponent {
         } else {
             document.getElementsByClassName('l-top-card')[0].innerHTML += more({mobile: false});
             // eslint-disable-next-line no-undef
-            // const elem = VK.Share.button(false, {
-            //     url: window.location.href,
-            //     type: 'round_nocount',
-            //     text: 'Поделиться',
-            // });
-            // document.getElementById('azazazaza').innerHTML += elem;
+            const elem = VK.Share.button(false, {
+                url: window.location.href,
+                type: 'round_nocount',
+                text: 'Поделиться',
+            });
+            document.getElementById('azazazaza').innerHTML += elem;
         }
         document.getElementById('checkbox').checked = isPrivate;
         this._button = document.getElementById('playlist-share-button');
