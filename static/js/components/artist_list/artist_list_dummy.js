@@ -23,6 +23,8 @@ export default class ArtistListDummyComponent {
      * @param {Object} data
      */
     render(data) {
-        document.getElementsByClassName(this._DOMItem)[0].innerHTML = artistList(data);
+        if (document.getElementsByClassName(this._DOMItem)[0] !== undefined) {
+            document.getElementsByClassName(this._DOMItem)[0].innerHTML = artistList(data);
+        }
     }
 }

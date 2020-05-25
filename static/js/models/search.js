@@ -26,6 +26,7 @@ export default class SearchModel {
      * @param {Object} data
      */
     getData(data) {
+        console.log(data);
         Api.searchGet(data.input, SEARCH.AMOUNT)
             .then((res) => {
                 switch (res.status) {

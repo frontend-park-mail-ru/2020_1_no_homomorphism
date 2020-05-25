@@ -30,5 +30,16 @@
                 </div>
             </div>
         </fest:if>
+        <fest:if test="data.albums.length == 0">
+            <fest:if test="data.tracks.length == 0">
+                <fest:if test="data.artists.length == 0">
+                    <div class="l-main l-down-card">
+                        <h2 class="l-small-card">
+                            Sorry, we didnt find any results
+                        </h2>
+                    </div>
+                </fest:if>
+            </fest:if>
+        </fest:if>
     </div>
 </fest:template>
