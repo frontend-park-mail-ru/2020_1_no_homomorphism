@@ -42,7 +42,7 @@
                         </button>
                     </div>
                     <div class="row">
-                        <div class="m-share-button" id="azazazaza">
+                        <div class="m-share-button" id="vk-share">
                             <fest:script>
                             </fest:script>
                         </div>
@@ -56,12 +56,6 @@
                                    class="fb-xfbml-parse-ignore">Share
                                 </a>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="=">
-                            <fest:value id="rrr" output="js">
-                            </fest:value>
                         </div>
                     </div>
                 </div>

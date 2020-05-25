@@ -141,7 +141,7 @@ export default class Router {
         window.addEventListener('click', (event) => {
             let current = event.target;
             while (current !== window && current !== document.body && current != null) {
-                if (current instanceof HTMLAnchorElement) {
+                if (current instanceof HTMLAnchorElement && current.target !== '_blank') {
                     event.preventDefault();
                     this.check(current.pathname, true);
                     break;

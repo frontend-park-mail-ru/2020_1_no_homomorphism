@@ -31,7 +31,10 @@ export default class MorePlaylistComponent {
                 type: 'round_nocount',
                 text: 'Поделиться',
             });
-            document.getElementById('azazazaza').innerHTML += elem;
+            document.getElementById('vk-share').innerHTML += elem;
+            document.querySelectorAll('td').forEach((elem) => {
+                elem.children[0].target = '_blank';
+            });
         }
         document.getElementById('checkbox').checked = isPrivate;
         this._button = document.getElementById('playlist-share-button');
