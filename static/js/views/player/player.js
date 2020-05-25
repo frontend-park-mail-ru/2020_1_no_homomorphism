@@ -154,6 +154,13 @@ export default class PlayerView extends BaseView {
                 document.getElementsByClassName('l-player-footer')[0].classList.add('l-player');
                 document.getElementsByClassName('l-player')[0].classList.remove('l-player-footer');
             }
+            if (this.expanded) {
+                document.getElementsByClassName('player-trigger')[0]
+                    .classList.remove('is-z-index-top');
+            } else {
+                document.getElementsByClassName('player-trigger')[0]
+                    .classList.add('is-z-index-top');
+            }
             // ---- LEFT ----
             left = this.expanded ?
                 body.clientWidth - this.root.clientWidth : body.clientWidth - 13;
@@ -161,7 +168,7 @@ export default class PlayerView extends BaseView {
             // ---- TOP ----
             this.root.style.top = NAVBAR.HEIGHT.toString() + 'px';
             // ---- HEIGHT ----
-            height = body.clientHeight - top;
+            height = body.clientHeight - NAVBAR.HEIGHT;
             this.root.style.height = height.toString() + 'px';
             document.getElementsByClassName('player-trigger')[0]
                 .style.height = height.toString() + 'px';
@@ -292,7 +299,7 @@ export default class PlayerView extends BaseView {
      */
     audioTimeUpdate() {
         if (isNaN(document.getElementsByTagName('audio')[0].currentTime /
-            document.getElementsByTagName('audio')[0].duration) || this.timelineDrag
+            document.getElementsByTagName('audio')[0].duration)
         ) {
             return;
         }

@@ -85,6 +85,8 @@ export default class PlaylistView extends BaseView {
         this.edit = !this.edit;
         if (!this.edit) {
             this.unsetDynamicEventListeners();
+            document.getElementById('playlist-edit-button').firstChild.src =
+                '/static/img/icons/edit.svg';
         }
         document.getElementsByClassName('m-big-name')[1].classList.toggle('is-not-displayed');
         document.getElementsByClassName('m-big-name')[1].value =
@@ -98,6 +100,8 @@ export default class PlaylistView extends BaseView {
             .toggle('is-not-displayed');
         if (this.edit) {
             this.setDynamicEventListeners();
+            document.getElementById('playlist-edit-button').firstChild.src =
+                '/static/img/icons/edit_outline.svg';
         }
     }
 

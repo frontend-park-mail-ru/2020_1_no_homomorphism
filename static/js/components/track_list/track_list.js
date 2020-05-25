@@ -97,16 +97,50 @@ export default class TrackListComponent {
         }
         if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
             document.querySelectorAll('.more-button').forEach((button) => {
+                button.ontouchstart = (event) => {
+                    event.preventDefault();
+                    event.target.click();
+                };
                 button.onclick = (event) => this.moreClicked(event);
             });
             document.querySelectorAll('.add-button').forEach((track) => {
+                track.ontouchstart = (event) => {
+                    event.preventDefault();
+                    event.target.click();
+                };
                 track.onclick = (event) => this.addToPlaylist.bind(this)(event);
             });
             document.querySelectorAll('.like-button').forEach((button) => {
+                button.ontouchstart = (event) => {
+                    event.preventDefault();
+                    event.target.click();
+                };
                 button.onclick = (event) => this.likeClicked(event);
+            });
+            document.querySelectorAll('.add-player-button').forEach((button) => {
+                button.ontouchstart = (event) => {
+                    event.preventDefault();
+                    event.target.click();
+                };
+            });
+            document.querySelectorAll('.album-button').forEach((button) => {
+                button.ontouchstart = (event) => {
+                    event.preventDefault();
+                    event.target.click();
+                };
+            });
+            document.querySelectorAll('.artist-button').forEach((button) => {
+                button.ontouchstart = (event) => {
+                    event.preventDefault();
+                    event.target.click();
+                };
             });
             if (this._tracklist.type) {
                 document.querySelectorAll('.remove-button').forEach((button) => {
+                    button.ontouchstart = (event) => {
+                        event.preventDefault();
+                        event.target.click();
+                    };
                     button.onclick = (event) => this.deleteClicked(event);
                 });
             }
@@ -290,6 +324,8 @@ export default class TrackListComponent {
      * @param {Object} event
      */
     likeClicked(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
         if (!User.exists()) {
             new PopUp(POPUP.LOGIN_ERROR, true);
             // globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);

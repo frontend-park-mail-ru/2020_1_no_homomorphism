@@ -233,6 +233,7 @@ export const PLAYLIST = {
     RENDER_IMAGE: 'playlist-render-image',
     RENDER_PLAYLIST_DATA: 'playlist-render-playlist-data',
     RENDER_TRACKS: 'playlist-render-tracks-data',
+    RENDER_EDIT: 'playlist-render-edit',
     DELETE_PLAYLIST: 'playlist-delete',
     ERROR: 'playlist-show-errors',
     RENDER_DELETED: 'playlist-render-deleted',

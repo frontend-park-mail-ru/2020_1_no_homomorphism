@@ -94,19 +94,19 @@
                         </button>
                     </div>
                     <div class="row">
-                        <button class="m-dropdown-button add-button">
+                        <button class="m-dropdown-button add-player-button">
                             <img src="/static/img/icons/queue_music.svg"/>
                             <span class="m-text-in-button">add to player</span>
                         </button>
                     </div>
                     <div class="row">
-                        <button class="m-dropdown-button add-button">
+                        <button class="m-dropdown-button album-button">
                             <img src="/static/img/icons/album.svg"/>
                             <span class="m-text-in-button">go to album</span>
                         </button>
                     </div>
                     <div class="row">
-                        <button class="m-dropdown-button add-button">
+                        <button class="m-dropdown-button artist-button">
                             <img src="/static/img/icons/person.svg"/>
                             <span class="m-text-in-button">go to artist</span>
                         </button>

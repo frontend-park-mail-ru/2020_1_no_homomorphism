@@ -58,7 +58,8 @@
         filter: invert(0.9);
     }
 
-    .l-list-rounded-card:hover {
+    .l-list-rounded-card:hover,
+    .m-dropdown {
         box-shadow: 0 0 0 1px var(--selected-elem);
     }
 }
