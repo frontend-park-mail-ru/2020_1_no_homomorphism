@@ -22,6 +22,7 @@ export default class SearchDummyComponent {
         this._data = data;
         document.getElementsByClassName('l-top-content')[0].innerHTML = search(data);
         document.getElementsByClassName('m-search-input')[0].value = data.input;
+        document.getElementsByClassName('m-search-input')[0].classList.add('with-modal-window');
         this.setEventListener.bind(this)();
     }
 
