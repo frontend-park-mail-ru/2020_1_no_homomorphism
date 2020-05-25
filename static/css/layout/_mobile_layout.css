@@ -118,8 +118,8 @@
     }
 
     .l-search {
-        left: 11.5%;
-        width: 35.5%;
+        left: calc(5% + 44px);
+        width: 35.8%;
     }
 
     .l-main {
@@ -439,7 +439,7 @@
 
     .l-search {
         left: 5.5%;
-        width: 80%;
+        width: 85%;
     }
 
     .l-navbar .m-search-input {

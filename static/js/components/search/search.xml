@@ -30,10 +30,8 @@
                             </div>
                         </div>
                     </a>
-
                     <div class="small-line"></div>
                 </fest:for>
-
             </div>
         </fest:if>
         <fest:if test="data.tracks.length > 0">
@@ -53,7 +51,6 @@
                         <div class="m-obscure-title m-small-text">
                             <fest:value>track.artist</fest:value>
                         </div>
-
                     </div>
                     <div class="small-line"></div>
                 </fest:for>
@@ -77,7 +74,6 @@
                             <div class="m-obscure-title m-small-text">
                                 <fest:value>album.artist_name</fest:value>
                             </div>
-
                         </div>
                     </a>
                     <div class="small-line"></div>
