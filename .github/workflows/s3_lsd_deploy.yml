@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - lsd
+      - lsd_saved
   pull_request:
     branches:
         - lsd
