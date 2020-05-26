@@ -47,6 +47,7 @@
     .m-large-like-button,
     .m-theme-selector-container-button,
     .container-audio img,
+    .l-player-footer .play-pause,
     .m-close-choose-menu-button,
     .m-subscribe,
     .m-more-button,
@@ -56,6 +57,10 @@
     .m-playlist-edit-button,
     .m-playlist-image-upload-button img {
         filter: invert(0.9);
+    }
+
+    .player-trigger-arrow-row {
+        filter: invert(0.6);
     }
 
     .l-list-rounded-card:hover,

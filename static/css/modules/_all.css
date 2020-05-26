@@ -159,10 +159,9 @@
     margin-bottom: 16px;
 }
 
-.l-track-big:hover {
+.l-track-big:hover, .l-player-track:hover {
     & .m-big-like-button, .m-big-delete-button, .m-big-add-button {
         transition: 0.3s;
-        -webkit-transform: scale(2);
         transform: scale(1.2);
     }
     & .m-big-like-button, .m-big-delete-button, .m-big-add-button {
@@ -170,15 +169,10 @@
     }
 }
 
-.border-bottom:hover .m-big-like-button, .border-bottom:hover .m-big-delete-button, .border-bottom:hover .m-big-add-button {
-    transition: 0.3s;
-    -webkit-transform: scale(2);
-    transform: scale(0.8);
-    opacity: 0.8;
-}
-
-.l-track-big:not(:hover) .m-big-like-button, .l-track-big:not(:hover) .m-big-delete-button, .l-track-big:not(:hover) .m-big-add-button {
-    transition: 0.1s;
+.l-track-big:not(:hover), .l-player-track:not(:hover) {
+    & .m-big-like-button, .m-big-delete-button, .m-big-add-button {
+        transition: 0.1s;
+    }
 }
 
 .l-track-big .l-big-track-button {
@@ -186,7 +180,7 @@
     float: left;
 }
 
-.l-track-big {
+.l-track-big, .l-player-track {
     & .m-big-like-button, .m-big-delete-button, .m-big-add-button {
         opacity: 0;
         &:hover {
@@ -198,14 +192,10 @@
 .m-big-like-button {
     &.is-liked{
         opacity: 0.8 !important;
-        content: url("../../static/img/icons/favorite.svg");
-    }
-    &.is-not-liked {
-        content: url("../../static/img/icons/favorite_border.svg");
     }
 }
 
-.l-big-track-button.more-button {
+.more-button {
     display: none;
 }
 
@@ -620,7 +610,7 @@
 .m-dropdown {
     border-radius: 10px;
     background: var(--overlay-color);
-    z-index: var(--main-level);
+    z-index: var(--top-level);
     opacity: 0;
     pointer-events: none;
     transition: box-shadow 0.3s, opacity 0.3s;

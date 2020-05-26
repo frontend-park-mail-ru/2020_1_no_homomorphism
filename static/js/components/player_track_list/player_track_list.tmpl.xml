@@ -1,6 +1,6 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <fest:for iterate="data" index="i" value="track">
-        <div class="row border-bottom" id="{track.id}" draggable="true">
+        <div class="l-player-track row border-bottom" id="{track.id}" draggable="true">
             <div class="m-track-photo">
                 <img src="{track.image}" height="50px" width="50px" alt="..."/>
             </div>
@@ -13,49 +13,67 @@
                 </a>
             </div>
             <div class="l-player-track-buttons">
-                <div class="l-big-track-button delete-button">
-                    <img src="/static/img/icons/clear.svg" class="m-big-delete-button" height="15px" alt="..."/>
+                <div class="l-player-track-button delete-button">
+                    <img src="/static/img/icons/clear.svg" class="m-big-delete-button" height="20px" alt="..."/>
                 </div>
-<!--                <div class="l-big-track-button favorite-button">-->
-<!--                    <img src="/static/img/icons/favorite_border.svg" class="m-big-like-button" height="15px" alt="..."/>-->
-<!--                </div>-->
-<!--                <div class="l-big-track-button add-button">-->
-<!--                    <img src="/static/img/icons/playlist_add.svg" class="m-big-add-button" height="15px" alt="..."/>-->
-<!--                </div>-->
-                <div class="l-big-track-button more-button">
-                    <img src="/static/img/icons/more_vert.svg" class="m-big-more-button" height="15px" alt="..."/>
+               <div class="l-player-track-button favorite-button">
+                   <fest:if test="!track.is_liked">
+                       <img src="/static/img/icons/favorite_border.svg" class="m-big-like-button is-not-liked" height="20px" alt="..."/>
+                   </fest:if>
+                   <fest:if test="track.is_liked">
+                       <img src="/static/img/icons/favorite.svg" class="m-big-like-button is-liked" height="20px" alt="..."/>
+                   </fest:if>
+               </div>
+               <div class="l-player-track-button add-button">
+                   <img src="/static/img/icons/playlist_add.svg" class="m-big-add-button" height="20px" alt="..."/>
+               </div>
+                <div class="l-player-track-button more-button">
+                    <img src="/static/img/icons/more_vert.svg" class="m-big-more-button" height="20px" alt="..."/>
                 </div>
             </div>
             <div class="m-top-right-corner m-dropdown m-mobile-tablet-only">
                 <div class="row">
-                    <div class="col">
-                        <button class="m-dropdown-button delete-button">
-                            <img src="/static/img/icons/clear.svg"/>
-                            <span class="m-text-in-button">remove</span>
-                        </button>
-                    </div>
+                      <button class="m-dropdown-button delete-button">
+                        <img src="/static/img/icons/clear.svg"/>
+                        <span class="m-text-in-button">remove</span>
+                    </button>
                 </div>
-                <!-- <div class="row">
-                    <div class="col">
-                        <button class="m-dropdown-button like-button">
-                            <fest:if test="!track.is_liked">
-                                <img src="/static/img/icons/favorite_border.svg"/>
-                            </fest:if>
-                            <fest:if test="track.is_liked">
-                                <img src="/static/img/icons/favorite.svg"/>
-                            </fest:if>
+                <div class="row">
+                    <button class="m-dropdown-button like-button">
+                        <fest:if test="!track.is_liked">
+                            <img src="/static/img/icons/favorite_border.svg"/>
                             <span class="m-text-in-button">like</span>
-                        </button>
-                    </div>
-                </div> -->
-                <!-- <div class="row">
-                    <div class="col">
-                        <button class="m-dropdown-button add-button">
-                            <img src="/static/img/icons/playlist_add.svg"/>
-                            <span class="m-text-in-button">add</span>
-                        </button>
-                    </div>
-                </div> -->
+                        </fest:if>
+                        <fest:if test="track.is_liked">
+                            <img src="/static/img/icons/favorite.svg"/>
+                            <span class="m-text-in-button">unlike</span>
+                        </fest:if>
+                    </button>
+                </div>
+                <div class="row">
+                    <button class="m-dropdown-button add-button">
+                        <img src="/static/img/icons/playlist_add.svg"/>
+                        <span class="m-text-in-button">add</span>
+                    </button>
+                </div>
+                <div class="row">
+                    <button class="m-dropdown-button add-player-button">
+                        <img src="/static/img/icons/queue_music.svg"/>
+                        <span class="m-text-in-button">add to player</span>
+                    </button>
+                </div>
+                <div class="row">
+                    <button class="m-dropdown-button album-button">
+                        <img src="/static/img/icons/album.svg"/>
+                        <span class="m-text-in-button">go to album</span>
+                    </button>
+                </div>
+                <div class="row">
+                    <button class="m-dropdown-button artist-button">
+                        <img src="/static/img/icons/person.svg"/>
+                        <span class="m-text-in-button">go to artist</span>
+                    </button>
+                </div>
             </div>
         </div>
     </fest:for>

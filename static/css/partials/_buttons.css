@@ -293,8 +293,19 @@ input:checked + .m-slider:before {
 }
 
 .l-player-track-buttons {
-    float: left;
+    float: right;
     padding-top: 17px;
+    margin-left: auto;
+    margin-right: 3px;
+}
+
+.l-player-track-button {
+    float: left;
+    margin-right: 2px;
+}
+
+.favorite-button {
+    margin-right: 4px;
 }
 
 .m-add-playlist-button {

@@ -5,7 +5,8 @@
         display: block;
     }
 
-    .volume-scale, .m-desktop-only, .m-desktop-mobile-only, .l-big-track-button {
+    .volume-scale, .m-desktop-only, .m-desktop-mobile-only,
+    .l-big-track-button, .l-player-track-button {
         display: none;
     }
 
@@ -13,7 +14,8 @@
         width: calc(100% - 53px);
     }
 
-    .l-player .l-music-bar {
+    .l-player .l-music-bar,
+    .l-top-info.col-6, .l-top-titles.col-6 {
         width: 100%;
     }
 
@@ -54,21 +56,31 @@
         margin-top: 0;
     }
 
+    .player-control-button {
+        &.prev, &.play-pause, &.next {
+            size: 40px;
+            margin: 0; /*4px;*/
+        }
+    }
+
     .shuffle {
+        width: 22px;
         position: absolute;
-        top: 53px;
+        top: 58px;
         right: 45px;
     }
 
     .repeat {
+        width: 22px;
         position: absolute;
-        top: 53px;
+        top: 58px;
         right: 22px;
     }
 
     .volume {
+        width: 22px;
         position: absolute;
-        top: 53px;
+        top: 58px;
         right: -1px;
     }
 
@@ -78,7 +90,7 @@
     }
 
     .track-list .m-track-group-names {
-        width: 77%;
+        width: 68%;
     }
 
     .track-list .m-track-name {
@@ -119,7 +131,7 @@
 
     .l-search {
         left: calc(5% + 44px);
-        width: 35.8%;
+        width: 36%;
     }
 
     .l-main {
@@ -181,7 +193,8 @@
         background: red;
     }
 
-    .l-big-track-button.more-button {
+    .l-big-track-button.more-button,
+    .l-player-track-button.more-button {
         display: block;
     }
 
@@ -335,8 +348,9 @@
     }
 
     .trigger-button, .player-trigger,
-    .l-big-track-button, .volume-scale,
-    .m-desktop-only, .m-desktop-tablet-only {
+    .l-big-track-button, .l-player-track-button,
+    .volume-scale, .volume, .m-desktop-only,
+    .m-desktop-tablet-only {
         display: none;
     }
 
@@ -360,7 +374,8 @@
     }
 
     .control-elements {
-        margin-top: 0;
+        margin-top: -11px;
+        margin-bottom: 10px;
     }
 
     .l-player-footer .play-pause {
@@ -368,8 +383,7 @@
         right: 13px;
         top: 15px;
         z-index: var(--top-level);
-        height: 35px;
-        width: 35px;
+        size: 35px;
     }
 
     .l-music-bar .m-track-group-names {
@@ -386,26 +400,32 @@
         transition-duration: 0.2s;
     }
 
+    .player-control-button {
+        &.prev, &.play-pause, &.next {
+            size: 40px;
+            margin: 0 4px;
+        }
+        &.prev {
+            margin-left: 29%;
+        }
+    }
+
     .shuffle {
+        width: 25px;
         position: absolute;
         top: 61px;
-        right: 45px;
+        right: 0;
     }
 
     .repeat {
+        width: 25px;
         position: absolute;
         top: 61px;
-        right: 22px;
-    }
-
-    .volume {
-        position: absolute;
-        top: 61px;
-        right: -1px;
+        left: 0;
     }
 
     .track-list .m-track-group-names {
-        width: 77%;
+        width: 74%;
     }
 
     .l-navbar {
@@ -482,7 +502,8 @@
         width: calc(66%);
     }
 
-    .l-big-track-button.more-button {
+    .l-big-track-button.more-button,
+    .l-player-track-button.more-button {
         display: block;
     }
 

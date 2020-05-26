@@ -249,11 +249,6 @@
     transition-duration: 0.25s;
 }
 
-.track-buttons {
-    position: absolute;
-    left: 341px;
-}
-
 .track-button {
     opacity: 0;
 }
@@ -280,18 +275,10 @@
 }
 
 .track-list .m-track-group-names {
-  padding-left: 8px;
-  height: 50px;
-  float: left;
-}
-
-.track-list .track-name {
-    font-size: 18px;
-    width: 224px;
-}
-
-.track-list .group-name {
-    font-size: 12px;
+    padding-left: 8px;
+    max-width: 63%;
+    height: 50px;
+    float: left;
 }
 
 .track-list .col {
