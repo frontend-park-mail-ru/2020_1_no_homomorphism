@@ -30,7 +30,6 @@ export default class PlayerView extends BaseView {
             this.trackListComponent.setEventListeners.bind(this));
         this.subscribe();
         globalEventBus.on(GLOBAL.COLLAPSE, this.collapse.bind(this));
-        // globalEventBus.on(GLOBAL.COLLAPSE_AND_LOCK, this.collapseAndLock.bind(this));
         globalEventBus.on(GLOBAL.COLLAPSE_IF_MOBILE, this.collapseIfMobile.bind(this));
     }
 
@@ -370,6 +369,10 @@ export default class PlayerView extends BaseView {
                     document.getElementById('next'));
                 document.getElementById('cover').classList.remove('in-footer-cover');
                 document.getElementsByClassName('l-pop-up-container')[0].style.bottom = '0';
+                document.getElementsByClassName('m-dropdown').forEach((dropdown) => {
+                    dropdown.classList.remove('is-expanded');
+                });
+                document.documentElement.click();
             } else {
                 document.getElementsByClassName('player-trigger-arrow-row')[0]
                     .classList.add('is-hidden');
@@ -401,6 +404,10 @@ export default class PlayerView extends BaseView {
             if (this.expanded) {
                 document.getElementsByClassName('player-trigger')[0]
                     .classList.remove('is-z-index-top');
+                document.getElementsByClassName('m-dropdown').forEach((dropdown) => {
+                    dropdown.classList.remove('is-expanded');
+                });
+                document.documentElement.click();
             } else {
                 document.getElementsByClassName('player-trigger')[0]
                     .classList.add('is-z-index-top');
@@ -504,16 +511,6 @@ export default class PlayerView extends BaseView {
             window.matchMedia(LAYOUT.TABLET).matches)
         ) {
             this.triggerClick();
-        }
-    }
-
-    /**
-     * Сворачивает плеер, если он развёрнут и блокирует его
-     */
-    collapseAndLock() {
-        if (this.expanded) {
-            this.expanded = false;
-            this.triggerClick(true);
         }
     }
 

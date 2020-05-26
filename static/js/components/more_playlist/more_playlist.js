@@ -58,6 +58,17 @@ export default class MorePlaylistComponent {
                     document.getElementsByClassName('m-dropdown')[0].classList
                         .toggle('is-expanded');
                 });
+            document.getElementsByClassName('m-more-button')[0]
+                .addEventListener('touchstart', (event) => {
+                    event.preventDefault();
+                    event.target.classList.add('touched');
+                });
+            document.getElementsByClassName('m-more-button')[0]
+                .addEventListener('touchend', (event) => {
+                    event.preventDefault();
+                    event.target.classList.remove('touched');
+                    event.target.click();
+                });
         } else {
             document.getElementsByClassName('m-button-share')[0]
                 .addEventListener('click', (event) => {
@@ -68,11 +79,48 @@ export default class MorePlaylistComponent {
         }
         document.getElementById('playlist-delete-button').addEventListener('click',
             this._deletePlaylist.bind(this));
+        document.getElementById('playlist-delete-button').addEventListener('touchend', (event) => {
+            event.preventDefault();
+            if (event.target.tagName == 'BUTTON') {
+                event.target.classList.add('touched');
+                setTimeout(() => event.target.classList.remove('touched'), 100);
+            } else {
+                event.target.parentNode.classList.add('touched');
+                setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+            }
+            event.target.click();
+        });
         document.getElementById('playlist-edit-button').addEventListener('click',
             this._editPlaylist.bind(this));
+        document.getElementById('playlist-edit-button').addEventListener('touchend', (event) => {
+            event.preventDefault();
+            if (event.target.tagName == 'BUTTON') {
+                event.target.classList.add('touched');
+                setTimeout(() => event.target.classList.remove('touched'), 100);
+            } else {
+                event.target.parentNode.classList.add('touched');
+                setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+            }
+            event.target.click();
+        });
         document.getElementsByClassName('m-slider')[0].addEventListener('click',
             this._setPrivacy.bind(this));
+        document.getElementsByClassName('m-slider')[0].addEventListener('touchend', (event) => {
+            event.preventDefault();
+            event.target.click();
+        });
         this._button.addEventListener('click', this._copyLink.bind(this));
+        this._button.addEventListener('touchend', (event) => {
+            event.preventDefault();
+            if (event.target.tagName == 'BUTTON') {
+                event.target.classList.add('touched');
+                setTimeout(() => event.target.classList.remove('touched'), 100);
+            } else {
+                event.target.parentNode.classList.add('touched');
+                setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+            }
+            event.target.click();
+        });
     }
 
     /**

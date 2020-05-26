@@ -77,6 +77,26 @@ export default class PlayerControlComponent {
      * Sets EventListeners
      */
     setEventListeners() {
+        document.getElementsByClassName('player-control-button').forEach((button) => {
+            button.addEventListener('touchstart', (event) => {
+                event.preventDefault();
+                event.target.classList.add('touched');
+            });
+            button.addEventListener('touchend', (event) => {
+                event.preventDefault();
+                event.target.classList.remove('touched');
+                event.target.click();
+            });
+        });
+        document.getElementsByClassName('playlist-control-button').forEach((button) => {
+            button.addEventListener('touchstart', (event) => {
+                event.preventDefault();
+            });
+            button.addEventListener('touchend', (event) => {
+                event.preventDefault();
+                event.target.click();
+            });
+        });
         [{
             element: window,
             event: 'mouseup',
@@ -175,24 +195,8 @@ export default class PlayerControlComponent {
             callback: this.timelineTouchEnd,
         }, {
             element: document.querySelector('.shuffle'),
-            event: 'mouseover',
-            callback: this.shuffleButtonMouseOver,
-        }, {
-            element: document.querySelector('.shuffle'),
-            event: 'mouseout',
-            callback: this.shuffleButtonMouseOut,
-        }, {
-            element: document.querySelector('.shuffle'),
             event: 'click',
             callback: this.shuffleButtonClick,
-        }, {
-            element: document.querySelector('.repeat'),
-            event: 'mouseover',
-            callback: this.repeatButtonMouseOver,
-        }, {
-            element: document.querySelector('.repeat'),
-            event: 'mouseout',
-            callback: this.repeatButtonMouseOut,
         }, {
             element: document.querySelector('.repeat'),
             event: 'click',
@@ -311,6 +315,15 @@ export default class PlayerControlComponent {
     }
 
     /**
+     * Слушает начало touch на таймлайне
+     * @param {Object} event
+     */
+    timelineTouchStart(event) {
+        event.preventDefault();
+        this.timelineDrag = true;
+    }
+
+    /**
      * Слушает отпускание клавиши мыши на таймлайне
      * @param {Object} event
      */
@@ -327,6 +340,7 @@ export default class PlayerControlComponent {
      * @param {Object} event
      */
     timelineTouchEnd(event) {
+        event.preventDefault();
         this.timelineDrag = false;
         const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
         const width = event.changedTouches[0].clientX;
@@ -353,6 +367,7 @@ export default class PlayerControlComponent {
      */
     timelineTouchMove(event) {
         if (this.timelineDrag) {
+            event.preventDefault();
             const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
             const width = event.changedTouches[0].clientX;
             const ratio = (width - bcr.x) / bcr.width;
@@ -371,49 +386,14 @@ export default class PlayerControlComponent {
     }
 
     /**
-     * Слушает вход курсора на кнопку перемешивания
-     */
-    shuffleButtonMouseOver() {
-        if (!this.shuffled) {
-            document.querySelector('.shuffle').classList.add('is-opacity-1');
-        }
-    }
-
-    /**
-     * Слушает выход курсора с кнопки перемешивания
-     */
-    shuffleButtonMouseOut() {
-        if (!this.shuffled) {
-            document.querySelector('.shuffle').classList.remove('is-opacity-1');
-        }
-    }
-
-    /**
      * Слушает клик по кнопке перемешивания
      */
     shuffleButtonClick() {
+        document.querySelector('.shuffle').classList.toggle('is-opacity-1');
         if (!this.shuffled) {
             this.eventBus.emit(PLAYER.SHUFFLE, 'first');
         } else {
             this.eventBus.emit(PLAYER.UNSHUFFLE);
-        }
-    }
-
-    /**
-     * Слушает вход курсора на кнопку зацикливания
-     */
-    repeatButtonMouseOver() {
-        if (this.repeatState === 0) {
-            document.querySelector('.repeat').classList.add('is-opacity-1');
-        }
-    }
-
-    /**
-     * Слушает выход курсора с кнопки зацикливания
-     */
-    repeatButtonMouseOut() {
-        if (this.repeatState === 0) {
-            document.querySelector('.repeat').classList.remove('is-opacity-1');
         }
     }
 
@@ -423,12 +403,14 @@ export default class PlayerControlComponent {
     repeatButtonClick() {
         switch (this.repeatState) {
         case 0:
+            document.querySelector('.repeat').classList.add('is-opacity-1');
             this.eventBus.emit(PLAYER.REPEAT);
             break;
         case 1:
             this.eventBus.emit(PLAYER.REPEAT_ONE);
             break;
         case 2:
+            document.querySelector('.repeat').classList.remove('is-opacity-1');
             this.eventBus.emit(PLAYER.UNREPEAT);
             break;
         }

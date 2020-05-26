@@ -450,8 +450,12 @@ input:checked + .m-slider:before {
     margin-right: 18px;
     opacity: 0.4;
     cursor: pointer;
+    border-radius: 50%;
     &:hover {
         opacity: 0.8;
+    }
+    &.touched {
+        background: var(--font-color);
     }
 }
 

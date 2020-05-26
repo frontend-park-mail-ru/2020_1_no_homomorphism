@@ -99,6 +99,8 @@ export default class TrackListComponent {
             document.querySelectorAll('.more-button').forEach((button) => {
                 button.ontouchstart = (event) => {
                     event.preventDefault();
+                    event.target.classList.add('touched');
+                    setTimeout(() => event.target.classList.remove('touched'), 200);
                     event.target.click();
                 };
                 button.onclick = (event) => this.moreClicked(event);
@@ -106,6 +108,13 @@ export default class TrackListComponent {
             document.querySelectorAll('.add-button').forEach((track) => {
                 track.ontouchstart = (event) => {
                     event.preventDefault();
+                    if (event.target.tagName == 'BUTTON') {
+                        event.target.classList.add('touched');
+                        setTimeout(() => event.target.classList.remove('touched'), 100);
+                    } else {
+                        event.target.parentNode.classList.add('touched');
+                        setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                    }
                     event.target.click();
                 };
                 track.onclick = (event) => this.addToPlaylist.bind(this)(event);
@@ -113,6 +122,13 @@ export default class TrackListComponent {
             document.querySelectorAll('.like-button').forEach((button) => {
                 button.ontouchstart = (event) => {
                     event.preventDefault();
+                    if (event.target.tagName == 'BUTTON') {
+                        event.target.classList.add('touched');
+                        setTimeout(() => event.target.classList.remove('touched'), 100);
+                    } else {
+                        event.target.parentNode.classList.add('touched');
+                        setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                    }
                     event.target.click();
                 };
                 button.onclick = (event) => this.likeClicked(event);
@@ -120,18 +136,39 @@ export default class TrackListComponent {
             document.querySelectorAll('.add-player-button').forEach((button) => {
                 button.ontouchstart = (event) => {
                     event.preventDefault();
+                    if (event.target.tagName == 'BUTTON') {
+                        event.target.classList.add('touched');
+                        setTimeout(() => event.target.classList.remove('touched'), 100);
+                    } else {
+                        event.target.parentNode.classList.add('touched');
+                        setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                    }
                     event.target.click();
                 };
             });
             document.querySelectorAll('.album-button').forEach((button) => {
                 button.ontouchstart = (event) => {
                     event.preventDefault();
+                    if (event.target.tagName == 'BUTTON') {
+                        event.target.classList.add('touched');
+                        setTimeout(() => event.target.classList.remove('touched'), 100);
+                    } else {
+                        event.target.parentNode.classList.add('touched');
+                        setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                    }
                     event.target.click();
                 };
             });
             document.querySelectorAll('.artist-button').forEach((button) => {
                 button.ontouchstart = (event) => {
                     event.preventDefault();
+                    if (event.target.tagName == 'BUTTON') {
+                        event.target.classList.add('touched');
+                        setTimeout(() => event.target.classList.remove('touched'), 100);
+                    } else {
+                        event.target.parentNode.classList.add('touched');
+                        setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                    }
                     event.target.click();
                 };
             });
@@ -139,6 +176,14 @@ export default class TrackListComponent {
                 document.querySelectorAll('.remove-button').forEach((button) => {
                     button.ontouchstart = (event) => {
                         event.preventDefault();
+                        if (event.target.tagName == 'BUTTON') {
+                            event.target.classList.add('touched');
+                            setTimeout(() => event.target.classList.remove('touched'), 100);
+                        } else {
+                            event.target.parentNode.classList.add('touched');
+                            setTimeout(() => event.target.parentNode.classList.remove('touched'),
+                                100);
+                        }
                         event.target.click();
                     };
                     button.onclick = (event) => this.deleteClicked(event);
@@ -350,6 +395,8 @@ export default class TrackListComponent {
             this.deleteFromDOM(id.toString());
             return;
         }
+        domItem.classList.toggle('is-liked');
+        domItem.classList.toggle('is-not-liked');
         if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
             while (!domItem.classList.contains('m-dropdown-button')) {
                 domItem = domItem.parentNode;
@@ -362,8 +409,11 @@ export default class TrackListComponent {
                 domItem.children[1].innerText = 'unlike';
             }
         } else {
-            domItem.classList.toggle('is-liked');
-            domItem.classList.toggle('is-not-liked');
+            if (domItem.src.indexOf('/static/img/icons/favorite.svg') !== -1) {
+                domItem.src = '/static/img/icons/favorite_border.svg';
+            } else {
+                domItem.src = '/static/img/icons/favorite.svg';
+            }
         }
     }
 

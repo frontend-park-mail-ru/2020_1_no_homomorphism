@@ -59,7 +59,10 @@
     .player-control-button {
         &.prev, &.play-pause, &.next {
             size: 40px;
-            margin: 0; /*4px;*/
+            margin: 0;
+        }
+        &:hover {
+            opacity: 0.4;
         }
     }
 
@@ -265,6 +268,9 @@
             margin-left: 0;
             transform: scale(1);
         }
+        &.touched {
+            transform: scale(1.1);
+        }
     }
 
     .m-top-right-corner {
@@ -293,6 +299,9 @@
 
     .m-dropdown-button {
         opacity: 0.8;
+        &.touched {
+            background: var(--chosen-icon);
+        }
     }
 
     .l-pop-up-container {
@@ -307,10 +316,16 @@
         margin-top: 0;
         position: relative;
         top: -191px;
+        & img {
+            opacity: 0.8;
+        }
     }
 
     .m-playlist-image-upload-button {
         right: -10px;
+        & img {
+            opacity: 0.8;
+        }
     }
 
     .is-button-disabled {
@@ -408,6 +423,13 @@
         &.prev {
             margin-left: 29%;
         }
+        &:hover {
+            opacity: 0.4;
+        }
+    }
+
+    .playlist-control-button:hover {
+        opacity: 0.4;
     }
 
     .shuffle {
@@ -498,6 +520,11 @@
         }
     }
 
+    .l-player-track .l-player-track-button {
+        transform: scale(1.5);
+        float: left;
+    }
+
     .m-track-name {
         width: calc(66%);
     }
@@ -505,6 +532,13 @@
     .l-big-track-button.more-button,
     .l-player-track-button.more-button {
         display: block;
+    }
+
+    .m-big-more-button {
+        border-radius: 50%;
+        &.touched {
+            background: var(--font-color);
+        }
     }
 
     .is-empty-track {
@@ -550,10 +584,10 @@
         display: flex;
         justify-content: center;
         &.album {
-            width: 80%;
+            width: 75%;
             float: left;
             & .l-button-middle-play {
-                margin-left: 25%;
+                margin-left: 35%;
             }
         }
     }
@@ -670,6 +704,9 @@
             transform: scale(1);
             width: auto;
         }
+        &.touched {
+            transform: scale(1.1);
+        }
     }
 
     .m-top-right-corner {
@@ -697,6 +734,9 @@
 
     .m-dropdown-button {
         opacity: 0.8;
+        &.touched {
+            background: var(--chosen-icon);
+        }
     }
 
     .m-privacy-title {
@@ -722,10 +762,16 @@
         margin-top: 0;
         position: relative;
         top: -191px;
+        & img {
+            opacity: 0.8;
+        }
     }
 
     .m-playlist-image-upload-button {
         right: -10px;
+        & img {
+            opacity: 0.8;
+        }
     }
 
     .is-button-disabled {

@@ -67,6 +67,17 @@ export default class AlbumView extends BaseView {
     setEventListeners() {
         document.getElementsByClassName('l-button-middle-play')[0].addEventListener('click',
             this.playAlbum.bind(this));
+        document.getElementsByClassName('l-button-middle-play')[0]
+            .addEventListener('touchend', (event) => {
+                event.preventDefault();
+                let target = event.target;
+                while (!target.classList.contains('l-button-middle-play')) {
+                    target = target.parentNode;
+                }
+                event.target.classList.add('touched');
+                setTimeout(() => event.target.classList.remove('touched'), 300);
+                event.target.click();
+            });
         document.getElementsByClassName('m-large-like-button')[0].addEventListener('click',
             this._likeClicked.bind(this));
     }

@@ -96,6 +96,7 @@ export default class NavbarView extends BaseView {
             event.target.click();
         });
         window.addEventListener('orientationchange', this.closeSearch.bind(this));
+        window.addEventListener('resize', this.closeSearch.bind(this));
         window.addEventListener('click', (event) => {
             const dropdown = document.getElementsByClassName('m-dropdown').find((elem) => {
                 return elem.classList.contains('is-expanded');

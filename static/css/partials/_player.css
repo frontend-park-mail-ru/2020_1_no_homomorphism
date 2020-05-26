@@ -120,10 +120,12 @@
     height: 30px;
     width: 30px;
     cursor: pointer;
-}
-
-.player-control-button:hover {
-    opacity: 1;
+    &:hover {
+        opacity: 1;
+    }
+    &.touched {
+        opacity: 1;
+    }
 }
 
 .volume,
@@ -138,6 +140,9 @@
     top: -5px;
     right: -208px;
     opacity: 0.4;
+    &:hover {
+        opacity: 1;
+    }
 }
 
 .repeat {
@@ -145,6 +150,9 @@
     top: -5px;
     right: -206px;
     opacity: 0.4;
+    &:hover {
+        opacity: 1;
+    }
 }
 
 .volume {
@@ -153,6 +161,9 @@
     right: -204px;
     z-index: var(--top-level);
     opacity: 0.4;
+    &:hover {
+        opacity: 1;
+    }
 }
 
 .volume-scale {
