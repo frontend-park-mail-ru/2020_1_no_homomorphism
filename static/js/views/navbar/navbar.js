@@ -81,6 +81,20 @@ export default class NavbarView extends BaseView {
         document.addEventListener('click', this.closeSearchComponent.bind(this));
         document.getElementsByClassName('l-navbar-small-search')[0]
             .addEventListener('click', this.renderSearch.bind(this));
+        document.getElementsByClassName('l-navbar-icon').forEach((icon) => {
+            icon.addEventListener('touchend', (event) => {
+                event.preventDefault();
+                icon.classList.add('touched');
+                setTimeout(() => {
+                    icon.classList.remove('touched');
+                }, 100);
+                icon.click();
+            });
+        });
+        document.getElementsByClassName('l-logo')[0].addEventListener('touchend', (event) => {
+            event.preventDefault();
+            event.target.click();
+        });
         window.addEventListener('orientationchange', this.closeSearch.bind(this));
         window.addEventListener('click', (event) => {
             const dropdown = document.getElementsByClassName('m-dropdown').find((elem) => {
