@@ -132,7 +132,7 @@ export default class PlayerControlComponent {
         }, {
             element: document.querySelector('.timeline-back'),
             event: 'touchend',
-            callback: this.timelineMouseUp,
+            callback: this.timelineTouchEnd,
         }, {
             element: document.querySelector('.timeline-front'),
             event: 'mouseup',
@@ -140,7 +140,7 @@ export default class PlayerControlComponent {
         }, {
             element: document.querySelector('.timeline-front'),
             event: 'touchend',
-            callback: this.timelineMouseUp,
+            callback: this.timelineTouchEnd,
         }, {
             element: document.querySelector('.timeline-toggler'),
             event: 'mouseup',
@@ -148,7 +148,7 @@ export default class PlayerControlComponent {
         }, {
             element: document.querySelector('.timeline-toggler'),
             event: 'touchend',
-            callback: this.timelineMouseUp,
+            callback: this.timelineTouchEnd,
         }, {
             element: window,
             event: 'mousemove',
@@ -156,15 +156,23 @@ export default class PlayerControlComponent {
         }, {
             element: window,
             event: 'touchmove',
-            callback: this.timelineMouseMove,
+            callback: this.timelineTouchMove,
         }, {
             element: document.querySelector('.timeline-back'),
             event: 'click',
             callback: this.timelineClick,
         }, {
+            element: document.querySelector('.timeline-back'),
+            event: 'touchend',
+            callback: this.timelineTouchEnd,
+        }, {
             element: document.querySelector('.timeline-front'),
             event: 'click',
             callback: this.timelineClick,
+        }, {
+            element: document.querySelector('.timeline-front'),
+            event: 'touchend',
+            callback: this.timelineTouchEnd,
         }, {
             element: document.querySelector('.shuffle'),
             event: 'mouseover',
@@ -309,7 +317,19 @@ export default class PlayerControlComponent {
     timelineMouseUp(event) {
         this.timelineDrag = false;
         const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
-        const width = event.clientX | (event.changedTouches ? event.changedTouches[0].pageX : 0);
+        const width = event.clientX;
+        const ratio = (width - bcr.x) / bcr.width;
+        this.eventBus.emit(PLAYER.REWIND, ratio);
+    }
+
+    /**
+     * Слушает окончание touch на таймлайне
+     * @param {Object} event
+     */
+    timelineTouchEnd(event) {
+        this.timelineDrag = false;
+        const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
+        const width = event.changedTouches[0].clientX;
         const ratio = (width - bcr.x) / bcr.width;
         this.eventBus.emit(PLAYER.REWIND, ratio);
     }
@@ -321,9 +341,20 @@ export default class PlayerControlComponent {
     timelineMouseMove(event) {
         if (this.timelineDrag) {
             const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
-            const width = event.clientX | (event.changedTouches ?
-                event.changedTouches[0].pageX :
-                0);
+            const width = event.clientX;
+            const ratio = (width - bcr.x) / bcr.width;
+            this.drawTimeline(ratio);
+        }
+    }
+
+    /**
+     * Слушает движение touch по таймлайну
+     * @param {Object} event
+     */
+    timelineTouchMove(event) {
+        if (this.timelineDrag) {
+            const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
+            const width = event.changedTouches[0].clientX;
             const ratio = (width - bcr.x) / bcr.width;
             this.drawTimeline(ratio);
         }
