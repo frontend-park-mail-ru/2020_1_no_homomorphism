@@ -360,7 +360,8 @@ input:checked + .m-slider:before {
     width: 40px;
     height: 40px;
     float: left;
-    margin-right: 10px;
+    margin-right: 18px;
+    margin-bottom: 16px;
     vertical-align: middle;
     opacity: 0.4;
 
@@ -378,7 +379,7 @@ input:checked + .m-slider:before {
 }
 
 .l-delete-playlist-button {
-    margin-top: 42px;
+    /*margin-top: 42px;*/
     float: right !important;
     cursor: pointer;
 }
