@@ -37,6 +37,7 @@ export default class ProfileView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
+        globalEventBus.emit(GLOBAL.COLLAPSE_IF_MOBILE);
         super.render(document.getElementsByClassName(DOM.CONTENT)[0], url);
         if (User.exists()) {
             this.eventBus.emit(PROFILE.GET_STAT);

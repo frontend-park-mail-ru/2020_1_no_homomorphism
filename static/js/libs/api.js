@@ -277,7 +277,7 @@ export default class Api {
     // ------------- PLAYLIST  ---------------
 
     /**
-     * Получение треков плейлиста
+     * Получение плейлиста
      * @param {number} id
      * @return {Promise<Response>}
      */
@@ -329,6 +329,30 @@ export default class Api {
      */
     static playlistChangePrivacy(id) {
         return postFetch(API + `/playlists/${id}/privacy`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
+     * Изменение названия плейлиста
+     * @param {String} id
+     * @param {String} name
+     * @return {Promise<Response>}
+     */
+    static playlistChangeName(id, name) {
+        return postFetch(API + `/playlists/${id}/update/${name}`, (error) => {
+            console.log(error.toString());
+        });
+    }
+
+    /**
+     * Изменение картинки плейлиста
+     * @param {String} id
+     * @param {Object} image
+     * @return {Promise<Response>}
+     */
+    static playlistChangeImage(id, image) {
+        return postImageFetch(API + `/playlists/${id}/image`, image, (error) => {
             console.log(error.toString());
         });
     }

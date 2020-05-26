@@ -37,16 +37,166 @@ export default class PlayerTrackListComponent {
         // });
         document.querySelectorAll('.track-list .row').forEach((row) => {
             row.addEventListener('click', this.tracklistClick.bind(this));
+            row.addEventListener('touchend', (event) => {
+                // event.preventDefault();
+                // event.target.click();
+            });
             row.addEventListener('mouseenter', this.tracklistMouseEnter.bind(this));
             row.addEventListener('mouseleave', this.tracklistMouseLeave.bind(this));
+            row.addEventListener('dragstart', (event) => {
+                this.dragged = event.target;
+            });
+            row.addEventListener('dragover', (event) => {
+                event.preventDefault();
+                let row = event.target;
+                while (!row.classList.contains('row')) {
+                    row = row.parentNode;
+                }
+                if (event.clientY < row.getBoundingClientRect().top + 25 &&
+                    row.previousSibling !== document.getElementsByClassName('drag-patch')[0]
+                ) {
+                    row.insertAdjacentElement('beforebegin',
+                        document.getElementsByClassName('drag-patch')[0]);
+                    document.getElementsByClassName('drag-patch')[0].classList.remove('is-active');
+                } else if (row.nextSibling !== document.getElementsByClassName('drag-patch')[0]) {
+                    row.insertAdjacentElement('afterend',
+                        document.getElementsByClassName('drag-patch')[0]);
+                    document.getElementsByClassName('drag-patch')[0].classList.remove('is-active');
+                }
+                document.getElementsByClassName('drag-patch')[0].classList.add('is-active');
+                return false;
+            });
+            row.addEventListener('drop', (event) => {
+                event.stopPropagation();
+                if (this.dragged.contains(event.target)) {
+                    return;
+                }
+                let row = event.target;
+                while (!row.classList.contains('row')) {
+                    row = row.parentNode;
+                }
+                row.insertAdjacentElement('afterend', this.dragged);
+                document.getElementsByClassName('drag-patch')[0].classList.remove('is-active');
+                document.getElementsByClassName('current-marker')[0].insertAdjacentElement(
+                    'afterend', document.getElementsByClassName('drag-patch')[0]);
+                this.eventBus.emit(PLAYER.MOVE_MARKER_TO_CURRENT);
+                this.eventBus.emit(PLAYER.CHANGE_ORDER, this.dragged.getAttribute('id'),
+                    this.dragged.previousSibling.getAttribute('id'));
+            });
+            row.addEventListener('dragend', () => {
+                document.getElementsByClassName('drag-patch')[0].classList.remove('is-active');
+            });
+        });
+        document.getElementsByClassName('drag-patch')[0].addEventListener('dragover', (event) => {
+            event.preventDefault();
+            this.eventBus.emit(PLAYER.MOVE_MARKER_TO_CURRENT);
+            return false;
+        });
+        document.getElementsByClassName('drag-patch')[0].addEventListener('drop', (event) => {
+            event.stopPropagation();
+            document.getElementsByClassName('drag-patch')[0]
+                .insertAdjacentElement('afterend', this.dragged);
+            document.getElementsByClassName('drag-patch')[0].classList.remove('is-active');
+            document.getElementsByClassName('current-marker')[0].insertAdjacentElement('afterend',
+                document.getElementsByClassName('drag-patch')[0]);
+            this.eventBus.emit(PLAYER.MOVE_MARKER_TO_CURRENT);
+            this.eventBus.emit(PLAYER.CHANGE_ORDER, this.dragged.getAttribute('id'),
+                this.dragged.previousSibling.getAttribute('id'));
         });
         document.querySelectorAll('.delete-button').forEach((button) => {
             button.addEventListener('click', this.trackDeleteButtonClick.bind(this));
         });
         if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
-            document.querySelectorAll('.more-button').forEach((button) => {
-                button.onclick = (event) => this.moreClicked(event);
-            });
+            document.getElementsByClassName('l-player')[0]
+                .querySelectorAll('.more-button').forEach((button) => {
+                    button.ontouchend = (event) => {
+                        event.preventDefault();
+                        event.target.classList.add('touched');
+                        setTimeout(() => event.target.classList.remove('touched'), 200);
+                        event.target.click();
+                    };
+                    button.onclick = (event) => this.moreClicked(event);
+                });
+            document.getElementsByClassName('l-player')[0]
+                .querySelectorAll('.add-button').forEach((button) => {
+                    button.ontouchend = (event) => {
+                        event.preventDefault();
+                        if (event.target.tagName == 'BUTTON') {
+                            event.target.classList.add('touched');
+                            setTimeout(() => event.target.classList.remove('touched'), 100);
+                        } else {
+                            event.target.parentNode.classList.add('touched');
+                            setTimeout(() => event.target.parentNode.classList.remove('touched'),
+                                100);
+                        }
+                        // event.target.click();
+                    };
+                    // button.onclick = (event) => this.addToPlaylist.bind(this)(event);
+                });
+            document.getElementsByClassName('l-player')[0]
+                .querySelectorAll('.like-button').forEach((button) => {
+                    button.ontouchend = (event) => {
+                        event.preventDefault();
+                        if (event.target.tagName == 'BUTTON') {
+                            event.target.classList.add('touched');
+                            setTimeout(() => event.target.classList.remove('touched'), 100);
+                        } else {
+                            event.target.parentNode.classList.add('touched');
+                            setTimeout(() => event.target.parentNode.classList.remove('touched'),
+                                100);
+                        }
+                        // event.target.click();
+                    };
+                    // button.onclick = (event) => this.likeClicked(event);
+                });
+            document.getElementsByClassName('l-player')[0]
+                .querySelectorAll('.album-button').forEach((button) => {
+                    button.ontouchend = (event) => {
+                        event.preventDefault();
+                        if (event.target.tagName == 'BUTTON') {
+                            event.target.classList.add('touched');
+                            setTimeout(() => event.target.classList.remove('touched'), 100);
+                        } else {
+                            event.target.parentNode.classList.add('touched');
+                            setTimeout(() => event.target.parentNode.classList.remove('touched'),
+                                100);
+                        }
+                        // event.target.click();
+                    };
+                    // button.onclick = (event) => this.likeClicked(event);
+                });
+            document.getElementsByClassName('l-player')[0]
+                .querySelectorAll('.artist-button').forEach((button) => {
+                    button.ontouchend = (event) => {
+                        event.preventDefault();
+                        if (event.target.tagName == 'BUTTON') {
+                            event.target.classList.add('touched');
+                            setTimeout(() => event.target.classList.remove('touched'), 100);
+                        } else {
+                            event.target.parentNode.classList.add('touched');
+                            setTimeout(() => event.target.parentNode.classList.remove('touched'),
+                                100);
+                        }
+                        // event.target.click();
+                    };
+                    // button.onclick = (event) => this.likeClicked(event);
+                });
+            document.getElementsByClassName('l-player')[0]
+                .querySelectorAll('.remove-button').forEach((button) => {
+                    button.ontouchend = (event) => {
+                        event.preventDefault();
+                        if (event.target.tagName == 'BUTTON') {
+                            event.target.classList.add('touched');
+                            setTimeout(() => event.target.classList.remove('touched'), 100);
+                        } else {
+                            event.target.parentNode.classList.add('touched');
+                            setTimeout(() => event.target.parentNode.classList.remove('touched'),
+                                100);
+                        }
+                        // event.target.click();
+                    };
+                    // button.onclick = (event) => this.deleteClicked(event);
+                });
         }
     }
 
@@ -195,18 +345,22 @@ export default class PlayerTrackListComponent {
      */
     removeFromTracklist(id) {
         document.getElementById(id).remove();
-        if (document.getElementsByClassName('track-list')[0].children.length === 1) {
+        if (document.getElementsByClassName('track-list')[0].children.length === 2) {
             if (this.expanded) {
                 this.triggerClick();
+                this.footer = false;
             }
             this.locked = true;
-            if (document.getElementsByClassName('l-player')) {
-                document.getElementsByClassName('l-player')[0].classList
-                    .remove('l-player-visible');
-            } else {
-                document.getElementsByClassName('l-player-footer')[0].classList
-                    .remove('l-player-visible');
+            if (window.matchMedia(LAYOUT.MOBILE).matches) {
+                this.resize();
             }
+            // if (document.getElementsByClassName('l-player')[0]) {
+            // document.getElementsByClassName('l-player')[0].classList
+            // .remove('l-player-visible');
+            // } else {
+            // document.getElementsByClassName('l-player-footer')[0].classList
+            // .remove('l-player-visible');
+            // }
         }
     }
 
@@ -221,7 +375,7 @@ export default class PlayerTrackListComponent {
             document.getElementsByClassName('l-player-footer')[0].classList
                 .remove('l-player-visible');
         }
-        while (document.getElementsByClassName('track-list')[0].children.length > 1) {
+        while (document.getElementsByClassName('track-list')[0].children.length > 2) {
             document.getElementsByClassName('track-list')[0].children[document
                 .getElementsByClassName('track-list')[0].children.length - 1].remove();
         }

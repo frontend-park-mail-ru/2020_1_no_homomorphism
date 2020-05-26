@@ -97,16 +97,95 @@ export default class TrackListComponent {
         }
         if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
             document.querySelectorAll('.more-button').forEach((button) => {
+                button.ontouchstart = (event) => {
+                    event.preventDefault();
+                    event.target.classList.add('touched');
+                    setTimeout(() => event.target.classList.remove('touched'), 200);
+                    event.target.click();
+                };
                 button.onclick = (event) => this.moreClicked(event);
             });
             document.querySelectorAll('.add-button').forEach((track) => {
+                track.ontouchstart = (event) => {
+                    event.preventDefault();
+                    if (event.target.tagName == 'BUTTON') {
+                        event.target.classList.add('touched');
+                        setTimeout(() => event.target.classList.remove('touched'), 100);
+                    } else {
+                        event.target.parentNode.classList.add('touched');
+                        setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                    }
+                    event.target.click();
+                };
                 track.onclick = (event) => this.addToPlaylist.bind(this)(event);
             });
             document.querySelectorAll('.like-button').forEach((button) => {
+                button.ontouchstart = (event) => {
+                    event.preventDefault();
+                    if (event.target.tagName == 'BUTTON') {
+                        event.target.classList.add('touched');
+                        setTimeout(() => event.target.classList.remove('touched'), 100);
+                    } else {
+                        event.target.parentNode.classList.add('touched');
+                        setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                    }
+                    event.target.click();
+                };
                 button.onclick = (event) => this.likeClicked(event);
+            });
+            document.querySelectorAll('.add-player-button').forEach((button) => {
+                button.ontouchstart = (event) => {
+                    event.preventDefault();
+                    if (event.target.tagName == 'BUTTON') {
+                        event.target.classList.add('touched');
+                        setTimeout(() => event.target.classList.remove('touched'), 100);
+                    } else {
+                        event.target.parentNode.classList.add('touched');
+                        setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                    }
+                    event.target.click();
+                };
+            });
+            document.querySelectorAll('.album-button').forEach((button) => {
+                button.ontouchstart = (event) => {
+                    event.preventDefault();
+                    if (event.target.tagName == 'BUTTON') {
+                        event.target.classList.add('touched');
+                        setTimeout(() => event.target.classList.remove('touched'), 100);
+                    } else {
+                        event.target.parentNode.classList.add('touched');
+                        setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                    }
+                    event.target.click();
+                };
+            });
+            document.querySelectorAll('.artist-button').forEach((button) => {
+                button.ontouchstart = (event) => {
+                    event.preventDefault();
+                    if (event.target.tagName == 'BUTTON') {
+                        event.target.classList.add('touched');
+                        setTimeout(() => event.target.classList.remove('touched'), 100);
+                    } else {
+                        event.target.parentNode.classList.add('touched');
+                        setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                    }
+                    event.target.click();
+                };
             });
             if (this._tracklist.type) {
                 document.querySelectorAll('.remove-button').forEach((button) => {
+                    button.ontouchstart = (event) => {
+                        event.preventDefault();
+                        if (event.target.tagName == 'BUTTON') {
+                            event.target.classList.add('touched');
+                            setTimeout(() => event.target.classList.remove('touched'), 100);
+                        } else {
+                            event.target.parentNode.classList.add('touched');
+                            setTimeout(() => event.target.parentNode.classList.remove('touched'),
+                                100);
+                        }
+                        event.target.click();
+                    };
                     button.onclick = (event) => this.deleteClicked(event);
                 });
             }
@@ -290,6 +369,8 @@ export default class TrackListComponent {
      * @param {Object} event
      */
     likeClicked(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
         if (!User.exists()) {
             new PopUp(POPUP.LOGIN_ERROR, true);
             // globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
@@ -314,7 +395,12 @@ export default class TrackListComponent {
             this.deleteFromDOM(id.toString());
             return;
         }
+        domItem.classList.toggle('is-liked');
+        domItem.classList.toggle('is-not-liked');
         if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
+            while (!domItem.classList.contains('m-dropdown-button')) {
+                domItem = domItem.parentNode;
+            }
             if (domItem.firstChild.src.indexOf('/static/img/icons/favorite.svg') !== -1) {
                 domItem.firstChild.src = '/static/img/icons/favorite_border.svg';
                 domItem.children[1].innerText = 'like';
@@ -323,8 +409,11 @@ export default class TrackListComponent {
                 domItem.children[1].innerText = 'unlike';
             }
         } else {
-            domItem.classList.toggle('is-liked');
-            domItem.classList.toggle('is-not-liked');
+            if (domItem.src.indexOf('/static/img/icons/favorite.svg') !== -1) {
+                domItem.src = '/static/img/icons/favorite_border.svg';
+            } else {
+                domItem.src = '/static/img/icons/favorite.svg';
+            }
         }
     }
 

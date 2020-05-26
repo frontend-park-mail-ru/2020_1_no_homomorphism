@@ -151,6 +151,7 @@ input:checked + .m-slider:before {
     padding-right: 32px;
     background: url(../../static/img/icons/subscribe.svg) no-repeat;
     transition: opacity 2s ease;
+    color: black;
 
     &:hover {
         opacity: 0.8;
@@ -202,6 +203,7 @@ input:checked + .m-slider:before {
     size: 100% 39px;
     height: 40px;
     transition: border 10s cubic-bezier(0, 0, 1, 1);
+    font-size: 16px;
     &.success-border {
         border: 1px solid var(--pop-up-color) !important;
     }
@@ -246,10 +248,8 @@ input:checked + .m-slider:before {
 }
 
 .m-button-without-size {
-    box-shadow: var(--box-shadow);
     opacity: 0.3;
     cursor: pointer;
-
     &:hover {
         opacity: 0.7;
     }
@@ -293,8 +293,19 @@ input:checked + .m-slider:before {
 }
 
 .l-player-track-buttons {
-    float: left;
+    float: right;
     padding-top: 17px;
+    margin-left: auto;
+    margin-right: 3px;
+}
+
+.l-player-track-button {
+    float: left;
+    margin-right: 2px;
+}
+
+.favorite-button {
+    margin-right: 4px;
 }
 
 .m-add-playlist-button {
@@ -362,6 +373,7 @@ input:checked + .m-slider:before {
     float: left;
     margin-right: 18px;
     margin-bottom: 16px;
+    margin-right: 20px;
     vertical-align: middle;
     opacity: 0.4;
 
@@ -380,6 +392,7 @@ input:checked + .m-slider:before {
 
 .l-delete-playlist-button {
     /*margin-top: 42px;*/
+    margin-top: 20px;
     float: right !important;
     cursor: pointer;
 }
@@ -440,8 +453,12 @@ input:checked + .m-slider:before {
     margin-right: 18px;
     opacity: 0.4;
     cursor: pointer;
+    border-radius: 50%;
     &:hover {
         opacity: 0.8;
+    }
+    &.touched {
+        background: var(--font-color);
     }
 }
 
@@ -466,6 +483,55 @@ input:checked + .m-slider:before {
     right: -30px;
     top: 0;
     cursor: pointer;
+}
+
+.m-playlist-section-edit-button {
+    cursor: pointer;
+    opacity: 0.4;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.m-playlist-delete-button {
+    size: 24px;
+    border-radius: 12px;
+    background: var(--overlay-color);
+    & img {
+        opacity: 0.4;
+    }
+    &:hover img {
+        opacity: 0.8;
+    }
+}
+
+.m-playlist-edit-button {
+    float: right;
+    margin-right: 26px;
+    cursor: pointer;
+    opacity: 0.4;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.m-playlist-image-upload-button {
+    size: 24px;
+    border-radius: 12px;
+    background: var(--overlay-color);
+    position: relative;
+    top: 0;
+    right: 34px;
+    float: right;
+    margin: 10px;
+    margin-top: -191px;
+    & img {
+        transform: scale(0.9);
+        opacity: 0.4;
+    }
+    &:hover img {
+        opacity: 0.8;
+    }
 }
 
 .m-share-button {

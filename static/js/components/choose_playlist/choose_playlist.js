@@ -189,8 +189,12 @@ export default class ChoosePlaylist {
     analyzeTouch(event) {
         const bcr = document.getElementsByClassName('l-pop-up-container')[0]
             .getBoundingClientRect();
+        let children = document.getElementsByClassName('l-pop-up-container')[0].children.length;
+        children = children > 3 ? 3 : children;
+        const containerY = bcr.top + (bcr.height * (1 - children / 3));
         const isPopUpClicked = event.clientX > bcr.left && event.clientX < bcr.right &&
-                event.clientY > bcr.top && event.clientY < bcr.bottom;
+            event.clientY > containerY &&
+            event.clientY < bcr.bottom;
         if (isPopUpClicked) {
             return;
         }

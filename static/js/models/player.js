@@ -50,6 +50,7 @@ export default class PlayerModel {
         this.eventBus.on(PLAYER.MUTE, this.mute.bind(this));
         this.eventBus.on(PLAYER.UNMUTE, this.unmute.bind(this));
         this.eventBus.on(PLAYER.DELETE, this.delete.bind(this));
+        this.eventBus.on(PLAYER.CHANGE_ORDER, this.changeOrder.bind(this));
     }
 
     /**
@@ -134,7 +135,7 @@ export default class PlayerModel {
      */
     setData(list, trackID = '') {
         if (list.tracks.length === 0) {
-            globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK, true);
+            globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK);
             return;
         }
         for (const song in list.tracks) {
@@ -174,6 +175,8 @@ export default class PlayerModel {
             localStorage.setItem('isPlaying', 'false');
             localStorage.setItem('isPlaying', 'true');
             document.getElementsByTagName('audio')[0].play();
+            document.title = this.playlist[this.queue[this.current]].name + ' – ' +
+                this.playlist[this.queue[this.current]].artist;
         }
         this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
         this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[this.current]]);
@@ -188,6 +191,7 @@ export default class PlayerModel {
         document.getElementsByTagName('audio')[0].pause();
         this.playing = false;
         this.eventBus.emit(PLAYER.DRAW_PLAY);
+        document.title = 'VirusMusic';
     }
 
     /**
@@ -200,6 +204,8 @@ export default class PlayerModel {
             .then(() => {
                 this.playing = true;
             });
+        document.title = this.playlist[this.queue[this.current]].name + ' – ' +
+            this.playlist[this.queue[this.current]].artist;
         this.eventBus.emit(PLAYER.DRAW_PAUSE);
     }
 
@@ -229,6 +235,8 @@ export default class PlayerModel {
             localStorage.setItem('isPlaying', 'false');
             localStorage.setItem('isPlaying', 'true');
             document.getElementsByTagName('audio')[0].play();
+            document.title = this.playlist[this.queue[this.current]].name + ' – ' +
+                this.playlist[this.queue[this.current]].artist;
         }
         this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
         this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[this.current]]);
@@ -251,7 +259,8 @@ export default class PlayerModel {
                 }
                 this.current = -1;
             } else {
-                if (cause === 'self') {
+                if (cause === 'self' || cause === 'delete') {
+                    document.getElementsByTagName('audio')[0].pause();
                     this.eventBus.emit(PLAYER.DRAW_PLAY);
                     this.current = 0;
                     this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
@@ -274,6 +283,8 @@ export default class PlayerModel {
             localStorage.setItem('isPlaying', 'false');
             localStorage.setItem('isPlaying', 'true');
             document.getElementsByTagName('audio')[0].play();
+            document.title = this.playlist[this.queue[this.current]].name + ' – ' +
+                this.playlist[this.queue[this.current]].artist;
         }
         this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
         this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[this.current]]);
@@ -374,6 +385,22 @@ export default class PlayerModel {
     }
 
     /**
+     * Изменение порядка
+     * @param {string} targetId
+     * @param {string} setAfterId
+     */
+    changeOrder(targetId, setAfterId) {
+        const temp = this.playlist.find((track) => track.id === targetId);
+        this.playlist.splice(this.playlist.indexOf(temp), 1);
+        const setAfter = this.playlist.find((track) => track.id === setAfterId);
+        if (this.playlist.indexOf(setAfter) == this.playlist.length - 1) {
+            this.playlist.push(temp);
+        } else {
+            this.playlist.splice(this.playlist.indexOf(setAfter) + 1, 0, temp);
+        }
+    }
+
+    /**
      * Удаляет трек из очереди
      * @param {string} id
      */
@@ -384,6 +411,7 @@ export default class PlayerModel {
         if (this.playlist[this.queue[this.current]].id === id) {
             if (this.playlist.length === 1) {
                 this.pause();
+                document.title = 'VirusMusic';
             } else {
                 this.next('delete');
                 decCurrent = true;
@@ -401,6 +429,7 @@ export default class PlayerModel {
         }
         this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[this.queue[this.current]].id,
             this.playlist[this.queue[this.current]].id);
+        this.eventBus.emit(PLAYER.MOVE_MARKER_TO_CURRENT);
     }
 
     /**
@@ -409,6 +438,7 @@ export default class PlayerModel {
     deleteAll() {
         if (this.playing) {
             this.pause();
+            document.title = 'VirusMusic';
         }
         this.queue = [];
         this.playlist = [];

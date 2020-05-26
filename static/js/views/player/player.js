@@ -21,8 +21,7 @@ export default class PlayerView extends BaseView {
         this.expanded = false;
         this.locked = true;
         this.footer = false;
-        this.triggerTouchedY = undefined;
-        this.playerTouchedY = undefined;
+        this.layout = {};
         this.topTrackComponent = new TopTrackComponent(eventBus);
         this.trackListComponent = new PlayerTrackListComponent(eventBus);
         this.playerControlComponent = new PlayerControlComponent(eventBus);
@@ -31,6 +30,7 @@ export default class PlayerView extends BaseView {
             this.trackListComponent.setEventListeners.bind(this));
         this.subscribe();
         globalEventBus.on(GLOBAL.COLLAPSE, this.collapse.bind(this));
+        globalEventBus.on(GLOBAL.COLLAPSE_IF_MOBILE, this.collapseIfMobile.bind(this));
     }
 
     /**
@@ -57,6 +57,10 @@ export default class PlayerView extends BaseView {
             event: PLAYER.MOVE_MARKER,
             callback: this.moveMarker,
             binding: this,
+        }, {
+            event: PLAYER.MOVE_MARKER_TO_CURRENT,
+            callback: this.moveMarkerToCurrent,
+            binding: this,
         }].forEach((subscription) => {
             this.eventBus.on(subscription.event, subscription.callback.bind(subscription.binding));
         });
@@ -69,8 +73,8 @@ export default class PlayerView extends BaseView {
      */
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.PLAYER)[0]);
-        const mobile = window.matchMedia(LAYOUT.MOBILE);
-        if (mobile.matches) {
+        this.checkLayout();
+        if (this.layout.mobile) {
             document.getElementsByClassName('l-player')[0].classList.add('l-player-footer');
         }
         this.topTrackComponent.render();
@@ -83,55 +87,140 @@ export default class PlayerView extends BaseView {
      * Действия при изменении размера
      */
     resize() {
-        if (this.footer) {
-            return;
-        }
         const body = document.documentElement;
-        const mobile = window.matchMedia(LAYOUT.MOBILE);
-        const tablet = window.matchMedia(LAYOUT.TABLET);
-        const left = (
-            mobile.matches ?
-                0 :
-                (this.expanded ? body.clientWidth - this.root.clientWidth : body.clientWidth - 13)
-        );
-        this.root.style.left = left.toString() + 'px';
-        const top =
-            mobile.matches ?
-                (this.expanded ?
-                    NAVBAR.HEIGHT :
-                    document.getElementsByTagName('audio')[0].currentSrc !== '' ?
-                        NAVBAR.HEIGHT :
-                        body.clientHeight) :
-                NAVBAR.HEIGHT;
-        this.root.style.top = top.toString() + 'px';
-        document.getElementsByTagName('audio')[0].volume = this.playerControlComponent.volume;
-        if (mobile.matches) {
-            if (this.expanded) {
-                document.getElementsByClassName('l-pop-up-container')[0].style.bottom = '0';
-            } else {
-                document.getElementsByClassName('l-pop-up-container')[0].style.bottom =
-                    (top - body.clientHeight).toString() + 'px';
+        this.checkLayout();
+        let left;
+        let top;
+        let height;
+        let callCollapse = false;
+        switch (true) {
+        case this.layout.mobile:
+            if (this.footer) {
+                return;
             }
-        }
-        let height = body.clientHeight - top;
-        if (height === 0) {
-            return;
-        }
-        this.root.style.height = height.toString() + 'px';
-        document.getElementsByClassName('player-trigger')[0]
-            .style.height = height.toString() + 'px';
-        if (tablet.matches) {
-            document.getElementsByClassName('track-list')[0].style.height = (body.clientHeight -
-                NAVBAR.HEIGHT).toString() + 'px';
-        } else {
+            // ---- CHECK CLASSES ----
+            document.getElementById('cover').classList.add('animated-cover');
+            if (!this.expanded || this.locked) {
+                if (!this.locked) {
+                    this.footer = true;
+                    callCollapse = true;
+                    this.expanded = true;
+                } else {
+                    if (!document.getElementsByClassName('l-player-footer')[0]) {
+                        document.getElementsByClassName('l-player')[0]
+                            .classList.add('l-player-footer');
+                        document.getElementsByClassName('l-player-footer')[0]
+                            .classList.remove('l-player');
+                    }
+                }
+            }
+            // ---- LEFT ----
+            this.root.style.left = '0';
+            // ---- TOP ----
+            top = this.locked ?
+                body.clientHeight :
+                this.expanded ?
+                    NAVBAR.HEIGHT :
+                    body.clientHeight - NAVBAR.HEIGHT;
+            this.root.style.top = top.toString() + 'px';
+            // ---- HEIGHT ----
+            height = body.clientHeight - NAVBAR.HEIGHT;
+            this.root.style.height = height.toString() + 'px';
             height -= document.getElementsByClassName('container-audio')[0].clientHeight +
                 document.getElementsByClassName('l-music-bar')[0].clientHeight +
                 document.getElementsByClassName('patch')[0].clientHeight +
-                (mobile.matches ?
-                    document.getElementsByClassName('player-trigger-row')[0].clientHeight :
-                    0);
+                document.getElementsByClassName('player-trigger-row')[0].clientHeight;
             document.getElementsByClassName('track-list')[0].style.height =
                 height.toString() + 'px';
+            // ---- POP-UP CONTAINER ----
+            if (this.expanded || this.locked) {
+                document.getElementsByClassName('l-pop-up-container')[0].style.bottom = '0';
+            } else {
+                document.getElementsByClassName('l-pop-up-container')[0].style.bottom =
+                    (NAVBAR.HEIGHT).toString() + 'px';
+            }
+            if (callCollapse) {
+                this.triggerClick();
+            }
+            break;
+        case this.layout.tablet:
+            // ---- CHECK CLASSES ----
+            document.getElementById('cover').classList.remove('animated-cover');
+            if (this.footer) {
+                this.expandFooter();
+            }
+            this.footer = false;
+            if (document.getElementsByClassName('l-player-footer')[0]) {
+                document.getElementsByClassName('l-player-footer')[0].classList.add('l-player');
+                document.getElementsByClassName('l-player')[0].classList.remove('l-player-footer');
+            }
+            if (this.expanded) {
+                document.getElementsByClassName('player-trigger')[0]
+                    .classList.remove('is-z-index-top');
+            } else {
+                document.getElementsByClassName('player-trigger')[0]
+                    .classList.add('is-z-index-top');
+            }
+            // ---- LEFT ----
+            left = this.expanded ?
+                body.clientWidth - this.root.clientWidth : body.clientWidth - 13;
+            this.root.style.left = left.toString() + 'px';
+            // ---- TOP ----
+            this.root.style.top = NAVBAR.HEIGHT.toString() + 'px';
+            // ---- HEIGHT ----
+            height = body.clientHeight - NAVBAR.HEIGHT;
+            this.root.style.height = height.toString() + 'px';
+            document.getElementsByClassName('player-trigger')[0]
+                .style.height = height.toString() + 'px';
+            document.getElementsByClassName('track-list')[0].style.height =
+                height.toString() + 'px';
+            break;
+        case this.layout.desktop:
+            // ---- CHECK CLASSES ----
+            document.getElementById('cover').classList.remove('animated-cover');
+            if (document.getElementsByClassName('l-player-footer')[0]) {
+                document.getElementsByClassName('l-player-footer')[0].classList.add('l-player');
+                document.getElementsByClassName('l-player')[0].classList.remove('l-player-footer');
+            }
+            // ---- LEFT ----
+            left = this.expanded ?
+                body.clientWidth - this.root.clientWidth : body.clientWidth - 13;
+            this.root.style.left = left.toString() + 'px';
+            // ---- TOP ----
+            this.root.style.top = NAVBAR.HEIGHT.toString() + 'px';
+            // ---- HEIGHT ----
+            height = body.clientHeight - NAVBAR.HEIGHT;
+            this.root.style.height = height.toString() + 'px';
+            document.getElementsByClassName('player-trigger')[0]
+                .style.height = height.toString() + 'px';
+            height -= document.getElementsByClassName('container-audio')[0].clientHeight +
+                document.getElementsByClassName('l-music-bar')[0].clientHeight +
+                document.getElementsByClassName('patch')[0].clientHeight;
+            document.getElementsByClassName('track-list')[0].style.height =
+                height.toString() + 'px';
+            break;
+        }
+    }
+
+    /**
+     * Проверяет размеры окна
+     */
+    checkLayout() {
+        switch (true) {
+        case window.matchMedia(LAYOUT.MOBILE).matches:
+            this.layout.mobile = true;
+            this.layout.tablet = false;
+            this.layout.desktop = false;
+            break;
+        case window.matchMedia(LAYOUT.TABLET).matches:
+            this.layout.mobile = false;
+            this.layout.tablet = true;
+            this.layout.desktop = false;
+            break;
+        default:
+            this.layout.mobile = false;
+            this.layout.tablet = false;
+            this.layout.desktop = true;
         }
     }
 
@@ -139,13 +228,21 @@ export default class PlayerView extends BaseView {
      * Sets static EventListeners
      */
     setEventListeners() {
+        document.getElementsByTagName('body')[0].addEventListener('DOMSubtreeModified', (event) => {
+            const player = document.getElementsByClassName('l-player')[0] ?
+                document.getElementsByClassName('l-player')[0] :
+                document.getElementsByClassName('l-player-footer')[0];
+            if (!player.contains(event.target)) {
+                this.resize();
+            }
+        });
         [{
             element: window,
-            event: 'resize',
+            event: 'orientationchange',
             callback: this.resize,
         }, {
-            element: document.getElementsByTagName('body')[0],
-            event: 'DOMSubtreeModified',
+            element: window,
+            event: 'resize',
             callback: this.resize,
         }, {
             element: document.getElementsByTagName('audio')[0],
@@ -184,17 +281,13 @@ export default class PlayerView extends BaseView {
             event: 'touchstart',
             callback: this.triggerTouch,
         }, {
+            element: document.getElementsByClassName('player-trigger-row')[0],
+            event: 'touchend',
+            callback: this.triggerTouchEnd,
+        }, {
             element: window,
             event: 'touchend',
             callback: this.triggerSwipe,
-        }, {
-            element: document.getElementsByClassName('l-player')[0],
-            event: 'touchstart',
-            callback: this.playerTouch,
-        }, {
-            element: document.getElementsByClassName('l-player')[0],
-            event: 'touchend',
-            callback: this.playerSwipe,
         }].forEach((el) => {
             el.element.addEventListener(el.event, el.callback.bind(this));
         });
@@ -206,7 +299,7 @@ export default class PlayerView extends BaseView {
      */
     audioTimeUpdate() {
         if (isNaN(document.getElementsByTagName('audio')[0].currentTime /
-            document.getElementsByTagName('audio')[0].duration) || this.timelineDrag
+            document.getElementsByTagName('audio')[0].duration)
         ) {
             return;
         }
@@ -247,62 +340,105 @@ export default class PlayerView extends BaseView {
             return;
         }
         if (this.expanded) {
-            document.querySelector('.player-trigger-arrow').classList.remove('is-rotated-0');
+            setTimeout(() => {
+                document.querySelector('.player-trigger-arrow').classList.remove('is-rotated-0');
+            }, 750);
         } else {
-            document.querySelector('.player-trigger-arrow').classList.add('is-rotated-0');
+            setTimeout(() => {
+                document.querySelector('.player-trigger-arrow').classList.add('is-rotated-0');
+            }, 750);
         }
-        const body = document.getElementsByTagName('body')[0];
-        const mobile = window.matchMedia(LAYOUT.MOBILE);
-        if (mobile.matches) {
+        const body = document.documentElement;
+        this.expanded = !this.expanded;
+        let left;
+        let top;
+        switch (true) {
+        case this.layout.mobile:
+            document.getElementById('cover').classList.add('animated-cover');
+            this.footer = !this.expanded;
             if (this.expanded) {
-                document.getElementsByClassName('track-list')[0].style.top = '0px';
-                this.footer = true;
-                document.getElementsByClassName('player-trigger-arrow-row')[0].classList
-                    .add('is-hidden');
-                setTimeout(() => {
-                    document.getElementsByClassName('l-player')[0].classList.add('l-player-footer');
-                    document.getElementsByClassName('l-player')[0].classList.remove('l-player');
-                    document.getElementsByClassName('l-player-footer')[0].appendChild(
-                        document.getElementsByClassName('timeline')[0],
-                    );
-                    document.getElementById('cover').classList.add('in-footer-cover');
-                }, 600);
-                setTimeout(() => {
-                    document.getElementsByClassName('l-player-footer')[0].appendChild(
-                        document.getElementsByClassName('play-pause')[0],
-                    );
-                }, 1000);
-                document.getElementsByClassName('l-pop-up-container')[0].style.bottom = '60px';
-            } else {
-                this.footer = false;
-                document.getElementsByClassName('player-trigger-arrow-row')[0].classList
-                    .remove('is-hidden');
+                document.getElementsByClassName('player-trigger-arrow-row')[0]
+                    .classList.remove('is-hidden');
                 document.getElementsByClassName('l-player-footer')[0].classList.add('l-player');
                 document.getElementsByClassName('l-player')[0].classList.remove('l-player-footer');
                 document.getElementsByClassName('container-audio')[0].insertBefore(
                     document.getElementsByClassName('timeline')[0],
-                    document.getElementsByClassName('control-elements')[0],
-                );
+                    document.getElementsByClassName('control-elements')[0]);
                 document.getElementsByClassName('control-elements')[0].insertBefore(
                     document.getElementsByClassName('play-pause')[0],
-                    document.getElementById('next'),
-                );
+                    document.getElementById('next'));
                 document.getElementById('cover').classList.remove('in-footer-cover');
                 document.getElementsByClassName('l-pop-up-container')[0].style.bottom = '0';
+                document.getElementsByClassName('m-dropdown').forEach((dropdown) => {
+                    dropdown.classList.remove('is-expanded');
+                });
+                document.documentElement.click();
+            } else {
+                document.getElementsByClassName('player-trigger-arrow-row')[0]
+                    .classList.add('is-hidden');
+                document.getElementsByClassName('track-list')[0].style.top = '0';
+                setTimeout(() => {
+                    if (!document.getElementsByClassName('l-player-footer')[0]) {
+                        document.getElementsByClassName('l-player')[0]
+                            .classList.add('l-player-footer');
+                        document.getElementsByClassName('l-player')[0]
+                            .classList.remove('l-player');
+                    }
+                    document.getElementsByClassName('l-player-footer')[0].appendChild(
+                        document.getElementsByClassName('timeline')[0]);
+                    document.getElementById('cover').classList.add('in-footer-cover');
+                }, 300);
+                setTimeout(() => {
+                    document.getElementsByClassName('l-player-footer')[0].appendChild(
+                        document.getElementsByClassName('play-pause')[0]);
+                }, 500);
+                document.getElementsByClassName('l-pop-up-container')[0].style.bottom = '60px';
             }
-            const top =
-                this.expanded ?
-                    document.documentElement.clientHeight - 60 :
-                    NAVBAR.HEIGHT;
+            top = this.expanded ? NAVBAR.HEIGHT : body.clientHeight - NAVBAR.HEIGHT;
             this.root.style.top = top + 'px';
-        } else {
-            const left =
-                this.expanded ?
-                    body.clientWidth - 13 :
-                    body.clientWidth - this.root.clientWidth;
+            break;
+        case this.layout.tablet:
+            document.getElementById('cover').classList.remove('animated-cover');
+            left = this.expanded ? body.clientWidth - this.root.clientWidth : body.clientWidth - 13;
             this.root.style.left = left + 'px';
+            if (this.expanded) {
+                document.getElementsByClassName('player-trigger')[0]
+                    .classList.remove('is-z-index-top');
+                document.getElementsByClassName('m-dropdown').forEach((dropdown) => {
+                    dropdown.classList.remove('is-expanded');
+                });
+                document.documentElement.click();
+            } else {
+                document.getElementsByClassName('player-trigger')[0]
+                    .classList.add('is-z-index-top');
+            }
+            break;
+        case this.layout.desktop:
+            document.getElementById('cover').classList.remove('animated-cover');
+            left = this.expanded ? body.clientWidth - this.root.clientWidth : body.clientWidth - 13;
+            this.root.style.left = left + 'px';
+            break;
         }
-        this.expanded = !this.expanded;
+    }
+
+    /**
+     * разворачивает плеер из состояния футера
+     */
+    expandFooter() {
+        document.getElementsByClassName('player-trigger-arrow-row')[0]
+            .classList.remove('is-hidden');
+        if (document.getElementsByClassName('l-player-footer')[0]) {
+            document.getElementsByClassName('l-player-footer')[0].classList.add('l-player');
+            document.getElementsByClassName('l-player')[0].classList.remove('l-player-footer');
+        }
+        document.getElementsByClassName('container-audio')[0].insertBefore(
+            document.getElementsByClassName('timeline')[0],
+            document.getElementsByClassName('control-elements')[0]);
+        document.getElementsByClassName('control-elements')[0].insertBefore(
+            document.getElementsByClassName('play-pause')[0],
+            document.getElementById('next'));
+        document.getElementById('cover').classList.remove('in-footer-cover');
+        document.getElementsByClassName('l-pop-up-container')[0].style.bottom = '0';
     }
 
     /**
@@ -319,44 +455,24 @@ export default class PlayerView extends BaseView {
     }
 
     /**
-     * Слушает свайп по триггеру плеера
+     * Слушает нажатие по триггеру плеера
      * @param {Object} event
      */
-    triggerSwipe(event) {
+    triggerTouchEnd(event) {
         if (this.triggerTouchedY &&
-            Math.abs(event.changedTouches[0].clientY - this.triggerTouchedY) > 300
+            Math.abs(event.changedTouches[0].clientY - this.triggerTouchedY) < 100
         ) {
             this.triggerClick();
         }
     }
 
     /**
-     * Слушает touchstart по плееру
+     * Слушает свайп по триггеру плеера
      * @param {Object} event
      */
-    playerTouch(event) {
-        if (this.footer ||
-            document.getElementsByClassName('track-list')[0].contains(event.target)
-        ) {
-            return;
-        }
-        setTimeout(() => {
-            this.playerTouchedY = event.changedTouches[0].clientY;
-            event.preventDefault();
-            event.stopImmediatePropagation();
-        }, 100);
-        setTimeout(() => {
-            this.playerTouchedY = undefined;
-        }, 500);
-    }
-
-    /**
-     * Слушает свайп по плееру
-     * @param {Object} event
-     */
-    playerSwipe(event) {
-        if (this.playerTouchedY && !this.footer &&
-            Math.abs(event.changedTouches[0].clientY - this.playerTouchedY) > 300
+    triggerSwipe(event) {
+        if (this.triggerTouchedY &&
+            Math.abs(event.changedTouches[0].clientY - this.triggerTouchedY) > 300
         ) {
             this.triggerClick();
         }
@@ -388,6 +504,17 @@ export default class PlayerView extends BaseView {
     }
 
     /**
+     * Сворачивает плеер, если он развёрнут
+     */
+    collapseIfMobile() {
+        if (this.expanded && (window.matchMedia(LAYOUT.MOBILE).matches ||
+            window.matchMedia(LAYOUT.TABLET).matches)
+        ) {
+            this.triggerClick();
+        }
+    }
+
+    /**
      * Передвигает маркер между треками
      * @param {string} currentId
      * @param {string} newId
@@ -399,26 +526,41 @@ export default class PlayerView extends BaseView {
         const marker = document.getElementsByClassName('current-marker')[0];
         const track1 = document.getElementById(currentId);
         const track2 = document.getElementById(newId);
+        const track2BCR = track2.getBoundingClientRect();
         const heightDifference = track1.getBoundingClientRect().y -
-            track2.getBoundingClientRect().y;
-        const base = document.getElementsByClassName('track-list')[0].children[1]
+            track2BCR.y;
+        const base = document.getElementsByClassName('track-list')[0].children[2]
             .getBoundingClientRect().y;
-        track2.classList.remove('is-margin-left-0');
         track2.classList.add('is-margin-left-5');
         marker.style.height = (50 + Math.abs(heightDifference)).toString() + 'px';
         if (heightDifference < 0) {
             setTimeout(() => {
-                marker.style.top = (track2.getBoundingClientRect().y - base + 5).toString() + 'px';
+                marker.style.top = (track2BCR.y - base + 5).toString() + 'px';
             }, 250);
         } else {
-            marker.style.top = (track2.getBoundingClientRect().y - base + 5).toString() + 'px';
+            marker.style.top = (track2BCR.y - base + 5).toString() + 'px';
         }
+        marker.setAttribute('current-id', track2.getAttribute('id'));
         setTimeout(() => {
             marker.style.height = '50px';
             if (heightDifference !== 0) {
                 track1.classList.remove('is-margin-left-5');
-                track1.classList.add('is-margin-left-0');
             }
         }, 250);
+    }
+
+    /**
+     * Передвигает маркер к треку
+     */
+    moveMarkerToCurrent() {
+        if (document.querySelectorAll('.track-list .row').length === 0) {
+            return;
+        }
+        const marker = document.getElementsByClassName('current-marker')[0];
+        const track = document.getElementById(marker.getAttribute('current-id'));
+        const base = document.getElementsByClassName('track-list')[0].children[1]
+            .getBoundingClientRect().y;
+        marker.style.top = (track.getBoundingClientRect().y - base + 5).toString() + 'px';
+        marker.style.height = '50px';
     }
 }

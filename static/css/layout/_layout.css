@@ -82,6 +82,12 @@
     width: calc(100%);
 }
 
+.l-avatar-input {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .l-navbar {
     width: 100%;
     position: sticky;

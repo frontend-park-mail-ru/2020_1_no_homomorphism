@@ -54,11 +54,10 @@
 .l-navbar-icon {
     opacity: 0.6;
     padding: 20px 8px 16px 8px;
-}
-
-.l-navbar-icon:hover {
-    opacity: 1;
-    background: var(--chosen-icon);
+    &:hover, &.touched {
+        opacity: 1;
+        background: var(--chosen-icon);
+    }
 }
 
 .m-small-icon {

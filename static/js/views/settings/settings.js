@@ -1,9 +1,10 @@
-import {SETTINGS, DOM, POPUP, LAYOUT, THEME, THEME_OVERLAY} from '@libs/constants';
+import {SETTINGS, DOM, POPUP, LAYOUT, THEME, THEME_OVERLAY, GLOBAL} from '@libs/constants';
 import settings from '@views/settings/settings.tmpl.xml';
 import BaseView from '@libs/base_view';
 import User from '@libs/user';
 import PopUp from '@components/pop-up/pop-up';
 import {inputSanitize} from '@libs/input_sanitize';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * вью для настроек
@@ -19,8 +20,8 @@ export default class SettingsView extends BaseView {
         this.errors = {};
         this.eventBus.on(SETTINGS.INVALID, this.showErrors.bind(this));
         this.eventBus.on(SETTINGS.RENDER_LOGGED, this.renderData.bind(this));
-        this.eventBus.on(POPUP.NEW, (message) => {
-            new PopUp(message);
+        this.eventBus.on(POPUP.NEW, (message, error = false) => {
+            new PopUp(message, error);
         });
     }
 
@@ -30,6 +31,7 @@ export default class SettingsView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
+        globalEventBus.emit(GLOBAL.COLLAPSE_IF_MOBILE);
         const data = {};
         data.themes = [];
         for (const i in THEME) {
@@ -110,15 +112,26 @@ export default class SettingsView extends BaseView {
                 target.classList.add('is-current-theme');
                 const split = target.getAttribute('id').split(' ');
                 document.documentElement.setAttribute('theme', split[0]);
-                if (split[0] === 'special') {
-                    document.documentElement.setAttribute('theme-name', split[1]);
-                } else {
-                    document.documentElement.removeAttribute('theme-name');
-                }
+                document.documentElement.removeAttribute('theme-name');
                 THEME[split[0]][split[1]].forEach((prop) => {
                     document.documentElement.style.setProperty(prop[0], prop[1]);
                 });
                 this.submitTheme();
+            });
+        });
+        document.getElementsByClassName('m-big-input').forEach((input) => {
+            input.addEventListener('keyup', (event) => {
+                if (event.keyCode === 13) {
+                    let next = event.target.parentElement.parentElement.parentElement.nextSibling
+                        .firstChild;
+                    if (next.nodeName === 'BUTTON') {
+                        event.target.blur();
+                        next.click();
+                    } else {
+                        next = next.lastChild.firstChild;
+                        next.focus();
+                    }
+                }
             });
         });
     }
@@ -130,8 +143,6 @@ export default class SettingsView extends BaseView {
     renderData(data) {
         this.userData = data;
         document.getElementsByClassName('m-round-image')[0].src = data.image;
-        document.getElementsByClassName('m-top-name')[0].innerHTML = inputSanitize(data.login);
-        document.getElementsByClassName('m-top-login')[0].innerHTML = inputSanitize(data.name);
         document.getElementsByClassName('m-big-input')[0].value = inputSanitize(data.name);
         document.getElementsByClassName('m-big-input')[1].value = inputSanitize(data.email);
         document.getElementById('newPassword').value = '';

@@ -5,8 +5,7 @@
     --button-color: #0ab992;
 }
 
-:root, :root[theme="light"],
-:root[theme="special"][theme-name="lsd"] {
+:root, :root[theme="light"] {
     /* Светлая тема */
     --background-color: white;
     --overlay-color: white;
@@ -48,20 +47,24 @@
     .m-large-like-button,
     .m-theme-selector-container-button,
     .container-audio img,
-    .m-close-choose-menu-button {
+    .l-player-footer .play-pause,
+    .m-close-choose-menu-button,
+    .m-subscribe,
+    .m-more-button,
+    .m-playlist-section-edit-button,
+    .m-playlist-delete-button img,
+    .m-button-without-size,
+    .m-playlist-edit-button,
+    .m-playlist-image-upload-button img {
         filter: invert(0.9);
     }
 
-    .l-list-rounded-card:hover {
-        box-shadow: 0 0 0 1px var(--selected-elem);
+    .player-trigger-arrow-row {
+        filter: invert(0.6);
     }
-}
 
-:root[theme="special"][theme-name="lsd"] {
-    .paNqSg, .G2Vk3A, .NYcNWw {
-        display: block;
-    }
-    .container-audio {
-        overflow: hidden;
+    .l-list-rounded-card:hover,
+    .m-dropdown {
+        box-shadow: 0 0 0 1px var(--selected-elem);
     }
 }

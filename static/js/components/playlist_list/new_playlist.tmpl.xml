@@ -3,11 +3,26 @@
         <div class="l-list-image">
             <img class="m-list-image" src="/static/img/playlist/default.png" a-id="{playlist.id}" alt=""/>
         </div>
+        <label class="l-list-image-label is-not-displayed">
+            <img class="m-list-image" src="/static/img/playlist/default.png" a-id="{playlist.id}" alt=""/>
+            <input class="m-hidden-input is-not-displayed" type="file"/>
+        </label>
         <div class="l-button-play-track">
             <button class="m-button-track-play-playlist"> </button>
+        </div>
+        <div class="l-small-input is-not-displayed">
+            <input class="is-margin-top--191" type="text" placeholder="Playlist name" class="m-small-input"></input>
         </div>
         <a class="l-list-card-description" href="/playlist/{playlist.id}">
             <fest:value>playlist.name</fest:value>
         </a>
+        <div class="row">
+            <div class="m-playlist-delete-button m-top-right-corner is-margin-top--191 is-not-displayed">
+                <img src="/static/img/icons/delete-24px.svg" title="delete playlist"/>
+            </div>
+            <div class="m-playlist-image-upload-button is-not-displayed">
+                <img src="/static/img/icons/cloud_upload.svg" title="upload playlist image"/>
+            </div>
+        </div>
     </div>
 </fest:template>

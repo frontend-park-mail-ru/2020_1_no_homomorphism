@@ -1,6 +1,7 @@
 import BaseView from '@libs/base_view';
 import search from '@views/search/search.tmpl.xml';
-import {DOM, SEARCH} from '@libs/constants';
+import {DOM, SEARCH, GLOBAL} from '@libs/constants';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  * Вью страницы поиска
@@ -22,6 +23,7 @@ export default class SearchView extends BaseView {
      * @param {string} url
      */
     render(root, url = '') {
+        globalEventBus.emit(GLOBAL.COLLAPSE_IF_MOBILE);
         this.eventBus.emit(SEARCH.GET_DATA, {input: url});
     }
 

@@ -34,11 +34,7 @@
 }
 
 .is-not-displayed {
-    display: none;
-}
-
-.is-displayed {
-    display: block;
+    display: none !important;
 }
 
 .is-error {
@@ -84,7 +80,7 @@
 }
 
 .is-opacity-1 {
-    opacity: 1;
+    opacity: 1 !important;
 }
 
 .is-volume-scale-hover {
@@ -123,4 +119,18 @@
 
 .is-height-50 {
     height: 50px;
+}
+
+.is-margin-top--191 {
+    margin-top: -191px;
+}
+
+.is-geometricaly-invisible {
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.is-z-index-top {
+    z-index: var(--top-level);
 }

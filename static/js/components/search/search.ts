@@ -96,6 +96,8 @@ export default class SearchComponent {
         if (this.isOpen) {
             document.getElementsByClassName('l-top-content')[0]
                 .removeChild(document.getElementsByClassName('l-top-content')[0].firstChild);
+            document.getElementsByClassName('m-search-input')[0]
+                .classList.remove('with-modal-window');
             this.isOpen = false;
             if (blur) {
                 (document.getElementsByClassName('m-search-input')[0] as HTMLInputElement).blur();

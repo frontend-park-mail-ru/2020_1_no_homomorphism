@@ -70,12 +70,33 @@ export default class PlayerControlComponent {
         document.getElementsByClassName('container-audio')[0].innerHTML = template();
         this.drawVolume(document.getElementsByClassName('volume-scale-back')[0]
             .getBoundingClientRect().height * this.volume);
+        document.getElementsByTagName('audio')[0].volume = this.volume;
     }
 
     /**
      * Sets EventListeners
      */
     setEventListeners() {
+        document.getElementsByClassName('player-control-button').forEach((button) => {
+            button.addEventListener('touchstart', (event) => {
+                event.preventDefault();
+                event.target.classList.add('touched');
+            });
+            button.addEventListener('touchend', (event) => {
+                event.preventDefault();
+                event.target.classList.remove('touched');
+                event.target.click();
+            });
+        });
+        document.getElementsByClassName('playlist-control-button').forEach((button) => {
+            button.addEventListener('touchstart', (event) => {
+                event.preventDefault();
+            });
+            button.addEventListener('touchend', (event) => {
+                event.preventDefault();
+                event.target.click();
+            });
+        });
         [{
             element: window,
             event: 'mouseup',
@@ -131,7 +152,7 @@ export default class PlayerControlComponent {
         }, {
             element: document.querySelector('.timeline-back'),
             event: 'touchend',
-            callback: this.timelineMouseUp,
+            callback: this.timelineTouchEnd,
         }, {
             element: document.querySelector('.timeline-front'),
             event: 'mouseup',
@@ -139,7 +160,7 @@ export default class PlayerControlComponent {
         }, {
             element: document.querySelector('.timeline-front'),
             event: 'touchend',
-            callback: this.timelineMouseUp,
+            callback: this.timelineTouchEnd,
         }, {
             element: document.querySelector('.timeline-toggler'),
             event: 'mouseup',
@@ -147,7 +168,7 @@ export default class PlayerControlComponent {
         }, {
             element: document.querySelector('.timeline-toggler'),
             event: 'touchend',
-            callback: this.timelineMouseUp,
+            callback: this.timelineTouchEnd,
         }, {
             element: window,
             event: 'mousemove',
@@ -155,35 +176,27 @@ export default class PlayerControlComponent {
         }, {
             element: window,
             event: 'touchmove',
-            callback: this.timelineMouseMove,
+            callback: this.timelineTouchMove,
         }, {
             element: document.querySelector('.timeline-back'),
             event: 'click',
             callback: this.timelineClick,
         }, {
+            element: document.querySelector('.timeline-back'),
+            event: 'touchend',
+            callback: this.timelineTouchEnd,
+        }, {
             element: document.querySelector('.timeline-front'),
             event: 'click',
             callback: this.timelineClick,
         }, {
-            element: document.querySelector('.shuffle'),
-            event: 'mouseover',
-            callback: this.shuffleButtonMouseOver,
-        }, {
-            element: document.querySelector('.shuffle'),
-            event: 'mouseout',
-            callback: this.shuffleButtonMouseOut,
+            element: document.querySelector('.timeline-front'),
+            event: 'touchend',
+            callback: this.timelineTouchEnd,
         }, {
             element: document.querySelector('.shuffle'),
             event: 'click',
             callback: this.shuffleButtonClick,
-        }, {
-            element: document.querySelector('.repeat'),
-            event: 'mouseover',
-            callback: this.repeatButtonMouseOver,
-        }, {
-            element: document.querySelector('.repeat'),
-            event: 'mouseout',
-            callback: this.repeatButtonMouseOut,
         }, {
             element: document.querySelector('.repeat'),
             event: 'click',
@@ -302,13 +315,35 @@ export default class PlayerControlComponent {
     }
 
     /**
+     * Слушает начало touch на таймлайне
+     * @param {Object} event
+     */
+    timelineTouchStart(event) {
+        event.preventDefault();
+        this.timelineDrag = true;
+    }
+
+    /**
      * Слушает отпускание клавиши мыши на таймлайне
      * @param {Object} event
      */
     timelineMouseUp(event) {
         this.timelineDrag = false;
         const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
-        const width = event.clientX | (event.changedTouches ? event.changedTouches[0].pageX : 0);
+        const width = event.clientX;
+        const ratio = (width - bcr.x) / bcr.width;
+        this.eventBus.emit(PLAYER.REWIND, ratio);
+    }
+
+    /**
+     * Слушает окончание touch на таймлайне
+     * @param {Object} event
+     */
+    timelineTouchEnd(event) {
+        event.preventDefault();
+        this.timelineDrag = false;
+        const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
+        const width = event.changedTouches[0].clientX;
         const ratio = (width - bcr.x) / bcr.width;
         this.eventBus.emit(PLAYER.REWIND, ratio);
     }
@@ -320,9 +355,21 @@ export default class PlayerControlComponent {
     timelineMouseMove(event) {
         if (this.timelineDrag) {
             const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
-            const width = event.clientX | (event.changedTouches ?
-                event.changedTouches[0].pageX :
-                0);
+            const width = event.clientX;
+            const ratio = (width - bcr.x) / bcr.width;
+            this.drawTimeline(ratio);
+        }
+    }
+
+    /**
+     * Слушает движение touch по таймлайну
+     * @param {Object} event
+     */
+    timelineTouchMove(event) {
+        if (this.timelineDrag) {
+            event.preventDefault();
+            const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
+            const width = event.changedTouches[0].clientX;
             const ratio = (width - bcr.x) / bcr.width;
             this.drawTimeline(ratio);
         }
@@ -339,49 +386,14 @@ export default class PlayerControlComponent {
     }
 
     /**
-     * Слушает вход курсора на кнопку перемешивания
-     */
-    shuffleButtonMouseOver() {
-        if (!this.shuffled) {
-            document.querySelector('.shuffle').classList.add('is-opacity-1');
-        }
-    }
-
-    /**
-     * Слушает выход курсора с кнопки перемешивания
-     */
-    shuffleButtonMouseOut() {
-        if (!this.shuffled) {
-            document.querySelector('.shuffle').classList.remove('is-opacity-1');
-        }
-    }
-
-    /**
      * Слушает клик по кнопке перемешивания
      */
     shuffleButtonClick() {
+        document.querySelector('.shuffle').classList.toggle('is-opacity-1');
         if (!this.shuffled) {
             this.eventBus.emit(PLAYER.SHUFFLE, 'first');
         } else {
             this.eventBus.emit(PLAYER.UNSHUFFLE);
-        }
-    }
-
-    /**
-     * Слушает вход курсора на кнопку зацикливания
-     */
-    repeatButtonMouseOver() {
-        if (this.repeatState === 0) {
-            document.querySelector('.repeat').classList.add('is-opacity-1');
-        }
-    }
-
-    /**
-     * Слушает выход курсора с кнопки зацикливания
-     */
-    repeatButtonMouseOut() {
-        if (this.repeatState === 0) {
-            document.querySelector('.repeat').classList.remove('is-opacity-1');
         }
     }
 
@@ -391,12 +403,14 @@ export default class PlayerControlComponent {
     repeatButtonClick() {
         switch (this.repeatState) {
         case 0:
+            document.querySelector('.repeat').classList.add('is-opacity-1');
             this.eventBus.emit(PLAYER.REPEAT);
             break;
         case 1:
             this.eventBus.emit(PLAYER.REPEAT_ONE);
             break;
         case 2:
+            document.querySelector('.repeat').classList.remove('is-opacity-1');
             this.eventBus.emit(PLAYER.UNREPEAT);
             break;
         }

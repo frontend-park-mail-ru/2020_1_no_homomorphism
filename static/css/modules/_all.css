@@ -22,6 +22,10 @@
     border-radius: 5px;
     background: var(--overlay-color);
     padding: 8px 35px 8px 8px;
+    transition: 0.3s;
+    &.with-modal-window {
+        border-radius: 5px 5px 0 0;
+    }
 }
 
 .m-mobile-only, .m-mobile-tablet-only {
@@ -155,10 +159,9 @@
     margin-bottom: 16px;
 }
 
-.l-track-big:hover {
+.l-track-big:hover, .l-player-track:hover {
     & .m-big-like-button, .m-big-delete-button, .m-big-add-button {
         transition: 0.3s;
-        -webkit-transform: scale(2);
         transform: scale(1.2);
     }
     & .m-big-like-button, .m-big-delete-button, .m-big-add-button {
@@ -166,15 +169,10 @@
     }
 }
 
-.border-bottom:hover .m-big-like-button, .border-bottom:hover .m-big-delete-button, .border-bottom:hover .m-big-add-button {
-    transition: 0.3s;
-    -webkit-transform: scale(2);
-    transform: scale(0.8);
-    opacity: 0.8;
-}
-
-.l-track-big:not(:hover) .m-big-like-button, .l-track-big:not(:hover) .m-big-delete-button, .l-track-big:not(:hover) .m-big-add-button {
-    transition: 0.1s;
+.l-track-big:not(:hover), .l-player-track:not(:hover) {
+    & .m-big-like-button, .m-big-delete-button, .m-big-add-button {
+        transition: 0.1s;
+    }
 }
 
 .l-track-big .l-big-track-button {
@@ -182,7 +180,7 @@
     float: left;
 }
 
-.l-track-big {
+.l-track-big, .l-player-track {
     & .m-big-like-button, .m-big-delete-button, .m-big-add-button {
         opacity: 0;
         &:hover {
@@ -201,7 +199,7 @@
     }
 }
 
-.l-big-track-button.more-button {
+.more-button {
     display: none;
 }
 
@@ -267,10 +265,16 @@
     }
 }
 
-.l-list-card img {
-    float: left;
+.l-list-image img {
+    /* float: left; */
     width: 150px;
     height: 150px;
+}
+
+.l-list-image-label img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: -4px;
 }
 
 .l-list-rounded-card {
@@ -298,7 +302,7 @@
     display: inline-block;
     width: 90%;
     max-width: 150px;
-    max-height: 220px;
+    max-height: 201px;
     text-decoration: none;
     border-radius: var(--card-border-small);
     box-shadow: 0 0 10px -3px rgba(0, 0, 0, 0.5);
@@ -466,11 +470,15 @@
     padding: 16px;
     position: fixed;
     left: calc(5% + 186px);
-    width: 25.1%;
+    width: 25.2%;
     box-shadow: 4px 4px 6px -1px rgba(12, 12, 12, 0.1), -4px 4px 6px -1px rgba(12, 12, 12, 0.1);
-    top: 52px;
+    top: 50px;
     z-index: var(--top-level);
     background: var(--overlay-color);
+    border: 1px solid var(--chosen-icon);
+    border-radius: 0 0 5px 5px;
+    border-top: none;
+    transition: 0.3s;
 }
 
 .l-search-artists {
@@ -606,7 +614,7 @@
 .m-dropdown {
     border-radius: 10px;
     background: var(--overlay-color);
-    z-index: var(--main-level);
+    z-index: var(--top-level);
     opacity: 0;
     pointer-events: none;
     transition: box-shadow 0.3s, opacity 0.3s;
@@ -614,7 +622,7 @@
     padding-bottom: 6px;
     margin-top: 10px;
     margin-left: 17px;
-    font-size: 13px;
+    font-size: 16px;
     overflow: hidden;
     & .row .col {
         width: 100%;
@@ -694,4 +702,16 @@
 
 .settings-right-col {
     float: right;
+}
+
+input.m-big-name {
+    border: none;
+    margin-top: -6px;
+    padding: 5px 10px;
+    &:hover, &:focus {
+        margin-top: -8px;
+        border: solid 2px var(--button-color);
+        margin-left: -2px;
+        margin-right: -2px;
+    }
 }

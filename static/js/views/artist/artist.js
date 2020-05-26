@@ -34,6 +34,7 @@ export default class ArtistView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
+        globalEventBus.emit(GLOBAL.COLLAPSE_IF_MOBILE);
         super.render(document.getElementsByClassName(DOM.CONTENT)[0], url);
         this.analizeUrl(url);
         this.eventBus.emit(ARTIST.GET_DATA, this.id);
@@ -97,6 +98,17 @@ export default class ArtistView extends BaseView {
             .addEventListener('click', this.subscribe.bind(this));
         document.getElementsByClassName('l-button-middle-play')[0]
             .addEventListener('click', this.playArtistTracks.bind(this));
+        document.getElementsByClassName('l-button-middle-play')[0]
+            .addEventListener('touchend', (event) => {
+                event.preventDefault();
+                let target = event.target;
+                while (!target.classList.contains('l-button-middle-play')) {
+                    target = target.parentNode;
+                }
+                event.target.classList.add('touched');
+                setTimeout(() => event.target.classList.remove('touched'), 300);
+                event.target.click();
+            });
     }
 
     /**
