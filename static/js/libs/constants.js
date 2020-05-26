@@ -39,8 +39,8 @@ export const URL = {
 };
 
 export const PAGINATION = {
-    ALBUMS: 20,
-    TRACKS: 50,
+    'albums': 20,
+    'tracks': 10, // 50,
 };
 
 export const LAYOUT = {

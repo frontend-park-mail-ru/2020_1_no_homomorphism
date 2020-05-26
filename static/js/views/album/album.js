@@ -1,4 +1,4 @@
-import {ALBUM, GLOBAL, POPUP, URL} from '@libs/constants';
+import {ALBUM, GLOBAL, POPUP, URL, PAGINATION} from '@libs/constants';
 import playlist from '@views/album/album.tmpl.xml';
 import BaseView from '@libs/base_view';
 import TrackListComponent from '@components/track_list/track_list';
@@ -34,9 +34,13 @@ export default class AlbumView extends BaseView {
      *  @param {string} url
      */
     render(root, url) {
+        this.rendered = 0;
         globalEventBus.emit(GLOBAL.COLLAPSE_IF_MOBILE);
         super.render(root);
         this.eventBus.emit(ALBUM.GET_ALBUM_DATA, {id: url});
+        this.eventBus.emit(ALBUM.GET_TRACKS_DATA, url, this.rendered.toString(),
+            (this.rendered + PAGINATION['tracks']).toString());
+        this.rendered += PAGINATION['tracks'];
     }
 
     /**
@@ -62,6 +66,20 @@ export default class AlbumView extends BaseView {
     }
 
     /**
+     * рендерит ещё
+     */
+    renderMore() {
+        if (document.getElementsByClassName('l-down-card')[0].getBoundingClientRect().bottom <=
+            document.documentElement.clientHeight &&
+            this.rendered < this.albumData.tracks
+        ) {
+            this.eventBus.emit(ALBUM.GET_TRACKS_DATA, this.albumData.id, this.rendered.toString(),
+                (this.rendered + PAGINATION['tracks']).toString());
+            this.rendered += PAGINATION['tracks'];
+        }
+    }
+
+    /**
      * Слушает события
      */
     setEventListeners() {
@@ -80,6 +98,7 @@ export default class AlbumView extends BaseView {
             });
         document.getElementsByClassName('m-large-like-button')[0].addEventListener('click',
             this._likeClicked.bind(this));
+        window.addEventListener('scroll', this.renderMore.bind(this));
     }
 
     /**

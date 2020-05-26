@@ -60,6 +60,12 @@ export default class TrackListComponent {
      * @param {Object} data
      */
     render(data) {
+        data.startIndex = data.startIndex ? parseInt(data.startIndex) : 0;
+        let i = 1;
+        data.tracks.map((track) => {
+            track.index = i + data.startIndex;
+            i++;
+        });
         this._tracklist = data.tracks;
         this._type = data.type;
         this._tracklist.type = this._type === 'playlist';
@@ -68,7 +74,13 @@ export default class TrackListComponent {
             return;
         }
         const elem = document.getElementsByClassName(data.domItem)[0];
-        elem.innerHTML = template(this._tracklist);
+        if (elem.lastChild && elem.lastChild.classList.contains('is-empty-track')) {
+            elem.lastChild.remove();
+        }
+        if (elem.lastChild && elem.lastChild.classList.contains('m-empty-list')) {
+            elem.lastChild.remove();
+        }
+        elem.innerHTML += template(this._tracklist);
         if (this._tracklist.length !== 0) {
             this.setTracksEventListeners();
         }

@@ -1,4 +1,4 @@
-import {PLAYLIST, RESPONSE, PAGINATION, URL, GLOBAL, POPUP} from '@libs/constants';
+import {PLAYLIST, RESPONSE, URL, GLOBAL, POPUP} from '@libs/constants';
 import Api from '@libs/api';
 import User from '@libs/user';
 import Validation from '@libs/validation';
@@ -37,10 +37,6 @@ export default class PlaylistModel {
                 this.playlist = res;
                 this.eventBus.emit(PLAYLIST.SET_PLAYLIST_ID, this.playlist.id);
                 this.eventBus.emit(PLAYLIST.RENDER_PLAYLIST_DATA, this.playlist);
-                if (changeEvent) {
-                    return;
-                }
-                this.eventBus.emit(PLAYLIST.GET_TRACKS_DATA, {id: this.playlist.id});
                 break;
             case RESPONSE.BAD_REQUEST:
                 this.eventBus.emit(PLAYLIST.ERROR,
@@ -60,10 +56,12 @@ export default class PlaylistModel {
 
     /**
      * Получение списка треков
-     * @param {Object} id
+     * @param {string} id
+     * @param {string} start
+     * @param {string} end
      */
-    getTracks(id) {
-        Api.playlistTracksGet(id.id, this.curPagination.toString(), PAGINATION.TRACKS.toString())
+    getTracks(id, start, end) {
+        Api.playlistTracksGet(id, start, end)
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
@@ -74,6 +72,7 @@ export default class PlaylistModel {
                                 'tracks': this.playlist.tracks,
                                 'domItem': 'l-track-list',
                                 'type': 'playlist',
+                                'startIndex': start,
                             });
                         }
                         this.eventBus.emit(PLAYLIST.SET_TRACKS_AMOUNT, this.playlist.tracks.length);

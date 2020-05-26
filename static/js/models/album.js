@@ -1,4 +1,4 @@
-import {ALBUM, RESPONSE, PAGINATION, POPUP} from '@libs/constants';
+import {ALBUM, RESPONSE, POPUP} from '@libs/constants';
 import Api from '@libs/api';
 
 /**
@@ -12,7 +12,6 @@ export default class AlbumModel {
     constructor(eventBus) {
         this.album = {};
         this.tracks = {};
-        this.curPagination = 0;
         this.eventBus = eventBus;
         this.eventBus.on(ALBUM.GET_ALBUM_DATA, this.getAlbum.bind(this));
         this.eventBus.on(ALBUM.GET_TRACKS_DATA, this.getTracks.bind(this));
@@ -33,7 +32,6 @@ export default class AlbumModel {
                             this.album = list;
                             this.eventBus.emit(ALBUM.RENDER_ALBUM, this.album);
                             this.eventBus.emit(ALBUM.SET_ALBUM_ID, data.id);
-                            this.eventBus.emit(ALBUM.GET_TRACKS_DATA, data.id);
                         });
                     break;
                 case RESPONSE.BAD_REQUEST:
@@ -49,9 +47,11 @@ export default class AlbumModel {
     /**
      * Получение данных альбома
      * @param {number} id
+     * @param {string} start
+     * @param {string} end
      */
-    getTracks(id) {
-        Api.albumTracksGet(id, this.curPagination.toString(), PAGINATION.TRACKS.toString())
+    getTracks(id, start, end) {
+        Api.albumTracksGet(id, start, end)
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
@@ -62,6 +62,7 @@ export default class AlbumModel {
                                 'tracks': this.tracks,
                                 'domItem': 'l-track-list',
                                 'type': 'album',
+                                'startIndex': start,
                             });
                             this.eventBus.emit(ALBUM.SET_TRACKS_AMOUNT, this.tracks);
                         });

@@ -1,4 +1,4 @@
-import {PLAYLIST, GLOBAL, POPUP, LAYOUT} from '@libs/constants';
+import {PLAYLIST, GLOBAL, POPUP, LAYOUT, PAGINATION} from '@libs/constants';
 import playlist from '@views/playlist/playlist.tmpl.xml';
 import BaseView from '@libs/base_view';
 import TrackListComponent from '@components/track_list/track_list';
@@ -49,6 +49,7 @@ export default class PlaylistView extends BaseView {
      */
     render(root, url) {
         globalEventBus.emit(GLOBAL.COLLAPSE_IF_MOBILE);
+        this.rendered = 0;
         super.render(root);
         this.eventBus.emit(PLAYLIST.GET_PLAYLIST_DATA, {id: url});
     }
@@ -62,6 +63,8 @@ export default class PlaylistView extends BaseView {
         if (this.playlistData.private === undefined) {
             this.playlistData.private = false;
         }
+        this.eventBus.emit(PLAYLIST.GET_TRACKS_DATA, this.playlistData.id, this.rendered.toString(),
+            (this.rendered + PAGINATION['tracks']).toString());
         this.renderPlaylist();
     }
 
@@ -166,6 +169,22 @@ export default class PlaylistView extends BaseView {
                 setTimeout(() => event.target.classList.remove('touched'), 300);
                 event.target.click();
             });
+        window.addEventListener('scroll', this.renderMore.bind(this));
+    }
+
+    /**
+     * рендерит ещё
+     */
+    renderMore() {
+        if (document.getElementsByClassName('l-down-card')[0].firstChild.lastChild
+            .getBoundingClientRect().bottom <= document.documentElement.clientHeight &&
+            this.rendered < this.playlistData.tracks
+        ) {
+            this.eventBus.emit(PLAYLIST.GET_TRACKS_DATA, this.playlistData.id,
+                this.rendered.toString(),
+                (this.rendered + PAGINATION[this.currentOpen]).toString());
+            this.rendered += PAGINATION[this.currentOpen];
+        }
     }
 
     /**

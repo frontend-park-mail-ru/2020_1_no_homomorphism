@@ -2,7 +2,7 @@ import artist from '@views/artist/artist.tmpl.xml';
 import BaseView from '@libs/base_view';
 import TrackListComponent from '@components/track_list/track_list';
 import PlaylistsComponent from '@components/playlist_list/playlist_list';
-import {GLOBAL, ARTIST, DOM, POPUP} from '@libs/constants';
+import {GLOBAL, ARTIST, DOM, POPUP, PAGINATION} from '@libs/constants';
 import User from '@libs/user';
 import PopUp from '@components/pop-up/pop-up';
 import {inputSanitize} from '@libs/input_sanitize';
@@ -34,6 +34,7 @@ export default class ArtistView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
+        this.rendered = 0;
         globalEventBus.emit(GLOBAL.COLLAPSE_IF_MOBILE);
         super.render(document.getElementsByClassName(DOM.CONTENT)[0], url);
         this.analizeUrl(url);
@@ -59,7 +60,9 @@ export default class ArtistView extends BaseView {
     chooseSection(url) {
         const curSection = document.getElementById(`profile-${this.currentOpen}-title`);
         curSection.classList.add(ARTIST.SELECTED_CLASS);
-        this.eventBus.emit(`artist-${this.currentOpen}`, '0', '50');
+        this.eventBus.emit(`artist-${this.currentOpen}`, this.rendered.toString(),
+            (this.rendered + PAGINATION[this.currentOpen]).toString());
+        this.rendered += PAGINATION[this.currentOpen];
     }
 
     /**
@@ -109,6 +112,21 @@ export default class ArtistView extends BaseView {
                 setTimeout(() => event.target.classList.remove('touched'), 300);
                 event.target.click();
             });
+        window.addEventListener('scroll', this.renderMore.bind(this));
+    }
+
+    /**
+     * рендерит ещё
+     */
+    renderMore() {
+        if (document.getElementsByClassName('l-down-card')[0].firstChild.lastChild
+            .getBoundingClientRect().bottom <= document.documentElement.clientHeight &&
+            this.rendered < this.data.tracks
+        ) {
+            this.eventBus.emit(`artist-${this.currentOpen}`, this.rendered.toString(),
+                (this.rendered + PAGINATION[this.currentOpen]).toString());
+            this.rendered += PAGINATION[this.currentOpen];
+        }
     }
 
     /**

@@ -15,7 +15,7 @@
         <fest:for iterate="data" index="i" value="track">
             <div class="l-track-big" t-id="{track.id}" t-image="{track.image}">
                 <div class="m-index">
-                    <fest:value>i+1</fest:value>
+                    <fest:value>track.index</fest:value>
                 </div>
                 <img class="m-track-image" src="{track.image}" alt=""/>
                 <button class="m-button-track-play" id="playlist-play"></button>
