@@ -296,7 +296,6 @@ export default class PlayerView extends BaseView {
      * Слушает обновление времени аудио
      */
     audioTimeUpdate() {
-        alert(document.getElementsByTagName('audio')[0].currentTime);
         if (isNaN(document.getElementsByTagName('audio')[0].currentTime /
             document.getElementsByTagName('audio')[0].duration)
         ) {
