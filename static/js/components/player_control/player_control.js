@@ -1,4 +1,4 @@
-import {PLAYER, LAYOUT} from '@libs/constants';
+import {PLAYER} from '@libs/constants';
 import template from '@components/player_control/player_control.tmpl.xml';
 
 /**
@@ -254,12 +254,12 @@ export default class PlayerControlComponent {
         }].forEach((el) => {
             // el.element.addEventListener(el.event, el.callback.bind(this));// , {passive: false});
             el.element.addEventListener(el.event, (event) => {
-                event.preventDefault();
-                el.callback.bind(this)(event);// , {passive: false});
-            });
+                // event.preventDefault();
+                el.callback.bind(this)(event);
+            }, {passive: true});
         });
         document.querySelector('.timeline.row').addEventListener('touchmove',
-            this.timelineTouchMove.bind(this));
+            this.timelineTouchMove.bind(this), {passive: true});
     }
 
     /**
@@ -391,7 +391,7 @@ export default class PlayerControlComponent {
      */
     timelineClick(event) {
         const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
-        const ratio = window.matchMedia(LAYOUT.TOUCH) ?
+        const ratio = event.changedTouches ?
             (event.changedTouches[0].clientX - bcr.x) / bcr.width :
             (event.clientX - bcr.x) / bcr.width;
         this.eventBus.emit(PLAYER.REWIND, ratio);
