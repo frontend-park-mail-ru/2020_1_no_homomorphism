@@ -221,45 +221,42 @@ export default class PlayerControlComponent {
             el.element.addEventListener(el.event, el.callback.bind(this));
         });
         [{
-        //     element: document.querySelector('.timeline-back'),
-        //     event: 'touchstart',
-        //     // callback: this.timelineMouseDown,
-        //     callback: () => {},
-        // }, {
-        //     element: document.querySelector('.timeline-front'),
-        //     event: 'touchstart',
-        //     // callback: this.timelineMouseDown,
-        //     callback: () => {},
-        // }, {
-        //     element: document.querySelector('.timeline-toggler'),
-        //     event: 'touchstart',
-        //     // callback: this.timelineMouseDown,
-        //     callback: () => {},
-        // }, {
             element: document.querySelector('.timeline-back'),
-            event: 'touchend',
-            callback: this.timelineClick,
+            event: 'touchstart',
+            callback: this.timelineMouseMove,
         }, {
             element: document.querySelector('.timeline-front'),
-            event: 'touchend',
-            callback: this.timelineClick,
+            event: 'touchstart',
+            callback: this.timelineMouseMove,
         }, {
             element: document.querySelector('.timeline-toggler'),
-            event: 'touchend',
-            callback: this.timelineClick,
+            event: 'touchstart',
+            callback: this.timelineMouseMove,
+        // }, {
+        //     element: document.querySelector('.timeline-back'),
+        //     event: 'touchend',
+        //     callback: this.timelineClick,
+        // }, {
+        //     element: document.querySelector('.timeline-front'),
+        //     event: 'touchend',
+        //     callback: this.timelineClick,
+        // }, {
+        //     element: document.querySelector('.timeline-toggler'),
+        //     event: 'touchend',
+        //     callback: this.timelineClick,
         // }, {
             // element: window,
             // event: 'touchmove',
             // callback: this.timelineMouseMove, // TouchMove,
         }].forEach((el) => {
-            // el.element.addEventListener(el.event, el.callback.bind(this));// , {passive: false});
-            el.element.addEventListener(el.event, (event) => {
-                // event.preventDefault();
-                el.callback.bind(this)(event);
-            }, {passive: true});
+            el.element.addEventListener(el.event, el.callback.bind(this), false);
+            // el.element.addEventListener(el.event, (event) => {
+            // el.callback.bind(this)(event);
+            // event.preventDefault();
+            // }, false);
         });
         document.querySelector('.timeline.row').addEventListener('touchmove',
-            this.timelineTouchMove.bind(this), {passive: true});
+            this.timelineMouseMove.bind(this), false);
     }
 
     /**
@@ -319,17 +316,6 @@ export default class PlayerControlComponent {
     }
 
     /**
-     * Слушает начало touch на таймлайне
-     * @param {Object} event
-     */
-    timelineTouchStart(event) {
-        event.stopImmediatePropagation();
-        // event.preventDefault();
-        this.timelineDrag = true;
-        // return false;
-    }
-
-    /**
      * Слушает отпускание клавиши мыши на таймлайне
      * @param {Object} event
      */
@@ -342,47 +328,22 @@ export default class PlayerControlComponent {
     }
 
     /**
-     * Слушает окончание touch на таймлайне
-     * @param {Object} event
-     */
-    timelineTouchEnd(event) {
-        event.stopImmediatePropagation();
-        // event.preventDefault();
-        this.timelineDrag = false;
-        const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
-        const width = event.changedTouches[0].clientX;
-        const ratio = (width - bcr.x) / bcr.width;
-        this.eventBus.emit(PLAYER.REWIND, ratio);
-        // return false;
-    }
-
-    /**
      * Слушает движение мыши по таймлайну
      * @param {Object} event
      */
     timelineMouseMove(event) {
-        if (this.timelineDrag) {
+        if (this.timelineDrag && event.clientX) {
             const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
             const width = event.clientX;
             const ratio = (width - bcr.x) / bcr.width;
             this.drawTimeline(ratio);
+        } else if (event.targetTouches) {
+            const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
+            const width = event.targetTouches[0].clientX;
+            const ratio = (width - bcr.x) / bcr.width;
+            this.drawTimeline(ratio);
+            event.preventDefault();
         }
-    }
-
-    /**
-     * Слушает движение touch по таймлайну
-     * @param {Object} event
-     */
-    timelineTouchMove(event) {
-        // if (this.timelineDrag) {
-        // event.stopImmediatePropagation();
-        // event.preventDefault();
-        const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
-        const width = event.changedTouches[0].clientX;
-        const ratio = (width - bcr.x) / bcr.width;
-        this.drawTimeline(ratio);
-        // return false;
-        // }
     }
 
     /**
