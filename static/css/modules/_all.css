@@ -302,7 +302,8 @@
     display: inline-block;
     width: 90%;
     max-width: 150px;
-    max-height: 201px;
+    max-height: 220px;
+    height: 220px;
     text-decoration: none;
     border-radius: var(--card-border-small);
     box-shadow: 0 0 10px -3px rgba(0, 0, 0, 0.5);
@@ -435,7 +436,7 @@
     border-top: 1px solid #d9d6d0;
     border-radius: 0;
     line-height: 20px;
-    padding: 0 13px;
+    padding: 16px 10px 0;
 }
 
 .m-small-input {

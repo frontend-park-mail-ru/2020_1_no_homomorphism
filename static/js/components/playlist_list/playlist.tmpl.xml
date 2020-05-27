@@ -5,10 +5,12 @@
         </div>
         <div class="l-list-card" id="new playlist input">
             <div class="l-list-image">
-                <img class="m-button-without-size" src="/static/img/icons/add.svg" alt=""/>
+                <img class="lol" src="/static/img/playlist/default.png" alt=""/>
             </div>
             <div class="l-small-input">
-                <input type="text" placeholder="Create playlist" class="m-small-input"></input>
+                <input type="text" placeholder="Create" class="m-small-input">
+                </input>
+                <img class="m-submit-input-button" src="/static/img/icons/keyboard_return.svg"/>
             </div>
         </div>
         <fest:for iterate="data" index="i" value="elem">
