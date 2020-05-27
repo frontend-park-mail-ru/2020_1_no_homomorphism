@@ -1,7 +1,8 @@
-import {ALBUM, GLOBAL, POPUP, URL, PAGINATION} from '@libs/constants';
+import {ALBUM, GLOBAL, POPUP, URL} from '@libs/constants';
 import playlist from '@views/album/album.tmpl.xml';
 import BaseView from '@libs/base_view';
 import TrackListComponent from '@components/track_list/track_list';
+import PagesManager from '@components/pagination';
 import {globalEventBus} from '@libs/eventBus';
 import User from '@libs/user';
 import PopUp from '@components/pop-up/pop-up';
@@ -20,6 +21,11 @@ export default class AlbumView extends BaseView {
         this.albumData = {};
         this.tracksData = {};
         this.trackListComponent = new TrackListComponent(eventBus, ALBUM);
+        this.pagesManager = new PagesManager('album', eventBus, (start, end) => {
+            this.eventBus.emit(ALBUM.GET_TRACKS_DATA,
+                window.location.pathname.split('/')[window.location.pathname.split('/').length - 1],
+                start, end);
+        }, ALBUM.NEW_RECIEVED);
         this.eventBus.on(ALBUM.RENDER_ALBUM, this.setAlbumData.bind(this));
         this.eventBus.on(ALBUM.ERROR, this.showErrors.bind(this));
         this.eventBus.on(ALBUM.SET_TRACKS_AMOUNT, this.setTracksAmount.bind(this));
@@ -34,13 +40,10 @@ export default class AlbumView extends BaseView {
      *  @param {string} url
      */
     render(root, url) {
-        this.rendered = 0;
         globalEventBus.emit(GLOBAL.COLLAPSE_IF_MOBILE);
         super.render(root);
         this.eventBus.emit(ALBUM.GET_ALBUM_DATA, {id: url});
-        this.eventBus.emit(ALBUM.GET_TRACKS_DATA, url, this.rendered.toString(),
-            (this.rendered + PAGINATION['tracks']).toString());
-        this.rendered += PAGINATION['tracks'];
+        this.pagesManager.getFirst();
     }
 
     /**
@@ -66,20 +69,6 @@ export default class AlbumView extends BaseView {
     }
 
     /**
-     * рендерит ещё
-     */
-    // renderMore() {
-    //     if (document.getElementsByClassName('l-down-card')[0].getBoundingClientRect().bottom <=
-    //         document.documentElement.clientHeight &&
-    //         this.rendered < this.albumData.tracks
-    //     ) {
-    //         this.eventBus.emit(ALBUM.GET_TRACKS_DATA, this.albumData.id, this.rendered.toString(),
-    //             (this.rendered + PAGINATION['tracks']).toString());
-    //         this.rendered += PAGINATION['tracks'];
-    //     }
-    // }
-
-    /**
      * Слушает события
      */
     setEventListeners() {
@@ -98,7 +87,6 @@ export default class AlbumView extends BaseView {
             });
         document.getElementsByClassName('m-large-like-button')[0].addEventListener('click',
             this._likeClicked.bind(this));
-        // window.addEventListener('scroll', this.renderMore.bind(this));
     }
 
     /**

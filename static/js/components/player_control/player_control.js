@@ -150,14 +150,6 @@ export default class PlayerControlComponent {
             element: window,
             event: 'mousemove',
             callback: this.timelineMouseMove,
-        // }, {
-        //     element: document.querySelector('.timeline-back'),
-        //     event: 'click',
-        //     callback: this.timelineClick,
-        // }, {
-        //     element: document.querySelector('.timeline-front'),
-        //     event: 'click',
-        //     callback: this.timelineClick,
         }, {
             element: document.querySelector('.shuffle'),
             event: 'click',
@@ -233,28 +225,8 @@ export default class PlayerControlComponent {
             element: document.querySelector('.timeline-toggler'),
             event: 'touchstart',
             callback: this.timelineMouseDown,
-        // }, {
-        //     element: document.querySelector('.timeline-back'),
-        //     event: 'touchend',
-        //     callback: this.timelineClick,
-        // }, {
-        //     element: document.querySelector('.timeline-front'),
-        //     event: 'touchend',
-        //     callback: this.timelineClick,
-        // }, {
-        //     element: document.querySelector('.timeline-toggler'),
-        //     event: 'touchend',
-        //     callback: this.timelineClick,
-        // }, {
-            // element: window,
-            // event: 'touchmove',
-            // callback: this.timelineMouseMove, // TouchMove,
         }].forEach((el) => {
             el.element.addEventListener(el.event, el.callback.bind(this));
-            // el.element.addEventListener(el.event, (event) => {
-            // el.callback.bind(this)(event);
-            // event.preventDefault();
-            // }, false);
         });
         document.querySelector('.timeline.row').addEventListener('touchmove',
             this.timelineMouseMove.bind(this));
@@ -364,7 +336,6 @@ export default class PlayerControlComponent {
      * @param {Object} event
      */
     timelineTouchEnd(event) {
-        // } else if (event.changedTouches) {
         this.timelineDown = false;
         const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
         const ratio = (event.changedTouches[0].clientX - bcr.x) / bcr.width;
@@ -372,7 +343,6 @@ export default class PlayerControlComponent {
         if (event.cancelable) {
             event.preventDefault();
         }
-        // }
     }
 
     /**

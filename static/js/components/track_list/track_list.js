@@ -80,10 +80,8 @@ export default class TrackListComponent {
         ) {
             elem.lastChild.previousSibling.remove();
         }
-        if (elem.lastChild && elem.lastChild.previousSibling && elem.lastChild.previousSibling
-            .classList.contains('m-empty-list')
-        ) {
-            elem.lastChild.previousSibling.remove();
+        if (elem.lastChild && elem.lastChild && elem.lastChild.classList.contains('m-empty-list')) {
+            elem.lastChild.remove();
         }
         if (!elem.firstChild) {
             elem.innerHTML = '<div class="top-pagination-patch" style="height: 0px"></div>';

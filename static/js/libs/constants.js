@@ -40,7 +40,7 @@ export const URL = {
 
 export const PAGINATION = {
     'albums': 20,
-    'tracks': 50,
+    'tracks': 50, // 6,
 };
 
 export const LAYOUT = {
@@ -253,6 +253,7 @@ export const ALBUM = {
     GET_TRACKS_DATA: 'album-get-tracks-data',
     RENDER_ALBUM: 'album-render-album',
     RENDER_TRACKS: 'album-render-tracks',
+    NEW_RECIEVED: 'album-new-recieved',
     SET_TRACKS_AMOUNT: 'album-set-tracks-amount',
     SET_ALBUM_ID: 'set-album-id',
     LIKE: 'album-like',

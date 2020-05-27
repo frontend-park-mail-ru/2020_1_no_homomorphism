@@ -2,7 +2,8 @@ import artist from '@views/artist/artist.tmpl.xml';
 import BaseView from '@libs/base_view';
 import TrackListComponent from '@components/track_list/track_list';
 import PlaylistsComponent from '@components/playlist_list/playlist_list';
-import {GLOBAL, ARTIST, DOM, POPUP, PAGINATION} from '@libs/constants';
+import PagesManager from '@components/pagination';
+import {GLOBAL, ARTIST, DOM, POPUP} from '@libs/constants';
 import User from '@libs/user';
 import PopUp from '@components/pop-up/pop-up';
 import {inputSanitize} from '@libs/input_sanitize';
@@ -23,10 +24,12 @@ export default class ArtistView extends BaseView {
         this.textSubscribe = '';
         new TrackListComponent(eventBus, ARTIST);
         new PlaylistsComponent(eventBus, ARTIST.RENDER_ALBUMS);
+        this.pagesManager = new PagesManager('artist', eventBus, (start, end) => {
+            this.eventBus.emit('artist-tracks', start, end);
+        }, ARTIST.NEW_RECIEVED);
         this.eventBus = eventBus;
         this.eventBus.on(ARTIST.RENDER_DATA, this.renderData.bind(this));
         this.eventBus.on(ARTIST.DRAW_SUBSCRIBE, this.drawSubscribe.bind(this));
-        this.eventBus.on(ARTIST.NEW_RECIEVED, this.resetPage.bind(this));
     }
 
     /**
@@ -35,16 +38,11 @@ export default class ArtistView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
-        this.rendered = 0;
         globalEventBus.emit(GLOBAL.COLLAPSE_IF_MOBILE);
         super.render(document.getElementsByClassName(DOM.CONTENT)[0], url);
         this.analizeUrl(url);
         this.eventBus.emit(ARTIST.GET_DATA, this.id);
         this.chooseSection(url);
-        this.scrollListeningState = 'show';
-        this.scrollPreviosPageYOffset = 0;
-        this.firstInPage = undefined;
-        this.lastInPage = undefined;
     }
 
     /**
@@ -65,9 +63,11 @@ export default class ArtistView extends BaseView {
     chooseSection(url) {
         const curSection = document.getElementById(`profile-${this.currentOpen}-title`);
         curSection.classList.add(ARTIST.SELECTED_CLASS);
-        this.eventBus.emit(`artist-${this.currentOpen}`, '0',
-            PAGINATION[this.currentOpen].toString());
-        this.rendered += PAGINATION[this.currentOpen];
+        if (this.currentOpen === 'tracks') {
+            this.pagesManager.getFirst();
+        } else {
+            this.eventBus.emit(`artist-${this.currentOpen}`, '0', '50');
+        }
     }
 
     /**
@@ -117,219 +117,6 @@ export default class ArtistView extends BaseView {
                 setTimeout(() => event.target.classList.remove('touched'), 300);
                 event.target.click();
             });
-        window.addEventListener('scroll', this.managePages.bind(this));
-    }
-
-    /**
-     * управляет пагинацией
-     */
-    managePages() {
-        if (this.scrollListeningState === 'locked') {
-            return;
-        }
-        if (window.location.pathname.indexOf('artist') === -1) {
-            this.scrollListeningState = 'locked';
-            return;
-        }
-        if (!this.firstInPage) {
-            this.firstInPage = 0;
-        }
-        if (!this.lastInPage) {
-            this.lastInPage = document.getElementsByClassName('l-track-big').length - 1;
-        }
-        if (document.getElementsByClassName('top-pagination-patch')[0]
-            .getBoundingClientRect().bottom > 60 && this.scrollListeningState === 'show'
-        ) {
-            this.showPreviousPage();
-        }
-        if (document.getElementsByClassName('l-track-big')[this.firstInPage +
-            PAGINATION[this.currentOpen]] &&
-            document.getElementsByClassName('l-track-big')[this.firstInPage +
-            PAGINATION[this.currentOpen]].getBoundingClientRect().bottom >
-            document.documentElement.clientHeight + 20 &&
-            this.scrollPreviosPageYOffset > window.pageYOffset &&
-            this.scrollListeningState === 'hide'
-        ) {
-            this.hideNextPage();
-        }
-        if (document.getElementsByClassName('bottom-pagination-patch')[0]
-            .getBoundingClientRect().top < document.documentElement.clientHeight + 20 &&
-            this.scrollListeningState === 'show'
-        ) {
-            this.showNextPage();
-        }
-        if (document.getElementsByClassName('l-track-big')[this.firstInPage +
-            PAGINATION[this.currentOpen]] &&
-            document.getElementsByClassName('l-track-big')[this.firstInPage +
-            PAGINATION[this.currentOpen]].getBoundingClientRect().top < 60 &&
-            this.scrollPreviosPageYOffset < window.pageYOffset &&
-            this.scrollListeningState === 'hide'
-        ) {
-            this.hidePreviousPage();
-        }
-        this.scrollPreviosPageYOffset = window.pageYOffset;
-    }
-
-    /**
-     * Показывает предыдущую страницу
-     */
-    showPreviousPage() {
-        if (document.getElementsByClassName('top-pagination-patch')[0]
-            .getBoundingClientRect().height === 0
-        ) {
-            return;
-        }
-        // if (document.getElementsByClassName('top-pagination-patch')[0].getBoundingClientRect().height < 50) {
-        //     document.getElementsByClassName('top-pagination-patch')[0].style.height = '0px';
-        //     return;
-        // }
-        // console.log('show previous');
-        // console.log(this.firstInPage);
-        // console.log(this.lastInPage);
-        this.scrollListeningState = 'locked';
-        let i = 0;
-        let elem = this.firstInPage - 1;
-        while (i < PAGINATION[this.currentOpen]) {
-            document.getElementsByClassName('l-track-big')[elem].classList
-                .remove('is-not-displayed');
-            elem--;
-            i++;
-        }
-        elem++;
-        document.getElementsByClassName('top-pagination-patch')[0].style.height = (
-            parseInt(document.getElementsByClassName('top-pagination-patch')[0].style.height
-                .slice(0, document.getElementsByClassName('top-pagination-patch')[0].style.height
-                    .length - 2)) -
-            // Math.abs(document.getElementsByClassName('l-track-big')[elem].getBoundingClientRect().top -
-            // document.getElementsByClassName('l-track-big')[this.firstInPage - 1].getBoundingClientRect().bottom)
-            336
-        ).toString() + 'px';
-        this.firstInPage = elem;
-        this.scrollListeningState = 'hide';
-    }
-
-    /**
-     * Прячет следующую страницу
-     */
-    hideNextPage() {
-        // console.log('hide next');
-        // console.log(this.firstInPage);
-        // console.log(this.lastInPage);
-        this.scrollListeningState = 'locked';
-        document.getElementsByClassName('bottom-pagination-patch')[0].style.height = (
-            parseInt(document.getElementsByClassName('bottom-pagination-patch')[0].style.height
-                .slice(0, document.getElementsByClassName('bottom-pagination-patch')[0].style.height
-                    .length - 2)) +
-            // Math.abs(document.getElementsByClassName('l-track-big')[this.lastInPage].getBoundingClientRect().bottom -
-            // document.getElementsByClassName('l-track-big')[elem].getBoundingClientRect().bottom)
-            336
-        ).toString() + 'px';
-        while (this.lastInPage >= this.firstInPage + PAGINATION[this.currentOpen]) {
-            document.getElementsByClassName('l-track-big')[this.lastInPage].classList
-                .add('is-not-displayed');
-            this.lastInPage--;
-        }
-        this.scrollListeningState = 'show';
-    }
-
-
-    /**
-     * Показывает следующую страницу
-     */
-    showNextPage() {
-        if (document.getElementsByClassName('bottom-pagination-patch')[0]
-            .getBoundingClientRect().height === 0
-        ) {
-            if (this.rendered < this.data.tracks) {
-                this.scrollListeningState = 'locked';
-                this.eventBus.emit(`artist-${this.currentOpen}`, this.rendered.toString(),
-                    (this.rendered + PAGINATION[this.currentOpen]).toString());
-                this.rendered += PAGINATION[this.currentOpen];
-                // console.log('asking next');
-                // console.log(this.firstInPage);
-                // console.log(this.lastInPage);
-            }
-        } else {
-            // if (document.getElementsByClassName('bottom-pagination-patch')[0].getBoundingClientRect().height < 50) {
-            //     document.getElementsByClassName('bottom-pagination-patch')[0].style.height = '0px';
-            //     return;
-            // }
-            this.scrollListeningState = 'locked';
-            // console.log('show next');
-            // console.log(this.firstInPage);
-            // console.log(this.lastInPage);
-            let i = 0;
-            let elem = this.lastInPage + 1;
-            while (i < PAGINATION[this.currentOpen] && document
-                .getElementsByClassName('l-track-big')[elem]
-            ) {
-                document.getElementsByClassName('l-track-big')[elem].classList
-                    .remove('is-not-displayed');
-                elem++;
-                i++;
-            }
-            elem--;
-            document.getElementsByClassName('bottom-pagination-patch')[0].style.height = (
-                parseInt(document.getElementsByClassName('bottom-pagination-patch')[0].style.height
-                    .slice(0, document.getElementsByClassName('bottom-pagination-patch')[0].style
-                        .height.length - 2)) -
-                // Math.abs(document.getElementsByClassName('l-track-big')[this.lastInPage + 1].getBoundingClientRect().top -
-                // document.getElementsByClassName('l-track-big')[elem].getBoundingClientRect().bottom)
-                336
-            ).toString() + 'px';
-            this.lastInPage = elem;
-            this.scrollListeningState = 'hide';
-        }
-    }
-
-
-    /**
-     * Прячет предыдущую страницу
-     */
-    hidePreviousPage() {
-        // console.log('hide previous');
-        // console.log(this.firstInPage);
-        // console.log(this.lastInPage);
-        this.scrollListeningState = 'locked';
-        document.getElementsByClassName('top-pagination-patch')[0].style.height = (
-            parseInt(document.getElementsByClassName('top-pagination-patch')[0].style.height
-                .slice(0, document.getElementsByClassName('top-pagination-patch')[0].style.height
-                    .length - 2)) +
-            // Math.abs(document.getElementsByClassName('l-track-big')[this.firstInPage].getBoundingClientRect().top -
-            // document.getElementsByClassName('l-track-big')[this.firstInPage - PAGINATION[this.currentOpen]].getBoundingClientRect().top)
-            336
-        ).toString() + 'px';
-        let i = 0;
-        while (i < PAGINATION[this.currentOpen]) {
-            document.getElementsByClassName('l-track-big')[this.firstInPage].classList
-                .add('is-not-displayed');
-            i++;
-            this.firstInPage++;
-        }
-        this.scrollListeningState = 'show';
-    }
-
-    /**
-     * Регистрирует отрендеренные треки только что с бэкенда
-     */
-    resetPage() {
-        // console.log('next recieved');
-        if (this.firstInPage === undefined || this.lastInPage === undefined) {
-            this.firstInPage = 0;
-            this.lastInPage = this.rendered - 1;
-            this.scrollListeningState = 'show';
-        } else {
-            const i = 0;
-            while (i < PAGINATION[this.currentOpen] && document
-                .getElementsByClassName('l-track-big')[this.lastInPage]
-            ) {
-                this.lastInPage++;
-            }
-            this.lastInPage--;
-            this.scrollListeningState = 'hide';
-        }
-        // console.log(this.firstInPage);
-        // console.log(this.lastInPage);
     }
 
     /**
