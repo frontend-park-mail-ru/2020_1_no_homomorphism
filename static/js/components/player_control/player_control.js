@@ -232,18 +232,18 @@ export default class PlayerControlComponent {
             element: document.querySelector('.timeline-toggler'),
             event: 'touchstart',
             callback: this.timelineMouseMove,
-        }, {
-            element: document.querySelector('.timeline-back'),
-            event: 'touchend',
-            callback: this.timelineClick,
-        }, {
-            element: document.querySelector('.timeline-front'),
-            event: 'touchend',
-            callback: this.timelineClick,
-        }, {
-            element: document.querySelector('.timeline-toggler'),
-            event: 'touchend',
-            callback: this.timelineClick,
+        // }, {
+        //     element: document.querySelector('.timeline-back'),
+        //     event: 'touchend',
+        //     callback: this.timelineClick,
+        // }, {
+        //     element: document.querySelector('.timeline-front'),
+        //     event: 'touchend',
+        //     callback: this.timelineClick,
+        // }, {
+        //     element: document.querySelector('.timeline-toggler'),
+        //     event: 'touchend',
+        //     callback: this.timelineClick,
         // }, {
             // element: window,
             // event: 'touchmove',
@@ -257,6 +257,8 @@ export default class PlayerControlComponent {
         });
         document.querySelector('.timeline.row').addEventListener('touchmove',
             this.timelineMouseMove.bind(this), false);
+        document.querySelector('.timeline.row').addEventListener('touchend',
+            this.timelineClick.bind(this), false);
     }
 
     /**
@@ -355,8 +357,8 @@ export default class PlayerControlComponent {
         if (event.clientX) {
             const ratio = (event.clientX - bcr.x) / bcr.width;
             this.eventBus.emit(PLAYER.REWIND, ratio);
-        } else if (event.targetTouches) {
-            const ratio = (event.targetTouches[0].clientX - bcr.x) / bcr.width;
+        } else if (event.changedTouches) {
+            const ratio = (event.changedTouches[0].clientX - bcr.x) / bcr.width;
             this.eventBus.emit(PLAYER.REWIND, ratio);
             event.preventDefault();
         }
