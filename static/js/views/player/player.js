@@ -302,7 +302,7 @@ export default class PlayerView extends BaseView {
             return;
         }
         this.playerControlComponent.drawTimeline(document.getElementsByTagName('audio')[0]
-            .currentTime / document.getElementsByTagName('audio')[0].duration);
+            .currentTime / document.getElementsByTagName('audio')[0].duration, 'timeChange');
     }
 
     /**

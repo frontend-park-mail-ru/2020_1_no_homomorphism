@@ -178,7 +178,7 @@ export default class PlayerModel {
             document.title = this.playlist[this.queue[this.current]].name + ' – ' +
                 this.playlist[this.queue[this.current]].artist;
         }
-        this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
+        this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0, 'other');
         this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[this.current]]);
         this.eventBus.emit(PLAYER.MOVE_MARKER, currentId,
             this.playlist[this.queue[this.current]].id);
@@ -238,7 +238,7 @@ export default class PlayerModel {
             document.title = this.playlist[this.queue[this.current]].name + ' – ' +
                 this.playlist[this.queue[this.current]].artist;
         }
-        this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
+        this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0, 'other');
         this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[this.current]]);
         this.eventBus.emit(PLAYER.MOVE_MARKER, currentId,
             this.playlist[this.queue[this.current]].id);
@@ -263,7 +263,7 @@ export default class PlayerModel {
                     document.getElementsByTagName('audio')[0].pause();
                     this.eventBus.emit(PLAYER.DRAW_PLAY);
                     this.current = 0;
-                    this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
+                    this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0, 'other');
                     this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[0]]);
                     this.eventBus.emit(PLAYER.MOVE_MARKER, currentId,
                         this.playlist[this.queue[0]].id);
@@ -286,7 +286,7 @@ export default class PlayerModel {
             document.title = this.playlist[this.queue[this.current]].name + ' – ' +
                 this.playlist[this.queue[this.current]].artist;
         }
-        this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
+        this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0, 'other');
         this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[this.current]]);
         if (cause === 'delete') {
             return;

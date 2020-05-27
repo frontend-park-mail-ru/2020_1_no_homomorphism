@@ -16,6 +16,7 @@ export default class PlayerControlComponent {
         this.muted = false;
         this.volume = 1;
         this.timelineDrag = false;
+        this.timelineDown = false;
         this.volumeDrag = false;
         this.eventBus = eventBus;
         this.subscribe();
@@ -149,14 +150,14 @@ export default class PlayerControlComponent {
             element: window,
             event: 'mousemove',
             callback: this.timelineMouseMove,
-        }, {
-            element: document.querySelector('.timeline-back'),
-            event: 'click',
-            callback: this.timelineClick,
-        }, {
-            element: document.querySelector('.timeline-front'),
-            event: 'click',
-            callback: this.timelineClick,
+        // }, {
+        //     element: document.querySelector('.timeline-back'),
+        //     event: 'click',
+        //     callback: this.timelineClick,
+        // }, {
+        //     element: document.querySelector('.timeline-front'),
+        //     event: 'click',
+        //     callback: this.timelineClick,
         }, {
             element: document.querySelector('.shuffle'),
             event: 'click',
@@ -223,15 +224,15 @@ export default class PlayerControlComponent {
         [{
             element: document.querySelector('.timeline-back'),
             event: 'touchstart',
-            callback: this.timelineMouseMove,
+            callback: this.timelineMouseDown,
         }, {
             element: document.querySelector('.timeline-front'),
             event: 'touchstart',
-            callback: this.timelineMouseMove,
+            callback: this.timelineMouseDown,
         }, {
             element: document.querySelector('.timeline-toggler'),
             event: 'touchstart',
-            callback: this.timelineMouseMove,
+            callback: this.timelineMouseDown,
         // }, {
         //     element: document.querySelector('.timeline-back'),
         //     event: 'touchend',
@@ -258,7 +259,7 @@ export default class PlayerControlComponent {
         document.querySelector('.timeline.row').addEventListener('touchmove',
             this.timelineMouseMove.bind(this));
         document.querySelector('.timeline.row').addEventListener('touchend',
-            this.timelineClick.bind(this));
+            this.timelineTouchEnd.bind(this));
     }
 
     /**
@@ -266,6 +267,7 @@ export default class PlayerControlComponent {
      */
     windowMouseUp() {
         this.timelineDrag = false;
+        this.timelineDown = false;
         this.volumeDrag = false;
     }
 
@@ -314,7 +316,7 @@ export default class PlayerControlComponent {
      * Слушает нажатие клавиши мыши на таймлайне
      */
     timelineMouseDown() {
-        this.timelineDrag = true;
+        this.timelineDown = true;
     }
 
     /**
@@ -322,11 +324,17 @@ export default class PlayerControlComponent {
      * @param {Object} event
      */
     timelineMouseUp(event) {
-        this.timelineDrag = false;
-        const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
-        const width = event.clientX;
-        const ratio = (width - bcr.x) / bcr.width;
-        this.eventBus.emit(PLAYER.REWIND, ratio);
+        if (this.timelineDrag) {
+            this.timelineDrag = false;
+            const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
+            const width = event.clientX;
+            const ratio = (width - bcr.x) / bcr.width;
+            this.eventBus.emit(PLAYER.REWIND, ratio);
+        } else {
+            const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
+            const ratio = (event.clientX - bcr.x) / bcr.width;
+            this.eventBus.emit(PLAYER.REWIND, ratio);
+        }
     }
 
     /**
@@ -334,16 +342,17 @@ export default class PlayerControlComponent {
      * @param {Object} event
      */
     timelineMouseMove(event) {
-        if (this.timelineDrag && event.clientX) {
+        if (this.timelineDown && event.clientX) {
+            this.timelineDrag = true;
             const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
             const width = event.clientX;
             const ratio = (width - bcr.x) / bcr.width;
-            this.drawTimeline(ratio);
-        } else if (event.targetTouches) {
+            this.drawTimeline(ratio, 'drag');
+        } else if (event.changedTouches) {
             const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
-            const width = event.targetTouches[0].clientX;
+            const width = event.changedTouches[0].clientX;
             const ratio = (width - bcr.x) / bcr.width;
-            this.drawTimeline(ratio);
+            this.drawTimeline(ratio, 'drag');
             if (event.cancelable) {
                 event.preventDefault();
             }
@@ -354,18 +363,16 @@ export default class PlayerControlComponent {
      * Слушает клик по таймлайну
      * @param {Object} event
      */
-    timelineClick(event) {
+    timelineTouchEnd(event) {
+        // } else if (event.changedTouches) {
+        this.timelineDown = false;
         const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
-        if (event.clientX) {
-            const ratio = (event.clientX - bcr.x) / bcr.width;
-            this.eventBus.emit(PLAYER.REWIND, ratio);
-        } else if (event.changedTouches) {
-            const ratio = (event.changedTouches[0].clientX - bcr.x) / bcr.width;
-            this.eventBus.emit(PLAYER.REWIND, ratio);
-            if (event.cancelable) {
-                event.preventDefault();
-            }
+        const ratio = (event.changedTouches[0].clientX - bcr.x) / bcr.width;
+        this.eventBus.emit(PLAYER.REWIND, ratio);
+        if (event.cancelable) {
+            event.preventDefault();
         }
+        // }
     }
 
     /**
@@ -524,8 +531,12 @@ export default class PlayerControlComponent {
     /**
      * Рисует таймлайн в конкретном положении
      * @param {number} ratio
+     * @param {string} cause
      */
-    drawTimeline(ratio) {
+    drawTimeline(ratio, cause) {
+        if (this.timelineDown && cause === 'timeChange') {
+            return;
+        }
         const width = ratio * document.getElementsByClassName('timeline-back')[0]
             .getBoundingClientRect().width;
         document.getElementsByClassName('timeline-front')[0].style.width = width.toString() + 'px';
