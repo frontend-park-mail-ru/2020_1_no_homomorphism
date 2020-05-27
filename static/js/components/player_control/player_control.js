@@ -249,16 +249,16 @@ export default class PlayerControlComponent {
             // event: 'touchmove',
             // callback: this.timelineMouseMove, // TouchMove,
         }].forEach((el) => {
-            el.element.addEventListener(el.event, el.callback.bind(this), false);
+            el.element.addEventListener(el.event, el.callback.bind(this));
             // el.element.addEventListener(el.event, (event) => {
             // el.callback.bind(this)(event);
             // event.preventDefault();
             // }, false);
         });
         document.querySelector('.timeline.row').addEventListener('touchmove',
-            this.timelineMouseMove.bind(this), false);
+            this.timelineMouseMove.bind(this));
         document.querySelector('.timeline.row').addEventListener('touchend',
-            this.timelineClick.bind(this), false);
+            this.timelineClick.bind(this));
     }
 
     /**
@@ -344,7 +344,9 @@ export default class PlayerControlComponent {
             const width = event.targetTouches[0].clientX;
             const ratio = (width - bcr.x) / bcr.width;
             this.drawTimeline(ratio);
-            event.preventDefault();
+            if (event.cancelable) {
+                event.preventDefault();
+            }
         }
     }
 
@@ -360,7 +362,9 @@ export default class PlayerControlComponent {
         } else if (event.changedTouches) {
             const ratio = (event.changedTouches[0].clientX - bcr.x) / bcr.width;
             this.eventBus.emit(PLAYER.REWIND, ratio);
-            event.preventDefault();
+            if (event.cancelable) {
+                event.preventDefault();
+            }
         }
     }
 
