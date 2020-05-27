@@ -19,6 +19,7 @@
     --error-color: red;
     --box-shadow: 0 1px 20px 0 #ebeae7;
     --gray-hover: gray;
+    --accent-color: #ebeae7;
 }
 
 :root[theme="dark"] {
@@ -35,6 +36,7 @@
     --error-color: #da3333;
     --box-shadow: 0 1px 20px 0 #1f2023;
     --gray-hover: #1f2023;
+    --accent-color: #e0e0e0;
 
     .l-logo .m-medium-icon,
     .l-navbar .m-small-icon,

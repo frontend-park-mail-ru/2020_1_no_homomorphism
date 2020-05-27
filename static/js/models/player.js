@@ -81,7 +81,7 @@ export default class PlayerModel {
      * @param {string} trackId
      * @param {number} number
      */
-    getPlaylistTracks(id, trackId, number = PAGINATION.TRACKS) {
+    getPlaylistTracks(id, trackId, number = PAGINATION['tracks']) {
         Api.playlistTracksGet(id, '0', number.toString())
             .then((res) => {
                 switch (res.status) {
@@ -101,7 +101,7 @@ export default class PlayerModel {
      * @param {string} trackId
      * @param {number} number
      */
-    getAlbumTracks(id, trackId, number = PAGINATION.TRACKS) {
+    getAlbumTracks(id, trackId, number = PAGINATION['tracks']) {
         Api.albumTracksGet(id, '0', number)
             .then((res) => {
                 switch (res.status) {

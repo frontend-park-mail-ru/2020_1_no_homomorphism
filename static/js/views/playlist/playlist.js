@@ -63,8 +63,8 @@ export default class PlaylistView extends BaseView {
         if (this.playlistData.private === undefined) {
             this.playlistData.private = false;
         }
-        this.eventBus.emit(PLAYLIST.GET_TRACKS_DATA, this.playlistData.id, this.rendered.toString(),
-            (this.rendered + PAGINATION['tracks']).toString());
+        this.eventBus.emit(PLAYLIST.GET_TRACKS_DATA, this.playlistData.id, '0',
+            PAGINATION['tracks'].toString());
         this.renderPlaylist();
     }
 
@@ -175,17 +175,17 @@ export default class PlaylistView extends BaseView {
     /**
      * рендерит ещё
      */
-    renderMore() {
-        if (document.getElementsByClassName('l-down-card')[0].firstChild.lastChild
-            .getBoundingClientRect().bottom <= document.documentElement.clientHeight &&
-            this.rendered < this.playlistData.tracks
-        ) {
-            this.eventBus.emit(PLAYLIST.GET_TRACKS_DATA, this.playlistData.id,
-                this.rendered.toString(),
-                (this.rendered + PAGINATION[this.currentOpen]).toString());
-            this.rendered += PAGINATION[this.currentOpen];
-        }
-    }
+    // renderMore() {
+    //     if (document.getElementsByClassName('l-down-card')[0].firstChild.lastChild
+    //         .getBoundingClientRect().bottom <= document.documentElement.clientHeight &&
+    //         this.rendered < this.playlistData.tracks
+    //     ) {
+    //         this.eventBus.emit(PLAYLIST.GET_TRACKS_DATA, this.playlistData.id,
+    //             this.rendered.toString(),
+    //             (this.rendered + PAGINATION[this.currentOpen]).toString());
+    //         this.rendered += PAGINATION[this.currentOpen];
+    //     }
+    // }
 
     /**
      * Set dynamic EventListeners

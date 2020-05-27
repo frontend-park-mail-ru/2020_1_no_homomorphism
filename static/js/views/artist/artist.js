@@ -127,6 +127,10 @@ export default class ArtistView extends BaseView {
         if (this.scrollListeningState === 'locked') {
             return;
         }
+        if (window.location.pathname.indexOf('artist') === -1) {
+            this.scrollListeningState = 'locked';
+            return;
+        }
         if (!this.firstInPage) {
             this.firstInPage = 0;
         }

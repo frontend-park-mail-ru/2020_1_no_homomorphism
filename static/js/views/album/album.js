@@ -68,16 +68,16 @@ export default class AlbumView extends BaseView {
     /**
      * рендерит ещё
      */
-    renderMore() {
-        if (document.getElementsByClassName('l-down-card')[0].getBoundingClientRect().bottom <=
-            document.documentElement.clientHeight &&
-            this.rendered < this.albumData.tracks
-        ) {
-            this.eventBus.emit(ALBUM.GET_TRACKS_DATA, this.albumData.id, this.rendered.toString(),
-                (this.rendered + PAGINATION['tracks']).toString());
-            this.rendered += PAGINATION['tracks'];
-        }
-    }
+    // renderMore() {
+    //     if (document.getElementsByClassName('l-down-card')[0].getBoundingClientRect().bottom <=
+    //         document.documentElement.clientHeight &&
+    //         this.rendered < this.albumData.tracks
+    //     ) {
+    //         this.eventBus.emit(ALBUM.GET_TRACKS_DATA, this.albumData.id, this.rendered.toString(),
+    //             (this.rendered + PAGINATION['tracks']).toString());
+    //         this.rendered += PAGINATION['tracks'];
+    //     }
+    // }
 
     /**
      * Слушает события
@@ -98,7 +98,7 @@ export default class AlbumView extends BaseView {
             });
         document.getElementsByClassName('m-large-like-button')[0].addEventListener('click',
             this._likeClicked.bind(this));
-        window.addEventListener('scroll', this.renderMore.bind(this));
+        // window.addEventListener('scroll', this.renderMore.bind(this));
     }
 
     /**

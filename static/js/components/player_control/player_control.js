@@ -126,73 +126,37 @@ export default class PlayerControlComponent {
             event: 'mousedown',
             callback: this.timelineMouseDown,
         }, {
-            element: document.querySelector('.timeline-back'),
-            event: 'touchstart',
-            callback: this.timelineMouseDown,
-        }, {
             element: document.querySelector('.timeline-front'),
             event: 'mousedown',
-            callback: this.timelineMouseDown,
-        }, {
-            element: document.querySelector('.timeline-front'),
-            event: 'touchstart',
             callback: this.timelineMouseDown,
         }, {
             element: document.querySelector('.timeline-toggler'),
             event: 'mousedown',
             callback: this.timelineMouseDown,
         }, {
-            element: document.querySelector('.timeline-toggler'),
-            event: 'touchstart',
-            callback: this.timelineMouseDown,
-        }, {
             element: document.querySelector('.timeline-back'),
             event: 'mouseup',
             callback: this.timelineMouseUp,
-        }, {
-            element: document.querySelector('.timeline-back'),
-            event: 'touchend',
-            callback: this.timelineTouchEnd,
         }, {
             element: document.querySelector('.timeline-front'),
             event: 'mouseup',
             callback: this.timelineMouseUp,
         }, {
-            element: document.querySelector('.timeline-front'),
-            event: 'touchend',
-            callback: this.timelineTouchEnd,
-        }, {
             element: document.querySelector('.timeline-toggler'),
             event: 'mouseup',
             callback: this.timelineMouseUp,
-        }, {
-            element: document.querySelector('.timeline-toggler'),
-            event: 'touchend',
-            callback: this.timelineTouchEnd,
         }, {
             element: window,
             event: 'mousemove',
             callback: this.timelineMouseMove,
         }, {
-            element: window,
-            event: 'touchmove',
-            callback: this.timelineTouchMove,
-        }, {
             element: document.querySelector('.timeline-back'),
             event: 'click',
             callback: this.timelineClick,
         }, {
-            element: document.querySelector('.timeline-back'),
-            event: 'touchend',
-            callback: this.timelineTouchEnd,
-        }, {
             element: document.querySelector('.timeline-front'),
             event: 'click',
             callback: this.timelineClick,
-        }, {
-            element: document.querySelector('.timeline-front'),
-            event: 'touchend',
-            callback: this.timelineTouchEnd,
         }, {
             element: document.querySelector('.shuffle'),
             event: 'click',
@@ -256,6 +220,45 @@ export default class PlayerControlComponent {
         }].forEach((el) => {
             el.element.addEventListener(el.event, el.callback.bind(this));
         });
+        [{
+            element: document.querySelector('.timeline-back'),
+            event: 'touchstart',
+            callback: this.timelineMouseDown,
+        }, {
+            element: document.querySelector('.timeline-front'),
+            event: 'touchstart',
+            callback: this.timelineMouseDown,
+        }, {
+            element: document.querySelector('.timeline-toggler'),
+            event: 'touchstart',
+            callback: this.timelineMouseDown,
+        }, {
+            element: document.querySelector('.timeline-back'),
+            event: 'touchend',
+            callback: this.timelineTouchEnd,
+        }, {
+            element: document.querySelector('.timeline-front'),
+            event: 'touchend',
+            callback: this.timelineTouchEnd,
+        }, {
+            element: document.querySelector('.timeline-toggler'),
+            event: 'touchend',
+            callback: this.timelineTouchEnd,
+        }, {
+            element: window,
+            event: 'touchmove',
+            callback: this.timelineTouchMove,
+        }, {
+            element: document.querySelector('.timeline-back'),
+            event: 'touchend',
+            callback: this.timelineTouchEnd,
+        }, {
+            element: document.querySelector('.timeline-front'),
+            event: 'touchend',
+            callback: this.timelineTouchEnd,
+        }].forEach((el) => {
+            el.element.addEventListener(el.event, el.callback.bind(this), {passive: false});
+        });
     }
 
     /**
@@ -317,10 +320,12 @@ export default class PlayerControlComponent {
     /**
      * Слушает начало touch на таймлайне
      * @param {Object} event
+     * @return {Boolean}
      */
     timelineTouchStart(event) {
         event.preventDefault();
         this.timelineDrag = true;
+        return false;
     }
 
     /**
@@ -338,6 +343,7 @@ export default class PlayerControlComponent {
     /**
      * Слушает окончание touch на таймлайне
      * @param {Object} event
+     * @return {Boolean}
      */
     timelineTouchEnd(event) {
         event.preventDefault();
@@ -346,6 +352,7 @@ export default class PlayerControlComponent {
         const width = event.changedTouches[0].clientX;
         const ratio = (width - bcr.x) / bcr.width;
         this.eventBus.emit(PLAYER.REWIND, ratio);
+        return false;
     }
 
     /**
@@ -364,6 +371,7 @@ export default class PlayerControlComponent {
     /**
      * Слушает движение touch по таймлайну
      * @param {Object} event
+     * @return {Boolean}
      */
     timelineTouchMove(event) {
         if (this.timelineDrag) {
@@ -372,6 +380,7 @@ export default class PlayerControlComponent {
             const width = event.changedTouches[0].clientX;
             const ratio = (width - bcr.x) / bcr.width;
             this.drawTimeline(ratio);
+            return false;
         }
     }
 
