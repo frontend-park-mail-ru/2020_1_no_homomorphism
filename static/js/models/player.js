@@ -302,7 +302,7 @@ export default class PlayerModel {
     rewind(ratio) {
         document.getElementsByTagName('audio')[0].currentTime =
             document.getElementsByTagName('audio')[0].duration * ratio;
-        this.eventBus.emit(PLAYER.DRAW_TIMELINE, ratio);
+        // this.eventBus.emit(PLAYER.DRAW_TIMELINE, ratio);
     }
 
     /**

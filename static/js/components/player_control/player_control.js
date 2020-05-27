@@ -257,7 +257,7 @@ export default class PlayerControlComponent {
             event: 'touchend',
             callback: this.timelineTouchEnd,
         }].forEach((el) => {
-            el.element.addEventListener(el.event, el.callback.bind(this), {passive: false});
+            el.element.addEventListener(el.event, el.callback.bind(this));// , {passive: false});
         });
     }
 
@@ -320,12 +320,11 @@ export default class PlayerControlComponent {
     /**
      * Слушает начало touch на таймлайне
      * @param {Object} event
-     * @return {Boolean}
      */
     timelineTouchStart(event) {
-        event.preventDefault();
+        // event.preventDefault();
         this.timelineDrag = true;
-        return false;
+        // return false;
     }
 
     /**
@@ -343,16 +342,15 @@ export default class PlayerControlComponent {
     /**
      * Слушает окончание touch на таймлайне
      * @param {Object} event
-     * @return {Boolean}
      */
     timelineTouchEnd(event) {
-        event.preventDefault();
+        // event.preventDefault();
         this.timelineDrag = false;
         const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
         const width = event.changedTouches[0].clientX;
         const ratio = (width - bcr.x) / bcr.width;
         this.eventBus.emit(PLAYER.REWIND, ratio);
-        return false;
+        // return false;
     }
 
     /**
@@ -371,16 +369,15 @@ export default class PlayerControlComponent {
     /**
      * Слушает движение touch по таймлайну
      * @param {Object} event
-     * @return {Boolean}
      */
     timelineTouchMove(event) {
         if (this.timelineDrag) {
-            event.preventDefault();
+            // event.preventDefault();
             const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
             const width = event.changedTouches[0].clientX;
             const ratio = (width - bcr.x) / bcr.width;
             this.drawTimeline(ratio);
-            return false;
+            // return false;
         }
     }
 
