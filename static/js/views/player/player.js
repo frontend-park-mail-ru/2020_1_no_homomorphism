@@ -88,6 +88,7 @@ export default class PlayerView extends BaseView {
      */
     resize() {
         const body = document.documentElement;
+        this.scrollWidth = body.scrollWidth;
         this.checkLayout();
         let left;
         let top;
@@ -228,14 +229,11 @@ export default class PlayerView extends BaseView {
      * Sets static EventListeners
      */
     setEventListeners() {
-        document.getElementsByTagName('body')[0].addEventListener('DOMSubtreeModified', (event) => {
-            const player = document.getElementsByClassName('l-player')[0] ?
-                document.getElementsByClassName('l-player')[0] :
-                document.getElementsByClassName('l-player-footer')[0];
-            if (!player.contains(event.target)) {
-                this.resize();
-            }
-        });
+        // document.getElementsByTagName('body')[0].addEventListener('DOMSubtreeModified', (event) => {
+        //     if (document.documentElement.scrollWidth != this.scrollWidth) {
+        //         this.resize();
+        //     }
+        // });
         [{
             element: window,
             event: 'orientationchange',

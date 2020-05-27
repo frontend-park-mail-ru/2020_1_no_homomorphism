@@ -40,7 +40,7 @@ export const URL = {
 
 export const PAGINATION = {
     'albums': 20,
-    'tracks': 10, // 50,
+    'tracks': 6, // 50,
 };
 
 export const LAYOUT = {
@@ -220,6 +220,7 @@ export const ARTIST = {
     // --
     SET_ARTIST_ID: 'artist-set-artist-id',
     DROPDOWN: 'artist-dropdown',
+    NEW_RECIEVED: 'artist-new-recieved',
 };
 
 export const PLAYLIST = {

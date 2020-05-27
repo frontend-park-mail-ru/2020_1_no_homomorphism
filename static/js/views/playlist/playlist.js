@@ -169,7 +169,7 @@ export default class PlaylistView extends BaseView {
                 setTimeout(() => event.target.classList.remove('touched'), 300);
                 event.target.click();
             });
-        window.addEventListener('scroll', this.renderMore.bind(this));
+        // window.addEventListener('scroll', this.renderMore.bind(this));
     }
 
     /**

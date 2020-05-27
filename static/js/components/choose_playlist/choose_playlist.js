@@ -153,7 +153,7 @@ export default class ChoosePlaylist {
         document.getElementsByClassName('m-small-ul')[0].innerHTML += createdPlaylist(playlist);
         this._playlists.push(playlist);
         this._curPlaylist = document.getElementsByClassName('m-small-ul')[0].lastChild;
-        this.addToPlaylist(playlist.id);
+        this._trackComponent.addToPlaylist(playlist.id, this.renderAddedToPlaylist.bind(this));
     }
 
     /**

@@ -711,3 +711,7 @@ input.m-big-name {
         margin-right: -2px;
     }
 }
+
+.pagination-patch {
+    width: 100%;
+}

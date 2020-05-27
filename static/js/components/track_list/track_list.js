@@ -28,6 +28,7 @@ export default class TrackListComponent {
         this._type = '';
         this._baseDom = '';
         this._subscribe.bind(this)(constType);
+        this.constType = constType;
     }
 
     /**
@@ -66,7 +67,7 @@ export default class TrackListComponent {
             track.index = i + data.startIndex;
             i++;
         });
-        this._tracklist = data.tracks;
+        Array.prototype.push.apply(this._tracklist, data.tracks);
         this._type = data.type;
         this._tracklist.type = this._type === 'playlist';
         this._baseDom = data.domItem;
@@ -74,13 +75,27 @@ export default class TrackListComponent {
             return;
         }
         const elem = document.getElementsByClassName(data.domItem)[0];
-        if (elem.lastChild && elem.lastChild.classList.contains('is-empty-track')) {
-            elem.lastChild.remove();
+        if (elem.lastChild && elem.lastChild.previousSibling && elem.lastChild.previousSibling
+            .classList.contains('is-empty-track')
+        ) {
+            elem.lastChild.previousSibling.remove();
         }
-        if (elem.lastChild && elem.lastChild.classList.contains('m-empty-list')) {
-            elem.lastChild.remove();
+        if (elem.lastChild && elem.lastChild.previousSibling && elem.lastChild.previousSibling
+            .classList.contains('m-empty-list')
+        ) {
+            elem.lastChild.previousSibling.remove();
         }
-        elem.innerHTML += template(this._tracklist);
+        if (!elem.firstChild) {
+            elem.innerHTML = '<div class="top-pagination-patch" style="height: 0px"></div>';
+        }
+        elem.innerHTML += template(data.tracks);
+        const patch = elem.getElementsByClassName('bottom-pagination-patch')[0];
+        if (!patch) {
+            elem.innerHTML += '<div class="bottom-pagination-patch" style="height: 0px"></div>';
+        } else {
+            elem.insertAdjacentElement('beforeend', patch);
+        }
+        this.eventBus.emit(this.constType.NEW_RECIEVED);
         if (this._tracklist.length !== 0) {
             this.setTracksEventListeners();
         }
