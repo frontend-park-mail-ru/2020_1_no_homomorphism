@@ -1,4 +1,4 @@
-import {PLAYER} from '@libs/constants';
+import {PLAYER, LAYOUT} from '@libs/constants';
 import template from '@components/player_control/player_control.tmpl.xml';
 
 /**
@@ -221,44 +221,45 @@ export default class PlayerControlComponent {
             el.element.addEventListener(el.event, el.callback.bind(this));
         });
         [{
+        //     element: document.querySelector('.timeline-back'),
+        //     event: 'touchstart',
+        //     // callback: this.timelineMouseDown,
+        //     callback: () => {},
+        // }, {
+        //     element: document.querySelector('.timeline-front'),
+        //     event: 'touchstart',
+        //     // callback: this.timelineMouseDown,
+        //     callback: () => {},
+        // }, {
+        //     element: document.querySelector('.timeline-toggler'),
+        //     event: 'touchstart',
+        //     // callback: this.timelineMouseDown,
+        //     callback: () => {},
+        // }, {
             element: document.querySelector('.timeline-back'),
-            event: 'touchstart',
-            callback: this.timelineMouseDown,
+            event: 'touchend',
+            callback: this.timelineClick,
         }, {
             element: document.querySelector('.timeline-front'),
-            event: 'touchstart',
-            callback: this.timelineMouseDown,
+            event: 'touchend',
+            callback: this.timelineClick,
         }, {
             element: document.querySelector('.timeline-toggler'),
-            event: 'touchstart',
-            callback: this.timelineMouseDown,
-        }, {
-            element: document.querySelector('.timeline-back'),
             event: 'touchend',
-            callback: this.timelineTouchEnd,
-        }, {
-            element: document.querySelector('.timeline-front'),
-            event: 'touchend',
-            callback: this.timelineTouchEnd,
-        }, {
-            element: document.querySelector('.timeline-toggler'),
-            event: 'touchend',
-            callback: this.timelineTouchEnd,
-        }, {
-            element: window,
-            event: 'touchmove',
-            callback: this.timelineTouchMove,
-        }, {
-            element: document.querySelector('.timeline-back'),
-            event: 'touchend',
-            callback: this.timelineTouchEnd,
-        }, {
-            element: document.querySelector('.timeline-front'),
-            event: 'touchend',
-            callback: this.timelineTouchEnd,
+            callback: this.timelineClick,
+        // }, {
+            // element: window,
+            // event: 'touchmove',
+            // callback: this.timelineMouseMove, // TouchMove,
         }].forEach((el) => {
-            el.element.addEventListener(el.event, el.callback.bind(this));// , {passive: false});
+            // el.element.addEventListener(el.event, el.callback.bind(this));// , {passive: false});
+            el.element.addEventListener(el.event, (event) => {
+                event.preventDefault();
+                el.callback.bind(this)(event);// , {passive: false});
+            });
         });
+        document.querySelector('.timeline.row').addEventListener('touchmove',
+            this.timelineTouchMove.bind(this));
     }
 
     /**
@@ -322,6 +323,7 @@ export default class PlayerControlComponent {
      * @param {Object} event
      */
     timelineTouchStart(event) {
+        event.stopImmediatePropagation();
         // event.preventDefault();
         this.timelineDrag = true;
         // return false;
@@ -344,6 +346,7 @@ export default class PlayerControlComponent {
      * @param {Object} event
      */
     timelineTouchEnd(event) {
+        event.stopImmediatePropagation();
         // event.preventDefault();
         this.timelineDrag = false;
         const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
@@ -371,14 +374,15 @@ export default class PlayerControlComponent {
      * @param {Object} event
      */
     timelineTouchMove(event) {
-        if (this.timelineDrag) {
-            // event.preventDefault();
-            const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
-            const width = event.changedTouches[0].clientX;
-            const ratio = (width - bcr.x) / bcr.width;
-            this.drawTimeline(ratio);
-            // return false;
-        }
+        // if (this.timelineDrag) {
+        // event.stopImmediatePropagation();
+        // event.preventDefault();
+        const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
+        const width = event.changedTouches[0].clientX;
+        const ratio = (width - bcr.x) / bcr.width;
+        this.drawTimeline(ratio);
+        // return false;
+        // }
     }
 
     /**
@@ -387,7 +391,9 @@ export default class PlayerControlComponent {
      */
     timelineClick(event) {
         const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
-        const ratio = (event.clientX - bcr.x) / bcr.width;
+        const ratio = window.matchMedia(LAYOUT.TOUCH) ?
+            (event.changedTouches[0].clientX - bcr.x) / bcr.width :
+            (event.clientX - bcr.x) / bcr.width;
         this.eventBus.emit(PLAYER.REWIND, ratio);
     }
 

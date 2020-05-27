@@ -47,6 +47,8 @@ export const LAYOUT = {
     MOBILE: 'screen and (max-width: 480px) and (min-width: 344px)',
     TABLET: 'screen and (min-width: 481px) and (max-width: 1106px)',
     DESKTOP: 'min-width: 988px',
+    TOUCH: 'pointer: coarse',
+    MOUSE: 'pointer: fine',
 };
 
 export const VALIDATION = {
