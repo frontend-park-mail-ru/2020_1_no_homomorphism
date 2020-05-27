@@ -300,9 +300,17 @@ export default class PlayerModel {
      * @param {number} ratio
      */
     rewind(ratio) {
+        if (isNaN(document.getElementsByTagName('audio')[0].duration)) {
+            return;
+        }
+        if (this.playing) {
+            document.getElementsByTagName('audio')[0].pause();
+        }
         document.getElementsByTagName('audio')[0].currentTime =
             document.getElementsByTagName('audio')[0].duration * ratio;
-        // this.eventBus.emit(PLAYER.DRAW_TIMELINE, ratio);
+        if (this.playing) {
+            document.getElementsByTagName('audio')[0].play();
+        }
     }
 
     /**
