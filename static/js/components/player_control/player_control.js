@@ -232,18 +232,18 @@ export default class PlayerControlComponent {
             element: document.querySelector('.timeline-toggler'),
             event: 'touchstart',
             callback: this.timelineMouseMove,
-        // }, {
-        //     element: document.querySelector('.timeline-back'),
-        //     event: 'touchend',
-        //     callback: this.timelineClick,
-        // }, {
-        //     element: document.querySelector('.timeline-front'),
-        //     event: 'touchend',
-        //     callback: this.timelineClick,
-        // }, {
-        //     element: document.querySelector('.timeline-toggler'),
-        //     event: 'touchend',
-        //     callback: this.timelineClick,
+        }, {
+            element: document.querySelector('.timeline-back'),
+            event: 'touchend',
+            callback: this.timelineClick,
+        }, {
+            element: document.querySelector('.timeline-front'),
+            event: 'touchend',
+            callback: this.timelineClick,
+        }, {
+            element: document.querySelector('.timeline-toggler'),
+            event: 'touchend',
+            callback: this.timelineClick,
         // }, {
             // element: window,
             // event: 'touchmove',
@@ -341,8 +341,7 @@ export default class PlayerControlComponent {
             const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
             const width = event.targetTouches[0].clientX;
             const ratio = (width - bcr.x) / bcr.width;
-            // this.drawTimeline(ratio);
-            this.eventBus.emit(PLAYER.REWIND, ratio);
+            this.drawTimeline(ratio);
             event.preventDefault();
         }
     }
@@ -353,10 +352,14 @@ export default class PlayerControlComponent {
      */
     timelineClick(event) {
         const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
-        const ratio = event.changedTouches ?
-            (event.changedTouches[0].clientX - bcr.x) / bcr.width :
-            (event.clientX - bcr.x) / bcr.width;
-        this.eventBus.emit(PLAYER.REWIND, ratio);
+        if (event.clientX) {
+            const ratio = (event.clientX - bcr.x) / bcr.width;
+            this.eventBus.emit(PLAYER.REWIND, ratio);
+        } else if (event.targetTouches) {
+            const ratio = (event.targetTouches[0].clientX - bcr.x) / bcr.width;
+            this.eventBus.emit(PLAYER.REWIND, ratio);
+            event.preventDefault();
+        }
     }
 
     /**
