@@ -341,7 +341,8 @@ export default class PlayerControlComponent {
             const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
             const width = event.targetTouches[0].clientX;
             const ratio = (width - bcr.x) / bcr.width;
-            this.drawTimeline(ratio);
+            // this.drawTimeline(ratio);
+            this.eventBus.emit(PLAYER.REWIND, ratio);
             event.preventDefault();
         }
     }
