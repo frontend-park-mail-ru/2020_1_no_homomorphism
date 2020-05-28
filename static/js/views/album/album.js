@@ -2,6 +2,7 @@ import {ALBUM, GLOBAL, POPUP, URL} from '@libs/constants';
 import playlist from '@views/album/album.tmpl.xml';
 import BaseView from '@libs/base_view';
 import TrackListComponent from '@components/track_list/track_list';
+import PagesManager from '@components/pagination';
 import {globalEventBus} from '@libs/eventBus';
 import User from '@libs/user';
 import PopUp from '@components/pop-up/pop-up';
@@ -20,6 +21,11 @@ export default class AlbumView extends BaseView {
         this.albumData = {};
         this.tracksData = {};
         this.trackListComponent = new TrackListComponent(eventBus, ALBUM);
+        this.pagesManager = new PagesManager('album', eventBus, (start, end) => {
+            this.eventBus.emit(ALBUM.GET_TRACKS_DATA,
+                window.location.pathname.split('/')[window.location.pathname.split('/').length - 1],
+                start, end);
+        }, ALBUM.NEW_RECIEVED);
         this.eventBus.on(ALBUM.RENDER_ALBUM, this.setAlbumData.bind(this));
         this.eventBus.on(ALBUM.ERROR, this.showErrors.bind(this));
         this.eventBus.on(ALBUM.SET_TRACKS_AMOUNT, this.setTracksAmount.bind(this));
@@ -34,8 +40,10 @@ export default class AlbumView extends BaseView {
      *  @param {string} url
      */
     render(root, url) {
+        globalEventBus.emit(GLOBAL.COLLAPSE_IF_MOBILE);
         super.render(root);
         this.eventBus.emit(ALBUM.GET_ALBUM_DATA, {id: url});
+        this.pagesManager.getFirst();
     }
 
     /**
@@ -66,6 +74,17 @@ export default class AlbumView extends BaseView {
     setEventListeners() {
         document.getElementsByClassName('l-button-middle-play')[0].addEventListener('click',
             this.playAlbum.bind(this));
+        document.getElementsByClassName('l-button-middle-play')[0]
+            .addEventListener('touchend', (event) => {
+                event.preventDefault();
+                let target = event.target;
+                while (!target.classList.contains('l-button-middle-play')) {
+                    target = target.parentNode;
+                }
+                event.target.classList.add('touched');
+                setTimeout(() => event.target.classList.remove('touched'), 300);
+                event.target.click();
+            });
         document.getElementsByClassName('m-large-like-button')[0].addEventListener('click',
             this._likeClicked.bind(this));
     }
@@ -101,8 +120,8 @@ export default class AlbumView extends BaseView {
         if (this.tracksData.length === 0) {
             return;
         }
-        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = inputSanitize('Tracks: ' +
-            this.tracksData.length);
+        document.getElementsByClassName('m-tracks-amount')[0].innerHTML = inputSanitize(
+            this.tracksData.length + (this.tracksData.length !== 1 ? ' tracks' : ' track'));
     }
 
     /**

@@ -50,6 +50,7 @@ export default class PlayerModel {
         this.eventBus.on(PLAYER.MUTE, this.mute.bind(this));
         this.eventBus.on(PLAYER.UNMUTE, this.unmute.bind(this));
         this.eventBus.on(PLAYER.DELETE, this.delete.bind(this));
+        this.eventBus.on(PLAYER.CHANGE_ORDER, this.changeOrder.bind(this));
     }
 
     /**
@@ -80,7 +81,7 @@ export default class PlayerModel {
      * @param {string} trackId
      * @param {number} number
      */
-    getPlaylistTracks(id, trackId, number = PAGINATION.TRACKS) {
+    getPlaylistTracks(id, trackId, number = PAGINATION['tracks']) {
         Api.playlistTracksGet(id, '0', number.toString())
             .then((res) => {
                 switch (res.status) {
@@ -100,7 +101,7 @@ export default class PlayerModel {
      * @param {string} trackId
      * @param {number} number
      */
-    getAlbumTracks(id, trackId, number = PAGINATION.TRACKS) {
+    getAlbumTracks(id, trackId, number = PAGINATION['tracks']) {
         Api.albumTracksGet(id, '0', number)
             .then((res) => {
                 switch (res.status) {
@@ -122,28 +123,9 @@ export default class PlayerModel {
      * @param {string} trackId
      */
     generateData(res, trackId = '') {
-        res.json()
-            .then((list) => {
-                this.setData.bind(this)(list, trackId);
-                // if (list.tracks.length === 0) {
-                //     globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK);
-                //     return;
-                // }
-                // // eslint-disable-next-line guard-for-in
-                // for (const song in list.tracks) {
-                //     this.playlist.push(list.tracks[song]);
-                //     this.queue.push(this.playlist.length - 1);
-                // }
-                // if (trackId !== '') {
-                //     this.current = this.playlist.indexOf(this.playlist.find((track) =>
-                //         track.id === trackId));
-                // }
-                // this.eventBus.emit(PLAYER.DRAW_TRACKLIST, this.playlist);
-                // this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[this.queue[this.current]].id,
-                //     this.playlist[this.queue[this.current]].id);
-                // this.getTrack(this.playlist[this.queue[this.current]].id);
-                // this.play();
-            });
+        res.json().then((list) => {
+            this.setData.bind(this)(list, trackId);
+        });
     }
 
     /**
@@ -153,13 +135,14 @@ export default class PlayerModel {
      */
     setData(list, trackID = '') {
         if (list.tracks.length === 0) {
-            globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK, true);
+            globalEventBus.emit(GLOBAL.CLEAR_AND_LOCK);
             return;
         }
-        // eslint-disable-next-line guard-for-in
         for (const song in list.tracks) {
-            this.playlist.push(list.tracks[song]);
-            this.queue.push(this.playlist.length - 1);
+            if ({}.hasOwnProperty.call(list.tracks, song)) {
+                this.playlist.push(list.tracks[song]);
+                this.queue.push(this.playlist.length - 1);
+            }
         }
         if (trackID !== '') {
             this.current = this.playlist.indexOf(this.playlist.find((track) =>
@@ -192,8 +175,10 @@ export default class PlayerModel {
             localStorage.setItem('isPlaying', 'false');
             localStorage.setItem('isPlaying', 'true');
             document.getElementsByTagName('audio')[0].play();
+            document.title = this.playlist[this.queue[this.current]].name + ' – ' +
+                this.playlist[this.queue[this.current]].artist;
         }
-        this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
+        this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0, 'other');
         this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[this.current]]);
         this.eventBus.emit(PLAYER.MOVE_MARKER, currentId,
             this.playlist[this.queue[this.current]].id);
@@ -206,6 +191,7 @@ export default class PlayerModel {
         document.getElementsByTagName('audio')[0].pause();
         this.playing = false;
         this.eventBus.emit(PLAYER.DRAW_PLAY);
+        document.title = 'VirusMusic';
     }
 
     /**
@@ -218,6 +204,8 @@ export default class PlayerModel {
             .then(() => {
                 this.playing = true;
             });
+        document.title = this.playlist[this.queue[this.current]].name + ' – ' +
+            this.playlist[this.queue[this.current]].artist;
         this.eventBus.emit(PLAYER.DRAW_PAUSE);
     }
 
@@ -247,8 +235,10 @@ export default class PlayerModel {
             localStorage.setItem('isPlaying', 'false');
             localStorage.setItem('isPlaying', 'true');
             document.getElementsByTagName('audio')[0].play();
+            document.title = this.playlist[this.queue[this.current]].name + ' – ' +
+                this.playlist[this.queue[this.current]].artist;
         }
-        this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
+        this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0, 'other');
         this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[this.current]]);
         this.eventBus.emit(PLAYER.MOVE_MARKER, currentId,
             this.playlist[this.queue[this.current]].id);
@@ -269,10 +259,11 @@ export default class PlayerModel {
                 }
                 this.current = -1;
             } else {
-                if (cause === 'self') {
+                if (cause === 'self' || cause === 'delete') {
+                    document.getElementsByTagName('audio')[0].pause();
                     this.eventBus.emit(PLAYER.DRAW_PLAY);
                     this.current = 0;
-                    this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
+                    this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0, 'other');
                     this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[0]]);
                     this.eventBus.emit(PLAYER.MOVE_MARKER, currentId,
                         this.playlist[this.queue[0]].id);
@@ -292,8 +283,10 @@ export default class PlayerModel {
             localStorage.setItem('isPlaying', 'false');
             localStorage.setItem('isPlaying', 'true');
             document.getElementsByTagName('audio')[0].play();
+            document.title = this.playlist[this.queue[this.current]].name + ' – ' +
+                this.playlist[this.queue[this.current]].artist;
         }
-        this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0);
+        this.eventBus.emit(PLAYER.DRAW_TIMELINE, 0, 'other');
         this.eventBus.emit(PLAYER.TRACK_UPDATE, this.playlist[this.queue[this.current]]);
         if (cause === 'delete') {
             return;
@@ -307,9 +300,17 @@ export default class PlayerModel {
      * @param {number} ratio
      */
     rewind(ratio) {
+        if (isNaN(document.getElementsByTagName('audio')[0].duration)) {
+            return;
+        }
+        if (this.playing) {
+            document.getElementsByTagName('audio')[0].pause();
+        }
         document.getElementsByTagName('audio')[0].currentTime =
             document.getElementsByTagName('audio')[0].duration * ratio;
-        this.eventBus.emit(PLAYER.DRAW_TIMELINE, ratio);
+        if (this.playing) {
+            document.getElementsByTagName('audio')[0].play();
+        }
     }
 
     /**
@@ -392,6 +393,22 @@ export default class PlayerModel {
     }
 
     /**
+     * Изменение порядка
+     * @param {string} targetId
+     * @param {string} setAfterId
+     */
+    changeOrder(targetId, setAfterId) {
+        const temp = this.playlist.find((track) => track.id === targetId);
+        this.playlist.splice(this.playlist.indexOf(temp), 1);
+        const setAfter = this.playlist.find((track) => track.id === setAfterId);
+        if (this.playlist.indexOf(setAfter) == this.playlist.length - 1) {
+            this.playlist.push(temp);
+        } else {
+            this.playlist.splice(this.playlist.indexOf(setAfter) + 1, 0, temp);
+        }
+    }
+
+    /**
      * Удаляет трек из очереди
      * @param {string} id
      */
@@ -402,6 +419,7 @@ export default class PlayerModel {
         if (this.playlist[this.queue[this.current]].id === id) {
             if (this.playlist.length === 1) {
                 this.pause();
+                document.title = 'VirusMusic';
             } else {
                 this.next('delete');
                 decCurrent = true;
@@ -419,6 +437,7 @@ export default class PlayerModel {
         }
         this.eventBus.emit(PLAYER.MOVE_MARKER, this.playlist[this.queue[this.current]].id,
             this.playlist[this.queue[this.current]].id);
+        this.eventBus.emit(PLAYER.MOVE_MARKER_TO_CURRENT);
     }
 
     /**
@@ -427,6 +446,7 @@ export default class PlayerModel {
     deleteAll() {
         if (this.playing) {
             this.pause();
+            document.title = 'VirusMusic';
         }
         this.queue = [];
         this.playlist = [];

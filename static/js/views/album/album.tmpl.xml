@@ -1,24 +1,23 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
-    <div class="col col-9">
+    <div class="col-9">
         <div class="l-main">
             <div class="l-top-card row">
                 <div class="l-top-info col">
                     <div class="l-round-image col">
                         <img alt="" src="{data.image}" class="m-rounded-image" id="avatar"/>
                     </div>
-                    <div class="col">
-                        <button class="m-button-track-list-play"> </button>
-                    </div>
                     <div class="l-top-name col">
                         <div class="m-big-name">
                         </div>
                     </div>
                 </div>
-                <div class="l-button-middle-play">
-                    <button class="m-button-middle-play"> </button>
-                    <span class="m-tracks-amount">Tracks: 0 </span>
+                <div class="l-play-button-col album">
+                    <div class="l-button-middle-play">
+                        <button class="m-button-middle-play"> </button>
+                        <div class="m-tracks-amount">0 tracks</div>
+                    </div>
                 </div>
-                <div class="m-right-col">
+                <div class="m-right-col-bottom">
                     <div class="col">
                         <div class="m-large-like-button is-not-liked" title="Like album"> </div>
                     </div>

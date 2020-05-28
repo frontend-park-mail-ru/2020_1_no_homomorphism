@@ -1,4 +1,4 @@
-import {PLAYER, GLOBAL, URL} from '@libs/constants';
+import {PLAYER, GLOBAL, URL, LAYOUT} from '@libs/constants';
 import template from '@components/player_track_list/player_track_list.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
 import User from '@libs/user';
@@ -19,41 +19,184 @@ export default class PlayerTrackListComponent {
      * Sets EventListeners
      */
     setEventListeners() {
-        document.querySelectorAll('.track-list').forEach((row) => {
+        // window.addEventListener('mousemove', (event) => {
+        //     const marker = document.getElementsByClassName('current-marker')[0];
+        //     const bcr = marker.getBoundingClientRect();
+        //     const row = document.getElementsByClassName('track-list')[0]
+        //         .getElementsByClassName('row').find((row) => {
+        //             return bcr.top === row.getBoundingClientRect().top;
+        //         });
+        //     if (!row || row.contains(event.target)) {
+        //         return;
+        //     }
+        //     console.log(row);
+        //     marker.style.top = (parseInt(marker.style.top.slice(0, marker.style.top.length -
+        //         2)) + 5).toString() + 'px';
+        //     marker.style.height = (parseInt(marker.style.height.slice(0,
+        //         marker.style.height.length - 2)) - 10).toString() + 'px';
+        // });
+        document.querySelectorAll('.track-list .row').forEach((row) => {
             row.addEventListener('click', this.tracklistClick.bind(this));
+            row.addEventListener('touchend', (event) => {
+                // event.preventDefault();
+                // event.target.click();
+            });
+            row.addEventListener('mouseenter', this.tracklistMouseEnter.bind(this));
+            row.addEventListener('mouseleave', this.tracklistMouseLeave.bind(this));
+            row.addEventListener('dragstart', (event) => {
+                this.dragged = event.target;
+            });
+            row.addEventListener('dragover', (event) => {
+                event.preventDefault();
+                let row = event.target;
+                while (!row.classList.contains('row')) {
+                    row = row.parentNode;
+                }
+                if (event.clientY < row.getBoundingClientRect().top + 25 &&
+                    row.previousSibling !== document.getElementsByClassName('drag-patch')[0]
+                ) {
+                    row.insertAdjacentElement('beforebegin',
+                        document.getElementsByClassName('drag-patch')[0]);
+                    document.getElementsByClassName('drag-patch')[0].classList.remove('is-active');
+                } else if (row.nextSibling !== document.getElementsByClassName('drag-patch')[0]) {
+                    row.insertAdjacentElement('afterend',
+                        document.getElementsByClassName('drag-patch')[0]);
+                    document.getElementsByClassName('drag-patch')[0].classList.remove('is-active');
+                }
+                document.getElementsByClassName('drag-patch')[0].classList.add('is-active');
+                return false;
+            });
+            row.addEventListener('drop', (event) => {
+                event.stopPropagation();
+                if (this.dragged.contains(event.target)) {
+                    return;
+                }
+                let row = event.target;
+                while (!row.classList.contains('row')) {
+                    row = row.parentNode;
+                }
+                row.insertAdjacentElement('afterend', this.dragged);
+                document.getElementsByClassName('drag-patch')[0].classList.remove('is-active');
+                document.getElementsByClassName('current-marker')[0].insertAdjacentElement(
+                    'afterend', document.getElementsByClassName('drag-patch')[0]);
+                this.eventBus.emit(PLAYER.MOVE_MARKER_TO_CURRENT);
+                this.eventBus.emit(PLAYER.CHANGE_ORDER, this.dragged.getAttribute('id'),
+                    this.dragged.previousSibling.getAttribute('id'));
+            });
+            row.addEventListener('dragend', () => {
+                document.getElementsByClassName('drag-patch')[0].classList.remove('is-active');
+            });
+        });
+        document.getElementsByClassName('drag-patch')[0].addEventListener('dragover', (event) => {
+            event.preventDefault();
+            this.eventBus.emit(PLAYER.MOVE_MARKER_TO_CURRENT);
+            return false;
+        });
+        document.getElementsByClassName('drag-patch')[0].addEventListener('drop', (event) => {
+            event.stopPropagation();
+            document.getElementsByClassName('drag-patch')[0]
+                .insertAdjacentElement('afterend', this.dragged);
+            document.getElementsByClassName('drag-patch')[0].classList.remove('is-active');
+            document.getElementsByClassName('current-marker')[0].insertAdjacentElement('afterend',
+                document.getElementsByClassName('drag-patch')[0]);
+            this.eventBus.emit(PLAYER.MOVE_MARKER_TO_CURRENT);
+            this.eventBus.emit(PLAYER.CHANGE_ORDER, this.dragged.getAttribute('id'),
+                this.dragged.previousSibling.getAttribute('id'));
         });
         document.querySelectorAll('.delete-button').forEach((button) => {
             button.addEventListener('click', this.trackDeleteButtonClick.bind(this));
         });
-        document.getElementsByClassName('track-list')[0]
-            .addEventListener('scroll', this.trackListWheel.bind(this));
-    }
-
-    /**
-     * Слушает скрол для прокрутки плейлиста
-     * @param {Object} event
-     */
-    trackListWheel(event) {
-        const delta = event.deltaY;
-        const trackList = document.getElementsByClassName('track-list')[0];
-        event.preventDefault();
-        const top = parseInt(trackList.style.top.slice(0, trackList.style.top.length - 2));
-        if (delta < 0 && top < 0 ||
-            delta > 0 && trackList.getBoundingClientRect().bottom >
-            document.documentElement.clientHeight
-        ) {
-            if (delta < 0 && top - delta / 2 > 0) {
-                trackList.style.top = '0';
-            } else if (delta > 0 && trackList.getBoundingClientRect().bottom - delta / 2 <
-                document.documentElement.clientHeight
-            ) {
-                const container = document.getElementsByClassName('container-audio')[0];
-                trackList.style.top = (document.documentElement.clientHeight -
-                    trackList.getBoundingClientRect().height -
-                    container.getBoundingClientRect().bottom).toString() + 'px';
-            } else {
-                trackList.style.top = (top - delta / 2).toString() + 'px';
-            }
+        if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
+            document.getElementsByClassName('l-player')[0]
+                .querySelectorAll('.more-button').forEach((button) => {
+                    button.ontouchend = (event) => {
+                        event.preventDefault();
+                        event.target.classList.add('touched');
+                        setTimeout(() => event.target.classList.remove('touched'), 200);
+                        event.target.click();
+                    };
+                    button.onclick = (event) => this.moreClicked(event);
+                });
+            document.getElementsByClassName('l-player')[0]
+                .querySelectorAll('.add-button').forEach((button) => {
+                    button.ontouchend = (event) => {
+                        event.preventDefault();
+                        if (event.target.tagName == 'BUTTON') {
+                            event.target.classList.add('touched');
+                            setTimeout(() => event.target.classList.remove('touched'), 100);
+                        } else {
+                            event.target.parentNode.classList.add('touched');
+                            setTimeout(() => event.target.parentNode.classList.remove('touched'),
+                                100);
+                        }
+                        // event.target.click();
+                    };
+                    // button.onclick = (event) => this.addToPlaylist.bind(this)(event);
+                });
+            document.getElementsByClassName('l-player')[0]
+                .querySelectorAll('.like-button').forEach((button) => {
+                    button.ontouchend = (event) => {
+                        event.preventDefault();
+                        if (event.target.tagName == 'BUTTON') {
+                            event.target.classList.add('touched');
+                            setTimeout(() => event.target.classList.remove('touched'), 100);
+                        } else {
+                            event.target.parentNode.classList.add('touched');
+                            setTimeout(() => event.target.parentNode.classList.remove('touched'),
+                                100);
+                        }
+                        // event.target.click();
+                    };
+                    // button.onclick = (event) => this.likeClicked(event);
+                });
+            document.getElementsByClassName('l-player')[0]
+                .querySelectorAll('.album-button').forEach((button) => {
+                    button.ontouchend = (event) => {
+                        event.preventDefault();
+                        if (event.target.tagName == 'BUTTON') {
+                            event.target.classList.add('touched');
+                            setTimeout(() => event.target.classList.remove('touched'), 100);
+                        } else {
+                            event.target.parentNode.classList.add('touched');
+                            setTimeout(() => event.target.parentNode.classList.remove('touched'),
+                                100);
+                        }
+                        // event.target.click();
+                    };
+                    // button.onclick = (event) => this.likeClicked(event);
+                });
+            document.getElementsByClassName('l-player')[0]
+                .querySelectorAll('.artist-button').forEach((button) => {
+                    button.ontouchend = (event) => {
+                        event.preventDefault();
+                        if (event.target.tagName == 'BUTTON') {
+                            event.target.classList.add('touched');
+                            setTimeout(() => event.target.classList.remove('touched'), 100);
+                        } else {
+                            event.target.parentNode.classList.add('touched');
+                            setTimeout(() => event.target.parentNode.classList.remove('touched'),
+                                100);
+                        }
+                        // event.target.click();
+                    };
+                    // button.onclick = (event) => this.likeClicked(event);
+                });
+            document.getElementsByClassName('l-player')[0]
+                .querySelectorAll('.remove-button').forEach((button) => {
+                    button.ontouchend = (event) => {
+                        event.preventDefault();
+                        if (event.target.tagName == 'BUTTON') {
+                            event.target.classList.add('touched');
+                            setTimeout(() => event.target.classList.remove('touched'), 100);
+                        } else {
+                            event.target.parentNode.classList.add('touched');
+                            setTimeout(() => event.target.parentNode.classList.remove('touched'),
+                                100);
+                        }
+                        // event.target.click();
+                    };
+                    // button.onclick = (event) => this.deleteClicked(event);
+                });
         }
     }
 
@@ -62,26 +205,34 @@ export default class PlayerTrackListComponent {
      * @param {Object} event
      */
     tracklistClick(event) {
-        let current = event.target;
-        if (current.classList.contains('m-obscure-title') ||
-            current.classList.contains('m-big-delete-button')) {
-            return;
+        this.eventBus.emit(PLAYER.GET_TRACK, this.getIdByClick(event.target));
+    }
+
+    /**
+     * Слушает наведение мыши на трек в плейлисте
+     * @param {Object} event
+     */
+    tracklistMouseEnter(event) {
+        const marker = document.getElementsByClassName('current-marker')[0];
+        if (marker.getBoundingClientRect().top === event.target.getBoundingClientRect().top + 5) {
+            marker.style.top = (parseInt(marker.style.top.slice(0, marker.style.top.length -
+                2)) - 5).toString() + 'px';
+            marker.style.height = (parseInt(marker.style.height.slice(0,
+                marker.style.height.length - 2)) + 10).toString() + 'px';
         }
-        while (current !== window && current !== document.body && current != null) { // TODO Сделать по-человечески :(
-            if (current.getAttribute('class') === 'track-list' ||
-                (current.getAttribute('class') !== null &&
-                    current.getAttribute('class').indexOf('button') !== -1 &&
-                    current.getAttribute('class').indexOf('buttons') === -1 &&
-                    current.getAttribute('class').indexOf('row') !== -1)
-            ) {
-                break;
-            }
-            if (current.getAttribute('id') !== null) {
-                this.eventBus.emit(PLAYER.GET_TRACK, current.getAttribute('id'));
-                break;
-            } else {
-                current = current.parentNode;
-            }
+    }
+
+    /**
+     * Слушает выход мыши с трека в плейлисте
+     * @param {Object} event
+     */
+    tracklistMouseLeave(event) {
+        const marker = document.getElementsByClassName('current-marker')[0];
+        if (marker.getBoundingClientRect().top === event.target.getBoundingClientRect().top) {
+            marker.style.top = (parseInt(marker.style.top.slice(0, marker.style.top.length -
+                2)) + 5).toString() + 'px';
+            marker.style.height = (parseInt(marker.style.height.slice(0,
+                marker.style.height.length - 2)) - 10).toString() + 'px';
         }
     }
 
@@ -122,26 +273,52 @@ export default class PlayerTrackListComponent {
             globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
             return;
         }
-        this._choosePlaylist.trackData = this.getIdByClick(event);
+        this._choosePlaylist.trackData = {'id': this.getIdByClick(event)};
         alert('NIKITA, I havent finished it yet');
         this.getProfilePlaylists();
     }
 
     /**
-     * Получение id из dom-елемента по нажатию
+     * Открытие нужного меню
      * @param {Object} event
-     * @return {Object}
      */
-    getIdByClick(event) {
-        let current = event.target;
-        while (current !== null && !current.classList.contains('track-list')) {
-            if (current.classList.contains('border-bottom') &&
-                current.getAttribute('id') !== null) {
-                return {'id': current.getAttribute('id')};
+    moreClicked(event) {
+        event.stopImmediatePropagation();
+        document.getElementsByClassName('m-dropdown').forEach((dropdown) => {
+            if (dropdown != event.target.parentNode.parentNode.parentNode.lastChild) {
+                dropdown.classList.remove('is-expanded');
             }
-            current = current.parentNode;
+        });
+        const dropdown = event.target.parentNode.parentNode.parentNode.lastChild;
+        const tbcr = event.target.getBoundingClientRect();
+        dropdown.classList.toggle('is-expanded');
+        const dbcr = dropdown.getBoundingClientRect();
+        dropdown.style.right = (document.documentElement.clientWidth - tbcr.right + 10)
+            .toString() + 'px';
+        const tracklistSTop = document.getElementsByClassName('track-list')[0].scrollTop;
+        const tracklistCTop = document.getElementsByClassName('track-list')[0]
+            .getBoundingClientRect().top;
+        if (tbcr.bottom + dbcr.height > document.documentElement.clientHeight) {
+            dropdown.style.top = (document.documentElement.clientHeight + tracklistSTop -
+                tracklistCTop - dbcr.height - 20).toString() + 'px';
+        } else {
+            dropdown.style.top = (tbcr.top + tracklistSTop - tracklistCTop - 10).toString() + 'px';
         }
-        return '';
+    }
+
+    /**
+     * Получение id из dom-елемента по нажатию
+     * @param {Node} target
+     * @return {Node}
+     */
+    getIdByClick(target) {
+        while (target) {
+            if (target.classList.contains('border-bottom') && target.getAttribute('id') !== null) {
+                return target.getAttribute('id');
+            }
+            target = target.parentNode;
+        }
+        return undefined;
     }
 
     /**
@@ -149,7 +326,11 @@ export default class PlayerTrackListComponent {
      * @param {Object} tracks
      */
     drawTracklist(tracks) {
-        document.getElementsByClassName('l-player')[0].classList.add('l-player-visible');
+        if (document.getElementsByClassName('l-player')[0]) {
+            document.getElementsByClassName('l-player')[0].classList.add('l-player-visible');
+        } else {
+            document.getElementsByClassName('l-player-footer')[0].classList.add('l-player-visible');
+        }
         this.eventBus.emit(PLAYER.TRACK_UPDATE, tracks[0]);
         document.getElementsByClassName('track-list')[0].innerHTML += template(tracks);
         this.locked = false;
@@ -164,18 +345,22 @@ export default class PlayerTrackListComponent {
      */
     removeFromTracklist(id) {
         document.getElementById(id).remove();
-        if (document.getElementsByClassName('track-list')[0].children.length === 1) {
+        if (document.getElementsByClassName('track-list')[0].children.length === 2) {
             if (this.expanded) {
                 this.triggerClick();
+                this.footer = false;
             }
             this.locked = true;
-            if (document.getElementsByClassName('l-player')) {
-                document.getElementsByClassName('l-player')[0].classList
-                    .remove('l-player-visible');
-            } else {
-                document.getElementsByClassName('l-player-footer')[0].classList
-                    .remove('l-player-visible');
+            if (window.matchMedia(LAYOUT.MOBILE).matches) {
+                this.resize();
             }
+            // if (document.getElementsByClassName('l-player')[0]) {
+            // document.getElementsByClassName('l-player')[0].classList
+            // .remove('l-player-visible');
+            // } else {
+            // document.getElementsByClassName('l-player-footer')[0].classList
+            // .remove('l-player-visible');
+            // }
         }
     }
 
@@ -183,14 +368,14 @@ export default class PlayerTrackListComponent {
      * Очищает список воспроизвдения
      */
     removeFromTracklistAll() {
-        if (document.getElementsByClassName('l-player')) {
+        if (document.getElementsByClassName('l-player')[0]) {
             document.getElementsByClassName('l-player')[0].classList
                 .remove('l-player-visible');
         } else {
             document.getElementsByClassName('l-player-footer')[0].classList
                 .remove('l-player-visible');
         }
-        while (document.getElementsByClassName('track-list')[0].children.length > 1) {
+        while (document.getElementsByClassName('track-list')[0].children.length > 2) {
             document.getElementsByClassName('track-list')[0].children[document
                 .getElementsByClassName('track-list')[0].children.length - 1].remove();
         }

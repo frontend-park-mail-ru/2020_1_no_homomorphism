@@ -2,7 +2,8 @@ import {DOM, GLOBAL, URL} from '@libs/constants';
 import EventBus, {globalEventBus} from '@libs/eventBus';
 
 type HTMLElementEvent<T extends HTMLElement> = Event & {
-    target: T;
+    target: T,
+    keyCode: number;
 };
 
 export default class TopFormComponent {
@@ -16,14 +17,10 @@ export default class TopFormComponent {
     }
 
     configure(): void {
-        if (document
-            .getElementsByClassName(DOM.CONTENT)[0].children.length > 0) {
-            document
-                .getElementsByClassName(DOM.CONTENT)[0].classList.add('is-un-emphasized');
+        if (document.getElementsByClassName(DOM.CONTENT)[0].children.length > 0) {
+            document.getElementsByClassName(DOM.CONTENT)[0].classList.add('is-un-emphasized');
         }
-        document.getElementsByClassName(DOM.NAVBAR)[0]
-            .classList
-            .add('is-untouchable');
+        document.getElementsByClassName(DOM.NAVBAR)[0].classList.add('is-untouchable');
         this.setDynamicEventListeners.bind(this)();
     }
 
@@ -37,8 +34,7 @@ export default class TopFormComponent {
             this.setDynamicEventListeners();
             return;
         }
-        if (document
-            .getElementsByClassName(DOM.CONTENT)[0].firstChild !== null) {
+        if (document.getElementsByClassName(DOM.CONTENT)[0].firstChild !== null) {
             this.close();
             return;
         }
@@ -46,11 +42,28 @@ export default class TopFormComponent {
         globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
     }
 
+    keyup(event: HTMLElementEvent<HTMLTextAreaElement>): void {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            if (event.target.nodeName === "BUTTON") {
+                event.target.click();
+            }
+            let next: HTMLElement = event.target.parentElement.parentElement.nextElementSibling.firstElementChild as HTMLElement;
+            if (next) {
+                next = next.firstElementChild as HTMLElement;
+                next.focus();
+            }
+        }
+    }
+
     showErrors(errors: { [index: string]: string }): void {
         this.setDynamicEventListeners.bind(this)();
         document.getElementsByClassName('l-form')[0].classList.add('is-error-border');
-        // eslint-disable-next-line guard-for-in
         for (const key in errors) {
+            if (!{}.hasOwnProperty.call(errors, key)) {
+                continue;
+            }
             if (key === 'global') {
                 document.getElementById('global').innerText = errors[key];
                 document.getElementById('global').classList.add('is-error-input-duplication');
@@ -76,14 +89,15 @@ export default class TopFormComponent {
 
     setDynamicEventListeners(): void {
         document.addEventListener('click', this.analyzeTouch.bind(this), {once: true});
+        document.querySelectorAll('.l-form input').forEach((input) => {
+            input.addEventListener('keyup', this.keyup.bind(this));
+        });
     }
 
     close(): void {
         document.getElementsByClassName(DOM.NAVBAR)[0].classList.remove('is-untouchable');
-        document
-            .getElementsByClassName(DOM.CONTENT)[0].classList.remove('is-un-emphasized');
-        document
-            .getElementsByClassName(DOM.TOP_CONTENT)[0].innerHTML = '';
+        document.getElementsByClassName(DOM.CONTENT)[0].classList.remove('is-un-emphasized');
+        document.getElementsByClassName(DOM.TOP_CONTENT)[0].innerHTML = '';
         globalEventBus.emit(GLOBAL.LOGIN_REDIRECT);
     }
 }

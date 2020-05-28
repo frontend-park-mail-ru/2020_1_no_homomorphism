@@ -37,6 +37,7 @@ export default class ProfileView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
+        globalEventBus.emit(GLOBAL.COLLAPSE_IF_MOBILE);
         super.render(document.getElementsByClassName(DOM.CONTENT)[0], url);
         if (User.exists()) {
             this.eventBus.emit(PROFILE.GET_STAT);
@@ -53,8 +54,8 @@ export default class ProfileView extends BaseView {
     renderData(data) {
         this.setData(Object.assign(this.data, data));
         document.getElementsByClassName('m-top-login')[0].innerHTML =
-            inputSanitize(this.data.login);
-        document.getElementsByClassName('m-top-name')[0].innerHTML = inputSanitize(this.data.name);
+            inputSanitize(this.data.name);
+        document.getElementsByClassName('m-top-name')[0].innerHTML = inputSanitize(this.data.login);
         document.getElementsByClassName('m-round-image')[0].src = this.data.image;
     }
 

@@ -1,0 +1,59 @@
+/* ресет стандратрных стилей */
+@import "../modules/_variables";
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--obscure);
+    border-radius: 10px;
+}
+
+body {
+    margin: 0 auto;
+    padding-bottom: 80px;
+    font-family: Montserrat-Regular, sans-serif;
+    background: var(--background-color);
+    color: var(--font-color);
+}
+
+hr {
+    border: none;
+    background-color: #b39ddb;
+    color: #b39ddb;
+    height: 1px;
+    margin: 0;
+}
+
+h2 {
+    margin: 0;
+}
+
+p {
+    margin: 6px;
+}
+
+input {
+    font-family: Montserrat-Medium, sans-serif;
+    outline: none;
+    background-color: var(--overlay-color);
+    color: var(--font-color);
+}
+
+img {
+    object-fit: cover;
+}
+
+button,
+button:active,
+button:focus {
+    outline: none;
+}

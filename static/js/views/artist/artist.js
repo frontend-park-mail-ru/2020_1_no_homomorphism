@@ -2,10 +2,12 @@ import artist from '@views/artist/artist.tmpl.xml';
 import BaseView from '@libs/base_view';
 import TrackListComponent from '@components/track_list/track_list';
 import PlaylistsComponent from '@components/playlist_list/playlist_list';
-import {ARTIST, DOM, POPUP} from '@libs/constants';
+import PagesManager from '@components/pagination';
+import {GLOBAL, ARTIST, DOM, POPUP} from '@libs/constants';
 import User from '@libs/user';
 import PopUp from '@components/pop-up/pop-up';
 import {inputSanitize} from '@libs/input_sanitize';
+import {globalEventBus} from '@libs/eventBus';
 
 /**
  *  вью для страницы артиста
@@ -20,8 +22,11 @@ export default class ArtistView extends BaseView {
         this.id = 0;
         this.currentOpen = '';
         this.textSubscribe = '';
-        this.trackListComponent = new TrackListComponent(eventBus, ARTIST);
-        this.playlistsComponent = new PlaylistsComponent(eventBus, ARTIST.RENDER_ALBUMS);
+        new TrackListComponent(eventBus, ARTIST);
+        new PlaylistsComponent(eventBus, ARTIST.RENDER_ALBUMS);
+        this.pagesManager = new PagesManager('artist', eventBus, (start, end) => {
+            this.eventBus.emit('artist-tracks', start, end);
+        }, ARTIST.NEW_RECIEVED);
         this.eventBus = eventBus;
         this.eventBus.on(ARTIST.RENDER_DATA, this.renderData.bind(this));
         this.eventBus.on(ARTIST.DRAW_SUBSCRIBE, this.drawSubscribe.bind(this));
@@ -33,6 +38,7 @@ export default class ArtistView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
+        globalEventBus.emit(GLOBAL.COLLAPSE_IF_MOBILE);
         super.render(document.getElementsByClassName(DOM.CONTENT)[0], url);
         this.analizeUrl(url);
         this.eventBus.emit(ARTIST.GET_DATA, this.id);
@@ -44,8 +50,7 @@ export default class ArtistView extends BaseView {
      * @param {string} url
      */
     analizeUrl(url) {
-        this.id = (url.indexOf('/') === -1 ? url : url.slice(0, url.indexOf('/'))
-        );
+        this.id = (url.indexOf('/') === -1 ? url : url.slice(0, url.indexOf('/')));
         this.currentOpen = (url.indexOf('/') === -1 ?
             'tracks' :
             url.slice(url.indexOf('/') + 1, url.length));
@@ -58,7 +63,11 @@ export default class ArtistView extends BaseView {
     chooseSection(url) {
         const curSection = document.getElementById(`profile-${this.currentOpen}-title`);
         curSection.classList.add(ARTIST.SELECTED_CLASS);
-        this.eventBus.emit(`artist-${this.currentOpen}`, '0', '50');
+        if (this.currentOpen === 'tracks') {
+            this.pagesManager.getFirst();
+        } else {
+            this.eventBus.emit(`artist-${this.currentOpen}`, '0', '50');
+        }
     }
 
     /**
@@ -95,6 +104,31 @@ export default class ArtistView extends BaseView {
     setEventListeners() {
         document.getElementsByClassName('m-subscribe')[0]
             .addEventListener('click', this.subscribe.bind(this));
+        document.getElementsByClassName('l-button-middle-play')[0]
+            .addEventListener('click', this.playArtistTracks.bind(this));
+        document.getElementsByClassName('l-button-middle-play')[0]
+            .addEventListener('touchend', (event) => {
+                event.preventDefault();
+                let target = event.target;
+                while (!target.classList.contains('l-button-middle-play')) {
+                    target = target.parentNode;
+                }
+                event.target.classList.add('touched');
+                setTimeout(() => event.target.classList.remove('touched'), 300);
+                event.target.click();
+            });
+    }
+
+    /**
+     * Проигрование всех треков артиста
+     */
+    playArtistTracks() {
+        if (this._data.tracks === 0) {
+            return;
+        }
+        globalEventBus.emit(GLOBAL.PLAY_ARTIST_TRACKS, this.id,
+            document.getElementsByClassName('l-track-big')[0].getAttribute('t-id'),
+            this._data.tracks);
     }
 
     /**

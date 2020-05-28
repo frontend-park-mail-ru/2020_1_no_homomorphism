@@ -18,13 +18,15 @@ export default class SearchComponent {
         GLOBAL.HREF = 'global-href-checked';
         globalEventBus.on(GLOBAL.REDIRECT, this.close.bind(this));
         globalEventBus.on(GLOBAL.HREF, this.close.bind(this));
-        this.dummySearch = new SearchDummyComponent(this.getIdByClick.bind(this));
+        this.dummySearch = new SearchDummyComponent(this.getIdByClick.bind(this),
+            this.close.bind(this));
         this.waitingAnswer = false;
         this.isOpen = false;
     }
 
     render(input: string): void {
         if (input === '') {
+            this.close(false, false);
             clearTimeout(this.requestInterval);
             return;
         }
@@ -38,22 +40,20 @@ export default class SearchComponent {
 
     getData(): void {
         this.waitingAnswer = false;
-        Api.searchGet(this.input, SEARCH.AMOUNT_TOP)
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    res.json()
-                        .then((elem) => {
-                            elem.input = this.input;
-                            this.isOpen = true;
-                            this.dummySearch.render(elem);
-                        });
-                    break;
-                default:
-                    console.log(res);
-                    console.error('I am a teapot');
-                }
-            });
+        Api.searchGet(this.input, SEARCH.AMOUNT_TOP).then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                res.json().then((elem) => {
+                    elem.input = this.input;
+                    this.isOpen = true;
+                    this.dummySearch.render(elem);
+                });
+                break;
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
     }
 
     getIdByClick(event: HTMLElementEvent<HTMLTextAreaElement>): void {
@@ -71,33 +71,40 @@ export default class SearchComponent {
     }
 
     getTrackInfo(id: string): void {
-        Api.trackGet(id)
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    res.json()
-                        .then((elem) => {
-                            globalEventBus.emit(GLOBAL.PLAY_TRACKS, {
-                                tracks: [elem],
-                            }, elem.id);
-                        });
-                    break;
-                default:
-                    console.log(res);
-                    console.error('I am a teapot');
-                }
-            });
+        Api.trackGet(id).then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                res.json().then((elem) => {
+                    globalEventBus.emit(GLOBAL.PLAY_TRACKS, {
+                        tracks: [elem],
+                    }, elem.id);
+                });
+                break;
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
     }
 
     /**
      * Закрытие раздела
+     * @param {boolean} blur
+     * @param {boolean} clear
      */
-    close(): void {
+    close(blur: boolean = true, clear: boolean = true): void {
         if (this.isOpen) {
             document.getElementsByClassName('l-top-content')[0]
                 .removeChild(document.getElementsByClassName('l-top-content')[0].firstChild);
+            document.getElementsByClassName('m-search-input')[0]
+                .classList.remove('with-modal-window');
             this.isOpen = false;
-            (document.getElementsByClassName('m-search-input')[0] as HTMLInputElement).value = '';
+            if (blur) {
+                (document.getElementsByClassName('m-search-input')[0] as HTMLInputElement).blur();
+            }
+            if (clear) {
+                (document.getElementsByClassName('m-search-input')[0] as HTMLInputElement).value = '';
+            }
         }
     }
 }

@@ -13,11 +13,13 @@ import {AlbumController} from '@controllers/album';
 import {SearchController} from '@controllers/search';
 import {globalEventBus} from '@libs/eventBus';
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
-import '@css/_main.scss';
+import '@css/_main.css';
 
 window.addEventListener('DOMContentLoaded', () => {
     HTMLCollection.prototype.forEach = Array.prototype.forEach;
     HTMLCollection.prototype.find = Array.prototype.find;
+    HTMLCollection.prototype.indexOf = Array.prototype.indexOf;
+    HTMLCollection.prototype.slice = Array.prototype.slice;
 
     const router = new Router();
     const navbarController = new NavbarController(router);
@@ -59,6 +61,9 @@ window.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('storage', (e) => {
     if (e.key === 'isPlaying' && e.newValue === 'false') {
         globalEventBus.emit(GLOBAL.PAUSE);
+    }
+    if (e.key === 'theme' && e.newValue) {
+        globalEventBus.emit(GLOBAL.RENDER_THEME, e.newValue);
     }
 });
 

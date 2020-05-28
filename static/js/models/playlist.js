@@ -1,5 +1,7 @@
-import {PLAYLIST, RESPONSE, PAGINATION, URL, GLOBAL, POPUP} from '@libs/constants';
+import {PLAYLIST, RESPONSE, URL, GLOBAL, POPUP} from '@libs/constants';
 import Api from '@libs/api';
+import User from '@libs/user';
+import Validation from '@libs/validation';
 import {globalEventBus} from '@libs/eventBus';
 
 /**
@@ -18,21 +20,23 @@ export default class PlaylistModel {
         this.eventBus.on(PLAYLIST.GET_TRACKS_DATA, this.getTracks.bind(this));
         this.eventBus.on(PLAYLIST.DELETE_PLAYLIST, this.deletePlaylist.bind(this));
         this.eventBus.on(PLAYLIST.CHANGE_PRIVACY, this.changePrivacy.bind(this));
+        this.eventBus.on(PLAYLIST.CHANGE_NAME, this.changeName.bind(this));
+        this.eventBus.on(PLAYLIST.CHANGE_IMAGE, this.changeImage.bind(this));
         this.eventBus.on(PLAYLIST.ADD_PLAYLIST, this.addPlaylist.bind(this));
     }
 
     /**
      * Получение данных плейлиста
      * @param {Object} id
+     * @param {boolean} changeEvent были ли изменены данные
      */
-    getPlaylist(id) {
+    getPlaylist(id, changeEvent = false) {
         Api.playlistGet(id.id).then((res) => {
             switch (res.status) {
             case undefined: // TODO Временно
                 this.playlist = res;
                 this.eventBus.emit(PLAYLIST.SET_PLAYLIST_ID, this.playlist.id);
                 this.eventBus.emit(PLAYLIST.RENDER_PLAYLIST_DATA, this.playlist);
-                this.eventBus.emit(PLAYLIST.GET_TRACKS_DATA, {id: this.playlist.id});
                 break;
             case RESPONSE.BAD_REQUEST:
                 this.eventBus.emit(PLAYLIST.ERROR,
@@ -52,10 +56,12 @@ export default class PlaylistModel {
 
     /**
      * Получение списка треков
-     * @param {Object} id
+     * @param {string} id
+     * @param {string} start
+     * @param {string} end
      */
-    getTracks(id) {
-        Api.playlistTracksGet(id.id, this.curPagination.toString(), PAGINATION.TRACKS.toString())
+    getTracks(id, start, end) {
+        Api.playlistTracksGet(id, start, end)
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
@@ -66,6 +72,7 @@ export default class PlaylistModel {
                                 'tracks': this.playlist.tracks,
                                 'domItem': 'l-track-list',
                                 'type': 'playlist',
+                                'startIndex': start,
                             });
                         }
                         this.eventBus.emit(PLAYLIST.SET_TRACKS_AMOUNT, this.playlist.tracks.length);
@@ -91,6 +98,7 @@ export default class PlaylistModel {
                 globalEventBus.emit(GLOBAL.REDIRECT, URL.PROFILE_PLAYLISTS);
                 break;
             case RESPONSE.BAD_REQUEST:
+                this.eventBus.emit(POPUP.NEW, POPUP.PLAYLIST_DELETION_ERROR_MESSAGE);
                 break;
             default:
                 console.log(res);
@@ -117,6 +125,63 @@ export default class PlaylistModel {
     }
 
     /**
+     * Изменение названия плейлиста
+     * @param {Object} id
+     * @param {String} name
+     */
+    changeName(id, name) {
+        Api.playlistChangeName(id, name).then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                this.eventBus.emit(POPUP.NEW, POPUP.PLAYLIST_NAME_UPDATE_MESSAGE);
+                this.eventBus.emit(PLAYLIST.RENDER_NAME, name);
+                break;
+            case RESPONSE.BAD_REQUEST:
+                this.eventBus.emit(POPUP.NEW, POPUP.PLAYLIST_NAME_UPDATE_ERROR_MESSAGE, true);
+                break;
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
+    }
+
+    /**
+     * Изменение картинки плейлиста
+     * @param {Object} id
+     */
+    changeImage(id) {
+        const fileAttach = document.getElementById('image-upload');
+        const resImage = Validation.image(fileAttach.files[0].size, fileAttach.files[0].type
+            .split('/').pop().toLowerCase());
+        if (resImage !== '') {
+            this.eventBus.emit(PLAYLIST.INVALID, {'image-error': resImage});
+        } else {
+            const fData = new FormData();
+            fData.append('playlist_image', fileAttach.files[0], 'kek.png');
+            Api.playlistChangeImage(id, fData).then((res) => {
+                this.eventBus.emit(PLAYLIST.GET_CSRF_TOKEN);
+                switch (res.status) {
+                case RESPONSE.OK:
+                    this.getPlaylist({id: id}, true);
+                    this.eventBus.emit(POPUP.NEW, POPUP.PLAYLIST_PICTURE_UPDATE_MESSAGE);
+                    break;
+                case RESPONSE.BAD_REQUEST:
+                    this.eventBus.emit(POPUP.NEW, POPUP.PLAYLIST_PICTURE_UPDATE_ERROR_MESSAGE);
+                    this.eventBus.emit(PLAYLIST.INVALID);
+                    break;
+                case RESPONSE.SERVER_ERROR:
+                    this.eventBus.emit(POPUP.NEW, POPUP.SORRY);
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
+        }
+    }
+
+    /**
      * Добавление чужого плейлиста себе :>
      * @param {String} id
      */
@@ -137,6 +202,15 @@ export default class PlaylistModel {
                 console.log(res);
                 console.error('I am a teapot');
             }
+        });
+    }
+
+    /**
+     * Получение токена
+     */
+    getCsrfToken() {
+        Api.csrfTokenGet().then((res) => {
+            User.token = res.headers.get('Csrf-Token');
         });
     }
 }

@@ -20,13 +20,11 @@ export default class ArtistListComponent {
     private eventBus: EventBus;
     private artistListDummy: ArtistListDummyComponent;
     private artistList: [artist];
-    private message: string;
 
-    constructor(eventBus: EventBus, renderMessage: string, emergingRenderMessage: string) {
+    constructor(eventBus: EventBus, renderMessage: string) {
         this.eventBus = eventBus;
         this.artistListDummy = new ArtistListDummyComponent();
         this.eventBus.on(renderMessage, this.render.bind(this));
-        this.message = emergingRenderMessage;
     }
 
     render(data: input): void {

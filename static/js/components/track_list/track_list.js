@@ -4,7 +4,7 @@ import {globalEventBus} from '@libs/eventBus';
 import ChoosePlaylist from '@components/choose_playlist/choose_playlist';
 import TrackComponent from '@components/track/track';
 import PlaylistComponent from '@components/playlist/playlist';
-import {PLAYLIST, GLOBAL, RESPONSE, PROFILE, POPUP} from '@libs/constants';
+import {PLAYLIST, GLOBAL, RESPONSE, PROFILE, POPUP, LAYOUT} from '@libs/constants';
 import User from '@libs/user';
 import Api from '@libs/api';
 import PopUp from '@components/pop-up/pop-up';
@@ -28,6 +28,7 @@ export default class TrackListComponent {
         this._type = '';
         this._baseDom = '';
         this._subscribe.bind(this)(constType);
+        this.constType = constType;
     }
 
     /**
@@ -60,7 +61,13 @@ export default class TrackListComponent {
      * @param {Object} data
      */
     render(data) {
-        this._tracklist = data.tracks;
+        data.startIndex = data.startIndex ? parseInt(data.startIndex) : 0;
+        let i = 1;
+        data.tracks.map((track) => {
+            track.index = i + data.startIndex;
+            i++;
+        });
+        Array.prototype.push.apply(this._tracklist, data.tracks);
         this._type = data.type;
         this._tracklist.type = this._type === 'playlist';
         this._baseDom = data.domItem;
@@ -68,7 +75,25 @@ export default class TrackListComponent {
             return;
         }
         const elem = document.getElementsByClassName(data.domItem)[0];
-        elem.innerHTML = template(this._tracklist);
+        if (elem.lastChild && elem.lastChild.previousSibling && elem.lastChild.previousSibling
+            .classList.contains('is-empty-track')
+        ) {
+            elem.lastChild.previousSibling.remove();
+        }
+        if (elem.lastChild && elem.lastChild && elem.lastChild.classList.contains('m-empty-list')) {
+            elem.lastChild.remove();
+        }
+        if (!elem.firstChild) {
+            elem.innerHTML = '<div class="top-pagination-patch" style="height: 0px"></div>';
+        }
+        elem.innerHTML += template(data.tracks);
+        const patch = elem.getElementsByClassName('bottom-pagination-patch')[0];
+        if (!patch) {
+            elem.innerHTML += '<div class="bottom-pagination-patch" style="height: 0px"></div>';
+        } else {
+            elem.insertAdjacentElement('beforeend', patch);
+        }
+        this.eventBus.emit(this.constType.NEW_RECIEVED);
         if (this._tracklist.length !== 0) {
             this.setTracksEventListeners();
         }
@@ -94,6 +119,101 @@ export default class TrackListComponent {
             document.querySelectorAll('img.m-big-delete-button').forEach((button) => {
                 button.onclick = (event) => this.deleteClicked(event);
             });
+        }
+        if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
+            document.querySelectorAll('.more-button').forEach((button) => {
+                button.ontouchstart = (event) => {
+                    event.preventDefault();
+                    event.target.classList.add('touched');
+                    setTimeout(() => event.target.classList.remove('touched'), 200);
+                    event.target.click();
+                };
+                button.onclick = (event) => this.moreClicked(event);
+            });
+            document.querySelectorAll('.add-button').forEach((track) => {
+                track.ontouchstart = (event) => {
+                    event.preventDefault();
+                    if (event.target.tagName == 'BUTTON') {
+                        event.target.classList.add('touched');
+                        setTimeout(() => event.target.classList.remove('touched'), 100);
+                    } else {
+                        event.target.parentNode.classList.add('touched');
+                        setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                    }
+                    event.target.click();
+                };
+                track.onclick = (event) => this.addToPlaylist.bind(this)(event);
+            });
+            document.querySelectorAll('.like-button').forEach((button) => {
+                button.ontouchstart = (event) => {
+                    event.preventDefault();
+                    if (event.target.tagName == 'BUTTON') {
+                        event.target.classList.add('touched');
+                        setTimeout(() => event.target.classList.remove('touched'), 100);
+                    } else {
+                        event.target.parentNode.classList.add('touched');
+                        setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                    }
+                    event.target.click();
+                };
+                button.onclick = (event) => this.likeClicked(event);
+            });
+            document.querySelectorAll('.add-player-button').forEach((button) => {
+                button.ontouchstart = (event) => {
+                    event.preventDefault();
+                    if (event.target.tagName == 'BUTTON') {
+                        event.target.classList.add('touched');
+                        setTimeout(() => event.target.classList.remove('touched'), 100);
+                    } else {
+                        event.target.parentNode.classList.add('touched');
+                        setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                    }
+                    event.target.click();
+                };
+            });
+            document.querySelectorAll('.album-button').forEach((button) => {
+                button.ontouchstart = (event) => {
+                    event.preventDefault();
+                    if (event.target.tagName == 'BUTTON') {
+                        event.target.classList.add('touched');
+                        setTimeout(() => event.target.classList.remove('touched'), 100);
+                    } else {
+                        event.target.parentNode.classList.add('touched');
+                        setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                    }
+                    event.target.click();
+                };
+            });
+            document.querySelectorAll('.artist-button').forEach((button) => {
+                button.ontouchstart = (event) => {
+                    event.preventDefault();
+                    if (event.target.tagName == 'BUTTON') {
+                        event.target.classList.add('touched');
+                        setTimeout(() => event.target.classList.remove('touched'), 100);
+                    } else {
+                        event.target.parentNode.classList.add('touched');
+                        setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                    }
+                    event.target.click();
+                };
+            });
+            if (this._tracklist.type) {
+                document.querySelectorAll('.remove-button').forEach((button) => {
+                    button.ontouchstart = (event) => {
+                        event.preventDefault();
+                        if (event.target.tagName == 'BUTTON') {
+                            event.target.classList.add('touched');
+                            setTimeout(() => event.target.classList.remove('touched'), 100);
+                        } else {
+                            event.target.parentNode.classList.add('touched');
+                            setTimeout(() => event.target.parentNode.classList.remove('touched'),
+                                100);
+                        }
+                        event.target.click();
+                    };
+                    button.onclick = (event) => this.deleteClicked(event);
+                });
+            }
         }
     }
 
@@ -181,22 +301,45 @@ export default class TrackListComponent {
      * @param {String} id
      */
     getTrackInfo(id) {
-        Api.trackGet(id)
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    res.json()
-                        .then((elem) => {
-                            globalEventBus.emit(GLOBAL.PLAY_TRACKS, {
-                                tracks: [elem],
-                            }, elem.id);
-                        });
-                    break;
-                default:
-                    console.log(res);
-                    console.error('I am a teapot');
-                }
-            });
+        Api.trackGet(id).then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                res.json().then((elem) => {
+                    globalEventBus.emit(GLOBAL.PLAY_TRACKS, {
+                        tracks: [elem],
+                    }, elem.id);
+                });
+                break;
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
+    }
+
+    /**
+     * Открытие нужного меню
+     * @param {Object} event
+     */
+    moreClicked(event) {
+        event.stopImmediatePropagation();
+        document.getElementsByClassName('m-dropdown').forEach((dropdown) => {
+            if (dropdown != event.target.parentNode.parentNode.parentNode.lastChild) {
+                dropdown.classList.remove('is-expanded');
+            }
+        });
+        const dropdown = event.target.parentNode.parentNode.parentNode.lastChild;
+        const tbcr = event.target.getBoundingClientRect();
+        dropdown.classList.toggle('is-expanded');
+        const dbcr = dropdown.getBoundingClientRect();
+        dropdown.style.right = (document.documentElement.clientWidth - tbcr.right + 20)
+            .toString() + 'px';
+        if (tbcr.bottom + dbcr.height > document.documentElement.clientHeight) {
+            dropdown.style.top = (document.documentElement.clientHeight + window.pageYOffset -
+                dbcr.height - 20).toString() + 'px';
+        } else {
+            dropdown.style.top = (tbcr.top + window.pageYOffset - 10).toString() + 'px';
+        }
     }
 
     /**
@@ -251,6 +394,8 @@ export default class TrackListComponent {
      * @param {Object} event
      */
     likeClicked(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
         if (!User.exists()) {
             new PopUp(POPUP.LOGIN_ERROR, true);
             // globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
@@ -277,6 +422,24 @@ export default class TrackListComponent {
         }
         domItem.classList.toggle('is-liked');
         domItem.classList.toggle('is-not-liked');
+        if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
+            while (!domItem.classList.contains('m-dropdown-button')) {
+                domItem = domItem.parentNode;
+            }
+            if (domItem.firstChild.src.indexOf('/static/img/icons/favorite.svg') !== -1) {
+                domItem.firstChild.src = '/static/img/icons/favorite_border.svg';
+                domItem.children[1].innerText = 'like';
+            } else {
+                domItem.firstChild.src = '/static/img/icons/favorite.svg';
+                domItem.children[1].innerText = 'unlike';
+            }
+        } else {
+            if (domItem.src.indexOf('/static/img/icons/favorite.svg') !== -1) {
+                domItem.src = '/static/img/icons/favorite_border.svg';
+            } else {
+                domItem.src = '/static/img/icons/favorite.svg';
+            }
+        }
     }
 
     /**
@@ -293,16 +456,15 @@ export default class TrackListComponent {
      * @param {Object} domItem
      */
     _doLike(id, domItem) {
-        Api.trackLike(id.toString())
-            .then((res) => {
-                switch (res.status) {
-                case RESPONSE.OK:
-                    this._changeImage.bind(this)(id, domItem);
-                    break;
-                default:
-                    console.log(res);
-                    console.error('I am a teapot');
-                }
-            });
+        Api.trackLike(id.toString()).then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                this._changeImage.bind(this)(id, domItem);
+                break;
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
     }
 }

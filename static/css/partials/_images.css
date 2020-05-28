@@ -1,0 +1,73 @@
+/* изображения */
+@import "../modules/_variables";
+
+.l-round-image {
+    margin: 16px 32px;
+}
+
+.m-rounded-image {
+    z-index: var(--main-level);
+    height: 150px;
+    width: 150px;
+    border-radius: 100px;
+    float: right;
+    box-shadow: var(--box-shadow-hard);
+}
+
+.m-round-image {
+    z-index: var(--main-level);
+    height: 150px;
+    width: 150px;
+    border-radius: 100px;
+    margin: 16px;
+    float: right;
+    box-shadow: var(--box-shadow-hard);
+}
+
+.m-scale-image:hover {
+    transition: 0.3s;
+    box-shadow: 0 0 40px var(--chosen-icon);
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.m-scale-image:not(:hover) {
+    transition: 0.3s;
+    box-shadow: var(--box-shadow-hard);
+}
+
+.m-search-icon {
+    height: 30px;
+    width: 30px;
+}
+
+.m-medium-icon {
+    height: 40px;
+    width: 40px;
+}
+
+.m-icon-border {
+    border-radius: 5px;
+}
+
+.l-navbar-icon {
+    opacity: 0.6;
+    padding: 20px 8px 16px 8px;
+    &:hover, &.touched {
+        opacity: 1;
+        background: var(--chosen-icon);
+    }
+}
+
+.m-small-icon {
+    height: 20px;
+    width: 20px;
+}
+
+.m-track-image {
+    height: 50px;
+    width: 50px;
+    z-index: var(--main-level);
+    border-radius: 5px;
+}

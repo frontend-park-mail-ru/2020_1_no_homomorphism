@@ -1,0 +1,136 @@
+/* Состояния */
+@import "../modules/_variables";
+
+.is-emphasized {
+    position: fixed;
+    box-shadow: black;
+    z-index: var(--super-top-level);
+}
+
+.is-un-emphasized {
+    transition: .6s filter;
+    filter: blur(10px) contrast(.8) brightness(0.8);
+    pointer-events: none;
+}
+
+.is-untouchable {
+    pointer-events: none;
+}
+
+.is-touched-section {
+    background: var(--selected-elem);
+    border-radius: var(--card-border-small);
+    cursor: pointer;
+    transition: 0.1s;
+    transform: scale(1.1);
+}
+
+.is-hidden {
+    visibility: hidden;
+}
+
+.is-visible {
+    visibility: visible;
+}
+
+.is-not-displayed {
+    display: none !important;
+}
+
+.is-error {
+    border: 1px solid red;
+    padding: 32px;
+    font-size: 32px;
+}
+
+.is-error-input-duplication {
+    height: 20px;
+    visibility: visible;
+    margin-top: 21px;
+}
+
+.is-error-input-underline {
+    height: 15px;
+    margin-bottom: 10px;
+    visibility: visible;
+}
+
+.is-error-border {
+    border-color: var(--error-color) !important;
+}
+
+.is-mouse-on {
+    background: var(--chosen-icon);
+}
+
+.is-rotated-0 {
+    transform: rotate(0);
+}
+
+.is-margin-left-5 {
+    margin-left: 5px;
+}
+
+.is-margin-left-0 {
+    margin-left: 0;
+}
+
+.timeline .is-timeline-mouse-over {
+    font-size: 11px;
+}
+
+.is-opacity-1 {
+    opacity: 1 !important;
+}
+
+.is-volume-scale-hover {
+    top: -36px;
+}
+
+.is-empty-track {
+    display: inline-block;
+    width: calc(49%);
+    overflow: hidden;
+}
+
+.is-underlined-ref {
+    position: relative;
+    &::after {
+        content: "";
+        position: absolute;
+        top: 85%;
+        height: 1px;
+        width: 0;
+        left: 0;
+        background-color: var(--obscure);
+        transition: 0.5s ease all;
+    }
+    &:hover::after {
+        background-color: var(--font-color);
+        width: 100%;
+        transition: 0.3s ease all;
+    }
+}
+
+.is-button-disabled {
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+.is-height-50 {
+    height: 50px;
+}
+
+.is-margin-top--191 {
+    margin-top: -191px;
+}
+
+.is-geometricaly-invisible {
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.is-z-index-top {
+    z-index: var(--top-level);
+}

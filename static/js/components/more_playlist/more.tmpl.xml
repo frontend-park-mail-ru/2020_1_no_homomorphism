@@ -1,0 +1,63 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <fest:if test="data.mobile === true">
+        <img class="m-top-right-corner m-more-button" src="/static/img/icons/more_horiz.svg"/>
+        <div class="m-top-right-corner m-dropdown">
+            <div class="row">
+                <div class="m-privacy-title">private playlist</div>
+                <label class="m-switch">
+                    <input type="checkbox" id="checkbox" checked="true" value="1"> </input>
+                    <span class="m-slider"> </span>
+                </label>
+            </div>
+            <div class="small-line"></div>
+            <div class="row">
+                <button class="m-dropdown-button" id="playlist-share-button">
+                    <img src="/static/img/icons/link.svg"/>
+                    <span class="m-text-in-button">copy link</span>
+                </button>
+            </div>
+            <div class="row">
+                <button class="m-dropdown-button" id="playlist-edit-button">
+                    <img src="/static/img/icons/edit.svg"/>
+                    <span class="m-text-in-button">edit playlist</span>
+                </button>
+            </div>
+            <div class="row">
+                <button class="m-dropdown-button" id="playlist-delete-button">
+                    <img src="/static/img/icons/delete-24px.svg"/>
+                    <span class="m-text-in-button">delete playlist</span>
+                </button>
+            </div>
+        </div>
+    </fest:if>
+    <fest:if test="data.mobile === false">
+        <div class="m-right-col m-tablet-auto">
+            <div class="row">
+                <div class="m-privacy-title col">Private playlist</div>
+                <label class="m-switch col">
+                    <input type="checkbox" id="checkbox" checked="true" value="1"> </input>
+                    <span class="m-slider"> </span>
+                </label>
+            </div>
+            <div class="row">
+                <div class="m-dropdown col">
+                    <div class="row">
+                        <button class="m-dropdown-button" id="playlist-share-button">
+                            <img src="/static/img/icons/link.svg"/>
+                            <span class="m-text-in-button">copy link</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col">
+                    <button class="m-button-share"></button>
+                </div>
+            </div>
+            <div class="row">
+                <img class="m-playlist-edit-button" id="playlist-edit-button" src="/static/img/icons/edit.svg"/>
+            </div>
+            <div class="l-delete-playlist-button" id="playlist-delete-button">
+                <div class="m-delete-playlist-button"></div>
+            </div>
+        </div>
+    </fest:if>
+</fest:template>

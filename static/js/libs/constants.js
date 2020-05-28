@@ -40,12 +40,13 @@ export const URL = {
 
 export const PAGINATION = {
     ALBUMS: 20,
-    TRACKS: 50,
+    TRACKS: 6, // 50,
+    TRACK_HEIGHT: 54,
 };
 
 export const LAYOUT = {
     MOBILE: 'screen and (max-width: 480px) and (min-width: 344px)',
-    TABLET: 'screen and (min-width: 481px) and (max-width: 987px)',
+    TABLET: 'screen and (min-width: 481px) and (max-width: 1106px)',
     DESKTOP: 'min-width: 988px',
 };
 
@@ -75,6 +76,8 @@ export const GLOBAL = {
     PLAY_ALBUM: 'global-play-album',
     CLEAR_AND_LOCK: 'global-clear-and-lock',
     COLLAPSE: 'global-collapse',
+    COLLAPSE_AND_LOCK: 'global-collapse-and-lock',
+    COLLAPSE_IF_MOBILE: 'global-collapse-if-mobile',
     REDIRECT: 'redirect',
     HREF: 'global-href',
     LOGOUT_REDIRECT: 'global-logout-redirect',
@@ -82,6 +85,7 @@ export const GLOBAL = {
     CLOSE_SEARCH: 'global-close-search',
     PAUSE: 'global-pause',
     HIDE_SUBSCRIPTIONS: 'hide subscriptions',
+    RENDER_THEME: 'render theme',
 };
 
 export const MAIN = {
@@ -132,6 +136,7 @@ export const PLAYER = {
     UNREPEAT: 'player-unrepeat',
     MUTE: 'player-mute',
     UNMUTE: 'player-unmute',
+    CHANGE_ORDER: 'player-change-order',
     DELETE: 'player-delete',
     LIKE: 'player-like',
     ADD: 'player-add',
@@ -139,6 +144,7 @@ export const PLAYER = {
     DRAW_PAUSE: 'player-draw-pause',
     TRACK_UPDATE: 'player-track-update',
     MOVE_MARKER: 'player-move-marker',
+    MOVE_MARKER_TO_CURRENT: 'player-move-marker-to-current',
     DRAW_TRACKLIST: 'player-draw-tracklist',
     REMOVE_FROM_TRACKLIST: 'player-remove-from-tracklist',
     REMOVE_FROM_TRACKLIST_ALL: 'player-remove-from-tracklist-all',
@@ -215,6 +221,7 @@ export const ARTIST = {
     // --
     SET_ARTIST_ID: 'artist-set-artist-id',
     DROPDOWN: 'artist-dropdown',
+    NEW_RECIEVED: 'artist-new-recieved',
 };
 
 export const PLAYLIST = {
@@ -225,14 +232,20 @@ export const PLAYLIST = {
     GET_PLAYLIST_DATA: 'playlist-get-playlist-data',
     GET_TRACKS_DATA: 'playlist-get-tracks-data',
     RENDER_DATA: 'playlist-render-playlist',
+    RENDER_NAME: 'playlist-render-name',
+    RENDER_IMAGE: 'playlist-render-image',
     RENDER_PLAYLIST_DATA: 'playlist-render-playlist-data',
     RENDER_TRACKS: 'playlist-render-tracks-data',
+    RENDER_EDIT: 'playlist-render-edit',
     DELETE_PLAYLIST: 'playlist-delete',
     ERROR: 'playlist-show-errors',
     RENDER_DELETED: 'playlist-render-deleted',
     CHANGE_TRACK_AMOUNT: 'playlist-change-track-amount',
     CHANGE_PRIVACY: 'playlist-privacy',
+    CHANGE_NAME: 'playlist-name',
+    CHANGE_IMAGE: 'playlist-image',
     ADD_PLAYLIST: 'playlist-add',
+    INVALID: 'playlist-invalid',
 };
 
 export const ALBUM = {
@@ -241,6 +254,7 @@ export const ALBUM = {
     GET_TRACKS_DATA: 'album-get-tracks-data',
     RENDER_ALBUM: 'album-render-album',
     RENDER_TRACKS: 'album-render-tracks',
+    NEW_RECIEVED: 'album-new-recieved',
     SET_TRACKS_AMOUNT: 'album-set-tracks-amount',
     SET_ALBUM_ID: 'set-album-id',
     LIKE: 'album-like',
@@ -261,14 +275,23 @@ export const SEARCH = {
 
 export const POPUP = {
     NEW: 'new pop-up',
-    LOG_IN_MESSAGE: 'Please, log in',
+    SOMETHING_WENT_WRONG: 'Something went wrong',
+    SORRY: 'Sorry, cannot perform it because our server is kek',
     SETTINGS_MESSAGE: 'Profile data successfully updated',
+    THEME_MESSAGE: 'Theme successfully updated',
     PASSWORD_MESSAGE: 'Password successfully changed',
     AVATAR_MESSAGE: 'Profile picture successfully changed',
     PLAYLIST_CREATION_MESSAGE: 'Playlist successfully created',
+    PLAYLIST_EMPTY_NAME_ERROR: 'Enter name first',
     PLAYLIST_CREATION_ERROR_MESSAGE: 'Playlist with this name already exists',
+    PLAYLIST_NAME_UPDATE_MESSAGE: 'Playlist name successfully updated',
+    PLAYLIST_NAME_UPDATE_ERROR_MESSAGE: 'Cannot updata playlist name',
+    PLAYLIST_PICTURE_UPDATE_MESSAGE: 'Playlist picture successfully updated',
+    PLAYLIST_PICTURE_UPDATE_ERROR_MESSAGE: 'Cannot updata playlist picture',
     PLAYLIST_DELETION_MESSAGE: 'Playlist successfully deleted',
+    PLAYLIST_DELETION_ERROR_MESSAGE: 'Cannot delete playlist',
     TRACK_ADDITION_MESSAGE: 'Added to playlist ',
+    TRACK_ADDITION_ERROR_MESSAGE: 'Already added',
     TRACK_DELETION_MESSAGE: 'Deleted from playlist ',
     TRACK_DELETION_ERROR_MESSAGE: 'Cannot delete this track',
     PLAYLIST_PRIVACY_PRIVATE_MESSAGE: 'Playlist is private now',
@@ -284,7 +307,64 @@ export const POPUP = {
     ARTIST_UNSUBSCRIPTION_ERROR_MESSAGE: 'Cannot unsubscribe from ',
     ALBUM_LIKED: 'Album successfully liked',
     ALBUM_UN_LIKED: 'Like successfully removed',
-    LOGIN_ERROR: 'Please login',
+    LOGIN_ERROR: 'Please, login',
     LIFETIME: 2000,
     DISSOLUTIONTIME: 1000,
+};
+
+export const THEME_OVERLAY = {
+    'light': 'white',
+    'dark': '#383b40',
+};
+
+export const THEME = {
+    'light': {
+        'green': [
+            ['--selected-elem', '#d6ffeb'],
+            ['--marker-color', '#00e676'],
+            ['--button-color', '#0ab992'],
+        ],
+        'red': [
+            ['--selected-elem', '#ffe0e4'],
+            ['--marker-color', '#ff2137'],
+            ['--button-color', '#ff4255'],
+        ],
+        'purple': [
+            ['--selected-elem', '#f9d4ff'],
+            ['--marker-color', '#ab47bc'],
+            ['--button-color', '#7b1fa2'],
+        ],
+        'blue': [
+            ['--selected-elem', '#d0eaff'],
+            ['--marker-color', '#29b6f6'],
+            ['--button-color', '#186db1'],
+        ],
+        'black': [
+            ['--selected-elem', '#dcdcdc'],
+            ['--marker-color', 'black'],
+            ['--button-color', '#1d1d1d'],
+        ],
+    },
+    'dark': {
+        'green': [
+            ['--selected-elem', '#2d9c66'],
+            ['--marker-color', '#2d9c66'],
+            ['--button-color', '#2d9c66'],
+        ],
+        'pink': [
+            ['--selected-elem', '#de4a7d'],
+            ['--marker-color', '#de4a7d'],
+            ['--button-color', '#de4a7d'],
+        ],
+        'purple': [
+            ['--selected-elem', '#7b1fa2'],
+            ['--marker-color', '#7b1fa2'],
+            ['--button-color', '#7b1fa2'],
+        ],
+        'blue': [
+            ['--selected-elem', '#01579b'],
+            ['--marker-color', '#01579b'],
+            ['--button-color', '#01579b'],
+        ],
+    },
 };

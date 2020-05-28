@@ -67,6 +67,7 @@ export default class ArtistModel {
                                     'tracks': data.tracks,
                                     'domItem': 'l-track-list',
                                     'type': 'artist',
+                                    'startIndex': start,
                                 });
                         });
                     break;

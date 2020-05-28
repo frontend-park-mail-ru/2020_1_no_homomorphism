@@ -1,5 +1,5 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
-    <div class="col col-9">
+    <div class="col-9">
         <div class="l-main ">
             <div class="l-top-card">
                 <div class="row">
@@ -16,16 +16,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="m-right-col">
-                        <div class="col">
-                                <div class="m-subscribe">
-                                </div>
+                    <div class="l-play-button-col">
+                          <div class="l-button-middle-play artist">
+                            <button class="m-button-middle-play"> </button>
+                            <div class="m-tracks-amount m-mobile-only">play all tracks</div>
                         </div>
                     </div>
+                    <div class="m-right-col">
+                        <div class="m-subscribe"></div>
+                    </div>
                 </div>
-
                 <div class="row">
-                    <div class="l-top-section-tracks col col-4" id="profile-tracks-title">
+                    <div class="l-top-section-tracks col-4" id="profile-tracks-title">
                         <a class="m-tiny-ref m-top-section-tracks-ref" href="/artist/{data.id}/tracks">
                             <h2 id="artist-tracks-title">
                                 <fest:value>data.tracks</fest:value>
@@ -33,7 +35,7 @@
                             <p>Tracks</p>
                         </a>
                     </div>
-                    <div class="l-top-section-albums col col-4" id="profile-albums-title">
+                    <div class="l-top-section-albums col-4" id="profile-albums-title">
                         <a class="m-tiny-ref m-top-section-albums-ref" href="/artist/{data.id}/albums">
                             <h2 id="artist-albums-title">
                                 <fest:value>data.albums</fest:value>
@@ -41,7 +43,7 @@
                             <p>Albums</p>
                         </a>
                     </div>
-                    <div class="l-top-section-info col col-4" id="profile-info-title">
+                    <div class="l-top-section-info col-4" id="profile-info-title">
                         <a class="m-tiny-ref l-top-section-info-ref" href="/artist/{data.id}/info">
                             <h2>Info</h2>
                         </a>

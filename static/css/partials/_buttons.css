@@ -1,0 +1,532 @@
+/* Кнопки */
+@import "../modules/_variables";
+
+.m-submit-button {
+    border-radius: 6px;
+    margin-left: 213px;
+    background-color: var(--button-color);
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 20px;
+    padding: 20px;
+    width: 100px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.m-submit-button {
+    span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+}
+
+.m-button-track-list-play {
+    height: 30px;
+    width: 30px;
+    background: url(../../static/img/icons/play.svg) no-repeat;
+    border: yellow;
+    cursor: pointer;
+    opacity: 0.4;
+    margin-top: 96px;
+    padding: 20px;
+    position: relative;
+    margin-left: -140px;
+    margin-right: 20px;
+    transform: scale(3);
+}
+
+.m-button-track-list-play:hover {
+    opacity: 1;
+    -webkit-transform: scale(3.5);
+    transform: scale(3.5);
+    transition: 0.3s;
+}
+
+.m-button-track-list-play:not(:hover) {
+    opacity: 0.4;
+    transform: scale(3);
+    transition: 0.3s;
+}
+
+.l-button-middle-play {
+    size: 45px;
+    max-width: fit-content;
+    padding: 11px;
+    border-radius: 100px;
+    background-color: var(--selected-elem);
+    cursor: pointer;
+    margin-top: 92px;
+    margin-left: 17px;
+    overflow: hidden;
+    float: left;
+    transition: 0.3s;
+    &.artist {
+        margin-top: 99px;
+    }
+    & .m-tracks-amount {
+        transition: opacity 0.1s 0.2s;
+        opacity: 0;
+        margin-left: 35px;
+        margin-top: 1px;
+        white-space: nowrap;
+    }
+    &:hover {
+        margin-left: 20.4px;
+        width: 150px;
+        transform: scale(1.2);
+        & .m-tracks-amount {
+            opacity: 1;
+        }
+    }
+    &:not(:hover) {
+        & .m-tracks-amount {
+            transition: opacity 0.1s;
+        }
+    }
+}
+
+.m-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-top: 10px;
+    margin-right: 10px;
+    input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+}
+
+.m-slider {
+    position: absolute;
+    cursor: pointer;
+    border-radius: 24px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 32px;
+    background-color: #ccc;
+    transition: .4s;
+    transform: scale(0.6);
+    &:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 3px;
+        border-radius: 50%;
+        background-color: var(--overlay-color);
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+}
+
+input:checked + .m-slider {
+    background-color: var(--button-color);
+}
+
+input:checked + .m-slider:before {
+    transform: translateX(24px);
+}
+
+.m-subscribe {
+    cursor: pointer;
+    opacity: 0.8;
+    margin-top: 40px;
+    margin-right: 170px;
+    position: relative;
+    transform: scale(1.3);
+    width: 30px;
+    height: 30px;
+    padding-left: 32px;
+    padding-right: 32px;
+    background: url(../../static/img/icons/subscribe.svg) no-repeat;
+    transition: opacity 2s ease;
+    color: black;
+
+    &:hover {
+        opacity: 0.8;
+        transform: scale(1.4);
+        transition: 0.2s cubic-bezier(0, 0, 0.5, 1);
+    }
+
+    &:not(:hover) {
+        transition: 0.2s cubic-bezier(0, 0, 0.5, 1);
+    }
+
+    &.is-subscribed {
+        opacity: 0.4;
+    }
+
+    &.is-invisible {
+        opacity: 0.1;
+    }
+}
+
+.m-button-share {
+    background: url(../../static/img/icons/share.svg) no-repeat;
+    border: yellow;
+    cursor: pointer;
+    opacity: 0.5;
+    margin-top: 20px;
+    margin-left: 18px;
+    margin-right: 21px;
+    position: relative;
+    transform: scale(1.3);
+    width: 30px;
+    height: 26px;
+    border: 0 solid gray;
+    transition: border 10s cubic-bezier(0, 0, 1, 1);
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.m-dropdown-button {
+    background: var(--overlay-color);
+    border: none;
+    text-align: left;
+    color: var(--font-color);
+    cursor: pointer;
+    opacity: 0.5;
+    position: relative;
+    min-width: 90px;
+    size: 100% 39px;
+    padding: 0 12px 0 6px;
+    transition: border 10s cubic-bezier(0, 0, 1, 1);
+    font-size: 16px;
+    &.success-border {
+        border: 1px solid var(--pop-up-color) !important;
+    }
+    &.error-border {
+        border: 1px solid red !important;
+    }
+    &:hover {
+        box-shadow: var(--box-shadow-hard);
+        transition: 0.1s;
+        opacity: 0.8;
+    }
+    & img{
+        height: 22.1px;
+        margin: 0;
+        float: none;
+    }
+}
+
+.m-button-middle-play {
+    size: 25px;
+    background: url(../../static/img/icons/play.svg) no-repeat;
+    border: none;
+    cursor: pointer;
+    opacity: 0.5;
+    padding: 0;
+    transform: scale(1.7);
+    float: left;
+    &:hover {
+        opacity: 0.75;
+    }
+}
+
+.m-lupa-button {
+    opacity: 0.4;
+    cursor: pointer;
+    position: relative;
+    left: -32px;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.m-button-without-size {
+    opacity: 0.3;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+.m-button-fixed {
+    position: fixed;
+    max-width: 40px;
+    max-height: 40px;
+}
+
+.m-signup-button {
+    height: 60px;
+    width: 6%;
+    padding-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    margin-left: auto;
+}
+
+.m-signup-button:hover {
+    background: var(--chosen-icon);
+}
+
+.m-login-button {
+    height: 60px;
+    width: 6%;
+    padding-top: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.m-login-button:hover {
+    background: var(--chosen-icon);
+}
+
+.l-track-buttons {
+    text-align: right;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.l-player-track-buttons {
+    float: right;
+    padding-top: 17px;
+    margin-left: auto;
+    margin-right: 3px;
+}
+
+.l-player-track-button {
+    float: left;
+    margin-right: 2px;
+}
+
+.favorite-button {
+    margin-right: 4px;
+}
+
+.m-add-playlist-button {
+    background-image: url("/static/img/icons/add.svg");
+    display: inline-block;
+    background-size: 100%;
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin: 16px;
+    vertical-align: middle;
+    opacity: 0.4;
+    cursor: pointer;
+
+    &:hover {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+        transition: 0.3s;
+        opacity: 0.8;
+    }
+
+    &:not(:hover) {
+        transition: 0.3s;
+    }
+}
+
+.m-large-like-button {
+    background-image: url("/static/img/icons/add.svg");
+    display: inline-block;
+    background-size: 100%;
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin: 16px;
+    vertical-align: middle;
+    opacity: 0.4;
+    cursor: pointer;
+
+    &.is-liked{
+        background-image: url("../../static/img/icons/favorite.svg");
+    }
+
+    &.is-not-liked {
+        background-image: url("../../static/img/icons/favorite_border.svg");
+    }
+
+    &:hover {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+        transition: 0.3s;
+        opacity: 0.8;
+    }
+
+    &:not(:hover) {
+        transition: 0.3s;
+    }
+}
+
+.m-delete-playlist-button {
+    background-image: url("/static/img/icons/delete_outline-24px.svg");
+    display: inline-block;
+    background-size: 100%;
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-right: 20px;
+    vertical-align: middle;
+    opacity: 0.4;
+
+    &:hover {
+        background-image: url("/static/img/icons/delete-24px.svg");
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+        transition: 0.3s;
+        opacity: 0.7;
+    }
+
+    &:not(:hover) {
+        transition: 0.3s;
+    }
+}
+
+.l-delete-playlist-button {
+    margin-top: 20px;
+    float: right !important;
+    cursor: pointer;
+}
+
+.m-small-ticked-button {
+    background-image: url("/static/img/icons/spizdil_is_yandexa_black.svg");
+    display: inline-block;
+    background-size: 100%;
+    width: 24px;
+    height: 24px;
+    float: left;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.m-small-add-button {
+    background-image: url("/static/img/icons/add.svg");
+    opacity: .2;
+    background-size: 100%;
+    width: 24px;
+    height: 24px;
+    float: left;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.m-button-track-play-playlist {
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+    background: url(../../static/img/icons/play.svg) no-repeat;
+    border: yellow;
+    cursor: pointer;
+    opacity: 0;
+    margin-left: 56px !important;
+}
+
+.l-button-play-track {
+    height: 200px;
+    margin-top: -200px;
+}
+
+.m-small-button {
+    border-radius: 6px;
+    background-color: var(--button-color);
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 20px;
+    padding: 8px;
+    width: 90px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin-top: 16px;
+}
+
+.m-more-button {
+    margin-right: 18px;
+    opacity: 0.4;
+    cursor: pointer;
+    border-radius: 50%;
+    &:hover {
+        opacity: 0.8;
+    }
+    &.touched {
+        background: var(--font-color);
+    }
+}
+
+.submit-input-button {
+    size: 24px;
+    background: var(--button-color);
+    border-radius: 4px;
+    position: absolute;
+    bottom: 13px;
+    right: 10px;
+    cursor: pointer;
+    & img {
+        filter: invert(0.9);
+    }
+    &.is-pressed {
+        box-shadow: 0 24px 0 0 #0000002e inset;
+    }
+}
+
+.m-close-choose-menu-button {
+    position: absolute;
+    right: -30px;
+    top: 0;
+    cursor: pointer;
+}
+
+.m-playlist-section-edit-button {
+    cursor: pointer;
+    opacity: 0.4;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.m-playlist-delete-button {
+    size: 24px;
+    border-radius: 12px;
+    background: var(--overlay-color);
+    & img {
+        opacity: 0.4;
+    }
+    &:hover img {
+        opacity: 0.8;
+    }
+}
+
+.m-playlist-edit-button {
+    float: right;
+    margin-right: 26px;
+    cursor: pointer;
+    opacity: 0.4;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.m-playlist-image-upload-button {
+    size: 24px;
+    border-radius: 12px;
+    background: var(--overlay-color);
+    position: relative;
+    top: 0;
+    right: 34px;
+    float: right;
+    margin: 10px;
+    margin-top: -191px;
+    & img {
+        transform: scale(0.9);
+        opacity: 0.4;
+    }
+    &:hover img {
+        opacity: 0.8;
+    }
+}

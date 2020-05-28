@@ -61,7 +61,7 @@ export default class TrackComponent {
                 callback(playlistID);
                 break;
             case RESPONSE.BAD_REQUEST:
-                console.log('ALREADY ADDED');
+                new PopUp(POPUP.TRACK_ADDITION_ERROR_MESSAGE, true);
                 break;
             default:
                 console.log(res);
@@ -73,12 +73,17 @@ export default class TrackComponent {
     /**
      * Удлаение трека из плейлиста
      * @param {number} playlistID
+     * @param {function} callback
      */
-    delFromPlaylist(playlistID) {
+    delFromPlaylist(playlistID, callback) {
         Api.playlistTrackDelete(playlistID.toString(), this._trackData.id).then((res) => {
             switch (res.status) {
             case RESPONSE.OK:
-                new PopUp(POPUP.TRACK_DELETION_MESSAGE);
+                if (callback) {
+                    callback(playlistID);
+                } else {
+                    new PopUp(POPUP.TRACK_DELETION_MESSAGE);
+                }
                 break;
             case RESPONSE.BAD_REQUEST:
                 new PopUp(POPUP.TRACK_DELETION_ERROR_MESSAGE, true);

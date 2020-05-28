@@ -1,5 +1,5 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
-    <div class="col col-9">
+    <div class="col-9">
         <fest:if test="data.artists.length !== 0">
             <div class="l-main l-top-card">
                 <h2 class="l-small-card">

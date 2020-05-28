@@ -3,7 +3,7 @@
   "short_name": "VM",
   "description": "",
   "icons": [{
-        "src": "/static/img/icons/music_note.svg",
+        "src": "/static/img/manifest_icon.svg",
         "sizes": "48x48 72x72 96x96 128x128"
       }],
   "start_url": "/",

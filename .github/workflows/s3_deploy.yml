@@ -2,9 +2,7 @@ name: S3 deploy
 
 on:
   push:
-    branches:
-      - master
-      - dev
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 

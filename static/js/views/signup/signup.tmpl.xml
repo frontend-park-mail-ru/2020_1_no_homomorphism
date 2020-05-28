@@ -1,23 +1,23 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="is-emphasized l-center-pos row">
-        <div class="col col-4">
+        <div class="col-4">
             <form class="l-form l-card" onsubmit="return false;" autocomplete="none">
                 <h2>SIGN UP</h2>
-                <div class="l-signup-input">
+                <div class="m-form-input">
                     <label>
                         Name
                         <input class="m-big-input" id="name" type="text" value="" placeholder="John Smith" use="required"/>
                         <div class="m-error-message-small"></div>
                     </label>
                 </div>
-                <div class="l-signup-input">
+                <div class="m-form-input">
                     <label>
                         Login
                         <input class="m-big-input" id="login" type="text" value="" placeholder="john99" use="required"/>
                         <div class="m-error-message-small"></div>
                     </label>
                 </div>
-                <div class="l-signup-input">
+                <div class="m-form-input">
                     <label>
                         Email
                         <input class="m-big-input" type="text" id="email" value="" placeholder="johnSmith@mail.ru"
@@ -25,14 +25,14 @@
                         <div class="m-error-message-small"></div>
                     </label>
                 </div>
-                <div class="l-signup-input">
+                <div class="m-form-input">
                     <label>
                         Password
                         <input class="m-big-input" type="password" id="password" value="" use="required"/>
                         <div class="m-error-message-small"></div>
                     </label>
                 </div>
-                <div class="l-signup-input">
+                <div class="m-form-input">
                     <label>
                         Password Confirmation
                         <input class="m-big-input" type="password" id="password-confirm" value="" use="required"/>
