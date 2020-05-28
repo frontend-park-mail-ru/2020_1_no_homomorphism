@@ -26,8 +26,8 @@ export default class PagesManager {
 
     getFirst() {
         this.rendered = 0;
-        this.getData('0', PAGINATION['tracks'].toString());
-        this.rendered += PAGINATION['tracks'];
+        this.getData('0', PAGINATION.TRACKS.toString());
+        this.rendered += PAGINATION.TRACKS;
     }
 
     /**
@@ -56,9 +56,9 @@ export default class PagesManager {
             this.showPreviousPage();
         }
         if (document.getElementsByClassName('l-track-big')[this.firstInPage +
-            PAGINATION['tracks']] &&
+            PAGINATION.TRACKS] &&
             document.getElementsByClassName('l-track-big')[this.firstInPage +
-            PAGINATION['tracks']].getBoundingClientRect().bottom >
+            PAGINATION.TRACKS].getBoundingClientRect().bottom >
             document.documentElement.clientHeight + 20 &&
             this.scrollPreviosPageYOffset > window.pageYOffset &&
             this.scrollListeningState === 'hide'
@@ -72,9 +72,9 @@ export default class PagesManager {
             this.showNextPage();
         }
         if (document.getElementsByClassName('l-track-big')[this.firstInPage +
-            PAGINATION['tracks']] &&
+            PAGINATION.TRACKS] &&
             document.getElementsByClassName('l-track-big')[this.firstInPage +
-            PAGINATION['tracks']].getBoundingClientRect().top < 60 &&
+            PAGINATION.TRACKS].getBoundingClientRect().top < 60 &&
             this.scrollPreviosPageYOffset < window.pageYOffset &&
             this.scrollListeningState === 'hide'
         ) {
@@ -92,17 +92,10 @@ export default class PagesManager {
         ) {
             return;
         }
-        // if (document.getElementsByClassName('top-pagination-patch')[0].getBoundingClientRect().height < 50) {
-        //     document.getElementsByClassName('top-pagination-patch')[0].style.height = '0px';
-        //     return;
-        // }
-        // console.log('show previous');
-        // console.log(this.firstInPage);
-        // console.log(this.lastInPage);
         this.scrollListeningState = 'locked';
         let i = 0;
         let elem = this.firstInPage - 1;
-        while (i < PAGINATION['tracks']) {
+        while (i < PAGINATION.TRACKS) {
             document.getElementsByClassName('l-track-big')[elem].classList
                 .remove('is-not-displayed');
             elem--;
@@ -112,10 +105,7 @@ export default class PagesManager {
         document.getElementsByClassName('top-pagination-patch')[0].style.height = (
             parseInt(document.getElementsByClassName('top-pagination-patch')[0].style.height
                 .slice(0, document.getElementsByClassName('top-pagination-patch')[0].style.height
-                    .length - 2)) -
-            // Math.abs(document.getElementsByClassName('l-track-big')[elem].getBoundingClientRect().top -
-            // document.getElementsByClassName('l-track-big')[this.firstInPage - 1].getBoundingClientRect().bottom)
-            166
+                    .length - 2)) - PAGINATION.TRACK_HEIGHT * PAGINATION.TRACKS / 2
         ).toString() + 'px';
         this.firstInPage = elem;
         this.scrollListeningState = 'hide';
@@ -125,19 +115,13 @@ export default class PagesManager {
      * Прячет следующую страницу
      */
     hideNextPage() {
-        // console.log('hide next');
-        // console.log(this.firstInPage);
-        // console.log(this.lastInPage);
         this.scrollListeningState = 'locked';
         document.getElementsByClassName('bottom-pagination-patch')[0].style.height = (
             parseInt(document.getElementsByClassName('bottom-pagination-patch')[0].style.height
                 .slice(0, document.getElementsByClassName('bottom-pagination-patch')[0].style.height
-                    .length - 2)) +
-            // Math.abs(document.getElementsByClassName('l-track-big')[this.lastInPage].getBoundingClientRect().bottom -
-            // document.getElementsByClassName('l-track-big')[this.firstInPage + PAGINATION['tracks']].getBoundingClientRect().bottom)
-            166
+                    .length - 2)) + PAGINATION.TRACK_HEIGHT * PAGINATION.TRACKS / 2
         ).toString() + 'px';
-        while (this.lastInPage >= this.firstInPage + PAGINATION['tracks']) {
+        while (this.lastInPage >= this.firstInPage + PAGINATION.TRACKS) {
             document.getElementsByClassName('l-track-big')[this.lastInPage].classList
                 .add('is-not-displayed');
             this.lastInPage--;
@@ -155,24 +139,14 @@ export default class PagesManager {
             if (this.askMore) {
                 this.scrollListeningState = 'locked';
                 this.getData(this.rendered.toString(),
-                    (this.rendered + PAGINATION['tracks']).toString());
-                this.rendered += PAGINATION['tracks'];
-                // console.log('asking next');
-                // console.log(this.firstInPage);
-                // console.log(this.lastInPage);
+                    (this.rendered + PAGINATION.TRACKS).toString());
+                this.rendered += PAGINATION.TRACKS;
             }
         } else {
-            // if (document.getElementsByClassName('bottom-pagination-patch')[0].getBoundingClientRect().height < 50) {
-            //     document.getElementsByClassName('bottom-pagination-patch')[0].style.height = '0px';
-            //     return;
-            // }
             this.scrollListeningState = 'locked';
-            // console.log('show next');
-            // console.log(this.firstInPage);
-            // console.log(this.lastInPage);
             let i = 0;
             let elem = this.lastInPage + 1;
-            while (i < PAGINATION['tracks'] && document
+            while (i < PAGINATION.TRACKS && document
                 .getElementsByClassName('l-track-big')[elem]
             ) {
                 document.getElementsByClassName('l-track-big')[elem].classList
@@ -184,10 +158,7 @@ export default class PagesManager {
             document.getElementsByClassName('bottom-pagination-patch')[0].style.height = (
                 parseInt(document.getElementsByClassName('bottom-pagination-patch')[0].style.height
                     .slice(0, document.getElementsByClassName('bottom-pagination-patch')[0].style
-                        .height.length - 2)) -
-                // Math.abs(document.getElementsByClassName('l-track-big')[this.lastInPage + 1].getBoundingClientRect().top -
-                // document.getElementsByClassName('l-track-big')[elem].getBoundingClientRect().bottom)
-                166
+                        .height.length - 2)) - PAGINATION.TRACK_HEIGHT * PAGINATION.TRACKS / 2
             ).toString() + 'px';
             this.lastInPage = elem;
             this.scrollListeningState = 'hide';
@@ -198,20 +169,14 @@ export default class PagesManager {
      * Прячет предыдущую страницу
      */
     hidePreviousPage() {
-        // console.log('hide previous');
-        // console.log(this.firstInPage);
-        // console.log(this.lastInPage);
         this.scrollListeningState = 'locked';
         document.getElementsByClassName('top-pagination-patch')[0].style.height = (
             parseInt(document.getElementsByClassName('top-pagination-patch')[0].style.height
                 .slice(0, document.getElementsByClassName('top-pagination-patch')[0].style.height
-                    .length - 2)) +
-            // Math.abs(document.getElementsByClassName('l-track-big')[this.firstInPage].getBoundingClientRect().top -
-            // document.getElementsByClassName('l-track-big')[this.firstInPage + PAGINATION[this.currentOpen]].getBoundingClientRect().top)
-            166
+                    .length - 2)) + PAGINATION.TRACK_HEIGHT * PAGINATION.TRACKS / 2
         ).toString() + 'px';
         let i = 0;
-        while (i < PAGINATION['tracks']) {
+        while (i < PAGINATION.TRACKS) {
             document.getElementsByClassName('l-track-big')[this.firstInPage].classList
                 .add('is-not-displayed');
             i++;
@@ -224,7 +189,6 @@ export default class PagesManager {
      * Регистрирует отрендеренные треки только что с бэкенда
      */
     resetPage() {
-        // console.log('next recieved');
         if (this.firstInPage === undefined || this.lastInPage === undefined) {
             this.firstInPage = 0;
             this.lastInPage = 0;
@@ -232,7 +196,7 @@ export default class PagesManager {
                 this.lastInPage++;
             }
             this.lastInPage--;
-            if (this.lastInPage - this.firstInPage + 1 < PAGINATION['tracks']) {
+            if (this.lastInPage - this.firstInPage + 1 < PAGINATION.TRACKS) {
                 this.askMore = false;
             }
             this.scrollListeningState = 'show';
@@ -241,12 +205,10 @@ export default class PagesManager {
                 this.lastInPage++;
             }
             this.lastInPage--;
-            if (this.lastInPage - this.firstInPage + 1 < 2 * PAGINATION['tracks']) {
+            if (this.lastInPage - this.firstInPage + 1 < 2 * PAGINATION.TRACKS) {
                 this.askMore = false;
             }
             this.scrollListeningState = 'hide';
         }
-        // console.log(this.firstInPage);
-        // console.log(this.lastInPage);
     }
 }
