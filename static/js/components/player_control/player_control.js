@@ -236,10 +236,11 @@ export default class PlayerControlComponent {
 
     /**
      * Слушает отпускание клавиши мыши
+     * @param {Object} event
      */
-    windowMouseUp() {
-        this.timelineDrag = false;
+    windowMouseUp(event) {
         this.timelineDown = false;
+        this.timelineMouseUp(event);
         this.volumeDrag = false;
     }
 
@@ -302,7 +303,9 @@ export default class PlayerControlComponent {
             const width = event.clientX;
             const ratio = (width - bcr.x) / bcr.width;
             this.eventBus.emit(PLAYER.REWIND, ratio);
-        } else {
+        } else if (event.target.classList.contains('timeline-back') ||
+            event.target.classList.contains('timeline-front')
+        ) {
             const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
             const ratio = (event.clientX - bcr.x) / bcr.width;
             this.eventBus.emit(PLAYER.REWIND, ratio);
