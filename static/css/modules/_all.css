@@ -1,6 +1,24 @@
 /* Стили всех разделов */
 @import "_variables.css";
 
+.m-empty-section {
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+    border-radius: var(--card-border);
+    margin-top: 16px;
+    height: 200px;
+    background: linear-gradient(var(--background-color), var(--chosen-icon), var(--background-color)) !important;
+    animation-name: blinker;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: 2s;
+}
+
+@keyframes blinker {
+    100% {
+        background-position: 0 200px;
+    }
+}
+
 .small-line {
     border-top: 1px solid var(--chosen-icon);
 }
@@ -23,6 +41,7 @@
     background: var(--overlay-color);
     padding: 8px 35px 8px 8px;
     transition: 0.3s;
+
     &.with-modal-window {
         border-radius: 5px 5px 0 0;
     }
@@ -60,6 +79,7 @@
     font-weight: lighter;
     color: var(--font-color);
     text-decoration: none;
+
     &:hover {
         color: var(--tiny-ref-color);
     }
@@ -87,7 +107,6 @@
 .m-text-in-button {
     position: relative;
     bottom: 7.5px;
-    margin-left: 17px
 }
 
 .m-top-name {
@@ -164,6 +183,7 @@
         transition: 0.3s;
         transform: scale(1.2);
     }
+
     & .m-big-like-button, .m-big-delete-button, .m-big-add-button {
         opacity: 0.4;
     }
@@ -183,6 +203,7 @@
 .l-track-big, .l-player-track {
     & .m-big-like-button, .m-big-delete-button, .m-big-add-button {
         opacity: 0;
+
         &:hover {
             opacity: 0.8;
         }
@@ -190,8 +211,13 @@
 }
 
 .m-big-like-button {
-    &.is-liked{
-        opacity: 0.8 !important;
+    &.is-liked {
+        opacity: 0.6 !important;
+        content: url("../../static/img/icons/favorite.svg");
+    }
+
+    &.is-not-liked {
+        content: url("../../static/img/icons/favorite_border.svg");
     }
 }
 
@@ -254,6 +280,7 @@
     text-align: left;
     width: calc(61%);
     float: left;
+
     & div {
         overflow: hidden;
         white-space: nowrap;
@@ -284,6 +311,7 @@
     text-decoration: none;
     border-radius: var(--card-border-small);
     transition: 0.11s;
+
     &:hover {
         box-shadow: var(--box-shadow-hard);
         transform: scale(1.02);
@@ -298,7 +326,8 @@
     display: inline-block;
     width: 90%;
     max-width: 150px;
-    max-height: 201px;
+    max-height: 220px;
+    height: 220px;
     text-decoration: none;
     border-radius: var(--card-border-small);
     box-shadow: 0 0 10px -3px rgba(0, 0, 0, 0.5);
@@ -360,6 +389,7 @@
     transition: box-shadow .3s ease;
     box-shadow: var(--box-shadow-hard);
     z-index: var(--top-level);
+
     .content {
         margin: auto;
     }
@@ -372,6 +402,7 @@
     overflow-x: hidden;
     box-sizing: border-box;
     font: 13px YSTextRegular, Arial, Helvetica, sans-serif;
+
     &::-webkit-scrollbar {
         width: 4px;
     }
@@ -431,7 +462,7 @@
     border-top: 1px solid #d9d6d0;
     border-radius: 0;
     line-height: 20px;
-    padding: 0 13px;
+    padding: 8px 10px 0;
 }
 
 .m-small-input {
@@ -493,6 +524,10 @@
 
 .m-small-text {
     font-size: 13px;
+}
+
+.m-medium-text {
+    font-size: 18px;
 }
 
 .m-medium-bold-text {
@@ -620,9 +655,11 @@
     margin-left: 17px;
     font-size: 16px;
     overflow: hidden;
+
     & .row .col {
         width: 100%;
     }
+
     &.is-expanded {
         opacity: 1;
         pointer-events: all;
@@ -648,6 +685,7 @@
     cursor: pointer;
     float: left;
     transition: 0.3s;
+
     &.is-expanded {
         transform: rotate(90deg);
     }
@@ -658,6 +696,7 @@
     padding-left: 20px;
     height: 0;
     overflow: hidden;
+
     &.is-expanded {
         height: fit-content;
     }
@@ -673,9 +712,11 @@
     float: left;
     margin: 10px 7px;
     transition: 0.3s;
+
     &:hover {
         transform: scale(1.2);
     }
+
     &.is-current-theme .m-theme-small {
         size: 45px;
     }
@@ -704,6 +745,7 @@ input.m-big-name {
     border: none;
     margin-top: -6px;
     padding: 5px 10px;
+
     &:hover, &:focus {
         margin-top: -8px;
         border: solid 2px var(--button-color);
@@ -714,4 +756,121 @@ input.m-big-name {
 
 .pagination-patch {
     width: 100%;
+
+.m-news-elem {
+    animation-duration: 1s;
+    overflow: hidden;
+    margin: 8px;
+    display: inline-block;
+    width: 90%;
+    max-width: 150px;
+    max-height: 250px;
+    height: 250px;
+    text-decoration: none;
+    border-radius: var(--card-border-small);
+    box-shadow: 0 0 10px -3px rgba(0, 0, 0, 0.5);
+    transition: transform 0.1s ease-in-out, box-shadow 0.1s;
+
+    &:hover {
+        background: var(--chosen-icon);
+        transform: translateY(-0.05rem) scale(1.001);
+        transition: 0.2s;
+        box-shadow: 0 3px 10px -3px rgba(0, 0, 0, 0.5);
+    }
+}
+
+.m-news-artist {
+    border-right: 1px solid gray;
+    width: 128px;
+}
+
+.m-news-content {
+    padding-left: 8px;
+    width: 150px;
+}
+
+.m-news-image {
+    height: 100px;
+    width: 100px;
+    float: bottom;
+    border-radius: var(--card-border-small);
+}
+
+.m-small-description {
+    height: 40px;
+}
+
+.m-news-title {
+    display: block;
+    color: var(--font-color);
+    text-decoration: none;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.l-list-round-card {
+    overflow: hidden;
+    background-color: var(--overlay-color);
+    width: 90%;
+    max-width: 180px;
+    max-height: 220px;
+    text-decoration: none;
+    border-radius: var(--card-border-small);
+    transition: 0.11s;
+    min-width: 180px;
+    margin: 1px;
+    &:hover {
+        box-shadow: 0 0 0 1px var(--button-color);
+    }
+}
+
+.artists-section {
+    margin-left: 32px;
+    margin-right: 32px;
+    display: flex;
+    min-height: 225px;
+    overflow-x: scroll;
+}
+
+.artists-section::-webkit-scrollbar {
+    display: none;
+}
+
+.m-prev-button {
+    position: absolute;
+    margin-top: 80px;
+    background: var(--button-color);
+    border-radius: 100px;
+    padding-left: 4px;
+    padding-top: 6px;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+    scroll-behavior: smooth;
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+.m-next-button {
+    position: sticky;
+    right: 16px;
+    margin-top: 80px;
+    opacity: 0.6;
+    background: var(--button-color);
+    border-radius: 100px;
+    padding-left: 6px;
+    padding-right: 4px;
+    padding-top: 6px;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    scroll-behavior: smooth;
+    &:hover {
+        opacity: 0.9;
+    }
 }

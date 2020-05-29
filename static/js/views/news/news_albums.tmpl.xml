@@ -1,0 +1,22 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <fest:for iterate="data" index="i" value="elem">
+        <div class="m-news-elem" a-id="{elem.id}">
+            <div class="l-list-image" title="{elem.name}" >
+                <a href="/album/{elem.id}">
+                    <img class="m-list-image" src="{elem.image}" a-id="{elem.id}" alt=""/>
+                </a>
+            </div>
+            <a class="l-list-card-description  m-tiny-ref" title="{elem.name}"  href="/album/{elem.id}"
+               style="padding-bottom: 0">
+                <fest:value>elem.name</fest:value>
+            </a>
+            <a class="m-obscure-title m-tiny-ref m-small-text row" href="/artist/{elem.artist_id}"
+               style="margin-bottom: 10px">
+                <fest:value>elem.artist_name</fest:value>
+            </a>
+            <div class="m-obscure-title m-small-text">
+                <fest:value>elem.release</fest:value>
+            </div>
+        </div>
+    </fest:for>
+</fest:template>

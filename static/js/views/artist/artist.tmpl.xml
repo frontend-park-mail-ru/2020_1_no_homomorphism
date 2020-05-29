@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="l-down-card">
-                <div class="l-track-list" id="artist-albums">
+                <div class="l-track-list m-empty-section" id="artist-albums">
                 </div>
             </div>
         </div>

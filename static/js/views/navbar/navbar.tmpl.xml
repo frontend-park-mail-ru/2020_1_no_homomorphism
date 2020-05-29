@@ -27,7 +27,7 @@
         <div class="m-mobile-only m-tablet-only l-navbar-icon">
             <img class="m-small-icon" src="/static/img/icons/exit_to_app.svg"/>
         </div>
-        <div class="m-desktop-only">log out</div>
+        <div class="m-desktop-only">logout</div>
     </a>
     <a href="/signup" class="m-signup-button is-not-displayed" id="signup-link">
         <div class="m-mobile-only m-tablet-only l-navbar-icon">

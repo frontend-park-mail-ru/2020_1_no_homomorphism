@@ -34,6 +34,7 @@ export default class SettingsModel {
             case RESPONSE.OK:
                 res.json().then((data) => {
                     User.setUserData(data);
+                    globalEventBus.emit(GLOBAL.RENDER_LOGGED, User.getUserData());
                     window.localStorage.setItem('theme', data.theme);
                     this.getCsrfToken();
                     this.eventBus.emit(SETTINGS.RENDER_LOGGED, User.getUserData());

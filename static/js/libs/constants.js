@@ -87,6 +87,7 @@ export const GLOBAL = {
     PAUSE: 'global-pause',
     HIDE_SUBSCRIPTIONS: 'hide subscriptions',
     RENDER_THEME: 'render theme',
+    RENDER_LOGGED: 'render-new-avatar',
 };
 
 export const MAIN = {
@@ -94,12 +95,13 @@ export const MAIN = {
     GET_TRACKS_DATA: 'get-all-tracks-data',
     GET_ARTISTS_DATA: 'get-all-artists-data',
     RENDER_SUBSCRIPTIONS: 'render subscriptions',
-    RENDER_ARTISTS: 'render artists',
+    RENDER_NEWS_SECTION: 'render-news-section',
     RENDER_TRACKS: 'render tracks',
     RENDER_SUBSCRIPTIONS_LIST: 'render subscriptions list',
-    RENDER_ARTISTS_LIST: 'render artists list',
+    RENDER_NEWS_LIST: 'render news list',
     RENDER_TRACKS_LIST: 'render tracks list',
     NO_ANSWER: 'no-answer',
+    RENDER_ARTISTS_LIST: 'render artists list',
 };
 
 export const LOGIN = {
@@ -317,6 +319,7 @@ export const POPUP = {
 export const THEME_OVERLAY = {
     'light': 'white',
     'dark': '#383b40',
+    'special': 'white',
 };
 
 export const THEME = {
@@ -367,6 +370,13 @@ export const THEME = {
             ['--selected-elem', '#01579b'],
             ['--marker-color', '#01579b'],
             ['--button-color', '#01579b'],
+        ],
+    },
+    'special': {
+        'lsd': [
+            ['--selected-elem', '#dcc4ff'],
+            ['--marker-color', '#6900ff'],
+            ['--button-color', '#6900ff'],
         ],
     },
 };
