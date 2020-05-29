@@ -35,6 +35,7 @@ export default class PlayerModel {
         globalEventBus.on(GLOBAL.PLAY_PLAYLIST, this.getPlaylistTracks.bind(this));
         globalEventBus.on(GLOBAL.PLAY_ALBUM, this.deleteAll.bind(this));
         globalEventBus.on(GLOBAL.PLAY_ALBUM, this.getAlbumTracks.bind(this));
+        globalEventBus.on(GLOBAL.ADD_TO_QUEUE, this.addToQueue.bind(this));
         this.eventBus.on(PLAYER.GET_TRACK, this.getTrack.bind(this));
         this.eventBus.on(PLAYER.GET_TRACKS, this.getPlaylistTracks.bind(this));
         this.eventBus.on(PLAYER.PAUSE, this.pause.bind(this));
@@ -81,7 +82,7 @@ export default class PlayerModel {
      * @param {string} trackId
      * @param {number} number
      */
-    getPlaylistTracks(id, trackId, number = PAGINATION['tracks']) {
+    getPlaylistTracks(id, trackId, number = PAGINATION.TRACKS) {
         Api.playlistTracksGet(id, '0', number.toString())
             .then((res) => {
                 switch (res.status) {
@@ -101,7 +102,7 @@ export default class PlayerModel {
      * @param {string} trackId
      * @param {number} number
      */
-    getAlbumTracks(id, trackId, number = PAGINATION['tracks']) {
+    getAlbumTracks(id, trackId, number = PAGINATION.TRACKS) {
         Api.albumTracksGet(id, '0', number)
             .then((res) => {
                 switch (res.status) {
@@ -115,6 +116,26 @@ export default class PlayerModel {
                     console.error('I am a teapot');
                 }
             });
+    }
+
+    /**
+     * Добавляет новый трек в очередь
+     * @param {string} id
+     */
+    addToQueue(id) {
+        Api.trackGet(id).then((res) => {
+            if (res.ok) {
+                res.json().then((track) => {
+                    if (this.playlist.length === 0) {
+                        this.setData({tracks: [track]});
+                    } else {
+                        this.playlist.push(track);
+                        this.queue.push(this.queue.length);
+                        this.eventBus.emit(PLAYER.ADD_TO_QUEUE, track);
+                    }
+                });
+            }
+        });
     }
 
     /**

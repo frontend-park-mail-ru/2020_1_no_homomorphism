@@ -103,25 +103,25 @@ export default class TrackListComponent {
      * Set EventListeners
      */
     setTracksEventListeners() {
-        document.querySelectorAll('.m-track-image').forEach((track) => {
+        document.querySelectorAll('.l-track-big .m-track-image').forEach((track) => {
             track.onclick = (event) => this.playTrack.bind(this)(event);
         });
-        document.querySelectorAll('.m-button-track-play').forEach((track) => {
+        document.querySelectorAll('.l-track-big .m-button-track-play').forEach((track) => {
             track.onclick = (event) => this.playTrack.bind(this)(event);
         });
-        document.querySelectorAll('.m-big-add-button').forEach((track) => {
+        document.querySelectorAll('.l-track-big .m-big-add-button').forEach((track) => {
             track.onclick = (event) => this.addToPlaylist.bind(this)(event);
         });
-        document.querySelectorAll('img.m-big-like-button').forEach((button) => {
+        document.querySelectorAll('.l-track-big img.m-big-like-button').forEach((button) => {
             button.onclick = (event) => this.likeClicked(event);
         });
         if (this._tracklist.type) {
-            document.querySelectorAll('img.m-big-delete-button').forEach((button) => {
+            document.querySelectorAll('.l-track-big img.m-big-delete-button').forEach((button) => {
                 button.onclick = (event) => this.deleteClicked(event);
             });
         }
         if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
-            document.querySelectorAll('.more-button').forEach((button) => {
+            document.querySelectorAll('.l-track-big .more-button').forEach((button) => {
                 button.ontouchstart = (event) => {
                     event.preventDefault();
                     event.target.classList.add('touched');
@@ -130,7 +130,7 @@ export default class TrackListComponent {
                 };
                 button.onclick = (event) => this.moreClicked(event);
             });
-            document.querySelectorAll('.add-button').forEach((track) => {
+            document.querySelectorAll('.l-track-big .add-button').forEach((track) => {
                 track.ontouchstart = (event) => {
                     event.preventDefault();
                     if (event.target.tagName == 'BUTTON') {
@@ -144,7 +144,7 @@ export default class TrackListComponent {
                 };
                 track.onclick = (event) => this.addToPlaylist.bind(this)(event);
             });
-            document.querySelectorAll('.like-button').forEach((button) => {
+            document.querySelectorAll('.l-track-big .like-button').forEach((button) => {
                 button.ontouchstart = (event) => {
                     event.preventDefault();
                     if (event.target.tagName == 'BUTTON') {
@@ -158,7 +158,21 @@ export default class TrackListComponent {
                 };
                 button.onclick = (event) => this.likeClicked(event);
             });
-            document.querySelectorAll('.add-player-button').forEach((button) => {
+            document.querySelectorAll('.l-track-big .add-player-button').forEach((button) => {
+                button.ontouchstart = (event) => {
+                    event.preventDefault();
+                    if (event.target.tagName == 'BUTTON') {
+                        event.target.classList.add('touched');
+                        setTimeout(() => event.target.classList.remove('touched'), 100);
+                    } else {
+                        event.target.parentNode.classList.add('touched');
+                        setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                    }
+                    event.target.click();
+                };
+                button.onclick = (event) => this.addToPlayerQueue(event);
+            });
+            document.querySelectorAll('.l-track-big .album-button').forEach((button) => {
                 button.ontouchstart = (event) => {
                     event.preventDefault();
                     if (event.target.tagName == 'BUTTON') {
@@ -171,7 +185,7 @@ export default class TrackListComponent {
                     event.target.click();
                 };
             });
-            document.querySelectorAll('.album-button').forEach((button) => {
+            document.querySelectorAll('.l-track-big .artist-button').forEach((button) => {
                 button.ontouchstart = (event) => {
                     event.preventDefault();
                     if (event.target.tagName == 'BUTTON') {
@@ -183,22 +197,10 @@ export default class TrackListComponent {
                     }
                     event.target.click();
                 };
-            });
-            document.querySelectorAll('.artist-button').forEach((button) => {
-                button.ontouchstart = (event) => {
-                    event.preventDefault();
-                    if (event.target.tagName == 'BUTTON') {
-                        event.target.classList.add('touched');
-                        setTimeout(() => event.target.classList.remove('touched'), 100);
-                    } else {
-                        event.target.parentNode.classList.add('touched');
-                        setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
-                    }
-                    event.target.click();
-                };
+                button.onclick = (event) => this.artistClicked(event);
             });
             if (this._tracklist.type) {
-                document.querySelectorAll('.remove-button').forEach((button) => {
+                document.querySelectorAll('.l-track-big .remove-button').forEach((button) => {
                     button.ontouchstart = (event) => {
                         event.preventDefault();
                         if (event.target.tagName == 'BUTTON') {
@@ -466,5 +468,27 @@ export default class TrackListComponent {
                 console.error('I am a teapot');
             }
         });
+    }
+
+    /**
+     * Добавляет в очередь плеера
+     * @param {Object} event
+     */
+    addToPlayerQueue() {
+        const track = this.getIdByClick(event);
+        globalEventBus.emit(GLOBAL.ADD_TO_QUEUE, track.id);
+    }
+
+    /**
+     * Переход на страницу артиста
+     * @param {Object} event
+     */
+    artistClicked(event) {
+        event.stopImmediatePropagation();
+        let target = event.target;
+        while (!target.classList.contains('l-track-big')) {
+            target = target.parentNode;
+        }
+        globalEventBus.emit(GLOBAL.REDIRECT, target.children[3].children[1].getAttribute('href'));
     }
 }
