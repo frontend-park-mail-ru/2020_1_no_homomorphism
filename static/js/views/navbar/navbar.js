@@ -54,8 +54,11 @@ export default class NavbarView extends BaseView {
             document.documentElement.removeAttribute('theme-name');
         }
         // document.documentElement.removeAttribute('theme-name');
+        console.log('LOL');
+        console.log(name);
         THEME[split[0]][split[1]].forEach((prop) => {
             document.documentElement.style.setProperty(prop[0], prop[1]);
+            // console.log(document.documentElement);
         });
     }
 
@@ -181,7 +184,7 @@ export default class NavbarView extends BaseView {
         document.getElementById('logout-link').classList.remove('is-not-displayed');
         document.getElementById('profile-link').classList.remove('is-not-displayed');
         document.getElementById('settings-icon').classList.remove('is-not-displayed');
-        this.renderTheme(data.theme);
+        // this.renderTheme(data.theme);
     }
 
     /**

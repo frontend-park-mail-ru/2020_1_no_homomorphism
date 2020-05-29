@@ -251,6 +251,7 @@ export const PLAYLIST = {
     CHANGE_IMAGE: 'playlist-image',
     ADD_PLAYLIST: 'playlist-add',
     INVALID: 'playlist-invalid',
+    CHECK_COOKIE: 'check-user-cookie',
 };
 
 export const ALBUM = {

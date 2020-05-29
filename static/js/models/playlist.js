@@ -76,7 +76,7 @@ export default class PlaylistModel {
                                 'startIndex': start,
                             }, save);
                         }
-                        this.eventBus.emit(PLAYLIST.SET_TRACKS_AMOUNT, this.playlist.tracks.length);
+                        this.cookieFetch.bind(this)(this.playlist.tracks.length);
                     });
                     break;
                 default:
@@ -204,6 +204,19 @@ export default class PlaylistModel {
                 console.error('I am a teapot');
             }
         });
+    }
+
+    /**
+     * Узнаёт, залогинен ли пользователь
+     * @param {number} length
+     */
+    cookieFetch(length) {
+        Api.cookieGet()
+            .then((res) => {
+                if (res.status === RESPONSE.OK) {
+                    this.eventBus.emit(PLAYLIST.SET_TRACKS_AMOUNT, length);
+                }
+            });
     }
 
     /**
