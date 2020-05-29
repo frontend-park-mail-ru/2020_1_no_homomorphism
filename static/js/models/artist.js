@@ -53,8 +53,9 @@ export default class ArtistModel {
      * Получает треки артиста из БД
      * @param {string} start
      * @param {string} end
+     * @param {boolean} save
      */
-    getArtistTracks(start, end) {
+    getArtistTracks(start, end, save) {
         Api.artistTracksGet(this.id, start, end)
             .then((res) => {
                 switch (res.status) {
@@ -68,7 +69,7 @@ export default class ArtistModel {
                                     'domItem': 'l-track-list',
                                     'type': 'artist',
                                     'startIndex': start,
-                                });
+                                }, save);
                         });
                     break;
                 default:

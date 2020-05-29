@@ -59,8 +59,9 @@ export default class PlaylistModel {
      * @param {string} id
      * @param {string} start
      * @param {string} end
+     * @param {boolean} save
      */
-    getTracks(id, start, end) {
+    getTracks(id, start, end, save) {
         Api.playlistTracksGet(id, start, end)
             .then((res) => {
                 switch (res.status) {
@@ -73,7 +74,7 @@ export default class PlaylistModel {
                                 'domItem': 'l-track-list',
                                 'type': 'playlist',
                                 'startIndex': start,
-                            });
+                            }, save);
                         }
                         this.eventBus.emit(PLAYLIST.SET_TRACKS_AMOUNT, this.playlist.tracks.length);
                     });
