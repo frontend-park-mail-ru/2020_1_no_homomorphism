@@ -6,7 +6,7 @@ import {PAGINATION} from '@libs/constants';
 export default class PagesManager {
     /**
      * Конструктор
-     * @param {String} url
+     * @param {Array} url
      * @param {Object} eventBus
      * @param {Function} getData
      * @param {String} resetMessage
@@ -37,10 +37,7 @@ export default class PagesManager {
         if (this.scrollListeningState === 'locked') {
             return;
         }
-        if (window.location.pathname.indexOf(this.url) === -1 ||
-            window.location.pathname.indexOf('albums') !== -1 ||
-            window.location.pathname.indexOf('info') !== -1
-        ) {
+        if (!this.url.find((reg) => window.location.pathname.match(reg))) {
             this.scrollListeningState = 'locked';
             return;
         }

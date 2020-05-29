@@ -27,7 +27,7 @@ export default class PlaylistView extends BaseView {
         this.moreComponent = new MorePlaylistComponent(eventBus);
         this.addComponent = new AddPlaylistComponent(eventBus);
         this.trackListComponent = new TrackListComponent(eventBus, PLAYLIST);
-        this.pagesManager = new PagesManager('playlist', eventBus, (start, end) => {
+        this.pagesManager = new PagesManager([/(\/playlist\/)[0-9]+/], eventBus, (start, end) => {
             this.eventBus.emit(PLAYLIST.GET_TRACKS_DATA,
                 window.location.pathname.split('/')[window.location.pathname.split('/').length - 1],
                 start, end);

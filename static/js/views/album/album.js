@@ -21,7 +21,7 @@ export default class AlbumView extends BaseView {
         this.albumData = {};
         this.tracksData = {};
         this.trackListComponent = new TrackListComponent(eventBus, ALBUM);
-        this.pagesManager = new PagesManager('album', eventBus, (start, end) => {
+        this.pagesManager = new PagesManager([/(\/album\/)[0-9]+/], eventBus, (start, end) => {
             this.eventBus.emit(ALBUM.GET_TRACKS_DATA,
                 window.location.pathname.split('/')[window.location.pathname.split('/').length - 1],
                 start, end);
