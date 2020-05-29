@@ -24,13 +24,15 @@ export default class MorePlaylistComponent {
         if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
             document.getElementsByClassName('l-top-card')[0].innerHTML += more({mobile: true});
         } else {
-            document.getElementsByClassName('l-top-card')[0].innerHTML += more({mobile: false});
+            document.getElementsByClassName('l-top-card')[0]
+                .innerHTML += more({mobile: false, id: this._playlist.id});
             // eslint-disable-next-line no-undef
             const elem = VK.Share.button(false, {
                 url: window.location.href,
                 type: 'round_nocount',
-                text: 'Поделиться',
+                text: 'Share',
             });
+            console.log(window.location.href);
             document.getElementById('vk-share').innerHTML += elem;
             document.querySelectorAll('td').forEach((elem) => {
                 elem.children[0].target = '_blank';
@@ -153,7 +155,6 @@ export default class MorePlaylistComponent {
      * @param {Object} event
      */
     _copyLink(event) {
-        // if (!this._playlist.private) {
         if (navigator.share) {
             navigator.share({
                 title: 'Shared a playlist',
@@ -179,10 +180,6 @@ export default class MorePlaylistComponent {
             .catch((err) => {
                 new PopUp(POPUP.PLAYLIST_LINK_COPY_ERROR_MESSAGE, true);
             });
-        // return;
-        // }
-        // this._button.classList.toggle('error-border');
-        // setTimeout(this.delErrorClass.bind(this), 1000);
     }
 
     /**

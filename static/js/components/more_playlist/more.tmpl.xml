@@ -13,7 +13,7 @@
             <div class="row">
                 <button class="m-dropdown-button" id="playlist-share-button">
                     <img src="/static/img/icons/link.svg"/>
-                    <span class="m-text-in-button">copy link</span>
+                    <span class="m-text-in-button">copy</span>
                 </button>
             </div>
             <div class="row">
@@ -35,8 +35,8 @@
             <div class="row">
                 <div class="m-privacy-title col">Private playlist</div>
                 <label class="m-switch col">
-                    <input type="checkbox" id="checkbox" checked="true" value="1"></input>
-                    <span class="m-slider"></span>
+                    <input type="checkbox" id="checkbox" checked="true" value="1"> </input>
+                    <span class="m-slider"> </span>
                 </label>
             </div>
             <div class="row">
@@ -44,7 +44,7 @@
                     <div class="row">
                         <button class="m-dropdown-button" id="playlist-share-button">
                             <img src="/static/img/icons/link.svg"/>
-                            <span class="m-text-in-button">copy link</span>
+                            <span class="m-text-in-button">copy</span>
                         </button>
                     </div>
                     <div class="row">
@@ -55,7 +55,11 @@
                     </div>
                     <div class="row">
                         <div class="m-share-button">
-                            <div class="fb-share-button" data-href="https://virusmusic.fun" data-layout="button"
+<!--                            <div class="fb-share-button"-->
+<!--                                 data-href="https://www.your-domain.com/your-page.html"-->
+<!--                                 data-layout="button_count">-->
+<!--                            </div>-->
+                            <div class="fb-share-button" data-href="https://virusmusic.fun/playlist/{data.id}" data-layout="button"
                                  data-size="small">
                                 <a target="_blank"
                                    href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
@@ -66,8 +70,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <button class="m-button-share"></button>
-
+                    <button class="m-button-share"> </button>
                 </div>
             </div>
             <div class="row">

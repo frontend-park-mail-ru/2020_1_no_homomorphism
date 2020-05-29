@@ -207,9 +207,10 @@ input:checked + .m-slider:before {
     cursor: pointer;
     opacity: 0.5;
     position: relative;
-    min-width: 90px;
-//size: 100% 39px; height: 40px; transition: border 10s cubic-bezier(0, 0, 1, 1); font-size: 16px;
-
+    transition: border 10s cubic-bezier(0, 0, 1, 1);
+    padding: 4px 4px 4px 16px;
+    height: 30px;
+    width: 90px;
     &.success-border {
         border: 1px solid var(--pop-up-color) !important;
     }

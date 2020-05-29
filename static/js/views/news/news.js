@@ -67,7 +67,7 @@ export default class NewsView extends BaseView {
      */
     renderNewsList(data) {
         const node = document.getElementsByClassName(data.domItem)[0];
-        if (node === null) {
+        if (node === null || node === undefined) {
             return;
         }
         const curDate = new Date().getTime();
