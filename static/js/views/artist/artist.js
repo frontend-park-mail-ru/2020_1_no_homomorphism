@@ -26,7 +26,7 @@ export default class ArtistView extends BaseView {
         new PlaylistsComponent(eventBus, ARTIST.RENDER_ALBUMS);
         this.pagesManager = new PagesManager([/(\/artist\/)[0-9]+/, /(\/artist\/)[0-9]+(\/tracks)/],
             eventBus, (start, end) => {
-                this.eventBus.emit('artist-tracks', start, end);
+                this.eventBus.emit('artist-tracks', start, end, true);
             }, ARTIST.NEW_RECIEVED);
         this.eventBus = eventBus;
         this.eventBus.on(ARTIST.RENDER_DATA, this.renderData.bind(this));

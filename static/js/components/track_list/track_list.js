@@ -59,15 +59,20 @@ export default class TrackListComponent {
     /**
      * Отрисовка списка треков
      * @param {Object} data
+     * @param {Boolean} save
      */
-    render(data) {
+    render(data, save = false) {
         data.startIndex = data.startIndex ? parseInt(data.startIndex) : 0;
         let i = 1;
         data.tracks.map((track) => {
             track.index = i + data.startIndex;
             i++;
         });
-        Array.prototype.push.apply(this._tracklist, data.tracks);
+        if (save) {
+            Array.prototype.push.apply(this._tracklist, data.tracks);
+        } else {
+            this._tracklist = data.tracks;
+        }
         this._type = data.type;
         this._tracklist.type = this._type === 'playlist';
         this._baseDom = data.domItem;
