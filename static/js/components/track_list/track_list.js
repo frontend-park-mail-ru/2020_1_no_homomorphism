@@ -4,10 +4,11 @@ import {globalEventBus} from '@libs/eventBus';
 import ChoosePlaylist from '@components/choose_playlist/choose_playlist';
 import TrackComponent from '@components/track/track';
 import PlaylistComponent from '@components/playlist/playlist';
-import {PLAYLIST, GLOBAL, RESPONSE, PROFILE, POPUP, LAYOUT} from '@libs/constants';
+import {PLAYLIST, GLOBAL, RESPONSE, PROFILE, LAYOUT} from '@libs/constants';
 import User from '@libs/user';
 import Api from '@libs/api';
 import PopUp from '@components/pop-up/pop-up';
+import {lang} from '@libs/language';
 
 /**
  * Компонент - список треков
@@ -86,7 +87,10 @@ export default class TrackListComponent {
         if (!elem.firstChild) {
             elem.innerHTML = '<div class="top-pagination-patch" style="height: 0px"></div>';
         }
-        elem.innerHTML += template(data.tracks);
+        elem.innerHTML += template({
+            tracks: data.tracks,
+            lang: lang,
+        });
         const patch = elem.getElementsByClassName('bottom-pagination-patch')[0];
         if (!patch) {
             elem.innerHTML += '<div class="bottom-pagination-patch" style="height: 0px"></div>';
@@ -252,7 +256,7 @@ export default class TrackListComponent {
      */
     addToPlaylist(event) {
         if (!User.exists()) {
-            new PopUp(POPUP.LOGIN_ERROR, true);
+            new PopUp(lang.popUp.LOGIN_ERROR, true);
             // globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
             return;
         }
@@ -397,7 +401,7 @@ export default class TrackListComponent {
         event.preventDefault();
         event.stopImmediatePropagation();
         if (!User.exists()) {
-            new PopUp(POPUP.LOGIN_ERROR, true);
+            new PopUp(lang.popUp.LOGIN_ERROR, true);
             // globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
             return;
         }
@@ -428,10 +432,10 @@ export default class TrackListComponent {
             }
             if (domItem.firstChild.src.indexOf('/static/img/icons/favorite.svg') !== -1) {
                 domItem.firstChild.src = '/static/img/icons/favorite_border.svg';
-                domItem.children[1].innerText = 'like';
+                domItem.children[1].innerText = lang.dropdown.like;
             } else {
                 domItem.firstChild.src = '/static/img/icons/favorite.svg';
-                domItem.children[1].innerText = 'unlike';
+                domItem.children[1].innerText = lang.dropdown.unlike;
             }
         } else {
             if (domItem.src.indexOf('/static/img/icons/favorite.svg') !== -1) {

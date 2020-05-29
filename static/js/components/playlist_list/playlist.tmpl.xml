@@ -8,7 +8,7 @@
                 <img class="m-button-without-size" src="/static/img/icons/add.svg" alt=""/>
             </div>
             <div class="l-small-input">
-                <input type="text" placeholder="Create playlist" class="m-small-input"></input>
+                <input type="text" placeholder="{data.lang.playlist.createPlaceholder}" class="m-small-input"></input>
             </div>
         </div>
         <fest:for iterate="data" index="i" value="elem">
@@ -24,17 +24,17 @@
                     <button class="m-button-track-play-playlist"></button>
                 </div>
                 <div class="l-small-input is-not-displayed">
-                    <input class="is-margin-top--191" type="text" placeholder="Playlist name" class="m-small-input"></input>
+                    <input class="is-margin-top--191" type="text" placeholder="{data.lang.playlist.editPlaceholder}" class="m-small-input"></input>
                 </div>
                 <a class="l-list-card-description  m-tiny-ref" href="{data.href}{elem.id}">
                     <fest:value>elem.name</fest:value>
                 </a>
                 <div class="row">
                     <div class="m-playlist-delete-button m-top-right-corner is-margin-top--191 is-not-displayed">
-                        <img src="/static/img/icons/delete-24px.svg" title="delete playlist"/>
+                        <img src="/static/img/icons/delete-24px.svg" title="{data.lang.playlist.deleteButtonTitle}"/>
                     </div>
                     <div class="m-playlist-image-upload-button is-not-displayed">
-                        <img src="/static/img/icons/cloud_upload.svg" title="upload playlist image"/>
+                        <img src="/static/img/icons/cloud_upload.svg" title="{data.lang.playlist.imageButtonTitle}"/>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
     <fest:if test="!data.type">
         <fest:if test="data.length < 1">
             <div class="m-empty-list">
-                There aren't any albums
+                <fest:value>data.lang.album.noAlbums</fest:value>
             </div>
         </fest:if>
         <fest:for iterate="data" index="i" value="elem">
@@ -60,6 +60,5 @@
                 </a>
             </div>
         </fest:for>
-
     </fest:if>
 </fest:template>

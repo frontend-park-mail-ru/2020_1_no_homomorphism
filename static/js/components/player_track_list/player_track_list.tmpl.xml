@@ -1,5 +1,5 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
-    <fest:for iterate="data" index="i" value="track">
+    <fest:for iterate="data.tracks" index="i" value="track">
         <div class="l-player-track row border-bottom" id="{track.id}" draggable="true">
             <div class="m-track-photo">
                 <img src="{track.image}" height="50px" width="50px" alt="..."/>
@@ -35,37 +35,49 @@
                 <div class="row">
                       <button class="m-dropdown-button delete-button">
                         <img src="/static/img/icons/clear.svg"/>
-                        <span class="m-text-in-button">remove</span>
+                        <span class="m-text-in-button">
+                            <fest:value>data.lang.dropdown.remove</fest:value>
+                        </span>
                     </button>
                 </div>
                 <div class="row">
                     <button class="m-dropdown-button like-button">
                         <fest:if test="!track.is_liked">
                             <img src="/static/img/icons/favorite_border.svg"/>
-                            <span class="m-text-in-button">like</span>
+                            <span class="m-text-in-button">
+                                <fest:value>data.lang.dropdown.like</fest:value>
+                            </span>
                         </fest:if>
                         <fest:if test="track.is_liked">
                             <img src="/static/img/icons/favorite.svg"/>
-                            <span class="m-text-in-button">unlike</span>
+                            <span class="m-text-in-button">
+                                <fest:value>data.lang.dropdown.unlike</fest:value>
+                            </span>
                         </fest:if>
                     </button>
                 </div>
                 <div class="row">
                     <button class="m-dropdown-button add-button">
                         <img src="/static/img/icons/playlist_add.svg"/>
-                        <span class="m-text-in-button">add</span>
+                        <span class="m-text-in-button">
+                            <fest:value>data.lang.dropdown.add</fest:value>
+                        </span>
                     </button>
                 </div>
                 <div class="row">
                     <button class="m-dropdown-button album-button">
                         <img src="/static/img/icons/album.svg"/>
-                        <span class="m-text-in-button">go to album</span>
+                        <span class="m-text-in-button">
+                            <fest:value>data.lang.dropdown.goToAlbum</fest:value>
+                        </span>
                     </button>
                 </div>
                 <div class="row">
                     <button class="m-dropdown-button artist-button">
                         <img src="/static/img/icons/person.svg"/>
-                        <span class="m-text-in-button">go to artist</span>
+                        <span class="m-text-in-button">
+                            <fest:value>data.lang.dropdown.goToAtrist</fest:value>
+                        </span>
                     </button>
                 </div>
             </div>

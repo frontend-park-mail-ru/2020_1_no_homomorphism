@@ -1,4 +1,5 @@
 import search from '@components/search/search.xml';
+import {lang} from '@libs/language';
 
 /**
  * Глупенький компонент поиска (без высшего образования)
@@ -20,6 +21,7 @@ export default class SearchDummyComponent {
      */
     render(data) {
         this._data = data;
+        data.lang = lang;
         document.getElementsByClassName('l-top-content')[0].innerHTML = search(data);
         document.getElementsByClassName('m-search-input')[0].value = data.input;
         document.getElementsByClassName('m-search-input')[0].classList.add('with-modal-window');

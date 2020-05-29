@@ -2,24 +2,26 @@
     <div class="is-emphasized l-center-pos row">
         <div class="col-4">
             <form class="l-form l-card" onsubmit="return false;" autocomplete="none">
-                <h2>SIGN UP</h2>
+                <h2>
+                    <fest:value>data.lang.signup.caption</fest:value>
+                </h2>
                 <div class="m-form-input">
                     <label>
-                        Name
+                        <fest:value>data.lang.signup.name</fest:value>
                         <input class="m-big-input" id="name" type="text" value="" placeholder="John Smith" use="required"/>
                         <div class="m-error-message-small"></div>
                     </label>
                 </div>
                 <div class="m-form-input">
                     <label>
-                        Login
+                        <fest:value>data.lang.signup.login</fest:value>
                         <input class="m-big-input" id="login" type="text" value="" placeholder="john99" use="required"/>
                         <div class="m-error-message-small"></div>
                     </label>
                 </div>
                 <div class="m-form-input">
                     <label>
-                        Email
+                        <fest:value>data.lang.signup.email</fest:value>
                         <input class="m-big-input" type="text" id="email" value="" placeholder="johnSmith@mail.ru"
                                use="required"/>
                         <div class="m-error-message-small"></div>
@@ -27,26 +29,26 @@
                 </div>
                 <div class="m-form-input">
                     <label>
-                        Password
+                        <fest:value>data.lang.signup.password</fest:value>
                         <input class="m-big-input" type="password" id="password" value="" use="required"/>
                         <div class="m-error-message-small"></div>
                     </label>
                 </div>
                 <div class="m-form-input">
                     <label>
-                        Password Confirmation
+                        <fest:value>data.lang.signup.passwordConfirmation</fest:value>
                         <input class="m-big-input" type="password" id="password-confirm" value="" use="required"/>
                         <div class="m-error-message-small"></div>
                     </label>
                 </div>
                 <button class="m-submit-button" type="submit" id="signup-submit">
-                    Go
+                    <fest:value>data.lang.signup.go</fest:value>
                 </button>
                 <div class="m-error-message-small" id="global">
                 </div>
                 <div class="m-form-description">
                     <a class="m-tiny-ref" href="/login">
-                        Already registered? Log in.
+                        <fest:value>data.lang.signup.alreadyRegistered</fest:value>
                     </a>
                 </div>
             </form>

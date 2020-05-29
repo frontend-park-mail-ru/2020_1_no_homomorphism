@@ -1,4 +1,6 @@
 import {VALIDATION} from '@libs/constants';
+import {lang} from '@libs/language';
+
 /**
  * Валидация данных
  * @class Validation
@@ -10,11 +12,11 @@ export default class Validation {
      */
     static email(email = '') {
         if (email === '') {
-            return VALIDATION.EMAIL_EMPTY;
+            return lang.validation.EMAIL_EMPTY;
         }
         const regExpr = new RegExp(VALIDATION.REGEX_EMAIL);
         if (!email.match(regExpr)) {
-            return VALIDATION.EMAIL_INCORRECT;
+            return lang.validation.EMAIL_INCORRECT;
         }
         return '';
     }
@@ -25,10 +27,10 @@ export default class Validation {
     static login(login = '') {
         const regExpr = new RegExp(VALIDATION.REGEX_LOGIN);
         if (login === '') {
-            return VALIDATION.LOGIN_EMPTY;
+            return lang.validation.LOGIN_EMPTY;
         }
         if (!login.match(regExpr)) {
-            return VALIDATION.LOGIN_INCORRECT;
+            return lang.validation.LOGIN_INCORRECT;
         }
         return '';
     }
@@ -40,17 +42,17 @@ export default class Validation {
      */
     static password(pass1 = '', pass2 = '', passConfirm = false) {
         if (pass1 === '') {
-            return VALIDATION.PASS_EMPTY;
+            return lang.validation.PASS_EMPTY;
         }
         if (pass2 === '' && passConfirm) {
-            return VALIDATION.REPEAT_PASS_EMPTY;
+            return lang.validation.REPEAT_PASS_EMPTY;
         }
         if (pass1 !== pass2 && passConfirm) {
-            return VALIDATION.PASSES_DIFF;
+            return lang.validation.PASSES_DIFF;
         }
         const regExpr = new RegExp(VALIDATION.REGEX_PASSWORD);
         if (!pass1.match(regExpr)) {
-            return VALIDATION.PASS_INCORRECT;
+            return lang.validation.PASS_INCORRECT;
         }
         return '';
     }
@@ -61,10 +63,10 @@ export default class Validation {
      */
     static image(size, extension) {
         if (size > 1048576) {
-            return VALIDATION.IMG_TOO_BIG;
+            return lang.validation.IMG_TOO_BIG;
         }
         if (VALIDATION.ALLOWABLE_EXTENSIONS.indexOf(extension) === -1) {
-            return VALIDATION.IMG_WRONG_EXT;
+            return lang.validation.IMG_WRONG_EXT;
         }
         return '';
     }

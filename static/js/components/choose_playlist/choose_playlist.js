@@ -1,9 +1,10 @@
 import dropdown from '@components/choose_playlist/choose_playlist.tmpl.xml';
 import createdPlaylist from '@components/choose_playlist/created_playlist.tmpl.xml';
-import {DOM, SEARCH, POPUP} from '@libs/constants';
+import {DOM, SEARCH} from '@libs/constants';
 import TrackComponent from '@components/track/track';
 import PlaylistComponent from '@components/playlist/playlist';
 import PopUp from '@components/pop-up/pop-up';
+import {lang} from '@libs/language';
 
 /**
  * Компонент - выпадающее меню при добавлении трека в плейлист
@@ -57,7 +58,10 @@ export default class ChoosePlaylist {
         for (const elem of this._playlists) {
             elem.include = playlistIncludes.includes(elem.id);
         }
-        document.getElementsByClassName(DOM.TOP_CONTENT)[0].innerHTML += dropdown(this._playlists);
+        document.getElementsByClassName(DOM.TOP_CONTENT)[0].innerHTML += dropdown({
+            playlists: this._playlists,
+            lang: lang,
+        });
         document.getElementsByClassName(DOM.CONTENT)[0]
             .firstChild
             .classList
@@ -121,7 +125,7 @@ export default class ChoosePlaylist {
             this._playlistComponent
                 .createPlaylist(this.renderNewPlaylist.bind(this), value);
         } else {
-            new PopUp(POPUP.PLAYLIST_EMPTY_NAME_ERROR, true);
+            new PopUp(lang.popUp.PLAYLIST_EMPTY_NAME_ERROR, true);
         }
     }
 
@@ -141,7 +145,7 @@ export default class ChoosePlaylist {
             this._playlistComponent
                 .createPlaylist(this.renderNewPlaylist.bind(this), value);
         } else {
-            new PopUp(POPUP.PLAYLIST_EMPTY_NAME_ERROR, true);
+            new PopUp(lang.popUp.PLAYLIST_EMPTY_NAME_ERROR, true);
         }
     }
 
@@ -166,7 +170,7 @@ export default class ChoosePlaylist {
         this._curPlaylist.setAttribute('is-include', 'true');
         const playlist = this._playlists.find((item) => item.id === playlistID);
         playlist.include = true;
-        new PopUp(POPUP.TRACK_ADDITION_MESSAGE + playlist.name);
+        new PopUp(lang.popUp.TRACK_ADDITION_MESSAGE + playlist.name);
     }
 
     /**
@@ -179,7 +183,7 @@ export default class ChoosePlaylist {
         this._curPlaylist.setAttribute('is-include', 'false');
         const playlist = this._playlists.find((item) => item.id === playlistID);
         playlist.include = false;
-        new PopUp(POPUP.TRACK_DELETION_MESSAGE + playlist.name);
+        new PopUp(lang.popUp.TRACK_DELETION_MESSAGE + playlist.name);
     }
 
     /**

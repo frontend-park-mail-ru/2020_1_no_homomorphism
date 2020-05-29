@@ -1,4 +1,6 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <fest:script>
+    </fest:script>
     <div class="col-9">
         <div class="l-main ">
             <div class="l-top-card">
@@ -9,7 +11,6 @@
                         </div>
                         <div class="l-top-name col">
                             <div class="m-top-login" id="profile-login">
-                                <fest:value>data.name</fest:value>
                             </div>
                             <div class="m-top-name" id="profile-name">
                                 <fest:value>data.genre</fest:value>
@@ -19,7 +20,9 @@
                     <div class="l-play-button-col">
                           <div class="l-button-middle-play artist">
                             <button class="m-button-middle-play"> </button>
-                            <div class="m-tracks-amount m-mobile-only">play all tracks</div>
+                            <div class="m-tracks-amount m-mobile-only">
+                                <fest:value>data.lang.artist.playAll</fest:value>
+                            </div>
                         </div>
                     </div>
                     <div class="m-right-col">
@@ -32,7 +35,9 @@
                             <h2 id="artist-tracks-title">
                                 <fest:value>data.tracks</fest:value>
                             </h2>
-                            <p>Tracks</p>
+                            <p>
+                                <fest:value>data.lang.artist.tracks</fest:value>
+                            </p>
                         </a>
                     </div>
                     <div class="l-top-section-albums col-4" id="profile-albums-title">
@@ -40,12 +45,16 @@
                             <h2 id="artist-albums-title">
                                 <fest:value>data.albums</fest:value>
                             </h2>
-                            <p>Albums</p>
+                            <p>
+                                <fest:value>data.lang.artist.albums</fest:value>
+                            </p>
                         </a>
                     </div>
                     <div class="l-top-section-info col-4" id="profile-info-title">
                         <a class="m-tiny-ref l-top-section-info-ref" href="/artist/{data.id}/info">
-                            <h2>Info</h2>
+                            <h2>
+                                <fest:value>data.lang.artist.info</fest:value>
+                            </h2>
                         </a>
                     </div>
                 </div>

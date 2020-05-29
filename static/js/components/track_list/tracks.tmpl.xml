@@ -1,18 +1,18 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
-    <fest:if test="data.length < 1">
-        <fest:if test="data.type">
+    <fest:if test="data.tracks.length < 1">
+        <fest:if test="data.tracks.type">
             <div class="m-empty-list">
-                You don't have any liked tracks
+                <fest:value>data.lang.track.noLiked</fest:value>
             </div>
         </fest:if>
-        <fest:if test="!data.type">
+        <fest:if test="!data.tracks.type">
             <div class="m-empty-list">
-                There aren't any tracks
+                <fest:value>data.lang.track.empty</fest:value>
             </div>
         </fest:if>
     </fest:if>
-    <fest:if test="data.length > 0">
-        <fest:for iterate="data" index="i" value="track">
+    <fest:if test="data.tracks.length > 0">
+        <fest:for iterate="data.tracks" index="i" value="track">
             <div class="l-track-big" t-id="{track.id}" t-image="{track.image}">
                 <div class="m-index">
                     <fest:value>track.index</fest:value>
@@ -27,7 +27,7 @@
                         <fest:value>track.artist</fest:value>
                     </a>
                 </div>
-                <fest:if test="data.type">
+                <fest:if test="data.tracks.type">
                     <div class="l-track-buttons">
                         <div class="l-big-track-button delete-button">
                             <img src="/static/img/icons/clear.svg" class="m-big-delete-button" height="15px" alt="..."/>
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </fest:if>
-                <fest:if test="!data.type">
+                <fest:if test="!data.tracks.type">
                     <div class="l-track-buttons">
                         <div class="l-big-track-button favorite-button">
                             <fest:if test="!track.is_liked">
@@ -67,11 +67,13 @@
                     </div>
                 </fest:if>
                 <div class="m-top-right-corner m-dropdown m-mobile-tablet-only">
-                    <fest:if test="data.type">
+                    <fest:if test="data.tracks.type">
                         <div class="row">
                             <button class="m-dropdown-button remove-button">
                                 <img src="/static/img/icons/clear.svg"/>
-                                <span class="m-text-in-button">remove</span>
+                                <span class="m-text-in-button">
+                                    <fest:value>data.lang.dropdown.remove</fest:value>
+                                </span>
                             </button>
                         </div>
                     </fest:if>
@@ -79,45 +81,57 @@
                         <button class="m-dropdown-button like-button">
                             <fest:if test="!track.is_liked">
                                 <img src="/static/img/icons/favorite_border.svg"/>
-                                <span class="m-text-in-button">like</span>
+                                <span class="m-text-in-button">
+                                    <fest:value>data.lang.dropdown.like</fest:value>
+                                </span>
                             </fest:if>
                             <fest:if test="track.is_liked">
                                 <img src="/static/img/icons/favorite.svg"/>
-                                <span class="m-text-in-button">unlike</span>
+                                <span class="m-text-in-button">
+                                    <fest:value>data.lang.dropdown.unlike</fest:value>
+                                </span>
                             </fest:if>
                         </button>
                     </div>
                     <div class="row">
                         <button class="m-dropdown-button add-button">
                             <img src="/static/img/icons/playlist_add.svg"/>
-                            <span class="m-text-in-button">add</span>
+                            <span class="m-text-in-button">
+                                <fest:value>data.lang.dropdown.add</fest:value>
+                            </span>
                         </button>
                     </div>
                     <div class="row">
                         <button class="m-dropdown-button add-player-button">
                             <img src="/static/img/icons/queue_music.svg"/>
-                            <span class="m-text-in-button">add to player</span>
+                            <span class="m-text-in-button">
+                                <fest:value>data.lang.dropdown.addToPlayer</fest:value>
+                            </span>
                         </button>
                     </div>
                     <div class="row">
                         <button class="m-dropdown-button album-button">
                             <img src="/static/img/icons/album.svg"/>
-                            <span class="m-text-in-button">go to album</span>
+                            <span class="m-text-in-button">
+                                <fest:value>data.lang.dropdown.goToAlbum</fest:value>
+                            </span>
                         </button>
                     </div>
                     <div class="row">
                         <button class="m-dropdown-button artist-button">
                             <img src="/static/img/icons/person.svg"/>
-                            <span class="m-text-in-button">go to artist</span>
+                            <span class="m-text-in-button">
+                                <fest:value>data.lang.dropdown.goToAtrist</fest:value>
+                            </span>
                         </button>
                     </div>
                 </div>
             </div>
-            <fest:if test="data.length == i+1">
-                <fest:if test="data.length % 2 === 1">
+            <fest:if test="data.tracks.length == i+1">
+                <fest:if test="data.tracks.length % 2 === 1">
                     <div class="is-empty-track is-height-50"></div>
                 </fest:if>
-                <fest:if test="data.length % 2 !== 1">
+                <fest:if test="data.tracks.length % 2 !== 1">
                     <div class="is-empty-track"></div>
                 </fest:if>
             </fest:if>

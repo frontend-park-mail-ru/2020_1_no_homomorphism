@@ -4,9 +4,8 @@
         <div class="m-project-name m-desktop-mobile-only col">
             VirusMusic
         </div>
-
     </a>
-    <input type="text" class="m-search-input m-desktop-tablet-only" placeholder="Find artist, track or album"/>
+    <input type="text" class="m-search-input m-desktop-tablet-only" placeholder="{data.lang.navbar.searchPlaceholder}"/>
     <img src="/static/img/icons/search.svg" class="m-lupa-button m-search-icon m-desktop-tablet-only"/>
     <a href="/search" class="l-navbar-small-search m-mobile-only l-navbar-icon">
         <img class="m-small-icon" src="/static/img/icons/search.svg"/>
@@ -27,19 +26,25 @@
         <div class="m-mobile-only m-tablet-only l-navbar-icon">
             <img class="m-small-icon" src="/static/img/icons/exit_to_app.svg"/>
         </div>
-        <div class="m-desktop-only">log out</div>
+        <div class="m-desktop-only">
+            <fest:value>data.lang.navbar.logout</fest:value>
+        </div>
     </a>
     <a href="/signup" class="m-signup-button is-not-displayed" id="signup-link">
         <div class="m-mobile-only m-tablet-only l-navbar-icon">
             <img class="m-small-icon" src="/static/img/icons/person_add.svg"/>
         </div>
-        <div class="m-desktop-only">sign up</div>
+        <div class="m-desktop-only">
+            <fest:value>data.lang.navbar.signup</fest:value>
+        </div>
     </a>
     <a href="/login" class="m-login-button is-not-displayed" id="login-link">
         <div class="m-mobile-only m-tablet-only l-navbar-icon">
             <img class="m-small-icon" src="/static/img/icons/exit_to_app.svg"/>
         </div>
-        <div class="m-desktop-only">log in</div>
+        <div class="m-desktop-only">
+            <fest:value>data.lang.navbar.login</fest:value>
+        </div>
     </a>
     <div class="l-top-search">
     </div>

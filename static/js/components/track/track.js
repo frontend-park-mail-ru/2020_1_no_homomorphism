@@ -1,6 +1,7 @@
 import Api from '@libs/api';
-import {RESPONSE, POPUP} from '@libs/constants';
+import {RESPONSE} from '@libs/constants';
 import PopUp from '@components/pop-up/pop-up';
+import {lang} from '@libs/language';
 
 /**
  * Компонент трек
@@ -61,7 +62,7 @@ export default class TrackComponent {
                 callback(playlistID);
                 break;
             case RESPONSE.BAD_REQUEST:
-                new PopUp(POPUP.TRACK_ADDITION_ERROR_MESSAGE, true);
+                new PopUp(lang.popUp.TRACK_ADDITION_ERROR_MESSAGE, true);
                 break;
             default:
                 console.log(res);
@@ -82,11 +83,11 @@ export default class TrackComponent {
                 if (callback) {
                     callback(playlistID);
                 } else {
-                    new PopUp(POPUP.TRACK_DELETION_MESSAGE);
+                    new PopUp(lang.popUp.TRACK_DELETION_MESSAGE);
                 }
                 break;
             case RESPONSE.BAD_REQUEST:
-                new PopUp(POPUP.TRACK_DELETION_ERROR_MESSAGE, true);
+                new PopUp(lang.popUp.TRACK_DELETION_ERROR_MESSAGE, true);
                 break;
             default:
                 console.log(res);

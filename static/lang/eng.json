@@ -1,0 +1,193 @@
+{
+    "album": {
+        "tracks": {
+            "=1": "track",
+            "default": "tracks"
+        },
+        "empty": "Album is empty :(",
+        "noId": "Sorry, there isn't album with this id :(",
+        "like": "like album",
+        "noAlbums": "There aren't any albums"
+    },
+    "artist": {
+        "subscribe": "Subscribe",
+        "unsubscribe": "Unsubscribe",
+        "tracks": "Tracks",
+        "albums": "Albums",
+        "info": "Info",
+        "playAll": "play all tracks",
+        "noSubscribtions": "You haven't subscribed to any artists"
+    },
+    "login": {
+        "caption": "LOG IN",
+        "login": "Login",
+        "password": "Password",
+        "go": "Go",
+        "noAccount": "No account? Sign up",
+        "errors": {
+            "wrong": "Wrong login or password",
+            "already": "You are already logged in",
+            "tryAgain": "Errors in input data, try again"
+        }
+    },
+    "navbar": {
+        "searchPlaceholder": "Find artist, track or album",
+        "logout": "log out",
+        "signup": "sign up",
+        "login": "log in"
+    },
+    "playlist": {
+        "tracks": {
+            "=1": "track",
+            "default": "tracks"
+        },
+        "changeImage": "Change image",
+        "empty": "Playlist is empty :(",
+        "noId": "Sorry, there isn't playlist with this id :(",
+        "noRights": "Sorry, you can't get this playlist :(",
+        "privacy": "Private playlist",
+        "copyLink": "copy link",
+        "edit": "edit playlist",
+        "delete": "delete playlist",
+        "createPlaceholder": "Create playlist",
+        "editPlaceholder": "Playlist name",
+        "deleteButtonTitle": "delete playlist",
+        "imageButtonTitle": "upload playlist image"
+    },
+    "profile": {
+        "tracks": "Tracks",
+        "playlists": "Playlists",
+        "albums": "Albums",
+        "artists": "Artists"
+    },
+    "search": {
+        "tracks": "Tracks",
+        "albums": "Albums",
+        "artists": "Artists",
+        "noResults": "No results found",
+        "allResults": "All results ➤"
+    },
+    "settings": {
+        "avatar": "Avatar",
+        "avatarTitle": "Add new image",
+        "profile": {
+            "caption": "Profile data",
+            "name": "Name",
+            "email": "Email",
+            "save": "Save"
+        },
+        "password": {
+            "caption": "Password",
+            "newPassword": "New password",
+            "repeatPassword": "Repeat password",
+            "oldPassword": "Old password",
+            "change": "Change"
+        },
+        "theme": {
+            "caption": "Theme",
+            "names": {
+                "light": "Light",
+                "dark": "Dark",
+                "special": "Special"
+            }
+        },
+        "other": {
+            "caption": "Other",
+            "language": "Language",
+            "languages": [{
+                "full": "English",
+                "short": "eng"
+            }, {
+                "full": "Русский",
+                "short": "rus"
+            }]
+        },
+        "errors": {
+            "oldPassword": "Enter old password",
+            "name": "Enter name",
+            "password": "Wrong password",
+            "email": "This email is already taken"
+        }
+    },
+    "signup": {
+        "caption": "SIGN UP",
+        "name": "Name",
+        "login": "Login",
+        "email": "Email",
+        "password": "Password",
+        "passwordConfirmation": "Password confirmation",
+        "go": "Go",
+        "alreadyRegistered": "Already registered? Log in",
+        "errors": {
+            "name": "Enter your name",
+            "request": "Bad request",
+            "already": "You are already logged in",
+            "tryAgain": "Errors in input data, try again",
+            "taken": {
+                "login": "This login is taken",
+                "email": "This email is taken",
+                "both": "These login and email are taken"
+            }
+        }
+    },
+    "tracks": {
+        "empty": "There aren't any tracks",
+        "noLiked": "You don't have any liked tracks"
+    },
+    "validation": {
+        "EMAIL_EMPTY": "Enter email",
+        "EMAIL_INCORRECT": "Incorrect email syntax",
+        "LOGIN_EMPTY": "Enter login",
+        "LOGIN_INCORRECT": "Login must contain at least 3 letters or numbers",
+        "PASS_EMPTY": "Enter password",
+        "REPEAT_PASS_EMPTY": "Repeat the password",
+        "PASSES_DIFF": "Passwords must match",
+        "PASS_INCORRECT": "Password must contain at least 3 letters or numbers",
+        "IMG_TOO_BIG": "Max allowable size – 1Mb",
+        "IMG_WRONG_EXT": "Not allowable extension"
+    },
+    "dropdown": {
+        "like": "like",
+        "unlike": "unlike",
+        "remove": "remove",
+        "add": "add",
+        "addToPlayer": "add to player",
+        "goToAlbum": "go to album",
+        "goToAtrist": "go to atrist"
+    },
+    "popUp": {
+        "SOMETHING_WENT_WRONG": "Something went wrong",
+        "SORRY": "Sorry, cannot perform it because our server is kek",
+        "SETTINGS_MESSAGE": "Profile data successfully updated",
+        "THEME_MESSAGE": "Theme successfully updated",
+        "PASSWORD_MESSAGE": "Password successfully changed",
+        "AVATAR_MESSAGE": "Profile picture successfully changed",
+        "PLAYLIST_CREATION_MESSAGE": "Playlist successfully created",
+        "PLAYLIST_EMPTY_NAME_ERROR": "Enter name first",
+        "PLAYLIST_CREATION_ERROR_MESSAGE": "Playlist with this name already exists",
+        "PLAYLIST_NAME_UPDATE_MESSAGE": "Playlist name successfully updated",
+        "PLAYLIST_NAME_UPDATE_ERROR_MESSAGE": "Cannot updatе playlist name",
+        "PLAYLIST_PICTURE_UPDATE_MESSAGE": "Playlist picture successfully updated",
+        "PLAYLIST_PICTURE_UPDATE_ERROR_MESSAGE": "Cannot updata playlist picture",
+        "PLAYLIST_DELETION_MESSAGE": "Playlist successfully deleted",
+        "PLAYLIST_DELETION_ERROR_MESSAGE": "Cannot delete playlist",
+        "TRACK_ADDITION_MESSAGE": "Added to playlist ",
+        "TRACK_ADDITION_ERROR_MESSAGE": "Already added",
+        "TRACK_DELETION_MESSAGE": "Deleted from playlist ",
+        "TRACK_DELETION_ERROR_MESSAGE": "Cannot delete this track",
+        "PLAYLIST_PRIVACY_PRIVATE_MESSAGE": "Playlist is private now",
+        "PLAYLIST_PRIVACY_PUBLIC_MESSAGE": "Playlist is public now",
+        "PLAYLIST_LINK_COPY_MESSAGE": "Link copied",
+        "PLAYLIST_LINK_COPY_ERROR_MESSAGE": "Cannot copy link",
+        "PLAYLIST_LINK_COPY_PRIVACY_ERROR_MESSAGE": "No link copied. Make the playlist public first",
+        "PLAYLIST_ADDITION_MESSAGE": "Playlist added",
+        "PLAYLIST_ADDITION_ERROR_MESSAGE": "Cannot add playlist",
+        "ARTIST_SUBSCRIPTION_MESSAGE": "Subscribed to ",
+        "ARTIST_SUBSCRIPTION_ERROR_MESSAGE": "Please, login. Can not subscribe to ",
+        "ARTIST_UNSUBSCRIPTION_MESSAGE": "Unsubscribed from ",
+        "ARTIST_UNSUBSCRIPTION_ERROR_MESSAGE": "Cannot unsubscribe from ",
+        "ALBUM_LIKED": "Album successfully liked",
+        "ALBUM_UN_LIKED": "Like successfully removed",
+        "LOGIN_ERROR": "Please, login"
+    }
+}

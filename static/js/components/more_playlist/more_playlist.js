@@ -1,6 +1,7 @@
-import {PLAYLIST, POPUP, LAYOUT} from '@libs/constants';
+import {PLAYLIST, LAYOUT} from '@libs/constants';
 import more from '@components/more_playlist/more.tmpl.xml';
 import PopUp from '@components/pop-up/pop-up';
+import {lang} from '@libs/language';
 
 /**
  * Компонента, отвечающая за возможности авторизированного пользователя
@@ -22,9 +23,15 @@ export default class MorePlaylistComponent {
      */
     render(isPrivate) {
         if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
-            document.getElementsByClassName('l-top-card')[0].innerHTML += more({mobile: true});
+            document.getElementsByClassName('l-top-card')[0].innerHTML += more({
+                lang: lang,
+                mobile: true,
+            });
         } else {
-            document.getElementsByClassName('l-top-card')[0].innerHTML += more({mobile: false});
+            document.getElementsByClassName('l-top-card')[0].innerHTML += more({
+                lang: lang,
+                mobile: false,
+            });
         }
         document.getElementById('checkbox').checked = isPrivate;
         this._button = document.getElementById('playlist-share-button');
@@ -131,8 +138,8 @@ export default class MorePlaylistComponent {
         this._playlist.private = !this._playlist.private;
         this._button.classList.toggle('is-button-disabled');
         new PopUp(this._playlist.private ?
-            POPUP.PLAYLIST_PRIVACY_PRIVATE_MESSAGE :
-            POPUP.PLAYLIST_PRIVACY_PUBLIC_MESSAGE);
+            lang.popUp.PLAYLIST_PRIVACY_PRIVATE_MESSAGE :
+            lang.popUp.PLAYLIST_PRIVACY_PUBLIC_MESSAGE);
         this.eventBus.emit(PLAYLIST.CHANGE_PRIVACY, this._playlist.id);
     }
 
@@ -146,10 +153,10 @@ export default class MorePlaylistComponent {
                 .then(() => {
                     this._button.classList.add('success-border');
                     setTimeout(this.delSuccessClass.bind(this), 1000);
-                    new PopUp(POPUP.PLAYLIST_LINK_COPY_MESSAGE);
+                    new PopUp(lang.popUp.PLAYLIST_LINK_COPY_MESSAGE);
                 })
                 .catch((err) => {
-                    new PopUp(POPUP.PLAYLIST_LINK_COPY_ERROR_MESSAGE, true);
+                    new PopUp(lang.popUp.PLAYLIST_LINK_COPY_ERROR_MESSAGE, true);
                 });
             return;
         }

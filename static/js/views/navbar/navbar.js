@@ -121,7 +121,6 @@ export default class NavbarView extends BaseView {
             document.getElementsByClassName('m-search-input')[0].value = '';
             globalEventBus.emit(GLOBAL.REDIRECT, `/search/${input}`);
         }
-        // alert(input);
     }
 
     /**

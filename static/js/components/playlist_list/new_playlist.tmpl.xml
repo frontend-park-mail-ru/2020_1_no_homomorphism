@@ -1,27 +1,27 @@
-<fest:template xmlns:fest="http://fest.mail.ru" context_name="playlist">
-    <div class="l-list-card" a-id="{playlist.id}">
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <div class="l-list-card" a-id="{data.playlist.id}">
         <div class="l-list-image">
-            <img class="m-list-image" src="/static/img/playlist/default.png" a-id="{playlist.id}" alt=""/>
+            <img class="m-list-image" src="/static/img/playlist/default.png" a-id="{data.playlist.id}" alt=""/>
         </div>
         <label class="l-list-image-label is-not-displayed">
-            <img class="m-list-image" src="/static/img/playlist/default.png" a-id="{playlist.id}" alt=""/>
+            <img class="m-list-image" src="/static/img/playlist/default.png" a-id="{data.playlist.id}" alt=""/>
             <input class="m-hidden-input is-not-displayed" type="file"/>
         </label>
         <div class="l-button-play-track">
             <button class="m-button-track-play-playlist"> </button>
         </div>
         <div class="l-small-input is-not-displayed">
-            <input class="is-margin-top--191" type="text" placeholder="Playlist name" class="m-small-input"></input>
+            <input class="is-margin-top--191" type="text" placeholder="{data.lang.playlist.editPlaceholder}" class="m-small-input"></input>
         </div>
-        <a class="l-list-card-description" href="/playlist/{playlist.id}">
-            <fest:value>playlist.name</fest:value>
+        <a class="l-list-card-description" href="/playlist/{data.playlist.id}">
+            <fest:value>data,playlist.name</fest:value>
         </a>
         <div class="row">
             <div class="m-playlist-delete-button m-top-right-corner is-margin-top--191 is-not-displayed">
-                <img src="/static/img/icons/delete-24px.svg" title="delete playlist"/>
+                <img src="/static/img/icons/delete-24px.svg" title="{data.lang.playlist.deleteButtonTitle}"/>
             </div>
             <div class="m-playlist-image-upload-button is-not-displayed">
-                <img src="/static/img/icons/cloud_upload.svg" title="upload playlist image"/>
+                <img src="/static/img/icons/cloud_upload.svg" title="{data.lang.playlist.imageButtonTitle}"/>
             </div>
         </div>
     </div>

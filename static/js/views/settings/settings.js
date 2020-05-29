@@ -5,6 +5,7 @@ import User from '@libs/user';
 import PopUp from '@components/pop-up/pop-up';
 import {inputSanitize} from '@libs/input_sanitize';
 import {globalEventBus} from '@libs/eventBus';
+import {lang, setLanguage} from '@libs/language';
 
 /**
  * вью для настроек
@@ -39,7 +40,7 @@ export default class SettingsView extends BaseView {
                 continue;
             }
             data.themes.push({
-                name: i[0].toUpperCase() + i.slice(1, i.length),
+                name: lang.settings.theme.names[i],
                 themes: [],
             });
             for (const j in THEME[i]) {
@@ -87,6 +88,9 @@ export default class SettingsView extends BaseView {
             event.stopImmediatePropagation();
             this.hideErrors();
             this.eventBus.emit(SETTINGS.AVATAR_UPLOAD);
+        });
+        document.getElementById('language-select').addEventListener('change', (event) => {
+            setLanguage(event.target.selectedOptions[0].value);
         });
         document.getElementsByClassName('m-theme-selector-container-name').forEach((elem) => {
             elem.addEventListener('click', (event) => {
@@ -149,6 +153,7 @@ export default class SettingsView extends BaseView {
         document.getElementById('newPasswordConfirm').value = '';
         document.getElementById('password').value = '';
         document.getElementById(data.theme).classList.add('is-current-theme');
+        // document.getElementById('language-select').options[].selected = true;
     }
 
     /**

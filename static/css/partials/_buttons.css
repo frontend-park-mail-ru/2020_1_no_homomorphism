@@ -3,14 +3,15 @@
 
 .m-submit-button {
     border-radius: 6px;
-    margin-left: 213px;
+    /* margin-left: 213px; */
     background-color: var(--button-color);
     border: none;
     color: #FFFFFF;
     text-align: center;
     font-size: 20px;
     padding: 20px;
-    width: 100px;
+    min-width: 100px;
+    width: fit-content;
     transition: all 0.5s;
     cursor: pointer;
     margin-top: 8px;
@@ -263,8 +264,8 @@ input:checked + .m-slider:before {
 
 .m-signup-button {
     height: 60px;
-    width: 6%;
-    padding-top: 20px;
+    width: fit-content;
+    padding: 20px 10px 0;
     text-align: center;
     font-weight: bold;
     margin-left: auto;
@@ -440,7 +441,7 @@ input:checked + .m-slider:before {
     text-align: center;
     font-size: 20px;
     padding: 8px;
-    width: 90px;
+    width: fit-content;
     transition: all 0.5s;
     cursor: pointer;
     margin-top: 16px;

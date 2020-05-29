@@ -126,5 +126,6 @@ export default class ArtistModel {
      */
     getArtistInfo() {
         alert('This functionality is not accessible by now');
+        window.history.back();
     }
 }

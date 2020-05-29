@@ -3,7 +3,8 @@ import newPlaylist from '@components/playlist_list/new_playlist.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
 import PlaylistComponent from '@components/playlist/playlist';
 import PopUp from '@components/pop-up/pop-up';
-import {GLOBAL, PROFILE, SEARCH, POPUP} from '@libs/constants';
+import {GLOBAL, PROFILE, SEARCH} from '@libs/constants';
+import {lang} from '@libs/language';
 
 /**
  * Список плейлистов или альбомомв
@@ -53,6 +54,7 @@ export default class PlaylistsComponent {
      * @return {Array}
      */
     generateHref(list) {
+        list.lang = lang;
         list.type = this._type === 'playlist';
         list.href = `/${this._type}/`;
         return list;
@@ -178,7 +180,7 @@ export default class PlaylistsComponent {
             document.getElementsByClassName('m-small-input')[0].value = '';
             this._playlistComponent.createPlaylist(this.updatePlaylistList.bind(this), value);
         } else {
-            new PopUp(POPUP.PLAYLIST_EMPTY_NAME_ERROR, true);
+            new PopUp(lang.popUp.PLAYLIST_EMPTY_NAME_ERROR, true);
         }
     }
 
@@ -228,7 +230,10 @@ export default class PlaylistsComponent {
      */
     updatePlaylistList(playlist) {
         if (playlist['name']) {
-            document.getElementsByClassName(this._domItem)[0].innerHTML += newPlaylist(playlist);
+            document.getElementsByClassName(this._domItem)[0].innerHTML += newPlaylist({
+                playlist: playlist,
+                lang: lang,
+            });
             this.eventBus.emit(PROFILE.CHANGE_PLAYLIST_AMOUNT, 1);
         } else {
             const card = document.getElementsByClassName('l-list-card').find((card) => {

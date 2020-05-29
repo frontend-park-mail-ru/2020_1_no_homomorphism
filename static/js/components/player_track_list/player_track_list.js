@@ -2,6 +2,7 @@ import {PLAYER, GLOBAL, URL, LAYOUT} from '@libs/constants';
 import template from '@components/player_track_list/player_track_list.tmpl.xml';
 import {globalEventBus} from '@libs/eventBus';
 import User from '@libs/user';
+import {lang} from '@libs/language';
 
 /**
  * Компонент - список треков в плеере
@@ -332,7 +333,10 @@ export default class PlayerTrackListComponent {
             document.getElementsByClassName('l-player-footer')[0].classList.add('l-player-visible');
         }
         this.eventBus.emit(PLAYER.TRACK_UPDATE, tracks[0]);
-        document.getElementsByClassName('track-list')[0].innerHTML += template(tracks);
+        document.getElementsByClassName('track-list')[0].innerHTML += template({
+            tracks: tracks,
+            lang: lang,
+        });
         this.locked = false;
         if (!this.expanded) {
             this.triggerClick();

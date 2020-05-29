@@ -3,6 +3,7 @@ import Api from '@libs/api';
 import User from '@libs/user';
 import Validation from '@libs/validation';
 import {globalEventBus} from '@libs/eventBus';
+import {lang} from '@libs/language';
 
 /**
  * Модель плейлиста
@@ -40,12 +41,12 @@ export default class PlaylistModel {
                 break;
             case RESPONSE.BAD_REQUEST:
                 this.eventBus.emit(PLAYLIST.ERROR,
-                    {text: 'Sorry, there isn\'t playlist with this id :('});
+                    {text: lang.playlist.noId});
                 break;
             case RESPONSE.UNAUTH:
             case RESPONSE.NO_ACCESS_RIGHT:
                 this.eventBus.emit(PLAYLIST.ERROR,
-                    {text: 'Sorry, you can\'t get this playlist :('});
+                    {text: lang.playlist.noRights});
                 break;
             default:
                 console.log(res);
@@ -94,11 +95,11 @@ export default class PlaylistModel {
             switch (res.status) {
             case RESPONSE.OK:
                 this.eventBus.emit(PLAYLIST.RENDER_DELETED);
-                this.eventBus.emit(POPUP.NEW, POPUP.PLAYLIST_DELETION_MESSAGE);
+                this.eventBus.emit(POPUP.NEW, lang.popUp.PLAYLIST_DELETION_MESSAGE);
                 globalEventBus.emit(GLOBAL.REDIRECT, URL.PROFILE_PLAYLISTS);
                 break;
             case RESPONSE.BAD_REQUEST:
-                this.eventBus.emit(POPUP.NEW, POPUP.PLAYLIST_DELETION_ERROR_MESSAGE);
+                this.eventBus.emit(POPUP.NEW, lang.popUp.PLAYLIST_DELETION_ERROR_MESSAGE);
                 break;
             default:
                 console.log(res);
@@ -133,11 +134,11 @@ export default class PlaylistModel {
         Api.playlistChangeName(id, name).then((res) => {
             switch (res.status) {
             case RESPONSE.OK:
-                this.eventBus.emit(POPUP.NEW, POPUP.PLAYLIST_NAME_UPDATE_MESSAGE);
+                this.eventBus.emit(POPUP.NEW, lang.popUp.PLAYLIST_NAME_UPDATE_MESSAGE);
                 this.eventBus.emit(PLAYLIST.RENDER_NAME, name);
                 break;
             case RESPONSE.BAD_REQUEST:
-                this.eventBus.emit(POPUP.NEW, POPUP.PLAYLIST_NAME_UPDATE_ERROR_MESSAGE, true);
+                this.eventBus.emit(POPUP.NEW, lang.popUp.PLAYLIST_NAME_UPDATE_ERROR_MESSAGE, true);
                 break;
             default:
                 console.log(res);
@@ -164,14 +165,14 @@ export default class PlaylistModel {
                 switch (res.status) {
                 case RESPONSE.OK:
                     this.getPlaylist({id: id}, true);
-                    this.eventBus.emit(POPUP.NEW, POPUP.PLAYLIST_PICTURE_UPDATE_MESSAGE);
+                    this.eventBus.emit(POPUP.NEW, lang.popUp.PLAYLIST_PICTURE_UPDATE_MESSAGE);
                     break;
                 case RESPONSE.BAD_REQUEST:
-                    this.eventBus.emit(POPUP.NEW, POPUP.PLAYLIST_PICTURE_UPDATE_ERROR_MESSAGE);
+                    this.eventBus.emit(POPUP.NEW, lang.popUp.PLAYLIST_PICTURE_UPDATE_ERROR_MESSAGE);
                     this.eventBus.emit(PLAYLIST.INVALID);
                     break;
                 case RESPONSE.SERVER_ERROR:
-                    this.eventBus.emit(POPUP.NEW, POPUP.SORRY);
+                    this.eventBus.emit(POPUP.NEW, lang.popUp.SORRY);
                     break;
                 default:
                     console.log(res);
@@ -191,14 +192,14 @@ export default class PlaylistModel {
             case RESPONSE.OK:
                 res.json().then((playlist) => {
                     globalEventBus.emit(GLOBAL.REDIRECT, `/playlist/${playlist.id}`);
-                    this.eventBus.emit(POPUP.NEW, POPUP.PLAYLIST_ADDITION_MESSAGE);
+                    this.eventBus.emit(POPUP.NEW, lang.popUp.PLAYLIST_ADDITION_MESSAGE);
                 });
                 break;
             case RESPONSE.BAD_REQUEST:
-                this.eventBus.emit(POPUP.NEW, POPUP.PLAYLIST_ADDITION_ERROR_MESSAGE, true);
+                this.eventBus.emit(POPUP.NEW, lang.popUp.PLAYLIST_ADDITION_ERROR_MESSAGE, true);
                 break;
             default:
-                this.eventBus.emit(POPUP.NEW, POPUP.PLAYLIST_ADDITION_ERROR_MESSAGE, true);
+                this.eventBus.emit(POPUP.NEW, lang.popUp.PLAYLIST_ADDITION_ERROR_MESSAGE, true);
                 console.log(res);
                 console.error('I am a teapot');
             }

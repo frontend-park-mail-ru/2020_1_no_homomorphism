@@ -7,6 +7,7 @@ import {globalEventBus} from '@libs/eventBus';
 import User from '@libs/user';
 import PopUp from '@components/pop-up/pop-up';
 import {inputSanitize} from '@libs/input_sanitize';
+import {lang} from '@libs/language';
 
 /**
  *  вью для входа
@@ -120,8 +121,27 @@ export default class AlbumView extends BaseView {
         if (this.tracksData.length === 0) {
             return;
         }
+        let tracksText = ' ';
+        for (const key in lang.album.tracks) {
+            if (!{}.hasOwnProperty.call(lang.album.tracks, key)) {
+                continue;
+            }
+            if (key[0] === '=' && this.tracksData.length == key.slice(1, key.length)) {
+                tracksText += lang.album.tracks[key];
+                break;
+            }
+            if (key[0] === '%' &&
+                this.tracksData.length % (10 * (key.length - 1)) == key.slice(1, key.length)
+            ) {
+                tracksText += lang.album.tracks[key];
+                break;
+            }
+            if (key === 'default') {
+                tracksText += lang.album.tracks[key];
+            }
+        }
         document.getElementsByClassName('m-tracks-amount')[0].innerHTML = inputSanitize(
-            this.tracksData.length + (this.tracksData.length !== 1 ? ' tracks' : ' track'));
+            this.tracksData.length + tracksText);
     }
 
     /**

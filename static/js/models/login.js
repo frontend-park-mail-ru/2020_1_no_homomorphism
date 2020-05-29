@@ -3,6 +3,7 @@ import Validation from '@libs/validation';
 import {RESPONSE, LOGIN, NAVBAR} from '@libs/constants';
 import User from '@libs/user';
 import {globalEventBus} from '@libs/eventBus';
+import {lang} from '@libs/language';
 
 /**
  * Модель для страницы входа
@@ -43,14 +44,14 @@ export default class LoginModel {
                         this.eventBus.emit(LOGIN.CLOSE);
                         break;
                     case RESPONSE.BAD_REQUEST:
-                        this.eventBus.emit(LOGIN.INVALID, {global: 'Wrong login or password'});
+                        this.eventBus.emit(LOGIN.INVALID, {global: lang.login.errors.wrong});
                         break;
                     case RESPONSE.NO_ACCESS_RIGHT:
-                        this.eventBus.emit(LOGIN.INVALID, {global: 'You are already logged in'});
+                        this.eventBus.emit(LOGIN.INVALID, {global: lang.login.errors.already});
                         break;
                     case RESPONSE.SERVER_ERROR:
                         this.eventBus.emit(LOGIN.INVALID,
-                            {global: 'Errors in input data, try again'});
+                            {global: lang.login.errors.tryAgain});
                         break;
                     default:
                         console.log(res);

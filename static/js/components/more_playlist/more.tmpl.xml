@@ -3,7 +3,9 @@
         <img class="m-top-right-corner m-more-button" src="/static/img/icons/more_horiz.svg"/>
         <div class="m-top-right-corner m-dropdown">
             <div class="row">
-                <div class="m-privacy-title">private playlist</div>
+                <div class="m-privacy-title">
+                    <fest:value>data.lang.playlist.privacy</fest:value>
+                </div>
                 <label class="m-switch">
                     <input type="checkbox" id="checkbox" checked="true" value="1"> </input>
                     <span class="m-slider"> </span>
@@ -13,19 +15,25 @@
             <div class="row">
                 <button class="m-dropdown-button" id="playlist-share-button">
                     <img src="/static/img/icons/link.svg"/>
-                    <span class="m-text-in-button">copy link</span>
+                    <span class="m-text-in-button">
+                        <fest:value>data.lang.playlist.copyLink</fest:value>
+                    </span>
                 </button>
             </div>
             <div class="row">
                 <button class="m-dropdown-button" id="playlist-edit-button">
                     <img src="/static/img/icons/edit.svg"/>
-                    <span class="m-text-in-button">edit playlist</span>
+                    <span class="m-text-in-button">
+                        <fest:value>data.lang.playlist.edit</fest:value>
+                    </span>
                 </button>
             </div>
             <div class="row">
                 <button class="m-dropdown-button" id="playlist-delete-button">
                     <img src="/static/img/icons/delete-24px.svg"/>
-                    <span class="m-text-in-button">delete playlist</span>
+                    <span class="m-text-in-button">
+                        <fest:value>data.lang.playlist.delete</fest:value>
+                    </span>
                 </button>
             </div>
         </div>
@@ -33,7 +41,9 @@
     <fest:if test="data.mobile === false">
         <div class="m-right-col m-tablet-auto">
             <div class="row">
-                <div class="m-privacy-title col">Private playlist</div>
+                <div class="m-privacy-title col">
+                    <fest:value>data.lang.playlist.privacy</fest:value>
+                </div>
                 <label class="m-switch col">
                     <input type="checkbox" id="checkbox" checked="true" value="1"> </input>
                     <span class="m-slider"> </span>
@@ -44,7 +54,9 @@
                     <div class="row">
                         <button class="m-dropdown-button" id="playlist-share-button">
                             <img src="/static/img/icons/link.svg"/>
-                            <span class="m-text-in-button">copy link</span>
+                            <span class="m-text-in-button">
+                                <fest:value>data.lang.playlist.copyLink</fest:value>
+                            </span>
                         </button>
                     </div>
                 </div>

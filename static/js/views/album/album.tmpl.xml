@@ -19,14 +19,14 @@
                 </div>
                 <div class="m-right-col-bottom">
                     <div class="col">
-                        <div class="m-large-like-button is-not-liked" title="Like album"> </div>
+                        <div class="m-large-like-button is-not-liked" title="{data.lang.album.like}"> </div>
                     </div>
                 </div>
             </div>
             <div class="l-down-card">
                 <div class="l-track-list">
                     <div class="m-empty-list">
-                        Album is empty :(
+                        <fest:value>data.lang.album.empty</fest:value>
                     </div>
                 </div>
             </div>
