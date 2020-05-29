@@ -24,7 +24,9 @@ export default class ArtistListDummyComponent {
      */
     render(data) {
         if (document.getElementsByClassName(this._DOMItem)[0] !== undefined) {
-            document.getElementsByClassName(this._DOMItem)[0].innerHTML = artistList(data);
+            const elem = document.getElementsByClassName(this._DOMItem)[0];
+            elem.classList.remove('m-empty-section');
+            elem.innerHTML = artistList(data);
         }
     }
 }

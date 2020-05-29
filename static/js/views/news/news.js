@@ -1,5 +1,6 @@
 import news from '@views/news/news.tmpl.xml';
 import newsSection from '@views/news/news_section.tmpl.xml';
+import newsAlbums from '@views/news/news_albums.tmpl.xml';
 import BaseView from '@libs/base_view';
 import {MAIN, GLOBAL} from '@libs/constants';
 import {globalEventBus} from '@libs/eventBus';
@@ -18,6 +19,8 @@ export default class NewsView extends BaseView {
         this.eventBus.on(MAIN.RENDER_SUBSCRIPTIONS, this.renderList.bind(this));
         this.eventBus.on(MAIN.RENDER_TRACKS_LIST, this.renderList.bind(this));
         this.eventBus.on(MAIN.RENDER_ARTISTS, this.renderList.bind(this));
+        this.eventBus.on(MAIN.RENDER_NEWS_SECTION, this.renderList.bind(this));
+        this.eventBus.on(MAIN.RENDER_NEWS_LIST, this.renderNewsList.bind(this));
         globalEventBus.on(GLOBAL.HIDE_SUBSCRIPTIONS, () => {
             if (!document.getElementsByClassName('subscriptions-section')[0]) {
                 return;
@@ -51,9 +54,22 @@ export default class NewsView extends BaseView {
         }
         node.innerHTML = newsSection(data);
         node.classList.remove(data.domItem);
+        node.classList.remove('m-empty-section');
         if (!data.ok) {
             return;
         }
         node.firstChild.lastChild.classList.add(data.domItem);
+    }
+
+    /**
+     * Отрисовка списка новостей
+     * @param{Object} data
+     */
+    renderNewsList(data) {
+        const node = document.getElementsByClassName(data.domItem)[0];
+        if (node === null) {
+            return;
+        }
+        node.innerHTML = newsAlbums(data.news);
     }
 }

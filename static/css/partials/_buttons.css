@@ -498,7 +498,7 @@ input:checked + .m-slider:before {
     border-radius: 4px;
     float: right;
     margin-right: 4px;
-    padding-bottom: 10px;
+    padding-bottom: 16px;
     cursor: pointer;
 }
 

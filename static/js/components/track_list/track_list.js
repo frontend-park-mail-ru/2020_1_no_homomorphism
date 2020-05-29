@@ -68,6 +68,7 @@ export default class TrackListComponent {
             return;
         }
         const elem = document.getElementsByClassName(data.domItem)[0];
+        elem.classList.remove('m-empty-section');
         elem.innerHTML = template(this._tracklist);
         if (this._tracklist.length !== 0) {
             this.setTracksEventListeners();

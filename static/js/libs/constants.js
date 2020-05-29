@@ -93,12 +93,13 @@ export const MAIN = {
     GET_TRACKS_DATA: 'get-all-tracks-data',
     GET_ARTISTS_DATA: 'get-all-artists-data',
     RENDER_SUBSCRIPTIONS: 'render subscriptions',
-    RENDER_ARTISTS: 'render artists',
+    RENDER_NEWS_SECTION: 'render-news-section',
     RENDER_TRACKS: 'render tracks',
     RENDER_SUBSCRIPTIONS_LIST: 'render subscriptions list',
-    RENDER_ARTISTS_LIST: 'render artists list',
+    RENDER_NEWS_LIST: 'render news list',
     RENDER_TRACKS_LIST: 'render tracks list',
     NO_ANSWER: 'no-answer',
+    RENDER_ARTISTS_LIST: 'render artists list',
 };
 
 export const LOGIN = {

@@ -1,0 +1,33 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <fest:for iterate="data" index="i" value="elem">
+        <div class="m-news-elem">
+            <div class="m-news-artist col" a-id="{elem.artist_id}">
+                <div>
+                    <a class="" href="/artist/{elem.artist_id}/tracks">
+                        <img class="m-big-icon" src="{elem.image}" alt=""/>
+                    </a>
+                </div>
+                <div>
+                    <a class="m-tiny-ref  m-medium-text"
+                       href="/artist/{elem.artist_id}/tracks">
+                        <fest:value>elem.artist_name</fest:value>
+                    </a>
+                </div>
+
+            </div>
+            <div class="m-news-content col" n-id="{elem.id}">
+                <div class="">
+                    <a class="" href="/album/{elem.id}">
+                        <img class="m-news-image" src="{elem.image}" alt=""/>
+                    </a>
+                </div>
+                <a class=" m-tiny-ref m-medium-text m-news-title" href="/album/{elem.id}">
+                    <fest:value>elem.name</fest:value>
+                </a>
+                <div class="m-obscure-title m-small-text">
+                    <fest:value>elem.release</fest:value>
+                </div>
+            </div>
+        </div>
+    </fest:for>
+</fest:template>

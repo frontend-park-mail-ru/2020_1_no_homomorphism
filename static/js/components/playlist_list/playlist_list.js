@@ -42,6 +42,7 @@ export default class PlaylistsComponent {
         this._domItem = data.domItem;
         const elem = document.getElementsByClassName(data.domItem)[0];
         if (elem !== undefined) {
+            elem.classList.remove('m-empty-section');
             elem.innerHTML = template(this.generateHref(data.list));
             this.setEventListeners();
         }

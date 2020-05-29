@@ -35,7 +35,7 @@
                 <fest:if test="data.artists.length == 0">
                     <div class="l-main l-down-card">
                         <h2 class="l-small-card">
-                            Sorry, we didnt find any results
+                            Sorry, we didnt find anything
                         </h2>
                     </div>
                 </fest:if>

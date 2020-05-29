@@ -3,7 +3,6 @@ import {MAIN, URL, RESPONSE, GLOBAL} from '@libs/constants';
 import {globalEventBus} from '@libs/eventBus';
 import ArtistListComponent from '@components/artist_list/artist_list';
 import TrackListComponent from '@components/track_list/track_list';
-import User from '@libs/user';
 
 /**
  * Модель для главной страницы
@@ -17,48 +16,65 @@ export default class NewsModel {
         this.eventBus = eventBus;
         this.artists = [];
         this.subscriptionsListComponent = new ArtistListComponent(eventBus,
-            MAIN.RENDER_SUBSCRIPTIONS_LIST, MAIN.RENDER_SUBSCRIPTIONS);
-        this.artistListComponent = new ArtistListComponent(eventBus,
-            MAIN.RENDER_ARTISTS_LIST, MAIN.RENDER_ARTISTS);
+            MAIN.RENDER_ARTISTS_LIST);
         this.trackListComponent = new TrackListComponent(eventBus, MAIN);
-        this.eventBus.on(MAIN.GET_SUBSCRIPTIONS_DATA, this.getSubscriptionsData.bind(this));
+        this.eventBus.on(MAIN.GET_SUBSCRIPTIONS_DATA, this.cookieFetch.bind(this));
         this.eventBus.on(MAIN.GET_TRACKS_DATA, this.getTracksOfTheDay.bind(this));
         this.eventBus.on(MAIN.GET_ARTISTS_DATA, this.getArtistListData.bind(this));
+    }
+
+    /* *
+     * Узнаёт, залогинен ли пользователь
+     */
+    cookieFetch() {
+        Api.cookieGet()
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    this.getSubscriptionsData();
+                    break;
+                case RESPONSE.UNAUTH:
+                    document.getElementsByClassName('subscriptions-section')[0]
+                        .classList.remove('m-empty-section');
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
     }
 
     /**
      * Получает список подписок
      */
     getSubscriptionsData() {
-        if (!User.exists()) {
-            return;
-        }
-        Api.profileArtistsGet().then((res) => {
-            switch (res.status) {
-            case RESPONSE.OK:
-                res.json().then((data) => {
-                    this.eventBus.emit(MAIN.RENDER_ARTISTS, {
-                        domItem: 'subscriptions-section',
-                        caption: 'Subscriptions',
-                        ok: data.length > 0,
+        Api.newsGet()
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    res.json().then((data) => {
+                        this.eventBus.emit(MAIN.RENDER_NEWS_SECTION, {
+                            domItem: 'subscriptions-section',
+                            caption: 'Your news',
+                            ok: data.length > 0,
+                        });
+                        this.eventBus.emit(MAIN.RENDER_NEWS_LIST, {
+                            domItem: 'subscriptions-section',
+                            news: data,
+                        });
                     });
-                    this.eventBus.emit(MAIN.RENDER_ARTISTS_LIST, {
-                        domItem: 'subscriptions-section',
-                        artists: data,
-                    });
-                });
-                break;
-            case RESPONSE.BAD_REQUEST:
-                globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
-                break;
-            case RESPONSE.SERVER_ERROR:
-                globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
-                break;
-            default:
-                console.log(res);
-                console.error('I am a teapot');
-            }
-        });
+                    break;
+                case RESPONSE.BAD_REQUEST:
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+                    break;
+                case RESPONSE.SERVER_ERROR:
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
     }
 
     /**

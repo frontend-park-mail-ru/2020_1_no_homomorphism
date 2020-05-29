@@ -47,6 +47,13 @@
     width: 40px;
 }
 
+.m-big-icon {
+    height: 80px;
+    width: 80px;
+    border-radius: 100px;
+    box-shadow: var(--box-shadow-hard);
+}
+
 .m-icon-border {
     border-radius: 5px;
 }

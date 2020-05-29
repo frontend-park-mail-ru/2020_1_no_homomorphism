@@ -1,8 +1,6 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="col-9">
         <div class="l-main">
-
-
             <div class="l-top-card">
                 <div class="mobile-row">
                     <div class="l-top-info col-6">
@@ -59,7 +57,7 @@
 
             </div>
             <div class="l-down-card">
-                <div class="l-track-list">
+                <div class="l-track-list m-empty-section">
                 </div>
             </div>
         </div>
