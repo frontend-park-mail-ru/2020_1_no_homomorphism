@@ -55,7 +55,7 @@ export default class NewsModel {
                     res.json().then((data) => {
                         this.eventBus.emit(MAIN.RENDER_NEWS_SECTION, {
                             domItem: 'subscriptions-section',
-                            caption: 'Your news',
+                            caption: 'Subscriptions\' releases',
                             ok: data.length > 0,
                         });
                         this.eventBus.emit(MAIN.RENDER_NEWS_LIST, {

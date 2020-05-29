@@ -77,13 +77,7 @@ export default class NewsView extends BaseView {
             const releaseDate = new Date(sep[1] + '/' + sep[0] + '/' + sep[2]);
             const diffTime = curDate - releaseDate.getTime();
             data.news[i].release = this.setTimePeriod(diffTime / (1000 * 3600 * 24));
-            // console.log(diffTime/ (1000 * 3600 * 24));
         }
-        // const re = /-/gi;
-        // const sep = data.news[0].release.split('-');
-        // console.log(sep);
-        // console.log(new Date('06/30/2019'));
-        // console.log(new Date(sep[1] + '/' + sep[0] + '/' + sep[2]));
         node.innerHTML = newsAlbums(data.news);
     }
 
