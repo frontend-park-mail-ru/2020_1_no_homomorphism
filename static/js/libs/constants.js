@@ -1,4 +1,3 @@
-// export const SERVER_PATH = 'http://localhost:8081';
 export const SERVER_PATH = 'https://virusmusic.fun';
 
 export const API = '/api/v1';
@@ -124,7 +123,6 @@ export const NAVBAR = {
 };
 
 export const PLAYER = {
-    // REDIRECT: 'player-redirect',
     GET_TRACK: 'player-get-track',
     GET_TRACKS: 'player-get-tracks',
     RESIZE: 'player-resize',
@@ -171,7 +169,6 @@ export const SETTINGS = {
     SUBMIT: 'settings-submit',
     SUBMIT_PASSWORD: 'settings-submit-password',
     INVALID: 'settings-invalid',
-    // REDIRECT: 'settings-redirect',
 };
 
 export const SIGN_UP = {
@@ -189,8 +186,6 @@ export const PROFILE = {
     ID_ALBUMS_SECTION: 'profile-albums-title',
     ID_ARTISTS_SECTION: 'profile-artists-title',
     // --
-    // NO_ANSWER: 'profile-no-answer',
-    // REDIRECT: 'profile-redirect',
     GET_DATA: 'profile-get-profile-data',
     GET_STAT: 'profile-get-profile-stat',
     GET_TRACKS: 'profile-get-profile-tracks',
@@ -232,7 +227,6 @@ export const ARTIST = {
 export const PLAYLIST = {
     DROPDOWN: 'playlist-dropdown',
     SET_TRACKS_AMOUNT: 'playlist-set-tracks-amount',
-    // REDIRECT: 'playlist-redirect',
     SET_PLAYLIST_ID: 'playlist-set-id',
     GET_PLAYLIST_DATA: 'playlist-get-playlist-data',
     GET_TRACKS_DATA: 'playlist-get-tracks-data',
@@ -255,7 +249,6 @@ export const PLAYLIST = {
 };
 
 export const ALBUM = {
-    // REDIRECT: 'album-redirect',
     GET_ALBUM_DATA: 'album-get-album-data',
     GET_TRACKS_DATA: 'album-get-tracks-data',
     RENDER_ALBUM: 'album-render-album',

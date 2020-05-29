@@ -51,13 +51,10 @@ export default class ArtistListDummyComponent {
         document.getElementsByClassName('m-prev-button')[0].addEventListener('click', () => {
             document.getElementsByClassName('artists-section')[0]
                 .scrollBy({left: -360, behavior: 'smooth'});
-
-            console.log('prev');
         });
         document.getElementsByClassName('m-next-button')[0].addEventListener('click', () => {
             document.getElementsByClassName('artists-section')[0]
                 .scrollBy({left: 360, behavior: 'smooth'});
-            console.log('next');
         });
     }
 }

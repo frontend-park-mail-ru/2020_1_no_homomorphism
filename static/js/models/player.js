@@ -341,7 +341,7 @@ export default class PlayerModel {
     shuffle(positionOfCurrent) {
         let j;
         let tmp;
-        for (let i = this.queue.length - 1; i > 0; i--) { // TODO подумать, как сделать с генераторами
+        for (let i = this.queue.length - 1; i > 0; i--) {
             j = Math.floor(Math.random() * (i + 1));
             if (j === this.current) {
                 this.current = i;

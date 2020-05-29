@@ -838,6 +838,18 @@ input.m-big-name {
     display: none;
 }
 
+.world-artists-section {
+    margin-left: 32px;
+    margin-right: 32px;
+    display: flex;
+    min-height: 225px;
+    overflow-x: scroll;
+}
+
+.world-artists-section::-webkit-scrollbar {
+    display: none;
+}
+
 .m-prev-button {
     position: absolute;
     margin-top: 80px;

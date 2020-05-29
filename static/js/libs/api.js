@@ -112,6 +112,17 @@ export default class Api {
     }
 
     /**
+     * Получение новостей подписок пользователя
+     * @return {Promise<Response>}
+     */
+    static topArtists() {
+        return getFetch(API + '/artists/top', (error) => {
+            console.log(error.toString());
+            throw new Error(error);
+        });
+    }
+
+    /**
      * Профиль просмотр статистики
      * @param {string} id
      * @return {Promise<Response>}

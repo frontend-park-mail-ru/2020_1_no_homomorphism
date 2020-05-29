@@ -53,12 +53,8 @@ export default class NavbarView extends BaseView {
         } else {
             document.documentElement.removeAttribute('theme-name');
         }
-        // document.documentElement.removeAttribute('theme-name');
-        console.log('LOL');
-        console.log(name);
         THEME[split[0]][split[1]].forEach((prop) => {
             document.documentElement.style.setProperty(prop[0], prop[1]);
-            // console.log(document.documentElement);
         });
     }
 
@@ -130,7 +126,6 @@ export default class NavbarView extends BaseView {
             document.getElementsByClassName('m-search-input')[0].value = '';
             globalEventBus.emit(GLOBAL.REDIRECT, `/search/${input}`);
         }
-        // alert(input);
     }
 
     /**
@@ -184,7 +179,6 @@ export default class NavbarView extends BaseView {
         document.getElementById('logout-link').classList.remove('is-not-displayed');
         document.getElementById('profile-link').classList.remove('is-not-displayed');
         document.getElementById('settings-icon').classList.remove('is-not-displayed');
-        // this.renderTheme(data.theme);
     }
 
     /**

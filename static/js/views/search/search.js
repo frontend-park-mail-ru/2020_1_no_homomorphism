@@ -32,7 +32,6 @@ export default class SearchView extends BaseView {
      * @param {Object} data
      */
     renderData(data) {
-        console.log(data);
         document.getElementsByClassName(DOM.CONTENT)[0].innerHTML = search(data);
     }
 }

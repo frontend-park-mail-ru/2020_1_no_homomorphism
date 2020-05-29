@@ -117,7 +117,6 @@ export default class SettingsView extends BaseView {
                 } else {
                     document.documentElement.removeAttribute('theme-name');
                 }
-                // document.documentElement.removeAttribute('theme-name');
                 THEME[split[0]][split[1]].forEach((prop) => {
                     document.documentElement.style.setProperty(prop[0], prop[1]);
                 });

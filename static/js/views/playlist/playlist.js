@@ -146,8 +146,6 @@ export default class PlaylistView extends BaseView {
      * check what type of user came - owner, authed or not authed
      */
     async checkUser() {
-        // this.eventBus.emit(PLAYLIST.CHECK_COOKIE);
-        // if (User.exists()) {
         if (User.getUserData().id !== this.playlistData.user_id) {
             this.addComponent.playlistData = this.playlistData.id;
             this.addComponent.render();
@@ -155,7 +153,6 @@ export default class PlaylistView extends BaseView {
         }
         this.moreComponent.playlistData = this.playlistData;
         this.moreComponent.render(this.playlistData.private);
-        // }
     }
 
     /**

@@ -76,7 +76,7 @@ export default class SettingsModel {
                         this.eventBus.emit(POPUP.NEW, POPUP.AVATAR_MESSAGE);
                         globalEventBus.emit(NAVBAR.GET_USER_DATA);
                         break;
-                    case RESPONSE.BAD_REQUEST: // TODO Обработать ошибку
+                    case RESPONSE.BAD_REQUEST:
                         this.eventBus.emit(POPUP.NEW, POPUP.SOMETHING_WENT_WRONG);
                         this.eventBus.emit(SETTINGS.INVALID);
                         break;

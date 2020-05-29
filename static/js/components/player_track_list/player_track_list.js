@@ -71,9 +71,7 @@ export default class PlayerTrackListComponent {
                             setTimeout(() => event.target.parentNode.classList.remove('touched'),
                                 100);
                         }
-                        // event.target.click();
                     };
-                    // button.onclick = (event) => this.addToPlaylist.bind(this)(event);
                 });
             document.getElementsByClassName('l-player')[0]
                 .querySelectorAll('.like-button').forEach((button) => {
@@ -103,9 +101,7 @@ export default class PlayerTrackListComponent {
                             setTimeout(() => event.target.parentNode.classList.remove('touched'),
                                 100);
                         }
-                        // event.target.click();
                     };
-                    // button.onclick = (event) => this.albumClicked(event);
                 });
             document.getElementsByClassName('l-player')[0]
                 .querySelectorAll('.artist-button').forEach((button) => {
@@ -433,9 +429,7 @@ export default class PlayerTrackListComponent {
                     event.target.parentNode.classList.add('touched');
                     setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
                 }
-                // event.target.click();
             };
-            // trackRow.getElementsByClassName('add-button')[0].onclick = (event) => this.addToPlaylist.bind(this)(event);
             trackRow.getElementsByClassName('like-button')[0].ontouchend = (event) => {
                 event.preventDefault();
                 if (event.target.tagName == 'BUTTON') {
@@ -458,9 +452,7 @@ export default class PlayerTrackListComponent {
                     event.target.parentNode.classList.add('touched');
                     setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
                 }
-                // event.target.click();
             };
-            // trackRow.getElementsByClassName('album-button')[0].onclick = (event) => this.albumClicked(event);
             trackRow.getElementsByClassName('artist-button')[0].ontouchend = (event) => {
                 event.preventDefault();
                 if (event.target.tagName == 'BUTTON') {

@@ -174,7 +174,6 @@ export default class PlaylistsComponent {
      * @param {Object} event
      */
     createPlaylistClick(event) {
-        console.log('lol');
         const value = document.getElementsByClassName('m-small-input')[0].value;
         if (value !== '') {
             document.getElementsByClassName('m-small-input')[0].value = '';
@@ -200,7 +199,6 @@ export default class PlaylistsComponent {
     uploadClick(event) {
         const label = event.target.parentElement.parentElement.parentElement
             .getElementsByTagName('label')[0];
-        console.log(label);
         label.click();
     }
 

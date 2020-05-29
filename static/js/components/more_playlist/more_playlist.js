@@ -32,7 +32,6 @@ export default class MorePlaylistComponent {
                 type: 'round_nocount',
                 text: 'Share',
             });
-            console.log(window.location.href);
             document.getElementById('vk-share').innerHTML += elem;
             document.querySelectorAll('td').forEach((elem) => {
                 elem.children[0].target = '_blank';

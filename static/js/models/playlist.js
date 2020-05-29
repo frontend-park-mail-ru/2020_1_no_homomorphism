@@ -33,7 +33,7 @@ export default class PlaylistModel {
     getPlaylist(id, changeEvent = false) {
         Api.playlistGet(id.id).then((res) => {
             switch (res.status) {
-            case undefined: // TODO Временно
+            case undefined:
                 this.playlist = res;
                 this.eventBus.emit(PLAYLIST.SET_PLAYLIST_ID, this.playlist.id);
                 this.eventBus.emit(PLAYLIST.RENDER_PLAYLIST_DATA, this.playlist);
@@ -211,12 +211,20 @@ export default class PlaylistModel {
      * @param {number} length
      */
     cookieFetch(length) {
-        Api.cookieGet()
-            .then((res) => {
-                if (res.status === RESPONSE.OK) {
-                    this.eventBus.emit(PLAYLIST.SET_TRACKS_AMOUNT, length);
-                }
-            });
+        Api.profileGet().then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                res.json()
+                    .then((data) => {
+                        User.setUserData(data);
+                        this.eventBus.emit(PLAYLIST.SET_TRACKS_AMOUNT, length);
+                    });
+                break;
+            default:
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
     }
 
     /**

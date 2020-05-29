@@ -229,11 +229,6 @@ export default class PlayerView extends BaseView {
      * Sets static EventListeners
      */
     setEventListeners() {
-        // document.getElementsByTagName('body')[0].addEventListener('DOMSubtreeModified', (event) => {
-        //     if (document.documentElement.scrollWidth != this.scrollWidth) {
-        //         this.resize();
-        //     }
-        // });
         [{
             element: window,
             event: 'orientationchange',

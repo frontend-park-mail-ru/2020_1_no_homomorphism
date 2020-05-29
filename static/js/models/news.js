@@ -45,9 +45,42 @@ export default class NewsModel {
     }
 
     /**
-     * Получает список подписок
+     * Получает список обновлений артистов
      */
     getSubscriptionsData() {
+        Api.newsGet()
+            .then((res) => {
+                switch (res.status) {
+                case RESPONSE.OK:
+                    res.json().then((data) => {
+                        this.eventBus.emit(MAIN.RENDER_NEWS_SECTION, {
+                            domItem: 'subscriptions-section',
+                            caption: 'Subscriptions\' releases',
+                            ok: data.length > 0,
+                        });
+                        this.eventBus.emit(MAIN.RENDER_NEWS_LIST, {
+                            domItem: 'subscriptions-section',
+                            news: data,
+                        });
+                    });
+                    break;
+                case RESPONSE.BAD_REQUEST:
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+                    break;
+                case RESPONSE.SERVER_ERROR:
+                    globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
+                    break;
+                default:
+                    console.log(res);
+                    console.error('I am a teapot');
+                }
+            });
+    }
+
+    /**
+     * Получает обновлений мировых артистов
+     */
+    getWorldNews() {
         Api.newsGet()
             .then((res) => {
                 switch (res.status) {
@@ -114,7 +147,7 @@ export default class NewsModel {
      * Получает список артистов
      */
     getArtistListData() {
-        Api.artistListGet('0', '10').then((res) => {
+        Api.topArtists().then((res) => {
             switch (res.status) {
             case RESPONSE.OK:
                 res.json().then((data) => {
@@ -125,9 +158,9 @@ export default class NewsModel {
                     });
                     const temp = [];
                     // eslint-disable-next-line guard-for-in
-                    for (const i in data.artists) { // TODO ВРЕМЕННО!
-                        temp.push(data.artists[i]);
-                        temp.push(data.artists[i]);
+                    for (const i in data) { // TODO ВРЕМЕННО!
+                        temp.push(data[i]);
+                        temp.push(data[i]);
                     }
                     this.eventBus.emit(MAIN.RENDER_ARTISTS_LIST, {
                         domItem: 'artists-section',

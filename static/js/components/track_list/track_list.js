@@ -62,7 +62,6 @@ export default class TrackListComponent {
      * @param {Boolean} save
      */
     render(data, save = false) {
-        console.log(data);
         document.getElementsByClassName(data.domItem)[0]
             .classList.remove('m-empty-section');
         data.startIndex = data.startIndex ? parseInt(data.startIndex) : 0;
@@ -263,7 +262,6 @@ export default class TrackListComponent {
     addToPlaylist(event) {
         if (!User.exists()) {
             new PopUp(POPUP.LOGIN_ERROR, true);
-            // globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
             return;
         }
         this._choosePlaylist.trackData = this.getIdByClick(event);

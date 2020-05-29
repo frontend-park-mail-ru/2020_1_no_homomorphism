@@ -101,7 +101,7 @@ export default class Router {
             if (pushState) {
                 window.history.pushState('', {}, URL.MAIN);
             }
-            this.redirect(URL.MAIN); // TODO добавить вывод пользователю
+            this.redirect(URL.MAIN);
             return;
         }
         if (newPath === URL.PROFILE) {

@@ -36,7 +36,7 @@ export default class ArtistModel {
                 globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                 return;
             }
-            if (res.every((item) => item.ok)) { // TODO Сделать красиво!!!
+            if (res.every((item) => item.ok)) {
                 const data = {};
                 Promise.all(res.map((item) => item.json()))
                     .then((res) => res.forEach((item) => Object.assign(data, item)))
