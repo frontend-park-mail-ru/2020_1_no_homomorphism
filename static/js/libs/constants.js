@@ -97,6 +97,7 @@ export const MAIN = {
     RENDER_SUBSCRIPTIONS: 'render subscriptions',
     RENDER_NEWS_SECTION: 'render-news-section',
     RENDER_TRACKS: 'render tracks',
+    RENDER_ARTISTS: 'render artist kek',
     RENDER_SUBSCRIPTIONS_LIST: 'render subscriptions list',
     RENDER_NEWS_LIST: 'render news list',
     RENDER_TRACKS_LIST: 'render tracks list',

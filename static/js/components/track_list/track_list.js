@@ -62,6 +62,9 @@ export default class TrackListComponent {
      * @param {Boolean} save
      */
     render(data, save = false) {
+        console.log(data);
+        document.getElementsByClassName(data.domItem)[0]
+            .classList.remove('m-empty-section');
         data.startIndex = data.startIndex ? parseInt(data.startIndex) : 0;
         let i = 1;
         data.tracks.map((track) => {
