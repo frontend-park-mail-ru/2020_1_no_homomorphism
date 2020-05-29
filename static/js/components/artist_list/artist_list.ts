@@ -28,6 +28,7 @@ export default class ArtistListComponent {
     }
 
     render(data: input): void {
+        this.artistListDummy.news = data.domItem === 'artists-section';
         this.artistListDummy.DOMItem = data.domItem;
         this.artistList = data.artists;
         this.artistListDummy.render(this.artistList);

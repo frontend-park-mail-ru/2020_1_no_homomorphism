@@ -1,33 +1,51 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <fest:for iterate="data" index="i" value="elem">
-        <div class="m-news-elem">
-            <div class="m-news-artist col" a-id="{elem.artist_id}">
-                <div>
-                    <a class="" href="/artist/{elem.artist_id}/tracks">
-                        <img class="m-big-icon" src="{elem.image}" alt=""/>
-                    </a>
-                </div>
-                <div>
-                    <a class="m-tiny-ref  m-medium-text"
-                       href="/artist/{elem.artist_id}/tracks">
-                        <fest:value>elem.artist_name</fest:value>
-                    </a>
-                </div>
-
+        <div class="m-news-elem" a-id="{elem.id}">
+            <div class="l-list-image">
+                <img class="m-list-image" src="{elem.image}" a-id="{elem.id}" alt=""/>
             </div>
-            <div class="m-news-content col" n-id="{elem.id}">
-                <div class="">
-                    <a class="" href="/album/{elem.id}">
-                        <img class="m-news-image" src="{elem.image}" alt=""/>
-                    </a>
-                </div>
-                <a class=" m-tiny-ref m-medium-text m-news-title" href="/album/{elem.id}">
-                    <fest:value>elem.name</fest:value>
-                </a>
-                <div class="m-obscure-title m-small-text">
-                    <fest:value>elem.release</fest:value>
-                </div>
+            <a class="l-list-card-description  m-tiny-ref" href="{data.href}{elem.id}"
+               style="padding-bottom: 0">
+                <fest:value>elem.name</fest:value>
+            </a>
+            <a class="m-obscure-title m-tiny-ref m-small-text row" href="/artist/{elem.artist_id}"
+               style="margin-bottom: 10px">
+                <fest:value>elem.artist_name</fest:value>
+            </a>
+            <div class="m-obscure-title m-small-text">
+                <fest:value>elem.release</fest:value>
             </div>
         </div>
     </fest:for>
+    <!--    <fest:for iterate="data" index="i" value="elem">-->
+    <!--        <div class="m-news-elem">-->
+    <!--            <div class="m-news-artist col" a-id="{elem.artist_id}">-->
+    <!--                <div>-->
+    <!--                    <a class="" href="/artist/{elem.artist_id}/tracks">-->
+    <!--                        <img class="m-big-icon" src="{elem.image}" alt=""/>-->
+    <!--                    </a>-->
+    <!--                </div>-->
+    <!--                <div>-->
+    <!--                    <a class="m-tiny-ref  m-medium-text"-->
+    <!--                       href="/artist/{elem.artist_id}/tracks">-->
+    <!--                        <fest:value>elem.artist_name</fest:value>-->
+    <!--                    </a>-->
+    <!--                </div>-->
+
+    <!--            </div>-->
+    <!--            <div class="m-news-content col" n-id="{elem.id}">-->
+    <!--                <div class="">-->
+    <!--                    <a class="" href="/album/{elem.id}">-->
+    <!--                        <img class="m-news-image" src="{elem.image}" alt=""/>-->
+    <!--                    </a>-->
+    <!--                </div>-->
+    <!--                <a class=" m-tiny-ref m-medium-text m-news-title" href="/album/{elem.id}">-->
+    <!--                    <fest:value>elem.name</fest:value>-->
+    <!--                </a>-->
+    <!--                <div class="m-obscure-title m-small-text">-->
+    <!--                    <fest:value>elem.release</fest:value>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </fest:for>-->
 </fest:template>

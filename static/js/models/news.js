@@ -114,18 +114,24 @@ export default class NewsModel {
      * Получает список артистов
      */
     getArtistListData() {
-        Api.artistListGet('0', '100').then((res) => {
+        Api.artistListGet('0', '10').then((res) => {
             switch (res.status) {
             case RESPONSE.OK:
                 res.json().then((data) => {
                     this.eventBus.emit(MAIN.RENDER_ARTISTS, {
                         domItem: 'artists-section',
-                        caption: 'Artists',
+                        caption: 'Top artists',
                         ok: true,
                     });
+                    const temp = [];
+                    // eslint-disable-next-line guard-for-in
+                    for (const i in data.artists) { // TODO ВРЕМЕННО!
+                        temp.push(data.artists[i]);
+                        temp.push(data.artists[i]);
+                    }
                     this.eventBus.emit(MAIN.RENDER_ARTISTS_LIST, {
                         domItem: 'artists-section',
-                        artists: data.artists,
+                        artists: temp,
                     });
                 });
                 break;

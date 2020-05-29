@@ -759,12 +759,11 @@ input.m-big-name {
     animation-duration: 1s;
     overflow: hidden;
     margin: 8px;
-    padding: 8px;
     display: inline-block;
     width: 90%;
-    max-width: 300px;
-    max-height: 180px;
-    height: 220px;
+    max-width: 150px;
+    max-height: 250px;
+    height: 250px;
     text-decoration: none;
     border-radius: var(--card-border-small);
     box-shadow: 0 0 10px -3px rgba(0, 0, 0, 0.5);
@@ -806,4 +805,70 @@ input.m-big-name {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+.l-list-round-card {
+    overflow: hidden;
+    background-color: var(--overlay-color);
+    width: 90%;
+    max-width: 180px;
+    max-height: 220px;
+    text-decoration: none;
+    border-radius: var(--card-border-small);
+    transition: 0.11s;
+    min-width: 180px;
+    margin: 1px;
+    &:hover {
+        box-shadow: 0 0 0 1px var(--button-color);
+    }
+}
+
+.artists-section {
+    margin-left: 32px;
+    margin-right: 32px;
+    display: flex;
+    min-height: 225px;
+    overflow-x: scroll;
+}
+
+.artists-section::-webkit-scrollbar {
+    display: none;
+}
+
+.m-prev-button {
+    position: absolute;
+    margin-top: 80px;
+    background: var(--button-color);
+    border-radius: 100px;
+    padding-left: 4px;
+    padding-top: 6px;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+    scroll-behavior: smooth;
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+.m-next-button {
+    position: sticky;
+    right: 16px;
+    margin-top: 80px;
+    opacity: 0.6;
+    background: var(--button-color);
+    border-radius: 100px;
+    padding-left: 6px;
+    padding-right: 4px;
+    padding-top: 6px;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    scroll-behavior: smooth;
+    &:hover {
+        opacity: 0.9;
+    }
 }

@@ -70,6 +70,38 @@ export default class NewsView extends BaseView {
         if (node === null) {
             return;
         }
+        const curDate = new Date().getTime();
+        // eslint-disable-next-line guard-for-in
+        for (const i in data.news) {
+            const sep = data.news[i].release.split('-');
+            const releaseDate = new Date(sep[1] + '/' + sep[0] + '/' + sep[2]);
+            const diffTime = curDate - releaseDate.getTime();
+            data.news[i].release = this.setTimePeriod(diffTime / (1000 * 3600 * 24));
+            // console.log(diffTime/ (1000 * 3600 * 24));
+        }
+        // const re = /-/gi;
+        // const sep = data.news[0].release.split('-');
+        // console.log(sep);
+        // console.log(new Date('06/30/2019'));
+        // console.log(new Date(sep[1] + '/' + sep[0] + '/' + sep[2]));
         node.innerHTML = newsAlbums(data.news);
+    }
+
+    /**
+     * Set time period
+     * @param {number} dif
+     * @return {String} time from current day
+     */
+    setTimePeriod(dif) {
+        if (dif < 1) {
+            return 'Today';
+        }
+        if (dif < 8) {
+            return Math.floor(dif) + ' days ago';
+        }
+        if (dif < 31) {
+            return Math.floor(dif / 7) + ' weeks ago';
+        }
+        return Math.floor(dif / 31) + ' months ago';
     }
 }
