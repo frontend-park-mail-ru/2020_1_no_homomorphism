@@ -327,6 +327,9 @@ export default class PlayerModel {
         if (this.playing) {
             document.getElementsByTagName('audio')[0].pause();
         }
+        document.getElementsByTagName('audio')[0].src =
+            document.getElementsByTagName('audio')[0].src;
+        // audio.src = audio.src;
         document.getElementsByTagName('audio')[0].currentTime =
             document.getElementsByTagName('audio')[0].duration * ratio;
 
