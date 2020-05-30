@@ -5,6 +5,7 @@ on:
     branches:
       - lsd
       - language
+      - finish
   pull_request:
     branches:
         - lsd
