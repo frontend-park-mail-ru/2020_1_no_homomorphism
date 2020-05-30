@@ -33,12 +33,10 @@ export default class NavbarView extends BaseView {
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.NAVBAR)[0]);
         this.eventBus.emit(NAVBAR.CHECK_COOKIE);
-        if (window.localStorage.getItem('theme')) {
-            this.renderTheme(window.localStorage.getItem('theme'));
-        } else if (User.exists()) {
+        if (User.exists()) {
             window.localStorage.setItem('theme', User.getUserData().theme);
-            this.renderTheme(window.localStorage.getItem('theme'));
         }
+        this.renderTheme(window.localStorage.getItem('theme'));
         this.renderLanguage();
         this.setEventListeners();
     }
@@ -64,10 +62,10 @@ export default class NavbarView extends BaseView {
      * Рендерит язык
      */
     renderLanguage() {
-        if (window.localStorage.getItem('lang')) {
-            setLanguage(window.localStorage.getItem('lang'));
-        } else if (User.exists()) {
+        if (User.exists()) {
             setLanguage(User.getUserData().lang);
+        } else if (window.localStorage.getItem('lang')) {
+            setLanguage(window.localStorage.getItem('lang'));
         }
     }
 
