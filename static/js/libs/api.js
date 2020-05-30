@@ -141,13 +141,15 @@ export default class Api {
      * @param {string} password
      * @param {string} newPassword
      * @param {string} theme
+     * @param {string} lang
      * @return {Promise<Response>}
      */
-    static profilePut(name, email, password, newPassword, theme) {
+    static profilePut(name, email, password, newPassword, theme, lang) {
         return putFetch(API + '/users/settings', {
             name: inputSanitize(name),
             email: inputSanitize(email),
             theme: inputSanitize(theme),
+            lang: inputSanitize(lang),
             password: inputSanitize(password),
             new_password: inputSanitize(newPassword),
         }, (error) => {

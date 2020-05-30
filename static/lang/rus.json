@@ -183,6 +183,7 @@
         "THEME_MESSAGE": "Тема обновлена",
         "PASSWORD_MESSAGE": "Пароль изменён",
         "AVATAR_MESSAGE": "Изображение профиля изменено",
+        "LANG_MESSAGE": "Язык изменён",
         "PLAYLIST_CREATION_MESSAGE": "Плейлист создан",
         "PLAYLIST_EMPTY_NAME_ERROR": "Сначала введите название",
         "PLAYLIST_CREATION_ERROR_MESSAGE": "Плейлист с таким назвнием уже существует",

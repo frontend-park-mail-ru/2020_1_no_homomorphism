@@ -149,7 +149,7 @@ export default class SettingsModel {
                 type = 'password';
             }
             Api.profilePut(values.name, values.email, values.password, values.newPassword,
-                values.theme)
+                values.theme, values.lang)
                 .then((res) => {
                     this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
                     switch (res.status) {

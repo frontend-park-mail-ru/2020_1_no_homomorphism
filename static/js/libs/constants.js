@@ -77,6 +77,7 @@ export const GLOBAL = {
     HIDE_SUBSCRIPTIONS: 'hide subscriptions',
     RENDER_THEME: 'render theme',
     RENDER_LOGGED: 'render-new-avatar',
+    RERENDER_BECAUSE_OF_LANGUAGE: 'global-rerender',
 };
 
 export const MAIN = {

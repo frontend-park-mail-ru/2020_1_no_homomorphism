@@ -39,10 +39,7 @@ export default class NavbarView extends BaseView {
             window.localStorage.setItem('theme', User.getUserData().theme);
             this.renderTheme(window.localStorage.getItem('theme'));
         }
-        if (User.exists()) {
-            window.localStorage.setItem('lang', User.getUserData().lang);
-            setLanguage(User.getUserData().lang);
-        }
+        this.renderLanguage();
         this.setEventListeners();
     }
 
@@ -61,6 +58,17 @@ export default class NavbarView extends BaseView {
         THEME[split[0]][split[1]].forEach((prop) => {
             document.documentElement.style.setProperty(prop[0], prop[1]);
         });
+    }
+
+    /**
+     * Рендерит язык
+     */
+    renderLanguage() {
+        if (window.localStorage.getItem('lang')) {
+            setLanguage(window.localStorage.getItem('lang'));
+        } else if (User.exists()) {
+            setLanguage(User.getUserData().lang);
+        }
     }
 
     /**
@@ -184,6 +192,7 @@ export default class NavbarView extends BaseView {
         document.getElementById('logout-link').classList.remove('is-not-displayed');
         document.getElementById('profile-link').classList.remove('is-not-displayed');
         document.getElementById('settings-icon').classList.remove('is-not-displayed');
+        this.renderLanguage();
     }
 
     /**
