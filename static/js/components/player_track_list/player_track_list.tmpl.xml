@@ -16,7 +16,7 @@
                 <div class="l-player-track-button delete-button">
                     <img src="/static/img/icons/clear.svg" class="m-big-delete-button" height="20px" alt="..."/>
                 </div>
-               <div class="l-player-track-button favorite-button">
+               <!-- <div class="l-player-track-button favorite-button">
                    <fest:if test="!track.is_liked">
                        <img src="/static/img/icons/favorite_border.svg" class="m-big-like-button is-not-liked" height="20px" alt="..."/>
                    </fest:if>
@@ -26,7 +26,7 @@
                </div>
                <div class="l-player-track-button add-button">
                    <img src="/static/img/icons/playlist_add.svg" class="m-big-add-button" height="20px" alt="..."/>
-               </div>
+               </div> -->
                 <div class="l-player-track-button more-button">
                     <img src="/static/img/icons/more_vert.svg" class="m-big-more-button" height="20px" alt="..."/>
                 </div>

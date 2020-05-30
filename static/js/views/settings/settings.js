@@ -248,6 +248,8 @@ export default class SettingsView extends BaseView {
             newPasswordConfirm: '',
             password: '',
         });
+        setLanguage(lang);
+        document.location.reload();
     }
 
     /**
