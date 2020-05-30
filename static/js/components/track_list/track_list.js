@@ -378,6 +378,7 @@ export default class TrackListComponent {
                 break;
             }
         }
+        document.getElementsByClassName('is-empty-track')[0].classList.toggle('is-height-50');
         if (this._tracklist.length < 1) {
             this._setEmpty();
         }
