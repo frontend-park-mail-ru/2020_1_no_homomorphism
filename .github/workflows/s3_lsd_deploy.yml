@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - lsd
-      - merge
       - language
   pull_request:
     branches:
