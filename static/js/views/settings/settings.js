@@ -133,6 +133,7 @@ export default class SettingsView extends BaseView {
                 });
                 event.target.classList.add('selected');
                 this.submitLang(event.target.parentNode.getAttribute('id'));
+                // document.location.reload(true);
             });
         });
         document.getElementsByClassName('m-big-input').forEach((input) => {
@@ -238,6 +239,8 @@ export default class SettingsView extends BaseView {
      * @param {string} lang
      */
     submitLang(lang) {
+        setLanguage(lang);
+        document.location.reload();
         this.eventBus.emit(SETTINGS.SUBMIT, {
             name: this.userData.name,
             email: this.userData.email,

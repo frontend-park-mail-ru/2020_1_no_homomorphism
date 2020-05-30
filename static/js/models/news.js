@@ -55,7 +55,6 @@ export default class NewsModel {
                 switch (res.status) {
                 case RESPONSE.OK:
                     res.json().then((data) => {
-                        console.log('DUBL');
                         this.eventBus.emit(MAIN.RENDER_NEWS_SECTION, {
                             domItem: 'subscriptions-section',
                             caption: lang.news.subscriptions,

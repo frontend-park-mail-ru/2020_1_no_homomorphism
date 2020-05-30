@@ -2,12 +2,12 @@
     <fest:if test="data.tracks.length < 1">
         <fest:if test="data.tracks.type">
             <div class="m-empty-list">
-                <fest:value>data.lang.track.noLiked</fest:value>
+                <fest:value>data.lang.tracks.empty</fest:value>
             </div>
         </fest:if>
         <fest:if test="!data.tracks.type">
             <div class="m-empty-list">
-                <fest:value>data.lang.track.empty</fest:value>
+                <fest:value>data.lang.tracks.noLiked</fest:value>
             </div>
         </fest:if>
     </fest:if>

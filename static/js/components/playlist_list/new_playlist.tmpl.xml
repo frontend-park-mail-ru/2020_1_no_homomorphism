@@ -14,7 +14,7 @@
             <input class="is-margin-top--191" type="text" placeholder="{data.lang.playlist.editPlaceholder}" class="m-small-input"></input>
         </div>
         <a class="l-list-card-description" href="/playlist/{data.playlist.id}">
-            <fest:value>data,playlist.name</fest:value>
+            <fest:value>data.playlist.name</fest:value>
         </a>
         <div class="row">
             <div class="m-playlist-delete-button m-top-right-corner is-margin-top--191 is-not-displayed">
