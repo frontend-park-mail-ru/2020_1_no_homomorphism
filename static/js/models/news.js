@@ -158,14 +158,9 @@ export default class NewsModel {
                         caption: lang.news.artists,
                         ok: true,
                     });
-                    const temp = [];
-                    for (const i of data) { // TODO ВРЕМЕННО!
-                        temp.push(i);
-                        temp.push(i);
-                    }
                     this.eventBus.emit(MAIN.RENDER_ARTISTS_LIST, {
                         domItem: 'artists-section',
-                        artists: temp,
+                        artists: data,
                     });
                 });
                 break;

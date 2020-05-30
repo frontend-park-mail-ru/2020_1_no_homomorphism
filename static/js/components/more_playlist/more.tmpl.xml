@@ -65,29 +65,18 @@
                             </fest:script>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="m-share-button">
-<!--                            <div class="fb-share-button"-->
-<!--                                 data-href="https://www.your-domain.com/your-page.html"-->
-<!--                                 data-layout="button_count">-->
-<!--                            </div>-->
-                            <div class="fb-share-button" data-href="https://virusmusic.fun/playlist/{data.id}" data-layout="button"
-                                 data-size="small">
-                                <a target="_blank"
-                                   href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
-                                   class="fb-xfbml-parse-ignore">Share
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="col">
                     <button class="m-button-share"> </button>
                 </div>
+                <div class="col">
+
+                    <img class="m-playlist-edit-button" id="playlist-edit-button" src="/static/img/icons/edit.svg"/>
+                </div>
             </div>
-            <div class="row">
-                <img class="m-playlist-edit-button" id="playlist-edit-button" src="/static/img/icons/edit.svg"/>
-            </div>
+<!--            <div class="row">-->
+<!--                -->
+<!--            </div>-->
             <div class="l-delete-playlist-button" id="playlist-delete-button">
                 <div class="m-delete-playlist-button"></div>
             </div>

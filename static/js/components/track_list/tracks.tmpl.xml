@@ -109,14 +109,14 @@
                             </span>
                         </button>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <button class="m-dropdown-button album-button">
                             <img src="/static/img/icons/album.svg"/>
                             <span class="m-text-in-button">
                                 <fest:value>data.lang.dropdown.goToAlbum</fest:value>
                             </span>
                         </button>
-                    </div>
+                    </div> -->
                     <div class="row">
                         <button class="m-dropdown-button artist-button">
                             <img src="/static/img/icons/person.svg"/>

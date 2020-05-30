@@ -321,19 +321,14 @@ export default class PlayerModel {
      * @param {number} ratio
      */
     rewind(ratio) {
-        console.log(document.getElementsByTagName('audio')[0].duration);
-        console.log(this.playing);
-        console.log(ratio);
         if (isNaN(document.getElementsByTagName('audio')[0].duration)) {
             return;
         }
         if (this.playing) {
             document.getElementsByTagName('audio')[0].pause();
         }
-        console.log(document.getElementsByTagName('audio')[0].currentTime);
         document.getElementsByTagName('audio')[0].currentTime =
             document.getElementsByTagName('audio')[0].duration * ratio;
-        console.log(document.getElementsByTagName('audio')[0].duration);
 
         if (this.playing) {
             document.getElementsByTagName('audio')[0].play();

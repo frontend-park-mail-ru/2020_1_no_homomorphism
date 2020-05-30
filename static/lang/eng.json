@@ -53,7 +53,7 @@
         "noId": "Sorry, there isn't playlist with this id :(",
         "noRights": "Sorry, you can't get this playlist :(",
         "privacy": "Private playlist",
-        "copyLink": "copy link",
+        "copyLink": "copy",
         "edit": "edit playlist",
         "delete": "delete playlist",
         "createPlaceholder": "Create playlist",

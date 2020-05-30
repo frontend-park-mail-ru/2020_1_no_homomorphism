@@ -239,8 +239,6 @@ export default class SettingsView extends BaseView {
      * @param {string} lang
      */
     submitLang(lang) {
-        setLanguage(lang);
-        document.location.reload();
         this.eventBus.emit(SETTINGS.SUBMIT, {
             name: this.userData.name,
             email: this.userData.email,
@@ -250,6 +248,8 @@ export default class SettingsView extends BaseView {
             newPasswordConfirm: '',
             password: '',
         });
+        setLanguage(lang);
+        document.location.reload();
     }
 
     /**
