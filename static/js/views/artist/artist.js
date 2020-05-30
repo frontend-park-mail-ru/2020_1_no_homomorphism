@@ -31,6 +31,7 @@ export default class ArtistView extends BaseView {
         this.eventBus = eventBus;
         this.eventBus.on(ARTIST.RENDER_DATA, this.renderData.bind(this));
         this.eventBus.on(ARTIST.DRAW_SUBSCRIBE, this.drawSubscribe.bind(this));
+        this.eventBus.on(ARTIST.RENDER_INFO, this.renderInfo.bind(this));
     }
 
     /**
@@ -137,6 +138,16 @@ export default class ArtistView extends BaseView {
      */
     subscribe() {
         this.eventBus.emit(ARTIST.SUBSCRIBE, this.data.id);
+    }
+
+    /**
+     * Subscribe
+     */
+    renderInfo() {
+        document.getElementsByClassName('l-track-list')[0]
+            .classList.remove('m-empty-section');
+        document.getElementsByClassName('l-track-list')[0].innerHTML =
+            '<div class="m-empty-list">We are planning to add this functionality later</div>';
     }
 
     /**

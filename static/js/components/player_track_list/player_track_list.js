@@ -265,22 +265,6 @@ export default class PlayerTrackListComponent {
     }
 
     /**
-     * Слушает клик мыши по кнопке добавления на треке в плейлисте
-     * @param {Object} event
-     */
-    trackAddButtonClick(event) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        if (!User.exists()) {
-            globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
-            return;
-        }
-        this._choosePlaylist.trackData = {'id': this.getIdByClick(event)};
-        alert('NIKITA, I havent finished it yet');
-        this.getProfilePlaylists();
-    }
-
-    /**
      * Переход на страницу артиста
      * @param {Object} event
      */
