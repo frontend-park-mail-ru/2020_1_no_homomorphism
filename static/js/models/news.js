@@ -118,9 +118,9 @@ export default class NewsModel {
     getTracksOfTheDay() {
         const promises = [];
         for (let i = 0; i < 10; i++) {
-            let p = Math.floor(Math.random() * (37 - 1) + 1);
+            let p = Math.floor(Math.random() * (99 - 1) + 1);
             while (promises.indexOf(p) !== -1) {
-                p = Math.floor(Math.random() * (37 - 1) + 1);
+                p = Math.floor(Math.random() * (99 - 1) + 1);
             }
             promises.push(p);
         }

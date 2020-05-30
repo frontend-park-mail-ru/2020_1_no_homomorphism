@@ -47,8 +47,9 @@ export default class PagesManager {
         if (!this.lastInPage) {
             this.lastInPage = document.getElementsByClassName('l-track-big').length - 1;
         }
-        if (document.getElementsByClassName('top-pagination-patch')[0]
-            .getBoundingClientRect().bottom > 60 && this.scrollListeningState === 'show'
+        if (document.getElementsByClassName('top-pagination-patch')[0] !== undefined &&
+            document.getElementsByClassName('top-pagination-patch')[0]
+                .getBoundingClientRect().bottom > 60 && this.scrollListeningState === 'show'
         ) {
             this.showPreviousPage();
         }
