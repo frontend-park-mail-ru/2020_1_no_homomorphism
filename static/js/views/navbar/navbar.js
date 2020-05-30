@@ -33,20 +33,19 @@ export default class NavbarView extends BaseView {
     render(root, url) {
         super.render(document.getElementsByClassName(DOM.NAVBAR)[0]);
         this.eventBus.emit(NAVBAR.CHECK_COOKIE);
-        if (User.exists()) {
-            window.localStorage.setItem('theme', User.getUserData().theme);
-        }
-        this.renderTheme(window.localStorage.getItem('theme'));
+        this.renderTheme();
         this.renderLanguage();
         this.setEventListeners();
     }
 
     /**
      * Рендерит тему
-     * @param {string} name
      */
-    renderTheme(name) {
-        const split = name.split(' ');
+    renderTheme() {
+        if (User.exists()) {
+            window.localStorage.setItem('theme', User.getUserData().theme);
+        }
+        const split = window.localStorage.getItem('theme').split(' ');
         document.documentElement.setAttribute('theme', split[0]);
         if (split[0] === 'special') {
             document.documentElement.setAttribute('theme-name', split[1]);
@@ -191,6 +190,7 @@ export default class NavbarView extends BaseView {
         document.getElementById('profile-link').classList.remove('is-not-displayed');
         document.getElementById('settings-icon').classList.remove('is-not-displayed');
         this.renderLanguage();
+        this.renderTheme();
     }
 
     /**
