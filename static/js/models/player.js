@@ -333,6 +333,7 @@ export default class PlayerModel {
         document.getElementsByTagName('audio')[0].currentTime =
             document.getElementsByTagName('audio')[0].duration * ratio;
         console.log(document.getElementsByTagName('audio')[0].duration);
+        console.log(document.getElementsByTagName('audio')[0].currentTime);
 
         if (this.playing) {
             document.getElementsByTagName('audio')[0].play();
