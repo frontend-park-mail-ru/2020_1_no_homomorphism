@@ -16,17 +16,6 @@
                 <div class="l-player-track-button delete-button">
                     <img src="/static/img/icons/clear.svg" class="m-big-delete-button" height="20px" alt="..."/>
                 </div>
-               <!-- <div class="l-player-track-button favorite-button">
-                   <fest:if test="!track.is_liked">
-                       <img src="/static/img/icons/favorite_border.svg" class="m-big-like-button is-not-liked" height="20px" alt="..."/>
-                   </fest:if>
-                   <fest:if test="track.is_liked">
-                       <img src="/static/img/icons/favorite.svg" class="m-big-like-button is-liked" height="20px" alt="..."/>
-                   </fest:if>
-               </div>
-               <div class="l-player-track-button add-button">
-                   <img src="/static/img/icons/playlist_add.svg" class="m-big-add-button" height="20px" alt="..."/>
-               </div> -->
                 <div class="l-player-track-button more-button">
                     <img src="/static/img/icons/more_vert.svg" class="m-big-more-button" height="20px" alt="..."/>
                 </div>
@@ -40,38 +29,6 @@
                         </span>
                     </button>
                 </div>
-                <!-- <div class="row">
-                    <button class="m-dropdown-button like-button">
-                        <fest:if test="!track.is_liked">
-                            <img src="/static/img/icons/favorite_border.svg"/>
-                            <span class="m-text-in-button">
-                                <fest:value>data.lang.dropdown.like</fest:value>
-                            </span>
-                        </fest:if>
-                        <fest:if test="track.is_liked">
-                            <img src="/static/img/icons/favorite.svg"/>
-                            <span class="m-text-in-button">
-                                <fest:value>data.lang.dropdown.unlike</fest:value>
-                            </span>
-                        </fest:if>
-                    </button>
-                </div> -->
-                <!-- <div class="row">
-                    <button class="m-dropdown-button add-button">
-                        <img src="/static/img/icons/playlist_add.svg"/>
-                        <span class="m-text-in-button">
-                            <fest:value>data.lang.dropdown.add</fest:value>
-                        </span>
-                    </button>
-                </div> -->
-                <!-- <div class="row">
-                    <button class="m-dropdown-button album-button">
-                        <img src="/static/img/icons/album.svg"/>
-                        <span class="m-text-in-button">
-                            <fest:value>data.lang.dropdown.goToAlbum</fest:value>
-                        </span>
-                    </button>
-                </div> -->
                 <div class="row">
                     <button class="m-dropdown-button artist-button">
                         <img src="/static/img/icons/person.svg"/>

@@ -45,7 +45,11 @@ export default class NavbarView extends BaseView {
         if (User.exists()) {
             window.localStorage.setItem('theme', User.getUserData().theme);
         }
+        if (window.localStorage.getItem('theme') === null) {
+            window.localStorage.setItem('theme', 'dark green');
+        }
         const split = window.localStorage.getItem('theme').split(' ');
+
         document.documentElement.setAttribute('theme', split[0]);
         if (split[0] === 'special') {
             document.documentElement.setAttribute('theme-name', split[1]);

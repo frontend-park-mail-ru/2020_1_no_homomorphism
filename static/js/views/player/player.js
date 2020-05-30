@@ -72,6 +72,7 @@ export default class PlayerView extends BaseView {
      * @param {string} url
      */
     render(root, url) {
+        console.log('RENDER');
         super.render(document.getElementsByClassName(DOM.PLAYER)[0]);
         this.checkLayout();
         if (this.layout.mobile) {
