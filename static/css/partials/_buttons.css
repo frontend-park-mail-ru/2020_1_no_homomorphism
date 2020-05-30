@@ -537,6 +537,7 @@ input:checked + .m-slider:before {
 .m-playlist-edit-button {
     float: right;
     margin-right: 26px;
+    margin-top: 20px;
     cursor: pointer;
     opacity: 0.4;
 
