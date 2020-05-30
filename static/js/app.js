@@ -27,12 +27,7 @@ async function load() {
     if (window.localStorage.getItem('lang')) {
         await setLanguage(window.localStorage.getItem('lang'));
     } else {
-        // if (User.exists()) {
-        //     await setLanguage(User.getUserData().lang);
-        //     window.localStorage.setItem('lang', User.getUserData().lang);
-        // } else {
         await setLanguage('eng');
-        // }
     }
 
     const router = new Router();
@@ -83,10 +78,8 @@ window.addEventListener('storage', (e) => {
     }
 });
 
-window.onpopstate = function(event) {
+window.onpopstate = (event) => {
     document.getElementsByClassName(DOM.NAVBAR)[0].classList.remove('is-untouchable');
-    document
-        .getElementsByClassName(DOM.CONTENT)[0].classList.remove('is-un-emphasized');
-    document
-        .getElementsByClassName(DOM.TOP_CONTENT)[0].innerHTML = '';
+    document.getElementsByClassName(DOM.CONTENT)[0].classList.remove('is-un-emphasized');
+    document.getElementsByClassName(DOM.TOP_CONTENT)[0].innerHTML = '';
 };

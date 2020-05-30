@@ -43,6 +43,7 @@ export default class PlaylistsComponent {
         this._domItem = data.domItem;
         const elem = document.getElementsByClassName(data.domItem)[0];
         if (elem !== undefined) {
+            elem.classList.remove('m-empty-section');
             elem.innerHTML = template(this.generateHref(data.list));
             this.setEventListeners();
         }
@@ -78,7 +79,7 @@ export default class PlaylistsComponent {
             elem.onclick = this.elemClick.bind(this);
         });
         if (this._type === 'playlist') {
-            document.getElementsByClassName('m-button-without-size')[0]
+            document.getElementsByClassName('m-submit-input-button')[0]
                 .onclick = this.createPlaylistClick.bind(this);
             document.getElementsByClassName('m-small-input')[0]
                 .onkeyup = (event) => {
@@ -200,7 +201,6 @@ export default class PlaylistsComponent {
     uploadClick(event) {
         const label = event.target.parentElement.parentElement.parentElement
             .getElementsByTagName('label')[0];
-        console.log(label);
         label.click();
     }
 

@@ -1,5 +1,5 @@
 /* Кнопки */
-@import "../modules/_variables";
+@import "../modules/_variables.css";
 
 .m-submit-button {
     border-radius: 6px;
@@ -66,9 +66,11 @@
     overflow: hidden;
     float: left;
     transition: 0.3s;
+
     &.artist {
         margin-top: 99px;
     }
+
     & .m-tracks-amount {
         transition: opacity 0.1s 0.2s;
         opacity: 0;
@@ -76,14 +78,17 @@
         margin-top: 1px;
         white-space: nowrap;
     }
+
     &:hover {
         margin-left: 20.4px;
         width: 150px;
         transform: scale(1.2);
+
         & .m-tracks-amount {
             opacity: 1;
         }
     }
+
     &:not(:hover) {
         & .m-tracks-amount {
             transition: opacity 0.1s;
@@ -98,6 +103,7 @@
     height: 34px;
     margin-top: 10px;
     margin-right: 10px;
+
     input {
         opacity: 0;
         width: 0;
@@ -117,6 +123,7 @@
     background-color: #ccc;
     transition: .4s;
     transform: scale(0.6);
+
     &:before {
         position: absolute;
         content: "";
@@ -187,6 +194,7 @@ input:checked + .m-slider:before {
     height: 26px;
     border: 0 solid gray;
     transition: border 10s cubic-bezier(0, 0, 1, 1);
+
     &:hover {
         opacity: 0.8;
     }
@@ -200,23 +208,25 @@ input:checked + .m-slider:before {
     cursor: pointer;
     opacity: 0.5;
     position: relative;
-    min-width: 90px;
-    size: 100% 39px;
-    padding: 0 12px 0 6px;
     transition: border 10s cubic-bezier(0, 0, 1, 1);
-    font-size: 16px;
+    padding: 4px 4px 4px 16px;
+    height: 30px;
+    width: 90px;
     &.success-border {
         border: 1px solid var(--pop-up-color) !important;
     }
+
     &.error-border {
         border: 1px solid red !important;
     }
+
     &:hover {
         box-shadow: var(--box-shadow-hard);
         transition: 0.1s;
         opacity: 0.8;
     }
-    & img{
+
+    & img {
         height: 22.1px;
         margin: 0;
         float: none;
@@ -232,6 +242,7 @@ input:checked + .m-slider:before {
     padding: 0;
     transform: scale(1.7);
     float: left;
+
     &:hover {
         opacity: 0.75;
     }
@@ -251,6 +262,7 @@ input:checked + .m-slider:before {
 .m-button-without-size {
     opacity: 0.3;
     cursor: pointer;
+
     &:hover {
         opacity: 0.7;
     }
@@ -345,7 +357,7 @@ input:checked + .m-slider:before {
     opacity: 0.4;
     cursor: pointer;
 
-    &.is-liked{
+    &.is-liked {
         background-image: url("../../static/img/icons/favorite.svg");
     }
 
@@ -372,6 +384,8 @@ input:checked + .m-slider:before {
     width: 40px;
     height: 40px;
     float: left;
+    margin-right: 18px;
+    margin-bottom: 16px;
     margin-right: 20px;
     vertical-align: middle;
     opacity: 0.4;
@@ -390,6 +404,7 @@ input:checked + .m-slider:before {
 }
 
 .l-delete-playlist-button {
+    /*margin-top: 42px;*/
     margin-top: 20px;
     float: right !important;
     cursor: pointer;
@@ -452,9 +467,11 @@ input:checked + .m-slider:before {
     opacity: 0.4;
     cursor: pointer;
     border-radius: 50%;
+
     &:hover {
         opacity: 0.8;
     }
+
     &.touched {
         background: var(--font-color);
     }
@@ -468,12 +485,23 @@ input:checked + .m-slider:before {
     bottom: 13px;
     right: 10px;
     cursor: pointer;
+
     & img {
         filter: invert(0.9);
     }
+
     &.is-pressed {
         box-shadow: 0 24px 0 0 #0000002e inset;
     }
+}
+
+.m-submit-input-button {
+    size: 24px;
+    border-radius: 4px;
+    float: right;
+    margin-right: 4px;
+    padding-bottom: 16px;
+    cursor: pointer;
 }
 
 .m-close-choose-menu-button {
@@ -486,6 +514,7 @@ input:checked + .m-slider:before {
 .m-playlist-section-edit-button {
     cursor: pointer;
     opacity: 0.4;
+
     &:hover {
         opacity: 0.8;
     }
@@ -495,9 +524,11 @@ input:checked + .m-slider:before {
     size: 24px;
     border-radius: 12px;
     background: var(--overlay-color);
+
     & img {
         opacity: 0.4;
     }
+
     &:hover img {
         opacity: 0.8;
     }
@@ -508,6 +539,7 @@ input:checked + .m-slider:before {
     margin-right: 26px;
     cursor: pointer;
     opacity: 0.4;
+
     &:hover {
         opacity: 0.8;
     }
@@ -523,11 +555,33 @@ input:checked + .m-slider:before {
     float: right;
     margin: 10px;
     margin-top: -191px;
+
     & img {
         transform: scale(0.9);
         opacity: 0.4;
     }
+
     &:hover img {
+        opacity: 0.8;
+    }
+}
+
+.m-share-button {
+    background: var(--overlay-color);
+    border: none;
+    text-align: -webkit-center;
+    color: var(--font-color);
+    cursor: pointer;
+    opacity: 0.5;
+    position: relative;
+    min-width: 90px;
+    padding: 4px;
+    height: 30px;
+    transition: border 10s cubic-bezier(0, 0, 1, 1);
+
+    &:hover {
+        box-shadow: var(--box-shadow-hard);
+        transition: 0.1s;
         opacity: 0.8;
     }
 }

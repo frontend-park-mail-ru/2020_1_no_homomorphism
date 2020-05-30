@@ -1,0 +1,22 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
+    <div class=" is-rotated-180 m-prev-button">
+        <img src="/static/img/icons/arrow_forward_ios.svg" class="is-rotated-0"
+             alt="." height="28"/>
+    </div>
+    <fest:for iterate="data" index="i" value="artist">
+        <a href="/artist/{artist.id}/tracks">
+            <div class="l-list-round-card col" a-id="{artist.id}">
+                <div class="l-list-image">
+                    <img class="m-round-image" src="{artist.image}" alt=""/>
+                </div>
+                <div class="l-list-card-description">
+                    <fest:value>artist.name</fest:value>
+                </div>
+            </div>
+        </a>
+    </fest:for>
+    <div class="m-next-button">
+        <img src="/static/img/icons/arrow_forward_ios.svg" class="is-rotated-0"
+             alt="." height="28"/>
+    </div>
+</fest:template>

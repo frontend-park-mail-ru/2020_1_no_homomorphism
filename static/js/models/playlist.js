@@ -34,7 +34,7 @@ export default class PlaylistModel {
     getPlaylist(id, changeEvent = false) {
         Api.playlistGet(id.id).then((res) => {
             switch (res.status) {
-            case undefined: // TODO Временно
+            case undefined:
                 this.playlist = res;
                 this.eventBus.emit(PLAYLIST.SET_PLAYLIST_ID, this.playlist.id);
                 this.eventBus.emit(PLAYLIST.RENDER_PLAYLIST_DATA, this.playlist);
@@ -60,8 +60,9 @@ export default class PlaylistModel {
      * @param {string} id
      * @param {string} start
      * @param {string} end
+     * @param {boolean} save
      */
-    getTracks(id, start, end) {
+    getTracks(id, start, end, save) {
         Api.playlistTracksGet(id, start, end)
             .then((res) => {
                 switch (res.status) {
@@ -74,9 +75,9 @@ export default class PlaylistModel {
                                 'domItem': 'l-track-list',
                                 'type': 'playlist',
                                 'startIndex': start,
-                            });
+                            }, save);
                         }
-                        this.eventBus.emit(PLAYLIST.SET_TRACKS_AMOUNT, this.playlist.tracks.length);
+                        this.cookieFetch.bind(this)(this.playlist.tracks.length);
                     });
                     break;
                 default:
@@ -200,6 +201,27 @@ export default class PlaylistModel {
                 break;
             default:
                 this.eventBus.emit(POPUP.NEW, lang.popUp.PLAYLIST_ADDITION_ERROR_MESSAGE, true);
+                console.log(res);
+                console.error('I am a teapot');
+            }
+        });
+    }
+
+    /**
+     * Узнаёт, залогинен ли пользователь
+     * @param {number} length
+     */
+    cookieFetch(length) {
+        Api.profileGet().then((res) => {
+            switch (res.status) {
+            case RESPONSE.OK:
+                res.json()
+                    .then((data) => {
+                        User.setUserData(data);
+                        this.eventBus.emit(PLAYLIST.SET_TRACKS_AMOUNT, length);
+                    });
+                break;
+            default:
                 console.log(res);
                 console.error('I am a teapot');
             }

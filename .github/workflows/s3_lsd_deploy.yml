@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - lsd
-      - golden_fixes
+      - merge
+      - language
   pull_request:
     branches:
         - lsd

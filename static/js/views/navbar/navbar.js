@@ -5,6 +5,7 @@ import User from '@libs/user';
 import SearchComponent from '@components/search/search';
 import {globalEventBus} from '@libs/eventBus';
 import {inputSanitize} from '@libs/input_sanitize';
+import {setLanguage} from '@libs/language';
 
 /**
  *  вью для навбара
@@ -18,6 +19,7 @@ export default class NavbarView extends BaseView {
         this.eventBus = eventBus;
         this.searchComponent = new SearchComponent();
         globalEventBus.on(GLOBAL.RENDER_THEME, this.renderTheme.bind(this));
+        globalEventBus.on(GLOBAL.RENDER_LOGGED, this.renderLogged.bind(this));
         this.eventBus.on(NAVBAR.DRAW_COOKIE_RESULT, this.analyzeCookie.bind(this));
         this.eventBus.on(NAVBAR.RENDER_LOGGED, this.renderLogged.bind(this));
         this.eventBus.on(NAVBAR.RENDER_NOT_LOGGED, this.renderNotLogged.bind(this));
@@ -37,6 +39,10 @@ export default class NavbarView extends BaseView {
             window.localStorage.setItem('theme', User.getUserData().theme);
             this.renderTheme(window.localStorage.getItem('theme'));
         }
+        if (User.exists()) {
+            window.localStorage.setItem('lang', User.getUserData().lang);
+            setLanguage(User.getUserData().lang);
+        }
         this.setEventListeners();
     }
 
@@ -47,7 +53,11 @@ export default class NavbarView extends BaseView {
     renderTheme(name) {
         const split = name.split(' ');
         document.documentElement.setAttribute('theme', split[0]);
-        document.documentElement.removeAttribute('theme-name');
+        if (split[0] === 'special') {
+            document.documentElement.setAttribute('theme-name', split[1]);
+        } else {
+            document.documentElement.removeAttribute('theme-name');
+        }
         THEME[split[0]][split[1]].forEach((prop) => {
             document.documentElement.style.setProperty(prop[0], prop[1]);
         });
@@ -174,7 +184,6 @@ export default class NavbarView extends BaseView {
         document.getElementById('logout-link').classList.remove('is-not-displayed');
         document.getElementById('profile-link').classList.remove('is-not-displayed');
         document.getElementById('settings-icon').classList.remove('is-not-displayed');
-        this.renderTheme(data.theme);
     }
 
     /**

@@ -28,10 +28,10 @@ export default class PlaylistView extends BaseView {
         this.moreComponent = new MorePlaylistComponent(eventBus);
         this.addComponent = new AddPlaylistComponent(eventBus);
         this.trackListComponent = new TrackListComponent(eventBus, PLAYLIST);
-        this.pagesManager = new PagesManager('playlist', eventBus, (start, end) => {
+        this.pagesManager = new PagesManager([/(\/playlist\/)[0-9]+/], eventBus, (start, end) => {
             this.eventBus.emit(PLAYLIST.GET_TRACKS_DATA,
                 window.location.pathname.split('/')[window.location.pathname.split('/').length - 1],
-                start, end);
+                start, end, true);
         }, PLAYLIST.NEW_RECIEVED);
         this.eventBus.on(PLAYLIST.RENDER_PLAYLIST_DATA, this.setPlaylistData.bind(this));
         this.eventBus.on(PLAYLIST.RENDER_EDIT, this.renderEdit.bind(this));
@@ -42,6 +42,7 @@ export default class PlaylistView extends BaseView {
         this.eventBus.on(PLAYLIST.RENDER_NAME, this.renderName.bind(this));
         this.eventBus.on(PLAYLIST.RENDER_IMAGE, this.renderImage.bind(this));
         this.eventBus.on(PLAYLIST.INVALID, this.showErrors.bind(this));
+        this.eventBus.on(PLAYLIST.CHECK_COOKIE, this.checkUser.bind(this));
         this.eventBus.on(POPUP.NEW, (message, error = false) => {
             new PopUp(message, error);
         });
@@ -164,16 +165,14 @@ export default class PlaylistView extends BaseView {
     /**
      * check what type of user came - owner, authed or not authed
      */
-    checkUser() {
-        if (User.exists()) {
-            if (User.getUserData().id !== this.playlistData.user_id) {
-                this.addComponent.playlistData = this.playlistData.id;
-                this.addComponent.render();
-                return;
-            }
-            this.moreComponent.playlistData = this.playlistData;
-            this.moreComponent.render(this.playlistData.private);
+    async checkUser() {
+        if (User.getUserData().id !== this.playlistData.user_id) {
+            this.addComponent.playlistData = this.playlistData.id;
+            this.addComponent.render();
+            return;
         }
+        this.moreComponent.playlistData = this.playlistData;
+        this.moreComponent.render(this.playlistData.private);
     }
 
     /**

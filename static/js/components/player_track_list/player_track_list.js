@@ -14,79 +14,21 @@ export default class PlayerTrackListComponent {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
+        eventBus.on(PLAYER.ADD_TO_QUEUE, this.drawNew.bind(this));
     }
 
     /**
      * Sets EventListeners
      */
     setEventListeners() {
-        // window.addEventListener('mousemove', (event) => {
-        //     const marker = document.getElementsByClassName('current-marker')[0];
-        //     const bcr = marker.getBoundingClientRect();
-        //     const row = document.getElementsByClassName('track-list')[0]
-        //         .getElementsByClassName('row').find((row) => {
-        //             return bcr.top === row.getBoundingClientRect().top;
-        //         });
-        //     if (!row || row.contains(event.target)) {
-        //         return;
-        //     }
-        //     console.log(row);
-        //     marker.style.top = (parseInt(marker.style.top.slice(0, marker.style.top.length -
-        //         2)) + 5).toString() + 'px';
-        //     marker.style.height = (parseInt(marker.style.height.slice(0,
-        //         marker.style.height.length - 2)) - 10).toString() + 'px';
-        // });
-        document.querySelectorAll('.track-list .row').forEach((row) => {
+        document.querySelectorAll('.l-player-track').forEach((row) => {
             row.addEventListener('click', this.tracklistClick.bind(this));
-            row.addEventListener('touchend', (event) => {
-                // event.preventDefault();
-                // event.target.click();
-            });
             row.addEventListener('mouseenter', this.tracklistMouseEnter.bind(this));
             row.addEventListener('mouseleave', this.tracklistMouseLeave.bind(this));
-            row.addEventListener('dragstart', (event) => {
-                this.dragged = event.target;
-            });
-            row.addEventListener('dragover', (event) => {
-                event.preventDefault();
-                let row = event.target;
-                while (!row.classList.contains('row')) {
-                    row = row.parentNode;
-                }
-                if (event.clientY < row.getBoundingClientRect().top + 25 &&
-                    row.previousSibling !== document.getElementsByClassName('drag-patch')[0]
-                ) {
-                    row.insertAdjacentElement('beforebegin',
-                        document.getElementsByClassName('drag-patch')[0]);
-                    document.getElementsByClassName('drag-patch')[0].classList.remove('is-active');
-                } else if (row.nextSibling !== document.getElementsByClassName('drag-patch')[0]) {
-                    row.insertAdjacentElement('afterend',
-                        document.getElementsByClassName('drag-patch')[0]);
-                    document.getElementsByClassName('drag-patch')[0].classList.remove('is-active');
-                }
-                document.getElementsByClassName('drag-patch')[0].classList.add('is-active');
-                return false;
-            });
-            row.addEventListener('drop', (event) => {
-                event.stopPropagation();
-                if (this.dragged.contains(event.target)) {
-                    return;
-                }
-                let row = event.target;
-                while (!row.classList.contains('row')) {
-                    row = row.parentNode;
-                }
-                row.insertAdjacentElement('afterend', this.dragged);
-                document.getElementsByClassName('drag-patch')[0].classList.remove('is-active');
-                document.getElementsByClassName('current-marker')[0].insertAdjacentElement(
-                    'afterend', document.getElementsByClassName('drag-patch')[0]);
-                this.eventBus.emit(PLAYER.MOVE_MARKER_TO_CURRENT);
-                this.eventBus.emit(PLAYER.CHANGE_ORDER, this.dragged.getAttribute('id'),
-                    this.dragged.previousSibling.getAttribute('id'));
-            });
-            row.addEventListener('dragend', () => {
-                document.getElementsByClassName('drag-patch')[0].classList.remove('is-active');
-            });
+            row.addEventListener('dragstart', this.dragStart.bind(this));
+            row.addEventListener('dragover', this.dragOver.bind(this));
+            row.addEventListener('drop', this.drop.bind(this));
+            row.addEventListener('dragend', this.dragEnd.bind(this));
         });
         document.getElementsByClassName('drag-patch')[0].addEventListener('dragover', (event) => {
             event.preventDefault();
@@ -130,9 +72,7 @@ export default class PlayerTrackListComponent {
                             setTimeout(() => event.target.parentNode.classList.remove('touched'),
                                 100);
                         }
-                        // event.target.click();
                     };
-                    // button.onclick = (event) => this.addToPlaylist.bind(this)(event);
                 });
             document.getElementsByClassName('l-player')[0]
                 .querySelectorAll('.like-button').forEach((button) => {
@@ -146,9 +86,9 @@ export default class PlayerTrackListComponent {
                             setTimeout(() => event.target.parentNode.classList.remove('touched'),
                                 100);
                         }
-                        // event.target.click();
+                        event.target.click();
                     };
-                    // button.onclick = (event) => this.likeClicked(event);
+                    button.onclick = (event) => this.likeClicked(event);
                 });
             document.getElementsByClassName('l-player')[0]
                 .querySelectorAll('.album-button').forEach((button) => {
@@ -162,9 +102,7 @@ export default class PlayerTrackListComponent {
                             setTimeout(() => event.target.parentNode.classList.remove('touched'),
                                 100);
                         }
-                        // event.target.click();
                     };
-                    // button.onclick = (event) => this.likeClicked(event);
                 });
             document.getElementsByClassName('l-player')[0]
                 .querySelectorAll('.artist-button').forEach((button) => {
@@ -178,9 +116,9 @@ export default class PlayerTrackListComponent {
                             setTimeout(() => event.target.parentNode.classList.remove('touched'),
                                 100);
                         }
-                        // event.target.click();
+                        event.target.click();
                     };
-                    // button.onclick = (event) => this.likeClicked(event);
+                    button.onclick = (event) => this.artistClicked(event);
                 });
             document.getElementsByClassName('l-player')[0]
                 .querySelectorAll('.remove-button').forEach((button) => {
@@ -194,11 +132,74 @@ export default class PlayerTrackListComponent {
                             setTimeout(() => event.target.parentNode.classList.remove('touched'),
                                 100);
                         }
-                        // event.target.click();
+                        event.target.click();
                     };
-                    // button.onclick = (event) => this.deleteClicked(event);
+                    button.onclick = (event) => this.trackDeleteButtonClick(event);
                 });
         }
+    }
+
+    /**
+     * Drag start
+     * @param {Object} event
+     */
+    dragStart(event) {
+        this.dragged = event.target;
+    }
+
+    /**
+     * Drag over
+     * @param {Object} event
+     * @return {Boolean}
+     */
+    dragOver(event) {
+        event.preventDefault();
+        let row = event.target;
+        while (!row.classList.contains('row')) {
+            row = row.parentNode;
+        }
+        if (event.clientY < row.getBoundingClientRect().top + 25 &&
+            row.previousSibling !== document.getElementsByClassName('drag-patch')[0]
+        ) {
+            row.insertAdjacentElement('beforebegin',
+                document.getElementsByClassName('drag-patch')[0]);
+            document.getElementsByClassName('drag-patch')[0].classList.remove('is-active');
+        } else if (row.nextSibling !== document.getElementsByClassName('drag-patch')[0]) {
+            row.insertAdjacentElement('afterend',
+                document.getElementsByClassName('drag-patch')[0]);
+            document.getElementsByClassName('drag-patch')[0].classList.remove('is-active');
+        }
+        document.getElementsByClassName('drag-patch')[0].classList.add('is-active');
+        return false;
+    }
+
+    /**
+     * Drag end
+     */
+    dragEnd() {
+        document.getElementsByClassName('drag-patch')[0].classList.remove('is-active');
+    }
+
+    /**
+     * Drop
+     * @param {Object} event
+     */
+    drop(event) {
+        event.stopPropagation();
+        if (this.dragged.contains(event.target)) {
+            return;
+        }
+        let row = event.target;
+        while (!row.classList.contains('row')) {
+            row = row.parentNode;
+        }
+        row.insertAdjacentElement('afterend', this.dragged);
+        document.getElementsByClassName('drag-patch')[0].classList.remove('is-active');
+        document.getElementsByClassName('current-marker')[0].insertAdjacentElement(
+            'afterend', document.getElementsByClassName('drag-patch')[0]);
+        this.eventBus.emit(PLAYER.MOVE_MARKER_TO_CURRENT);
+        this.eventBus.emit(PLAYER.CHANGE_ORDER, this.dragged.getAttribute('id'),
+            this.dragged.previousSibling.getAttribute('id'));
     }
 
     /**
@@ -255,28 +256,26 @@ export default class PlayerTrackListComponent {
      * Слушает клик мыши по кнопке лайка на треке в плейлисте
      * @param {Object} event
      */
-    trackFavoriteButtonClick(event) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        if (!User.exists()) {
-            globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
-        }
-    }
-
-    /**
-     * Слушает клик мыши по кнопке добавления на треке в плейлисте
-     * @param {Object} event
-     */
-    trackAddButtonClick(event) {
+    likeClicked(event) {
         event.preventDefault();
         event.stopImmediatePropagation();
         if (!User.exists()) {
             globalEventBus.emit(GLOBAL.REDIRECT, URL.LOGIN);
             return;
         }
-        this._choosePlaylist.trackData = {'id': this.getIdByClick(event)};
-        alert('NIKITA, I havent finished it yet');
-        this.getProfilePlaylists();
+    }
+
+    /**
+     * Переход на страницу артиста
+     * @param {Object} event
+     */
+    artistClicked(event) {
+        event.stopImmediatePropagation();
+        let target = event.target;
+        while (!target.classList.contains('l-player-track')) {
+            target = target.parentNode;
+        }
+        globalEventBus.emit(GLOBAL.REDIRECT, target.children[1].children[1].getAttribute('href'));
     }
 
     /**
@@ -314,7 +313,7 @@ export default class PlayerTrackListComponent {
      */
     getIdByClick(target) {
         while (target) {
-            if (target.classList.contains('border-bottom') && target.getAttribute('id') !== null) {
+            if (target.classList.contains('l-player-track') && target.getAttribute('id') !== null) {
                 return target.getAttribute('id');
             }
             target = target.parentNode;
@@ -358,13 +357,6 @@ export default class PlayerTrackListComponent {
             if (window.matchMedia(LAYOUT.MOBILE).matches) {
                 this.resize();
             }
-            // if (document.getElementsByClassName('l-player')[0]) {
-            // document.getElementsByClassName('l-player')[0].classList
-            // .remove('l-player-visible');
-            // } else {
-            // document.getElementsByClassName('l-player-footer')[0].classList
-            // .remove('l-player-visible');
-            // }
         }
     }
 
@@ -385,6 +377,96 @@ export default class PlayerTrackListComponent {
         }
         if (this.expanded) {
             this.triggerClick();
+        }
+    }
+
+    /**
+     * Рисует новый трек в очереди
+     * @param {Object} track
+     */
+    drawNew(track) {
+        let crutch = document.createElement('div');
+        crutch.innerHTML = template([track]);
+        crutch = crutch.firstChild;
+        document.getElementsByClassName('track-list')[0].insertAdjacentElement('beforeend', crutch);
+        const trackRow = document.getElementById(track.id);
+        trackRow.addEventListener('click', this.tracklistClick.bind(this));
+        trackRow.addEventListener('mouseenter', this.tracklistMouseEnter.bind(this));
+        trackRow.addEventListener('mouseleave', this.tracklistMouseLeave.bind(this));
+        trackRow.addEventListener('dragstart', this.dragStart.bind(this));
+        trackRow.addEventListener('dragover', this.dragOver.bind(this));
+        trackRow.addEventListener('drop', this.drop.bind(this));
+        trackRow.addEventListener('dragend', this.dragEnd.bind(this));
+        trackRow.getElementsByClassName('delete-button')[0].addEventListener('click',
+            this.trackDeleteButtonClick.bind(this));
+        if (window.matchMedia(LAYOUT.MOBILE).matches || window.matchMedia(LAYOUT.TABLET).matches) {
+            trackRow.getElementsByClassName('more-button')[0].ontouchend = (event) => {
+                event.preventDefault();
+                event.target.classList.add('touched');
+                setTimeout(() => event.target.classList.remove('touched'), 200);
+                event.target.click();
+            };
+            trackRow.getElementsByClassName('more-button')[0].onclick = (event) =>
+                this.moreClicked(event);
+            trackRow.getElementsByClassName('add-button')[0].ontouchend = (event) => {
+                event.preventDefault();
+                if (event.target.tagName == 'BUTTON') {
+                    event.target.classList.add('touched');
+                    setTimeout(() => event.target.classList.remove('touched'), 100);
+                } else {
+                    event.target.parentNode.classList.add('touched');
+                    setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                }
+            };
+            trackRow.getElementsByClassName('like-button')[0].ontouchend = (event) => {
+                event.preventDefault();
+                if (event.target.tagName == 'BUTTON') {
+                    event.target.classList.add('touched');
+                    setTimeout(() => event.target.classList.remove('touched'), 100);
+                } else {
+                    event.target.parentNode.classList.add('touched');
+                    setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                }
+                event.target.click();
+            };
+            trackRow.getElementsByClassName('like-button')[0].onclick = (event) =>
+                this.likeClicked(event);
+            trackRow.getElementsByClassName('album-button')[0].ontouchend = (event) => {
+                event.preventDefault();
+                if (event.target.tagName == 'BUTTON') {
+                    event.target.classList.add('touched');
+                    setTimeout(() => event.target.classList.remove('touched'), 100);
+                } else {
+                    event.target.parentNode.classList.add('touched');
+                    setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                }
+            };
+            trackRow.getElementsByClassName('artist-button')[0].ontouchend = (event) => {
+                event.preventDefault();
+                if (event.target.tagName == 'BUTTON') {
+                    event.target.classList.add('touched');
+                    setTimeout(() => event.target.classList.remove('touched'), 100);
+                } else {
+                    event.target.parentNode.classList.add('touched');
+                    setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                }
+                event.target.click();
+            };
+            trackRow.getElementsByClassName('artist-button')[0].onclick = (event) =>
+                this.artistClicked(event);
+            trackRow.getElementsByClassName('delete-button')[0].ontouchend = (event) => {
+                event.preventDefault();
+                if (event.target.tagName == 'BUTTON') {
+                    event.target.classList.add('touched');
+                    setTimeout(() => event.target.classList.remove('touched'), 100);
+                } else {
+                    event.target.parentNode.classList.add('touched');
+                    setTimeout(() => event.target.parentNode.classList.remove('touched'), 100);
+                }
+                event.target.click();
+            };
+            trackRow.getElementsByClassName('delete-button')[0].onclick = (event) =>
+                this.trackDeleteButtonClick(event);
         }
     }
 }

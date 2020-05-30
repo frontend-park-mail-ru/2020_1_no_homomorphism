@@ -4,16 +4,18 @@
             <img class="m-right-col m-playlist-section-edit-button" src="/static/img/icons/edit.svg"/>
         </div>
         <div class="l-list-card" id="new playlist input">
-            <div class="l-list-image">
-                <img class="m-button-without-size" src="/static/img/icons/add.svg" alt=""/>
+            <div class="l-list-image" >
+                <img class="lol" src="/static/img/playlist/default.png" alt=""/>
             </div>
             <div class="l-small-input">
-                <input type="text" placeholder="{data.lang.playlist.createPlaceholder}" class="m-small-input"></input>
+                <input type="text" placeholder="{data.lang.playlist.createPlaceholder}" class="m-small-input">
+                </input>
+                <img class="m-submit-input-button" src="/static/img/icons/keyboard_return.svg"/>
             </div>
         </div>
         <fest:for iterate="data" index="i" value="elem">
             <div class="l-list-card" a-id="{elem.id}">
-                <div class="l-list-image">
+                <div class="l-list-image" title="{elem.name}">
                     <img class="m-list-image" src="{elem.image}" a-id="{elem.id}" alt=""/>
                 </div>
                 <label class="l-list-image-label is-not-displayed">
@@ -21,12 +23,12 @@
                     <input class="m-hidden-input is-not-displayed" type="file"/>
                 </label>
                 <div class="l-button-play-track">
-                    <button class="m-button-track-play-playlist"></button>
+                    <button class="m-button-track-play-playlist"> </button>
                 </div>
                 <div class="l-small-input is-not-displayed">
                     <input class="is-margin-top--191" type="text" placeholder="{data.lang.playlist.editPlaceholder}" class="m-small-input"></input>
                 </div>
-                <a class="l-list-card-description  m-tiny-ref" href="{data.href}{elem.id}">
+                <a class="l-list-card-description  m-tiny-ref" title="{elem.name}" href="{data.href}{elem.id}">
                     <fest:value>elem.name</fest:value>
                 </a>
                 <div class="row">
@@ -47,11 +49,11 @@
             </div>
         </fest:if>
         <fest:for iterate="data" index="i" value="elem">
-            <div class="l-list-card" a-id="{elem.id}">
-                <div class="l-list-image">
+            <div class="l-list-card"  a-id="{elem.id}">
+                <div class="l-list-image" title="{elem.name}" >
                     <img class="m-list-image" src="{elem.image}" a-id="{elem.id}" alt=""/>
                 </div>
-                <a class="l-list-card-description  m-tiny-ref" href="{data.href}{elem.id}"
+                <a class="l-list-card-description  m-tiny-ref" title="{elem.name}" href="{data.href}{elem.id}"
                    style="padding-bottom: 0">
                     <fest:value>elem.name</fest:value>
                 </a>

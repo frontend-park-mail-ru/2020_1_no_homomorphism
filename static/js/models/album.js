@@ -50,8 +50,9 @@ export default class AlbumModel {
      * @param {number} id
      * @param {string} start
      * @param {string} end
+     * @param {boolean} save
      */
-    getTracks(id, start, end) {
+    getTracks(id, start, end, save) {
         Api.albumTracksGet(id, start, end)
             .then((res) => {
                 switch (res.status) {
@@ -64,7 +65,7 @@ export default class AlbumModel {
                                 'domItem': 'l-track-list',
                                 'type': 'album',
                                 'startIndex': start,
-                            });
+                            }, save);
                             this.eventBus.emit(ALBUM.SET_TRACKS_AMOUNT, this.tracks);
                         });
                     break;

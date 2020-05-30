@@ -36,7 +36,6 @@ export default class TrackComponent {
                 });
                 break;
             case RESPONSE.BAD_REQUEST:
-                console.log('ALREADY ADDED');
                 break;
             default:
                 console.log(res);

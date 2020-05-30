@@ -16,7 +16,8 @@
         "albums": "Albums",
         "info": "Info",
         "playAll": "play all tracks",
-        "noSubscribtions": "You haven't subscribed to any artists"
+        "noSubscribtions": "You haven't subscribed to any artists",
+        "emptyInfo": "We are planning to add this functionality later"
     },
     "login": {
         "caption": "LOG IN",
@@ -35,6 +36,12 @@
         "logout": "log out",
         "signup": "sign up",
         "login": "log in"
+    },
+    "news": {
+        "subscriptions": "Subscriptions' releases",
+        "worldNews": "World news",
+        "tracks": "Tracks of the day",
+        "artists": "Top artists"
     },
     "playlist": {
         "tracks": {
@@ -162,6 +169,7 @@
         "THEME_MESSAGE": "Theme successfully updated",
         "PASSWORD_MESSAGE": "Password successfully changed",
         "AVATAR_MESSAGE": "Profile picture successfully changed",
+        "LANG_MESSAGE": "Language successfully changed",
         "PLAYLIST_CREATION_MESSAGE": "Playlist successfully created",
         "PLAYLIST_EMPTY_NAME_ERROR": "Enter name first",
         "PLAYLIST_CREATION_ERROR_MESSAGE": "Playlist with this name already exists",

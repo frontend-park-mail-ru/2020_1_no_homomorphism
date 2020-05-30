@@ -35,7 +35,9 @@ export default class SettingsModel {
             case RESPONSE.OK:
                 res.json().then((data) => {
                     User.setUserData(data);
+                    globalEventBus.emit(GLOBAL.RENDER_LOGGED, User.getUserData());
                     window.localStorage.setItem('theme', data.theme);
+                    window.localStorage.setItem('lang', data.lang);
                     this.getCsrfToken();
                     this.eventBus.emit(SETTINGS.RENDER_LOGGED, User.getUserData());
                 });
@@ -76,7 +78,7 @@ export default class SettingsModel {
                         this.eventBus.emit(POPUP.NEW, lang.popUp.AVATAR_MESSAGE);
                         globalEventBus.emit(NAVBAR.GET_USER_DATA);
                         break;
-                    case RESPONSE.BAD_REQUEST: // TODO Обработать ошибку
+                    case RESPONSE.BAD_REQUEST:
                         this.eventBus.emit(POPUP.NEW, lang.popUp.SOMETHING_WENT_WRONG);
                         this.eventBus.emit(SETTINGS.INVALID);
                         break;
@@ -113,7 +115,9 @@ export default class SettingsModel {
             if (values.password === '') {
                 errors['password-error'] = lang.settings.errors.oldPassword;
             }
-        } else if (values.theme === User.getUserData().theme) {
+        } else if (values.theme === User.getUserData().theme &&
+            values.lang === User.getUserData().lang
+        ) {
             if (values.name === User.getUserData().name &&
                 values.email === User.getUserData().email
             ) {
@@ -139,6 +143,8 @@ export default class SettingsModel {
                 type = 'profile data';
             } else if (values.theme !== User.getUserData().theme) {
                 type = 'theme';
+            } else if (values.lang !== User.getUserData().lang) {
+                type = 'lang';
             } else {
                 type = 'password';
             }
@@ -152,6 +158,8 @@ export default class SettingsModel {
                             this.eventBus.emit(POPUP.NEW, lang.popUp.SETTINGS_MESSAGE);
                         } else if (type === 'theme') {
                             this.eventBus.emit(POPUP.NEW, lang.popUp.THEME_MESSAGE);
+                        } else if (type === 'lang') {
+                            this.eventBus.emit(POPUP.NEW, lang.popUp.LANG_MESSAGE);
                         } else {
                             this.eventBus.emit(POPUP.NEW, lang.popUp.PASSWORD_MESSAGE);
                         }
