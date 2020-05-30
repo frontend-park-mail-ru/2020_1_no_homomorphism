@@ -138,10 +138,10 @@ export default class PlayerControlComponent {
             element: document.querySelector('.timeline-back'),
             event: 'mouseup',
             callback: this.timelineMouseUp,
-        }, {
-            element: document.querySelector('.timeline-front'),
-            event: 'mouseup',
-            callback: this.timelineMouseUp,
+        // }, {
+        //     element: document.querySelector('.timeline-front'),
+        //     event: 'mouseup',
+        //     callback: this.timelineMouseUp,
         }, {
             element: document.querySelector('.timeline-toggler'),
             event: 'mouseup',
@@ -240,7 +240,9 @@ export default class PlayerControlComponent {
      */
     windowMouseUp(event) {
         this.timelineDown = false;
-        this.timelineMouseUp(event);
+        if (this.timelineDrag) {
+            this.timelineMouseUp(event);
+        }
         this.volumeDrag = false;
     }
 
