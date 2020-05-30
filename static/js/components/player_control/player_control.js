@@ -138,10 +138,10 @@ export default class PlayerControlComponent {
             element: document.querySelector('.timeline-back'),
             event: 'mouseup',
             callback: this.timelineMouseUp,
-        // }, {
-        //     element: document.querySelector('.timeline-front'),
-        //     event: 'mouseup',
-        //     callback: this.timelineMouseUp,
+        }, {
+            element: document.querySelector('.timeline-front'),
+            event: 'mouseup',
+            callback: this.timelineMouseUp,
         }, {
             element: document.querySelector('.timeline-toggler'),
             event: 'mouseup',
