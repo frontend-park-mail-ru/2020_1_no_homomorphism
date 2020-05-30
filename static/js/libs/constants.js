@@ -84,6 +84,7 @@ export const MAIN = {
     GET_SUBSCRIPTIONS_DATA: 'get-all-subscriptions-data',
     GET_TRACKS_DATA: 'get-all-tracks-data',
     GET_ARTISTS_DATA: 'get-all-artists-data',
+    GET_WORLDS_NEWS: 'get-world-news',
     RENDER_SUBSCRIPTIONS: 'render subscriptions',
     RENDER_NEWS_SECTION: 'render-news-section',
     RENDER_TRACKS: 'render tracks',

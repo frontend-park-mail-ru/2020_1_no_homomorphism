@@ -40,6 +40,7 @@ export default class NewsView extends BaseView {
         super.render(root, url);
         this.eventBus.emit(MAIN.GET_SUBSCRIPTIONS_DATA);
         this.eventBus.emit(MAIN.GET_TRACKS_DATA);
+        this.eventBus.emit(MAIN.GET_WORLDS_NEWS);
         this.eventBus.emit(MAIN.GET_ARTISTS_DATA);
     }
 

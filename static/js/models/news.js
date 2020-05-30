@@ -22,6 +22,7 @@ export default class NewsModel {
         this.eventBus.on(MAIN.GET_SUBSCRIPTIONS_DATA, this.cookieFetch.bind(this));
         this.eventBus.on(MAIN.GET_TRACKS_DATA, this.getTracksOfTheDay.bind(this));
         this.eventBus.on(MAIN.GET_ARTISTS_DATA, this.getArtistListData.bind(this));
+        this.eventBus.on(MAIN.GET_WORLDS_NEWS, this.getWorldNews.bind(this));
     }
 
     /* *
@@ -46,7 +47,7 @@ export default class NewsModel {
     }
 
     /**
-     * Получает список обновлений артистов
+     * Получает список обновлений артистов, на которые подписан юзер
      */
     getSubscriptionsData() {
         Api.newsGet()
@@ -54,6 +55,7 @@ export default class NewsModel {
                 switch (res.status) {
                 case RESPONSE.OK:
                     res.json().then((data) => {
+                        console.log('DUBL');
                         this.eventBus.emit(MAIN.RENDER_NEWS_SECTION, {
                             domItem: 'subscriptions-section',
                             caption: lang.news.subscriptions,
@@ -82,18 +84,18 @@ export default class NewsModel {
      * Получает обновлений мировых артистов
      */
     getWorldNews() {
-        Api.newsGet()
+        Api.worldNewsGet()
             .then((res) => {
                 switch (res.status) {
                 case RESPONSE.OK:
                     res.json().then((data) => {
                         this.eventBus.emit(MAIN.RENDER_NEWS_SECTION, {
-                            domItem: 'subscriptions-section',
+                            domItem: 'world-news-section',
                             caption: lang.news.worldNews,
                             ok: data.length > 0,
                         });
                         this.eventBus.emit(MAIN.RENDER_NEWS_LIST, {
-                            domItem: 'subscriptions-section',
+                            domItem: 'world-news-section',
                             news: data,
                         });
                     });
