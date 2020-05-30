@@ -3,6 +3,7 @@ import Api from '@libs/api';
 import {SETTINGS, URL, RESPONSE, NAVBAR, GLOBAL, POPUP} from '@libs/constants';
 import User from '@libs/user';
 import {globalEventBus} from '@libs/eventBus';
+import {lang} from '@libs/language';
 
 /**
  * Модель настроек
@@ -34,7 +35,9 @@ export default class SettingsModel {
             case RESPONSE.OK:
                 res.json().then((data) => {
                     User.setUserData(data);
+                    globalEventBus.emit(GLOBAL.RENDER_LOGGED, User.getUserData());
                     window.localStorage.setItem('theme', data.theme);
+                    window.localStorage.setItem('lang', data.lang);
                     this.getCsrfToken();
                     this.eventBus.emit(SETTINGS.RENDER_LOGGED, User.getUserData());
                 });
@@ -72,11 +75,11 @@ export default class SettingsModel {
                     switch (res.status) {
                     case RESPONSE.OK:
                         this.getUserData.bind(this)(true);
-                        this.eventBus.emit(POPUP.NEW, POPUP.AVATAR_MESSAGE);
+                        this.eventBus.emit(POPUP.NEW, lang.popUp.AVATAR_MESSAGE);
                         globalEventBus.emit(NAVBAR.GET_USER_DATA);
                         break;
-                    case RESPONSE.BAD_REQUEST: // TODO Обработать ошибку
-                        this.eventBus.emit(POPUP.NEW, POPUP.SOMETHING_WENT_WRONG);
+                    case RESPONSE.BAD_REQUEST:
+                        this.eventBus.emit(POPUP.NEW, lang.popUp.SOMETHING_WENT_WRONG);
                         this.eventBus.emit(SETTINGS.INVALID);
                         break;
                     case RESPONSE.UNAUTH:
@@ -110,9 +113,11 @@ export default class SettingsModel {
                 errors['new-password-error'] = resPassword;
             }
             if (values.password === '') {
-                errors['password-error'] = 'Enter old password';
+                errors['password-error'] = lang.settings.errors.oldPassword;
             }
-        } else if (values.theme === User.getUserData().theme) {
+        } else if (values.theme === User.getUserData().theme &&
+            values.lang === User.getUserData().lang
+        ) {
             if (values.name === User.getUserData().name &&
                 values.email === User.getUserData().email
             ) {
@@ -125,7 +130,7 @@ export default class SettingsModel {
                 errors['email-error'] = resEmail;
             }
             if (values.name === '') {
-                errors['name-error'] = 'Enter name';
+                errors['name-error'] = lang.settings.errors.name;
             }
         }
         if (JSON.stringify(errors) !== '{}') {
@@ -138,37 +143,41 @@ export default class SettingsModel {
                 type = 'profile data';
             } else if (values.theme !== User.getUserData().theme) {
                 type = 'theme';
+            } else if (values.lang !== User.getUserData().lang) {
+                type = 'lang';
             } else {
                 type = 'password';
             }
             Api.profilePut(values.name, values.email, values.password, values.newPassword,
-                values.theme)
+                values.theme, values.lang)
                 .then((res) => {
                     this.eventBus.emit(SETTINGS.GET_CSRF_TOKEN);
                     switch (res.status) {
                     case RESPONSE.OK:
                         if (type === 'profile data') {
-                            this.eventBus.emit(POPUP.NEW, POPUP.SETTINGS_MESSAGE);
+                            this.eventBus.emit(POPUP.NEW, lang.popUp.SETTINGS_MESSAGE);
                         } else if (type === 'theme') {
-                            this.eventBus.emit(POPUP.NEW, POPUP.THEME_MESSAGE);
+                            this.eventBus.emit(POPUP.NEW, lang.popUp.THEME_MESSAGE);
+                        } else if (type === 'lang') {
+                            this.eventBus.emit(POPUP.NEW, lang.popUp.LANG_MESSAGE);
                         } else {
-                            this.eventBus.emit(POPUP.NEW, POPUP.PASSWORD_MESSAGE);
+                            this.eventBus.emit(POPUP.NEW, lang.popUp.PASSWORD_MESSAGE);
                         }
                         this.getUserData.bind(this)(true);
                         break;
                     case RESPONSE.BAD_REQUEST:
-                        errors['password-error'] = 'Wrong password';
+                        errors['password-error'] = lang.settings.errors.password;
                         this.eventBus.emit(SETTINGS.INVALID, errors);
                         break;
                     case RESPONSE.UNAUTH:
                         globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                         break;
                     case RESPONSE.EXISTS:
-                        errors['email-error'] = 'This email is already taken';
+                        errors['email-error'] = lang.settings.errors.email;
                         this.eventBus.emit(SETTINGS.INVALID, errors);
                         break;
                     case RESPONSE.SERVER_ERROR:
-                        this.eventBus.emit(POPUP.NEW, POPUP.SOMETHING_WENT_WRONG, true);
+                        this.eventBus.emit(POPUP.NEW, lang.popUp.SOMETHING_WENT_WRONG, true);
                         break;
                     default:
                         console.log(res);

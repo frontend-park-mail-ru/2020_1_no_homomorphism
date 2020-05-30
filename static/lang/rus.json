@@ -1,0 +1,215 @@
+{
+    "album": {
+        "tracks": {
+            "%11": "треков",
+            "%12": "треков",
+            "%13": "треков",
+            "%14": "треков",
+            "%1": "трек",
+            "%2": "трека",
+            "%3": "трека",
+            "%4": "трека",
+            "default": "треков"
+        },
+        "empty": "Альбом пуст :(",
+        "noId": "Нет альбома с таким id :(",
+        "like": "лайк альбома",
+        "noAlbums": "Альбомов нет!"
+    },
+    "artist": {
+        "subscribe": "Подписаться",
+        "unsubscribe": "Отписаться",
+        "tracks": "Треки",
+        "albums": "Альбомы",
+        "info": "Инфо",
+        "playAll": "играть все",
+        "noSubscribtions": "Вы не подписаны ни на одного артиста",
+        "emptyInfo": "Мы планируем добавить этот раздел позже"
+    },
+    "login": {
+        "title": "ВХОД",
+        "login": "Логин",
+        "password": "Пароль",
+        "go": "Войти",
+        "noAccount": "Нет аккаунта? Зарегистрируйтесь",
+        "errors": {
+            "wrong": "Ошибка в логине или пароле",
+            "already": "Вы уже вошли",
+            "tryAgain": "Ошибки во входных данных. Попробуйте снова"
+        }
+    },
+    "navbar": {
+        "searchPlaceholder": "Исполнитель, трек или альбом",
+        "logout": "выйти",
+        "signup": "регистрация",
+        "login": "войти"
+    },
+    "news": {
+        "subscriptions": "Новые выпуски нашей аудиопрограммы",
+        "worldNews": "Мировые новости",
+        "tracks": "Треки дня",
+        "artists": "Топ исполнителей"
+    },
+    "playlist": {
+        "tracks": {
+            "%11": "треков",
+            "%12": "треков",
+            "%13": "треков",
+            "%14": "треков",
+            "%1": "трек",
+            "%2": "трека",
+            "%3": "трека",
+            "%4": "трека",
+            "default": "треков"
+        },
+        "changeImage": "Изменить изображение",
+        "empty": "Плейлист пуст :(",
+        "noId": "Нет плейлиста с таким id :(",
+        "noRights": "Вы не можете получить доступ к этому плейлисту :(",
+        "privacy": "Приватный плейлист",
+        "copyLink": "копировать ссылку",
+        "edit": "редактировать",
+        "delete": "удалить",
+        "createPlaceholder": "Создать плейлист",
+        "editPlaceholder": "Название",
+        "deleteButtonTitle": "удалить плейлист",
+        "imageButtonTitle": "загрузить обложку плейлиста"
+    },
+    "profile": {
+        "tracks": "Треки",
+        "playlists": "Плейлисты",
+        "albums": "Альбомы",
+        "artists": "Подписки"
+    },
+    "search": {
+        "tracks": "Треки",
+        "albums": "Альбомы",
+        "artists": "Исполнители",
+        "noResults": "Ничего не найдено",
+        "allResults": "Все результаты ➤"
+    },
+    "settings": {
+        "avatar": "Аватар",
+        "avatarTitle": "Измнить аватар",
+        "profile": {
+            "caption": "Данные профиля",
+            "name": "Имя",
+            "email": "Email",
+            "save": "Сохранить"
+        },
+        "password": {
+            "caption": "Пароль",
+            "newPassword": "Новый пароль",
+            "repeatPassword": "Повторите пароль",
+            "oldPassword": "Старый пароль",
+            "change": "Изменить"
+        },
+        "theme": {
+            "caption": "Тема",
+            "names": {
+                "light": "Светлая",
+                "dark": "Тёмная",
+                "special": "Особая"
+            }
+        },
+        "other": {
+            "caption": "Другое",
+            "language": "Язык",
+            "languages": [{
+                "full": "English",
+                "short": "eng"
+            }, {
+                "full": "Русский",
+                "short": "rus"
+            }]
+        },
+        "errors": {
+            "oldPassword": "Введите старый пароль",
+            "name": "Введите имя",
+            "password": "Неверный пароль",
+            "email": "Этот email уже занят"
+        }
+    },
+    "signup": {
+        "caption": "РЕГИСТРАЦИЯ",
+        "name": "Имя",
+        "login": "Логин",
+        "email": "Email",
+        "password": "Пароль",
+        "passwordConfirmation": "Подтверждение пароля",
+        "go": "Зарегистрироваться",
+        "alreadyRegistered": "Есть аккаунт? Войдите",
+        "errors": {
+            "name": "Введите имя",
+            "request": "Bad request",
+            "already": "Вы уже вошли",
+            "tryAgain": "Ошибки во входных данных. Попробуйте снова",
+            "taken": {
+                "login": "Этот логин уже занят",
+                "email": "Этот email уже занят",
+                "both": "Эти логин и email уже заняты"
+            }
+        }
+    },
+    "tracks": {
+        "empty": "Нет треков",
+        "noLiked": "У Вас нет понравившихся треков"
+    },
+    "validation": {
+        "EMAIL_EMPTY": "Введите email",
+        "EMAIL_INCORRECT": "Чёта это не email, судя по всему",
+        "LOGIN_EMPTY": "Введите логин",
+        "LOGIN_INCORRECT": "Логин должен сожержать по кайней мере 3 буквы или цифры",
+        "PASS_EMPTY": "Введите пароль",
+        "REPEAT_PASS_EMPTY": "Повторите пароль",
+        "PASSES_DIFF": "Пароли должны совпадать",
+        "PASS_INCORRECT": "пароль должен сожержать по кайней мере 3 буквы или цифры",
+        "IMG_TOO_BIG": "Максимальный размер – 1 Мб",
+        "IMG_WRONG_EXT": "Не, такое расширение низзя"
+    },
+    "dropdown": {
+        "like": "нравится",
+        "unlike": "не нравится",
+        "remove": "убрать",
+        "add": "добавить",
+        "addToPlayer": "добавить в плеер",
+        "goToAlbum": "альбом",
+        "goToAtrist": "исполнитель"
+    },
+    "popUp": {
+        "SOMETHING_WENT_WRONG": "Что-то пошло не так",
+        "SORRY": "Извините, мы не можем так сделать, потому что наш сервер – кек",
+        "SETTINGS_MESSAGE": "Данные профиля обновлены",
+        "THEME_MESSAGE": "Тема обновлена",
+        "PASSWORD_MESSAGE": "Пароль изменён",
+        "AVATAR_MESSAGE": "Изображение профиля изменено",
+        "LANG_MESSAGE": "Язык изменён",
+        "PLAYLIST_CREATION_MESSAGE": "Плейлист создан",
+        "PLAYLIST_EMPTY_NAME_ERROR": "Сначала введите название",
+        "PLAYLIST_CREATION_ERROR_MESSAGE": "Плейлист с таким назвнием уже существует",
+        "PLAYLIST_NAME_UPDATE_MESSAGE": "Название плейлиста обновлено",
+        "PLAYLIST_NAME_UPDATE_ERROR_MESSAGE": "Невозможно обновить название плейлиста",
+        "PLAYLIST_PICTURE_UPDATE_MESSAGE": "Обложка плейлиста изменена",
+        "PLAYLIST_PICTURE_UPDATE_ERROR_MESSAGE": "Невозможно обновить изображение профиля",
+        "PLAYLIST_DELETION_MESSAGE": "Плейлист удалён",
+        "PLAYLIST_DELETION_ERROR_MESSAGE": "Невозможно удалить плейлист",
+        "TRACK_ADDITION_MESSAGE": "Добавлено в плейлист ",
+        "TRACK_ADDITION_ERROR_MESSAGE": "Уже добавлено",
+        "TRACK_DELETION_MESSAGE": "Удалено из плейлиста ",
+        "TRACK_DELETION_ERROR_MESSAGE": "Невозможно удалить этот трек",
+        "PLAYLIST_PRIVACY_PRIVATE_MESSAGE": "Плейлист приватный",
+        "PLAYLIST_PRIVACY_PUBLIC_MESSAGE": "Плейлист публичный",
+        "PLAYLIST_LINK_COPY_MESSAGE": "Ссылка скопирована",
+        "PLAYLIST_LINK_COPY_ERROR_MESSAGE": "Не удалось скопировать ссылку",
+        "PLAYLIST_LINK_COPY_PRIVACY_ERROR_MESSAGE": "Сначала сделайте плейлист публичным",
+        "PLAYLIST_ADDITION_MESSAGE": "Плейлист добавлен",
+        "PLAYLIST_ADDITION_ERROR_MESSAGE": "Невозможно добавить плейлист",
+        "ARTIST_SUBSCRIPTION_MESSAGE": "Оформлена подписка на ",
+        "ARTIST_SUBSCRIPTION_ERROR_MESSAGE": "Пожалуйста, войдите. Невозможно подписаться на ",
+        "ARTIST_UNSUBSCRIPTION_MESSAGE": "Отменена подписка на ",
+        "ARTIST_UNSUBSCRIPTION_ERROR_MESSAGE": "Невозможно отписаться от ",
+        "ALBUM_LIKED": "Альбом отмечен как понравившийся",
+        "ALBUM_UN_LIKED": "Отметка \"понаравилось\" отменена",
+        "LOGIN_ERROR": "Пожалуйста, войдите"
+    }
+}

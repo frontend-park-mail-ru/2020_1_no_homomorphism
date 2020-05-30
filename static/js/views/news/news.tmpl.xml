@@ -1,7 +1,8 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="col-9">
-        <div class="subscriptions-section"></div>
-        <div class="tracks-section"></div>
-        <div class="artists-section"></div>
+        <div class="m-empty-section tracks-section l-main"> </div>
+        <div class=" m-empty-section subscriptions-section l-main"> </div>
+        <div class=" m-empty-section world-news-section l-main"> </div>
+        <div class=" m-empty-section artists-section l-main"> </div>
     </div>
 </fest:template>

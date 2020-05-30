@@ -12,8 +12,8 @@ import User from '@libs/user';
 export const postFetch = (path = '/', body = {}) => {
     return fetch(SERVER_PATH + path, {
         method: 'POST',
-        mode: 'cors', // no-cors, cors, *same-origin (последнее - значение по умолчанию)
-        credentials: 'include', // include, *same-origin, omit (относится к кукам)
+        mode: 'cors',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json; charset=utf-8',
             'Csrf-Token': User.token,

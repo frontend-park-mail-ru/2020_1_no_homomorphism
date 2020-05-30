@@ -9,6 +9,7 @@ import User from '@libs/user';
 import MorePlaylistComponent from '@components/more_playlist/more_playlist';
 import AddPlaylistComponent from '@components/add_playlist/add_playlist';
 import {inputSanitize} from '@libs/input_sanitize';
+import {lang} from '@libs/language';
 
 /**
  *  вью для входа
@@ -27,10 +28,10 @@ export default class PlaylistView extends BaseView {
         this.moreComponent = new MorePlaylistComponent(eventBus);
         this.addComponent = new AddPlaylistComponent(eventBus);
         this.trackListComponent = new TrackListComponent(eventBus, PLAYLIST);
-        this.pagesManager = new PagesManager('playlist', eventBus, (start, end) => {
+        this.pagesManager = new PagesManager([/(\/playlist\/)[0-9]+/], eventBus, (start, end) => {
             this.eventBus.emit(PLAYLIST.GET_TRACKS_DATA,
                 window.location.pathname.split('/')[window.location.pathname.split('/').length - 1],
-                start, end);
+                start, end, true);
         }, PLAYLIST.NEW_RECIEVED);
         this.eventBus.on(PLAYLIST.RENDER_PLAYLIST_DATA, this.setPlaylistData.bind(this));
         this.eventBus.on(PLAYLIST.RENDER_EDIT, this.renderEdit.bind(this));
@@ -41,6 +42,7 @@ export default class PlaylistView extends BaseView {
         this.eventBus.on(PLAYLIST.RENDER_NAME, this.renderName.bind(this));
         this.eventBus.on(PLAYLIST.RENDER_IMAGE, this.renderImage.bind(this));
         this.eventBus.on(PLAYLIST.INVALID, this.showErrors.bind(this));
+        this.eventBus.on(PLAYLIST.CHECK_COOKIE, this.checkUser.bind(this));
         this.eventBus.on(POPUP.NEW, (message, error = false) => {
             new PopUp(message, error);
         });
@@ -67,7 +69,7 @@ export default class PlaylistView extends BaseView {
     setPlaylistData(playlist) {
         this.playlistData = playlist;
         if (this.playlistData.private === undefined) {
-            this.playlistData.private = false;
+            this.playlistData.private = true;
         }
         this.renderPlaylist();
     }
@@ -136,24 +138,41 @@ export default class PlaylistView extends BaseView {
         if (this.tracksAmount === 0) {
             return;
         }
+        let tracksText = ' ';
+        for (const key in lang.playlist.tracks) {
+            if (!{}.hasOwnProperty.call(lang.playlist.tracks, key)) {
+                continue;
+            }
+            if (key[0] === '=' && this.tracksAmount == key.slice(1, key.length)) {
+                tracksText += lang.playlist.tracks[key];
+                break;
+            }
+            if (key[0] === '%' &&
+                this.tracksAmount % (10 * (key.length - 1)) == key.slice(1, key.length)
+            ) {
+                tracksText += lang.playlist.tracks[key];
+                break;
+            }
+            if (key === 'default') {
+                tracksText += lang.playlist.tracks[key];
+            }
+        }
         document.getElementsByClassName('m-tracks-amount')[0].innerHTML = this.tracksAmount +
-            (this.tracksAmount !== 1 ? ' tracks' : ' track');
+            tracksText;
         this.setEventListeners();
     }
 
     /**
      * check what type of user came - owner, authed or not authed
      */
-    checkUser() {
-        if (User.exists()) {
-            if (User.getUserData().id !== this.playlistData.user_id) {
-                this.addComponent.playlistData = this.playlistData.id;
-                this.addComponent.render();
-                return;
-            }
-            this.moreComponent.playlistData = this.playlistData;
-            this.moreComponent.render(this.playlistData.private);
+    async checkUser() {
+        if (User.getUserData().id !== this.playlistData.user_id) {
+            this.addComponent.playlistData = this.playlistData.id;
+            this.addComponent.render();
+            return;
         }
+        this.moreComponent.playlistData = this.playlistData;
+        this.moreComponent.render(this.playlistData.private);
     }
 
     /**
@@ -201,7 +220,7 @@ export default class PlaylistView extends BaseView {
      */
     inputChange(event) {
         if (event.target.value === '') {
-            new PopUp(POPUP.PLAYLIST_EMPTY_NAME_ERROR, true);
+            new PopUp(lang.popUp.PLAYLIST_EMPTY_NAME_ERROR, true);
         }
         this.eventBus.emit(PLAYLIST.CHANGE_NAME, this.playlistData.id, event.target.value);
     }
@@ -290,8 +309,27 @@ export default class PlaylistView extends BaseView {
      */
     changeTrackAmount(dif) {
         this.tracksAmount += dif;
+        let tracksText = ' ';
+        for (const key in lang.playlist.tracks) {
+            if (!{}.hasOwnProperty.call(lang.playlist.tracks, key)) {
+                continue;
+            }
+            if (key[0] === '=' && this.tracksAmount == key.slice(1, key.length)) {
+                tracksText += lang.playlist.tracks[key];
+                break;
+            }
+            if (key[0] === '%' &&
+                this.tracksAmount % (10 * (key.length - 1)) == key.slice(1, key.length)
+            ) {
+                tracksText += lang.playlist.tracks[key];
+                break;
+            }
+            if (key === 'default') {
+                tracksText += lang.playlist.tracks[key];
+            }
+        }
         document.getElementsByClassName('m-tracks-amount')[0].innerHTML = this.tracksAmount +
-            (this.tracksAmount !== 1 ? ' tracks' : ' track');
+            tracksText;
     }
 
     /**

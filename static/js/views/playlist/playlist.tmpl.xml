@@ -6,7 +6,7 @@
                     <div class="l-round-image col">
                         <label class="is-not-displayed">
                             <img alt="" src="{data.image}" class="m-rounded-image m-scale-image" id="image"
-                                 title="Change image"/>
+                                 title="{data.lang.playlist.changeImage}"/>
                             <input class="m-hidden-input" type="file" id="image-upload"/>
                         </label>
                         <div class="m-error-message-small" id="image-error" style="padding-left: 32px"> </div>
@@ -27,7 +27,7 @@
             <div class="l-down-card">
                 <div class="l-track-list" style="top: 0;">
                     <div class="m-empty-list">
-                        Playlist is empty :(
+                        <fest:value>data.lang.playlist.empty</fest:value>
                     </div>
                 </div>
             </div>

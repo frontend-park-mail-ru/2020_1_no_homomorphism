@@ -1,4 +1,4 @@
-module.exports = { //**/*.js - Для игнора всех js файлов
+module.exports = {
     "env": {
         "browser": true,
         "commonjs": true,

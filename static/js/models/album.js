@@ -1,5 +1,6 @@
 import {ALBUM, RESPONSE, POPUP} from '@libs/constants';
 import Api from '@libs/api';
+import {lang} from '@libs/language';
 
 /**
  * Модель плейлиста
@@ -36,7 +37,7 @@ export default class AlbumModel {
                     break;
                 case RESPONSE.BAD_REQUEST:
                     this.eventBus.emit(ALBUM.ERROR,
-                        {text: 'Sorry, there isn\'t album with this id :('});
+                        {text: lang.album.noId});
                     break;
                 default:
                     console.error('I am a teapot');
@@ -49,8 +50,9 @@ export default class AlbumModel {
      * @param {number} id
      * @param {string} start
      * @param {string} end
+     * @param {boolean} save
      */
-    getTracks(id, start, end) {
+    getTracks(id, start, end, save) {
         Api.albumTracksGet(id, start, end)
             .then((res) => {
                 switch (res.status) {
@@ -63,7 +65,7 @@ export default class AlbumModel {
                                 'domItem': 'l-track-list',
                                 'type': 'album',
                                 'startIndex': start,
-                            });
+                            }, save);
                             this.eventBus.emit(ALBUM.SET_TRACKS_AMOUNT, this.tracks);
                         });
                     break;
@@ -84,10 +86,10 @@ export default class AlbumModel {
                 case RESPONSE.OK:
                     this.album.is_liked = !this.album.is_liked;
                     if (this.album.is_liked) {
-                        this.eventBus.emit(POPUP.NEW, POPUP.ALBUM_LIKED);
+                        this.eventBus.emit(POPUP.NEW, lang.popUp.ALBUM_LIKED);
                         return;
                     }
-                    this.eventBus.emit(POPUP.NEW, POPUP.ALBUM_UN_LIKED);
+                    this.eventBus.emit(POPUP.NEW, lang.popUp.ALBUM_UN_LIKED);
                     break;
                 default:
                     console.error('I am a teapot');

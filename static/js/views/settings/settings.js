@@ -5,6 +5,7 @@ import User from '@libs/user';
 import PopUp from '@components/pop-up/pop-up';
 import {inputSanitize} from '@libs/input_sanitize';
 import {globalEventBus} from '@libs/eventBus';
+import {lang, setLanguage} from '@libs/language';
 
 /**
  * вью для настроек
@@ -39,7 +40,7 @@ export default class SettingsView extends BaseView {
                 continue;
             }
             data.themes.push({
-                name: i[0].toUpperCase() + i.slice(1, i.length),
+                name: lang.settings.theme.names[i],
                 themes: [],
             });
             for (const j in THEME[i]) {
@@ -112,11 +113,27 @@ export default class SettingsView extends BaseView {
                 target.classList.add('is-current-theme');
                 const split = target.getAttribute('id').split(' ');
                 document.documentElement.setAttribute('theme', split[0]);
-                document.documentElement.removeAttribute('theme-name');
+                if (split[0] === 'special') {
+                    document.documentElement.setAttribute('theme-name', split[1]);
+                } else {
+                    document.documentElement.removeAttribute('theme-name');
+                }
                 THEME[split[0]][split[1]].forEach((prop) => {
                     document.documentElement.style.setProperty(prop[0], prop[1]);
                 });
                 this.submitTheme();
+            });
+        });
+        document.getElementsByClassName('lang-img').forEach((elem) => {
+            elem.addEventListener('click', (event) => {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                document.getElementsByClassName('lang-img').forEach((img) => {
+                    img.classList.remove('selected');
+                });
+                event.target.classList.add('selected');
+                this.submitLang(event.target.parentNode.getAttribute('id'));
+                // document.location.reload(true);
             });
         });
         document.getElementsByClassName('m-big-input').forEach((input) => {
@@ -149,6 +166,8 @@ export default class SettingsView extends BaseView {
         document.getElementById('newPasswordConfirm').value = '';
         document.getElementById('password').value = '';
         document.getElementById(data.theme).classList.add('is-current-theme');
+        document.getElementById(data.lang).firstChild.classList.add('selected');
+        setLanguage(data.lang);
     }
 
     /**
@@ -193,6 +212,7 @@ export default class SettingsView extends BaseView {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
             theme: this.userData.theme,
+            lang: this.userData.lang,
             newPassword: '',
             newPasswordConfirm: '',
             password: '',
@@ -200,13 +220,32 @@ export default class SettingsView extends BaseView {
     }
 
     /**
-    * отправляет данные формы - тема
-    */
+     * отправляет данные формы - тема
+     */
     submitTheme() {
         this.eventBus.emit(SETTINGS.SUBMIT, {
             name: this.userData.name,
             email: this.userData.email,
             theme: document.getElementsByClassName('is-current-theme')[0].getAttribute('id'),
+            lang: this.userData.lang,
+            newPassword: '',
+            newPasswordConfirm: '',
+            password: '',
+        });
+    }
+
+    /**
+     * отправляет данные формы - язык
+     * @param {string} lang
+     */
+    submitLang(lang) {
+        setLanguage(lang);
+        document.location.reload();
+        this.eventBus.emit(SETTINGS.SUBMIT, {
+            name: this.userData.name,
+            email: this.userData.email,
+            theme: this.userData.theme,
+            lang: lang,
             newPassword: '',
             newPasswordConfirm: '',
             password: '',
@@ -221,6 +260,7 @@ export default class SettingsView extends BaseView {
             name: this.userData.name,
             email: this.userData.email,
             theme: this.userData.theme,
+            lang: this.userData.lang,
             newPassword: document.getElementById('newPassword').value,
             newPasswordConfirm: document.getElementById('newPasswordConfirm').value,
             password: document.getElementById('password').value,

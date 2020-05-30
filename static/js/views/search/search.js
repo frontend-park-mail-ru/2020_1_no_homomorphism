@@ -2,6 +2,7 @@ import BaseView from '@libs/base_view';
 import search from '@views/search/search.tmpl.xml';
 import {DOM, SEARCH, GLOBAL} from '@libs/constants';
 import {globalEventBus} from '@libs/eventBus';
+import {lang} from '@libs/language';
 
 /**
  * Вью страницы поиска
@@ -32,6 +33,7 @@ export default class SearchView extends BaseView {
      * @param {Object} data
      */
     renderData(data) {
+        data.lang = lang;
         document.getElementsByClassName(DOM.CONTENT)[0].innerHTML = search(data);
     }
 }

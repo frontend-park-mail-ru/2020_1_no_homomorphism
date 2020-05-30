@@ -1,3 +1,5 @@
+import {lang} from '@libs/language';
+
 /**
  */
 export default class BaseView {
@@ -18,6 +20,7 @@ export default class BaseView {
     render(root, url = '') {
         this.url = url;
         this.root = root;
+        this._data.lang = lang;
         this.root.innerHTML = this.template(this._data);
     }
 

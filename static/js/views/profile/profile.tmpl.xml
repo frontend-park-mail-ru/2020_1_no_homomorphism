@@ -1,8 +1,6 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="col-9">
         <div class="l-main">
-
-
             <div class="l-top-card">
                 <div class="mobile-row">
                     <div class="l-top-info col-6">
@@ -19,7 +17,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="mobile-row">
                     <div class="l-top-titles col-6">
                         <div class="l-top-section-tracks col-3" id="profile-tracks-title">
@@ -27,7 +24,9 @@
                                 <h2 id="tracks">
                                     <fest:value>data.tracks</fest:value>
                                 </h2>
-                                <p>Tracks</p>
+                                <p>
+                                    <fest:value>data.lang.profile.tracks</fest:value>
+                                </p>
                             </a>
                         </div>
                         <div class="m-profile-playlists col-3" id="profile-playlists-title">
@@ -35,7 +34,9 @@
                                 <h2 id="playlists">
                                     <fest:value>data.playlists</fest:value>
                                 </h2>
-                                <p>Playlists</p>
+                                <p>
+                                    <fest:value>data.lang.profile.playlists</fest:value>
+                                </p>
                             </a>
                         </div>
                         <div class="l-top-section-albums col-3" id="profile-albums-title">
@@ -43,7 +44,9 @@
                                 <h2 id="albums">
                                     <fest:value>data.albums</fest:value>
                                 </h2>
-                                <p>Albums</p>
+                                <p>
+                                    <fest:value>data.lang.profile.albums</fest:value>
+                                </p>
                             </a>
                         </div>
                         <div class="l-top-section-artists col-3" id="profile-artists-title">
@@ -51,15 +54,16 @@
                                 <h2 id="artists">
                                     <fest:value>data.artists</fest:value>
                                 </h2>
-                                <p>Artists</p>
+                                <p>
+                                    <fest:value>data.lang.profile.artists</fest:value>
+                                </p>
                             </a>
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="l-down-card">
-                <div class="l-track-list">
+                <div class="l-track-list m-empty-section">
                 </div>
             </div>
         </div>

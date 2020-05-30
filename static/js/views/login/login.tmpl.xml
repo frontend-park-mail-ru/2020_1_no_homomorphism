@@ -2,29 +2,31 @@
     <div class="is-emphasized l-center-pos row">
         <div class="col-4">
             <form class="l-form l-card" method="post" autocomplete="none">
-                <h2>LOG IN</h2>
+                <h2>
+                    <fest:value>data.lang.login.caption</fest:value>
+                </h2>
                 <div class="m-form-input">
                     <label>
-                        Login
+                        <fest:value>data.lang.login.login</fest:value>
                         <input class="m-big-input" type="text" id="login" use = "required"/>
                         <div class="m-error-message-small"></div>
                     </label>
                 </div>
                 <div class="m-form-input">
                     <label>
-                        Password
+                        <fest:value>data.lang.login.password</fest:value>
                         <input class="m-big-input" type="password" id="password" use="required"/>
                         <div class="m-error-message-small"></div>
                     </label>
                 </div>
                 <button class="m-submit-button" type="submit" id="submit-login">
-                    Go
+                    <fest:value>data.lang.login.go</fest:value>
                 </button>
                 <div class="m-error-message-small" id="global">
                 </div>
                 <div class="m-form-description">
                     <a class="m-tiny-ref" href="/signup">
-                        No account? Sign up.
+                        <fest:value>data.lang.login.noAccount</fest:value>
                     </a>
                 </div>
             </form>

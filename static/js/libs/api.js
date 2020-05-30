@@ -101,6 +101,39 @@ export default class Api {
     }
 
     /**
+     * Получение новостей подписок пользователя
+     * @return {Promise<Response>}
+     */
+    static newsGet() {
+        return getFetch(API + '/albums/newest', (error) => {
+            console.log(error.toString());
+            throw new Error(error);
+        });
+    }
+
+    /**
+     * Получение новостей подписок пользователя
+     * @return {Promise<Response>}
+     */
+    static worldNewsGet() {
+        return getFetch(API + '/albums/worldnews', (error) => {
+            console.log(error.toString());
+            throw new Error(error);
+        });
+    }
+
+    /**
+     * Получение новостей подписок пользователя
+     * @return {Promise<Response>}
+     */
+    static topArtists() {
+        return getFetch(API + '/artists/top', (error) => {
+            console.log(error.toString());
+            throw new Error(error);
+        });
+    }
+
+    /**
      * Профиль просмотр статистики
      * @param {string} id
      * @return {Promise<Response>}
@@ -119,13 +152,15 @@ export default class Api {
      * @param {string} password
      * @param {string} newPassword
      * @param {string} theme
+     * @param {string} lang
      * @return {Promise<Response>}
      */
-    static profilePut(name, email, password, newPassword, theme) {
+    static profilePut(name, email, password, newPassword, theme, lang) {
         return putFetch(API + '/users/settings', {
             name: inputSanitize(name),
             email: inputSanitize(email),
             theme: inputSanitize(theme),
+            lang: inputSanitize(lang),
             password: inputSanitize(password),
             new_password: inputSanitize(newPassword),
         }, (error) => {

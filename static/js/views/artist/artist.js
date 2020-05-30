@@ -3,11 +3,12 @@ import BaseView from '@libs/base_view';
 import TrackListComponent from '@components/track_list/track_list';
 import PlaylistsComponent from '@components/playlist_list/playlist_list';
 import PagesManager from '@components/pagination';
-import {GLOBAL, ARTIST, DOM, POPUP} from '@libs/constants';
+import {GLOBAL, ARTIST, DOM} from '@libs/constants';
 import User from '@libs/user';
 import PopUp from '@components/pop-up/pop-up';
 import {inputSanitize} from '@libs/input_sanitize';
 import {globalEventBus} from '@libs/eventBus';
+import {lang} from '@libs/language';
 
 /**
  *  вью для страницы артиста
@@ -24,12 +25,14 @@ export default class ArtistView extends BaseView {
         this.textSubscribe = '';
         new TrackListComponent(eventBus, ARTIST);
         new PlaylistsComponent(eventBus, ARTIST.RENDER_ALBUMS);
-        this.pagesManager = new PagesManager('artist', eventBus, (start, end) => {
-            this.eventBus.emit('artist-tracks', start, end);
-        }, ARTIST.NEW_RECIEVED);
+        this.pagesManager = new PagesManager([/(\/artist\/)[0-9]+/, /(\/artist\/)[0-9]+(\/tracks)/],
+            eventBus, (start, end) => {
+                this.eventBus.emit('artist-tracks', start, end, true);
+            }, ARTIST.NEW_RECIEVED);
         this.eventBus = eventBus;
         this.eventBus.on(ARTIST.RENDER_DATA, this.renderData.bind(this));
         this.eventBus.on(ARTIST.DRAW_SUBSCRIBE, this.drawSubscribe.bind(this));
+        this.eventBus.on(ARTIST.RENDER_INFO, this.renderInfo.bind(this));
     }
 
     /**
@@ -89,9 +92,9 @@ export default class ArtistView extends BaseView {
         document.getElementById('artist-tracks-title').innerText = data.tracks;
         document.getElementById('artist-albums-title').innerText = data.albums;
         this.setEventListeners.bind(this)();
-        this.textSubscribe = 'Subscribe';
+        this.textSubscribe = lang.artist.subscribe;
         if (data.is_subscribed) {
-            this.textSubscribe = 'Unsubscribe';
+            this.textSubscribe = lang.artist.unsubscribe;
             document.getElementsByClassName('m-subscribe')[0].classList.toggle('is-subscribed');
         }
         document.getElementsByClassName('m-subscribe')[0].innerHTML =
@@ -139,27 +142,37 @@ export default class ArtistView extends BaseView {
     }
 
     /**
+     * Subscribe
+     */
+    renderInfo() {
+        document.getElementsByClassName('l-track-list')[0]
+            .classList.remove('m-empty-section');
+        document.getElementsByClassName('l-track-list')[0].innerHTML =
+            `<div class="m-empty-list">${lang.artist.emptyInfo}</div>`;
+    }
+
+    /**
      * Subscribe result
      * @param {Boolean} success
      */
     drawSubscribe(success) {
         if (!success) {
-            if (this.textSubscribe === 'Subscribe') {
-                new PopUp(POPUP.ARTIST_SUBSCRIPTION_ERROR_MESSAGE + this.data.name, true);
+            if (this.textSubscribe === lang.artist.subscribe) {
+                new PopUp(lang.popUp.ARTIST_SUBSCRIPTION_ERROR_MESSAGE + this.data.name, true);
             } else {
-                new PopUp(POPUP.ARTIST_UNSUBSCRIPTION_ERROR_MESSAGE + this.data.name, true);
+                new PopUp(lang.popUp.ARTIST_UNSUBSCRIPTION_ERROR_MESSAGE + this.data.name, true);
             }
             return;
         }
-        if (this.textSubscribe === 'Subscribe') {
-            new PopUp(POPUP.ARTIST_SUBSCRIPTION_MESSAGE + this.data.name);
+        if (this.textSubscribe === lang.artist.subscribe) {
+            new PopUp(lang.popUp.ARTIST_SUBSCRIPTION_MESSAGE + this.data.name);
         } else {
-            new PopUp(POPUP.ARTIST_UNSUBSCRIPTION_MESSAGE + this.data.name);
+            new PopUp(lang.popUp.ARTIST_UNSUBSCRIPTION_MESSAGE + this.data.name);
         }
         if (User.exists()) {
             const button = document.getElementsByClassName('m-subscribe')[0];
             this.textSubscribe = button.classList.contains('is-subscribed') ?
-                'Subscribe' : 'Unsubscribe';
+                lang.artist.subscribe : lang.artist.unsubscribe;
             button.classList.add('is-invisible');
             button.classList.toggle('is-subscribed');
             button.innerText = this.textSubscribe;

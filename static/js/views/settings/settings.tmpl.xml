@@ -3,13 +3,15 @@
         <div class="l-main">
             <div class="settings-left-col">
                 <div class="l-down-card col-12">
-                    <h2 class="l-small-card">Avatar</h2>
+                    <h2 class="l-small-card">
+                        <fest:value>data.lang.settings.avatar</fest:value>
+                    </h2>
                     <div class="small-line"></div>
                     <div class="l-avatar-input">
                         <div class="l-round-image col">
                             <label>
                                 <img alt="" src="{data.image}" class="m-round-image m-scale-image" id="avatar"
-                                    title="Add new image"/>
+                                    title="{data.lang.settings.avatarTitle}"/>
                                 <input class="m-hidden-input" type="file" id="avatar-upload"/>
                             </label>
                             <div class="m-error-message-small" id="avatar-error" style="padding-left: 32px"> </div>
@@ -17,12 +19,16 @@
                     </div>
                 </div>
                 <div class="l-down-card col-12">
-                    <h2 class="l-small-card">Profile data</h2>
+                    <h2 class="l-small-card">
+                        <fest:value>data.lang.settings.profile.caption</fest:value>
+                    </h2>
                     <div class="small-line"></div>
                     <div class="l-input">
                         <div class="row">
                             <div class="l-input">
-                                <span class="m-settings-title">Name</span>
+                                <span class="m-settings-title">
+                                    <fest:value>data.lang.settings.profile.name</fest:value>
+                                </span>
                                 <label for="login">
                                     <input type="text" class="m-big-input" id="name"/>
                                     <div class="m-error-message-small" id="name-error"></div>
@@ -31,7 +37,9 @@
                         </div>
                         <div class="row">
                             <div class="l-input">
-                                <span class=" m-settings-title">Email</span>
+                                <span class=" m-settings-title">
+                                    <fest:value>data.lang.settings.profile.email</fest:value>
+                                </span>
                                 <label for="email">
                                     <input type="text" class="m-big-input" id="email" autocomplete="off"/>
                                     <div class="m-error-message-small" id="email-error"></div>
@@ -40,7 +48,7 @@
                         </div>
                         <div class="row">
                             <button class="m-small-button" type="submit" id="submit-setting-changes-data">
-                                Save
+                                <fest:value>data.lang.settings.profile.save</fest:value>
                             </button>
                         </div>
                     </div>
@@ -48,12 +56,16 @@
             </div>
             <div class="settings-right-col">
                 <div class="l-down-card col-12">
-                    <h2 class="l-small-card">Password</h2>
+                    <h2 class="l-small-card">
+                        <fest:value>data.lang.settings.password.caption</fest:value>
+                    </h2>
                     <div class="small-line"></div>
                     <div class="l-input">
                         <div class="row">
                             <div class="l-input">
-                                <span class="m-settings-title">New password</span>
+                                <span class="m-settings-title">
+                                    <fest:value>data.lang.settings.password.newPassword</fest:value>
+                                </span>
                                 <label for="newPassword">
                                     <input type="password" class="m-big-input" id="newPassword" autocomplete="off"/>
                                     <div class="m-error-message-small" id="new-password-error"></div>
@@ -62,7 +74,9 @@
                         </div>
                         <div class="row">
                             <div class="l-input">
-                                <span class="m-settings-title">Repeat password</span>
+                                <span class="m-settings-title">
+                                    <fest:value>data.lang.settings.password.repeatPassword</fest:value>
+                                </span>
                                 <label for="newPasswordConfirm">
                                     <input type="password" class="m-big-input" id="newPasswordConfirm"
                                         autocomplete="off"/>
@@ -72,7 +86,9 @@
                         </div>
                         <div class="row">
                             <div class="l-input">
-                                <span class="m-settings-title">Old password</span>
+                                <span class="m-settings-title">
+                                    <fest:value>data.lang.settings.password.oldPassword</fest:value>
+                                </span>
                                 <label for="password">
                                     <input type="password" class="m-big-input" id="password"
                                         placeholder="" autocomplete="off"/>
@@ -82,13 +98,15 @@
                         </div>
                         <div class="row">
                             <button type="submit" class="m-small-button" id="submit-setting-changes-pass">
-                                Change
+                                <fest:value>data.lang.settings.password.change</fest:value>
                             </button>
                         </div>
                     </div>
                 </div>
                 <div class="l-down-card col-12">
-                    <h2 class="l-small-card">Theme</h2>
+                    <h2 class="l-small-card">
+                        <fest:value>data.lang.settings.theme.caption</fest:value>
+                    </h2>
                     <div class="small-line"></div>
                     <div class="l-input">
                         <fest:for iterate="data.themes" index="i" value="themeGroup">
@@ -109,6 +127,29 @@
                                 </div>
                             </div>
                         </fest:for>
+                    </div>
+                </div>
+                <div class="l-down-card col-12">
+                    <h2 class="l-small-card">
+                        <fest:value>data.lang.settings.other.caption</fest:value>
+                    </h2>
+                    <div class="small-line"></div>
+                    <div class="l-input">
+                        <div class="row m-theme-selector-container-caption">
+                            <div class="m-theme-selector-container-name">
+                                <fest:value>data.lang.settings.other.language</fest:value>
+                            </div>
+                            <img class="m-theme-selector-container-button" src="/static/img/icons/arrow_forward_ios.svg"/>
+                        </div>
+                        <div class="row">
+                            <div class="m-theme-selector-container">
+                                <fest:for iterate="data.lang.settings.other.languages" index="i" value="language">
+                                    <div class="m-theme-big" id="{language.short}">
+                                        <img class="lang-img" src="/static/img/icons/languages/{language.short}.png"/>
+                                    </div>
+                                </fest:for>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

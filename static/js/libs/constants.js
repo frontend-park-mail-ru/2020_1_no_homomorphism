@@ -1,4 +1,3 @@
-// export const SERVER_PATH = 'http://localhost:8081';
 export const SERVER_PATH = 'https://virusmusic.fun';
 
 export const API = '/api/v1';
@@ -40,7 +39,7 @@ export const URL = {
 
 export const PAGINATION = {
     ALBUMS: 20,
-    TRACKS: 6, // 50,
+    TRACKS: 50,
     TRACK_HEIGHT: 54,
 };
 
@@ -51,16 +50,6 @@ export const LAYOUT = {
 };
 
 export const VALIDATION = {
-    EMAIL_EMPTY: 'Enter email',
-    EMAIL_INCORRECT: 'Incorrect email syntax',
-    LOGIN_EMPTY: 'Enter login',
-    LOGIN_INCORRECT: 'Login must contain at least 3 letters or numbers',
-    PASS_EMPTY: 'Enter password',
-    REPEAT_PASS_EMPTY: 'Repeat the password',
-    PASSES_DIFF: 'Passwords must match',
-    PASS_INCORRECT: 'Password must contain at least 3 letters or numbers',
-    IMG_TOO_BIG: 'Max allowable size - 1Mb',
-    IMG_WRONG_EXT: 'Not allowable extension',
     REGEX_EMAIL: '(.)+@(.)+',
     REGEX_LOGIN: '^[a-zA-Z0-9_.]{3,}$',
     REGEX_PASSWORD: '^[a-zA-Z0-9]{3,}$',
@@ -74,6 +63,7 @@ export const GLOBAL = {
     PLAY_TRACKS: 'global-play-track-tracks',
     PLAY_PLAYLIST: 'global-play-playlist',
     PLAY_ALBUM: 'global-play-album',
+    ADD_TO_QUEUE: 'global-add-to-queue',
     CLEAR_AND_LOCK: 'global-clear-and-lock',
     COLLAPSE: 'global-collapse',
     COLLAPSE_AND_LOCK: 'global-collapse-and-lock',
@@ -86,19 +76,24 @@ export const GLOBAL = {
     PAUSE: 'global-pause',
     HIDE_SUBSCRIPTIONS: 'hide subscriptions',
     RENDER_THEME: 'render theme',
+    RENDER_LOGGED: 'render-new-avatar',
+    RERENDER_BECAUSE_OF_LANGUAGE: 'global-rerender',
 };
 
 export const MAIN = {
     GET_SUBSCRIPTIONS_DATA: 'get-all-subscriptions-data',
     GET_TRACKS_DATA: 'get-all-tracks-data',
     GET_ARTISTS_DATA: 'get-all-artists-data',
+    GET_WORLDS_NEWS: 'get-world-news',
     RENDER_SUBSCRIPTIONS: 'render subscriptions',
-    RENDER_ARTISTS: 'render artists',
+    RENDER_NEWS_SECTION: 'render-news-section',
     RENDER_TRACKS: 'render tracks',
+    RENDER_ARTISTS: 'render artist kek',
     RENDER_SUBSCRIPTIONS_LIST: 'render subscriptions list',
-    RENDER_ARTISTS_LIST: 'render artists list',
+    RENDER_NEWS_LIST: 'render news list',
     RENDER_TRACKS_LIST: 'render tracks list',
     NO_ANSWER: 'no-answer',
+    RENDER_ARTISTS_LIST: 'render artists list',
 };
 
 export const LOGIN = {
@@ -120,7 +115,6 @@ export const NAVBAR = {
 };
 
 export const PLAYER = {
-    // REDIRECT: 'player-redirect',
     GET_TRACK: 'player-get-track',
     GET_TRACKS: 'player-get-tracks',
     RESIZE: 'player-resize',
@@ -140,6 +134,7 @@ export const PLAYER = {
     DELETE: 'player-delete',
     LIKE: 'player-like',
     ADD: 'player-add',
+    ADD_TO_QUEUE: 'player-add-to-queue',
     DRAW_PLAY: 'player-draw-play',
     DRAW_PAUSE: 'player-draw-pause',
     TRACK_UPDATE: 'player-track-update',
@@ -166,7 +161,6 @@ export const SETTINGS = {
     SUBMIT: 'settings-submit',
     SUBMIT_PASSWORD: 'settings-submit-password',
     INVALID: 'settings-invalid',
-    // REDIRECT: 'settings-redirect',
 };
 
 export const SIGN_UP = {
@@ -184,8 +178,6 @@ export const PROFILE = {
     ID_ALBUMS_SECTION: 'profile-albums-title',
     ID_ARTISTS_SECTION: 'profile-artists-title',
     // --
-    // NO_ANSWER: 'profile-no-answer',
-    // REDIRECT: 'profile-redirect',
     GET_DATA: 'profile-get-profile-data',
     GET_STAT: 'profile-get-profile-stat',
     GET_TRACKS: 'profile-get-profile-tracks',
@@ -227,7 +219,6 @@ export const ARTIST = {
 export const PLAYLIST = {
     DROPDOWN: 'playlist-dropdown',
     SET_TRACKS_AMOUNT: 'playlist-set-tracks-amount',
-    // REDIRECT: 'playlist-redirect',
     SET_PLAYLIST_ID: 'playlist-set-id',
     GET_PLAYLIST_DATA: 'playlist-get-playlist-data',
     GET_TRACKS_DATA: 'playlist-get-tracks-data',
@@ -246,10 +237,10 @@ export const PLAYLIST = {
     CHANGE_IMAGE: 'playlist-image',
     ADD_PLAYLIST: 'playlist-add',
     INVALID: 'playlist-invalid',
+    CHECK_COOKIE: 'check-user-cookie',
 };
 
 export const ALBUM = {
-    // REDIRECT: 'album-redirect',
     GET_ALBUM_DATA: 'album-get-album-data',
     GET_TRACKS_DATA: 'album-get-tracks-data',
     RENDER_ALBUM: 'album-render-album',
@@ -275,39 +266,6 @@ export const SEARCH = {
 
 export const POPUP = {
     NEW: 'new pop-up',
-    SOMETHING_WENT_WRONG: 'Something went wrong',
-    SORRY: 'Sorry, cannot perform it because our server is kek',
-    SETTINGS_MESSAGE: 'Profile data successfully updated',
-    THEME_MESSAGE: 'Theme successfully updated',
-    PASSWORD_MESSAGE: 'Password successfully changed',
-    AVATAR_MESSAGE: 'Profile picture successfully changed',
-    PLAYLIST_CREATION_MESSAGE: 'Playlist successfully created',
-    PLAYLIST_EMPTY_NAME_ERROR: 'Enter name first',
-    PLAYLIST_CREATION_ERROR_MESSAGE: 'Playlist with this name already exists',
-    PLAYLIST_NAME_UPDATE_MESSAGE: 'Playlist name successfully updated',
-    PLAYLIST_NAME_UPDATE_ERROR_MESSAGE: 'Cannot updata playlist name',
-    PLAYLIST_PICTURE_UPDATE_MESSAGE: 'Playlist picture successfully updated',
-    PLAYLIST_PICTURE_UPDATE_ERROR_MESSAGE: 'Cannot updata playlist picture',
-    PLAYLIST_DELETION_MESSAGE: 'Playlist successfully deleted',
-    PLAYLIST_DELETION_ERROR_MESSAGE: 'Cannot delete playlist',
-    TRACK_ADDITION_MESSAGE: 'Added to playlist ',
-    TRACK_ADDITION_ERROR_MESSAGE: 'Already added',
-    TRACK_DELETION_MESSAGE: 'Deleted from playlist ',
-    TRACK_DELETION_ERROR_MESSAGE: 'Cannot delete this track',
-    PLAYLIST_PRIVACY_PRIVATE_MESSAGE: 'Playlist is private now',
-    PLAYLIST_PRIVACY_PUBLIC_MESSAGE: 'Playlist is public now',
-    PLAYLIST_LINK_COPY_MESSAGE: 'Link copied',
-    PLAYLIST_LINK_COPY_ERROR_MESSAGE: 'Cannot copy link',
-    PLAYLIST_LINK_COPY_PRIVACY_ERROR_MESSAGE: 'No link copied. Make the playlist public first',
-    PLAYLIST_ADDITION_MESSAGE: 'Playlist added',
-    PLAYLIST_ADDITION_ERROR_MESSAGE: 'Cannot add playlist',
-    ARTIST_SUBSCRIPTION_MESSAGE: 'Subscribed to ',
-    ARTIST_SUBSCRIPTION_ERROR_MESSAGE: 'Please, login. Can not subscribe to ',
-    ARTIST_UNSUBSCRIPTION_MESSAGE: 'Unsubscribed from ',
-    ARTIST_UNSUBSCRIPTION_ERROR_MESSAGE: 'Cannot unsubscribe from ',
-    ALBUM_LIKED: 'Album successfully liked',
-    ALBUM_UN_LIKED: 'Like successfully removed',
-    LOGIN_ERROR: 'Please, login',
     LIFETIME: 2000,
     DISSOLUTIONTIME: 1000,
 };
@@ -315,6 +273,7 @@ export const POPUP = {
 export const THEME_OVERLAY = {
     'light': 'white',
     'dark': '#383b40',
+    'special': 'white',
 };
 
 export const THEME = {
@@ -365,6 +324,13 @@ export const THEME = {
             ['--selected-elem', '#01579b'],
             ['--marker-color', '#01579b'],
             ['--button-color', '#01579b'],
+        ],
+    },
+    'special': {
+        'lsd': [
+            ['--selected-elem', '#dcc4ff'],
+            ['--marker-color', '#6900ff'],
+            ['--button-color', '#6900ff'],
         ],
     },
 };

@@ -3,6 +3,7 @@ import Api from '@libs/api';
 import {SIGN_UP, RESPONSE, NAVBAR} from '@libs/constants';
 import User from '@libs/user';
 import {globalEventBus} from '@libs/eventBus';
+import {lang} from '@libs/language';
 
 /**
  * модель странички регистрации
@@ -27,7 +28,7 @@ export default class SignupModel {
         const resEmail = Validation.email(values.email);
         const errors = {};
         if (values.name === '') {
-            errors.name = 'Enter your name';
+            errors.name = lang.signup.errors.name;
         }
         if (resLogin !== '') {
             errors.login = resLogin;
@@ -50,17 +51,17 @@ export default class SignupModel {
                         globalEventBus.emit(NAVBAR.GET_USER_DATA);
                         break;
                     case RESPONSE.BAD_REQUEST:
-                        this.eventBus.emit(SIGN_UP.INVALID, {global: 'Bad request'});
+                        this.eventBus.emit(SIGN_UP.INVALID, {global: lang.signup.errors.request});
                         break;
                     case RESPONSE.NO_ACCESS_RIGHT:
-                        this.eventBus.emit(SIGN_UP.INVALID, {global: 'You are already logged in'});
+                        this.eventBus.emit(SIGN_UP.INVALID, {global: lang.signup.errors.already});
                         break;
                     case RESPONSE.EXISTS:
                         this.checkBody.bind(this)(res);
                         break;
                     case RESPONSE.SERVER_ERROR:
                         this.eventBus.emit(SIGN_UP.INVALID,
-                            {global: 'Errors in input data, try again'});
+                            {global: lang.signup.errors.tryAgain});
                         break;
                     default:
                         console.log(res);
@@ -80,12 +81,12 @@ export default class SignupModel {
                 if (body.login_exists) {
                     if (body.email_exists) {
                         this.eventBus.emit(SIGN_UP.INVALID,
-                            {global: 'These login and email are taken'});
+                            {global: lang.signup.errors.taken.both});
                         return;
                     }
-                    this.eventBus.emit(SIGN_UP.INVALID, {global: 'This login is taken'});
+                    this.eventBus.emit(SIGN_UP.INVALID, {global: lang.signup.errors.taken.login});
                 } else {
-                    this.eventBus.emit(SIGN_UP.INVALID, {global: 'This email is taken'});
+                    this.eventBus.emit(SIGN_UP.INVALID, {global: lang.signup.errors.taken.email});
                 }
             });
     }

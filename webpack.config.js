@@ -3,8 +3,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-
-const isDev = process.env.NODE_ENV === 'development';
+const TerserPlugin = require('terser-webpack-plugin');
 
 const curHash = '[hash]';
 
@@ -25,6 +24,22 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
     },
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new TerserPlugin({
+                include: /\/static/,
+                terserOptions: {
+                    mangle: true,
+                    compress: false,
+                    output: {
+                        comments: false,
+                    },
+                },
+                extractComments: false,
+            }),
+        ],
+    },
     resolve: {
         extensions: ['.tsx', '.ts', '.js', '.json', '.scss', '.css'],
         alias: {
@@ -42,7 +57,7 @@ module.exports = {
             template: './index.html',
             filename: 'index.html',
             minify: {
-                collapseWhitespace: !isDev,
+                collapseWhitespace: true,
             },
         }),
         new CleanWebpackPlugin(),

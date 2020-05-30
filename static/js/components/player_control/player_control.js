@@ -236,10 +236,13 @@ export default class PlayerControlComponent {
 
     /**
      * Слушает отпускание клавиши мыши
+     * @param {Object} event
      */
-    windowMouseUp() {
-        this.timelineDrag = false;
+    windowMouseUp(event) {
         this.timelineDown = false;
+        if (this.timelineDrag) {
+            this.timelineMouseUp(event);
+        }
         this.volumeDrag = false;
     }
 
@@ -296,15 +299,23 @@ export default class PlayerControlComponent {
      * @param {Object} event
      */
     timelineMouseUp(event) {
+        console.log(event);
+        // console.log(this);
         if (this.timelineDrag) {
             this.timelineDrag = false;
             const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
             const width = event.clientX;
             const ratio = (width - bcr.x) / bcr.width;
+            console.log(this.timelineDrag);
+            console.log(ratio);
             this.eventBus.emit(PLAYER.REWIND, ratio);
-        } else {
+        } else if (event.target.classList.contains('timeline-back') ||
+            event.target.classList.contains('timeline-front')
+        ) {
             const bcr = document.getElementsByClassName('timeline-back')[0].getBoundingClientRect();
             const ratio = (event.clientX - bcr.x) / bcr.width;
+            console.log(this.timelineDrag);
+            console.log(ratio);
             this.eventBus.emit(PLAYER.REWIND, ratio);
         }
     }

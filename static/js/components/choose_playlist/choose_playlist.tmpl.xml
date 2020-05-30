@@ -1,7 +1,7 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
     <div class="m-choose-menu ">
           <div class="m-small-ul">
-            <fest:for iterate="data" index="i" value="playlist">
+            <fest:for iterate="data.playlists" index="i" value="playlist">
                 <div class="m-small-li" p-id="{playlist.id}" is-include="{playlist.include}">
                     <fest:if test="playlist.include === true">
                         <span class="m-small-ticked-button"></span>
@@ -16,7 +16,7 @@
             </fest:for>
         </div>
         <div class="l-small-input" style="padding-right: 44px;">
-            <input type="text" placeholder="Create playlist" class="m-small-input"></input>
+            <input type="text" placeholder="{data.lang.playlist.createPlaceholder}" class="m-small-input"></input>
             <div class="submit-input-button">
                 <img src="/static/img/icons/keyboard_return.svg"/>
             </div>

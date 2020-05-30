@@ -1,9 +1,10 @@
 import Api from '@libs/api';
-import {GLOBAL, RESPONSE, URL, POPUP} from '@libs/constants';
+import {GLOBAL, RESPONSE, URL} from '@libs/constants';
 import {globalEventBus} from '@libs/eventBus';
 import PopUp from '@components/pop-up/pop-up';
 import Validation from '@libs/validation';
 import User from '@libs/user';
+import {lang} from '@libs/language';
 
 /**
  * Компонент трек
@@ -67,10 +68,10 @@ export default class PlaylistComponent {
                     });
                     this._setEventListeners();
                 });
-                new PopUp(POPUP.PLAYLIST_CREATION_MESSAGE);
+                new PopUp(lang.popUp.PLAYLIST_CREATION_MESSAGE);
                 break;
             case RESPONSE.BAD_REQUEST:
-                new PopUp(POPUP.PLAYLIST_CREATION_ERROR_MESSAGE, true);
+                new PopUp(lang.popUp.PLAYLIST_CREATION_ERROR_MESSAGE, true);
                 break;
             default:
                 console.log(res);
@@ -90,10 +91,10 @@ export default class PlaylistComponent {
             case RESPONSE.OK:
                 callback({'id': id});
                 this._setEventListeners();
-                new PopUp(POPUP.PLAYLIST_DELETION_MESSAGE);
+                new PopUp(lang.popUp.PLAYLIST_DELETION_MESSAGE);
                 break;
             case RESPONSE.BAD_REQUEST:
-                new PopUp(POPUP.PLAYLIST_DELETION_ERROR_MESSAGE, true);
+                new PopUp(lang.popUp.PLAYLIST_DELETION_ERROR_MESSAGE, true);
                 break;
             default:
                 console.log(res);
@@ -113,10 +114,10 @@ export default class PlaylistComponent {
             switch (res.status) {
             case RESPONSE.OK:
                 callback(id, name, '');
-                new PopUp(POPUP.PLAYLIST_NAME_UPDATE_MESSAGE);
+                new PopUp(lang.popUp.PLAYLIST_NAME_UPDATE_MESSAGE);
                 break;
             case RESPONSE.BAD_REQUEST:
-                new PopUp(POPUP.PLAYLIST_NAME_UPDATE_ERROR_MESSAGE, true);
+                new PopUp(lang.popUp.PLAYLIST_NAME_UPDATE_ERROR_MESSAGE, true);
                 break;
             default:
                 console.log(res);
@@ -143,14 +144,14 @@ export default class PlaylistComponent {
                 switch (res.status) {
                 case RESPONSE.OK:
                     this.getCsrfToken();
-                    new PopUp(POPUP.PLAYLIST_PICTURE_UPDATE_MESSAGE);
+                    new PopUp(lang.popUp.PLAYLIST_PICTURE_UPDATE_MESSAGE);
                     callback(id, '', 'kek.png');
                     break;
                 case RESPONSE.BAD_REQUEST:
-                    new PopUp(POPUP.PLAYLIST_PICTURE_UPDATE_ERROR_MESSAGE);
+                    new PopUp(lang.popUp.PLAYLIST_PICTURE_UPDATE_ERROR_MESSAGE);
                     break;
                 case RESPONSE.SERVER_ERROR:
-                    new PopUp(POPUP.SORRY);
+                    new PopUp(lang.popUp.SORRY);
                     break;
                 default:
                     console.log(res);

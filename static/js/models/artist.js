@@ -36,7 +36,7 @@ export default class ArtistModel {
                 globalEventBus.emit(GLOBAL.REDIRECT, URL.MAIN);
                 return;
             }
-            if (res.every((item) => item.ok)) { // TODO Сделать красиво!!!
+            if (res.every((item) => item.ok)) {
                 const data = {};
                 Promise.all(res.map((item) => item.json()))
                     .then((res) => res.forEach((item) => Object.assign(data, item)))
@@ -53,8 +53,9 @@ export default class ArtistModel {
      * Получает треки артиста из БД
      * @param {string} start
      * @param {string} end
+     * @param {boolean} save
      */
-    getArtistTracks(start, end) {
+    getArtistTracks(start, end, save) {
         Api.artistTracksGet(this.id, start, end)
             .then((res) => {
                 switch (res.status) {
@@ -68,7 +69,7 @@ export default class ArtistModel {
                                     'domItem': 'l-track-list',
                                     'type': 'artist',
                                     'startIndex': start,
-                                });
+                                }, save);
                         });
                     break;
                 default:
@@ -125,6 +126,6 @@ export default class ArtistModel {
      * Получает информацию артиста из БД
      */
     getArtistInfo() {
-        alert('This functionality is not accessible by now');
+        this.eventBus.emit(ARTIST.RENDER_INFO);
     }
 }
