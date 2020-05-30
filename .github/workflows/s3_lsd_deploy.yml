@@ -3,7 +3,6 @@ name: S3 deploy
 on:
   push:
     branches:
-      - lsd
       - lsd_saved
   pull_request:
     branches:
