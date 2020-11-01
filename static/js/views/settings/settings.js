@@ -41,6 +41,7 @@ export default class SettingsView extends BaseView {
             }
             data.themes.push({
                 name: lang.settings.theme.names[i],
+                id: i,
                 themes: [],
             });
             for (const j in THEME[i]) {

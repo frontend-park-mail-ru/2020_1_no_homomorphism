@@ -111,7 +111,7 @@
                     <div class="l-input">
                         <fest:for iterate="data.themes" index="i" value="themeGroup">
                             <div class="row m-theme-selector-container-caption">
-                                <div class="m-theme-selector-container-name">
+                                <div class="m-theme-selector-container-name" id="{themeGroup.id}">
                                     <fest:value>themeGroup.name</fest:value>
                                 </div>
                                 <img class="m-theme-selector-container-button" src="/static/img/icons/arrow_forward_ios.svg"/>
@@ -136,7 +136,7 @@
                     <div class="small-line"></div>
                     <div class="l-input">
                         <div class="row m-theme-selector-container-caption">
-                            <div class="m-theme-selector-container-name">
+                            <div class="m-theme-selector-container-name" id="lang">
                                 <fest:value>data.lang.settings.other.language</fest:value>
                             </div>
                             <img class="m-theme-selector-container-button" src="/static/img/icons/arrow_forward_ios.svg"/>
