@@ -1,5 +1,5 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="data">
-    <div class="l-list-card" a-id="{data.playlist.id}">
+    <div class="l-list-card" a-id="{data.playlist.id}" data-test-name="{data.playlist.name}">
         <div class="l-list-image">
             <img class="m-list-image" src="/static/img/playlist/default.png" a-id="{data.playlist.id}" alt=""/>
         </div>
