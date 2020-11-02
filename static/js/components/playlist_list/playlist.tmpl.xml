@@ -14,7 +14,7 @@
             </div>
         </div>
         <fest:for iterate="data" index="i" value="elem">
-            <div class="l-list-card" a-id="{elem.id}">
+            <div class="l-list-card" a-id="{elem.id}" data-test-name="{elem.name}">
                 <div class="l-list-image" title="{elem.name}">
                     <img class="m-list-image" src="{elem.image}" a-id="{elem.id}" alt=""/>
                 </div>
